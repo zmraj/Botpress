@@ -11,12 +11,14 @@ title: Release Notes
 
 - Fix pause not working on quick replies in HITL module
 - Fix image rendering on Messenger
-- Fix object caching using wrong key
 - Increase cache size of object caching
+- Fix object caching using wrong key
 
 ## Docs
 
-- Update the license activation docs
+- Add RBAC (Role Base Access Control) documentation
+- Update the license activation doc
+- Add interactive examples of proactive messages
 
 ## Changelog
 
