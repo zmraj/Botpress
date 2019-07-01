@@ -34,7 +34,7 @@ Below are multiple possible ways of deploying Botpress in the cloud.
 
 4. `oc set volumes dc/server --add --claim-name=botpress-volume`
 5. Assign the volume to the pod
-6. Create a route to expose your pod
+6. Create a route to expose your pod `botpress/data`
 
 https://docs.openshift.com/container-platform/3.5/install_config/storage_examples/privileged_pod_storage.html
 
