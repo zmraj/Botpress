@@ -3,11 +3,40 @@ id: hosting
 title: Deployment
 ---
 
+## Overview
+
 When you are ready to open your bot to the world, you should deploy it in production mode. When the bot is started in production, the botpress file system (BPFS) is enabled [click here for more details](versions) and debug logs are no longer displayed. We also strongly recomment using a Postgres database instead of the embedded SQLite.
 
 All you need to do is start Botpress with the `-p` flag, like this: `./bp -p`
 
 Below are multiple possible ways of deploying Botpress in the cloud.
+
+## Deploying on OpenShift
+
+### Prerequisite
+
+1. Create a Red Hat account for free [here](https://manage.openshift.com/accounts/auth/keycloak)
+1. Add a new free plan and open the web console
+1. Download `oc`, the OpenShift CLI
+1. Login to `oc` by copying the login command
+
+![OpenShift CLI](assets/openshift-cli.png)
+![OpenShift Login](assets/openshift-login.png)
+
+### Build the docker image
+
+1. `oc new-project botpress`
+1. `oc new-app botpress/server:v11_9_6`
+1. `oc set volume dc/server --add --overwrite --name=v1 --type=persistentVolumeClaim --claim-name=pvc1`
+1. Create a volume claim: [Adding a volume](https://docs.openshift.com/container-platform/3.4/dev_guide/volumes.html#adding-volumes)
+
+![OpenShift Volume](assets/openshift-volume.png)
+
+4. `oc set volumes dc/server --add --claim-name=botpress-volume`
+5. Assign the volume to the pod
+6. Create a route to expose your pod
+
+https://docs.openshift.com/container-platform/3.5/install_config/storage_examples/privileged_pod_storage.html
 
 ## Deploying on Heroku
 
