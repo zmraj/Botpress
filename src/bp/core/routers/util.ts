@@ -180,6 +180,14 @@ export const needPermissions = (workspaceService: WorkspaceService) => (operatio
   const email = req.tokenUser && req.tokenUser!.email
   // The server user is used internally, and has all the permissions
   if (email === SERVER_USER) {
+    debugSuccess(`${req.originalUrl} %o`, {
+      method: req.method,
+      email,
+      operation,
+      resource,
+      userRole: 'superAdmin',
+      ip: req.ip
+    })
     return next()
   }
 
