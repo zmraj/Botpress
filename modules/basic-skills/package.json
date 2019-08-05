@@ -32,7 +32,6 @@
     "bluebird": "^3.5.3",
     "bluebird-global": "^1.0.1",
     "lodash": "^4.17.11",
-    "react-dnd": "^9.3.2",
     "react-tag-input": "6.1.0",
     "yn": "^3.1.0"
   }
