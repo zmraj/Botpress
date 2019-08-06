@@ -33,6 +33,7 @@ declare namespace NodeJS {
     LOADED_MODULES: { [module: string]: string }
     pkg: any
     IS_LICENSED: boolean
+    IS_WORKSPACE_LICENSED: Function
     IS_PRO_AVAILABLE: boolean
     IS_PRO_ENABLED: boolean
     CLUSTER_ENABLED: boolean

@@ -78,4 +78,13 @@ export class WorkspaceUsersRepository {
 
     return query.first().then(result => (result && result.qty) || 0)
   }
+
+  async countWorkspaceUsers(workspace: string): Promise<number> {
+    const query = this.database
+      .knex(this.tableName)
+      .where({ workspace })
+      .count('* as qty')
+
+    return query.first().then(result => (result && result.qty) || 0)
+  }
 }

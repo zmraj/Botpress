@@ -1,54 +1,65 @@
 export default interface LicensingService {
   installProtection(): void
-  refreshLicenseKey(): Promise<boolean>
-  replaceLicenseKey(licenseKey: string): Promise<boolean>
 
-  getLicenseStatus(): Promise<LicenseStatus>
+  getAllLicenses(): Promise<Partial<LicenseKeyDetails>[]>
   getLicenseInfo(licenseKey?: string): Promise<LicenseInfo>
-  getLicenseKey(): Promise<string>
-  getFingerprint(fingerprintType: FingerprintType): Promise<string>
-  auditLicensing(auditToken: string): Promise<LicenseAudit | undefined>
+  getLicenseStatus(workspaceId: string): Promise<LicenseStatus>
+
+  refreshLicenseKey(workspaceId?: string): Promise<boolean>
+  addNewKey(licenseKey: string, workspaceId?: string): Promise<void>
+  setWorkspaceKey(workspaceId: string, filename: string): Promise<void>
+  findWorkspaceLicense(workspaceId: string): Promise<LicenseKeyDetails | undefined>
 }
 
 export interface LicenseStatus {
   status: 'licensed' | 'invalid' | 'breached'
+  policyResults: CheckPolicyResult[]
   breachReasons: string[]
 }
 
-export type FingerprintType = 'machine_v1' | 'cluster_url'
-export type SupportType = 'standard' | 'gold'
-export enum Features {
-  Admins,
-  FullTimeNodes
-}
-
-export interface Limit {
-  min: number
-  max: number
-  feature: Features
-  description: string
-  breachMessage: string
-  breachConsequence: 'crash' | 'throw'
-}
-
 export interface LicenseInfo {
-  label: string
-  fingerprintType: FingerprintType
-  fingerprint: string
-  startDate: string
-  endDate: string
-  offline: boolean
-  paidUntil: Date
+  ownerEmail: string
+  keyName: string
+  licenseId: number
+  externalUrl: string
+
+  autoRenew: boolean
+  whiteLabel: boolean
+  branding: boolean
+
+  startDate: Date
+  endDate: Date
+
+  maxWorkspaces: number
+  maxCollaborators: number
+  maxEndUsers: number
+  maxBots: number
+
   versions: string
-  support: SupportType
-  auditToken: string
-  limits: Limit[]
-  manualRefresh: boolean
+  licenseSchema: 'v2'
 }
 
-export interface LicenseAudit {
-  botIds?: string[]
-  showPoweredBy?: boolean
-  superAdminsCount: number
-  collaboratorsCount: number
+export interface LicenseKeyDetails {
+  filename: string
+  licenseKey: string
+  licenseInfo: LicenseInfo
+  isAvailable: boolean
+  isValid: boolean
+  usedBy: { id: string; name: string }[]
 }
+
+export interface CheckPolicyResult {
+  breached: boolean
+  reason?: string
+  policy: Policy
+  /** Text displayed to the user on the admin panel in the policies section */
+  status?: string
+}
+
+export type LicensingStatus = {
+  isPro: boolean
+  isBuiltWithPro: boolean
+  license?: LicenseInfo
+} & LicenseStatus
+
+export type Policy = 'Version' | 'Date' | 'Endpoint' | 'Collaborators' | 'Bots' | 'Workspaces'

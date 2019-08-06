@@ -1,10 +1,4 @@
-import LicensingService, {
-  Features,
-  FingerprintType,
-  LicenseAudit,
-  LicenseInfo,
-  LicenseStatus
-} from 'common/licensing-service'
+import LicensingService, { LicenseInfo, LicenseKeyDetails, LicenseStatus } from 'common/licensing-service'
 import { injectable } from 'inversify'
 
 @injectable()
@@ -15,30 +9,30 @@ export default class CELicensingService implements LicensingService {
     throw new Error('Not implemented')
   }
 
-  replaceLicenseKey(): Promise<boolean> {
-    throw new Error('Not implemented')
-  }
-
-  async getLicenseStatus(): Promise<LicenseStatus> {
+  async getLicenseStatus(workspaceId: string): Promise<LicenseStatus> {
     return {
       breachReasons: [],
+      policyResults: [],
       status: 'licensed'
     }
   }
 
-  getLicenseKey(): Promise<string> {
-    throw new Error('Not implemented')
-  }
-
-  getFingerprint(fingerprintType: FingerprintType): Promise<string> {
-    throw new Error('Not implemented')
-  }
-
-  async auditLicensing(token: string): Promise<LicenseAudit | undefined> {
-    throw new Error('Not implemented')
-  }
-
   getLicenseInfo(): Promise<LicenseInfo> {
+    throw new Error('Not implemented')
+  }
+  getAllLicenses(): Promise<Partial<LicenseKeyDetails>[]> {
+    throw new Error('Not implemented')
+  }
+
+  addNewKey(licenseKey: string, workspaceId?: string): Promise<void> {
+    throw new Error('Not implemented')
+  }
+
+  setWorkspaceKey(workspaceId: string, filename: string): Promise<void> {
+    throw new Error('Not implemented')
+  }
+
+  findWorkspaceLicense(workspaceId: string): Promise<LicenseKeyDetails | undefined> {
     throw new Error('Not implemented')
   }
 }

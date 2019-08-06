@@ -1,31 +1,22 @@
 import { Logger } from 'botpress/sdk'
-import LicensingService, { LicenseInfo, LicenseStatus } from 'common/licensing-service'
+import LicensingService, { LicenseInfo, LicensingStatus } from 'common/licensing-service'
 import { RequestWithUser } from 'common/typings'
 import { ConfigProvider } from 'core/config/config-loader'
 import { Router } from 'express'
 import _ from 'lodash'
 
 import { CustomRouter } from '../customRouter'
-import { BadRequestError } from '../errors'
 import { assertSuperAdmin, success as sendSuccess } from '../util'
-
-type LicensingStatus = {
-  isPro: boolean
-  isBuiltWithPro: boolean
-  fingerprints: {
-    cluster_url: string
-  }
-  license?: LicenseInfo
-} & LicenseStatus
 
 const defaultResponse: LicensingStatus = {
   breachReasons: [],
+  policyResults: [],
   status: 'licensed',
-  fingerprints: { cluster_url: '' },
   isBuiltWithPro: process.IS_PRO_AVAILABLE,
   isPro: process.IS_PRO_ENABLED
 }
 
+// TODO CLEANUP HERE
 export class LicenseRouter extends CustomRouter {
   constructor(logger: Logger, private licenseService: LicensingService, private configProvider: ConfigProvider) {
     super('License', logger, Router({ mergeParams: true }))
@@ -42,54 +33,71 @@ export class LicenseRouter extends CustomRouter {
         const { tokenUser } = <RequestWithUser>req
 
         if (!process.IS_PRO_ENABLED) {
-          return sendSuccess<LicensingStatus>(res, 'License status', { ...defaultResponse, isPro: false })
+          return sendSuccess<LicensingStatus>(res, 'License status', defaultResponse)
         }
 
-        const status = await svc.getLicenseStatus()
+        const status = await svc.getLicenseStatus(req.workspace!)
         if (!tokenUser || !tokenUser.isSuperAdmin) {
-          return sendSuccess<LicensingStatus>(res, 'License status', {
-            ...defaultResponse,
-            isPro: true,
-            status: status.status
-          })
+          return sendSuccess<LicensingStatus>(res, 'License status', { ...defaultResponse, status: status.status })
         }
-
-        // Only SuperAdmins can see the details of the server's license
-        const clusterFingerprint = await svc.getFingerprint('cluster_url')
 
         let info: LicenseInfo | undefined
         try {
-          info = await svc.getLicenseInfo()
-        } catch (err) {}
+          const license = await svc.findWorkspaceLicense(req.workspace!)
+          if (!license || !license.licenseKey) {
+            return sendSuccess<LicensingStatus>(res, 'License status', { ...defaultResponse, ...status })
+          }
 
-        return sendSuccess<LicensingStatus>(res, 'License status', {
-          ...defaultResponse,
-          fingerprints: {
-            cluster_url: clusterFingerprint
-          },
-          license: info,
-          ...status
-        })
+          info = await svc.getLicenseInfo(license.licenseKey)
+        } catch (err) {
+          console.log(err)
+        }
+
+        return sendSuccess<LicensingStatus>(res, 'License status', { ...defaultResponse, ...status, license: info })
       })
     )
 
     router.post(
-      '/update',
+      '/validate',
+      this.asyncMiddleware(async (req, res) => {
+        res.send(await svc.getLicenseInfo(req.body.licenseKey))
+      })
+    )
+
+    router.post(
+      '/new',
+      this.asyncMiddleware(async (req, res) => {
+        const { licenseKey, filename } = req.body
+
+        if (await svc.getLicenseInfo(licenseKey)) {
+          await svc.addNewKey(licenseKey, req.workspace)
+          return res.sendStatus(200)
+        }
+        res.sendStatus(400)
+      })
+    )
+
+    router.get(
+      '/keys',
+      this.asyncMiddleware(async (req, res) => {
+        res.send(await svc.getAllLicenses())
+      })
+    )
+
+    router.put(
+      '/',
       assertSuperAdmin,
       this.asyncMiddleware(async (req, res) => {
-        const result = await svc.replaceLicenseKey(req.body.licenseKey)
-        if (!result) {
-          throw new BadRequestError('Invalid License Key')
+        if (!req.workspace || !req.body.filename) {
+          return res.status(400).send(`Workspace and key name is required.`)
         }
 
-        // We want to update the licenseKey in botpress.config.json if the user manually replaces its key
-        const pro = {
-          enabled: process.IS_PRO_ENABLED,
-          licenseKey: req.body.licenseKey
+        try {
+          await svc.setWorkspaceKey(req.workspace!, req.body.filename)
+          return sendSuccess(res, 'License Key updated')
+        } catch (err) {
+          res.status(400).send(`Could not set key for workspace.`)
         }
-        await this.configProvider.mergeBotpressConfig({ pro })
-
-        return sendSuccess(res, 'License Key updated')
       })
     )
 
@@ -97,7 +105,7 @@ export class LicenseRouter extends CustomRouter {
       '/refresh',
       assertSuperAdmin,
       this.asyncMiddleware(async (req, res) => {
-        await svc.refreshLicenseKey()
+        await svc.refreshLicenseKey(req.workspace)
         return sendSuccess(res, 'License refreshed')
       })
     )

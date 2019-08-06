@@ -7,7 +7,7 @@ import TabLayout from '../Layouts/Tabs'
 import Alerting from './Alerting'
 import Debug from './Debug'
 import Languages from './Languages'
-import LicenseStatus from './LicenseStatus'
+import LicenseStatus from './Licensing'
 import Monitoring from './Monitoring'
 import Versioning from './Versioning'
 

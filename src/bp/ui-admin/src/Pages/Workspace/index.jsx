@@ -7,7 +7,16 @@ import Users from './Users'
 import Roles from './Roles'
 
 const Workspace = props => {
-  const title = 'Workspace'
+  // TODO remove and do switch correctly
+  const title = (
+    <span>
+      Workspace{' '}
+      <a href="/admin/pickWorkspace">
+        <small>(switch)</small>
+      </a>
+    </span>
+  )
+
   const tabs = [
     {
       name: 'Bots',

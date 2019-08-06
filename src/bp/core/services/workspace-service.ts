@@ -2,7 +2,7 @@ import { Logger } from 'botpress/sdk'
 import { defaultAdminRole, defaultRoles, defaultUserRole } from 'common/default-roles'
 import { AuthRole, Pipeline, Workspace } from 'common/typings'
 import { StrategyUsersRepository } from 'core/repositories/strategy_users'
-import { WorkspaceUser, WorkspaceUsersRepository, WorkspaceUserAttributes } from 'core/repositories/workspace_users'
+import { WorkspaceUser, WorkspaceUserAttributes, WorkspaceUsersRepository } from 'core/repositories/workspace_users'
 import { inject, injectable, tagged } from 'inversify'
 import _ from 'lodash'
 
@@ -174,7 +174,7 @@ export class WorkspaceService {
   }
 
   private async _getUsersAttributes(users: WorkspaceUser[], strategies: string[], attributes: any) {
-    let attr = {}
+    const attr = {}
     const usersInfo = _.flatten(
       await Promise.map(strategies, strategy => this._getUsersInfoForStrategy(users, strategy, attributes))
     )
@@ -237,5 +237,22 @@ export class WorkspaceService {
       wu = [...wu, ...u]
     }
     return wu
+  }
+
+  async getWorkspaceUsersCount(workspaceId: string): Promise<number> {
+    return this.workspaceRepo.countWorkspaceUsers(workspaceId)
+  }
+
+  async setWorkspaceKey(workspaceId: string, keyName: string): Promise<void> {
+    const workspaces = await this.getWorkspaces()
+    const workspace = workspaces.find(x => x.id === workspaceId)
+
+    if (!workspace) {
+      throw new Error(`Specified workspace "${workspaceId}" doesn't exists`)
+    }
+
+    workspace.licenseKey = keyName
+
+    return this.save(workspaces)
   }
 }

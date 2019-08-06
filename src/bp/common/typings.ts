@@ -45,6 +45,7 @@ export interface Workspace {
   bots: string[]
   pipeline: Pipeline
   authStrategy?: string
+  licenseKey?: string
 }
 
 export interface AuthRule {
