@@ -1,4 +1,5 @@
 import { Logger } from 'botpress/sdk'
+import LicensingService from 'common/licensing-service'
 import { CreatedUser, WorkspaceUser } from 'common/typings'
 import AuthService from 'core/services/auth/auth-service'
 import { WorkspaceService } from 'core/services/workspace-service'
@@ -7,7 +8,7 @@ import Joi from 'joi'
 import _ from 'lodash'
 
 import { CustomRouter } from '../customRouter'
-import { ConflictError } from '../errors'
+import { BadRequestError, ConflictError } from '../errors'
 import {
   assertBotpressPro,
   assertSuperAdmin,
@@ -21,7 +22,12 @@ export class UsersRouter extends CustomRouter {
   private needPermissions: (operation: string, resource: string) => RequestHandler
   private assertBotpressPro: RequestHandler
 
-  constructor(logger: Logger, private authService: AuthService, private workspaceService: WorkspaceService) {
+  constructor(
+    logger: Logger,
+    private authService: AuthService,
+    private workspaceService: WorkspaceService,
+    private licenseService: LicensingService
+  ) {
     super('Users', logger, Router({ mergeParams: true }))
     this.needPermissions = needPermissions(this.workspaceService)
     this.assertBotpressPro = assertBotpressPro(this.workspaceService)
@@ -104,6 +110,11 @@ export class UsersRouter extends CustomRouter {
       this.needPermissions('write', this.resource),
       this.asyncMiddleware(async (req, res) => {
         process.ASSERT_LICENSED(req.workspace!)
+
+        const { available } = await this.licenseService.getPolicyUsage('Collaborators', req.workspace)
+        if (available !== undefined && available <= 0) {
+          throw new BadRequestError(`Please upgrade your license to create additional users`)
+        }
 
         validateBodySchema(
           req,

@@ -1,4 +1,10 @@
-import LicensingService, { LicenseInfo, LicenseKeyDetails, LicenseStatus } from 'common/licensing-service'
+import LicensingService, {
+  LicenseInfo,
+  LicenseKeyDetails,
+  LicenseStatus,
+  Policy,
+  PolicyCount
+} from 'common/licensing-service'
 import { injectable } from 'inversify'
 
 @injectable()
@@ -15,6 +21,10 @@ export default class CELicensingService implements LicensingService {
       policyResults: [],
       status: 'licensed'
     }
+  }
+
+  async getPolicyUsage(policy: Policy, workspaceId?: string, license?: LicenseInfo): Promise<PolicyCount> {
+    return { current: -1, maximum: -1, display: 'n/a' }
   }
 
   getLicenseInfo(): Promise<LicenseInfo> {

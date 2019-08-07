@@ -9,6 +9,7 @@ export default interface LicensingService {
   addNewKey(licenseKey: string, workspaceId?: string): Promise<void>
   setWorkspaceKey(workspaceId: string, filename: string): Promise<void>
   findWorkspaceLicense(workspaceId: string): Promise<LicenseKeyDetails | undefined>
+  getPolicyUsage(policy: Policy, workspaceId?: string, license?: LicenseInfo): Promise<PolicyCount>
 }
 
 export interface LicenseStatus {
@@ -54,6 +55,14 @@ export interface CheckPolicyResult {
   policy: Policy
   /** Text displayed to the user on the admin panel in the policies section */
   status?: string
+}
+
+export interface PolicyCount {
+  current: number
+  maximum: number
+  isOverLimit?: boolean
+  available?: number
+  display: string
 }
 
 export type LicensingStatus = {

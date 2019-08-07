@@ -1,4 +1,5 @@
 import { BotConfig, Logger } from 'botpress/sdk'
+import LicensingService from 'common/licensing-service'
 import { ConfigProvider } from 'core/config/config-loader'
 import { BotService } from 'core/services/bot-service'
 import { WorkspaceService } from 'core/services/workspace-service'
@@ -7,7 +8,7 @@ import Joi from 'joi'
 import _ from 'lodash'
 
 import { CustomRouter } from '../customRouter'
-import { ConflictError } from '../errors'
+import { BadRequestError, ConflictError } from '../errors'
 import { assertBotpressPro, needPermissions, success as sendSuccess } from '../util'
 
 export class BotsRouter extends CustomRouter {
@@ -22,7 +23,8 @@ export class BotsRouter extends CustomRouter {
     logger: Logger,
     private workspaceService: WorkspaceService,
     private botService: BotService,
-    private configProvider: ConfigProvider
+    private configProvider: ConfigProvider,
+    private licenseService: LicensingService
   ) {
     super('Bots', logger, Router({ mergeParams: true }))
     this.logger = logger
@@ -68,6 +70,11 @@ export class BotsRouter extends CustomRouter {
       this.needPermissions('write', this.resource),
       this.asyncMiddleware(async (req, res) => {
         process.ASSERT_LICENSED(req.workspace!)
+
+        const { available } = await this.licenseService.getPolicyUsage('Bots', req.workspace)
+        if (available !== undefined && available <= 0) {
+          throw new BadRequestError(`Please upgrade your license to create additional bots`)
+        }
 
         const bot = <BotConfig>_.pick(req.body, ['id', 'name', 'category', 'defaultLanguage'])
 
@@ -184,6 +191,11 @@ export class BotsRouter extends CustomRouter {
       this.needPermissions('write', this.resource),
       this.asyncMiddleware(async (req, res) => {
         process.ASSERT_LICENSED(req.workspace!)
+
+        const { available } = await this.licenseService.getPolicyUsage('Bots', req.workspace)
+        if (available !== undefined && available <= 0) {
+          throw new BadRequestError(`Please upgrade your license to create additional bots`)
+        }
 
         if (!req.is('application/tar+gzip')) {
           res.status(400).send('Bot should be imported from archive')
