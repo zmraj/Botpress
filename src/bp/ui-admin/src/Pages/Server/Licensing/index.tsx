@@ -46,10 +46,17 @@ class LicenseStatus extends React.Component<Props> {
             <div className="license-infos">
               <strong className="license-infos__label">Key Name:</strong>
               {(license && license.keyName) || 'N/A'}
+              <span style={{ marginLeft: 10 }}>
+                {license && license.licenseId && <small>(#{license.licenseId})</small>}
+              </span>
             </div>
             <div className="license-infos">
               <strong className="license-infos__label">Authorized Endpoint:</strong>
               {(license && license.externalUrl) || 'N/A'}
+            </div>
+            <div className="license-infos">
+              <strong className="license-infos__label">Renewal:</strong>
+              {license && license.autoRenew ? 'Automatic' : 'Manual'}
             </div>
             <hr />
             {this.props.licensing && (

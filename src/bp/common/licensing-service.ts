@@ -62,4 +62,4 @@ export type LicensingStatus = {
   license?: LicenseInfo
 } & LicenseStatus
 
-export type Policy = 'Version' | 'Date' | 'Endpoint' | 'Collaborators' | 'Bots' | 'Workspaces'
+export type Policy = 'Version' | 'Date' | 'Endpoint' | 'Collaborators' | 'Bots' | 'Workspaces' | 'End Users'

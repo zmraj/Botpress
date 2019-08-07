@@ -243,6 +243,11 @@ export class WorkspaceService {
     return this.workspaceRepo.countWorkspaceUsers(workspaceId)
   }
 
+  async getEndUsersCount(workspaceId: string): Promise<number> {
+    const botIds = await this.getBotRefs(workspaceId)
+    return this.workspaceRepo.countEndUsers(botIds)
+  }
+
   async setWorkspaceKey(workspaceId: string, keyName: string): Promise<void> {
     const workspaces = await this.getWorkspaces()
     const workspace = workspaces.find(x => x.id === workspaceId)

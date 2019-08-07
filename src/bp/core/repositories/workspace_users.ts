@@ -87,4 +87,14 @@ export class WorkspaceUsersRepository {
 
     return query.first().then(result => (result && result.qty) || 0)
   }
+
+  async countEndUsers(botIds: string[]): Promise<number> {
+    const query = this.database
+      .knex('srv_channel_users')
+      .join('web_conversations', 'srv_channel_users.user_id', 'web_conversations.userId')
+      .whereIn('web_conversations.botId', botIds)
+      .countDistinct('srv_channel_users.user_id as qty')
+
+    return query.first().then(result => (result && result.qty) || 0)
+  }
 }
