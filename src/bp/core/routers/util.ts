@@ -2,6 +2,7 @@ import { Logger } from 'botpress/sdk'
 import { checkRule } from 'common/auth'
 import { StrategyUser } from 'core/repositories/strategy_users'
 import { WorkspaceService } from 'core/services/workspace-service'
+import { UnlicensedError } from 'errors'
 import { NextFunction, Request, Response } from 'express'
 import Joi from 'joi'
 import onHeaders from 'on-headers'
@@ -38,7 +39,9 @@ export type AsyncMiddleware = (
 export const asyncMiddleware = (logger: Logger, routerName: string): AsyncMiddleware => fn => (req, res, next) => {
   Promise.resolve(fn(req as BPRequest, res, next)).catch(err => {
     err.router = routerName
-    if (!err.skipLogging && !process.IS_PRODUCTION) {
+    if (err instanceof UnlicensedError) {
+      logger.error(`Operation not permitted on an unlicensed workspace`)
+    } else if (!err.skipLogging && !process.IS_PRODUCTION) {
       logger.attachError(err).debug(`[${routerName}] Async request error ${err.message}`)
     }
 
@@ -163,7 +166,7 @@ export const assertBotpressPro = (workspaceService: WorkspaceService) => async (
   _res: Response,
   next: NextFunction
 ) => {
-  if (!process.IS_PRO_ENABLED || !process.IS_WORKSPACE_LICENSED(req.workspace)) {
+  if (!process.IS_PRO_ENABLED || !process.IS_LICENSED(req.workspace!)) {
     // Allow to create the first user
     if ((await workspaceService.getUniqueCollaborators()) > 0) {
       return next(new PaymentRequiredError('Botpress Pro is required to perform this action'))

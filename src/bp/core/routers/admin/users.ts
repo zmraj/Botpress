@@ -103,6 +103,8 @@ export class UsersRouter extends CustomRouter {
       this.assertBotpressPro,
       this.needPermissions('write', this.resource),
       this.asyncMiddleware(async (req, res) => {
+        process.ASSERT_LICENSED(req.workspace!)
+
         validateBodySchema(
           req,
           Joi.object().keys({

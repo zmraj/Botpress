@@ -2,6 +2,8 @@ import { Flow, Logger } from 'botpress/sdk'
 import { ObjectCache } from 'common/object-cache'
 import { FlowView, NodeView } from 'common/typings'
 import { ModuleLoader } from 'core/module-loader'
+import { RealTimePayload } from 'core/sdk/impl'
+import RealtimeService from 'core/services/realtime'
 import { inject, injectable, tagged } from 'inversify'
 import _ from 'lodash'
 import nanoid from 'nanoid/generate'
@@ -9,9 +11,6 @@ import nanoid from 'nanoid/generate'
 import { GhostService } from '../..'
 import { TYPES } from '../../../types'
 import { validateFlowSchema } from '../validator'
-
-import { RealTimePayload } from 'core/sdk/impl'
-import RealtimeService from 'core/services/realtime'
 
 const PLACING_STEP = 250
 const MIN_POS_X = 50
@@ -135,8 +134,6 @@ export class FlowService {
   }
 
   private async _upsertFlow(botId: string, flow: FlowView) {
-    process.ASSERT_LICENSED()
-
     const ghost = this.ghost.forBot(botId)
 
     const flowFiles = await ghost.directoryListing(FLOW_DIR, '**/*.json')
@@ -153,8 +150,6 @@ export class FlowService {
   }
 
   async deleteFlow(botId: string, flowName: string, userEmail: string) {
-    process.ASSERT_LICENSED()
-
     const ghost = this.ghost.forBot(botId)
 
     const flowFiles = await ghost.directoryListing(FLOW_DIR, '*.json')
@@ -177,8 +172,6 @@ export class FlowService {
   }
 
   async renameFlow(botId: string, previousName: string, newName: string, userEmail: string) {
-    process.ASSERT_LICENSED()
-
     const ghost = this.ghost.forBot(botId)
 
     const flowFiles = await ghost.directoryListing(FLOW_DIR, '*.json')

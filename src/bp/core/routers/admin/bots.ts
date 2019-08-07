@@ -67,6 +67,8 @@ export class BotsRouter extends CustomRouter {
       '/',
       this.needPermissions('write', this.resource),
       this.asyncMiddleware(async (req, res) => {
+        process.ASSERT_LICENSED(req.workspace!)
+
         const bot = <BotConfig>_.pick(req.body, ['id', 'name', 'category', 'defaultLanguage'])
 
         const botExists = (await this.botService.getBotsIds()).includes(bot.id)
@@ -136,6 +138,8 @@ export class BotsRouter extends CustomRouter {
       '/:botId',
       this.needPermissions('write', this.resource),
       this.asyncMiddleware(async (req, res) => {
+        process.ASSERT_LICENSED(req.workspace!)
+
         const { botId } = req.params
         const bot = <BotConfig>req.body
 
@@ -179,6 +183,8 @@ export class BotsRouter extends CustomRouter {
       '/:botId/import',
       this.needPermissions('write', this.resource),
       this.asyncMiddleware(async (req, res) => {
+        process.ASSERT_LICENSED(req.workspace!)
+
         if (!req.is('application/tar+gzip')) {
           res.status(400).send('Bot should be imported from archive')
         }

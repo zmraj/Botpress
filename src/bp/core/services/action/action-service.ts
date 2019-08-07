@@ -144,8 +144,6 @@ export class ScopedActionService {
   }
 
   async runAction(actionName: string, incomingEvent: any, actionArgs: any): Promise<any> {
-    process.ASSERT_LICENSED()
-
     debug.forBot(incomingEvent.botId, 'run action', { actionName, incomingEvent, actionArgs })
 
     const action = await this.findAction(actionName)

@@ -155,12 +155,11 @@ export class BotsRouter extends CustomRouter {
     return {
       botId,
       authentication: {
-        tokenDuration: ms('6h')
+        tokenDuration: ms(this.botpressConfig!.jwtToken.duration || '6h')
       },
       sendUsageStats: this.botpressConfig!.sendUsageStats,
       uuid: this.machineId,
       gaId: gaId,
-      flowEditorDisabled: !process.IS_LICENSED,
       botpress: {
         name: 'Botpress Studio',
         version: process.BOTPRESS_VERSION
@@ -198,7 +197,6 @@ export class BotsRouter extends CustomRouter {
               // Botpress Studio Specific
               window.AUTH_TOKEN_DURATION = ${data.authentication.tokenDuration};
               window.SEND_USAGE_STATS = ${data.sendUsageStats};
-              window.BOTPRESS_FLOW_EDITOR_DISABLED = ${data.flowEditorDisabled};
           `
 
         const totalEnv = `
@@ -289,6 +287,8 @@ export class BotsRouter extends CustomRouter {
       this.checkTokenHeader,
       this.needPermissions('write', 'bot.flows'),
       this.asyncMiddleware(async (req, res) => {
+        process.ASSERT_LICENSED(req.workspace!)
+
         const { botId } = req.params
         const flow = <FlowView>req.body.flow
         const userEmail = req.tokenUser!.email
@@ -304,6 +304,8 @@ export class BotsRouter extends CustomRouter {
       this.checkTokenHeader,
       this.needPermissions('write', 'bot.flows'),
       this.asyncMiddleware(async (req, res) => {
+        process.ASSERT_LICENSED(req.workspace!)
+
         const { botId, flowName } = req.params
         const flow = <FlowView>req.body.flow
         const userEmail = req.tokenUser!.email
@@ -368,6 +370,8 @@ export class BotsRouter extends CustomRouter {
       this.checkTokenHeader,
       this.needPermissions('write', 'bot.media'),
       this.asyncMiddleware(async (req, res) => {
+        process.ASSERT_LICENSED(req.workspace!)
+
         mediaUploadMulter(req, res, async err => {
           const email = req.tokenUser!.email
           if (err) {

@@ -114,6 +114,8 @@ export class ContentRouter extends CustomRouter {
       this._checkTokenHeader,
       this._needPermissions('write', 'bot.content'),
       this.asyncMiddleware(async (req, res) => {
+        process.ASSERT_LICENSED(req.workspace!)
+
         const { botId, contentType, elementId } = req.params
         const element = await this.cms.createOrUpdateContentElement(botId, contentType, req.body.formData, elementId)
         res.send(element)

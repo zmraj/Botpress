@@ -32,12 +32,11 @@ declare namespace NodeJS {
     PROJECT_LOCATION: string
     LOADED_MODULES: { [module: string]: string }
     pkg: any
-    IS_LICENSED: boolean
-    IS_WORKSPACE_LICENSED: Function
     IS_PRO_AVAILABLE: boolean
     IS_PRO_ENABLED: boolean
     CLUSTER_ENABLED: boolean
-    ASSERT_LICENSED: Function
+    IS_LICENSED: (workspaceId: string) => boolean
+    ASSERT_LICENSED: (workspaceId: string) => void
     BOTPRESS_VERSION: string
     core_env: BotpressEnvironementVariables
     distro: OSDistribution
