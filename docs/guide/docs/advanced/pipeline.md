@@ -1,11 +1,11 @@
 ---
 id: pipelines
-title: Bot Pipelines
+title: Pipelines
 ---
 
 ## Overview
 
-**Bot Pipelines** (not to be confused with Development Pipelines) are built on top of the multi-bot capability of Botpress. They allow teams to work on bots with multiple **stages** the same way others would work on software products. Different versions of a bot can run and co-exist on different stages. In software development, each team has its own way of working with pipelines and reacting to events along the pipeline, Botpress pipelines let you do the same.
+Pipelines are built on top of the multi-bot capability of Botpress. They allow teams to work on bots with multiple **stages** the same way others would work on software products. Different versions of a bot can run and co-exist on different stages. In software development, each team has its own way of working with pipelines and reacting to events along the pipeline, Botpress pipelines let you do the same.
 
 Although a typical pipeline would have 3 stages (e.g: _Development_, _Staging_ and _Production_) where a bot goes through all of them. Botpress lets you define your own stages and customize how they interact.
 
@@ -119,7 +119,7 @@ curl -X POST http://your.botpress.deployment/api/v1/admin/bots/{_YOUR_BOT_ID_}/s
 
 ### Available Hooks
 
-Hooks are key components to fully customize the pipeline feature to your needs. If you don't know about hooks, go read [the docs](../../main/code#hooks) right away.
+Hooks are key components to fully customize the pipeline feature to your needs. If you don't know about hooks, go read [the docs](../main/code#hooks) right away.
 Until now, we didn't customize anything of the pipeline feature and we didn't use or even see the `stage_request` property in the bot configs. Say that we want to check if the user has the right to change the stage of the bot, then rename it, give it custom id and lock it. For this we would use the `on_stage_request` hook.
 
 The hook will be called with the following arguments: **bp** (botpress sdk), **bot** (content of bot.config.json) , **users** (users in the workspace), **pipeline** (your pipeline definition), **hookResult** (object with a `actions` property).

@@ -1,12 +1,11 @@
 import bodyParser from 'body-parser'
 import { AxiosBotConfig, AxiosOptions, http, Logger, RouterOptions } from 'botpress/sdk'
 import LicensingService from 'common/licensing-service'
-import { RequestWithUser } from 'common/typings'
 import session from 'cookie-session'
 import cors from 'cors'
 import errorHandler from 'errorhandler'
 import { UnlicensedError } from 'errors'
-import express, { NextFunction, Response } from 'express'
+import express from 'express'
 import { Request } from 'express-serve-static-core'
 import rewrite from 'express-urlrewrite'
 import fs from 'fs'
@@ -31,7 +30,7 @@ import { HintsRouter } from './routers/bots/hints'
 import { isDisabled } from './routers/conditionalMiddleware'
 import { InvalidExternalToken, PaymentRequiredError } from './routers/errors'
 import { ShortLinksRouter } from './routers/shortlinks'
-import { hasPermissions, monitoringMiddleware, needPermissions } from './routers/util'
+import { monitoringMiddleware } from './routers/util'
 import { GhostService } from './services'
 import ActionService from './services/action/action-service'
 import { AlertingService } from './services/alerting-service'
@@ -53,6 +52,7 @@ import { TYPES } from './types'
 
 const BASE_API_PATH = '/api/v1'
 const SERVER_USER_STRATEGY = 'default' // The strategy isn't validated for the userver user, it could be anything.
+const isProd = process.env.NODE_ENV === 'production'
 
 const debug = DEBUG('api')
 const debugRequest = debug.sub('request')
@@ -81,11 +81,6 @@ export default class HTTPServer {
   private readonly shortlinksRouter: ShortLinksRouter
   private converseRouter!: ConverseRouter
   private hintsRouter!: HintsRouter
-  private _needPermissions: (
-    operation: string,
-    resource: string
-  ) => (req: RequestWithUser, res: Response, next: NextFunction) => Promise<void>
-  private _hasPermissions: (req: RequestWithUser, operation: string, resource: string) => Promise<boolean>
   private indexCache: { [pageUrl: string]: string } = {}
 
   constructor(
@@ -165,8 +160,6 @@ export default class HTTPServer {
       workspaceService,
       logger: this.logger
     })
-    this._needPermissions = needPermissions(this.workspaceService)
-    this._hasPermissions = hasPermissions(this.workspaceService)
   }
 
   async setupRootPath() {
@@ -183,7 +176,6 @@ export default class HTTPServer {
 
   @postConstruct()
   async initialize() {
-    await AppLifecycle.waitFor(AppLifecycleEvents.CONFIGURATION_LOADED)
     await this.setupRootPath()
 
     const app = express()
@@ -263,10 +255,6 @@ export default class HTTPServer {
       res.send(await this.monitoringService.getStatus())
     })
 
-    this.app.get('/version', async (req, res) => {
-      res.send(process.BOTPRESS_VERSION)
-    })
-
     this.app.use('/assets', this.guardWhiteLabel(), express.static(this.resolveAsset('')))
     this.app.use(rewrite('/:app/:botId/*env.js', '/api/v1/bots/:botId/:app/js/env.js'))
 
@@ -289,7 +277,7 @@ export default class HTTPServer {
       const errorCode = err.errorCode || 'BP_000'
       const message = (err.errorCode && err.message) || 'Unexpected error'
       const docs = err.docs || 'https://botpress.io/docs'
-      const devOnly = process.IS_PRODUCTION ? {} : { showStackInDev: true, stack: err.stack, full: err.message }
+      const devOnly = isProd ? {} : { showStackInDev: true, stack: err.stack, full: err.message }
 
       res.status(statusCode).json({
         statusCode,
@@ -316,7 +304,7 @@ export default class HTTPServer {
       this.logger.warn(
         `External URL is not configured. Using default value of ${
           process.EXTERNAL_URL
-        }. Some features may not work properly`
+        }. Some features may not work proprely`
       )
     }
 
@@ -348,16 +336,12 @@ export default class HTTPServer {
       }
 
       fs.readFile(this.resolveAsset(page), (err, data) => {
-        if (data) {
-          this.indexCache[page] = data
-            .toString()
-            .replace(/\<base href=\"\/\" ?\/\>/, `<base href="${process.ROOT_PATH}/" />`)
-            .replace(/ROOT_PATH=""|ROOT_PATH = ''/, `window.ROOT_PATH="${process.ROOT_PATH}"`)
+        this.indexCache[page] = data
+          .toString()
+          .replace(/\<base href=\"\/\" ?\/\>/, `<base href="${process.ROOT_PATH}/" />`)
+          .replace(/ROOT_PATH=""|ROOT_PATH = ''/, `window.ROOT_PATH="${process.ROOT_PATH}"`)
 
-          res.send(this.indexCache[page])
-        } else {
-          res.sendStatus(404)
-        }
+        res.send(this.indexCache[page])
       })
     }
 
@@ -382,14 +366,6 @@ export default class HTTPServer {
 
   createRouterForBot(router: string, identity: string, options: RouterOptions): any & http.RouterExtension {
     return this.botsRouter.getNewRouter(router, identity, options)
-  }
-
-  needPermission(operation: string, resource: string) {
-    return this._needPermissions(operation, resource)
-  }
-
-  hasPermission(req: RequestWithUser, operation: string, resource: string) {
-    return this._hasPermissions(req, operation, resource)
   }
 
   deleteRouterForBot(router: string): void {

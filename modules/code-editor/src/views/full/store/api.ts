@@ -1,6 +1,7 @@
 import _ from 'lodash'
 
-import { EditableFile, FilePermissions, FilesDS } from '../../../backend/typings'
+import { EditableFile, FilesDS } from '../../../backend/typings'
+import { Config } from '../typings'
 import { toastFailure } from '../utils'
 
 export default class CodeEditorApi {
@@ -10,12 +11,12 @@ export default class CodeEditorApi {
     this.axios = axiosInstance
   }
 
-  async fetchPermissions(): Promise<FilePermissions> {
+  async fetchConfig(): Promise<Config> {
     try {
-      const { data } = await this.axios.get('/mod/code-editor/permissions')
+      const { data } = await this.axios.get('/mod/code-editor/config')
       return data
     } catch (err) {
-      console.error(`Error while fetching code editor permissions`, err)
+      console.error(`Error while fetching code editor config`, err)
     }
   }
 
@@ -65,9 +66,6 @@ export default class CodeEditorApi {
   }
 
   handleApiError = (error, customMessage?: string) => {
-    if (error.response && error.response.status === 403) {
-      return // not enough permissions, nothing to do
-    }
     const data = _.get(error, 'response.data', {})
     const errorInfo = data.full || data.message
     customMessage ? toastFailure(`${customMessage}: ${errorInfo}`) : toastFailure(errorInfo)

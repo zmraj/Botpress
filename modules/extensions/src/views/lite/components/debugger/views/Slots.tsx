@@ -1,4 +1,4 @@
-import { Colors, H5, HTMLTable, Tooltip } from '@blueprintjs/core'
+import { Colors, H5, HTMLTable } from '@blueprintjs/core'
 import * as sdk from 'botpress/sdk'
 import _ from 'lodash'
 import React, { SFC } from 'react'
@@ -13,9 +13,14 @@ const renderSlotItem = (name: string, slot: any) => {
         <td>
           <ul>
             {slot.map(s => (
-              <Tooltip key={s.value} content={`Value: ${s.value}`} position={'top'}>
-                <li style={{ textDecoration: 'underline' }}>{s.source}</li>
-              </Tooltip>
+              <li>{s.source}</li>
+            ))}
+          </ul>
+        </td>
+        <td>
+          <ul>
+            {slot.map(s => (
+              <li>{s.value}</li>
             ))}
           </ul>
         </td>
@@ -26,11 +31,8 @@ const renderSlotItem = (name: string, slot: any) => {
   return (
     <tr>
       <td>{name}</td>
-      <td>
-        <Tooltip content={`Value: ${slot.value}`}>
-          <span style={{ textDecoration: 'underline' }}>{slot.source}</span>
-        </Tooltip>
-      </td>
+      <td>{slot.source}</td>
+      <td>{slot.value}</td>
       <td>{slot.turns ? `${slot.turns} turns ago` : 'This turn'} </td>
     </tr>
   )
@@ -54,6 +56,7 @@ export const Slots: SFC<Props> = props => {
           <tr>
             <th>Slot</th>
             <th>Source</th>
+            <th>Value</th>
             <th>Extracted</th>
           </tr>
         </thead>

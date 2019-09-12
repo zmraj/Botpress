@@ -1,10 +1,9 @@
-import { FlowView } from 'common/typings'
 import _ from 'lodash'
 import reduceReducers from 'reduce-reducers'
 import { handleActions } from 'redux-actions'
 import {
   clearErrorSaveFlows,
-  clearFlowMutex,
+  clearFlowsModification,
   closeFlowNodeProps,
   copyFlowNode,
   copyFlowNodeElement,
@@ -38,11 +37,11 @@ import {
 import { hashCode, prettyId } from '~/util'
 
 export interface FlowReducer {
-  currentFlow: FlowView | undefined
+  currentFlow: any
   showFlowNodeProps: boolean
   dirtyFlows: string[]
   errorSavingFlows: any
-  flowsByName: _.Dictionary<FlowView>
+  lastServerModification: any
 }
 
 const MAX_UNDO_STACK_SIZE = 25
@@ -61,7 +60,8 @@ const defaultState = {
   nodeInBuffer: null, // TODO: move it to buffer.node
   buffer: { action: null, transition: null },
   flowProblems: [],
-  errorSavingFlows: undefined
+  errorSavingFlows: undefined,
+  lastServerModification: undefined
 }
 
 const findNodesThatReferenceFlow = (state, flowName) =>
@@ -80,7 +80,7 @@ const computeFlowsHash = state => {
   }, {})
 }
 
-const computeHashForFlow = (flow: FlowView) => {
+const computeHashForFlow = flow => {
   const hashAction = (hash, action) => {
     if (_.isArray(action)) {
       action.forEach(c => {
@@ -159,8 +159,7 @@ const popHistory = stackName => state => {
     return state
   }
   const currentSnapshot = state[stackName][0]
-
-  const newState = {
+  return {
     ...state,
     currentSnapshot,
     currentFlow: currentSnapshot.currentFlow,
@@ -168,12 +167,6 @@ const popHistory = stackName => state => {
     flowsByName: currentSnapshot.flowsByName,
     [stackName]: state[stackName].slice(1),
     [oppositeStack]: [state.currentSnapshot, ...state[oppositeStack]]
-  }
-  const currentHashes = computeFlowsHash(newState)
-
-  return {
-    ...newState,
-    currentHashes
   }
 }
 
@@ -239,22 +232,27 @@ const doCreateNewFlow = name => ({
   ]
 })
 
-function isActualCreate(state, modification): boolean {
-  return !_.keys(state.flowsByName).includes(modification.name)
-}
+const isModificationRelevant = (state, modification) => {
+  const modificationType = modification.modification || ''
+  if (modificationType === 'create') {
+    return !_.keys(state.flowsByName).includes(modification.name)
+  }
 
-function isActualUpdate(state, modification): boolean {
-  const flowHash = computeHashForFlow(modification.payload)
-  const currentFlowHash = computeHashForFlow(state.flowsByName[modification.name])
-  return currentFlowHash !== flowHash
-}
+  if (modificationType === 'delete') {
+    return _.keys(state.flowsByName).includes(modification.name)
+  }
 
-function isActualDelete(state, modification): boolean {
-  return _.keys(state.flowsByName).includes(modification.name)
-}
+  if (modificationType === 'update') {
+    const flowHash = computeHashForFlow(modification.payload)
+    const currentFlowHash = computeHashForFlow(state.flowsByName[modification.name])
+    return currentFlowHash !== flowHash
+  }
 
-function isActualRename(state, modification): boolean {
-  return modification.newName && !_.keys(state.flowsByName).includes(modification.newName)
+  if (modificationType === 'rename') {
+    return modification.newName && !_.keys(state.flowsByName).includes(modification.newName)
+  }
+
+  return false
 }
 
 // *****
@@ -264,61 +262,15 @@ function isActualRename(state, modification): boolean {
 let reducer = handleActions(
   {
     [receiveFlowsModification]: (state, { payload: modification }) => {
-      const modificationType = modification.modification || ''
-
-      const isUpsertFlow =
-        (modificationType === 'create' && isActualCreate(state, modification)) ||
-        (modificationType === 'update' && isActualUpdate(state, modification))
-
-      if (isUpsertFlow) {
-        const newHash = computeHashForFlow(modification.payload)
-
-        return {
-          ...state,
-          flowsByName: {
-            ...state.flowsByName,
-            [modification.name]: modification.payload
-          },
-          currentHashes: {
-            ...state.currentHashes,
-            [modification.name]: newHash
-          },
-          initialHashes: {
-            ...state.initialHashes,
-            [modification.name]: newHash
-          }
-        }
-      }
-
-      if (modificationType === 'delete' && isActualDelete(state, modification)) {
-        return {
-          ...state,
-          flowsByName: _.omit(state.flowsByName, modification.name)
-        }
-      }
-
-      if (modificationType === 'rename' && isActualRename(state, modification)) {
-        const renamedFlow = state.flowsByName[modification.name]
-        const flowsByName = _.omit(state.flowsByName, modification.name)
-        flowsByName[modification.newName] = renamedFlow
-
-        return {
-          ...state,
-          flowsByName
-        }
-      }
-
       return {
-        ...state
+        ...state,
+        lastServerModification: isModificationRelevant(state, modification) ? modification : undefined
       }
     },
 
-    [clearFlowMutex]: (state, { payload: name }) => ({
+    [clearFlowsModification]: state => ({
       ...state,
-      flowsByName: {
-        ...state.flowsByName,
-        [name]: _.omit(state.flowsByName[name], 'currentMutex')
-      }
+      lastServerModification: undefined
     }),
 
     [updateFlowProblems]: (state, { payload }) => ({

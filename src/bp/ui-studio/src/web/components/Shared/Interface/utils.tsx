@@ -2,8 +2,6 @@ import { ContextMenu, Menu, MenuDivider, MenuItem } from '@blueprintjs/core'
 import _ from 'lodash'
 import React from 'react'
 
-import { SectionAction } from './typings'
-
 export const buildMenu = items => {
   return <Menu>{items.map(item => buildMenuItems(item))}</Menu>
 }
@@ -16,14 +14,13 @@ const buildMenuItems = items => {
   return renderMenuItem(items)
 }
 
-const renderMenuItem = (element: SectionAction) => {
+const renderMenuItem = element => {
   if (element.type === 'divider') {
     return <MenuDivider />
   }
 
   return (
     <MenuItem
-      id={element.id}
       key={element.label}
       text={element.label}
       icon={element.icon}

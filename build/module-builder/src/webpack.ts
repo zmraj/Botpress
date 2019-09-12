@@ -35,8 +35,7 @@ export function config(projectPath) {
       '@blueprintjs/core': 'BlueprintJsCore',
       'botpress/ui': 'BotpressUI',
       'botpress/content-picker': 'BotpressContentPicker',
-      'botpress/documentation': 'DocumentationProvider',
-      'botpress/utils': 'BotpressUtils'
+      'botpress/documentation': 'DocumentationProvider'
     },
     resolveLoader: {
       modules: ['node_modules', path.resolve(projectPath, './node_modules/module-builder/node_modules')]

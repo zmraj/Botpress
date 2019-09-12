@@ -63,7 +63,6 @@ class Composer extends React.Component<ComposerProps> {
           <textarea
             tabIndex={1}
             ref={this.textInput}
-            id="input-message"
             onFocus={this.props.setFocus.bind(this, 'input')}
             placeholder={placeholder}
             onChange={this.handleMessageChanged}
@@ -76,7 +75,6 @@ class Composer extends React.Component<ComposerProps> {
             className={'bpw-send-button'}
             disabled={!this.props.message.length}
             onClick={this.props.sendMessage.bind(this, undefined)}
-            id="btn-send"
           >
             <FormattedMessage id={'composer.send'} />
           </button>

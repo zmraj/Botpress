@@ -76,7 +76,6 @@ class Header extends React.Component<HeaderProps> {
     return (
       <span
         tabIndex={-1}
-        id="btn-reset"
         ref={el => (this.btnEls[0] = el)}
         className={'bpw-header-icon bpw-header-icon-reset'}
         onClick={this.props.resetSession}
@@ -92,7 +91,6 @@ class Header extends React.Component<HeaderProps> {
     return (
       <span
         tabIndex={-1}
-        id="btn-download"
         ref={el => (this.btnEls[1] = el)}
         className={'bpw-header-icon bpw-header-icon-download'}
         onClick={this.props.downloadConversation}
@@ -108,7 +106,6 @@ class Header extends React.Component<HeaderProps> {
     return (
       <span
         tabIndex={-1}
-        id="btn-conversations"
         ref={el => (this.btnEls[2] = el)}
         className={'bpw-header-icon bpw-header-icon-convo'}
         onClick={this.props.toggleConversations}
@@ -124,7 +121,6 @@ class Header extends React.Component<HeaderProps> {
     return (
       <span
         tabIndex={-1}
-        id="btn-botinfo"
         ref={el => (this.btnEls[3] = el)}
         className={'bpw-header-icon bpw-header-icon-botinfo'}
         onClick={this.props.toggleBotInfo}
@@ -140,7 +136,6 @@ class Header extends React.Component<HeaderProps> {
     return (
       <span
         tabIndex={-1}
-        id="btn-close"
         ref={el => (this.btnEls[4] = el)}
         className={'bpw-header-icon bpw-header-icon-close'}
         onClick={this.props.hideChat}
@@ -158,7 +153,6 @@ class Header extends React.Component<HeaderProps> {
       return (
         <span
           key={btn.id}
-          id={`btn-${btn.id}`}
           tabIndex={-1}
           className={'bpw-header-icon'}
           onClick={btn.onClick.bind(this, btn.id, this)}

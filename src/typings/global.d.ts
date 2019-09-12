@@ -15,8 +15,7 @@ declare namespace NodeJS {
 
   export interface Process {
     VERBOSITY_LEVEL: number
-    IS_PRODUCTION: boolean // TODO: look to remove this
-    BPFS_STORAGE: 'database' | 'disk'
+    IS_PRODUCTION: boolean
     APP_SECRET: string
     /**
      * Path to the global APP DATA folder, shared across all installations of Botpress Server
@@ -57,9 +56,6 @@ declare type BotpressEnvironementVariables = {
   /** Replace the path of the NodeJS Native Extensions for external OS-specific libraries such as fastText and CRFSuite */
   readonly NATIVE_EXTENSIONS_DIR?: string
 
-  /** Change the BPFS storage mechanism ("database" or "disk"). Defaults to "disk" */
-  readonly BPFS_STORAGE?: 'database' | 'disk'
-
   /**
    * Set this to true if you're exposing Botpress through a reverse proxy such as Nginx
    * Read more: https://expressjs.com/en/guide/behind-proxies.html
@@ -95,12 +91,6 @@ declare type BotpressEnvironementVariables = {
    * Defaults to '1gb'
    */
   readonly BP_MAX_MEMORY_CACHE_SIZE?: string
-
-  /**
-   * When set to true, Botpress will not automatically restart on crash
-   * @default false
-   */
-  readonly BP_DISABLE_AUTO_RESTART?: boolean
 }
 
 interface IDebug {

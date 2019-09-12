@@ -313,13 +313,7 @@ class Bots extends Component {
                 <Label for="name">
                   <strong>Name</strong>
                 </Label>
-                <Input
-                  id="input-name"
-                  type="text"
-                  name="name"
-                  value={this.state.name}
-                  onChange={this.handleInputChanged}
-                />
+                <Input type="text" name="name" value={this.state.name} onChange={this.handleInputChanged} />
               </FormGroup>
             </Col>
             <Col md={4}>
@@ -329,7 +323,6 @@ class Bots extends Component {
                     <strong>Category</strong>
                   </Label>
                   <Select
-                    id="select-category"
                     options={this.state.categories}
                     value={this.state.category}
                     onChange={this.handleCategoryChanged}
@@ -348,7 +341,6 @@ class Bots extends Component {
                   )}
                 </Label>
                 <Select
-                  id="select-status"
                   options={statusList}
                   value={this.state.status}
                   onChange={this.handleStatusChanged}
@@ -362,7 +354,6 @@ class Bots extends Component {
               <strong>Description</strong>
             </Label>
             <Input
-              id="input-description"
               type="textarea"
               name="description"
               value={this.state.description}
@@ -386,13 +377,7 @@ class Bots extends Component {
               <Label for="website">
                 <strong>Website</strong>
               </Label>
-              <Input
-                id="input-website"
-                type="text"
-                name="website"
-                value={this.state.website}
-                onChange={this.handleInputChanged}
-              />
+              <Input type="text" name="website" value={this.state.website} onChange={this.handleInputChanged} />
             </FormGroup>
           </Col>
           <Col md={4}>
@@ -400,13 +385,7 @@ class Bots extends Component {
               <Label for="phoneNumber">
                 <strong>Phone Number</strong>
               </Label>
-              <Input
-                id="input-phone"
-                type="text"
-                name="phoneNumber"
-                value={this.state.phoneNumber}
-                onChange={this.handleInputChanged}
-              />
+              <Input type="text" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleInputChanged} />
             </FormGroup>
           </Col>
           <Col md={4}>
@@ -415,7 +394,6 @@ class Bots extends Component {
                 <strong>Contact E-mail</strong>
               </Label>
               <Input
-                id="input-email"
                 type="text"
                 name="emailAddress"
                 value={this.state.emailAddress}
@@ -431,7 +409,6 @@ class Bots extends Component {
                 <strong>Link to Terms & Conditions</strong>
               </Label>
               <Input
-                id="input-termsConditions"
                 type="text"
                 name="termsConditions"
                 value={this.state.termsConditions}
@@ -446,7 +423,6 @@ class Bots extends Component {
               </Label>
               <Input
                 type="text"
-                id="input-privacyPolicy"
                 name="privacyPolicy"
                 value={this.state.privacyPolicy}
                 onChange={this.handleInputChanged}
@@ -538,7 +514,7 @@ class Bots extends Component {
         currentTeam={this.props.team}
         mainContent={this.renderDetails()}
         sideMenu={
-          <Button id="btn-save" color="primary" onClick={this.saveChanges}>
+          <Button color="primary" onClick={this.saveChanges}>
             Save Details
           </Button>
         }

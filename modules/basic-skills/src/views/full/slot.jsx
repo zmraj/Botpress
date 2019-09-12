@@ -19,8 +19,7 @@ export class Slot extends React.Component {
     intents: [],
     actions: [],
     maxRetryAttempts: 3,
-    error: undefined,
-    turnExpiry: -1
+    error: undefined
   }
 
   componentDidMount() {
@@ -41,8 +40,7 @@ export class Slot extends React.Component {
         selectedActionOption: data.validationAction && { value: data.validationAction, label: data.validationAction },
         contentElement: data.contentElement,
         notFoundElement: data.notFoundElement,
-        maxRetryAttempts: Number(data.retryAttempts) || 3,
-        turnExpiry: Number(data.turnExpiry) || -1
+        maxRetryAttempts: Number(data.retryAttempts) || 3
       })
     }
   }
@@ -56,7 +54,6 @@ export class Slot extends React.Component {
         retryAttempts: this.state.maxRetryAttempts,
         contentElement: this.state.contentElement,
         notFoundElement: this.state.notFoundElement,
-        turnExpiry: this.state.turnExpiry,
         validationAction: this.state.selectedActionOption && this.state.selectedActionOption.value,
         intent: intent && intent.name,
         slotName: slot && slot.name,
@@ -78,11 +75,9 @@ export class Slot extends React.Component {
   fetchActions = () => {
     this.props.bp.axios.get(`/actions`).then(({ data }) => {
       this.setState({
-        actions: data
-          .filter(action => !action.metadata.hidden)
-          .map(x => {
-            return { label: x.name, value: x.name, metadata: x.metadata }
-          })
+        actions: data.filter(action => !action.metadata.hidden).map(x => {
+          return { label: x.name, value: x.name, metadata: x.metadata }
+        })
       })
     })
   }
@@ -155,10 +150,6 @@ export class Slot extends React.Component {
     }
   }
 
-  handleTurnExpiryChange = event => {
-    this.setState({ turnExpiry: Number(event.target.value) })
-  }
-
   handleActionChange = selectedActionOption => {
     this.setState({ selectedActionOption })
   }
@@ -180,8 +171,8 @@ export class Slot extends React.Component {
     return (
       <div className={style.modalContent}>
         {this.state.error && <Alert bsStyle="danger">{this.state.error}</Alert>}
-        <Row style={{ marginBottom: 10 }}>
-          <Col md={5}>
+        <Row>
+          <Col md={6}>
             <Label>Choose an intent</Label>
             <Select
               id="intent"
@@ -194,7 +185,7 @@ export class Slot extends React.Component {
               options={intentsOptions}
             />
           </Col>
-          <Col md={4}>
+          <Col md={6}>
             <Label for="slot">Choose a slot to fill</Label>
             <Select
               id="slot"
@@ -207,23 +198,10 @@ export class Slot extends React.Component {
               options={slotOptions}
             />
           </Col>
-          <Col md={3}>
-            <Label for="turnExpiry">Expires after X turns</Label>
-            &nbsp;
-            <BotpressTooltip message="The information stored in the slot will be deleted after this number of turns. Set to -1 to never expire." />
-            <Input
-              id="turnExpiry"
-              name="turnExpiry"
-              type="number"
-              min={-1}
-              value={this.state.turnExpiry}
-              onChange={this.handleTurnExpiryChange}
-            />
-          </Col>
         </Row>
         <Row>
-          <Col md={9}>
-            <Label for="contentPicker">Bot will ask...</Label>
+          <Col md={12}>
+            <Label for="contentPicker">Bot will ask</Label>
             &nbsp;
             <BotpressTooltip message="The bot should ask a question specific about the slot to fill. (e.g. What is your email?)" />
             <ContentPickerWidget
@@ -238,7 +216,7 @@ export class Slot extends React.Component {
         </Row>
         <Row>
           <Col md="9">
-            <Label>Message to send when user input is invalid</Label>
+            <Label>Invalid Input Message</Label>
             &nbsp;
             <BotpressTooltip message="This message will appear to the user when the information he has given is invalid. (e.g. Your email is invalid)" />
             <ContentPickerWidget
@@ -266,9 +244,7 @@ export class Slot extends React.Component {
         </Row>
         <Row>
           <Col md={12}>
-            <Label for="validationCheck">
-              <small>Custom Input Validation (optional)</small>
-            </Label>
+            <Label for="validationCheck">Custom Input Validation (optional)</Label>
             &nbsp;
             <BotpressTooltip message="You can add custom validation for your slot with an action. It should assign a boolean value to the temp.valid variable." />
             <SelectActionDropdown

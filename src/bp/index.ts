@@ -1,5 +1,4 @@
 import { EventEmitter } from 'events'
-import { boolean } from 'joi'
 
 const yn = require('yn')
 const path = require('path')
@@ -85,8 +84,7 @@ try {
         }
       },
       argv => {
-        process.IS_PRODUCTION = argv.production || yn(process.env.BP_PRODUCTION) || yn(process.env.CLUSTER_ENABLED)
-        process.BPFS_STORAGE = process.core_env.BPFS_STORAGE || 'disk'
+        process.IS_PRODUCTION = argv.production || yn(process.env.BP_PRODUCTION)
 
         let defaultVerbosity = process.IS_PRODUCTION ? 0 : 2
         if (!isNaN(Number(process.env.VERBOSITY_LEVEL))) {
@@ -125,7 +123,7 @@ try {
     )
     .command(
       'pull',
-      'Pull data from a remote server to your local file system',
+      'Sync pending changes from an external server running botpress to local files',
       {
         url: {
           description: 'Base URL of the botpress server from which you want to pull changes',
@@ -134,78 +132,19 @@ try {
         },
         authToken: {
           alias: 'token',
-          description: 'Authorization token on the remote botpress server',
+          description: 'your authorization token on the remote botpress server',
+          // tslint:disable-next-line:no-null-keyword
+          default: null,
           type: 'string'
         },
         targetDir: {
           alias: 'dir',
-          description: 'Target directory where the remote data will be stored',
+          description: 'target directory in which you want sync the changes. will be created if doesnt exist',
+          default: path.join(__dirname, 'data'),
           type: 'string'
         }
       },
-      argv => require('./bpfs').default(argv, 'pull')
-    )
-    .command(
-      'push',
-      'Push local files to a remote botpress server',
-      {
-        url: {
-          description: 'URL of the botpress server to which to push changes',
-          default: 'http://localhost:3000',
-          type: 'string'
-        },
-        authToken: {
-          alias: 'token',
-          description: 'Authorization token on the remote botpress server',
-          type: 'string'
-        },
-        sourceDir: {
-          alias: 'dir',
-          description: 'The local directory containing the data you want to push on the remote server',
-          type: 'string'
-        }
-      },
-      argv => require('./bpfs').default(argv, 'push')
-    )
-    .command(
-      'pullfile',
-      'Pull a single file from the database',
-      {
-        file: {
-          description: 'Complete path of the remote file (ex: global/botpress.config.json)',
-          type: 'string'
-        },
-        dest: {
-          description: 'Path where the file will be copied locally (if not set, it uses the same path as "file")',
-          type: 'string'
-        }
-      },
-      argv => {
-        getos.default().then(distro => {
-          process.distro = distro
-          require('./bpfs_recovery').default(argv, 'pullfile')
-        })
-      }
-    )
-    .command(
-      'pushfile',
-      'Push a local file to a remote database directly',
-      {
-        file: {
-          description: 'Path of the local file (eg: botpress.config.json)',
-          type: 'string'
-        },
-        dest: {
-          description: 'Complete path of the destination file (ex: global/botpress.config.json)',
-          type: 'string'
-        }
-      },
-      argv => {
-        getos.default().then(distro => {
-          process.distro = distro
-          require('./bpfs_recovery').default(argv, 'pushfile')
-        })
-      }
+      argv => require('./pull').default(argv)
     )
     .command(
       'bench',

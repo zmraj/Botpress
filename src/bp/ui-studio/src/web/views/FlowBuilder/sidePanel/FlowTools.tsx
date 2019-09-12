@@ -57,16 +57,14 @@ const FlowTools: FC<{ skills: SkillDefinition[]; user: any; flowPreview: boolean
 
 const ToolItem: FC<ToolItemProps> = ({ label, type, id, icon }) => {
   return (
-    <div
-      id={`btn-tool-${id}`}
-      className={style.toolItem}
-      key={id}
-      draggable={true}
-      onDragStart={event => {
-        event.dataTransfer.setData('diagram-node', JSON.stringify({ type, id }))
-      }}
-    >
-      <div className={style.icon}>
+    <div className={style.toolItem} key={id}>
+      <div
+        className={style.icon}
+        draggable={true}
+        onDragStart={event => {
+          event.dataTransfer.setData('diagram-node', JSON.stringify({ type, id }))
+        }}
+      >
         <Icon icon={icon || 'add'} iconSize={22} />
       </div>
       <div className={style.title}>{label}</div>

@@ -18,7 +18,8 @@
       "version-11.5.1-build/code",
       "version-11.5.1-build/memory",
       "version-11.5.1-build/content",
-      "version-11.5.1-build/channels"
+      "version-11.5.1-build/channels",
+      "version-11.5.1-build/debugging"
     ],
     "Deploy": [
       "version-11.5.1-deploy/hosting"
@@ -27,6 +28,7 @@
       "version-11.5.1-manage/versions"
     ],
     "Developers": [
+      "version-11.5.1-developers/release-notes",
       "version-11.5.1-developers/migrate",
       "version-11.5.1-developers/create-module",
       "version-11.5.1-developers/cluster",

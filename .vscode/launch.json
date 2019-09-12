@@ -13,7 +13,7 @@
       "env": {
         "BP_MODULES_PATH": "${workspaceFolder}/modules:${workspaceFolder}/internal-modules",
         "NODE_PATH": "${workspaceFolder}/out/bp",
-        "DEBUG": "bp:none"
+        "DEBUG": "bp:*"
       },
       "smartStep": true,
       "outFiles": [
@@ -47,20 +47,12 @@
       "type": "lldb",
       "request": "launch",
       "program": "node",
-      "args": ["test/start.js"],
+      "args": ["index.js"],
       "env": {
         "BP_MODULES_PATH": "../../modules",
         "NODE_PATH": "./"
       },
       "cwd": "${workspaceFolder}/out/bp"
-    },
-    {
-      "name": "(lldb) CRFSuite Launch",
-      "type": "lldb",
-      "request": "launch",
-      "program": "node",
-      "args": ["test/start.js"],
-      "cwd": "${workspaceFolder}/src/bp/ml/crfsuite"
     },
     {
       "name": "(lldb) FastText Launch",

@@ -67,7 +67,6 @@ class ProfileUpdate extends Component {
         <FormGroup>
           <Label for="firstName">First Name</Label>
           <Input
-            id="input-firstname"
             name="firstName"
             onChange={this.onInputChanged}
             onKeyPress={this.onInputKeyPress}
@@ -77,7 +76,6 @@ class ProfileUpdate extends Component {
         <FormGroup>
           <Label for="lastName">Last Name</Label>
           <Input
-            id="input-lastname"
             name="lastName"
             onChange={this.onInputChanged}
             onKeyPress={this.onInputKeyPress}
@@ -111,7 +109,7 @@ class ProfileUpdate extends Component {
   renderSave() {
     return (
       this.state.isDirty && (
-        <Button id="btn-save" color="primary" onClick={() => this.updateProfile()}>
+        <Button color="primary" onClick={() => this.updateProfile()}>
           Save
         </Button>
       )

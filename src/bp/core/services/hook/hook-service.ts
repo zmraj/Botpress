@@ -3,10 +3,8 @@ import { IO } from 'botpress/sdk'
 import { ObjectCache } from 'common/object-cache'
 import { UntrustedSandbox } from 'core/misc/code-sandbox'
 import { printObject } from 'core/misc/print'
-import { WorkspaceUserAttributes } from 'core/repositories/workspace_users'
 import { inject, injectable, tagged } from 'inversify'
 import _ from 'lodash'
-import ms from 'ms'
 import path from 'path'
 import { NodeVM } from 'vm2'
 
@@ -15,9 +13,9 @@ import { requireAtPaths } from '../../modules/require'
 import { TYPES } from '../../types'
 import { VmRunner } from '../action/vm'
 import { Incident } from '../alerting-service'
+import { WorkspaceUserAttributes } from 'core/repositories/workspace_users'
 
 const debug = DEBUG('hooks')
-const DEBOUNCE_DELAY = ms('2s')
 
 interface HookOptions {
   timeout: number
@@ -130,7 +128,6 @@ class HookScript {
 @injectable()
 export class HookService {
   private _scriptsCache: Map<string, HookScript[]> = new Map()
-  private _invalidateDebounce
 
   constructor(
     @inject(TYPES.Logger)
@@ -140,7 +137,6 @@ export class HookService {
     @inject(TYPES.ObjectCache) private cache: ObjectCache
   ) {
     this._listenForCacheInvalidation()
-    this._invalidateDebounce = _.debounce(this._invalidateRequire, DEBOUNCE_DELAY, { leading: true, trailing: false })
   }
 
   private _listenForCacheInvalidation() {
@@ -148,15 +144,8 @@ export class HookService {
       if (key.toLowerCase().indexOf(`/hooks/`) > -1) {
         // clear the cache if there's any file that has changed in the `hooks` folder
         this._scriptsCache.clear()
-        this._invalidateDebounce()
       }
     })
-  }
-
-  private _invalidateRequire() {
-    Object.keys(require.cache)
-      .filter(r => r.match(/(\\|\/)hooks(\\|\/)/g))
-      .map(file => delete require.cache[file])
   }
 
   async executeHook(hook: Hooks.BaseHook): Promise<void> {

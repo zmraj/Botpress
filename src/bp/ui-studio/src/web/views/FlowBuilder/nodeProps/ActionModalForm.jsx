@@ -118,7 +118,6 @@ export default class ActionModalForm extends Component {
         <h5>Action to run {help}</h5>
         <div className={style.section}>
           <SelectActionDropdown
-            id="select-action"
             value={this.state.functionInputValue}
             options={avActions}
             onChange={val => {
@@ -230,10 +229,8 @@ export default class ActionModalForm extends Component {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button id="btn-cancel-action" onClick={this.onClose}>
-            Cancel
-          </Button>
-          <Button id="btn-submit-action" onClick={this.onSubmit} bsStyle="primary">
+          <Button onClick={this.onClose}>Cancel</Button>
+          <Button onClick={this.onSubmit} bsStyle="primary">
             {this.state.isEdit ? 'Update' : 'Add'} Action (Alt+Enter)
           </Button>
         </Modal.Footer>

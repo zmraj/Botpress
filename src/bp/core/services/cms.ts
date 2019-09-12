@@ -31,7 +31,6 @@ export class CMSService implements IDisposeOnExit {
   broadcastAddElement: Function = this.local__addElementToCache
   broadcastUpdateElement: Function = this.local__updateElementFromCache
   broadcastRemoveElements: Function = this.local__removeElementsFromCache
-  broadcastInvalidateForBot: Function = this.local__invalidateForBot
 
   private readonly contentTable = 'content_elements'
   private readonly typesDir = 'content-types'
@@ -63,7 +62,6 @@ export class CMSService implements IDisposeOnExit {
     this.broadcastUpdateElement = await this.jobService.broadcast<ContentElement>(
       this.local__updateElementFromCache.bind(this)
     )
-    this.broadcastInvalidateForBot = await this.jobService.broadcast<string>(this.local__invalidateForBot.bind(this))
 
     await this.prepareDb()
     await this._loadContentTypesFromFiles()
@@ -276,14 +274,6 @@ export class CMSService implements IDisposeOnExit {
     return `${prefix}-${nanoid(6)}`
   }
 
-  async elementIdExists(botId: string, id: string): Promise<boolean> {
-    const element = await this.memDb(this.contentTable)
-      .where({ botId, id })
-      .get(0)
-
-    return !!element
-  }
-
   async createOrUpdateContentElement(
     botId: string,
     contentTypeId: string,
@@ -321,9 +311,6 @@ export class CMSService implements IDisposeOnExit {
 
     if (!contentElementId) {
       contentElementId = this._generateElementId(contentTypeId)
-    }
-
-    if (!(await this.elementIdExists(botId, contentElementId))) {
       await this.broadcastAddElement(botId, body, contentElementId, contentType.id)
       const created = await this.getContentElement(botId, contentElementId)
 
@@ -630,13 +617,5 @@ export class CMSService implements IDisposeOnExit {
       id: elementId,
       contentType: contentTypeId
     })
-  }
-
-  /**
-   * Important! Do not use directly. Needs to be broadcasted.
-   */
-  private async local__invalidateForBot(botId: string): Promise<void> {
-    await this.clearElementsFromCache(botId)
-    await this.loadElementsForBot(botId)
   }
 }

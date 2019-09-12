@@ -1,50 +1,15 @@
 import axios from 'axios'
-import { FlowView } from 'common/typings'
 import _ from 'lodash'
 import { createAction } from 'redux-actions'
 
-import { getDeletedFlows, getDirtyFlows, getModifiedFlows, getNewFlows } from '../reducers/selectors'
+import { getDeletedFlows, getModifiedFlows, getNewFlows } from '../reducers/selectors'
 
 import { FlowsAPI } from './api'
 import BatchRunner from './BatchRunner'
 
 // Flows
 export const receiveFlowsModification = createAction('FLOWS/MODIFICATIONS/RECEIVE')
-
-const MUTEX_UNLOCK_SECURITY_FACTOR = 1.25
-const mutexHandles: _.Dictionary<number> = {}
-
-export const handleReceiveFlowsModification = modification => (dispatch, getState) => {
-  const dirtyFlows = getDirtyFlows(getState())
-  const amIModifyingTheSameFlow = dirtyFlows.includes(modification.name)
-  if (amIModifyingTheSameFlow) {
-    FlowsAPI.cancelUpdate(modification.name)
-  }
-
-  dispatch(receiveFlowsModification(modification))
-  dispatch(refreshFlowsLinks())
-
-  if (_.has(modification, 'payload.currentMutex') && _.has(modification, 'payload.name')) {
-    dispatch(startMutexCountDown(modification.payload))
-  }
-}
-
-const startMutexCountDown = (flow: FlowView) => dispatch => {
-  const { name, currentMutex } = flow
-  if (!currentMutex || !currentMutex.remainingSeconds) {
-    return
-  }
-
-  const handle = mutexHandles[name]
-  if (handle) {
-    clearTimeout(handle)
-  }
-  mutexHandles[name] = window.setTimeout(() => {
-    dispatch(clearFlowMutex(name))
-  }, currentMutex.remainingSeconds * 1000 * MUTEX_UNLOCK_SECURITY_FACTOR)
-}
-
-export const clearFlowMutex = createAction('FLOWS/MODIFICATIONS/CLEAR_MUTEX')
+export const clearFlowsModification = createAction('FLOWS/MODIFICATIONS/CLEAR')
 
 export const requestFlows = createAction('FLOWS/REQUEST')
 export const receiveFlows = createAction('FLOWS/RECEIVE', flows => flows, () => ({ receiveAt: new Date() }))
@@ -53,18 +18,10 @@ export const fetchFlows = () => dispatch => {
   dispatch(requestFlows())
 
   // tslint:disable-next-line: no-floating-promises
-  axios
-    .get(`${window.BOT_API_PATH}/flows`)
-    .then(({ data }) => {
-      const flows = _.keyBy(data, 'name')
-      dispatch(receiveFlows(flows))
-      return flows
-    })
-    .then(flows => {
-      for (const flow of _.values(flows)) {
-        dispatch(startMutexCountDown(flow))
-      }
-    })
+  axios.get(`${window.BOT_API_PATH}/flows`).then(({ data }) => {
+    const flows = _.keyBy(data, 'name')
+    dispatch(receiveFlows(flows))
+  })
 }
 
 export const receiveSaveFlows = createAction('FLOWS/SAVE/RECEIVE', flows => flows, () => ({ receiveAt: new Date() }))
@@ -173,13 +130,11 @@ export const handleFlowEditorRedo = createAction('FLOWS/EDITOR/REDO')
 export const flowEditorUndo = wrapAction(handleFlowEditorUndo, async (payload, state, dispatch) => {
   dispatch(refreshFlowsLinks())
   await updateCurrentFlow(payload, state)
-  await createNewFlows(state)
 })
 
 export const flowEditorRedo = wrapAction(handleFlowEditorRedo, async (payload, state, dispatch) => {
   dispatch(refreshFlowsLinks())
   await updateCurrentFlow(payload, state)
-  await createNewFlows(state)
 })
 
 export const setDiagramAction = createAction('FLOWS/FLOW/SET_ACTION')
@@ -307,24 +262,19 @@ export const cancelNewSkill = createAction('SKILLS/BUILD/CANCEL')
 
 export const insertNewSkill = wrapAction(requestInsertNewSkill, async (payload, state) => {
   await updateCurrentFlow(payload, state)
-  await createNewFlows(state)
-})
-
-const createNewFlows = async state => {
   const newFlows: string[] = getNewFlows(state)
   for (const newFlow of newFlows) {
     await FlowsAPI.createFlow(state.flows, newFlow)
   }
-}
+})
 
 export const insertNewSkillNode = wrapAction(requestInsertNewSkillNode, updateCurrentFlow)
 
 export const updateSkill = wrapAction(requestUpdateSkill, async (payload, state) => {
   const { editFlowName } = payload
-  const { flows: flowState } = state
   await Promise.all([
-    FlowsAPI.updateFlow(flowState, editFlowName),
-    FlowsAPI.updateFlow(flowState, flowState.currentFlow)
+    FlowsAPI.updateFlow(state.flows, editFlowName),
+    FlowsAPI.updateFlow(state.flows, state.currentFlow)
   ])
 })
 

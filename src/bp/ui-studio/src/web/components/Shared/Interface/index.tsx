@@ -91,7 +91,6 @@ export const SearchBar = (props: SearchBarProps) => {
     <div className={style.searchBar}>
       <ControlGroup fill={true}>
         <InputGroup
-          id="input-filter"
           leftIcon={props.icon}
           placeholder={props.placeholder || 'Search'}
           value={text}
@@ -99,7 +98,6 @@ export const SearchBar = (props: SearchBarProps) => {
         />
         {props.showButton && (
           <Button
-            id="btn-search"
             icon={'search'}
             className={Classes.FIXED}
             onClick={e => props.onButtonClick && props.onButtonClick(e)}
@@ -119,7 +117,6 @@ export const ItemList = (props: ItemListProps) => {
           return (
             <div key={key} className={classnames(style.item, { [style.itemListSelected]: item.selected })}>
               <div
-                id={item.id}
                 className={style.label}
                 onClick={() => props.onElementClicked && props.onElementClicked(item)}
                 onContextMenu={e => showContextMenu(e, item.contextMenu)}
@@ -130,14 +127,12 @@ export const ItemList = (props: ItemListProps) => {
                 {item.actions &&
                   item.actions.map(action => (
                     <Tooltip key={key + action.tooltip} content={action.tooltip} position={Position.RIGHT}>
-                      <span id={action.id}>
-                        <Icon
-                          style={{ padding: '0 7px' }} // so it has the same padding of a button
-                          icon={action.icon}
-                          color={Colors.GRAY2}
-                          onClick={() => action.onClick && action.onClick(item)}
-                        />
-                      </span>
+                      <Icon
+                        style={{ padding: '0 7px' }} // so it has the same padding of a button
+                        icon={action.icon}
+                        color={Colors.GRAY2}
+                        onClick={() => action.onClick && action.onClick(item)}
+                      />
                     </Tooltip>
                   ))}
               </div>
@@ -190,7 +185,7 @@ const SectionAction = (action: SectionAction) => {
     return (
       <Tooltip key={key} disabled={!action.tooltip} content={action.tooltip} position={Position.RIGHT}>
         <Popover content={buildMenu(action.items)} position={Position.BOTTOM_LEFT}>
-          <Button id={action.id} icon={action.icon} text={action.label} />
+          <Button icon={action.icon} text={action.label} />
         </Popover>
       </Tooltip>
     )
@@ -200,7 +195,6 @@ const SectionAction = (action: SectionAction) => {
     <Popover key={key} disabled={!action.popover} content={action.popover}>
       <Tooltip disabled={!action.tooltip} content={action.tooltip} position={Position.RIGHT}>
         <Button
-          id={action.id}
           disabled={action.disabled}
           icon={action.icon}
           text={action.label}

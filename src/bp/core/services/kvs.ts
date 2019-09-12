@@ -1,4 +1,4 @@
-import * as sdk from 'botpress/sdk'
+import { Logger } from 'botpress/sdk'
 import { inject, injectable, tagged } from 'inversify'
 import _ from 'lodash'
 import moment from 'moment'
@@ -8,81 +8,22 @@ import Database from '../database'
 import { safeStringify } from '../misc/utils'
 import { TYPES } from '../types'
 
-const GLOBAL = '__global__'
-const TABLE_NAME = 'srv_kvs'
-
 @injectable()
 export class KeyValueStore {
-  private services: _.Dictionary<KvsService> = {}
-  private globalKvs: KvsService
+  private readonly tableName = 'srv_kvs'
 
   constructor(
     @inject(TYPES.Database) private database: Database,
     @inject(TYPES.Logger)
     @tagged('name', 'KVS')
-    private logger: sdk.Logger
-  ) {
-    this.globalKvs = new KvsService(this.database, this.logger)
-  }
+    private logger: Logger
+  ) {}
 
-  public global() {
-    return this.globalKvs
-  }
-
-  public forBot(botId: string) {
-    if (!!this.services[botId]) {
-      return this.services[botId]
-    }
-    const newService = new KvsService(this.database, this.logger, botId)
-    this.services[botId] = newService
-    return newService
-  }
-
-  // All these are deprecated in sdk. Should be removed.
-
-  get = async (botId: string, key: string, path?: string) => {
-    return this.forBot(botId).get(key, path)
-  }
-
-  set = (botId: string, key: string, value, path?: string) => {
-    return this.forBot(botId).set(key, value, path)
-  }
-
-  setStorageWithExpiry = async (botId: string, key: string, value, expiryInMs?: string) => {
-    return this.forBot(botId).setStorageWithExpiry(key, value, expiryInMs)
-  }
-
-  getStorageWithExpiry = async (botId: string, key: string) => {
-    return this.forBot(botId).getStorageWithExpiry(key)
-  }
-
-  removeStorageKeysStartingWith = key => {
-    this.globalKvs.removeStorageKeysStartingWith(key)
-  }
-
-  getConversationStorageKey = (sessionId, variable) => {
-    return this.globalKvs.getConversationStorageKey(sessionId, variable)
-  }
-
-  getUserStorageKey = (userId, variable) => {
-    return this.globalKvs.getUserStorageKey(userId, variable)
-  }
-
-  getGlobalStorageKey = variable => {
-    return this.globalKvs.getGlobalStorageKey(variable)
-  }
-}
-
-export class KvsService implements sdk.KvsService {
-  constructor(private database: Database, private logger: sdk.Logger, private botId: string = GLOBAL) {}
-
-  private _upsert = (key: string, value) => {
+  upsert = (botId: string, key: string, value) => {
     let sql
 
-    const { botId } = this
-
     const params = {
-      tableName: TABLE_NAME,
+      tableName: this.tableName,
       botIdCol: 'botId',
       keyCol: 'key',
       valueCol: 'value',
@@ -102,7 +43,7 @@ export class KvsService implements sdk.KvsService {
       sql = `
         INSERT INTO :tableName: (:botIdCol:, :keyCol:, :valueCol:, :modifiedOnCol:)
         VALUES (:botId, :key, :value, :now)
-        ON CONFLICT (:keyCol:, :botIdCol:) DO UPDATE
+        ON CONFLICT (:keyCol:) DO UPDATE
           SET :valueCol: = :value, :modifiedOnCol: = :now
       `
     }
@@ -110,11 +51,9 @@ export class KvsService implements sdk.KvsService {
     return this.database.knex.raw(sql, params)
   }
 
-  get = async (key: string, path?: string) => {
-    const { botId } = this
-
-    return this.database
-      .knex(TABLE_NAME)
+  get = async (botId: string, key: string, path?: string) =>
+    this.database
+      .knex(this.tableName)
       .where({ botId })
       .andWhere({ key })
       .limit(1)
@@ -131,11 +70,10 @@ export class KvsService implements sdk.KvsService {
 
         return _.get(obj, path)
       })
-  }
 
-  set = async (key: string, value, path?: string) => {
+  set = (botId: string, key: string, value, path?: string) => {
     if (!path) {
-      return this._upsert(key, value)
+      return this.upsert(botId, key, value)
     }
 
     const setValue = obj => {
@@ -147,7 +85,7 @@ export class KvsService implements sdk.KvsService {
       }
     }
 
-    return this.get(key).then(original => this._upsert(key, setValue(original || {})))
+    return this.get(botId, key).then(original => this.upsert(botId, key, setValue(original || {})))
   }
 
   private boxWithExpiry = (value, expiry = 'never') => {
@@ -164,19 +102,19 @@ export class KvsService implements sdk.KvsService {
     return undefined
   }
 
-  setStorageWithExpiry = async (key: string, value, expiryInMs?: string) => {
+  setStorageWithExpiry = async (botId: string, key: string, value, expiryInMs?: string) => {
     const box = this.boxWithExpiry(value, expiryInMs)
-    await this.set(key, box)
+    await this.set(botId, key, box)
   }
 
-  getStorageWithExpiry = async key => {
-    const box = await this.get(this.botId, key)
+  getStorageWithExpiry = async (botId: string, key: string) => {
+    const box = await this.get(botId, key)
     return this.unboxWithExpiry(box)
   }
 
   removeStorageKeysStartingWith = async key => {
     await this.database
-      .knex(TABLE_NAME)
+      .knex(this.tableName)
       .where('key', 'like', key + '%')
       .del()
   }

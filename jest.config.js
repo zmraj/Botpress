@@ -1,11 +1,9 @@
 const path = require('path')
 
 module.exports = {
-  preset: 'ts-jest',
   globals: {
     'ts-jest': {
-      tsConfig: '<rootDir>/src/tsconfig.test.json',
-      diagnostics: false
+      tsConfig: '<rootDir>/src/tsconfig.test.json'
     }
   },
   setupFiles: ['<rootDir>/src/bp/jest-before.ts'],
@@ -24,9 +22,9 @@ module.exports = {
     '^botpress/sdk$': '<rootDir>/src/bp/core/sdk_impl'
   },
   testMatch: ['**/(src|test)/**/*.test.(ts|js)'],
-  testPathIgnorePatterns: ['out', 'build', 'node_modules', 'e2e'],
+  testPathIgnorePatterns: ['out', 'build', 'node_modules'],
   testEnvironment: 'node',
   rootDir: '.',
-
+  preset: 'ts-jest',
   testResultsProcessor: './node_modules/jest-html-reporter'
 }

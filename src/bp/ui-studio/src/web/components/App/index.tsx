@@ -7,7 +7,7 @@ import {
   fetchNotifications,
   fetchSkills,
   fetchUser,
-  handleReceiveFlowsModification,
+  receiveFlowsModification,
   refreshHints,
   replaceNotifications
 } from '~/actions'
@@ -24,7 +24,7 @@ interface Props {
   fetchBotInformation: () => void
   fetchUser: () => void
   replaceNotifications: (notifications: any) => void
-  handleReceiveFlowsModification: (modifications: any) => void
+  receiveFlowsModification: (modifications: any) => void
   addNotifications: any
   user: any
 }
@@ -71,7 +71,7 @@ class App extends Component<Props> {
       const isOtherUser = this.props.user.email !== payload.userEmail
       const isSameBot = payload.botId === window.BOT_ID
       if (isOtherUser && isSameBot) {
-        this.props.handleReceiveFlowsModification(payload)
+        this.props.receiveFlowsModification(payload)
       }
     })
 
@@ -105,7 +105,7 @@ const mapDispatchToProps = {
   fetchNotifications,
   replaceNotifications,
   addNotifications,
-  handleReceiveFlowsModification
+  receiveFlowsModification
 }
 
 const mapStateToProps = state => ({

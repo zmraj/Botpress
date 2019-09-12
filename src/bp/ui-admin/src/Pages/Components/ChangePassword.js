@@ -51,7 +51,6 @@ class ChangePassword extends Component {
           <FormGroup>
             <Label for="firstName">Current Password</Label>
             <Input
-              id="input-password"
               name="password"
               type="password"
               onChange={this.onInputChange}
@@ -62,7 +61,6 @@ class ChangePassword extends Component {
           <FormGroup>
             <Label for="lastName">New Password</Label>
             <Input
-              id="input-newPassword"
               value={this.state.newPassword}
               type="password"
               name="newPassword"
@@ -73,7 +71,6 @@ class ChangePassword extends Component {
           <FormGroup>
             <Label for="lastName">Confirm Password</Label>
             <Input
-              id="input-confirmPassword"
               value={this.state.confirmPassword}
               type="password"
               name="confirmPassword"
@@ -83,7 +80,7 @@ class ChangePassword extends Component {
           </FormGroup>
         </ModalBody>
         <ModalFooter>
-          <Button id="btn-submit" color="primary" onClick={() => this.changePassword()}>
+          <Button color="primary" onClick={() => this.changePassword()}>
             Change
           </Button>
         </ModalFooter>
@@ -94,7 +91,7 @@ class ChangePassword extends Component {
   render() {
     return (
       <div className="profile__change-pwd">
-        <Button id="btn-changePassword" color="primary" size="sm" onClick={this.toggleModal}>
+        <Button color="primary" size="sm" onClick={this.toggleModal}>
           Change Password
         </Button>
         {this.renderModal()}

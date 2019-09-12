@@ -91,11 +91,7 @@ export class AdminRouter extends CustomRouter {
     router.use('/users', this.checkTokenHeader, this.loadUser, this.usersRouter.router)
     router.use('/license', this.checkTokenHeader, this.licenseRouter.router)
     router.use('/languages', this.checkTokenHeader, this.languagesRouter.router)
-    router.use('/server', this.checkTokenHeader, assertSuperAdmin, this.serverRouter.router)
-
-    // TODO: Add versioning per workspace.
-    // This way admins could use these routes to push / pull independently of other workspaces.
-    // For now we're restricting to super-admin.
     router.use('/versioning', this.checkTokenHeader, assertSuperAdmin, this.versioningRouter.router)
+    router.use('/server', this.checkTokenHeader, assertSuperAdmin, this.serverRouter.router)
   }
 }

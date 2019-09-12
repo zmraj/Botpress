@@ -98,16 +98,9 @@ export interface Stage {
   action: StageAction
 }
 
-export interface FlowMutex {
-  lastModifiedBy: string
-  lastModifiedAt: Date
-  remainingSeconds?: number // backend calculate this because all clients time might be wrong
-}
-
 export type FlowView = Flow & {
   nodes: NodeView[]
   links: NodeLinkView[]
-  currentMutex?: FlowMutex
 }
 
 export interface NodeLinkView {

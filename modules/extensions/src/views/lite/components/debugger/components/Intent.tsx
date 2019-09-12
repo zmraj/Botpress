@@ -7,7 +7,7 @@ const QNA_IDENTIFIER = '__qna__'
 
 export const Intent = (props: { name: string; confidence?: number; elected?: boolean }) => {
   const { name, elected, confidence } = props
-  const isQnA = isQnaItem(name)
+  const isQnA = name.startsWith(QNA_IDENTIFIER)
 
   const displayName = isQnA ? formatQnaName(name) : name
 
@@ -23,10 +23,6 @@ export const Intent = (props: { name: string; confidence?: number; elected?: boo
       <a onClick={navigateToIntentDefinition(name, isQnA)}>{content}</a>
     </Fragment>
   )
-}
-
-export const isQnaItem = (name: string) => {
-  return name.startsWith(QNA_IDENTIFIER)
 }
 
 function formatQnaName(name: string): string {

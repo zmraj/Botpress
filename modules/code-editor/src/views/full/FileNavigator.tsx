@@ -1,4 +1,4 @@
-import { Classes, ContextMenu, Icon, ITreeNode, Menu, MenuDivider, MenuItem, Tooltip, Tree } from '@blueprintjs/core'
+import { Classes, ContextMenu, ITreeNode, Menu, MenuDivider, MenuItem, Tree } from '@blueprintjs/core'
 import { observe } from 'mobx'
 import { inject, observer } from 'mobx-react'
 import React from 'react'
@@ -37,13 +37,6 @@ class FileNavigator extends React.Component<Props, State> {
     if (!this.props.files) {
       return
     }
-
-    const readOnlyIcon = (
-      <Tooltip content="This file is read only">
-        <Icon icon="lock" />
-      </Tooltip>
-    )
-
     const filter = this.props.filters && this.props.filters.filename.toLowerCase()
     const nodes: ITreeNode[] = this.props.files.map(dir => ({
       id: dir.label,
@@ -51,7 +44,7 @@ class FileNavigator extends React.Component<Props, State> {
       icon: 'folder-close',
       hasCaret: true,
       isExpanded: true,
-      childNodes: buildTree(dir.files, this.props.expandedNodes, filter, readOnlyIcon)
+      childNodes: buildTree(dir.files, this.props.expandedNodes, filter)
     }))
 
     this.setState({ nodes })
@@ -108,25 +101,13 @@ class FileNavigator extends React.Component<Props, State> {
 
     ContextMenu.show(
       <Menu>
-        <MenuItem id="btn-rename" icon="edit" text="Rename" onClick={() => this.renameTreeNode(node)} />
-        <MenuItem id="btn-delete" icon="delete" text="Delete" onClick={() => this.props.deleteFile(file)} />
+        <MenuItem icon="edit" text="Rename" onClick={() => this.renameTreeNode(node)} />
+        <MenuItem icon="delete" text="Delete" onClick={() => this.props.deleteFile(file)} />
         <MenuDivider />
-        <MenuItem id="btn-duplicate" icon="duplicate" text="Duplicate" onClick={() => this.props.duplicateFile(file)} />
+        <MenuItem icon="duplicate" text="Duplicate" onClick={() => this.props.duplicateFile(file)} />
         <MenuDivider />
-        <MenuItem
-          id="btn-enable"
-          icon="endorsed"
-          text="Enable"
-          disabled={!isDisabled}
-          onClick={() => this.props.enableFile(file)}
-        />
-        <MenuItem
-          id="btn-disable"
-          icon="disable"
-          text="Disable"
-          disabled={isDisabled}
-          onClick={() => this.props.disableFile(file)}
-        />
+        <MenuItem icon="endorsed" text="Enable" disabled={!isDisabled} onClick={() => this.props.enableFile(file)} />
+        <MenuItem icon="disable" text="Disable" disabled={isDisabled} onClick={() => this.props.disableFile(file)} />
       </Menu>,
       { left: e.clientX, top: e.clientY }
     )
@@ -188,7 +169,8 @@ export default inject(({ store }: { store: RootStore }) => ({
   renameFile: store.renameFile,
   enableFile: store.enableFile,
   disableFile: store.disableFile,
-  duplicateFile: store.duplicateFile
+  duplicateFile: store.duplicateFile,
+  isGlobalAllowed: store.config && store.config.isGlobalAllowed
 }))(observer(FileNavigator))
 
 type Props = {

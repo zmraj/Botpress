@@ -86,7 +86,6 @@ export interface ItemListProps {
 }
 
 interface Item {
-  id?: string
   label: string
   /** This can be used when executing actions on the items */
   value: any
@@ -102,7 +101,6 @@ interface Item {
 }
 
 interface ItemAction {
-  id?: string
   /** Text displayed when the cursor is over the button */
   tooltip?: string
   /** The name of the icon to use. Can also be a JSX element */
@@ -124,8 +122,6 @@ export interface SidePanelSectionProps {
 }
 
 export interface SectionAction {
-  /** An id to select this element easily */
-  id?: string
   /** This text will be displayed when the mouse is over the icon */
   label?: string
   /** Text displayed when the cursor is over the button */

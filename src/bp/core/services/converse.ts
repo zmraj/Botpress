@@ -119,12 +119,9 @@ export class ConverseService {
   }
 
   private async _createTimeoutPromise(botId, userId) {
-    let timeout = _.get(await this.configProvider.getBotConfig(botId), 'converse.timeout')
-    if (!timeout) {
-      timeout = _.get(await this.configProvider.getBotpressConfig(), 'converse.timeout', '5s')
-    }
-
-    const timeoutInMs = ms(timeout as string)
+    const botConfig = await this.configProvider.getBotConfig(botId)
+    const botpressConfig = await this.configProvider.getBotpressConfig()
+    const timeoutInMs = ms(_.get(botConfig, 'converse.timeout', botpressConfig.converse.timeout) as string)
 
     let actionRunning = false
 

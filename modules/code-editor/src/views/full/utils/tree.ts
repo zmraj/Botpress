@@ -6,7 +6,7 @@ import { EditableFile } from '../../../backend/typings'
 const FOLDER_ICON = 'folder-close'
 const DOCUMENT_ICON = 'document'
 
-const addNode = (tree: ITreeNode, folders: ITreeNode[], file, data: any, secondaryLabel?: any) => {
+const addNode = (tree: ITreeNode, folders: ITreeNode[], file, data: any) => {
   for (const folderDesc of folders) {
     let folder = find(tree.childNodes, folderDesc) as ITreeNode | undefined
     if (!folder) {
@@ -16,7 +16,7 @@ const addNode = (tree: ITreeNode, folders: ITreeNode[], file, data: any, seconda
     tree = folder
   }
 
-  tree.childNodes.push({ ...file, ...data, secondaryLabel })
+  tree.childNodes.push({ ...file, ...data })
 }
 
 export const splitPath = (location: string, expandedNodeIds: object) => {
@@ -44,18 +44,13 @@ export const splitPath = (location: string, expandedNodeIds: object) => {
   }
 }
 
-export const buildTree = (
-  files: EditableFile[],
-  expandedNodeIds: object,
-  filterFileName: string | undefined,
-  readonlyIcon: any
-) => {
+export const buildTree = (files: EditableFile[], expandedNodeIds: object, filterFileName: string | undefined) => {
   const tree: ITreeNode = { id: 'root', label: '<root>', childNodes: [] }
 
   files.forEach(fileData => {
     const { folders, file } = splitPath(fileData.location, expandedNodeIds)
     if (!filterFileName || !filterFileName.length || file.label.includes(filterFileName)) {
-      addNode(tree, folders, file, { nodeData: fileData }, fileData.readOnly ? readonlyIcon : undefined)
+      addNode(tree, folders, file, { nodeData: fileData })
     }
   })
 

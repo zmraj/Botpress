@@ -1,5 +1,5 @@
-import { BotConfig, BotTemplate, Logger, Stage } from 'botpress/sdk'
-import { BotCreationSchema, BotEditSchema, isValidBotId } from 'common/validation'
+import { BotConfig, BotTemplate, Logger, LoggerListener, Stage } from 'botpress/sdk'
+import { BotCreationSchema, BotEditSchema } from 'common/validation'
 import { createForGlobalHooks } from 'core/api'
 import { ConfigProvider } from 'core/config/config-loader'
 import { PersistedConsoleLogger } from 'core/logger'
@@ -12,7 +12,6 @@ import { Statistics } from 'core/stats'
 import { TYPES } from 'core/types'
 import { WrapErrorsWith } from 'errors'
 import fse from 'fs-extra'
-import glob from 'glob'
 import { inject, injectable, postConstruct, tagged } from 'inversify'
 import Joi from 'joi'
 import _ from 'lodash'
@@ -215,15 +214,9 @@ export class BotService {
   }
 
   async importBot(botId: string, archive: Buffer, allowOverwrite?: boolean): Promise<void> {
-    if (!isValidBotId(botId)) {
-      throw new InvalidOperationError(`Can't import bot; the bot ID contains invalid characters`)
-    }
-
     if (await this.botExists(botId)) {
       if (!allowOverwrite) {
-        throw new InvalidOperationError(
-          `Cannot import the bot ${botId}, it already exists, and overwrite is not allowed`
-        )
+        return this.logger.error(`Cannot import the bot ${botId}, it already exists, and overwrite is not allowed`)
       } else {
         this.logger.warn(`The bot ${botId} already exists, files in the archive will overwrite existing ones`)
       }
@@ -251,13 +244,9 @@ export class BotService {
           to: `/bots/${botId}/`
         })
 
-        const folder = await this._validateBotArchive(tmpDir.name)
-        await this.ghostService.forBot(botId).importFromDirectory(folder)
-        const originalConfig = await this.configProvider.getBotConfig(botId)
-
+        await this.ghostService.forBot(botId).importFromDirectory(tmpDir.name)
         const newConfigs = <Partial<BotConfig>>{
           id: botId,
-          name: botId === originalConfig.name ? originalConfig.name : `${originalConfig.name} (${botId})`,
           pipeline_status: {
             current_stage: {
               id: pipeline && pipeline[0].id,
@@ -269,9 +258,7 @@ export class BotService {
         if (await this.botExists(botId)) {
           await this.unmountBot(botId)
         }
-
-        await this.configProvider.mergeBotConfig(botId, newConfigs, true)
-
+        await this.configProvider.mergeBotConfig(botId, newConfigs)
         await this.workspaceService.addBotRef(botId, workspaceId)
 
         await this._migrateBotContent(botId)
@@ -284,17 +271,6 @@ export class BotService {
     } finally {
       tmpDir.removeCallback()
     }
-  }
-
-  private async _validateBotArchive(directory: string): Promise<string> {
-    const configFile = await Promise.fromCallback<string[]>(cb => glob('**/bot.config.json', { cwd: directory }, cb))
-    if (configFile.length > 1) {
-      throw new InvalidOperationError(`Bots must be imported in separate archives`)
-    } else if (configFile.length !== 1) {
-      throw new InvalidOperationError(`The archive doesn't seems to contain a bot`)
-    }
-
-    return path.join(directory, path.dirname(configFile[0]))
   }
 
   private async _migrateBotContent(botId: string): Promise<void> {
@@ -482,7 +458,7 @@ export class BotService {
         }
 
         await scopedGhost.ensureDirs('/', BOT_DIRECTORIES)
-        await scopedGhost.upsertFile('/', BOT_CONFIG_FILENAME, stringify(mergedConfigs))
+        await scopedGhost.upsertFile('/', BOT_CONFIG_FILENAME, stringify(mergedConfigs), false)
         await scopedGhost.upsertFiles('/', files)
 
         return mergedConfigs
@@ -517,6 +493,8 @@ export class BotService {
     }
 
     try {
+      await this.ghostService.forBot(botId).sync()
+
       await this.cms.loadElementsForBot(botId)
       await this.moduleLoader.loadModulesForBot(botId)
 

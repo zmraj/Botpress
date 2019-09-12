@@ -1,6 +1,5 @@
 import { gaId, machineUUID } from 'common/stats'
 import { inject, injectable, postConstruct } from 'inversify'
-import { AppLifecycle, AppLifecycleEvents } from 'lifecycle'
 import ua, { Visitor } from 'universal-analytics'
 
 import { ConfigProvider } from './config/config-loader'
@@ -16,7 +15,6 @@ export class Statistics {
 
   @postConstruct()
   public async init() {
-    await AppLifecycle.waitFor(AppLifecycleEvents.CONFIGURATION_LOADED)
     const botpressConfig = await this.configProvider.getBotpressConfig()
     this._sendUsageStats = botpressConfig.sendUsageStats
 

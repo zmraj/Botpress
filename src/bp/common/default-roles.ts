@@ -8,31 +8,13 @@ export const defaultRoles: AuthRole[] = [
     name: 'Administrator',
     description:
       'Administrators have full access to the workspace including adding members, creating bots and synchronizing changes.',
-    rules: [
-      { res: '*', op: '+r+w' },
-      {
-        res: 'module.code-editor.global.configs',
-        op: '-r-w'
-      }
-    ]
+    rules: [{ res: '*', op: '+r+w' }]
   },
   {
     id: 'dev',
     name: 'Developer',
     description: 'Developers have full read/write access to bots, including flows, content, NLU and actions',
-    rules: [
-      { res: '*', op: '+r+w' },
-      { res: 'admin.*', op: '+r-w' },
-      { res: 'admin.collaborators.*', op: '-r' },
-      {
-        res: 'module.code-editor.global.*',
-        op: '+r-w'
-      },
-      {
-        res: 'module.code-editor.global.configs',
-        op: '-r-w'
-      }
-    ]
+    rules: [{ res: '*', op: '+r+w' }, { res: 'admin.*', op: '+r-w' }, { res: 'admin.collaborators.*', op: '-r' }]
   },
   {
     id: 'editor',
@@ -43,11 +25,7 @@ export const defaultRoles: AuthRole[] = [
       { res: '*', op: '+r' },
       { res: 'admin.collaborators.*', op: '-r' },
       { res: 'bot.flows', op: '+r-w' },
-      { res: 'bot.content', op: '+r+w' },
-      {
-        res: 'module.code-editor.*',
-        op: '-r-w'
-      }
+      { res: 'bot.content', op: '+r+w' }
     ]
   }
 ]

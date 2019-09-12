@@ -6,11 +6,11 @@ export class KeyValueStoreTable extends Table {
   async bootstrap() {
     let created = false
     await this.knex.createTableIfNotExists(this.name, table => {
-      table.string('key')
+      table.string('key').primary()
       table.text('value').notNullable()
       table.string('botId').notNullable()
+
       table.timestamp('modified_on')
-      table.primary(['key', 'botId'])
       created = true
     })
     return created

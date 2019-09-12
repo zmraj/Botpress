@@ -18,7 +18,6 @@ import { GoMortarBoard } from 'react-icons/go'
 import NluPerformanceStatus from './NluPerformanceStatus'
 
 import axios from 'axios'
-import ConfigStatus from './ConfigStatus'
 
 const COMPLETED_DURATION = 2000
 
@@ -29,7 +28,8 @@ class StatusBar extends React.Component {
     progress: 0,
     messages: [],
     nluSynced: true,
-    contexts: []
+    contexts: [],
+    botsIds: []
   }
 
   constructor(props) {
@@ -40,6 +40,12 @@ class StatusBar extends React.Component {
 
   async componentDidMount() {
     await this.fetchContexts()
+    await this.fetchWorkspaceBotsIds()
+  }
+
+  fetchWorkspaceBotsIds = async () => {
+    const { data } = await axios.get(`${window.BOT_API_PATH}/workspaceBotsIds`)
+    this.setState({ botsIds: data || [] })
   }
 
   fetchContexts = async () => {
@@ -187,8 +193,7 @@ class StatusBar extends React.Component {
           <div className={style.item}>
             <strong>v{this.props.botpressVersion}</strong>
           </div>
-          <BotSwitcher />
-          {this.props.user && this.props.user.isSuperAdmin && <ConfigStatus />}
+          <BotSwitcher botsIds={this.state.botsIds} currentBotId={this.props.botInfo.id} />
           {this.renderDocHints()}
           {this.renderTaskProgress()}
           <LangSwitcher

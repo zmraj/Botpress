@@ -12,20 +12,19 @@ export const Entities: SFC<{ entities: sdk.NLU.Entity[] }> = props => (
         <tr>
           <th>Type</th>
           <th>Source</th>
-          <th>Normalized Value</th>
+          <th>Normalized value</th>
+          <th>Unit</th>
         </tr>
       </thead>
       <tbody>
         {props.entities.map(entity => (
           <tr key={entity.name}>
-            <td>{entity.name}</td>
             <td>
-              <span>{entity.meta.source}</span>
+              @{entity.type}.{entity.name}
             </td>
-            <td>
-              {/** TODO: remove the unit in the backend when not required  */}
-              {entity.data.value}&nbsp;{entity.data.unit !== 'string' && entity.data.unit}
-            </td>
+            <td>{entity.meta.source}</td>
+            <td>{entity.data.value}</td>
+            <td>{entity.data.unit}</td>
           </tr>
         ))}
       </tbody>

@@ -100,13 +100,11 @@ export default class Storage {
       })
     )
 
-  async getConfusionMatrix(modelHash: string, buildVersion: string, lang: string): Promise<Result | undefined> {
-    const rootFolder = `${this.modelsDir}/${lang}`
-    const filename = `confusion__${modelHash}__${buildVersion}.json`
-
-    if (await this.botGhost.fileExists(rootFolder, filename)) {
-      return this.botGhost.readFileAsObject<Result>(rootFolder, filename)
-    }
+  async getConfusionMatrix(modelHash: string, buildVersion: string, lang: string): Promise<Result> {
+    return await this.botGhost.readFileAsObject<Result>(
+      `${this.modelsDir}/${lang}`,
+      `confusion__${modelHash}__${buildVersion}.json`
+    )
   }
 
   async deleteIntent(intent) {
@@ -263,7 +261,7 @@ export default class Storage {
     const modelName = `${model.meta.context}__${model.meta.created_on}__${model.meta.hash}__${model.meta.type}.bin`
     const modelDir = `${this.modelsDir}/${lang}`
 
-    return this.botGhost.upsertFile(modelDir, modelName, model.model, { ignoreLock: true })
+    return this.botGhost.upsertFile(modelDir, modelName, model.model)
   }
 
   private async _cleanupModels(lang: string): Promise<void> {
