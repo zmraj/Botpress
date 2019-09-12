@@ -1,4 +1,7 @@
 import { Logger } from 'botpress/sdk'
+import crypto from 'crypto'
+import globrex from 'globrex'
+import _ from 'lodash'
 
 export type MockObject<T> = { T: T } & { readonly [key in keyof T]: jest.Mock }
 
@@ -84,3 +87,24 @@ export const asBytes = (size: string) => {
 
   return Number(matches[1])
 }
+
+export const bytesToString = (bytes: number): string => {
+  const units = ['bytes', 'kb', 'mb', 'gb', 'tb']
+  const power = Math.log2(bytes)
+  const unitNumber = Math.min(Math.floor(power / 10), 4)
+  const significand = bytes / Math.pow(2, unitNumber * 10)
+
+  return `${significand.toFixed(0)} ${units[unitNumber]}`
+}
+
+export function filterByGlobs<T>(array: T[], iteratee: (value: T) => string, globs: string[]): T[] {
+  const rules: { regex: RegExp }[] = globs.map(g => globrex(g, { globstar: true }))
+
+  return array.filter(x => _.every(rules, rule => !rule.regex.test(iteratee(x))))
+}
+
+export const calculateHash = (content: string) =>
+  crypto
+    .createHash('sha256')
+    .update(content)
+    .digest('hex')

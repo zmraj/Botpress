@@ -16,7 +16,7 @@ import { setDebugScopes } from '../debug'
 import { createForGlobalHooks } from './api'
 import { BotpressConfig } from './config/botpress.config'
 import { ConfigProvider } from './config/config-loader'
-import Database, { DatabaseType } from './database'
+import Database from './database'
 import { LoggerDbPersister, LoggerFilePersister, LoggerProvider } from './logger'
 import { ModuleLoader } from './module-loader'
 import HTTPServer from './server'
@@ -106,23 +106,19 @@ export class Botpress {
   }
 
   private async initialize(options: StartOptions) {
+    this.config = await this.configProvider.getBotpressConfig()
+
     this.trackStart()
     this.trackHeartbeat()
 
     setDebugScopes(process.core_env.DEBUG || (process.IS_PRODUCTION ? '' : 'bp:dialog'))
 
-    this.config = await this.loadConfiguration()
-    await this.createDatabase()
-    await this.initializeGhost()
-    await this.restoreDebugScope()
-
-    // Invalidating the configuration to force it to load it from the ghost if enabled
-    this.config = await this.loadConfiguration(true)
-
     await AppLifecycle.setDone(AppLifecycleEvents.CONFIGURATION_LOADED)
-    await this.migrationService.initialize()
+
+    await this.restoreDebugScope()
     await this.checkJwtSecret()
     await this.loadModules(options.modules)
+    await this.migrationService.initialize()
     await this.cleanDisabledModules()
     await this.initializeServices()
     await this.checkEditionRequirements()
@@ -162,7 +158,8 @@ export class Botpress {
   }
 
   async checkEditionRequirements() {
-    const databaseType = this.getDatabaseType()
+    const { DATABASE_URL } = process.env
+    const dbType = DATABASE_URL && DATABASE_URL.toLowerCase().startsWith('postgres') ? 'postgres' : 'sqlite'
 
     if (!process.IS_PRO_ENABLED && process.CLUSTER_ENABLED) {
       this.logger.warn(
@@ -203,7 +200,7 @@ export class Botpress {
         'Botpress can be run on a cluster. If you want to do so, make sure Redis is running and properly configured in your environment variables'
       )
     }
-    if (process.IS_PRO_ENABLED && databaseType !== 'postgres' && process.CLUSTER_ENABLED) {
+    if (process.IS_PRO_ENABLED && dbType !== 'postgres' && process.CLUSTER_ENABLED) {
       throw new Error(
         'Postgres is required to use Botpress in a cluster. Please migrate your database to Postgres and enable it in your Botpress configuration file.'
       )
@@ -235,11 +232,6 @@ export class Botpress {
   @WrapErrorsWith('Error while discovering bots')
   async discoverBots(): Promise<void> {
     const botsRef = await this.workspaceService.getBotRefs()
-
-    for (const botId of botsRef) {
-      await this.ghostService.forBot(botId).sync()
-    }
-
     const botsIds = await this.botService.getBotsIds()
     const unlinked = _.difference(botsIds, botsRef)
     const deleted = _.difference(botsRef, botsIds)
@@ -278,8 +270,17 @@ export class Botpress {
 
   @WrapErrorsWith('Error initializing Ghost Service')
   async initializeGhost(): Promise<void> {
-    this.ghostService.initialize(process.IS_PRODUCTION)
-    await this.ghostService.global().sync()
+    const useDbDriver = process.BPFS_STORAGE === 'database'
+    this.ghostService.initialize(useDbDriver)
+    const global = await this.ghostService.global().directoryListing('/')
+
+    if (useDbDriver && _.isEmpty(global)) {
+      this.logger.info('Syncing data/global/ to database')
+      await this.ghostService.global().sync()
+
+      this.logger.info('Syncing data/bots/ to database')
+      await this.ghostService.bots().sync()
+    }
   }
 
   private async initializeServices() {
@@ -287,6 +288,10 @@ export class Botpress {
     this.loggerDbPersister.start()
 
     await this.loggerFilePersister.initialize(this.config!, await this.loggerProvider('LogFilePersister'))
+
+    this.configProvider.onBotpressConfigChanged = async (initialHash: string, newHash: string) => {
+      this.realtimeService.sendToSocket({ eventName: 'config.updated', payload: { initialHash, newHash } })
+    }
 
     await this.authService.initialize()
     await this.workspaceService.initialize()
@@ -366,26 +371,6 @@ export class Botpress {
     await AppLifecycle.setDone(AppLifecycleEvents.SERVICES_READY)
   }
 
-  private async loadConfiguration(forceInvalidate?): Promise<BotpressConfig> {
-    if (forceInvalidate) {
-      await this.configProvider.invalidateBotpressConfig()
-    }
-    return this.configProvider.getBotpressConfig()
-  }
-
-  private getDatabaseType(): DatabaseType {
-    const databaseUrl = process.env.DATABASE_URL
-    const databaseType = databaseUrl && databaseUrl.toLowerCase().startsWith('postgres') ? 'postgres' : 'sqlite'
-
-    return databaseType
-  }
-
-  @WrapErrorsWith(`Error initializing Database. Please check your configuration`)
-  private async createDatabase(): Promise<void> {
-    const databaseType = this.getDatabaseType()
-    await this.database.initialize(<DatabaseType>databaseType.toLowerCase(), process.env.DATABASE_URL)
-  }
-
   private async loadModules(modules: sdk.ModuleEntryPoint[]): Promise<void> {
     const loadedModules = await this.moduleLoader.loadModules(modules)
     this.logger.info(`Loaded ${loadedModules.length} ${plur('module', loadedModules.length)}`)
@@ -403,8 +388,8 @@ export class Botpress {
     AppLifecycle.setDone(AppLifecycleEvents.HTTP_SERVER_READY)
   }
 
-  private startRealtime() {
-    this.realtimeService.installOnHttpServer(this.httpServer.httpServer)
+  private async startRealtime() {
+    await this.realtimeService.installOnHttpServer(this.httpServer.httpServer)
   }
 
   private formatProcessingError(err: ProcessingError) {
