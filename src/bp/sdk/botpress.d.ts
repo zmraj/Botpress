@@ -240,6 +240,44 @@ declare module 'botpress/sdk' {
       export const Model: ModelConstructor
     }
 
+    export namespace KMeans {
+      export interface KMeansOptions {
+        maxIterations?: number
+        tolerance?: number
+        withIterations?: boolean
+        distanceFunction?: DistanceFunction
+        seed?: number
+        initialization?: 'random' | 'kmeans++' | 'mostDistant' | number[][]
+      }
+
+      export interface Centroid {
+        centroid: number[]
+        error: number
+        size: number
+      }
+
+      // TODO convert this to class we build the source of ml-kmeans
+      export interface KmeansResult {
+        // constructor(
+        //   clusters: number[],
+        //   centroids: Centroid[],
+        //   converged: boolean,
+        //   iterations: number,
+        //   distance: DistanceFunction
+        // )
+        clusters: number[]
+        centroids: Centroid[]
+        iterations: number
+        nearest: (data: DataPoint[]) => number[]
+      }
+
+      export type DataPoint = number[]
+
+      export type DistanceFunction = (point0: DataPoint, point1: DataPoint) => number
+
+      export const kmeans: (data: DataPoint[], K: number, options: KMeansOptions) => KmeansResult
+    }
+
     export namespace SVM {
       export interface SVMOptions {
         classifier: 'C_SVC'
@@ -263,10 +301,9 @@ declare module 'botpress/sdk' {
       }
 
       export class Trainer {
-        constructor(options?: Partial<SVMOptions>)
-        train(points: DataPoint[], callback?: TrainProgressCallback): Promise<void>
+        constructor()
+        train(points: DataPoint[], options?: Partial<SVMOptions>, callback?: TrainProgressCallback): Promise<string>
         isTrained(): boolean
-        serialize(): string
       }
 
       export class Predictor {
@@ -279,13 +316,16 @@ declare module 'botpress/sdk' {
 
     export namespace Strings {
       /**
-       * Returns the levenshtein distance between two strings
+       * Returns the levenshtein similarity between two strings
+       * sim(a, b) = (|a| - dist(a, b)) / |a| where |a| < |b|
+       * sim(a, b) ∈ [0, 1]
        * @returns the proximity between 0 and 1, where 1 is very close
        */
       export const computeLevenshteinDistance: (a: string, b: string) => number
 
       /**
-       * Returns the jaro-winkler distance between two strings
+       * Returns the jaro-winkler similarity between two strings
+       * sim(a, b) = 1 - dist(a, b)
        * @returns the proximity between 0 and 1, where 1 is very close
        */
       export const computeJaroWinklerDistance: (a: string, b: string, options: { caseSensitive: boolean }) => number
@@ -295,6 +335,7 @@ declare module 'botpress/sdk' {
       export interface Tagger {
         tag(xseq: Array<string[]>): { probability: number; result: string[] }
         open(model_filename: string): boolean
+        marginal(xseq: Array<string[]>): { [label: string]: number }[]
       }
 
       export interface TrainerOptions {
@@ -560,6 +601,15 @@ declare module 'botpress/sdk' {
        * This includes all the flow/nodes which were traversed for the current event
        */
       __stacktrace: JumpPoint[]
+      /** Contains details about an error that occurred while processing the event */
+      __error?: EventError
+    }
+
+    export interface EventError {
+      type: string
+      stacktrace?: string
+      actionName?: string
+      actionArgs?: any
     }
 
     export interface JumpPoint {
@@ -695,15 +745,23 @@ declare module 'botpress/sdk' {
     redirectUrl?: string
   }
 
+  export interface UpsertOptions {
+    /** Whether or not to record a revision @default true */
+    recordRevision?: boolean
+    /** When enabled, files changed on the database are synced locally so they can be used locally (eg: require in actions) @default false */
+    syncDbToDisk?: boolean
+    /** This is only applicable for bot-scoped ghost. When true, the lock status of the bot is ignored. @default false */
+    ignoreLock?: boolean
+  }
+
   export interface ScopedGhostService {
     /**
      * Insert or Update the file at the specified location
      * @param rootFolder - Folder relative to the scoped parent
      * @param file - The name of the file
      * @param content - The content of the file
-     * @param recordRevision - Whether or not to record a revision @default true
      */
-    upsertFile(rootFolder: string, file: string, content: string | Buffer, recordRevision?: boolean): Promise<void>
+    upsertFile(rootFolder: string, file: string, content: string | Buffer, options?: UpsertOptions): Promise<void>
     readFileAsBuffer(rootFolder: string, file: string): Promise<Buffer>
     readFileAsString(rootFolder: string, file: string): Promise<string>
     readFileAsObject<T>(rootFolder: string, file: string): Promise<T>
@@ -730,6 +788,26 @@ declare module 'botpress/sdk' {
      */
     onFileChanged(callback: (filePath: string) => void): ListenHandle
     fileExists(rootFolder: string, file: string): Promise<boolean>
+  }
+
+  export interface KvsService {
+    /**
+     * Returns the specified key as JSON object
+     * @example bp.kvs.get('bot123', 'hello/whatsup')
+     */
+    get(key: string, path?: string): Promise<any>
+
+    /**
+     * Saves the specified key as JSON object
+     * @example bp.kvs.set('bot123', 'hello/whatsup', { msg: 'i love you' })
+     */
+    set(key: string, value: any, path?: string): Promise<void>
+    setStorageWithExpiry(key: string, value, expiryInMs?: string)
+    getStorageWithExpiry(key: string)
+    getConversationStorageKey(sessionId: string, variable: string): string
+    getUserStorageKey(userId: string, variable: string): string
+    getGlobalStorageKey(variable: string): string
+    removeStorageKeysStartingWith(key): Promise<void>
   }
 
   export interface ListenHandle {
@@ -1176,6 +1254,13 @@ declare module 'botpress/sdk' {
      */
     export function extractExternalToken(req: any, res: any, next: any): Promise<void>
 
+    export function needPermission(
+      operation: string,
+      resource: string
+    ): (req: any, res: any, next: any) => Promise<void>
+
+    export function hasPermission(req: any, operation: string, resource: string): Promise<boolean>
+
     export interface RouterExtension {
       getPublicPath(): Promise<string>
     }
@@ -1315,21 +1400,56 @@ declare module 'botpress/sdk' {
    */
   export namespace kvs {
     /**
+     * Access the KVS Service for a specific bot. Check the {@link ScopedGhostService} for the operations available on the scoped element.
+     */
+    export function forBot(botId: string): KvsService
+    /**
+     * Access the KVS Service globally. Check the {@link ScopedGhostService} for the operations available on the scoped element.
+     */
+    export function global(): KvsService
+
+    /**
      * Returns the specified key as JSON object
      * @example bp.kvs.get('bot123', 'hello/whatsup')
+     * @deprecated will be removed, use global or forBot
      */
     export function get(botId: string, key: string, path?: string): Promise<any>
 
     /**
      * Saves the specified key as JSON object
      * @example bp.kvs.set('bot123', 'hello/whatsup', { msg: 'i love you' })
+     * @deprecated will be removed, use global or forBot
      */
     export function set(botId: string, key: string, value: any, path?: string): Promise<void>
+
+    /**
+     * @deprecated will be removed, use global or forBot
+     */
     export function setStorageWithExpiry(botId: string, key: string, value, expiryInMs?: string)
+
+    /**
+     * @deprecated will be removed, use global or forBot
+     */
     export function getStorageWithExpiry(botId: string, key: string)
+
+    /**
+     * @deprecated will be removed, use global or forBot
+     */
     export function getConversationStorageKey(sessionId: string, variable: string): string
+
+    /**
+     * @deprecated will be removed, use global or forBot
+     */
     export function getUserStorageKey(userId: string, variable: string): string
+
+    /**
+     * @deprecated will be removed, use global or forBot
+     */
     export function getGlobalStorageKey(variable: string): string
+
+    /**
+     * @deprecated will be removed, use global or forBot
+     */
     export function removeStorageKeysStartingWith(key): Promise<void>
   }
 

@@ -87,9 +87,7 @@ export default async (bp: typeof sdk, nlus: EngineByBot) => {
       const matrix = await engine.storage.getConfusionMatrix(req.params.modelHash, req.params.version, lang)
       res.send({ matrix, confusionComputing })
     } catch (err) {
-      if (err.code !== 'ENOENT') {
-        bp.logger.attachError(err).warn(`Could not get confusion matrix for ${req.params.modelHash}.`)
-      }
+      bp.logger.attachError(err).warn(`Could not get confusion matrix for ${req.params.modelHash}.`)
       res.send({ confusionComputing })
     }
   })
@@ -142,7 +140,7 @@ export default async (bp: typeof sdk, nlus: EngineByBot) => {
       await botEngine.storage.saveIntent(intentDef.name, intentDef)
       scheduleSyncNLU(req.params.botId)
 
-      res.sendStatus(201)
+      res.sendStatus(200)
     } catch (err) {
       bp.logger.attachError(err).warn('Cannot create intent, invalid schema')
       res.status(400).send('Invalid schema')
@@ -187,7 +185,7 @@ export default async (bp: typeof sdk, nlus: EngineByBot) => {
       await botEngine.storage.saveEntity(entityDef)
       scheduleSyncNLU(req.params.botId)
 
-      res.sendStatus(201)
+      res.sendStatus(200)
     } catch (err) {
       bp.logger.attachError(err).warn('Cannot create entity, imvalid schema')
       res.status(400).send('Invalid schema')
@@ -203,7 +201,7 @@ export default async (bp: typeof sdk, nlus: EngineByBot) => {
     await botEngine.storage.saveEntity({ ...updatedEntity, id })
     scheduleSyncNLU(req.params.botId)
 
-    res.sendStatus(201)
+    res.sendStatus(200)
   })
 
   router.delete('/entities/:id', async (req, res) => {

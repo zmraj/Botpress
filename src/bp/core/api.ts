@@ -21,7 +21,6 @@ import { BotService } from './services/bot-service'
 import { CMSService } from './services/cms'
 import { DialogEngine } from './services/dialog/dialog-engine'
 import { SessionIdFactory } from './services/dialog/session/id-factory'
-import { ScopedGhostService } from './services/ghost/service'
 import { HookService } from './services/hook/hook-service'
 import { KeyValueStore } from './services/kvs'
 import MediaService from './services/media'
@@ -51,6 +50,12 @@ const http = (httpServer: HTTPServer) => (identity: string): typeof sdk.http => 
     },
     decodeExternalToken(token: string): Promise<any> {
       return httpServer.decodeExternalToken(token)
+    },
+    needPermission(operation: string, resource: string): (req: any, res: any, next: any) => Promise<void> {
+      return httpServer.needPermission(operation, resource)
+    },
+    hasPermission(req: any, operation: string, resource: string): Promise<boolean> {
+      return httpServer.hasPermission(req, operation, resource)
     }
   }
 }
@@ -127,6 +132,12 @@ const users = (userRepo: UserRepository): typeof sdk.users => {
 
 const kvs = (kvs: KeyValueStore): typeof sdk.kvs => {
   return {
+    forBot(botId: string): sdk.KvsService {
+      return kvs.forBot(botId)
+    },
+    global(): sdk.KvsService {
+      return kvs.global()
+    },
     async get(botId: string, key: string, path?: string): Promise<any> {
       return kvs.get(botId, key, path)
     },
@@ -215,7 +226,7 @@ const experimental = (hookService: HookService): typeof sdk.experimental => {
  * Socket.IO API to emit payloads to front-end clients
  */
 export class RealTimeAPI implements RealTimeAPI {
-  constructor(private realtimeService: RealtimeService) { }
+  constructor(private realtimeService: RealtimeService) {}
 
   sendPayload(payload: RealTimePayload) {
     this.realtimeService.sendToSocket(payload)
