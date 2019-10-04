@@ -1,0 +1,31 @@
+{
+  "name": "internal-users",
+  "version": "1.0.0",
+  "description": "Features for internal users",
+  "private": true,
+  "main": "dist/backend/index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/module-builder build",
+    "watch": "./node_modules/.bin/module-builder watch"
+  },
+  "author": "Botpress Team",
+  "license": "AGPL-3.0-only",
+  "devDependencies": {
+    "@blueprintjs/core": "^3.18.1",
+    "@types/node": "^10.11.0",
+    "@types/react": "^16.8.18",
+    "@types/react-dom": "^16.8.4",
+    "module-builder": "../../build/module-builder"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "bluebird-global": "^1.0.1",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0"
+  },
+  "resolutions": {
+    "fstream": ">=1.0.12",
+    "lodash": ">=4.17.12"
+  }
+}
