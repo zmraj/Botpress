@@ -56,6 +56,10 @@ class Web extends React.Component<MainProps> {
       window.parent['webchat_store'] = this.props.store
     }
 
+    if (config.overrideDomain) {
+      document.domain = config.overrideDomain
+    }
+
     this.socket = new BpSocket(this.props.bp, config)
     this.socket.onMessage = this.handleNewMessage
     this.socket.onTyping = this.props.updateTyping
