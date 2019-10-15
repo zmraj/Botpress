@@ -1,9 +1,11 @@
-import { Checkbox, FormGroup, InputGroup } from '@blueprintjs/core'
+import { Button, Checkbox, FormGroup, InputGroup } from '@blueprintjs/core'
 // @ts-ignore
 import ContentPickerWidget from 'botpress/content-picker'
 import { InfoTooltip } from 'botpress/ui'
+import { toastInfo } from 'botpress/utils'
 import cx from 'classnames'
 import React, { FC, useEffect, useState } from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { AuthGateData } from '../../backend/authGate'
 
@@ -45,7 +47,7 @@ export const AuthGate: FC<SkillProps<AuthGateData>> = props => {
         <Checkbox
           checked={promptLogin}
           onChange={e => setPromptLogin(e.currentTarget.checked)}
-          label="Prompt for login when needed"
+          label="Prompt for login if user is unauthenticated"
         />
 
         <div style={{ marginLeft: 5 }}>
@@ -67,8 +69,16 @@ export const AuthGate: FC<SkillProps<AuthGateData>> = props => {
             />
 
             <blockquote className={cx('bp3-blockquote', style.details)}>
-              Login URL Markdown: <code>[Login Link]({`{{temp.login_url}}`}) </code>
+              Login URL Markdown{'  '}
               <InfoTooltip text="Copy and paste that small snippet of code in your text message to display a clickable URL in the chat for users to authenticate" />
+              <br />
+              <code>[Login Link]({`{{temp.login_url}}`}) </code>
+              <CopyToClipboard
+                text={`[Login Link]({{temp.login_url}})`}
+                onCopy={() => toastInfo('Copied to clipboard')}
+              >
+                <Button icon="clipboard" minimal={true} />
+              </CopyToClipboard>
             </blockquote>
           </div>
 

@@ -22,7 +22,8 @@
     "bluebird-global": "^1.0.1",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "react-copy-to-clipboard": "^5.0.1"
   },
   "resolutions": {
     "fstream": ">=1.0.12",
