@@ -10,12 +10,13 @@ import { ExecuteNodeModel } from './nodes_v2/ExecuteNode'
 import { ListenNodeModel } from './nodes_v2/ListenNode'
 import { RouterNodeModel } from './nodes_v2/RouterNode'
 import { SaySomethingNodeModel } from './nodes_v2/SaySomethingNode'
+import { VariablesNodeModel } from './nodes_v2/VariablesNode'
 
 const passThroughNodeProps: string[] = ['name', 'onEnter', 'onReceive', 'next', 'skill']
 export const DIAGRAM_PADDING: number = 100
 
 // Must be identified by the deleteSelectedElement logic to know it needs to delete something
-export const nodeTypes = ['standard', 'skill-call', 'say_something', 'execute', 'listen', 'router']
+export const nodeTypes = ['standard', 'skill-call', 'say_something', 'execute', 'listen', 'router', 'variables']
 
 // Using the new node types to prevent displaying start prort
 export const newNodeTypes = ['say_something', 'execute', 'listen', 'router']
@@ -35,6 +36,8 @@ const createNodeModel = (node, modelProps) => {
     return new ListenNodeModel(modelProps)
   } else if (type === 'router') {
     return new RouterNodeModel(modelProps)
+  } else if (type === 'variables') {
+    return new VariablesNodeModel(modelProps)
   } else {
     return new StandardNodeModel(modelProps)
   }

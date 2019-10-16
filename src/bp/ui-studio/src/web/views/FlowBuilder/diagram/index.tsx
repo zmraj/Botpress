@@ -47,6 +47,7 @@ import { ExecuteWidgetFactory } from './nodes_v2/ExecuteNode'
 import { ListenWidgetFactory } from './nodes_v2/ListenNode'
 import { RouterNodeModel, RouterWidgetFactory } from './nodes_v2/RouterNode'
 import { SaySomethingWidgetFactory } from './nodes_v2/SaySomethingNode'
+import { VariablesWidgetFactory } from './nodes_v2/VariablesNode'
 import style from './style.scss'
 
 class Diagram extends Component<Props> {
@@ -69,6 +70,7 @@ class Diagram extends Component<Props> {
     this.diagramEngine.registerNodeFactory(new ExecuteWidgetFactory())
     this.diagramEngine.registerNodeFactory(new ListenWidgetFactory())
     this.diagramEngine.registerNodeFactory(new RouterWidgetFactory())
+    this.diagramEngine.registerNodeFactory(new VariablesWidgetFactory())
     this.diagramEngine.registerLinkFactory(new DeletableLinkFactory())
 
     // This reference allows us to update flow nodes from widgets
