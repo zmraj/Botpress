@@ -25,7 +25,7 @@ export interface Hint {
   scope: 'inputs'
   name: string
   source: string
-  category: 'VARIABLES'
+  category: 'VARIABLES' | 'PROPERTIES'
   partial: boolean
   description?: string
   location?: string

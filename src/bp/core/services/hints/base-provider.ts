@@ -17,6 +17,31 @@ export default [
     name: 'event.preview'
   },
   {
+    description: "The event's memory",
+    name: 'event.state',
+    partial: true,
+  },
+  {
+    description: "The event's memory",
+    name: 'event.state.user',
+    partial: true,
+  },
+  {
+    description: "The event's memory",
+    name: 'event.state.session',
+    partial: true,
+  },
+  {
+    description: "The event's memory",
+    name: 'event.state.bot',
+    partial: true,
+  },
+  {
+    description: "The event's memory",
+    name: 'event.state.temp',
+    partial: true,
+  },
+  {
     description: 'The channel on which the event was received',
     name: 'event.channel'
   },

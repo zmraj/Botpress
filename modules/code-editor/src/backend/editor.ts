@@ -278,10 +278,12 @@ export default class Editor {
       path.join(__dirname, '/../typings/botpress.config.schema.json'),
       'utf-8'
     )
+    const memoryTypings = await this._loadBotMemoryTypings()
 
     this._typings = {
       'process.d.ts': this._buildRestrictedProcessVars(),
       'node.d.ts': nodeTyping.toString(),
+      'memory.d.ts': memoryTypings.replace(`'botpress/sdk'`, `sdk`),
       'botpress.d.ts': sdkTyping.toString().replace(`'botpress/sdk'`, `sdk`),
       'bot.config.schema.json': botSchema.toString(),
       'botpress.config.schema.json': botpressConfigSchema.toString()
@@ -332,6 +334,11 @@ export default class Editor {
       content: await ghost.readFileAsString('/', filepath),
       readOnly
     }))
+  }
+
+  private async _loadBotMemoryTypings(): Promise<string> {
+    const ghost = this.bp.ghost.forBot(this._botId)
+    return await ghost.readFileAsString('/', 'memoryTypings.ts')
   }
 
   private async _loadAllGlobalConfigs(readOnly: boolean): Promise<EditableFile[]> {
