@@ -47,7 +47,7 @@ import { ExecuteWidgetFactory } from './nodes_v2/ExecuteNode'
 import { ListenWidgetFactory } from './nodes_v2/ListenNode'
 import { RouterNodeModel, RouterWidgetFactory } from './nodes_v2/RouterNode'
 import { SaySomethingWidgetFactory } from './nodes_v2/SaySomethingNode'
-import { VariablesWidgetFactory } from './nodes_v2/VariablesNode'
+import { VariablesNodeModel, VariablesWidgetFactory } from './nodes_v2/VariablesNode'
 import style from './style.scss'
 
 class Diagram extends Component<Props> {
@@ -224,14 +224,15 @@ class Diagram extends Component<Props> {
 
   onDiagramDoubleClick = (event?: MouseEvent) => {
     if (event) {
-      // We only keep 3 events for dbl click: full flow, standard nodes and skills. Adding temporarily router so it's editable
+      // We only keep 3 events for dbl click: full flow, standard nodes and skills. Adding temporarily router and variables so they are editable
       const target = this.diagramWidget.getMouseElement(event)
       if (
         target &&
         !(
           target.model instanceof StandardNodeModel ||
           target.model instanceof SkillCallNodeModel ||
-          target.model instanceof RouterNodeModel
+          target.model instanceof RouterNodeModel ||
+          target.model instanceof VariablesNodeModel
         )
       ) {
         return
@@ -251,7 +252,8 @@ class Diagram extends Component<Props> {
     return (
       targetModel instanceof StandardNodeModel ||
       targetModel instanceof SkillCallNodeModel ||
-      target.model instanceof RouterNodeModel
+      targetModel instanceof RouterNodeModel ||
+      targetModel instanceof VariablesNodeModel
     )
   }
 

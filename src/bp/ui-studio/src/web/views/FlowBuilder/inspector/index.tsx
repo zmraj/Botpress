@@ -77,6 +77,10 @@ class Inspector extends Component<Props> {
       )
     }
 
+    if (flowType === 'variables') {
+      return (<div>hello world</div>)
+    }
+
     if (nodeTypes.includes(flowType)) {
       return (
         <StandardNode
