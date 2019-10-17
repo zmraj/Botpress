@@ -58,6 +58,17 @@ export default class WebchatDb {
           table.timestamp('sent_on')
         })
       })
+      .then(() =>
+        this.knex('web_messages')
+          .columnInfo()
+          .then(info => {
+            if (info.payload === undefined) {
+              return this.knex.schema.alterTable('web_messages', table => {
+                table.jsonb('payload')
+              })
+            }
+          })
+      )
   }
 
   async appendUserMessage(botId, userId, conversationId, payload, incomingEventId) {

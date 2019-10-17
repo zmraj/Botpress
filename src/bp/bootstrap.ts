@@ -95,6 +95,7 @@ This is a fatal error, process will exit.`
   const modules: sdk.ModuleEntryPoint[] = []
 
   const globalConfig = await Config.getBotpressConfig()
+  const loadingErrors: Error[] = []
   let modulesLog = ''
 
   const resolver = new ModuleResolver(logger)
@@ -115,10 +116,19 @@ This is a fatal error, process will exit.`
       modulesLog += os.EOL + `${chalk.greenBright('⦿')} ${entry.location}`
     } catch (err) {
       modulesLog += os.EOL + `${chalk.redBright('⊗')} ${entry.location} ${chalk.gray('(error)')}`
+      loadingErrors.push(new FatalError(err, `Fatal error loading module "${entry.location}"`))
     }
   }
 
   logger.info(`Using ${chalk.bold(modules.length.toString())} modules` + modulesLog)
+
+  for (const err of loadingErrors) {
+    logger.attachError(err).error('Error starting Botpress')
+  }
+
+  if (loadingErrors.length) {
+    process.exit(1)
+  }
 
   await Botpress.start({ modules }).catch(err => {
     logger.attachError(err).error('Error starting Botpress')
