@@ -28,7 +28,7 @@ export default class VariablesNode extends Component {
           if (property.type === 'number') {
             return (
               <FormGroup key={buildKeyForSchemaItem(property)} inline={true} label={property.name}>
-                <InputGroup />
+                <NumericInput />
               </FormGroup>
             )
           } else if (property.type === 'string') {
