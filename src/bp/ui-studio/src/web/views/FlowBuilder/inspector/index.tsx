@@ -17,6 +17,7 @@ import { nodeTypes } from '../diagram/manager'
 import FlowInformation from '../nodeProps/FlowInformation'
 import SkillCallNode from '../nodeProps/SkillCallNode'
 import StandardNode from '../nodeProps/StandardNode'
+import VariablesNode from '../nodeProps/VariablesNode'
 
 import style from './style.scss'
 
@@ -78,7 +79,7 @@ class Inspector extends Component<Props> {
     }
 
     if (flowType === 'variables') {
-      return (<div>hello world</div>)
+      return <VariablesNode />
     }
 
     if (nodeTypes.includes(flowType)) {
