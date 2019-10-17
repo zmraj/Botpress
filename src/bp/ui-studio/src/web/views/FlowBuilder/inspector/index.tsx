@@ -79,7 +79,7 @@ class Inspector extends Component<Props> {
     }
 
     if (flowType === 'variables') {
-      return <VariablesNode />
+      return <VariablesNode updateNode={updateNodeAndRefresh} />
     }
 
     if (nodeTypes.includes(flowType)) {

@@ -11,6 +11,10 @@ class VariablesNode extends Component {
     const user = schema.user
     const temp = schema.temp
 
+    const handleNumericChange = (val, key) => {
+      this.props.updateNode({ bleh: 'lol' })
+    }
+
     const renderSchemEntry = (memoryType, entry) => {
       const key = entry[0]
       const value = entry[1]
@@ -18,7 +22,7 @@ class VariablesNode extends Component {
       if (type === 'number') {
         return (
           <FormGroup key={buildKeyForSchemaItem(memoryType, type, key)} inline={true} label={key}>
-            <NumericInput />
+            <NumericInput onValueChange={val => handleNumericChange(val, key)} />
           </FormGroup>
         )
       } else if (type === 'string') {
