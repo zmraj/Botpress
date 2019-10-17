@@ -256,8 +256,8 @@ export const fetchUser = () => dispatch => {
 export const botInfoReceived = createAction('BOT/INFO_RECEIVED')
 export const fetchBotInformation = () => dispatch => {
   // tslint:disable-next-line: no-floating-promises
-  axios.get(`${window.BOT_API_PATH}`).then(information => {
-    dispatch(botInfoReceived(information.data))
+  axios.get(`${window.BOT_API_PATH}`).then(res => {
+    dispatch(botInfoReceived(res.data))
   })
 }
 
