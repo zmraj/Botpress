@@ -1,51 +1,59 @@
 import React, { Component, Fragment } from 'react'
-import { FormGroup, NumericInput, InputGroup, Switch } from '@blueprintjs/core'
+import { FormGroup, NumericInput, InputGroup, Switch, H4 } from '@blueprintjs/core'
+import { connect } from 'react-redux'
 
-export default class VariablesNode extends Component {
+class VariablesNode extends Component {
   render() {
-    const schema = [
-      {
-        name: 'age',
-        type: 'number',
-        memoryType: 'user'
-      },
-      {
-        name: 'city',
-        type: 'string',
-        memoryType: 'user'
-      },
-      { name: 'name', type: 'string', memoryType: 'temp' },
-      { name: 'isgood', type: 'boolean', memoryType: 'temp' }
-    ]
+    const buildKeyForSchemaItem = (memoryType, type, name) => {
+      return `${memoryType}.${type}.${name}`
+    }
+    const schema = this.props.memorySchema
+    const user = schema.user
+    const temp = schema.temp
 
-    const buildKeyForSchemaItem = property => {
-      return `${property.memoryType}.${property.type}.${property.name}`
+    const renderSchemEntry = (memoryType, entry) => {
+      const key = entry[0]
+      const value = entry[1]
+      const type = value.type
+      if (type === 'number') {
+        return (
+          <FormGroup key={buildKeyForSchemaItem(memoryType, type, key)} inline={true} label={key}>
+            <NumericInput />
+          </FormGroup>
+        )
+      } else if (type === 'string') {
+        return (
+          <FormGroup key={buildKeyForSchemaItem(memoryType, type, key)} inline={true} label={key}>
+            <InputGroup />
+          </FormGroup>
+        )
+      } else if (type === 'boolean') {
+        return (
+          <FormGroup key={buildKeyForSchemaItem(memoryType, type, key)} inline={true} label={key}>
+            <Switch />
+          </FormGroup>
+        )
+      }
     }
 
     return (
       <Fragment>
-        {schema.map(property => {
-          if (property.type === 'number') {
-            return (
-              <FormGroup key={buildKeyForSchemaItem(property)} inline={true} label={property.name}>
-                <NumericInput />
-              </FormGroup>
-            )
-          } else if (property.type === 'string') {
-            return (
-              <FormGroup key={buildKeyForSchemaItem(property)} inline={true} label={property.name}>
-                <InputGroup />
-              </FormGroup>
-            )
-          } else if (property.type === 'boolean') {
-            return (
-              <FormGroup key={buildKeyForSchemaItem(property)} inline={true} label={property.name}>
-                <Switch />
-              </FormGroup>
-            )
-          }
-        })}
+        <H4>User</H4>
+        {Object.entries(user).map(entry => renderSchemEntry('user', entry))}
+        <H4>Temp</H4>
+        {Object.entries(temp).map(entry => renderSchemEntry('temp', entry))}
       </Fragment>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  memorySchema: state.bot.memorySchema
+})
+
+const mapDispatchToProps = {}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VariablesNode)
