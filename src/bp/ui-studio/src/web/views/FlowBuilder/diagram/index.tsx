@@ -404,7 +404,7 @@ class Diagram extends Component<Props> {
       this.props.buildSkill({ location: { x, y }, id: data.id })
     } else if (data.type === 'node') {
       // The following nodes needs default transitions
-      if (data.id === 'say_something' || data.id === 'execute') {
+      if (data.id === 'say_something' || data.id === 'execute' || data.id === 'variables') {
         this.props.createFlowNode({ x, y, type: data.id, next: [defaultTransition] })
       } else if (data.id === 'listen') {
         this.props.createFlowNode({ x, y, type: data.id, onReceive: [], next: [defaultTransition] })
