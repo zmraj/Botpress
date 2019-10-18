@@ -15,7 +15,7 @@ class VariablesNode extends Component {
       this.props.updateNode({ bleh: 'lol' })
     }
 
-    const renderSchemEntry = (memoryType, entry) => {
+    const renderSchemaEntry = (memoryType, entry) => {
       const key = entry[0]
       const value = entry[1]
       const type = value.type
@@ -43,9 +43,9 @@ class VariablesNode extends Component {
     return (
       <Fragment>
         <H4>User</H4>
-        {Object.entries(user).map(entry => renderSchemEntry('user', entry))}
+        {Object.entries(user).map(entry => renderSchemaEntry('user', entry))}
         <H4>Temp</H4>
-        {Object.entries(temp).map(entry => renderSchemEntry('temp', entry))}
+        {Object.entries(temp).map(entry => renderSchemaEntry('temp', entry))}
       </Fragment>
     )
   }
