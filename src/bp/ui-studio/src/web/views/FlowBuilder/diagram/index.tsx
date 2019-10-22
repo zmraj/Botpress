@@ -163,7 +163,9 @@ class Diagram extends Component<Props> {
     executeNode: (point: Point) => this.props.createFlowNode({ ...point, type: 'execute', next: [defaultTransition] }),
     listenNode: (point: Point) =>
       this.props.createFlowNode({ ...point, type: 'listen', onReceive: [], next: [defaultTransition] }),
-    routerNode: (point: Point) => this.props.createFlowNode({ ...point, type: 'router' })
+    routerNode: (point: Point) => this.props.createFlowNode({ ...point, type: 'router' }),
+    variablesNode: (point: Point) =>
+      this.props.createFlowNode({ ...point, type: 'variables', next: [defaultTransition] })
   }
 
   handleContextMenuNoElement = (event: React.MouseEvent) => {
@@ -182,6 +184,7 @@ class Diagram extends Component<Props> {
             <MenuItem text="Execute" onClick={() => this.add.executeNode(point)} icon="code-block" />
             <MenuItem text="Listen" onClick={() => this.add.listenNode(point)} icon="hand" />
             <MenuItem text="Router" onClick={() => this.add.routerNode(point)} icon="search-around" />
+            <MenuItem text="Variables" onClick={() => this.add.variablesNode(point)} icon="properties" />
           </Fragment>
         ) : null}
         <MenuItem tagName="button" text="Skills" icon="add">
@@ -483,6 +486,9 @@ class Diagram extends Component<Props> {
           break
         case 'router':
           this.add.routerNode(point)
+          break
+        case 'variables':
+          this.add.variablesNode(point)
           break
         default:
           this.add.flowNode(point)
