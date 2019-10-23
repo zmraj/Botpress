@@ -14,6 +14,7 @@
     "emitDecoratorMetadata": true,
     "baseUrl": "./bp",
     "outDir": "../out",
+    "jsx": "react",
     "typeRoots": ["./typings", "../node_modules/@types", "./bp/common"],
     "types": ["reflect-metadata", "jest", "bluebird-global"]
   },

@@ -17,7 +17,7 @@ module.exports = {
   modulePaths: ['<rootDir>/src/bp/'],
   moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx'],
   transform: {
-    '^.+\\.(ts|tsx|js)$': 'ts-jest'
+    '^.+\\.(ts|tsx|js|jsx)$': 'ts-jest'
   },
   resolver: '<rootDir>/src/bp/jest-resolver.js',
   moduleNameMapper: {
