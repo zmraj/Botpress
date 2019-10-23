@@ -37,8 +37,6 @@ const buildKeyForSchemaItem = (memoryType, name) => {
 
 class VariablesNode extends Component {
   render() {
-    console.log(this.props.node)
-
     const schema = this.props.memorySchema
     if (!schema) {
       return <div>This bot has no memory Schema defined</div>
