@@ -80,7 +80,6 @@ class VariablesNode extends Component {
     }
 
     const parsedVariables = this.getParsedVariables()
-    console.log(parsedVariables)
     let variableValue
     try {
       variableValue = getVariableValue(memoryType, key, parsedVariables)
@@ -89,7 +88,6 @@ class VariablesNode extends Component {
         variableValue = defaultValue
       }
     }
-    console.log(variableValue)
 
     if (type === 'number') {
       return (
