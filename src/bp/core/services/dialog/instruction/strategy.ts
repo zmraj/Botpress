@@ -48,6 +48,8 @@ export class ActionStrategy implements InstructionStrategy {
   async processInstruction(botId, instruction, event): Promise<ProcessingResult> {
     if (instruction.fn.indexOf('say ') === 0) {
       return this.invokeOutputProcessor(botId, instruction, event)
+    } else if (instruction.fn.indexOf('setVariables ') === 0) {
+      return this.invokeSetVariables(botId, instruction, event)
     } else {
       return this.invokeAction(botId, instruction, event)
     }
@@ -101,6 +103,30 @@ export class ActionStrategy implements InstructionStrategy {
     const eventDestination = _.pick(event, ['channel', 'target', 'botId', 'threadId'])
     const renderedElements = await this.cms.renderElement(outputType, args, eventDestination)
     await this.eventEngine.replyToEvent(eventDestination, renderedElements, event.id)
+
+    return ProcessingResult.none()
+  }
+
+  private async invokeSetVariables(botId, instruction, event: IO.IncomingEvent): Promise<ProcessingResult> {
+    const chunks = instruction.fn.split(' ')
+    if (chunks.length != 2) {
+      throw new Error('Invalid setVariables instruction')
+    }
+
+    const params = chunks[1]
+    let args = {}
+    if (params.length > 0) {
+      try {
+        args = JSON.parse(params)
+      } catch (err) {
+        throw new Error(`setVariables has invalid arguments (not a valid JSON string): ${params}`)
+      }
+    }
+
+    debug.forBot(botId, `[${event.target}] setVariables "${JSON.stringify(args)}"`)
+
+    // @ts-ignore
+    event.state.user.age = args.user.age
 
     return ProcessingResult.none()
   }
