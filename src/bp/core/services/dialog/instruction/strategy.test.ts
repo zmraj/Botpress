@@ -12,6 +12,7 @@ const assignVariablesToState = (state: sdk.IO.EventState, variables: Variables) 
   _.assign(state.user, variables.user)
   _.assign(state.bot, variables.bot)
   _.assign(state.temp, variables.temp)
+  _.assign(state.session, variables.session)
 }
 
 const buildEmptyState = () => {
@@ -98,5 +99,16 @@ describe('assignVariablesToState', () => {
     assignVariablesToState(state, variables)
 
     expect(state.temp).toEqual({ a: 1, b: 1 })
+  })
+
+  test('session state', () => {
+    const state = buildEmptyState()
+    _.set(state, 'session.a', 1)
+    const variables = buildEmptyVariables()
+    _.set(variables, 'session.b', 1)
+
+    assignVariablesToState(state, variables)
+
+    expect(state.session).toEqual({ a: 1, b: 1, lastMessages: [] })
   })
 })
