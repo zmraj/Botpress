@@ -10,6 +10,8 @@ interface Variables {
 
 const assignVariablesToState = (state: sdk.IO.EventState, variables: Variables) => {
   _.assign(state.user, variables.user)
+  _.assign(state.bot, variables.bot)
+  _.assign(state.temp, variables.temp)
 }
 
 const buildEmptyState = () => {
@@ -74,5 +76,27 @@ describe('assignVariablesToState', () => {
     assignVariablesToState(state, variables)
 
     expect(state.user).toEqual({ a: 1, b: 1 })
+  })
+
+  test('bot state', () => {
+    const state = buildEmptyState()
+    _.set(state, 'bot.a', 1)
+    const variables = buildEmptyVariables()
+    _.set(variables, 'bot.b', 1)
+
+    assignVariablesToState(state, variables)
+
+    expect(state.bot).toEqual({ a: 1, b: 1 })
+  })
+
+  test('temp state', () => {
+    const state = buildEmptyState()
+    _.set(state, 'temp.a', 1)
+    const variables = buildEmptyVariables()
+    _.set(variables, 'temp.b', 1)
+
+    assignVariablesToState(state, variables)
+
+    expect(state.temp).toEqual({ a: 1, b: 1 })
   })
 })
