@@ -13,6 +13,7 @@ import { VmRunner } from '../../action/vm'
 import { BPError } from '../errors'
 
 import { Instruction, InstructionType, ProcessingResult } from '.'
+import { assignVariablesToState, Variables } from './utils'
 
 const debug = DEBUG('dialog')
 
@@ -114,7 +115,7 @@ export class ActionStrategy implements InstructionStrategy {
     }
 
     const params = chunks[1]
-    let args = {}
+    let args: Variables = { user: {}, temp: {}, bot: {}, session: {} }
     if (params.length > 0) {
       try {
         args = JSON.parse(params)
@@ -125,8 +126,7 @@ export class ActionStrategy implements InstructionStrategy {
 
     debug.forBot(botId, `[${event.target}] setVariables "${JSON.stringify(args)}"`)
 
-    // @ts-ignore
-    event.state.user.age = args.user.age
+    assignVariablesToState(event.state, args)
 
     return ProcessingResult.none()
   }
