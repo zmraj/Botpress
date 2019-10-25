@@ -16,7 +16,8 @@ import { EntityExtractor, Token2Vec } from '../typings'
 
 import CRFExtractor2 from './crf-extractor2'
 
-const debugIntents = DEBUG('nlu').sub('intents')
+const debugNLU = DEBUG('nlu')
+const debugIntents = debugNLU.sub('intents')
 const debugIntentsTrain = debugIntents.sub('train')
 const SVM_OPTIONS = { kernel: 'LINEAR', classifier: 'C_SVC' } as sdk.MLToolkit.SVM.SVMOptions
 // TODO grid search / optimization for those hyperparams
@@ -57,13 +58,14 @@ export default class Engine2 {
   private predictorsByLang: _.Dictionary<Predictors> = {}
   private modelsByLang: _.Dictionary<Model> = {}
 
-  constructor(private defaultLanguage: string) {}
+  constructor(private defaultLanguage: string, private logger: sdk.Logger) {}
 
   static provideTools(tools: Tools) {
     Engine2.tools = tools
   }
 
   async train(input: TrainInput): Promise<Model> {
+    this.logger.info('Training started')
     const token: CancellationToken = {
       cancel: async () => {},
       uid: '',
@@ -74,6 +76,7 @@ export default class Engine2 {
     const model = await Trainer(input, Engine2.tools, token)
     // TODO handle this logic outside. i.e (distributed)job-service ?
     if (model.success) {
+      this.logger.info('Successfully finished training')
       await this.loadModel(model)
     }
     return model
@@ -85,8 +88,9 @@ export default class Engine2 {
 
   async loadModel(model: Model) {
     if (
-      _.isEqual(this.modelsByLang[model.languageCode], model) &&
-      this.predictorsByLang[model.languageCode] !== undefined
+      this.predictorsByLang[model.languageCode] !== undefined &&
+      this.modelsByLang[model.languageCode] !== undefined &&
+      _.isEqual(this.modelsByLang[model.languageCode].data.input, model.data.input) // compare hash instead
     ) {
       return
     }
@@ -918,7 +922,7 @@ export const AppendNoneIntents = async (input: TrainOutput, tools: Tools): Promi
   const joinChar = vocabulary.filter(x => x.startsWith(SPACE)).length >= vocabulary.length * 0.5 ? SPACE : ''
 
   const noneUtterances = _.range(0, nbOfNoneUtterances).map(() => {
-    const nbWords = _.random(avgTokens / 2, avgTokens * 2, false)
+    const nbWords = Math.round(_.random(avgTokens / 2, avgTokens * 2, false))
     return _.sampleSize(junkWords, nbWords).join(joinChar)
   })
 
@@ -956,21 +960,30 @@ const Utterances = async (raw_utterances: string[], languageCode: string, tools:
   const vectors = await tools.vectorize_tokens(uniqTokens, languageCode)
   const vectorMap = _.zipObject(uniqTokens, vectors)
 
-  return _.zip(tokens, parsed).map(([tokUtt, { utterance: utt, parsedSlots }]) => {
-    const vectors = tokUtt.map(t => vectorMap[t])
-    const utterance = new Utterance(tokUtt, vectors)
+  return _.zip(tokens, parsed)
+    .map(([tokUtt, { utterance: utt, parsedSlots }]) => {
+      if (tokUtt.length === 0) {
+        return
+      }
+      const vectors = tokUtt.map(t => vectorMap[t])
+      const utterance = new Utterance(tokUtt, vectors)
 
-    // TODO: temporary work-around
-    // covers a corner case where tokenization returns tokens that are not identical to `parsed` utterance
-    // the corner case is when there's a trailing space inside a slot at the end of the utterance, e.g. `my name is [Sylvain ](any)`
-    if (utterance.toString().length === utt.length) {
-      parsedSlots.forEach(s => {
-        utterance.tagSlot({ name: s.name, source: s.value, confidence: 1 }, s.cleanPosition.start, s.cleanPosition.end)
-      })
-    } // else we skip the slot
+      // TODO: temporary work-around
+      // covers a corner case where tokenization returns tokens that are not identical to `parsed` utterance
+      // the corner case is when there's a trailing space inside a slot at the end of the utterance, e.g. `my name is [Sylvain ](any)`
+      if (utterance.toString().length === utt.length) {
+        parsedSlots.forEach(s => {
+          utterance.tagSlot(
+            { name: s.name, source: s.value, confidence: 1 },
+            s.cleanPosition.start,
+            s.cleanPosition.end
+          )
+        })
+      } // else we skip the slot
 
-    return utterance
-  })
+      return utterance
+    })
+    .filter(Boolean)
 }
 
 const trainSlotTagger = async (input: TrainOutput, tools: Tools): Promise<Buffer> => {

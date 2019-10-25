@@ -411,8 +411,6 @@ class Diagram extends Component<Props> {
       this.copySelectedElementToBuffer()
     } else if ((event.ctrlKey || event.metaKey) && event.key === 'v') {
       this.pasteElementFromBuffer()
-    } else if (event.code === 'Backspace' || event.code === 'Delete') {
-      this.deleteSelectedElements()
     }
   }
 
