@@ -1,4 +1,5 @@
 import { FlowGeneratorMetadata, Logger } from 'botpress/sdk'
+import { ConfigProvider } from 'core/config/config-loader'
 import AuthService, { TOKEN_AUDIENCE } from 'core/services/auth/auth-service'
 import { RequestHandler, Router } from 'express'
 
@@ -6,8 +7,7 @@ import { ModuleLoader } from '../module-loader'
 import { SkillService } from '../services/dialog/skill/service'
 
 import { CustomRouter } from './customRouter'
-import { checkTokenHeader, assertSuperAdmin } from './util'
-import { ConfigProvider } from 'core/config/config-loader'
+import { assertSuperAdmin, checkTokenHeader } from './util'
 
 export class ModulesRouter extends CustomRouter {
   private checkTokenHeader!: RequestHandler
