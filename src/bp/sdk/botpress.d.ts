@@ -986,7 +986,7 @@ declare module 'botpress/sdk' {
     timeoutNode?: string
     type?: string
     timeout?: { name: string; flow: string; node: string }[]
-    memorySchema: any
+    memorySchema?: any
   }
 
   /**

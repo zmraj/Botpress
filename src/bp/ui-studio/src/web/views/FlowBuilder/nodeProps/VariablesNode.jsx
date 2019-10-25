@@ -43,8 +43,8 @@ class VariablesNode extends Component {
       return <div>This bot has no memory Schema defined</div>
     }
 
-    const user = schema.user
-    const temp = schema.temp
+    const user = schema.user || {}
+    const temp = schema.temp || {}
 
     return (
       <Fragment>
@@ -122,8 +122,25 @@ class VariablesNode extends Component {
   }
 }
 
+const extractMemorySchemaFromState = state => {
+  const currentFlowName = state.flows.currentFlow
+  const currentFlow = state.flows.flowsByName[currentFlowName]
+  const nodes = currentFlow.nodes
+  const skillFlows = nodes
+    .filter(node => {
+      return node.type && node.type.startsWith('skill-')
+    })
+    .map(node => state.flows.flowsByName[node.flow])
+
+  const memorySchemas = skillFlows.filter(flow => flow.memorySchema).map(flow => flow.memorySchema)
+  console.log(memorySchemas)
+  const newLocal = _.merge({}, ...memorySchemas)
+  console.log(newLocal)
+  return newLocal
+}
+
 const mapStateToProps = state => ({
-  memorySchema: getCurrentFlow(state).memorySchema
+  memorySchema: extractMemorySchemaFromState(state)
 })
 
 const mapDispatchToProps = {}

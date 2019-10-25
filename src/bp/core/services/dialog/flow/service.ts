@@ -326,7 +326,7 @@ export class FlowService {
     }
 
     const flowContent = {
-      ..._.pick(flow, 'version', 'catchAll', 'startNode', 'skillData'),
+      ..._.pick(flow, 'version', 'catchAll', 'startNode', 'skillData', 'memorySchema'),
       nodes: flow.nodes.map(node => _.omit(node, 'x', 'y', 'lastModified'))
     }
 

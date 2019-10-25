@@ -96,7 +96,8 @@ export namespace FlowsAPI {
       links: flow.links,
       nodes: flow.nodes,
       skillData: flow.skillData,
-      timeoutNode: flow.timeoutNode
+      timeoutNode: flow.timeoutNode,
+      memorySchema: flow.memorySchema
     }
   }
 }
