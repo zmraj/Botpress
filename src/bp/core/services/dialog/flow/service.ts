@@ -122,6 +122,7 @@ export class FlowService {
       catchAll: flow.catchAll,
       startNode: flow.startNode,
       skillData: flow.skillData,
+      memorySchema: flow.memorySchema,
       currentMutex
     }
   }

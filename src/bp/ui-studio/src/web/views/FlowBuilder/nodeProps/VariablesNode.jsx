@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { FormGroup, NumericInput, InputGroup, Switch, H4 } from '@blueprintjs/core'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { getCurrentFlow } from '~/reducers'
 
 export const getVariableValue = (memoryType, key, variables) => {
   const value = variables[memoryType][key]
@@ -122,7 +123,7 @@ class VariablesNode extends Component {
 }
 
 const mapStateToProps = state => ({
-  memorySchema: state.bot.memorySchema
+  memorySchema: getCurrentFlow(state).memorySchema
 })
 
 const mapDispatchToProps = {}
