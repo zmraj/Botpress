@@ -1,3 +1,4 @@
+import 'bluebird-global'
 import * as sdk from 'botpress/sdk'
 import _ from 'lodash'
 import nanoid from 'nanoid'

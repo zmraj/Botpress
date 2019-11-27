@@ -1,7 +1,8 @@
-import React from 'react'
-
 import classnames from 'classnames'
+import _ from 'lodash'
+import React from 'react'
 import { MdCheck, MdClose, MdRemove } from 'react-icons/md'
+
 import style from './style.scss'
 
 const Interaction = ({ userMessage, success, failure, skipped, botReplies, mismatchIdx, previews, maxChars }) => {

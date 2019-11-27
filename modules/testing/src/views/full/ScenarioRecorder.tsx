@@ -1,22 +1,30 @@
+import { Button, ControlGroup, InputGroup, Intent } from '@blueprintjs/core'
 import React from 'react'
+import { Alert, Col, Collapse, Form, FormControl, Row } from 'react-bootstrap'
 import { MdExpandLess, MdExpandMore } from 'react-icons/md'
-import { Button, FormControl, Row, Col, Alert, Form, Collapse } from 'react-bootstrap'
 
 import style from './style.scss'
-import Interaction from './Interaction'
+
+interface Props {
+  bp: any
+  isRecording: boolean
+  cancel: () => void
+  onSave: () => void
+}
 
 const DEFAULT_STATE = {
   recordedScenario: null,
   scenarioName: '',
-  previewDisplyed: false
+  previewDisplyed: false,
+  chatUserId: undefined
 }
 
-class ScenarioRecorder extends React.Component {
+class ScenarioRecorder extends React.Component<Props> {
   state = { ...DEFAULT_STATE }
 
   componentDidMount() {
     const userId = localStorage.getItem(`bp/socket/studio/user`)
-    this.setState({ chatUserId: userId || window.__BP_VISITOR_ID })
+    this.setState({ chatUserId: userId || window['__BP_VISITOR_ID'] })
   }
 
   startRecording = async () => {
@@ -25,7 +33,7 @@ class ScenarioRecorder extends React.Component {
   }
 
   stopRecording = async () => {
-    window.botpressWebChat.sendEvent({ type: 'hide' })
+    window['botpressWebChat'].sendEvent({ type: 'hide' })
     const { data } = await this.props.bp.axios.get('/mod/testing/stopRecording')
     this.setState({ recordedScenario: JSON.stringify(data, null, 2) })
   }
@@ -57,30 +65,29 @@ class ScenarioRecorder extends React.Component {
                 You are now recording a scenario, every interaction in the emulator will be saved in a scenario. You can
                 either continue your current session or start a new session.
               </p>
-              <Button bsSize="sm" onClick={this.stopRecording}>
-                Stop recording
-              </Button>
+              <Button text="Stop recording" onClick={this.stopRecording} />
             </Alert>
           )}
           {this.state.recordedScenario && (
             <div>
               <Alert bsStyle="success">Recording complete</Alert>
               <Form onSubmit={e => e.preventDefault()} inline>
-                <FormControl
-                  name="scenarioName"
-                  placeholder={'Name of your scenario'}
-                  value={this.state.scenarioName}
-                  onKeyDown={e => e.key === 'Enter' && this.saveScenario()}
-                  onChange={e => {
-                    this.setState({ scenarioName: e.target.value })
-                  }}
-                />
-                &nbsp;
-                <Button onClick={this.saveScenario} bsStyle="primary">
-                  Save
-                </Button>
-                &nbsp;
-                <Button onClick={this.flush}>Discard</Button>
+                <ControlGroup>
+                  <InputGroup
+                    name="scenarioName"
+                    placeholder={'Name of your scenario'}
+                    value={this.state.scenarioName}
+                    onKeyDown={e => e.key === 'Enter' && this.saveScenario()}
+                    onChange={e => {
+                      this.setState({ scenarioName: e.currentTarget.value })
+                    }}
+                    autoFocus={true}
+                  />
+                  &nbsp;
+                  <Button text="Save" onClick={this.saveScenario} intent={Intent.PRIMARY} />
+                  &nbsp;
+                  <Button text="Discard" onClick={this.flush} />
+                </ControlGroup>
               </Form>
               <div className={style.scenarioPreview}>
                 <span

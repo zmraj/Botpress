@@ -33,9 +33,18 @@ export interface ScenarioMismatch {
 export interface DialogStep {
   userMessage: string
   botReplies: BotReply[]
+  eventId?: string
 }
 
 export interface BotReply {
   botResponse: string
   replySource: string
+}
+
+export interface ScenarioOverview {
+  name: string
+  steps: DialogStep[]
+  status: string
+  completedSteps: number
+  mismatch?: ScenarioMismatch
 }

@@ -3,6 +3,7 @@
 interface CssExports {
   'botReplies': string;
   'empty': string;
+  'inspector': string;
   'interaction': string;
   'interactionStatus': string;
   'reportInteractions': string;

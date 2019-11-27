@@ -1,14 +1,27 @@
+import classnames from 'classnames'
+import _ from 'lodash'
 import React from 'react'
-
-import { Panel, Label, Glyphicon } from 'react-bootstrap'
+import { Glyphicon, Label, Panel } from 'react-bootstrap'
 import { MdExpandLess, MdExpandMore } from 'react-icons/md'
 
-import style from './style.scss'
-import Interaction from './Interaction'
-import FailureReport from './FailureReport'
-import classnames from 'classnames'
+import { ScenarioOverview } from '../../backend/typings'
 
-class Scenario extends React.Component {
+import style from './style.scss'
+import FailureReport from './FailureReport'
+import { Inspector } from './Inspector'
+import Interaction from './Interaction'
+
+interface Props {
+  bp: any
+  scenario: ScenarioOverview
+  isRunning: boolean
+  previews: {
+    [key: string]: string
+  }
+  run: (scenario: any) => void
+}
+
+class Scenario extends React.Component<Props> {
   state = {
     expanded: false
   }
@@ -44,6 +57,10 @@ class Scenario extends React.Component {
     const { scenario, isRunning } = this.props
     const pending = scenario.status && scenario.status === 'pending'
     const expanded = this.state.expanded || pending
+
+    const receivedEventId = _.get(scenario, `mismatch.received.eventId`)
+    const expectedEventId = _.get(scenario, `mismatch.expected.eventId`)
+
     return (
       <Panel className={style.scenario} id={scenario.name} expanded={expanded}>
         <Panel.Heading className={style.scenarioHead}>
@@ -79,7 +96,6 @@ class Scenario extends React.Component {
                   skipped={skipped}
                   maxChars={50}
                   mismatchIdx={scenario.mismatch ? scenario.mismatch.index : null}
-                  style={{ borderBottom: 'solid 1px #eee' }}
                 />
               )
             })}
@@ -91,8 +107,8 @@ class Scenario extends React.Component {
                 failureIdx={scenario.completedSteps + 1}
                 skipped={scenario.steps.length - scenario.completedSteps - 1}
                 previews={this.props.previews}
-                bp={this.props.bp}
               />
+              <Inspector bp={this.props.bp} expectedEventId={expectedEventId} receivedEventId={receivedEventId} />
             </Panel.Footer>
           )}
         </Panel.Collapse>

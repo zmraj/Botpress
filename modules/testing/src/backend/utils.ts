@@ -19,7 +19,8 @@ export const convertLastMessages = (lastMessages, eventId) => {
         botResponse: x.replyPreview === undefined ? null : x.replyPreview,
         replySource: x.replySource
       }
-    })
+    }),
+    eventId
   }
 }
 

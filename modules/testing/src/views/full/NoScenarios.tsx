@@ -1,5 +1,6 @@
+import { Button } from '@blueprintjs/core'
 import React from 'react'
-import { Jumbotron, Button, Glyphicon } from 'react-bootstrap'
+import { Jumbotron } from 'react-bootstrap'
 
 import style from './style.scss'
 
@@ -16,10 +17,7 @@ export default ({ onRecordClicked }) => (
         </a>{' '}
         if you need help.
       </p>
-      <Button bsStyle="primary" onClick={onRecordClicked}>
-        <Glyphicon glyph="record" />
-        &nbsp; Record new scenario
-      </Button>
+      <Button text="Record new scenario" icon="record" onClick={onRecordClicked} />
     </Jumbotron>
   </div>
 )

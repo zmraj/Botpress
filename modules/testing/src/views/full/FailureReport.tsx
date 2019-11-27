@@ -1,6 +1,5 @@
 import React from 'react'
-
-import { Row, Col, Grid } from 'react-bootstrap'
+import { Col, Grid, Row } from 'react-bootstrap'
 
 import style from './style.scss'
 import Interaction from './Interaction'
