@@ -10,8 +10,11 @@ const style = require('./style.scss')
 
 export default class SkillCallNodePropertiesPanel extends Component {
   renameNode = text => {
-    if (text && text !== this.props.node.name) {
-      this.props.updateNode({ name: text })
+    if (text) {
+      const alreadyExists = this.props.flow.nodes.find(x => x.name === text)
+      if (!alreadyExists) {
+        this.props.updateNode({ name: text })
+      }
     }
   }
 
@@ -52,6 +55,7 @@ export default class SkillCallNodePropertiesPanel extends Component {
             <TransitionSection
               readOnly={readOnly}
               items={node.next}
+              currentFlow={this.props.flow}
               header="Transitions"
               subflows={this.props.subflows}
               onItemsUpdated={items => this.props.updateNode({ next: items })}

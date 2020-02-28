@@ -24,6 +24,7 @@ import { URL } from 'url'
 import { ExternalAuthConfig } from './config/botpress.config'
 import { ConfigProvider } from './config/config-loader'
 import { ModuleLoader } from './module-loader'
+import { LogsRepository } from './repositories/logs'
 import { AdminRouter, AuthRouter, BotsRouter, ModulesRouter } from './routers'
 import { ContentRouter } from './routers/bots/content'
 import { ConverseRouter } from './routers/bots/converse'
@@ -47,7 +48,6 @@ import { HintsService } from './services/hints'
 import { JobService } from './services/job-service'
 import { LogsService } from './services/logs/service'
 import MediaService from './services/media'
-import { EventEngine } from './services/middleware/event-engine'
 import { MonitoringService } from './services/monitoring'
 import { NotificationsService } from './services/notification/service'
 import { WorkspaceService } from './services/workspace-service'
@@ -87,7 +87,12 @@ export default class HTTPServer {
     operation: string,
     resource: string
   ) => (req: RequestWithUser, res: Response, next: NextFunction) => Promise<void>
-  private _hasPermissions: (req: RequestWithUser, operation: string, resource: string) => Promise<boolean>
+  private _hasPermissions: (
+    req: RequestWithUser,
+    operation: string,
+    resource: string,
+    noAudit?: boolean
+  ) => Promise<boolean>
   private indexCache: { [pageUrl: string]: string } = {}
 
   constructor(
@@ -114,7 +119,7 @@ export default class HTTPServer {
     @inject(TYPES.MonitoringService) private monitoringService: MonitoringService,
     @inject(TYPES.AlertingService) private alertingService: AlertingService,
     @inject(TYPES.JobService) private jobService: JobService,
-    @inject(TYPES.EventEngine) private eventEngine: EventEngine
+    @inject(TYPES.LogsRepository) private logsRepo: LogsRepository
   ) {
     this.app = express()
 
@@ -154,7 +159,8 @@ export default class HTTPServer {
       this.monitoringService,
       this.alertingService,
       moduleLoader,
-      this.jobService
+      this.jobService,
+      this.logsRepo
     )
     this.shortlinksRouter = new ShortLinksRouter(this.logger)
     this.botsRouter = new BotsRouter({
@@ -282,10 +288,13 @@ export default class HTTPServer {
     this.app.use(`${BASE_API_PATH}/bots/:botId`, this.botsRouter.router)
     this.app.use(`/s`, this.shortlinksRouter.router)
 
-    this.app.use(function handleErrors(err, req, res, next) {
+    this.app.use((err, req, res, next) => {
       if (err instanceof UnlicensedError) {
         next(new PaymentRequiredError(`Server is unlicensed "${err.message}"`))
       } else {
+        if (err.statusCode === 413) {
+          this.logger.error('You may need to increase httpServer.bodyLimit in file data/global/botpress.config.json')
+        }
         next(err)
       }
     })
@@ -294,7 +303,7 @@ export default class HTTPServer {
       const statusCode = err.statusCode || 500
       const errorCode = err.errorCode || 'BP_000'
       const message = (err.errorCode && err.message) || 'Unexpected error'
-      const docs = err.docs || 'https://botpress.io/docs'
+      const docs = err.docs || 'https://botpress.com/docs'
       const devOnly = process.IS_PRODUCTION ? {} : { showStackInDev: true, stack: err.stack, full: err.message }
 
       res.status(statusCode).json({
@@ -320,9 +329,7 @@ export default class HTTPServer {
 
     if (!process.env.EXTERNAL_URL && !config.externalUrl) {
       this.logger.warn(
-        `External URL is not configured. Using default value of ${
-          process.EXTERNAL_URL
-        }. Some features may not work properly`
+        `External URL is not configured. Using default value of ${process.EXTERNAL_URL}. Some features may not work properly`
       )
     }
 
@@ -394,8 +401,8 @@ export default class HTTPServer {
     return this._needPermissions(operation, resource)
   }
 
-  hasPermission(req: RequestWithUser, operation: string, resource: string) {
-    return this._hasPermissions(req, operation, resource)
+  hasPermission(req: RequestWithUser, operation: string, resource: string, noAudit?: boolean) {
+    return this._hasPermissions(req, operation, resource, noAudit)
   }
 
   deleteRouterForBot(router: string): void {

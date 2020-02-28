@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import { Modal, Button, Radio, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import Markdown from 'react-markdown'
-import axios from 'axios'
 import _ from 'lodash'
+import { confirmDialog } from 'botpress/shared'
 
 import { LinkDocumentationProvider } from '~/components/Util/DocumentationProvider'
-
+import { connect } from 'react-redux'
 import SelectActionDropdown from './SelectActionDropdown'
 import ParametersTable from './ParametersTable'
 import ContentPickerWidget from '~/components/Content/Select/Widget'
 
 const style = require('./style.scss')
 
-export default class ActionModalForm extends Component {
+class ActionModalForm extends Component {
   state = {
     actionType: 'message',
     avActions: [],
@@ -24,7 +24,7 @@ export default class ActionModalForm extends Component {
 
   textToItemId = text => _.get(text.match(/^say #!(.*)$/), '[1]')
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { item } = nextProps
 
     if (this.props.show || !nextProps.show) {
@@ -49,17 +49,10 @@ export default class ActionModalForm extends Component {
     if (this.props.layoutv2) {
       this.setState({ actionType: 'code' })
     }
-    this.fetchAvailableFunctions()
-  }
 
-  fetchAvailableFunctions() {
-    return axios.get(`${window.BOT_API_PATH}/actions`).then(({ data }) => {
-      this.setState({
-        avActions: data
-          .filter(action => !action.metadata.hidden)
-          .map(x => {
-            return { label: x.name, value: x.name, metadata: x.metadata }
-          })
+    this.setState({
+      avActions: this.props.actions.map(x => {
+        return { label: x.name, value: x.name, metadata: x.metadata }
       })
     })
   }
@@ -133,7 +126,9 @@ export default class ActionModalForm extends Component {
               // TODO Detect if default or custom arguments
               if (
                 Object.keys(this.state.functionParams || {}).length > 0 &&
-                !confirm('Do you want to overwrite existing parameters?')
+                !confirmDialog('Do you want to overwrite existing parameters?', {
+                  acceptLabel: 'Overwrite'
+                })
               ) {
                 return
               }
@@ -241,3 +236,9 @@ export default class ActionModalForm extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  actions: state.skills.actions
+})
+
+export default connect(mapStateToProps, undefined)(ActionModalForm)

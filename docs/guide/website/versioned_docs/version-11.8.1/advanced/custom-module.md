@@ -9,7 +9,7 @@ original_id: custom-module
 To help you get started, two templates are available: [Module Templates](https://github.com/botpress/botpress/tree/master/examples/module-templates).
 
 1. Copy / Paste the template of your choice in `modules/`
-1. In your `botpress.config.json`, [enable the module](../../main/module#enabling-or-disabling-modules)
+1. In your `botpress.config.json`, [enable the module](../main/module#enabling-or-disabling-modules)
 
 ## Module Structure
 
@@ -104,7 +104,7 @@ const entryPoint: sdk.ModuleEntryPoint = {
     menuIcon: 'some-icon',
     menuText: '',
     fullName: 'My Module',
-    homepage: 'https://botpress.io',
+    homepage: 'https://botpress.com',
     noInterface: false,
     plugins: []
   }
@@ -203,7 +203,7 @@ const botTemplates: sdk.BotTemplate[] = [
 
 The definition is used by Botpress to setup your module.
 
-Please refer to the [API Reference](https://botpress.io/reference/) for informations on the possible options
+Please refer to the [API Reference](https://botpress.com/reference/) for information on the possible options
 
 The only way to communicate with modules (or between them) is by using the API endpoint.
 All modules are isolated and receives their own instance of `bp`
@@ -486,7 +486,7 @@ const entryPoint: sdk.ModuleEntryPoint = {
 
 ## Register Actions
 
-Modules can register new actions that will be available on the flow editor. Please check out the [Custom Code](../../main/code) section for more informations about Actions.
+Modules can register new actions that will be available on the flow editor. Please check out the [Custom Code](../main/code) section for more information about Actions.
 Those actions must be deployed to the `data/global/actions` folder to be recognized by Botpress. Here is how to do that:
 
 1. Create a folder named `actions` in `src`

@@ -47,18 +47,18 @@ Each bot now defines a `pipeline_status` object in its `bot.config.json` file. T
     "current_stage": {
       "id": "dev", // id of the current stage
       "promoted_on": "2019-04-03T01:08:46.999Z", // date the bot has moved to this stage
-      "promoted_by": "user@botpress.io" //email of the user who changed the stage of the bot
+      "promoted_by": "user@botpress.com" //email of the user who changed the stage of the bot
     },
     "stage_request": {
       "id": "staging", //id of the desired stage
       "requested_on": "2019-04-04T13:16:32.107Z",
-      "requested_by": "user2@botpress.io" //email of the user who asked for a stage change
+      "requested_by": "user2@botpress.com" //email of the user who asked for a stage change
     }
   }
 }
 ```
 
-At the moment, only the current_stage will be interresting for you. We will learn more on `stage_request` in the [available hooks section](#available-hooks)
+At the moment, only the current_stage will be interesting for you. We will learn more on `stage_request` in the [available hooks section](#available-hooks)
 
 ## Usage
 
@@ -120,7 +120,7 @@ curl -X POST http://your.botpress.deployment/api/v1/admin/bots/{_YOUR_BOT_ID_}/s
 
 ### Available Hooks
 
-Hooks are key components to fully customize the pipeline feature to your needs. If you don't know about hooks, go read [the docs](../../main/code#hooks) right away.
+Hooks are key components to fully customize the pipeline feature to your needs. If you don't know about hooks, go read [the docs](../main/code#hooks) right away.
 Until now, we didn't customize anything of the pipeline feature and we didn't use or even see the `stage_request` property in the bot configs. Say that we want to check if the user has the right to change the stage of the bot, then rename it, give it custom id and lock it. For this we would use the `on_stage_request` hook.
 
 The hook will be called with the following arguments: **bp** (botpress sdk), **bot** (content of bot.config.json) , **users** (users in the workspace), **pipeline** (your pipeline definition), **hookResult** (object with a `actions` property).

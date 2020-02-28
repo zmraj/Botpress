@@ -17,13 +17,15 @@ export interface Config {
   /**
    * The interval at which to automatically sync the models in the background
    * Set this value to "false" to disable background sync
+   * @deprecated > 12.2
    * @default 30s
    */
   autoTrainInterval: string
 
   /**
-   * Wheather or not you want your models to be trained and loaded on bot mounts
+   * Whether or not you want your models to be trained and loaded on bot mounts
    * @default true
+   * @deprecated > 12.2
    */
   preloadModels: boolean
 

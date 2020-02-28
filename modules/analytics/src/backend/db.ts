@@ -1,11 +1,13 @@
+import * as sdk from 'botpress/sdk'
 import _ from 'lodash'
 
-import { SDK } from '.'
+const MAX_CHAR_LEN = 254
+const extractText = event => ((event.payload && event.payload.text) || '').substr(0, MAX_CHAR_LEN)
 
 export default class AnalyticsDb {
   knex: any
 
-  constructor(bp: SDK) {
+  constructor(bp: typeof sdk) {
     this.knex = bp.database
   }
 
@@ -46,7 +48,7 @@ export default class AnalyticsDb {
     const interactionRow = {
       ts: this.knex.date.now(),
       type: event.type,
-      text: event.payload.text,
+      text: extractText(event),
       channel: event.channel,
       user_id: event.target,
       direction: 'in'
@@ -59,7 +61,7 @@ export default class AnalyticsDb {
     const interactionRow = {
       ts: this.knex.date.now(),
       type: event.type,
-      text: event.payload.text,
+      text: extractText(event),
       channel: event.channel,
       user_id: event.target,
       direction: 'out'

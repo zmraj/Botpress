@@ -1,6 +1,7 @@
 import { ConverseConfig } from 'botpress/sdk'
-import { UniqueUser } from 'common/typings'
-import { IncidentRule } from 'core/services/alerting-service'
+
+import { UniqueUser } from '../../common/typings'
+import { IncidentRule } from '../services/alerting-service'
 
 export type BotpressCondition = '$isProduction' | '$isDevelopment'
 
@@ -28,22 +29,6 @@ export interface DialogConfig {
    * @default 30m
    */
   sessionTimeoutInterval: string
-}
-
-/**
- * Configuration file definition for the Converse API
- */
-export type ConverseConfig = {
-  /**
-   * The timeout of the converse API requests
-   * @default 5s
-   */
-  timeout: string
-  /**
-   * The text limitation of the converse API requests
-   * @default 360
-   */
-  maxMessageLength: number
 }
 
 export interface LogsConfig {
@@ -101,8 +86,8 @@ export type BotpressConfig = {
      */
     port: number
     /**
-     * There are two external URL that Botpress calls: https://license.botpress.io and https://duckling.botpress.io
-     * If you are behind a corporare proxy, you can configure it below.
+     * There are three external URLs that Botpress calls: https://license.botpress.io, https://duckling.botpress.io and https://lang-01.botpress.io
+     * If you are behind a corporate proxy, you can configure it below.
      * It is also possible to self-host Duckling, please check the documentation
      *
      * @example http://username:password@hostname:port
@@ -113,7 +98,7 @@ export type BotpressConfig = {
      */
     backlog: number
     /**
-     * @default 100kb
+     * @default 10mb
      */
     bodyLimit: string | number
     cors: {
@@ -127,7 +112,7 @@ export type BotpressConfig = {
      * Represents the complete base URL exposed externally by your bot. This is useful if you configure the bot
      * locally and use NGINX as a reverse proxy to handle HTTPS. It should include the protocol and no trailing slash.
      * If unset, it will be constructed from the real host/port
-     * @example https://botpress.io
+     * @example https://botpress.com
      * @default
      */
     externalUrl: string
@@ -174,7 +159,7 @@ export type BotpressConfig = {
     enabled: boolean
     /**
      * The license key for the server.  Optionally you can use the BP_LICENSE_KEY env variable.
-     * You can purchase a license on https://botpress.io
+     * You can purchase a license on https://botpress.com
      * For usage with Botpress Pro/Enterprise.
      * @default paste your license key here
      */
@@ -186,7 +171,7 @@ export type BotpressConfig = {
      */
     alerting: AlertingConfig
     /**
-     * External Authentication makes it possible to authenticate end-users (chat users) from an other system
+     * External Authentication makes it possible to authenticate end-users (chat users) from another system
      * by using JWT tokens.
      *
      * In addition to authenticate the users, the JWT token can also contain arbitrary additional
@@ -199,7 +184,7 @@ export type BotpressConfig = {
   }
   /**
    * An array of e-mails of users which will have root access to Botpress (manage users, server settings)
-   * @example: [admin@botpress.io]
+   * @example: [admin@botpress.com]
    */
   superAdmins: UniqueUser[]
   /**
@@ -255,6 +240,7 @@ export type BotpressConfig = {
    */
   autoRevision: boolean
   eventCollector: EventCollectorConfig
+  botMonitoring: BotMonitoringConfig
   /**
    * @default { "default": { "type": "basic", "allowSelfSignup": false, "options": { "maxLoginAttempt": 0} }}
    */
@@ -277,7 +263,7 @@ export type BotpressConfig = {
 }
 
 export interface ExternalAuthConfig {
-  /** Set to true to enable external authentification
+  /** Set to true to enable external authentication
    * @default false
    */
   enabled: boolean
@@ -324,7 +310,7 @@ export type RetentionPolicy = {
 export type AuthStrategyType = 'basic' | 'saml' | 'ldap' | 'oauth2'
 
 export interface AuthStrategy {
-  readonly id: string
+  readonly id?: string
   /**
    * Defines which authentication strategy to use. When the strategy is changed, accounts created before may no longer log in.
    * @default basic
@@ -437,8 +423,8 @@ export interface AuthStrategyOauth2 {
    */
   callbackURL: string
   /*
-   * Set this URL if your access token doesn't include user data. Botpress will query that URL to fetch user informations
-   * @example https://botpress.io/userinfo
+   * Set this URL if your access token doesn't include user data. Botpress will query that URL to fetch user information
+   * @example https://botpress.com/userinfo
    */
   userInfoURL?: string
   /** If the access token is a JWT token, set the parameters below to decode it. */
@@ -539,6 +525,20 @@ export interface AlertingConfig {
   rules: IncidentRule[]
 }
 
+export interface BotMonitoringConfig {
+  /**
+   * This must be enabled for the hook OnBotError to work properly.
+   * @default true
+   */
+  enabled: boolean
+  /**
+   * The interval between which logs are accumulated before triggering the OnBotError hook.
+   * Set this value higher if the hook is triggered too often.
+   * @default 1m
+   */
+  interval: string
+}
+
 export interface EventCollectorConfig {
   /**
    * When enabled, incoming and outgoing events will be saved on the database.
@@ -558,7 +558,7 @@ export interface EventCollectorConfig {
   retentionPeriod: string
   /**
    * Specify an array of event types that won't be persisted to the database. For example, typing events and visits
-   * may not provide you with useful informations
+   * may not provide you with useful information
    * @default ["visit","typing"]
    */
   ignoredEventTypes: string[]

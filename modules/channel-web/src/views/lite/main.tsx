@@ -10,13 +10,14 @@ import constants from './core/constants'
 import BpSocket from './core/socket'
 import ChatIcon from './icons/Chat'
 import { RootStore, StoreDef } from './store'
-import { checkLocationOrigin, initializeAnalytics } from './utils'
+import { checkLocationOrigin, initializeAnalytics, trackMessage, trackWebchatState } from './utils'
 
 const _values = obj => Object.keys(obj).map(x => obj[x])
 
 class Web extends React.Component<MainProps> {
   private socket: BpSocket
   private parentClass: string
+  private hasBeenInitialized: boolean = false
 
   state = {
     played: false
@@ -43,10 +44,30 @@ class Web extends React.Component<MainProps> {
 
     // tslint:disable-next-line: no-floating-promises
     this.initialize()
+    // tslint:disable-next-line: no-floating-promises
+    this.initializeIfChatDisplayed()
+    this.props.setLoadingCompleted()
   }
 
   componentWillUnmount() {
     window.removeEventListener('message', this.handleIframeApi)
+  }
+
+  componentDidUpdate() {
+    // tslint:disable-next-line: no-floating-promises
+    this.initializeIfChatDisplayed()
+  }
+
+  async initializeIfChatDisplayed() {
+    if (this.hasBeenInitialized) {
+      return
+    }
+
+    if (this.props.activeView === 'side' || this.props.isFullscreen) {
+      this.hasBeenInitialized = true
+      await this.socket.waitForUserId()
+      await this.props.initializeChat()
+    }
   }
 
   async initialize() {
@@ -59,6 +80,7 @@ class Web extends React.Component<MainProps> {
     this.socket = new BpSocket(this.props.bp, config)
     this.socket.onMessage = this.handleNewMessage
     this.socket.onTyping = this.props.updateTyping
+    this.socket.onData = this.handleDataMessage
     this.socket.onUserIdChanged = this.props.setUserId
     this.socket.setup()
 
@@ -67,18 +89,21 @@ class Web extends React.Component<MainProps> {
     config.containerWidth && window.parent.postMessage({ type: 'setWidth', value: config.containerWidth }, '*')
 
     await this.socket.waitForUserId()
-    await this.props.initializeChat()
+
+    config.reference && this.props.setReference()
 
     this.setupObserver()
-
-    this.props.setLoadingCompleted()
+    // tslint:disable-next-line: no-floating-promises
+    this.props.fetchBotInfo()
   }
 
   extractConfig() {
-    const { options } = queryString.parse(location.search)
+    const { options, ref } = queryString.parse(location.search)
     const { config } = JSON.parse(decodeURIComponent(options || '{}'))
 
     const userConfig = Object.assign({}, constants.DEFAULT_CONFIG, config)
+    userConfig.reference = config.ref || ref
+
     this.props.updateConfig(userConfig, this.props.bp)
 
     return userConfig
@@ -127,11 +152,15 @@ class Web extends React.Component<MainProps> {
 
       if (type === 'show') {
         this.props.showChat()
+        trackWebchatState('show')
       } else if (type === 'hide') {
         this.props.hideChat()
+        trackWebchatState('hide')
       } else if (type === 'toggle') {
         this.props.displayWidgetView ? this.props.showChat() : this.props.hideChat()
+        trackWebchatState('toggle')
       } else if (type === 'message') {
+        trackMessage('sent')
         await this.props.sendMessage(text)
       } else if (type === 'toggleBotInfo') {
         this.props.toggleBotInfo()
@@ -142,11 +171,12 @@ class Web extends React.Component<MainProps> {
   }
 
   handleNewMessage = async event => {
-    if ((event.payload && event.payload.type === 'visit') || event.message_type === 'visit') {
+    if (event.payload?.type === 'visit' || event.message_type === 'visit') {
       // don't do anything, it's the system message
       return
     }
 
+    trackMessage('received')
     await this.props.addEventToConversation(event)
 
     // there's no focus on the actual conversation
@@ -156,6 +186,19 @@ class Web extends React.Component<MainProps> {
     }
 
     this.handleResetUnreadCount()
+  }
+
+  handleDataMessage = event => {
+    if (!event || !event.payload) {
+      return
+    }
+
+    const { language } = event.payload
+    if (!language) {
+      return
+    }
+
+    this.props.updateBotUILanguage(language)
   }
 
   async playSound() {
@@ -174,7 +217,7 @@ class Web extends React.Component<MainProps> {
   }
 
   handleResetUnreadCount = () => {
-    if (document.hasFocus && document.hasFocus() && this.props.activeView === 'side') {
+    if (document.hasFocus?.() && this.props.activeView === 'side') {
       this.props.resetUnread()
     }
   }
@@ -207,7 +250,7 @@ class Web extends React.Component<MainProps> {
     })
 
     if (this.parentClass !== parentClass) {
-      window.parent && window.parent.postMessage({ type: 'setClass', value: parentClass }, '*')
+      window.parent?.postMessage({ type: 'setClass', value: parentClass }, '*')
       this.parentClass = parentClass
     }
 
@@ -215,8 +258,8 @@ class Web extends React.Component<MainProps> {
 
     return (
       <div onFocus={this.handleResetUnreadCount}>
-        {stylesheet && stylesheet.length && <link rel="stylesheet" type="text/css" href={stylesheet} />}
-        {extraStylesheet && extraStylesheet.length && <link rel="stylesheet" type="text/css" href={extraStylesheet} />}
+        {!!stylesheet?.length && <link rel="stylesheet" type="text/css" href={stylesheet} />}
+        {!!extraStylesheet?.length && <link rel="stylesheet" type="text/css" href={extraStylesheet} />}
         {this.props.displayWidgetView ? this.renderWidget() : <Container />}
       </div>
     )
@@ -228,13 +271,15 @@ export default inject(({ store }: { store: RootStore }) => ({
   config: store.config,
   sendData: store.sendData,
   initializeChat: store.initializeChat,
+  fetchBotInfo: store.fetchBotInfo,
   updateConfig: store.updateConfig,
   mergeConfig: store.mergeConfig,
   addEventToConversation: store.addEventToConversation,
   setUserId: store.setUserId,
   updateTyping: store.updateTyping,
   sendMessage: store.sendMessage,
-
+  setReference: store.setReference,
+  updateBotUILanguage: store.updateBotUILanguage,
   isWebchatReady: store.view.isWebchatReady,
   showWidgetButton: store.view.showWidgetButton,
   hasUnreadMessages: store.view.hasUnreadMessages,
@@ -242,6 +287,7 @@ export default inject(({ store }: { store: RootStore }) => ({
   resetUnread: store.view.resetUnread,
   incrementUnread: store.view.incrementUnread,
   activeView: store.view.activeView,
+  isFullscreen: store.view.isFullscreen,
   showChat: store.view.showChat,
   hideChat: store.view.hideChat,
   toggleBotInfo: store.view.toggleBotInfo,
@@ -256,16 +302,20 @@ type MainProps = { store: RootStore } & Pick<
   | 'bp'
   | 'config'
   | 'initializeChat'
+  | 'fetchBotInfo'
   | 'sendMessage'
   | 'setUserId'
   | 'sendData'
   | 'intl'
   | 'updateTyping'
+  | 'setReference'
+  | 'updateBotUILanguage'
   | 'hideChat'
   | 'showChat'
   | 'toggleBotInfo'
   | 'widgetTransition'
   | 'activeView'
+  | 'isFullscreen'
   | 'unreadCount'
   | 'hasUnreadMessages'
   | 'showWidgetButton'

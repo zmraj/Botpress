@@ -66,7 +66,7 @@ class ViewStore {
 
   @computed
   get showConversationsButton() {
-    return this.rootStore.config && this.rootStore.config.showConversationsButton
+    return this.rootStore.config?.showConversationsButton
   }
 
   @computed
@@ -81,12 +81,7 @@ class ViewStore {
 
   @computed
   get showResetButton() {
-    return (
-      !this.isConversationsDisplayed &&
-      !this.isBotInfoDisplayed &&
-      this.rootStore.config &&
-      this.rootStore.config.enableReset
-    )
+    return !this.isConversationsDisplayed && !this.isBotInfoDisplayed && this.rootStore.config?.enableReset
   }
 
   @computed
@@ -96,7 +91,7 @@ class ViewStore {
 
   @computed
   get showWidgetButton() {
-    return this.rootStore.config && !this.rootStore.config.hideWidget
+    return !this.rootStore.config?.hideWidget
   }
 
   @computed
@@ -111,18 +106,18 @@ class ViewStore {
 
   @computed
   get isBotInfoDisplayed(): boolean {
-    return this._showBotInfo && (this.rootStore.botInfo && this.rootStore.botInfo.showBotInfoPage)
+    return this._showBotInfo && this.rootStore.botInfo && this.rootStore.botInfo.showBotInfoPage
   }
 
   /** Returns the active transition for the side panel, like fade in or out */
   @computed
   get sideTransition() {
-    return !this.isFullscreen && this.transitions && this.transitions.sideTransition
+    return !this.isFullscreen && this.transitions?.sideTransition
   }
 
   @computed
   get widgetTransition() {
-    return this.transitions && this.transitions.widgetTransition
+    return this.transitions?.widgetTransition
   }
 
   @computed

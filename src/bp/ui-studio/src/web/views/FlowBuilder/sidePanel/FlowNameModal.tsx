@@ -47,13 +47,17 @@ const FlowNameModal: FC<Props> = props => {
   }
 
   const isIdentical = props.action === 'rename' && props.originalName === `${name}.flow.json`
-  const alreadyExists = !isIdentical && _.includes(props.flowsNames, `${name}.flow.json`)
+  const alreadyExists =
+    !isIdentical && _.some(props.flowsNames, n => n.toLowerCase() === `${name}.flow.json`.toLowerCase())
 
   let dialog: { icon: any; title: string } = { icon: 'add', title: 'Create Flow' }
+  let submitText = 'Create'
   if (props.action === 'duplicate') {
     dialog = { icon: 'duplicate', title: 'Duplicate Flow' }
+    submitText = 'Duplicate'
   } else if (props.action === 'rename') {
     dialog = { icon: 'edit', title: 'Rename Flow' }
+    submitText = 'Rename'
   }
 
   return (
@@ -68,10 +72,10 @@ const FlowNameModal: FC<Props> = props => {
               id="input-flow-name"
               tabIndex={1}
               placeholder="Choose a name for your flow"
-              required={true}
+              required
               value={name}
               onChange={e => setName(sanitizeName(e.currentTarget.value))}
-              autoFocus={true}
+              autoFocus
             />
           </FormGroup>
 
@@ -84,7 +88,13 @@ const FlowNameModal: FC<Props> = props => {
 
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <Button type="submit" id="btn-submit" text="Submit" onClick={submit} disabled={!name || alreadyExists} />
+            <Button
+              id="btn-submit"
+              type="submit"
+              text={submitText}
+              onClick={submit}
+              disabled={!name || isIdentical || alreadyExists}
+            />
           </div>
         </div>
       </form>

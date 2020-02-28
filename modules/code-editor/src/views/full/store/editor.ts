@@ -1,4 +1,5 @@
-import { action, computed, observable } from 'mobx'
+import { confirmDialog } from 'botpress/shared'
+import { action, computed, observable, runInAction } from 'mobx'
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 
 import { EditableFile } from '../../../backend/typings'
@@ -30,7 +31,7 @@ class EditorStore {
   @observable
   private _originalHash: string
 
-  constructor(rootStore) {
+  constructor(rootStore: RootStore) {
     this.rootStore = rootStore
   }
 
@@ -45,16 +46,23 @@ class EditorStore {
   }
 
   @action.bound
-  openFile(file: EditableFile) {
-    const { content, type, hookType } = file
+  async openFile(file: EditableFile) {
+    const { type, hookType } = file
 
-    this.fileContent = content
-    this.fileContentWrapped = wrapper.add(content, type, hookType)
+    let content = file.content
+    if (!content) {
+      content = await this.rootStore.api.readFile(file)
+    }
 
-    this.currentFile = file
-    this._isFileLoaded = true
+    runInAction('-> setFileContent', () => {
+      this.fileContent = content
+      this.fileContentWrapped = wrapper.add(content, type, hookType)
 
-    this.resetOriginalHash()
+      this.currentFile = file
+      this._isFileLoaded = true
+
+      this.resetOriginalHash()
+    })
   }
 
   @action.bound
@@ -75,7 +83,7 @@ class EditorStore {
 
   @action.bound
   async saveChanges() {
-    if (!this.fileContent) {
+    if (!this.fileContent || this.currentFile.readOnly || this.currentFile.isExample) {
       return
     }
 
@@ -92,7 +100,12 @@ class EditorStore {
   @action.bound
   async discardChanges() {
     if (this.isDirty && this.fileContent) {
-      if (window.confirm(`Do you want to save the changes you made to ${this.currentFile.name}?`)) {
+      if (
+        await confirmDialog(`Do you want to save the changes you made to ${this.currentFile.name}?`, {
+          acceptLabel: 'Save',
+          declineLabel: 'Discard'
+        })
+      ) {
         await this.saveChanges()
       }
     }
@@ -109,7 +122,7 @@ class EditorStore {
   }
 
   @action.bound
-  setMonacoEditor(editor) {
+  setMonacoEditor(editor: monaco.editor.IStandaloneCodeEditor) {
     this._editorRef = editor
   }
 }

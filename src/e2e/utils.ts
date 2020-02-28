@@ -57,6 +57,11 @@ export const waitForBotApiResponse = async (endOfUrl: string, method?: HttpMetho
   return response.json()
 }
 
+export enum CONFIRM_DIALOG {
+  ACCEPT = '#confirm-dialog-accept',
+  DECLINE = '#confirm-dialog-decline'
+}
+
 export const autoAnswerDialog = (promptText?: string, repeat?: boolean) => {
   const dialog = async (dialog: Dialog) => await dialog.accept(promptText)
 
@@ -95,6 +100,7 @@ export const closeToaster = async () => {
   await page.waitForFunction(() => {
     return document.querySelector('.bp3-overlay').childElementCount === 0
   })
+  await page.waitFor(500)
 }
 
 const shouldLogRequest = (url: string) => {

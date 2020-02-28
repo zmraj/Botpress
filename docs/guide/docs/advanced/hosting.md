@@ -5,7 +5,7 @@ title: Hosting
 
 ## Overview
 
-When you are ready to open your bot to the world, you should deploy it in production mode. When the bot is started in production, the botpress file system (BPFS) is enabled [click here for more details](../versions) and debug logs are no longer displayed. We also **strongly** recommend using PostgreSQL instead of the embedded SQLite.
+When you are ready to open your bot to the world, you should deploy it in production mode. When the bot is started in production, the botpress file system (BPFS) is enabled [click here for more details](versions) and debug logs are no longer displayed. We also **strongly** recommend using PostgreSQL instead of the embedded SQLite.
 
 ## Offline Servers
 
@@ -43,6 +43,12 @@ By default, the Language Server is configured to get `100` dimensions for words.
 | ja           | Japanese   |
 | pt           | Portuguese |
 | ru           | Russian    |
+| de           | German     |
+| es           | Spanish    |
+| he           | Hebrew     |
+| it           | Italian    |
+| nl           | Dutch      |
+| pl           | Polish     |
 
 ## Binary
 
@@ -72,7 +78,7 @@ When you have the duckling binary, simply edit the file `data/global/config/nlu.
 ```
 
 - **Linux and Mac**: Duckling must be compiled to run correctly on your specific system. Therefore, you will need to install the software development tools and build it from source.
-  Please follow the instructions on the [GitHub page of Duckling[(https://github.com/facebook/duckling). We may provide some binaries in the future for common OS.
+  Please follow the instructions on the [GitHub page of Duckling](https://github.com/facebook/duckling). We may provide some binaries in the future for common OS.
 
 - **Windows**: If you run Botpress on windows, there is a zip file available [here](https://s3.amazonaws.com/botpress-binaries/tools/duckling/duckling-windows.zip).
   Simply double-click on run-duckling.bat (the bat file simply sets the code page of the console to UTF-8, then runs the executable). The folder `zoneinfo` includes the Olson timezones which are already available by default on other OS.
@@ -376,7 +382,7 @@ Dokku is like a mini heroku on-prem. Once setup on your host, it's very easy to 
 ### Creating your EC2 instance
 
 1. Open the EC2 Dashboard and click on `Instances`. Press the `Launch Instance` button
-2. At the `Choose AMI` step, we recommend using Ubuntu Server 18.04 LTS
+2. At the `Choose AMI` step, we recommend using Ubuntu Server 18.04 LTS, we also support Centos 7.5, Debian 8.11, Red-hat 7.5, Ununtu 16.04
 3. Click on the tab named `6. Configure Security Group`
 4. Add these rules:
 
@@ -441,10 +447,10 @@ sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git
 
 # Creates a new database and link it to your application
 dokku postgres:create botpress-db
-dokku postgres:link botpress-server botpress-db
+dokku postgres:link botpress-db botpress-server
 
 # Tell Botpress what kind of database to use
-dokku config:set DATABASE=postgres --app botpress-server
+dokku config:set botpress-server DATABASE=postgres
 ```
 
 As with Heroku, the `DATABASE_URL` environment variable will already be set.

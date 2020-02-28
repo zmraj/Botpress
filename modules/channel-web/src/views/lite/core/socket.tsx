@@ -7,10 +7,11 @@ export default class BpSocket {
 
   public onMessage: (event: any) => void
   public onTyping: (event: any) => void
+  public onData: (event: any) => void
   public onUserIdChanged: (userId: string) => void
 
   constructor(bp, config: Config) {
-    this.events = bp && bp.events
+    this.events = bp?.events
     this.userIdScope = config.userIdScope
   }
 
@@ -24,6 +25,7 @@ export default class BpSocket {
 
     this.events.on('guest.webchat.message', this.onMessage)
     this.events.on('guest.webchat.typing', this.onTyping)
+    this.events.on('guest.webchat.data', this.onData)
 
     // firehose events to parent page
     this.events.onAny(this.postToParent)
@@ -31,7 +33,7 @@ export default class BpSocket {
 
   public postToParent = (type: string, payload: any) => {
     // we could filter on event type if necessary
-    window.parent && window.parent.postMessage(payload, '*')
+    window.parent?.postMessage(payload, '*')
   }
 
   public changeUserId(newId: string): Promise<void> {

@@ -14,7 +14,7 @@ You may wish to make your bot act proactively on your website in response to som
 
 First you need to open the webchat (either manually or programatically) and then send an event from the webpage.
 
-> 📖 How do I open the webchat? Please refer to the [channel-web](../../channels/web#embedding) section.
+> 📖 How do I open the webchat? Please refer to the [channel-web](../channels/web#embedding) section.
 
 ```js
 window.botpressWebChat.sendEvent({
@@ -32,7 +32,7 @@ The property `type: 'proactive-trigger'` is used to identify the event so we can
 
 This event will be dispatched to the bot so you need to add a handler for it. If this event is not handled, it will be interpreted as a user message.
 
-This snippet should be added to the [before_incoming_middleware hook](../../main/code#before-incoming-middleware):
+This snippet should be added to the [before_incoming_middleware hook](../main/code#before-incoming-middleware):
 
 ```js
 // Catch the event sent from the webpage
@@ -155,7 +155,7 @@ if (event.type === 'proactive-trigger') {
 }
 ```
 
-Here we're using the [replyToEvent](https://botpress.io/reference/modules/_botpress_sdk_.events.html#replytoevent) function from the SDK to reply to the current event and [renderElement](https://botpress.io/reference/modules/_botpress_sdk_.cms.html#renderelement) to render our custom content.
+Here we're using the [replyToEvent](https://botpress.com/reference/modules/_botpress_sdk_.events.html#replytoevent) function from the SDK to reply to the current event and [renderElement](https://botpress.com/reference/modules/_botpress_sdk_.cms.html#renderelement) to render our custom content.
 
 ### Send proactive only to new users
 

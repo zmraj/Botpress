@@ -6,41 +6,50 @@ import { connect } from 'react-redux'
 import { BotEditSchema } from 'common/validation'
 import Joi from 'joi'
 import Select from 'react-select'
-import { Row, Col, Button, FormGroup, Label, Input, Form, Alert, UncontrolledTooltip, Collapse } from 'reactstrap'
+import { Row, Col, FormGroup, Label, Input, Form, Alert, UncontrolledTooltip, Collapse } from 'reactstrap'
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md'
 import _ from 'lodash'
 
 import { fetchBots, fetchBotCategories } from '../../reducers/bots'
 import { fetchLicensing } from '../../reducers/license'
 import { fetchLanguages } from '../../reducers/server'
-
-import SectionLayout from '../Layouts/Section'
+import { toastSuccess, toastFailure } from '../../utils/toaster'
 
 import api from '../../api'
+import PageContainer from '~/App/PageContainer'
+import StickyActionBar from '~/App/StickyActionBar'
+import { Button, Intent } from '@blueprintjs/core'
+import { confirmDialog } from 'botpress/shared'
 
 const statusList = [
-  { label: 'Public', value: 'public' },
-  { label: 'Private', value: 'private' },
-  { label: 'Disabled', value: 'disabled' }
+  { label: 'Published', value: 'public' },
+  { label: 'Collaborators Only', value: 'private' },
+  { label: 'Unmounted', value: 'disabled' }
 ]
 
 class Bots extends Component {
-  state = {
-    id: '',
+  initialFormState = {
     name: '',
+    description: '',
+    privacyPolicy: '',
     avatarUrl: '',
     coverPictureUrl: '',
     category: undefined,
-    description: '',
     website: '',
     phoneNumber: '',
     termsConditions: '',
-    emailAddress: '',
+    emailAddress: ''
+  }
+
+  state = {
+    id: '',
+    ...this.initialFormState,
     error: undefined,
     categories: [],
     moreOpen: false,
     languages: [],
-    defaultLanguage: undefined
+    defaultLanguage: undefined,
+    isSaving: false
   }
 
   componentDidMount() {
@@ -83,7 +92,7 @@ class Bots extends Component {
       return
     }
 
-    const languagesList = this.props.languages.map(lang => ({
+    const languagesList = _.sortBy(this.props.languages, 'name').map(lang => ({
       label: lang.name,
       value: lang.code
     }))
@@ -102,29 +111,68 @@ class Bots extends Component {
     const status = this.bot.disabled ? 'disabled' : this.bot.private ? 'private' : 'public'
     const details = _.get(this.bot, 'details', {})
 
+    this.initialFormState = {
+      name: this.bot.name || '',
+      description: this.bot.description || '',
+      website: details.website || '',
+      phoneNumber: details.phoneNumber || '',
+      termsConditions: details.termsConditions || '',
+      privacyPolicy: details.privacyPolicy || '',
+      emailAddress: details.emailAddress || '',
+      status: statusList.find(x => x.value === status),
+      category: this.state.categories.find(x => x.value === this.bot.category),
+      avatarUrl: details.avatarUrl || '',
+      coverPictureUrl: details.coverPictureUrl || '',
+      selectedLanguages: this.bot.languages || [],
+      selectedDefaultLang: this.bot.defaultLanguage
+    }
+
     this.setState(
       {
         botId,
-        name: this.bot.name,
-        description: this.bot.description,
+        ...this.initialFormState,
         languages: this.bot.languages || [],
-        defaultLanguage: this.bot.defaultLanguage,
-        website: details.website,
-        phoneNumber: details.phoneNumber,
-        termsConditions: details.termsConditions,
-        privacyPolicy: details.privacyPolicy,
-        emailAddress: details.emailAddress,
-        status: statusList.find(x => x.value === status),
-        category: this.state.categories.find(x => x.value === this.bot.category),
-        avatarUrl: details.avatarUrl || '',
-        coverPictureUrl: details.coverPictureUrl || ''
+        defaultLanguage: this.bot.defaultLanguage
       },
       this.updateLanguages
     )
   }
 
+  cancel = async () => {
+    const currentFormState = {
+      name: this.state.name,
+      description: this.state.description,
+      website: this.state.website,
+      phoneNumber: this.state.phoneNumber,
+      termsConditions: this.state.termsConditions,
+      privacyPolicy: this.state.privacyPolicy,
+      emailAddress: this.state.emailAddress,
+      status: this.state.status,
+      category: this.state.category,
+      avatarUrl: this.state.avatarUrl,
+      coverPictureUrl: this.state.coverPictureUrl,
+      selectedLanguages: this.state.selectedLanguages.map(x => x.value),
+      selectedDefaultLang: this.state.selectedDefaultLang.value
+    }
+
+    if (
+      JSON.stringify(this.initialFormState) !== JSON.stringify(currentFormState) &&
+      !(await confirmDialog('There are unsaved changes in this form. Are you sure you want to cancel?', {
+        acceptLabel: 'Cancel',
+        declineLabel: 'Continue editing'
+      }))
+    ) {
+      return
+    }
+    this.backToList()
+  }
+
+  backToList = () => {
+    this.props.history.push('/workspace/')
+  }
+
   saveChanges = async () => {
-    this.setState({ error: undefined })
+    this.setState({ error: undefined, isSaving: true })
 
     const { selectedLanguages, selectedDefaultLang, category } = this.state
 
@@ -151,22 +199,20 @@ class Bots extends Component {
 
     const { error } = Joi.validate(bot, BotEditSchema)
     if (error) {
-      this.setState({ error: error })
+      toastFailure('The form contains errors')
+      this.setState({ error: error, isSaving: false })
       return
     }
 
     await api
       .getSecured()
       .post(`/admin/bots/${this.state.botId}`, bot)
-      .catch(err => this.setState({ error: err }))
+      .catch(err => this.setState({ error: err, isSaving: false }))
 
     await this.props.fetchBots()
 
-    this.setState({ successMsg: `Bot configuration updated successfully` })
-
-    window.setTimeout(() => {
-      this.setState({ successMsg: undefined })
-    }, 2000)
+    toastSuccess('Bot configuration updated successfully')
+    this.backToList()
   }
 
   toggleMoreOpen = () => {
@@ -190,17 +236,18 @@ class Bots extends Component {
   handleStatusChanged = status => this.setState({ status })
   handleCategoryChanged = category => this.setState({ category })
 
-  handleDefaultLangChanged = lang => {
+  handleDefaultLangChanged = async lang => {
     if (!this.state.selectedDefaultLang) {
       this.setState({ selectedDefaultLang: lang })
       return
     }
 
     if (this.state.selectedDefaultLang !== lang) {
-      const conf = window.confirm(
-        `Are you sure you want to change the language of your bot from ${this.state.selectedDefaultLang.label} to ${
-          lang.label
-        }? All of your content elements will be copied, make sure you translate them.`
+      const conf = await confirmDialog(
+        `Are you sure you want to change the language of your bot from ${this.state.selectedDefaultLang.label} to ${lang.label}? All of your content elements will be copied, make sure you translate them.`,
+        {
+          acceptLabel: 'Change'
+        }
       )
 
       if (conf) {
@@ -241,7 +288,7 @@ class Bots extends Component {
       .getSecured()
       .post(`/bots/${this.state.botId}/media`, data, { headers: { 'Content-Type': 'multipart/form-data' } })
       .then(response => {
-        this.setState({ [targetProp]: response.data.url }, this.saveChanges)
+        this.setState({ [targetProp]: response.data.url })
       })
       .catch(err => {
         this.setState({ error: err })
@@ -302,10 +349,10 @@ class Bots extends Component {
   }
 
   renderDetails() {
+    const { categories, category, description, error, name, status } = this.state
     return (
       <div>
-        {this.state.error && <Alert color="danger">{this.state.error.message}</Alert>}
-        {this.state.successMsg && <Alert type="success">{this.state.successMsg}</Alert>}
+        {error && <Alert color="danger">{error.message}</Alert>}
         <Form>
           <Row form>
             <Col md={5}>
@@ -313,25 +360,19 @@ class Bots extends Component {
                 <Label for="name">
                   <strong>Name</strong>
                 </Label>
-                <Input
-                  id="input-name"
-                  type="text"
-                  name="name"
-                  value={this.state.name}
-                  onChange={this.handleInputChanged}
-                />
+                <Input id="input-name" type="text" name="name" value={name} onChange={this.handleInputChanged} />
               </FormGroup>
             </Col>
             <Col md={4}>
-              {!!this.state.categories.length && (
+              {!!categories.length && (
                 <FormGroup>
                   <Label>
                     <strong>Category</strong>
                   </Label>
                   <Select
                     id="select-category"
-                    options={this.state.categories}
-                    value={this.state.category}
+                    options={categories}
+                    value={category}
                     onChange={this.handleCategoryChanged}
                   />
                 </FormGroup>
@@ -342,15 +383,15 @@ class Bots extends Component {
                 <Label for="status">
                   <strong>Status</strong>
                   {this.renderHelp(
-                    `Public bots can be accessed by anyone, while private are only accessible by authenticated users. 
-                    Please note that private bots cannot be embedded on a website. 
-                    This should only be used for testing purposes while developing or if you access it directly using shortlinks`
+                    `Public bots can be accessed by anyone, while private are only accessible by authenticated users.
+                Please note that private bots cannot be embedded on a website.
+                This should only be used for testing purposes while developing or if you access it directly using shortlinks`
                   )}
                 </Label>
                 <Select
                   id="select-status"
                   options={statusList}
-                  value={this.state.status}
+                  value={status}
                   onChange={this.handleStatusChanged}
                   isSearchable={false}
                 />
@@ -365,7 +406,7 @@ class Bots extends Component {
               id="input-description"
               type="textarea"
               name="description"
-              value={this.state.description}
+              value={description}
               onChange={this.handleInputChanged}
             />
           </FormGroup>
@@ -455,8 +496,8 @@ class Bots extends Component {
           </Col>
         </Row>
         <small>
-          These informations are displayed on the Bot Information page,{' '}
-          <a href="https://botpress.io/docs/tutorials/webchat-embedding" target="_blank" rel="noopener noreferrer">
+          This information is displayed on the Bot Information page,{' '}
+          <a href="https://botpress.com/docs/tutorials/webchat-embedding" target="_blank" rel="noopener noreferrer">
             check the documentation for more details
           </a>
         </small>
@@ -465,26 +506,35 @@ class Bots extends Component {
   }
 
   renderPictures() {
+    // [TODO] max.cloutier 2020.01.17 functional, but the style of this section should be revisited
     return (
       <Fragment>
         <Row>
-          <Col md={7}>
+          <Col md={6}>
             <Label>
               <strong>Bot Avatar</strong>
             </Label>
             <Input type="file" accept="image/*" name="avatarUrl" onChange={this.handleImageFileChanged} />
+            {this.state.avatarUrl !== this.initialFormState.avatarUrl && (
+              <p className="configUploadSuccess">
+                The bot avatar has been uploaded successfully. You need to save the form in order for the changes to
+                take effect.
+              </p>
+            )}
+            {this.state.avatarUrl && <img height={75} alt="avatar" src={this.state.avatarUrl} />}
           </Col>
-          <Col md={4}>{this.state.avatarUrl && <img height={75} alt="avatar" src={this.state.avatarUrl} />}</Col>
-        </Row>
-        <Row>
-          <Col md={4}>
+          <Col md={6}>
             <Label>
               <strong>Cover Picture</strong>
             </Label>
             <Input type="file" accept="image/*" name="coverPictureUrl" onChange={this.handleImageFileChanged} />
-          </Col>
-          <Col md={8}>
-            {this.state.coverPictureUrl && <img width="100%" alt="cover" src={this.state.coverPictureUrl} />}
+            {this.state.coverPictureUrl !== this.initialFormState.coverPictureUrl && (
+              <p className="configUploadSuccess">
+                The cover picture has been uploaded successfully. You need to save the form in order for the changes to
+                take effect.
+              </p>
+            )}
+            {this.state.coverPictureUrl && <img className="coverImg" alt="cover" src={this.state.coverPictureUrl} />}
           </Col>
         </Row>
       </Fragment>
@@ -531,18 +581,30 @@ class Bots extends Component {
 
   render() {
     return (
-      <SectionLayout
-        title={this.state.name || this.state.botId}
+      <PageContainer
+        contentClassName="with-sticky-action-bar"
+        title={`Bot - ${this.state.name || this.state.botId}`}
         helpText="This page shows the details you can configure for a desired bot."
-        activePage="bots"
-        currentTeam={this.props.team}
-        mainContent={this.renderDetails()}
-        sideMenu={
-          <Button id="btn-save" color="primary" onClick={this.saveChanges}>
-            Save Details
-          </Button>
-        }
-      />
+      >
+        {this.renderDetails()}
+        <StickyActionBar>
+          <Button
+            id="btn-cancel"
+            intent={Intent.NONE}
+            text="Cancel"
+            disabled={this.state.isSaving}
+            onClick={this.cancel}
+          />
+          <Button
+            id="btn-save"
+            intent={Intent.PRIMARY}
+            icon="floppy-disk"
+            text="Save changes"
+            disabled={this.state.isSaving}
+            onClick={this.saveChanges}
+          />
+        </StickyActionBar>
+      </PageContainer>
     )
   }
 }
@@ -562,7 +624,4 @@ const mapDispatchToProps = {
   fetchLanguages
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Bots)
+export default connect(mapStateToProps, mapDispatchToProps)(Bots)

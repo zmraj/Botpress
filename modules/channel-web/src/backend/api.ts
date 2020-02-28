@@ -1,3 +1,4 @@
+import apicache from 'apicache'
 import aws from 'aws-sdk'
 import * as sdk from 'botpress/sdk'
 import _ from 'lodash'
@@ -74,6 +75,10 @@ export default async (bp: typeof sdk, db: Database) => {
   }
 
   const router = bp.http.createRouterForBot('channel-web', { checkAuthentication: false, enableJsonBodyParser: true })
+  const perBotCache = apicache.options({
+    appendKey: req => req.method + ' for bot ' + req.params && req.params.botId,
+    statusCodes: { include: [200] }
+  }).middleware
 
   const asyncApi = fn => async (req, res, next) => {
     try {
@@ -86,6 +91,7 @@ export default async (bp: typeof sdk, db: Database) => {
 
   router.get(
     '/botInfo',
+    perBotCache('1 minute'),
     asyncApi(async (req, res) => {
       const { botId } = req.params
       const security = ((await bp.config.getModuleConfig('channel-web')) as Config).security // usage of global because a user could overwrite bot scoped configs
@@ -353,7 +359,7 @@ export default async (bp: typeof sdk, db: Database) => {
         threadId: conversationId,
         type: payload.type,
         payload,
-        credentials: req.credentials
+        credentials: req['credentials']
       })
 
       await bp.events.sendEvent(event)

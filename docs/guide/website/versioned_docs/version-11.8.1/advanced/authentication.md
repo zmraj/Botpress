@@ -34,7 +34,7 @@ Replace the following content with `"users": []`
 ```js
 "users": [
   {
-    "email": "admin@botpress.io",
+    "email": "admin@botpress.com",
     "password": "713f2a9c8382c8bec72dced71c787adf4ba3d0aa635a8201b0ee78700758919b4eb042ac4f2c8848bbdde05a734185f85903426b6fbc0fe8c76493e28bbcc7b3",
     "salt": "2af382287ebef39d",
     "firstname": "",
@@ -90,7 +90,7 @@ Here is a complete example
 #### Prerequisite
 
 - Botpress Pro enabled with a valid license key
-- Informations to access the LDAP server
+- Information to access the LDAP server
 
 #### Quick Start
 
@@ -170,7 +170,7 @@ cat jwtRS256.key.pub // Your public key
 
 ### Authenticate the user
 
-Once you have generated the JWT token, it must be passed down to the web chat. It will then be sent to Botpress with every message and events. Check out the [Connectring your bot with your existing backend](../../tutorials/existing-backend) for more details. There are two different situations:
+Once you have generated the JWT token, it must be passed down to the web chat. It will then be sent to Botpress with every message and events. Check out the [Connectring your bot with your existing backend](../tutorials/existing-backend) for more details. There are two different situations:
 
 1. The user is authenticated before the webchat is loaded.
 

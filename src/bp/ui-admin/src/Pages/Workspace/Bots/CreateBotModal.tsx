@@ -160,8 +160,7 @@ class CreateBotModal extends Component<Props, State> {
               label="Bot Name"
               labelFor="bot-name"
               labelInfo="*"
-              helperText={`It will be displayed to your visitors. You can change it anytime. If you put nothing, it will be named
-            "Bot" by default.`}
+              helperText={`It will be displayed to your visitors. You can change it anytime.`}
             >
               <InputGroup
                 id="input-bot-name"
@@ -200,7 +199,7 @@ class CreateBotModal extends Component<Props, State> {
                   tabIndex="3"
                   options={this.state.templates}
                   value={this.state.selectedTemplate}
-                  onChange={selectedTemplate => this.setState({ selectedTemplate })}
+                  onChange={selectedTemplate => this.setState({ selectedTemplate: selectedTemplate as any })}
                   getOptionLabel={o => o.name}
                   getOptionValue={o => o.id}
                 />
@@ -212,7 +211,7 @@ class CreateBotModal extends Component<Props, State> {
                   tabIndex="4"
                   options={this.state.categories}
                   value={this.state.selectedCategory}
-                  onChange={selectedCategory => this.setState({ selectedCategory })}
+                  onChange={selectedCategory => this.setState({ selectedCategory: selectedCategory as any })}
                 />
               </FormGroup>
             )}

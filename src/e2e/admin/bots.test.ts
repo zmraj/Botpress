@@ -2,7 +2,7 @@ import path from 'path'
 
 import { bpConfig } from '../../../jest-puppeteer.config'
 import { clickOn, expectMatchElement, fillField, uploadFile } from '../expectPuppeteer'
-import { autoAnswerDialog, closeToaster, expectAdminApiCallSuccess, gotoAndExpect } from '../utils'
+import { closeToaster, CONFIRM_DIALOG, expectAdminApiCallSuccess, gotoAndExpect } from '../utils'
 
 describe('Admin - Bot Management', () => {
   const tempBotId = 'lol-bot'
@@ -31,9 +31,10 @@ describe('Admin - Bot Management', () => {
   })
 
   it('Delete imported bot', async () => {
-    autoAnswerDialog()
-
     await clickButtonForBot('#btn-delete', importBotId)
+
+    await page.waitFor(1000)
+    await clickOn(CONFIRM_DIALOG.ACCEPT)
     await expectAdminApiCallSuccess(`bots/${importBotId}/delete`, 'POST')
     await page.waitFor(200)
   })
@@ -47,8 +48,7 @@ describe('Admin - Bot Management', () => {
     await fillField('#select-bot-templates', 'Welcome Bot') // Using fill instead of select because options are created dynamically
     await page.keyboard.press('Enter')
 
-    await clickOn('#btn-modal-create-bot')
-    await expectAdminApiCallSuccess('bots', 'POST')
+    await Promise.all([expectAdminApiCallSuccess('bots', 'POST'), clickOn('#btn-modal-create-bot')])
   })
 
   it('Export bot', async () => {
@@ -94,9 +94,9 @@ describe('Admin - Bot Management', () => {
   })
 
   it('Delete temporary bot', async () => {
-    autoAnswerDialog()
-
     await clickButtonForBot('#btn-delete', tempBotId)
+    await page.waitFor(1000)
+    await clickOn(CONFIRM_DIALOG.ACCEPT)
     await expectAdminApiCallSuccess(`bots/${tempBotId}/delete`, 'POST')
     await page.waitFor(200)
   })

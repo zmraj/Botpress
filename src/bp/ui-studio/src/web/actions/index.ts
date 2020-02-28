@@ -8,6 +8,11 @@ import { getDeletedFlows, getDirtyFlows, getModifiedFlows, getNewFlows } from '.
 import { FlowsAPI } from './api'
 import BatchRunner from './BatchRunner'
 
+export default function debounceAction(action: any, delay: number, options?: _.DebounceSettings) {
+  const debounced = _.debounce((dispatch, actionArgs) => dispatch(action(...actionArgs)), delay, options)
+  return (...actionArgs) => dispatch => debounced(dispatch, actionArgs)
+}
+
 // Flows
 export const receiveFlowsModification = createAction('FLOWS/MODIFICATIONS/RECEIVE')
 
@@ -47,7 +52,11 @@ const startMutexCountDown = (flow: FlowView) => dispatch => {
 export const clearFlowMutex = createAction('FLOWS/MODIFICATIONS/CLEAR_MUTEX')
 
 export const requestFlows = createAction('FLOWS/REQUEST')
-export const receiveFlows = createAction('FLOWS/RECEIVE', flows => flows, () => ({ receiveAt: new Date() }))
+export const receiveFlows = createAction(
+  'FLOWS/RECEIVE',
+  flows => flows,
+  () => ({ receiveAt: new Date() })
+)
 
 export const fetchFlows = () => dispatch => {
   dispatch(requestFlows())
@@ -67,7 +76,11 @@ export const fetchFlows = () => dispatch => {
     })
 }
 
-export const receiveSaveFlows = createAction('FLOWS/SAVE/RECEIVE', flows => flows, () => ({ receiveAt: new Date() }))
+export const receiveSaveFlows = createAction(
+  'FLOWS/SAVE/RECEIVE',
+  flows => flows,
+  () => ({ receiveAt: new Date() })
+)
 export const errorSaveFlows = createAction('FLOWS/SAVE/ERROR')
 export const clearErrorSaveFlows = createAction('FLOWS/SAVE/ERROR/CLEAR')
 
@@ -161,7 +174,7 @@ export const openFlowNodeProps = createAction('FLOWS/FLOW/OPEN_NODE_PROPS')
 export const closeFlowNodeProps = createAction('FLOWS/FLOW/CLOSE_NODE_PROPS')
 
 export const handleRefreshFlowLinks = createAction('FLOWS/FLOW/UPDATE_LINKS')
-export const refreshFlowsLinks = () => dispatch => setTimeout(() => dispatch(handleRefreshFlowLinks()), 10)
+export const refreshFlowsLinks = debounceAction(handleRefreshFlowLinks, 500, { leading: true })
 export const updateFlowProblems = createAction('FLOWS/FLOW/UPDATE_PROBLEMS')
 
 export const copyFlowNode = createAction('FLOWS/NODE/COPY')
@@ -354,5 +367,36 @@ export const refreshHints = () => dispatch => {
   // tslint:disable-next-line: no-floating-promises
   axios.get(`${window.BOT_API_PATH}/hints`).then(res => {
     dispatch(hintsReceived(res.data))
+  })
+}
+
+export const actionsReceived = createAction('ACTIONS/RECEIVED')
+export const refreshActions = () => dispatch => {
+  // tslint:disable-next-line: no-floating-promises
+  axios.get(`${window.BOT_API_PATH}/actions`).then(({ data }) => {
+    dispatch(
+      actionsReceived(
+        _.sortBy(
+          data.filter(action => !action.metadata.hidden),
+          ['metadata.category', 'name']
+        )
+      )
+    )
+  })
+}
+
+export const intentsReceived = createAction('INTENTS/RECEIVED')
+export const refreshIntents = () => dispatch => {
+  // tslint:disable-next-line: no-floating-promises
+  axios.get(`${window.BOT_API_PATH}/mod/nlu/intents`).then(({ data }) => {
+    dispatch(intentsReceived(data))
+  })
+}
+
+export const receiveQNAContentElement = createAction('QNA/CONTENT_ELEMENT')
+export const getQNAContentElementUsage = () => dispatch => {
+  // tslint:disable-next-line: no-floating-promises
+  axios.get(`${window.BOT_API_PATH}/mod/qna/contentElementUsage`).then(({ data }) => {
+    dispatch(receiveQNAContentElement(data))
   })
 }

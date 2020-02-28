@@ -2,11 +2,12 @@ import { Position, Tooltip } from '@blueprintjs/core'
 import _ from 'lodash'
 import find from 'lodash/find'
 import React from 'react'
+import { getFlowLabel, reorderFlows } from '~/components/Shared/Utils'
 
-import { ERROR_FLOW_ICON, FLOW_ICON, FOLDER_ICON, MAIN_FLOW_ICON } from './FlowsList'
+import { ERROR_FLOW_ICON, FLOW_ICON, FOLDER_ICON, MAIN_FLOW_ICON, TIMEOUT_ICON } from './FlowsList'
 
 /**
- *  Returns a different display for special flows.
+ * Returns a different display for special flows.
  * @param flowId The full path of the flow (including folders)
  * @param flowName The display name of the flow (only filename)
  */
@@ -16,7 +17,7 @@ const getFlowInfo = (flowId: string, flowName: string) => {
       icon: MAIN_FLOW_ICON,
       label: (
         <Tooltip content={<span>Every user session starts here</span>} hoverOpenDelay={500} position={Position.BOTTOM}>
-          <strong>Main</strong>
+          <strong>{getFlowLabel(flowName)}</strong>
         </Tooltip>
       )
     }
@@ -34,7 +35,26 @@ const getFlowInfo = (flowId: string, flowName: string) => {
           hoverOpenDelay={500}
           position={Position.BOTTOM}
         >
-          <strong>Error handling</strong>
+          <strong>{getFlowLabel(flowName)}</strong>
+        </Tooltip>
+      )
+    }
+  } else if (flowId === 'timeout') {
+    return {
+      icon: TIMEOUT_ICON,
+      label: (
+        <Tooltip
+          content={
+            <span>
+              When a discussion timeouts (user doesn't answer in
+              <br />
+              the configured timeframe) he will be redirected here.
+            </span>
+          }
+          hoverOpenDelay={500}
+          position={Position.BOTTOM}
+        >
+          <strong>{getFlowLabel(flowName)}</strong>
         </Tooltip>
       )
     }
@@ -43,14 +63,6 @@ const getFlowInfo = (flowId: string, flowName: string) => {
     icon: FLOW_ICON,
     label: flowName
   }
-}
-
-const reorderFlows = flows => {
-  return [
-    flows.find(x => x.id === 'main'),
-    flows.find(x => x.id === 'error'),
-    ...flows.filter(x => x.id !== 'main' && x.id !== 'error')
-  ].filter(x => Boolean(x))
 }
 
 const addNode = (tree, folders, flowDesc, data) => {
@@ -69,11 +81,7 @@ const compareNodes = (a, b) => {
   if (a.type === b.type) {
     return a.name < b.name ? -1 : 1
   }
-  if (a.type === 'folder') {
-    return -1
-  } else {
-    return 1
-  }
+  return a.type === 'folder' ? -1 : 1
 }
 
 const sortChildren = tree => {

@@ -21,22 +21,28 @@ import AccessControl, { isChatUser } from '../../../App/AccessControl'
 
 interface Props {
   bot: BotConfig
+  hasError: boolean
   deleteBot?: () => void
   exportBot?: () => void
   createRevision?: () => void
   rollback?: () => void
   requestStageChange?: () => void
   allowStageChange?: boolean
+  reloadBot?: () => void
+  viewLogs?: () => void
 }
 
 const BotItemPipeline: FC<Props> = ({
   bot,
+  hasError,
   requestStageChange,
   deleteBot,
   exportBot,
   allowStageChange,
   createRevision,
-  rollback
+  rollback,
+  reloadBot,
+  viewLogs
 }) => {
   const botShortLink = `${window.location.origin + window['ROOT_PATH']}/s/${bot.id}`
   const botStudioLink = isChatUser() ? botShortLink : `studio/${bot.id}`
@@ -48,7 +54,7 @@ const BotItemPipeline: FC<Props> = ({
           <Popover minimal position={Position.BOTTOM} interactionKind={PopoverInteractionKind.HOVER}>
             <Button id="btn-menu" icon={<Icon icon="menu" />} minimal={true} />
             <Menu>
-              {!bot.disabled && (
+              {!bot.disabled && !hasError && (
                 <Fragment>
                   <MenuItem icon="chat" text="Open chat" href={botShortLink} />
                   <MenuItem disabled={bot.locked} icon="edit" text="Edit in Studio" href={botStudioLink} />
@@ -60,6 +66,10 @@ const BotItemPipeline: FC<Props> = ({
               </CopyToClipboard>
               <MenuDivider />
 
+              <AccessControl resource="admin.logs" operation="read">
+                <MenuItem text="View Logs" icon="manual" id="btn-viewLogs" onClick={viewLogs} />
+              </AccessControl>
+
               {allowStageChange && (
                 <MenuItem
                   text="Promote to next stage"
@@ -70,16 +80,12 @@ const BotItemPipeline: FC<Props> = ({
               )}
 
               <AccessControl resource="admin.bots.*" operation="write">
-                <MenuItem
-                  text="Config"
-                  icon="cog"
-                  id="btn-config"
-                  onClick={() => history.push(`/bot/${bot.id}/details`)}
-                />
+                <MenuItem text="Config" icon="cog" id="btn-config" onClick={() => history.push(`bots/${bot.id}`)} />
                 <MenuItem text="Create Revision" icon="cloud-upload" id="btn-createRevision" onClick={createRevision} />
                 <MenuItem text="Rollback" icon="undo" id="btn-rollbackRevision" onClick={rollback} />
                 <MenuItem text="Export" icon="export" id="btn-export" onClick={exportBot} />
                 <MenuItem text="Delete" icon="trash" id="btn-delete" onClick={deleteBot} />
+                {hasError && <MenuItem text="Reload" icon="refresh" onClick={reloadBot} />}
               </AccessControl>
             </Menu>
           </Popover>
@@ -109,6 +115,11 @@ const BotItemPipeline: FC<Props> = ({
         {bot.private && (
           <Tag intent={Intent.PRIMARY} className="botbadge">
             private
+          </Tag>
+        )}
+        {hasError && (
+          <Tag intent={Intent.DANGER} className="botbadge">
+            error
           </Tag>
         )}
         {bot.pipeline_status.stage_request && (

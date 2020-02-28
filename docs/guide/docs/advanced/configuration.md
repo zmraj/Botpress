@@ -11,7 +11,7 @@ On this page, you will learn about the Botpress global configuration, individual
 
 This is the main file used to configure the Botpress server. It will be created automatically when it is missing. Default values should be good when discovering Botpress, but in this page you will learn about the most common configuration you may need to change.
 
-To get more informations about each individual options, check out the [comments on the configuration schema](https://github.com/botpress/botpress/blob/master/src/bp/core/config/botpress.config.ts)
+To get more information about each individual options, check out the [comments on the configuration schema](https://github.com/botpress/botpress/blob/master/src/bp/core/config/botpress.config.ts)
 
 ## HTTP Server Configuration
 
@@ -23,11 +23,11 @@ When you are ready to expose your bot externally, you will need to change some o
 
 This means that your server will still listen for connections on port 3000, but your reverse proxy will answer for queries on port 80. It's also the reverse proxy that will handle secure connections if you want to access your bot using `https`
 
-At this point, Botpress doesn't know how to access the bot from the web. You will need to edit the configuration of `httpServer.externalUrl`. Set the configuration variable to the complete host name, for example `https://bot.botpress.io`
+At this point, Botpress doesn't know how to access the bot from the web. You will need to edit the configuration of `httpServer.externalUrl`. Set the configuration variable to the complete host name, for example `https://bot.botpress.com`
 
 #### Changing the base URL of your bot
 
-By default, Botpress is accessible at the root of your domain (ex: https://bot.botpress.io/). It is possible to change that so you can serve it from a different URL, for example `https://bot.botpress.io/botpress/somepath/`. All you need to do is set the External URL, either in environment variable (`EXTERNAL_URL`), or via the `botpress.config.json` file.
+By default, Botpress is accessible at the root of your domain (ex: https://bot.botpress.com/). It is possible to change that so you can serve it from a different URL, for example `https://bot.botpress.com/botpress/somepath/`. All you need to do is set the External URL, either in environment variable (`EXTERNAL_URL`), or via the `botpress.config.json` file.
 
 The path will be automatically extracted from that URL, and will be used as the root path.
 
@@ -37,19 +37,47 @@ Logs are very useful to debug and understand what happens when the bot doesn't b
 
 When you start Botpress from the binary (or using the Docker image), the bot is in `debug` mode. This means that a lot of information will be displayed in the console to understand what happens.
 
-There are 4 different levels of logs:
+There are 5 different levels of logs:
 
-- Debug: display very detailed informations about the bot operations
+- Debug: display very detailed information about the bot operations
 - Info: gives general information or "good to know" stuff
 - Warn: means that something didn't go as expected, but the bot was able to recover
 - Error: there was an error that should be addressed
+- Critical: something prevents the bot or the server from behaving correctly (may not work at all)
 
-By default, you will see `debug` with all other log levels in the console, and `errors` will be saved in the database (useful to keep track of them).
-When you start Botpress in `production` mode, `debug` logs will be disabled for better performances.
+### Change Log Verbosity
 
-It is also possible to send log output to a file in a specific folder. Check below for the required configuration
+There are three different configuration of verbosity for the logger:
+
+- Production (verbosity: 0)
+- Developer (verbosity: 1)
+- Debug (verbosity: 2)
+
+By default, Botpress uses the `Debug` configuration.
+When you run Botpress in production `BP_PRODUCTION=true` or with cluster mode `CLUSTER_ENABLED=true`, logs will be configured as `Production`
+
+You can configure the level of verbosity using an environment variable (`VERBOSITY_LEVEL=0` for production) or using command line (ex: `-vv` for Debug)
+
+#### Production
+
+- The console will display `info`, `warn`, `error` and `critical` logs
+- In the studio's log console, bot developers will see `debug` logs for their bot
+- No stack traces\* will be displayed in the console
+
+#### Developer
+
+- Same thing as `Production`, but the console will also include stack traces\*
+
+#### Debug
+
+- Includes everything from `Production` and `Developer`
+- Debug logs will be displayed in the main console
+
+\* Stack traces are additional information used by developers to identify the source of an error. They are useful when developing, but in production they can hide important log messages.
 
 ### How to save logs on the file system
+
+It is also possible to send log output to a file in a specific folder. Check below for the required configuration
 
 Edit your `botpress.config.json` file and change your file to match the following:
 
@@ -69,7 +97,7 @@ Edit your `botpress.config.json` file and change your file to match the followin
 
 ## Advanced Logging
 
-In a production environment, you may want to persist additional logs such as full audit trail. You can enable more granular logs by using the [DEBUG environment variable](../debug) and saving those extra logs to a separate file:
+In a production environment, you may want to persist additional logs such as full audit trail. You can enable more granular logs by using the [DEBUG environment variable](debug) and saving those extra logs to a separate file:
 
 ```sh
 # Linux & OSX
@@ -103,7 +131,7 @@ The string `MODULE_ROOT` is a special string that is replaced when your configur
 
 Every bot that you create will have its own configuration file. It is located at `data/bots/NAME_OF_BOT/bot.config.json`. Most of the available options can be edited by clicking on the `Config` link next to the bot name on the administration panel.
 
-If you enable additionnal modules that adds other
+If you enable additional modules that adds other
 
 ## Module Configuration
 
@@ -115,7 +143,7 @@ Each module has a different set of possible configuration, so we won't go throug
 
 Most of these variables can be set in the configuration file `data/global/botpress.config.json`. Infrastructure configuration (like the database, cluster mode, etc) aren't available in the configuration file, since they are required before the config is loaded.
 
-Botpress supports `.env` files, so you don't have to set them everytime you start the app. Just add the file in the same folder as the executable.
+Botpress supports `.env` files, so you don't have to set them every time you start the app. Just add the file in the same folder as the executable.
 
 ### Common
 
@@ -142,9 +170,9 @@ Botpress supports `.env` files, so you don't have to set them everytime you star
 | FAST_TEXT_CLEANUP_MS      | The model will be kept in memory until it receives no messages to process for that duration | 60000   |
 | REVERSE_PROXY             | When enabled, it uses "x-forwarded-for" to fetch the user IP instead of remoteAddress       | false   |
 
-It is also possible to use environment variables to override module configuration. The pattern is `BP_%MODULE_NAME%_%OPTION_PATH%`, all in upper cases. For example, to define the `confidenceTreshold` option of the module `nlu`, you would use `BP_NLU_CONFIDENCETRESHOLD`. You can list the available environment variales for each modules by enabling the `DEBUG=bp:configuration:modules:*` flag.
+It is also possible to use environment variables to override module configuration. The pattern is `BP_%MODULE_NAME%_%OPTION_PATH%`, all in upper cases. For example, to define the `confidenceTreshold` option of the module `nlu`, you would use `BP_NLU_CONFIDENCETRESHOLD`. You can list the available environment variables for each modules by enabling the `DEBUG=bp:configuration:modules:*` flag.
 
-## More Informations
+## More Information
 
-- Check out the [database](../../tutorials/database) page for details about `DATABASE_URL`
-- Check out the [cluster](../../advanced/cluster) page for details about `CLUSTER_ENABLED` and `REDIS_URL`
+- Check out the [database](../tutorials/database) page for details about `DATABASE_URL`
+- Check out the [cluster](cluster) page for details about `CLUSTER_ENABLED` and `REDIS_URL`

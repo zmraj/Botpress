@@ -12,6 +12,7 @@ import { Container, inject, injectable, tagged } from 'inversify'
 import _ from 'lodash'
 import path from 'path'
 import semver from 'semver'
+import yn from 'yn'
 
 import { container } from '../../app.inversify'
 import { GhostService } from '../ghost/service'
@@ -52,7 +53,7 @@ export class MigrationService {
     const configVersion = process.env.TESTMIG_CONFIG_VERSION || (await this.configProvider.getBotpressConfig()).version
     debug(`Migration Check: %o`, { configVersion, currentVersion: this.currentVersion })
 
-    if (process.env.SKIP_MIGRATIONS) {
+    if (yn(process.env.SKIP_MIGRATIONS)) {
       debug(`Skipping Migrations`)
       return
     }
@@ -66,7 +67,7 @@ export class MigrationService {
     this.displayMigrationStatus(configVersion, missingMigrations, this.logger)
 
     if (!process.AUTO_MIGRATE) {
-      await this.logger.error(
+      this.logger.error(
         `Botpress needs to migrate your data. Please make a copy of your data, then start it with "./bp --auto-migrate"`
       )
 
@@ -91,16 +92,16 @@ export class MigrationService {
 
     this.displayMigrationStatus(botVersion, missingMigrations, this.logger.forBot(botId))
     const opts = await this.getMigrationOpts({ botId })
-    let hasFailures
+    let hasFailures = false
 
     await Promise.mapSeries(missingMigrations, async ({ filename }) => {
       const result = await this.loadedMigrations[filename].up(opts)
       debug.forBot(botId, `Migration step finished`, { filename, result })
       if (result.success) {
-        await this.logger.info(`- ${result.message || 'Success'}`)
+        this.logger.info(`- ${result.message || 'Success'}`)
       } else {
         hasFailures = true
-        await this.logger.error(`- ${result.message || 'Failure'}`)
+        this.logger.error(`- ${result.message || 'Failure'}`)
       }
     })
 
@@ -115,8 +116,8 @@ export class MigrationService {
     const opts = await this.getMigrationOpts()
 
     this.logger.info(chalk`========================================
-{bold ${center(`Executing ${missingMigrations.length.toString()} migrations`, 40)}}
-========================================`)
+{bold ${center(`Executing ${missingMigrations.length} migration${missingMigrations.length === 1 ? '' : 's'}`, 40, 9)}}
+${_.repeat(' ', 9)}========================================`)
 
     const completed = await this._getCompletedMigrations()
     let hasFailures = false
@@ -137,10 +138,7 @@ export class MigrationService {
         return this.logger.info(`Skipping already migrated file "${filename}"`)
       }
 
-      if (
-        process.env.TESTMIG_IGNORE_LIST &&
-        process.env.TESTMIG_IGNORE_LIST.split(',').filter(x => filename.includes(x)).length
-      ) {
+      if (process.env.TESTMIG_IGNORE_LIST?.split(',').filter(x => filename.includes(x)).length) {
         return this.logger.info(`Skipping ignored migration file "${filename}"`)
       }
 
@@ -149,15 +147,15 @@ export class MigrationService {
       const result = await this.loadedMigrations[filename].up(opts)
       if (result.success) {
         await this._saveCompletedMigration(filename, result)
-        await this.logger.info(`- ${result.message || 'Success'}`)
+        this.logger.info(`- ${result.message || 'Success'}`)
       } else {
         hasFailures = true
-        await this.logger.error(`- ${result.message || 'Failure'}`)
+        this.logger.error(`- ${result.message || 'Failure'}`)
       }
     })
 
     if (hasFailures) {
-      await this.logger.error(
+      this.logger.error(
         `Some steps failed to complete. Please fix errors manually, then restart Botpress so the update process may finish.`
       )
 
@@ -167,7 +165,7 @@ export class MigrationService {
     }
 
     await this.updateAllVersions()
-    this.logger.info(`Migrations completed successfully! `)
+    this.logger.info(`Migration${missingMigrations.length === 1 ? '' : 's'} completed successfully! `)
   }
 
   private async updateAllVersions() {
@@ -183,10 +181,10 @@ export class MigrationService {
     const migrations = missingMigrations.map(x => this.loadedMigrations[x.filename].info)
 
     logger.warn(chalk`========================================
-{bold ${center(`Migration Required`, 40)}}
-{dim ${center(`Version ${configVersion} => ${this.currentVersion} `, 40)}}
-{dim ${center(`${migrations.length} changes`, 40)}}
-========================================`)
+{bold ${center(`Migration${migrations.length === 1 ? '' : 's'} Required`, 40, 9)}}
+{dim ${center(`Version ${configVersion} => ${this.currentVersion} `, 40, 9)}}
+{dim ${center(`${migrations.length} change${migrations.length === 1 ? '' : 's'}`, 40, 9)}}
+${_.repeat(' ', 9)}========================================`)
 
     Object.keys(types).map(type => {
       logger.warn(chalk`{bold ${types[type]}}`)
@@ -225,7 +223,7 @@ export class MigrationService {
   }
 
   private async _getCompletedMigrations(): Promise<string[]> {
-    if (process.env.TESTMIG_IGNORE_COMPLETED) {
+    if (yn(process.env.TESTMIG_IGNORE_COMPLETED)) {
       return []
     }
 
@@ -250,7 +248,7 @@ export class MigrationService {
         return {
           filename: path.basename(filepath),
           version: semver.valid(rawVersion.replace(/_/g, '.')),
-          title: (title || '').replace('.js', ''),
+          title: (title || '').replace(/\.js$/i, ''),
           date: Number(timestamp),
           location: path.join(rootPath, filepath)
         }

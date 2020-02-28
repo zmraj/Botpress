@@ -21,6 +21,7 @@ describe('parse utterance', () => {
 
     expect(res.utterance).toEqual('')
     expect(res.parsedSlots).toEqual([])
+    expect(res.parts).toEqual([])
   })
 
   test('no slots', () => {
@@ -29,6 +30,8 @@ describe('parse utterance', () => {
     const res = parseUtterance(utterance)
     expect(res.utterance).toEqual(utterance)
     expect(res.parsedSlots).toEqual([])
+    expect(res.parts[0].text).toEqual('No one is safe, trust anyone but you.')
+    expect(res.parts[0].slot).not.toBeDefined()
   })
 
   test('single slot', () => {
@@ -43,6 +46,13 @@ describe('parse utterance', () => {
     expect(res.parsedSlots[0].value).toEqual('Alex')
     expect(res.parsedSlots[0].rawPosition).toEqual({ start: 15, end: 26 })
     expect(res.parsedSlots[0].cleanPosition).toEqual({ start: 15, end: 19 })
+    expect(res.parts[0].text).toEqual('Brace yourself ')
+    expect(res.parts[0].slot).not.toBeDefined()
+    expect(res.parts[1].text).toEqual('Alex')
+    expect(res.parts[1].slot).toBeDefined()
+    expect(res.parts[1].slot.name).toEqual('you')
+    expect(res.parts[2].text).toEqual(', big stuff coming.')
+    expect(res.parts[2].slot).not.toBeDefined()
   })
 
   test('multiple slots', () => {
@@ -60,5 +70,25 @@ describe('parse utterance', () => {
     expect(res.parsedSlots[1].value).toEqual('Jay')
     expect(res.parsedSlots[1].rawPosition).toEqual({ start: 40, end: 50 })
     expect(res.parsedSlots[1].cleanPosition).toEqual({ start: 34, end: 37 })
+    expect(res.parts).toHaveLength(4)
+    expect(res.parts[3].text).toEqual('Jay')
+  })
+
+  test('bounding spaces are trimmed from slots', () => {
+    const utterance = 'My name is[ Kanye    ](me) and your name is[   Jay ](you).'
+    // raw            .012345678901234567890123456789012345678901234567890123.
+    const res = parseUtterance(utterance)
+    expect(res.utterance).toEqual('My name is Kanye     and your name is   Jay .')
+    expect(res.parsedSlots.length).toEqual(2)
+    expect(res.parsedSlots[0].name).toEqual('me')
+    expect(res.parsedSlots[0].value).toEqual('Kanye')
+    expect(res.parsedSlots[0].rawPosition).toEqual({ start: 10, end: 26 })
+    expect(res.parsedSlots[0].cleanPosition).toEqual({ start: 10, end: 15 })
+    expect(res.parsedSlots[1].name).toEqual('you')
+    expect(res.parsedSlots[1].value).toEqual('Jay')
+    expect(res.parsedSlots[1].rawPosition).toEqual({ start: 43, end: 57 })
+    expect(res.parsedSlots[1].cleanPosition).toEqual({ start: 37, end: 40 })
+    expect(res.parts).toHaveLength(7)
+    expect(res.parts[4].text).toEqual('Jay')
   })
 })

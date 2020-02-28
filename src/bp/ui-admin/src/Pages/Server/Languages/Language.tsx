@@ -1,4 +1,5 @@
 import { Button, Position, ProgressBar, Tooltip } from '@blueprintjs/core'
+import { confirmDialog } from 'botpress/shared'
 import React, { FC, SFC, useState } from 'react'
 
 import api from '../../../api'
@@ -11,15 +12,15 @@ interface Props {
     name: string
     size?: number
   }
-  installed: boolean
+  installed?: boolean
   allowActions: boolean
-  loaded: boolean
+  loaded?: boolean
   languageSource: LanguageSource
   downloadProgress?: any
 }
 
 const units = ['bytes', 'Kb', 'Mb', 'Gb', 'Tb']
-function bytesToFormatedString(bytes: number): string {
+function bytesToFormattedString(bytes: number): string {
   const power = Math.log2(bytes)
   const unitNumber = Math.min(Math.floor(power / 10), 4)
   const mantisse = bytes / Math.pow(2, unitNumber * 10)
@@ -28,9 +29,9 @@ function bytesToFormatedString(bytes: number): string {
 
 const DownloadProgress: SFC<{ current: number; total: number }> = props => {
   const value = props.current / props.total
-  const formatedLoadingState = `${bytesToFormatedString(props.current)} / ${bytesToFormatedString(props.total)}`
+  const formattedLoadingState = `${bytesToFormattedString(props.current)} / ${bytesToFormattedString(props.total)}`
   return (
-    <Tooltip content={formatedLoadingState} position={Position.TOP}>
+    <Tooltip content={formattedLoadingState} position={Position.TOP}>
       <div style={{ width: '250px' }}>
         <ProgressBar value={value} />
       </div>
@@ -42,7 +43,11 @@ const Language: FC<Props> = props => {
   const [modelLoading, setLoading] = useState(false)
 
   const deleteLanguage = async () => {
-    if (window.confirm(`Are you sure that you want to delete ${props.language.name} from the server?`)) {
+    if (
+      await confirmDialog(`Are you sure that you want to delete ${props.language.name} from the server?`, {
+        acceptLabel: 'Delete'
+      })
+    ) {
       await api.getSecured().post(`/admin/languages/${props.language.code}/delete`)
     }
   }
@@ -62,7 +67,7 @@ const Language: FC<Props> = props => {
     }
   }
 
-  const requireFlag = code => {
+  const requireFlag = (code: string) => {
     try {
       return require(`../../../media/flags/${code}.svg`)
     } catch {

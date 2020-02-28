@@ -3,6 +3,7 @@ import _ from 'lodash'
 import Mustache from 'mustache'
 import React, { Component } from 'react'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
+import Markdown from 'react-markdown'
 import { connect } from 'react-redux'
 import { fetchContentItem, refreshFlowsLinks } from '~/actions'
 
@@ -86,8 +87,45 @@ class ActionItem extends Component<Props> {
 
     const item = this.props.items[this.state.itemId]
 
-    const preview = item && item.previews && item.previews[this.props.contentLang]
-    const textContent = (item && `${item.schema && item.schema.title} | ${preview}`) || ''
+    const preview = item?.previews?.[this.props.contentLang]
+    const className = classnames(style.name, {
+      [style.missingTranslation]: preview?.startsWith('(missing translation) ')
+    })
+
+    if (preview && item?.schema?.title === 'Image') {
+      const markdownRender = (
+        <Markdown
+          source={preview}
+          renderers={{
+            image: props => <img {...props} className={style.imagePreview} />,
+            link: props => (
+              <a href={props.href} target="_blank">
+                {props.children}
+              </a>
+            )
+          }}
+        />
+      )
+
+      if (this.props.layoutv2) {
+        return (
+          <div className={classnames(this.props.className, style['action-item'])}>
+            {markdownRender}
+            {this.props.children}
+          </div>
+        )
+      }
+
+      return (
+        <div className={classnames(this.props.className, style['action-item'], style.msg)}>
+          <span className={style.icon}>💬</span>
+          {markdownRender}
+          {this.props.children}
+        </div>
+      )
+    }
+
+    const textContent = (item && `${item.schema?.title} | ${preview}`) || ''
     const vars = {}
 
     const stripDots = str => str.replace(/\./g, '--dot--')
@@ -97,10 +135,6 @@ class ActionItem extends Component<Props> {
       const name = stripDots(x.replace(/{|}/g, ''))
       vars[name] = '<span class="var">' + x + '</span>'
       return '{' + stripDots(x) + '}'
-    })
-
-    const className = classnames(style.name, {
-      [style.missingTranslation]: preview && preview.startsWith('(missing translation) ')
     })
 
     const mustached = restoreDots(Mustache.render(htmlTpl, vars))
@@ -129,7 +163,4 @@ class ActionItem extends Component<Props> {
 const mapStateToProps = state => ({ items: state.content.itemsById })
 const mapDispatchToProps = { fetchContentItem, refreshFlowsLinks }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withLanguage(ActionItem))
+export default connect(mapStateToProps, mapDispatchToProps)(withLanguage(ActionItem))

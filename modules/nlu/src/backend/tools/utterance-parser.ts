@@ -15,9 +15,15 @@ export interface ParsedSlot {
   }
 }
 
+export interface UtterancePart {
+  text: string
+  slot?: ParsedSlot
+}
+
 export interface ParsedUtterance {
   utterance: string
   parsedSlots: ParsedSlot[]
+  parts: UtterancePart[]
 }
 
 export const extractSlots = (utterance: string): RegExpExecArray[] => {
@@ -36,7 +42,21 @@ export const parseUtterance = (utterance: string): ParsedUtterance => {
 
   const parsed = slotMatches.reduce(
     (acc, { 0: fullMatch, 1: value, 2: name, index }) => {
-      const clean = acc.utterance + utterance.slice(cursor, index) + value
+      let inBetweenText = utterance.slice(cursor, index)
+      let trailingText = ''
+
+      const nbPrefixSpaces = value.length - value.trimLeft().length
+      const nbTrailingSpaces = value.length - value.trimRight().length
+      if (nbPrefixSpaces) {
+        inBetweenText += ' '.repeat(nbPrefixSpaces)
+        value = value.trimLeft()
+      }
+      if (nbTrailingSpaces) {
+        trailingText += ' '.repeat(nbTrailingSpaces)
+        value = value.trimRight()
+      }
+
+      const clean = acc.utterance + inBetweenText + value + trailingText
       cursor = index + fullMatch.length // index is stateful since its a general regex
       const parsedSlot: ParsedSlot = {
         name,
@@ -46,20 +66,27 @@ export const parseUtterance = (utterance: string): ParsedUtterance => {
           end: cursor
         },
         cleanPosition: {
-          start: clean.length - value.length,
-          end: clean.length
+          start: clean.length - value.length - nbTrailingSpaces - nbPrefixSpaces,
+          end: clean.length - nbPrefixSpaces - nbTrailingSpaces
         }
       }
       return {
         utterance: clean,
-        parsedSlots: [...acc.parsedSlots, parsedSlot]
+        parsedSlots: [...acc.parsedSlots, parsedSlot],
+        parts: [
+          ...acc.parts,
+          { text: inBetweenText },
+          { text: value, slot: parsedSlot },
+          { text: trailingText }
+        ].filter(x => x.text.length)
       }
     },
-    { utterance: '', parsedSlots: [] } as ParsedUtterance
+    { utterance: '', parsedSlots: [], parts: [] } as ParsedUtterance
   )
 
   if (cursor < utterance.length) {
     parsed.utterance += utterance.slice(cursor)
+    parsed.parts = [...parsed.parts, { text: utterance.slice(cursor) }]
   }
   return parsed
 }

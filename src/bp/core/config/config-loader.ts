@@ -15,7 +15,7 @@ import { BotpressConfig } from './botpress.config'
 
 /**
  * These properties should not be considered when calculating the config hash
- * They are always read from the configuraiton file and can be dynamically changed
+ * They are always read from the configuration file and can be dynamically changed
  */
 const removeDynamicProps = config => _.omit(config, ['superAdmins'])
 
@@ -97,13 +97,13 @@ export class ConfigProvider {
   }
 
   public async createDefaultConfigIfMissing() {
-    if (!(await this.ghostService.global().fileExists('/', 'botpress.config.json'))) {
-      await this._copyConfigSchemas()
+    await this._copyConfigSchemas()
 
+    if (!(await this.ghostService.global().fileExists('/', 'botpress.config.json'))) {
       const botpressConfigSchema = await this.ghostService
         .root()
         .readFileAsObject<any>('/', 'botpress.config.schema.json')
-      const defaultConfig = defaultJsonBuilder(botpressConfigSchema)
+      const defaultConfig: BotpressConfig = defaultJsonBuilder(botpressConfigSchema)
 
       const config = {
         $schema: `../botpress.config.schema.json`,
@@ -120,8 +120,10 @@ export class ConfigProvider {
     const schemasToCopy = ['botpress.config.schema.json', 'bot.config.schema.json']
 
     for (const schema of schemasToCopy) {
-      const schemaContent = fs.readFileSync(path.join(__dirname, 'schemas', schema))
-      await this.ghostService.root().upsertFile('/', schema, schemaContent)
+      if (!(await this.ghostService.root().fileExists('/', schema))) {
+        const schemaContent = fs.readFileSync(path.join(__dirname, 'schemas', schema))
+        await this.ghostService.root().upsertFile('/', schema, schemaContent)
+      }
     }
   }
 

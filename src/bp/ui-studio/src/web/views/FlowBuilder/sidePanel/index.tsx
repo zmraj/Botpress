@@ -4,7 +4,6 @@ import reject from 'lodash/reject'
 import values from 'lodash/values'
 import React, { FC, useState } from 'react'
 import { connect } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
 import { deleteFlow, duplicateFlow, renameFlow } from '~/actions'
 import { history } from '~/components/Routes'
 import { SearchBar, SidePanel, SidePanelSection } from '~/components/Shared/Interface'
@@ -41,7 +40,7 @@ const SidePanelContent: FC<Props> = props => {
   const [flowAction, setFlowAction] = useState<any>('create')
   const [filter, setFilter] = useState()
 
-  const goToFlow = flow => history.push(`/flows/${flow.replace(/\.flow\.json/, '')}`)
+  const goToFlow = flow => history.push(`/flows/${flow.replace(/\.flow\.json$/i, '')}`)
 
   const normalFlows = reject(props.flows, x => x.name.startsWith('skills/'))
   const flowsName = normalFlows.map(x => {
@@ -102,7 +101,6 @@ const SidePanelContent: FC<Props> = props => {
           </SidePanelSection>
         </React.Fragment>
       )}
-
       <FlowNameModal
         action={flowAction}
         originalName={flowName}
@@ -132,7 +130,4 @@ const mapDispatchToProps = {
   renameFlow
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SidePanelContent)
+export default connect(mapStateToProps, mapDispatchToProps)(SidePanelContent)

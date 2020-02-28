@@ -17,6 +17,7 @@ declare global {
     BOT_ID: string
     BP_BASE_PATH: string
     SEND_USAGE_STATS: boolean
+    IS_BOT_MOUNTED: boolean
     BOT_LOCKED: boolean
     WORKSPACE_ID: string
     BOTPRESS_FLOW_EDITOR_DISABLED: boolean
@@ -24,6 +25,7 @@ declare global {
     ANALYTICS_ID: string
     UUID: string
     BP_STORAGE: BPStorage
+    USE_SESSION_STORAGE: boolean
     botpress: {
       [moduleName: string]: any
     }

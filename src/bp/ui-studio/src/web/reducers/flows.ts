@@ -536,9 +536,13 @@ reducer = reduceReducers(
           return {
             ...node,
             next: payload.transitions.map(transition => {
-              const prevTransition = node.next.find(({ condition }) => condition === transition.condition)
+              const prevTransition = node.next.find(
+                ({ condition, caption }) => condition === transition.condition || caption === transition.caption
+              )
+
               return { ...transition, node: (prevTransition || {}).node || '' }
-            })
+            }),
+            lastModified: new Date()
           }
         })
 
@@ -665,7 +669,10 @@ reducer = reduceReducers(
       [requestPasteFlowNode]: (state, { payload: { x, y } }) => {
         const currentFlow = state.flowsByName[state.currentFlow]
         const newNodeId = prettyId()
-        const name = copyName(currentFlow.nodes.map(({ name }) => name), state.nodeInBuffer.name)
+        const name = copyName(
+          currentFlow.nodes.map(({ name }) => name),
+          state.nodeInBuffer.name
+        )
         return {
           ...state,
           currentFlowNode: newNodeId,

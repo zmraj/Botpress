@@ -33,6 +33,7 @@ const setup = async bp => {
 }
 
 const generateFlow = async (data: any, metadata: sdk.FlowGeneratorMetadata): Promise<sdk.FlowGenerationResult> => {
+  const { randomId } = data
   const hardRetryLimit = 10
   const nbMaxRetries = Math.min(Number(data.config.nbMaxRetries), hardRetryLimit)
   const repeatQuestion = yn(data.config.repeatChoicesOnInvalid)
@@ -72,22 +73,26 @@ const generateFlow = async (data: any, metadata: sdk.FlowGeneratorMetadata): Pro
         {
           type: sdk.NodeActionType.RunAction,
           name: 'basic-skills/choice_parse_answer',
-          args: data
+          args: { ...data, randomId }
         }
       ],
-      next: [{ condition: `temp['skill-choice-valid'] === true`, node: '#' }, { condition: 'true', node: 'invalid' }]
+      next: [
+        { condition: `temp['skill-choice-valid-${randomId}'] === true`, node: '#' },
+        { condition: 'true', node: 'invalid' }
+      ]
     },
     {
       name: 'invalid',
       onEnter: [
         {
           type: sdk.NodeActionType.RunAction,
-          name: 'basic-skills/choice_invalid_answer'
+          name: 'basic-skills/choice_invalid_answer',
+          args: { randomId }
         }
       ],
       next: [
         {
-          condition: `Number(temp['skill-choice-invalid-count']) >= Number(${nbMaxRetries})`,
+          condition: `Number(temp['skill-choice-invalid-count-${randomId}']) > Number(${nbMaxRetries})`,
           node: '#'
         },
         { condition: 'true', node: 'sorry' }
@@ -101,7 +106,7 @@ const generateFlow = async (data: any, metadata: sdk.FlowGeneratorMetadata): Pro
   ]
 
   return {
-    transitions: createTransitions(data),
+    transitions: createTransitions(data, randomId),
     flow: {
       nodes: nodes,
       catchAll: {
@@ -111,13 +116,13 @@ const generateFlow = async (data: any, metadata: sdk.FlowGeneratorMetadata): Pro
   }
 }
 
-const createTransitions = data => {
+const createTransitions = (data, randomId) => {
   const transitions: sdk.NodeTransition[] = Object.keys(data.keywords).map(choice => {
     const choiceShort = choice.length > 8 ? choice.substr(0, 7) + '...' : choice
 
     return {
       caption: `User picked [${choiceShort}]`,
-      condition: `temp['skill-choice-ret'] == "${choice}"`,
+      condition: `temp['skill-choice-ret-${randomId}'] == "${choice}"`,
       node: ''
     }
   })

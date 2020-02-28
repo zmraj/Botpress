@@ -9,6 +9,7 @@ import ActionService from './action/action-service'
 import { AlertingService, CEAlertingService } from './alerting-service'
 import { AuthStrategies, CEAuthStrategies } from './auth-strategies'
 import AuthService from './auth/auth-service'
+import { BotMonitoringService } from './bot-monitoring-service'
 import { BotService } from './bot-service'
 import { CMSService } from './cms'
 import { ConverseService } from './converse'
@@ -27,6 +28,7 @@ import { NotificationsService } from './notification/service'
 import { Queue } from './queue'
 import MemoryQueue from './queue/memory-queue'
 import RealtimeService from './realtime'
+import { StatsService } from './stats-service'
 
 const ServicesContainerModule = new ContainerModule((bind: interfaces.Bind) => {
   bind<CMSService>(TYPES.CMSService)
@@ -60,6 +62,10 @@ const ServicesContainerModule = new ContainerModule((bind: interfaces.Bind) => {
     .to(CEAlertingService)
     .inSingletonScope()
     .when(() => !process.CLUSTER_ENABLED || !process.IS_PRO_ENABLED)
+
+  bind<BotMonitoringService>(TYPES.BotMonitoringService)
+    .to(BotMonitoringService)
+    .inSingletonScope()
 
   bind<AuthStrategies>(TYPES.AuthStrategies)
     .to(CEAuthStrategies)
@@ -120,6 +126,10 @@ const ServicesContainerModule = new ContainerModule((bind: interfaces.Bind) => {
 
   bind<BotService>(TYPES.BotService)
     .to(BotService)
+    .inSingletonScope()
+
+  bind<StatsService>(TYPES.StatsService)
+    .to(StatsService)
     .inSingletonScope()
 })
 

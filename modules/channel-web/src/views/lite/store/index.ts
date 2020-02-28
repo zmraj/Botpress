@@ -6,7 +6,7 @@ import { InjectedIntl } from 'react-intl'
 
 import WebchatApi from '../core/api'
 import constants from '../core/constants'
-import { getUserLocale } from '../translations'
+import { getUserLocale, initializeLocale } from '../translations'
 import {
   BotInfo,
   Config,
@@ -16,13 +16,16 @@ import {
   MessageWrapper,
   StudioConnector
 } from '../typings'
-import { downloadFile } from '../utils'
+import { downloadFile, trackMessage } from '../utils'
 
 import ComposerStore from './composer'
 import ViewStore from './view'
 
 /** Includes the partial definitions of all classes */
 export type StoreDef = Partial<RootStore> & Partial<ViewStore> & Partial<ComposerStore> & Partial<Config>
+
+initializeLocale()
+const chosenLocale = getUserLocale()
 
 class RootStore {
   public bp: StudioConnector
@@ -47,6 +50,9 @@ class RootStore {
   @observable
   public preferredLanguage: string
 
+  @observable
+  public isInitialized: boolean
+
   public intl: InjectedIntl
 
   public isBotTyping = observable.box(false)
@@ -54,6 +60,9 @@ class RootStore {
   /** When a wrapper is defined, every messages are wrapped by the specified component */
   @observable
   public messageWrapper: MessageWrapper | undefined
+
+  @observable
+  public botUILanguage: string = chosenLocale
 
   constructor({ fullscreen }) {
     this.composer = new ComposerStore(this)
@@ -67,39 +76,37 @@ class RootStore {
 
   @computed
   get isConversationStarted(): boolean {
-    return this.currentConversation && !!this.currentConversation.messages.length
+    return !!this.currentConversation?.messages.length
   }
 
   @computed
   get botName(): string {
-    return (this.config && this.config.botName) || (this.botInfo && this.botInfo.name) || 'Bot'
+    return this.config?.botName || this.botInfo?.name || 'Bot'
   }
 
   @computed
   get hasBotInfoDescription(): boolean {
-    return this.config.botConvoDescription && !!this.config.botConvoDescription.length
+    return !!this.config.botConvoDescription?.length
   }
 
   @computed
   get botAvatarUrl(): string {
-    return (
-      (this.botInfo && this.botInfo.details && this.botInfo.details.avatarUrl) || (this.config && this.config.avatarUrl)
-    )
+    return this.botInfo?.details?.avatarUrl || this.config?.avatarUrl
   }
 
   @computed
   get escapeHTML(): boolean {
-    return this.botInfo && this.botInfo.security && this.botInfo.security.escapeHTML
+    return this.botInfo?.security?.escapeHTML
   }
 
   @computed
   get currentMessages(): Message[] {
-    return this.currentConversation && this.currentConversation.messages
+    return this.currentConversation?.messages
   }
 
   @computed
   get currentConversationId(): number | undefined {
-    return this.currentConversation && this.currentConversation.id
+    return this.currentConversation?.id
   }
 
   @action.bound
@@ -135,16 +142,18 @@ class RootStore {
   @action.bound
   async initializeChat(): Promise<void> {
     try {
-      await this.fetchBotInfo()
       await this.fetchConversations()
       await this.fetchConversation()
+      runInAction('-> setInitialized', () => {
+        this.isInitialized = true
+      })
     } catch (err) {
       console.log('Error while fetching data, creating new convo...', err)
       await this.createConversation()
     }
 
-    await this.sendUserVisit()
     await this.fetchPreferences()
+    await this.sendUserVisit()
   }
 
   @action.bound
@@ -205,7 +214,9 @@ class RootStore {
     if (!userMessage || !userMessage.length) {
       return
     }
+
     await this.sendData({ type: 'text', text: userMessage })
+    trackMessage('sent')
 
     this.composer.addMessageToHistory(userMessage)
     this.composer.updateMessage('')
@@ -224,6 +235,11 @@ class RootStore {
     const newId = await this.api.createConversation()
     await this.fetchConversations()
     await this.fetchConversation(newId)
+  }
+
+  @action.bound
+  async setReference(): Promise<void> {
+    return this.api.setReference(this.config.reference, this.currentConversationId)
   }
 
   @action.bound
@@ -301,6 +317,13 @@ class RootStore {
     this.config.containerWidth && this.view.setContainerWidth(this.config.containerWidth)
     this.view.disableAnimations = this.config.disableAnimations
     this.config.showPoweredBy ? this.view.showPoweredBy() : this.view.hidePoweredBy()
+    this.config.locale && this.updateBotUILanguage(getUserLocale(this.config.locale))
+
+    try {
+      window.USE_SESSION_STORAGE = this.config.useSessionStorage
+    } catch {
+      console.error('Could not set USE_SESSION_STORAGE')
+    }
 
     this.api.updateAxiosConfig({ botId: this.config.botId, externalAuthToken: this.config.externalAuthToken })
     this.api.updateUserId(this.config.userId)
@@ -347,6 +370,14 @@ class RootStore {
 
     clearInterval(this._typingInterval)
     this._typingInterval = undefined
+  }
+
+  @action.bound
+  updateBotUILanguage(lang: string): void {
+    runInAction('-> setBotUILanguage', () => {
+      this.botUILanguage = lang
+      localStorage.setItem('bp/channel-web/user-lang', lang)
+    })
   }
 
   /** Returns the current conversation ID, or the last one if it didn't expired. Otherwise, returns nothing. */

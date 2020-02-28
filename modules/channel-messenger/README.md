@@ -7,7 +7,7 @@ Messenger requires you to have a Facebook App and a Facebook Page to setup your 
 - [Create a Facebook App](https://developers.facebook.com/docs/apps/)
 - [Create a Facebook Page](https://www.facebook.com/pages/creation/)
 - An HTTPS Endpoint to your bot
-  - Create an HTTPS tunnel to your marchine using Ngrok. [**Tutorial**](https://api.slack.com/tutorials/tunneling-with-ngrok)
+  - Create an HTTPS tunnel to your machine using Ngrok. [**Tutorial**](https://api.slack.com/tutorials/tunneling-with-ngrok)
   - Using Nginx and Let's Encrypt. [**Tutorial**](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04)
 
 ## Setup
@@ -17,11 +17,13 @@ Messenger requires you to have a Facebook App and a Facebook Page to setup your 
 #### Enable the Messenger Channel
 
 - Run Botpress Server a first time to auto-generate the global configuration file
+- Enable `channel-messenger` module in the global configuration file
 - Head over to `data/global/config/channel-messenger.json`. If it doesn't exist, restart Botpress Server.
 - Set the following properties:
+  - `enabled` to `true`
   - `appSecret`. You will find this value in your Facebook App page.
   - `verifyToken`. This is a random string you need to generate and keep secret. You'll need to copy/paste this token in the Facebook App portal when setting up your webhook.
-- Make sure you have an HTTPS url pointing to your Botpress Server and set the [`EXTERNAL_URL`](https://botpress.io/docs/manage/configuration/#exposing-your-bot-on-the-internet) environment variable
+- Make sure you have an HTTPS url pointing to your Botpress Server and set the [`EXTERNAL_URL`](https://botpress.com/docs/manage/configuration#exposing-your-bot-on-the-internet) environment variable
 - Restart Botpress Server to reload the configuration
 - Setup your webhook (see below)
 
@@ -44,7 +46,7 @@ Head over to `data/bots/<your_bot>/config/channel-messenger.json` and create the
 
 You will need to setup the following properties:
 
-- `accessToken` has to be set to your [Page Access Token](https://developers.facebook.com/docs/messenger-platform/getting-started/app-setup). [Official Reference](https://developers.facebook.com/docs/facebook-login/access-tokens/#pagetokens)
+- `accessToken` has to be set to your [Page Access Token](https://developers.facebook.com/docs/messenger-platform/getting-started/app-setup). [Official Reference](https://developers.facebook.com/docs/facebook-login/access-tokens#pagetokens)
 - `enabled` has to be set to `true`
 
 Restart Botpress Server to reload the configuration.

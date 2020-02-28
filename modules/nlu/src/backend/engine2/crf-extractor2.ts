@@ -3,11 +3,11 @@ import fs from 'fs'
 import _ from 'lodash'
 import tmp from 'tmp'
 
-import { ExtractedSlot, Intent, Utterance, UtteranceToken } from './engine2'
-import { BIO } from '../typings'
+import { Intent, SlotExtractionResult } from '../typings'
 
 import * as featurizer from './featurizer2'
 import * as labeler from './labeler2'
+import Utterance, { UtteranceToken } from './utterance'
 
 const debug = DEBUG('nlu').sub('slots')
 const debugTrain = debug.sub('train')
@@ -66,7 +66,9 @@ export default class CRFExtractor2 {
 
     for (const intent of intents) {
       for (const utterance of intent.utterances) {
-        const features: string[][] = utterance.tokens.map(this.tokenSliceFeatures.bind(this, intent, utterance, false))
+        const features: string[][] = utterance.tokens
+          .filter(x => !x.isSpace)
+          .map(this.tokenSliceFeatures.bind(this, intent, utterance, false))
         const labels = labeler.labelizeUtterance(utterance)
 
         trainer.append(features, labels)
@@ -82,15 +84,25 @@ export default class CRFExtractor2 {
     isPredict: boolean,
     token: UtteranceToken
   ): string[] {
-    const prevTok = utterance.tokens[token.index - 1]
-    const nexTok = utterance.tokens[token.index + 1]
+    const previous = utterance.tokens.filter(t => t.index < token.index && !t.isSpace).slice(-2)
+    const next = utterance.tokens.filter(t => t.index > token.index && !t.isSpace).slice(0, 1)
 
-    const prevFeats = this._getTokenFeatures(intent, utterance, prevTok, isPredict).filter(f => f.name !== 'quartile')
+    const prevFeats = previous.map(t =>
+      this._getTokenFeatures(intent, utterance, t, isPredict)
+        .filter(f => f.name !== 'quartile')
+        .reverse()
+    )
     const current = this._getTokenFeatures(intent, utterance, token, isPredict).filter(f => f.name !== 'cluster')
-    const nextFeats = this._getTokenFeatures(intent, utterance, nexTok, isPredict).filter(f => f.name !== 'quartile')
+    const nextFeats = next.map(t =>
+      this._getTokenFeatures(intent, utterance, t, isPredict).filter(f => f.name !== 'quartile')
+    )
 
-    const prevPairs = featurizer.getFeatPairs(prevFeats, current, ['word', 'vocab', 'weight'])
-    const nextPairs = featurizer.getFeatPairs(current, nextFeats, ['word', 'vocab', 'weight'])
+    const prevPairs = prevFeats.length
+      ? featurizer.getFeatPairs(prevFeats[0], current, ['word', 'vocab', 'weight', 'POS'])
+      : []
+    const nextPairs = nextFeats.length
+      ? featurizer.getFeatPairs(current, nextFeats[0], ['word', 'vocab', 'weight', 'POS'])
+      : []
 
     const intentFeat = featurizer.getIntentFeature(intent)
     const bos = token.isBOS ? ['__BOS__'] : []
@@ -99,9 +111,9 @@ export default class CRFExtractor2 {
     return [
       ...bos,
       featurizer.featToCRFsuiteAttr('', intentFeat),
-      ...prevFeats.map(featurizer.featToCRFsuiteAttr.bind(this, 'w[-1]')),
+      ..._.flatten(prevFeats.map((feat, idx) => feat.map(featurizer.featToCRFsuiteAttr.bind(this, `w[-${idx + 1}]`)))),
       ...current.map(featurizer.featToCRFsuiteAttr.bind(this, 'w[0]')),
-      ...nextFeats.map(featurizer.featToCRFsuiteAttr.bind(this, 'w[1]')),
+      ..._.flatten(nextFeats.map((feat, idx) => feat.map(featurizer.featToCRFsuiteAttr.bind(this, `w[${idx + 1}]`)))),
       ...prevPairs.map(featurizer.featToCRFsuiteAttr.bind(this, 'w[-1]|w[0]')),
       ...nextPairs.map(featurizer.featToCRFsuiteAttr.bind(this, 'w[0]|w[1]')),
       ...eos
@@ -123,56 +135,34 @@ export default class CRFExtractor2 {
       featurizer.getClusterFeat(token),
       featurizer.getWordWeight(token),
       featurizer.getInVocabFeat(token, intent),
-      featurizer.getSpaceFeat(token),
+      featurizer.getSpaceFeat(utterance.tokens[token.index - 1]),
       featurizer.getAlpha(token),
       featurizer.getNum(token),
       featurizer.getSpecialChars(token),
       featurizer.getWordFeat(token, isPredict),
+      featurizer.getPOSFeat(token),
       ...featurizer.getEntitiesFeats(token, intent.slot_entities, isPredict)
     ].filter(_.identity) // some features can be undefined
   }
 
-  async extract(
-    utterance: Utterance,
-    intent: Intent<Utterance>
-  ): Promise<{ slot: ExtractedSlot; start: number; end: number }[]> {
-    const features: string[][] = utterance.tokens.map(this.tokenSliceFeatures.bind(this, intent, utterance, true))
+  getSequenceFeatures(intent: Intent<Utterance>, utterance: Utterance, isPredict: boolean): string[][] {
+    return _.chain(utterance.tokens)
+      .filter(t => !t.isSpace)
+      .map(t => this.tokenSliceFeatures(intent, utterance, isPredict, t))
+      .value()
+  }
+
+  async extract(utterance: Utterance, intent: Intent<Utterance>): Promise<SlotExtractionResult[]> {
+    const features = this.getSequenceFeatures(intent, utterance, true)
     debugExtract('vectorize', features)
 
-    const predictions = this._crfTagger
-      .marginal(features)
+    const predictions = this._crfTagger.marginal(features)
+    debugExtract('slot crf predictions', predictions)
+
+    return _.chain(predictions)
       .map(labeler.predictionLabelToTagResult)
-      .map(res => labeler.swapInvalidTags(res, intent))
-
-    // move this into labeler ?
-    return _.zip(utterance.tokens, predictions)
-      .filter(([token, tag]) => tag.tag !== BIO.OUT)
-      .reduce(
-        (combined, [token, tag]) => {
-          const prev = _.last(combined)
-          const shouldConcatWithPrev = tag.tag === BIO.INSIDE && _.get(prev, 'slot.name') === tag.name
-
-          if (shouldConcatWithPrev) {
-            prev.slot.source += token.toString()
-            prev.end += token.value.length
-
-            return [...combined.slice(0, -1), prev]
-          } else {
-            return [
-              ...combined,
-              {
-                slot: {
-                  name: tag.name,
-                  confidence: tag.probability,
-                  source: token.toString()
-                },
-                start: token.offset,
-                end: token.offset + token.value.length
-              }
-            ]
-          }
-        },
-        [] as { slot: ExtractedSlot; start: number; end: number }[]
-      )
+      .map(tagRes => labeler.removeInvalidTagsForIntent(intent, tagRes))
+      .thru(tagRess => labeler.makeExtractedSlots(intent, utterance, tagRess))
+      .value() as SlotExtractionResult[]
   }
 }

@@ -11,9 +11,9 @@ You may wish to make your bot act proactively on your website in response to som
 
 ### Send an event from the webpage
 
-First you need to open the webchat (either manually or programatically) and then send an event from the webpage.
+First you need to open the webchat (either manually or programmatically) and then send an event from the webpage.
 
-> 📖 How do I open the webchat? Please refer to the [channel-web](../../channels/web#embedding) section.
+> 📖 How do I open the webchat? Please refer to the [channel-web](../channels/web#embedding) section.
 
 ```js
 window.botpressWebChat.sendEvent({
@@ -31,7 +31,7 @@ The property `type: 'proactive-trigger'` is used to identify the event so we can
 
 This event will be dispatched to the bot so you need to add a handler for it. If this event is not handled, it will be interpreted as a user message.
 
-This snippet should be added to the [before_incoming_middleware hook](../../main/code#before-incoming-middleware):
+This snippet should be added to the [before_incoming_middleware hook](../main/code#before-incoming-middleware):
 
 ```js
 // Catch the event sent from the webpage
@@ -55,43 +55,6 @@ There's currently 3 events that can be caught in your page :
 ## Common use cases
 
 Here are some examples of how can you use webchat events in your page.
-
-### Send message on page load
-
-This will send an event everytime the page is loaded.
-
-Use this code in your `index.html`:
-
-```html
-<html>
-  <head>
-    <title>Embedded Webchat</title>
-    <script src="/assets/modules/channel-web/inject.js"></script>
-  </head>
-
-  <body>
-    This is an example of embedded webchat
-  </body>
-
-  <script>
-    // Initialize the chat widget
-    // Change the `botId` with the Id of the bot that should respond to the chat
-    window.botpressWebChat.init({
-      host: 'http://localhost:3000',
-      botId: 'welcome-bot'
-    })
-
-    // Wait for the chat to load
-    setTimeout(function() {
-      window.botpressWebChat.sendEvent({
-        type: 'proactive-trigger',
-        channel: 'web',
-        payload: { text: 'fake message' }
-      })
-    }, 1000)
-  </script>
-</html>
-```
 
 ### Send message when the webchat is loaded
 
@@ -196,7 +159,7 @@ if (event.type === 'proactive-trigger') {
 }
 ```
 
-Here we're using the [replyToEvent](https://botpress.io/reference/modules/_botpress_sdk_.events.html#replytoevent) function from the SDK to reply to the current event and [renderElement](https://botpress.io/reference/modules/_botpress_sdk_.cms.html#renderelement) to render our custom content.
+Here we're using the [replyToEvent](https://botpress.com/reference/modules/_botpress_sdk_.events.html#replytoevent) function from the SDK to reply to the current event and [renderElement](https://botpress.com/reference/modules/_botpress_sdk_.cms.html#renderelement) to render our custom content.
 
 ### Send proactive only to new users
 
@@ -208,7 +171,7 @@ When you want to respond only to new users, you have to check if their session i
 ```js
 if (event.type === 'proactive-trigger') {
   // We only want to trigger a proactive message when the session is new,
-  // otherwise the conversation will progress everytime the page is refreshed.
+  // otherwise the conversation will progress every time the page is refreshed.
   if (event.state.session.lastMessages.length) {
     // This will tell the dialog engine to skip the processing of this event.
     event.setFlag(bp.IO.WellKnownFlags.SKIP_DIALOG_ENGINE, true)

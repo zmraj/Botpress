@@ -1,16 +1,25 @@
-import Promise from 'bluebird'
+import { ActionBuilderProps, ContentElement } from 'botpress/sdk'
 import classnames from 'classnames'
+import { FlowView, NodeView } from 'common/typings'
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { Alert } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
-import { deleteContentItems, fetchContentCategories, fetchContentItems, upsertContentItem } from '~/actions'
+import {
+  deleteContentItems,
+  fetchContentCategories,
+  fetchContentItems,
+  fetchFlows,
+  getQNAContentElementUsage,
+  upsertContentItem
+} from '~/actions'
 import CreateOrEditModal from '~/components/Content/CreateOrEditModal'
 import { Container } from '~/components/Shared/Interface'
 import { isOperationAllowed } from '~/components/Shared/Utils/AccessControl'
 import DocumentationProvider from '~/components/Util/DocumentationProvider'
 import { RootReducer } from '~/reducers'
+import { FlowReducer } from '~/reducers/flows'
 import { UserReducer } from '~/reducers/user'
 
 import style from './style.scss'
@@ -26,7 +35,8 @@ class ContentView extends Component<Props, State> {
     showModal: false,
     modifyId: null,
     selectedId: 'all',
-    contentToEdit: null
+    contentToEdit: null,
+    qnaUsage: {}
   }
 
   initialized = false
@@ -41,7 +51,9 @@ class ContentView extends Component<Props, State> {
 
     if (this.canRead) {
       this.props.fetchContentCategories()
+      this.props.fetchFlows()
       this.fetchCategoryItems(this.state.selectedId)
+      this.props.getQNAContentElementUsage()
     }
   }
 
@@ -53,7 +65,7 @@ class ContentView extends Component<Props, State> {
     this.init()
   }
 
-  fetchCategoryItems(id) {
+  fetchCategoryItems(id: string) {
     if (!this.canRead) {
       return Promise.resolve()
     }
@@ -64,6 +76,42 @@ class ContentView extends Component<Props, State> {
   }
 
   currentContentType() {
+    this.props.contentItems.forEach(async (element: ContentElementUsage) => {
+      element.usage = []
+      Object.values(this.props.flows.flowsByName).forEach((flow: FlowView) => {
+        flow.nodes.forEach((node: NodeView) => {
+          const usage: ContentUsage = {
+            type: 'Flow',
+            name: flow.name,
+            node: node.name,
+            count: 0
+          }
+
+          const addUsage = (v: string | ActionBuilderProps) => {
+            if (typeof v === 'string' && v.startsWith('say #!' + element.id)) {
+              if (!usage.count) {
+                element.usage.push(usage)
+              }
+              usage.count++
+            }
+          }
+          node.onEnter?.forEach(addUsage)
+          node.onReceive?.forEach(addUsage)
+        })
+      })
+
+      if (this.props.qnaUsage) {
+        const usage = this.props.qnaUsage['#!' + element.id]
+        usage &&
+          element.usage.push({
+            type: 'Q&A',
+            id: usage.qna,
+            name: usage.qna.substr(usage.qna.indexOf('_') + 1),
+            count: usage.count
+          })
+      }
+    })
+
     return this.state.modifyId
       ? _.get(_.find(this.props.contentItems, { id: this.state.modifyId }), 'contentType')
       : this.state.selectedId
@@ -89,6 +137,7 @@ class ContentView extends Component<Props, State> {
     const contentType = this.currentContentType()
     this.props
       .upsertContentItem({ contentType, formData: this.state.contentToEdit, modifyId: this.state.modifyId })
+      .then(() => this.props.fetchContentCategories())
       .then(() => this.fetchCategoryItems(this.state.selectedId))
       .then(() => this.setState({ showModal: false }))
   }
@@ -105,7 +154,7 @@ class ContentView extends Component<Props, State> {
     this.setState({ contentToEdit: data })
   }
 
-  handleCategorySelected = id => {
+  handleCategorySelected = (id: string) => {
     this.fetchCategoryItems(id)
     this.setState({ selectedId: id })
   }
@@ -114,13 +163,13 @@ class ContentView extends Component<Props, State> {
     this.props.deleteContentItems(ids).then(() => this.fetchCategoryItems(this.state.selectedId))
   }
 
-  handleModalShowForEdit = id => {
+  handleModalShowForEdit = (id: string) => {
     const contentToEdit = _.find(this.props.contentItems, { id }).formData
     this.setState({ modifyId: id, showModal: true, contentToEdit })
   }
 
   handleRefresh = () => {
-    this.fetchCategoryItems(this.state.selectedId || 'all')
+    this.fetchCategoryItems(this.state.selectedId ?? 'all')
   }
 
   handleSearch = input => {
@@ -130,7 +179,7 @@ class ContentView extends Component<Props, State> {
 
   render() {
     const { selectedId = 'all', contentToEdit } = this.state
-    const categories = this.props.categories || []
+    const categories = this.props.categories ?? []
     const selectedCategory = _.find(categories, { id: this.currentContentType() })
 
     const classNames = classnames(style.content, 'bp-content')
@@ -140,7 +189,7 @@ class ContentView extends Component<Props, State> {
         <div className={classNames}>
           <Alert bsStyle="warning">
             <strong>We think you don&apos;t have any content types defined.</strong> Please&nbsp;
-            <a href="https://botpress.io/docs/foundamentals/content/" target="_blank" rel="noopener noreferrer">
+            <a href="https://botpress.com/docs/foundamentals/content/" target="_blank" rel="noopener noreferrer">
               <strong>read the docs</strong>
             </a>
             &nbsp;to see how you can make use of this feature.
@@ -171,12 +220,13 @@ class ContentView extends Component<Props, State> {
           handleDeleteSelected={this.handleDeleteSelected}
           handleClone={this.handleClone}
           handleSearch={this.handleSearch}
+          refreshCategories={this.props.fetchContentCategories}
         />
         {this.canEdit && (
           <CreateOrEditModal
             show={this.state.showModal}
-            schema={(selectedCategory && selectedCategory.schema.json) || {}}
-            uiSchema={(selectedCategory && selectedCategory.schema.ui) || {}}
+            schema={selectedCategory?.schema.json ?? {}}
+            uiSchema={selectedCategory?.schema.ui ?? {}}
             formData={contentToEdit}
             isEditing={this.state.modifyId !== null}
             handleCreateOrUpdate={this.handleUpsert}
@@ -193,29 +243,34 @@ class ContentView extends Component<Props, State> {
 const mapStateToProps = (state: RootReducer) => ({
   categories: state.content.categories,
   contentItems: state.content.currentItems,
-  user: state.user
+  flows: state.flows,
+  user: state.user,
+  qnaUsage: state.content.qnaUsage
 })
 
 const mapDispatchToProps = {
   fetchContentCategories,
   fetchContentItems,
+  fetchFlows,
+  getQNAContentElementUsage,
   upsertContentItem,
   deleteContentItems
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ContentView)
+export default connect(mapStateToProps, mapDispatchToProps)(ContentView)
 
 type Props = {
   fetchContentCategories: Function
   fetchContentItems: Function
+  fetchFlows: Function
+  getQNAContentElementUsage: Function
   upsertContentItem: Function
   deleteContentItems: Function
   categories: any
-  contentItems: any
+  contentItems: ContentElementUsage[]
+  flows: FlowReducer
   user: UserReducer
+  qnaUsage: ContentElementUsage[]
 } & RouteComponentProps
 
 interface State {
@@ -224,4 +279,17 @@ interface State {
   contentToEdit: object
   modifyId: string
   selectedId: string
+  qnaUsage: any
+}
+
+type ContentElementUsage = {
+  usage: ContentUsage[]
+} & ContentElement
+
+export interface ContentUsage {
+  type: string
+  id?: string
+  name: string
+  node?: string
+  count: number
 }

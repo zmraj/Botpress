@@ -8,6 +8,8 @@ import {
   closeFlowNodeProps,
   flowEditorRedo,
   flowEditorUndo,
+  refreshActions,
+  refreshIntents,
   setDiagramAction,
   switchFlow
 } from '~/actions'
@@ -15,6 +17,7 @@ import { Container } from '~/components/Shared/Interface'
 import { Timeout, toastFailure, toastInfo } from '~/components/Shared/Utils'
 import { isOperationAllowed } from '~/components/Shared/Utils/AccessControl'
 import DocumentationProvider from '~/components/Util/DocumentationProvider'
+import { isInputFocused } from '~/keyboardShortcuts'
 import { getDirtyFlows, RootReducer } from '~/reducers'
 import { UserReducer } from '~/reducers/user'
 
@@ -24,6 +27,8 @@ import { PanelPermissions } from './sidePanel'
 import { MutexInfo } from './sidePanel/Toolbar'
 import SkillsBuilder from './skills'
 import style from './style.scss'
+
+const searchTag = '#search:'
 
 type Props = {
   currentFlow: string
@@ -38,29 +43,35 @@ type Props = {
   clearErrorSaveFlows: () => void
   clearFlowsModification: () => void
   closeFlowNodeProps: () => void
+  refreshActions: () => void
+  refreshIntents: () => void
   flowsByName: _.Dictionary<FlowView>
 } & RouteComponentProps
 
 interface State {
   initialized: any
   readOnly: boolean
-  pannelPermissions: PanelPermissions[]
+  panelPermissions: PanelPermissions[]
   flowPreview: boolean
   mutexInfo: MutexInfo
   showSearch: boolean
+  highlightFilter: string
 }
 
 class FlowBuilder extends Component<Props, State> {
   private diagram
   private userAllowed = false
+  private hash = this.props.location.hash
+  private highlightFilter = this.hash.startsWith(searchTag) ? this.hash.replace(searchTag, '') : ''
 
   state = {
     initialized: false,
     readOnly: false,
-    pannelPermissions: this.allPermissions,
+    panelPermissions: this.allPermissions,
     flowPreview: false,
     mutexInfo: undefined,
-    showSearch: false
+    showSearch: Boolean(this.highlightFilter),
+    highlightFilter: this.highlightFilter
   }
 
   get allPermissions(): PanelPermissions[] {
@@ -83,12 +94,14 @@ class FlowBuilder extends Component<Props, State> {
   freezeAll() {
     this.setState({
       readOnly: true,
-      pannelPermissions: []
+      panelPermissions: []
     })
   }
 
   componentDidMount() {
     this.init()
+    this.props.refreshActions()
+    this.props.refreshIntents()
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -133,7 +146,7 @@ class FlowBuilder extends Component<Props, State> {
     if (currentMutex && currentMutex.lastModifiedBy !== me && currentMutex.remainingSeconds) {
       this.setState({
         readOnly: true,
-        pannelPermissions: ['create'],
+        panelPermissions: ['create'],
         mutexInfo: { currentMutex }
       })
       return
@@ -146,7 +159,7 @@ class FlowBuilder extends Component<Props, State> {
     if (someoneElseIsEditingOtherFlow) {
       this.setState({
         readOnly: false,
-        pannelPermissions: ['create'],
+        panelPermissions: ['create'],
         mutexInfo: { someoneElseIsEditingOtherFlow: true }
       })
       return
@@ -154,23 +167,33 @@ class FlowBuilder extends Component<Props, State> {
 
     this.setState({
       readOnly: false,
-      pannelPermissions: this.allPermissions,
+      panelPermissions: this.allPermissions,
       mutexInfo: undefined
     })
   }
 
-  pushFlowState = flow => {
-    this.props.history.push(`/flows/${flow.replace(/\.flow\.json/, '')}`)
+  handleFilterChanged = ({ target: { value: highlightFilter } }) => {
+    const newUrl = this.props.location.pathname + searchTag + highlightFilter
+    this.setState({ highlightFilter })
+    this.props.history.replace(newUrl)
   }
 
-  hideSearch = () => this.setState({ showSearch: false })
+  pushFlowState = (flow) => {
+    const hash = this.state.showSearch ? searchTag + this.state.highlightFilter : ''
+    this.props.history.push(`/flows/${flow.replace(/\.flow\.json$/i, '')}${hash}`)
+  }
+
+  hideSearch = () => {
+    this.setState({ showSearch: false })
+    this.props.history.replace(this.props.location.pathname)
+  }
 
   render() {
     if (!this.state.initialized) {
       return null
     }
 
-    const { readOnly, pannelPermissions } = this.state
+    const { readOnly, panelPermissions } = this.state
 
     const keyHandlers = {
       add: e => {
@@ -188,6 +211,8 @@ class FlowBuilder extends Component<Props, State> {
       find: e => {
         e.preventDefault()
         this.setState({ showSearch: !this.state.showSearch })
+        const { pathname } = this.props.location
+        this.props.history.replace(this.state.showSearch ? pathname + searchTag + this.state.highlightFilter : pathname)
       },
       'preview-flow': e => {
         e.preventDefault()
@@ -196,6 +221,12 @@ class FlowBuilder extends Component<Props, State> {
       save: e => {
         e.preventDefault()
         toastInfo('Pssst! Flows now save automatically, no need to save anymore.', Timeout.LONG)
+      },
+      delete: e => {
+        if (!isInputFocused()) {
+          e.preventDefault()
+          this.diagram.deleteSelectedElements()
+        }
       },
       cancel: e => {
         e.preventDefault()
@@ -209,7 +240,7 @@ class FlowBuilder extends Component<Props, State> {
         <SidePanel
           readOnly={this.state.readOnly}
           mutexInfo={this.state.mutexInfo}
-          permissions={pannelPermissions}
+          permissions={panelPermissions}
           flowPreview={this.state.flowPreview}
           onCreateFlow={name => {
             this.diagram.createFlow(name)
@@ -228,6 +259,8 @@ class FlowBuilder extends Component<Props, State> {
                 this.diagram = el.getWrappedInstance()
               }
             }}
+            handleFilterChanged={this.handleFilterChanged}
+            highlightFilter={this.state.highlightFilter}
           />
         </div>
 
@@ -253,7 +286,9 @@ const mapDispatchToProps = {
   flowEditorUndo,
   flowEditorRedo,
   clearErrorSaveFlows,
-  closeFlowNodeProps
+  closeFlowNodeProps,
+  refreshActions,
+  refreshIntents
 }
 
 export default connect(

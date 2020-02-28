@@ -1,5 +1,6 @@
 import { Classes, ContextMenu, ITreeNode, Menu, MenuItem, Tree } from '@blueprintjs/core'
-import { includes, isEqual } from 'lodash'
+import { confirmDialog } from 'botpress/shared'
+import { isEqual } from 'lodash'
 import React, { Component } from 'react'
 
 import { buildFlowsTree } from './util'
@@ -9,6 +10,7 @@ export const DIRTY_ICON = 'clean'
 export const FLOW_ICON = 'document'
 export const MAIN_FLOW_ICON = 'flow-end'
 export const ERROR_FLOW_ICON = 'pivot'
+export const TIMEOUT_ICON = 'time'
 
 const lockedFlows = ['main.flow.json', 'error.flow.json']
 
@@ -32,14 +34,20 @@ export default class FlowsList extends Component<Props, State> {
     this.updateFlows()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (!isEqual(prevProps.flows, this.props.flows)) {
       this.updateFlows()
     }
 
-    if (this.props.currentFlow && prevProps.currentFlow !== this.props.currentFlow) {
+    if (this.props.currentFlow) {
+      let parentPath = this.props.currentFlow.name
+      parentPath = parentPath.substr(0, parentPath.lastIndexOf('/') + 1)
+
       traverseTree(this.state.nodes, (n: ITreeNode<NodeData>) => {
-        return (n.isSelected = n.nodeData && n.nodeData.name === this.props.currentFlow['name'])
+        if (parentPath.startsWith(n['fullPath'] + '/')) {
+          n.isExpanded = true
+        }
+        n.isSelected = n.nodeData && n.nodeData.name === this.props.currentFlow.name
       })
     }
 
@@ -58,8 +66,12 @@ export default class FlowsList extends Component<Props, State> {
     this.setState({ nodes })
   }
 
-  handleDelete = flow => {
-    if (confirm(`Are you sure you want to delete the flow ${flow.name}?`)) {
+  handleDelete = async flow => {
+    if (
+      await confirmDialog(`Are you sure you want to delete the flow ${flow.name}?`, {
+        acceptLabel: 'Delete'
+      })
+    ) {
       this.props.deleteFlow(flow.name)
     }
   }
@@ -81,18 +93,18 @@ export default class FlowsList extends Component<Props, State> {
           onClick={() => this.props.renameFlow(node.nodeData.name)}
         />
         <MenuItem
-          id="btn-delete"
-          disabled={lockedFlows.includes(node.nodeData.name) || !this.props.canDelete || this.props.readOnly}
-          icon="delete"
-          text="Delete"
-          onClick={() => this.handleDelete(node.nodeData)}
-        />
-        <MenuItem
           id="btn-duplicate"
           disabled={this.props.readOnly}
           icon="duplicate"
           text="Duplicate"
           onClick={() => this.props.duplicateFlow(node.nodeData.name)}
+        />
+        <MenuItem
+          id="btn-delete"
+          disabled={lockedFlows.includes(node.nodeData.name) || !this.props.canDelete || this.props.readOnly}
+          icon="delete"
+          text="Delete"
+          onClick={() => this.handleDelete(node.nodeData)}
         />
       </Menu>,
       { left: e.clientX, top: e.clientY }

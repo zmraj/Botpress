@@ -40,13 +40,18 @@ declare namespace NodeJS {
     CLUSTER_ENABLED: boolean
     ASSERT_LICENSED: Function
     BOTPRESS_VERSION: string
-    core_env: BotpressEnvironementVariables
+    core_env: BotpressEnvironmentVariables
     distro: OSDistribution
     BOTPRESS_EVENTS: EventEmitter
     AUTO_MIGRATE: boolean
     IS_FAILSAFE: boolean
     /** A random ID generated on server start to identify each server in a cluster */
     SERVER_ID: string
+    /**
+     * When true, global hooks and actions will be executed outside of the sandbox.
+     * This gives a boost in performances for code deemed "safe", while bot-specific content is executed in the sandbox
+     */
+    DISABLE_GLOBAL_SANDBOX: boolean
   }
 }
 
@@ -57,12 +62,21 @@ declare type PRO_FEATURES = 'seats'
 /**
  * This is a copy of process.env to add typing and documentation to variables
  */
-declare type BotpressEnvironementVariables = {
+declare type BotpressEnvironmentVariables = {
   /** Replace the path of the NodeJS Native Extensions for external OS-specific libraries such as fastText and CRFSuite */
   readonly NATIVE_EXTENSIONS_DIR?: string
 
   /** Change the BPFS storage mechanism ("database" or "disk"). Defaults to "disk" */
   readonly BPFS_STORAGE?: 'database' | 'disk'
+
+  /** The URL exposed by Botpress to external users (eg: when displaying links) */
+  readonly EXTERNAL_URL?: string
+
+  /** Use this to override the hostname that botpress will listen on (by default it's localhost) - replaces httpServer.host */
+  readonly BP_HOST?: string
+
+  /** Change the port where botpress listens. Replaces the configuration of httpServer.port */
+  readonly PORT?: number
 
   /**
    * The connection string for redis
@@ -92,12 +106,18 @@ declare type BotpressEnvironementVariables = {
   readonly BP_LICENSE_KEY?: string
 
   /**
+   * Change the host of the licensing server
+   * @default https://license.botpress.io
+   */
+  readonly BP_LICENSE_SERVER_HOST?: string
+
+  /**
    * Set this to true if you're exposing Botpress through a reverse proxy such as Nginx
    * Read more: https://expressjs.com/en/guide/behind-proxies.html
    */
   readonly REVERSE_PROXY?: string
 
-  /** Use this proxy connexion string to access external services, like Duckling and Licensing
+  /** Use this proxy connection string to access external services, like Duckling and Licensing
    *  This values overwrites the value defined in the global Botpress configuration
    * @example http://username:password@hostname:port
    */
@@ -108,6 +128,9 @@ declare type BotpressEnvironementVariables = {
    * @example bp:dialog:*,bp:nlu:intents:*
    */
   readonly DEBUG?: string
+
+  /** Enable performance hooks to track incoming and outgoing events */
+  readonly BP_DEBUG_IO?: boolean
 
   /**
    * Overrides the auto-computed `process.APP_DATA_PATH` path
@@ -150,6 +173,32 @@ declare type BotpressEnvironementVariables = {
    * This only affects fatal errors, it will not affect business rules checks (eg: licensing)
    */
   readonly BP_FAILSAFE?: boolean
+
+  /** When true, Redis will be used to keep active sessions in memory for better performances */
+  readonly USE_REDIS_STATE?: boolean
+
+  /**
+   * Experimental feature which will try to load actions locally, then from the ghost
+   */
+  readonly BP_EXPERIMENTAL_REQUIRE_BPFS?: boolean
+
+  /**
+   * When true, all hooks and GLOBAL actions are executed outside the sandbox.
+   * Can give a significant performance improvement but removes some protections.
+   */
+  readonly DISABLE_GLOBAL_SANDBOX?: boolean
+
+  /** Migration Testing: Simulate a specific version for the server, ex: 12.5.0 */
+  readonly TESTMIG_BP_VERSION?: string
+
+  /** Migration Testing: Simulate a specific version for the configuration file, ex: 12.4.0 */
+  readonly TESTMIG_CONFIG_VERSION?: string
+
+  /** Migration Testing: Set this to true to run completed migrations everytime the server starts */
+  readonly TESTMIG_IGNORE_COMPLETED?: boolean
+
+  /** Prevent running migrations (to allow manual fix of an issue which prevents server startup) */
+  readonly SKIP_MIGRATIONS?: boolean
 }
 
 interface IDebug {

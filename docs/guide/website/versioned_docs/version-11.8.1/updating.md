@@ -4,7 +4,7 @@ title: Updating to New Releases
 original_id: updating
 ---
 
-Download the new version of Botpress [here](https://botpress.io/download).
+Download the new version of Botpress [here](https://botpress.com/download).
 
 Even though Botpress Server has become much more stable, breaking changes still might occur. When they do, resolving them is often as simple as editing config files in the `/data` folder.
 
@@ -24,7 +24,7 @@ You can now follow the [migration guide](../migrate) if needed.
 
 > If you're not running in production or that your version is not listed in the [migration guide](../migrate), you can ignore this step
 
-In production, `/data` is directly persisted to the database because of [version control](../advanced/versions/). You need to pull `/data` to your filesystem.
+In production, `/data` is directly persisted to the database because of [version control](advanced/versions). You need to pull `/data` to your filesystem.
 
 Luckily, we have a tool for that:
 

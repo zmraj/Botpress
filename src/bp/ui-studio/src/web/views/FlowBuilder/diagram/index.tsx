@@ -2,7 +2,6 @@ import {
   Button,
   ContextMenu,
   ControlGroup,
-  Icon,
   InputGroup,
   Intent,
   Menu,
@@ -16,7 +15,7 @@ import _ from 'lodash'
 import React, { Component, Fragment } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import { DiagramEngine, DiagramWidget, NodeModel } from 'storm-react-diagrams'
+import { DefaultPortModel, DiagramEngine, DiagramWidget, NodeModel, PointModel } from 'storm-react-diagrams'
 import {
   buildNewSkill,
   closeFlowNodeProps,
@@ -55,10 +54,8 @@ class Diagram extends Component<Props> {
   private diagramWidget: DiagramWidget
   private diagramContainer: HTMLDivElement
   private manager: DiagramManager
-
-  state = {
-    highlightFilter: ''
-  }
+  /** Represents the source port clicked when the user is connecting a node */
+  private dragPortSource: any
 
   constructor(props) {
     super(props)
@@ -75,6 +72,10 @@ class Diagram extends Component<Props> {
     // This reference allows us to update flow nodes from widgets
     this.diagramEngine.flowBuilder = this
     this.manager = new DiagramManager(this.diagramEngine, { switchFlowNode: this.props.switchFlowNode })
+
+    if (this.props.highlightFilter) {
+      this.manager.setHighlightedNodes(this.props.highlightFilter)
+    }
 
     // @ts-ignore
     window.highlightNode = (flowName: string, nodeName: string) => {
@@ -101,13 +102,11 @@ class Diagram extends Component<Props> {
   componentDidMount() {
     this.props.fetchFlows()
     ReactDOM.findDOMNode(this.diagramWidget).addEventListener('click', this.onDiagramClick)
-    ReactDOM.findDOMNode(this.diagramWidget).addEventListener('dblclick', this.onDiagramDoubleClick)
     document.getElementById('diagramContainer').addEventListener('keydown', this.onKeyDown)
   }
 
   componentWillUnmount() {
     ReactDOM.findDOMNode(this.diagramWidget).removeEventListener('click', this.onDiagramClick)
-    ReactDOM.findDOMNode(this.diagramWidget).removeEventListener('dblclick', this.onDiagramDoubleClick)
     document.getElementById('diagramContainer').removeEventListener('keydown', this.onKeyDown)
   }
 
@@ -120,6 +119,11 @@ class Diagram extends Component<Props> {
         width: this.diagramContainer.offsetWidth,
         height: this.diagramContainer.offsetHeight
       })
+    }
+
+    if (this.dragPortSource && !prevProps.currentFlowNode && this.props.currentFlowNode) {
+      // tslint:disable-next-line: no-floating-promises
+      this.linkCreatedNode()
     }
 
     const isDifferentFlow = _.get(prevProps, 'currentFlow.name') !== _.get(this, 'props.currentFlow.name')
@@ -135,9 +139,15 @@ class Diagram extends Component<Props> {
       this.manager.syncModel()
     }
 
+    // Refresh nodes when the filter is displayed
+    if (this.props.highlightFilter && this.props.showSearch) {
+      this.manager.setHighlightedNodes(this.props.highlightFilter)
+      this.manager.syncModel()
+    }
+
     // Refresh nodes when the filter is updated
-    if (this.state.highlightFilter !== prevState.highlightFilter) {
-      this.manager.setHighlightedNodes(this.state.highlightFilter)
+    if (this.props.highlightFilter !== prevProps.highlightFilter) {
+      this.manager.setHighlightedNodes(this.props.highlightFilter)
       this.manager.syncModel()
     }
 
@@ -146,10 +156,37 @@ class Diagram extends Component<Props> {
       this.manager.setHighlightedNodes([])
       this.manager.syncModel()
     }
+  }
 
-    // Reset search when toggled
-    if (this.props.showSearch && !prevProps.showSearch) {
-      this.setState({ highlightFilter: '' })
+  updateTransitionNode = async (nodeId: string, index: number, newName: string) => {
+    await this.props.switchFlowNode(nodeId)
+    const next = this.props.currentFlowNode.next
+
+    if (!next.length) {
+      this.props.updateFlowNode({ next: [{ condition: 'true', node: newName }] })
+    } else {
+      await this.props.updateFlowNode({
+        next: Object.assign([], next, { [index]: { ...next[index], node: newName } })
+      })
+    }
+
+    this.checkForLinksUpdate()
+    this.diagramWidget.forceUpdate()
+  }
+
+  linkCreatedNode = async () => {
+    const sourcePort: DefaultPortModel = _.get(this.dragPortSource, 'parent.sourcePort')
+    this.dragPortSource = undefined
+
+    if (!sourcePort || sourcePort.parent.id === this.props.currentFlowNode.id) {
+      return
+    }
+
+    if (!sourcePort.in) {
+      const sourcePortIndex = Number(sourcePort.name.replace('out', ''))
+      await this.updateTransitionNode(sourcePort.parent.id, sourcePortIndex, this.props.currentFlowNode.name)
+    } else {
+      await this.updateTransitionNode(this.props.currentFlowNode.id, 0, sourcePort.parent['name'])
     }
   }
 
@@ -167,19 +204,27 @@ class Diagram extends Component<Props> {
   handleContextMenuNoElement = (event: React.MouseEvent) => {
     const point = this.manager.getRealPosition(event)
 
+    // When no element is chosen from the context menu, we reset the start port so it doesn't impact the next selected node
+    let clearStartPortOnClose = true
+
+    const wrap = (addNodeMethod, ...args) => () => {
+      clearStartPortOnClose = false
+      addNodeMethod(...args)
+    }
+
     ContextMenu.show(
       <Menu>
         {this.props.canPasteNode && (
           <MenuItem icon="clipboard" text="Paste" onClick={() => this.pasteElementFromBuffer(point)} />
         )}
         <MenuDivider title="Add Node" />
-        <MenuItem text="Standard Node" onClick={() => this.add.flowNode(point)} icon="chat" />
+        <MenuItem text="Standard Node" onClick={wrap(this.add.flowNode, point)} icon="chat" />
         {this.props.flowPreview ? (
           <Fragment>
-            <MenuItem text="Say" onClick={() => this.add.sayNode(point)} icon="comment" />
-            <MenuItem text="Execute" onClick={() => this.add.executeNode(point)} icon="code-block" />
-            <MenuItem text="Listen" onClick={() => this.add.listenNode(point)} icon="hand" />
-            <MenuItem text="Router" onClick={() => this.add.routerNode(point)} icon="search-around" />
+            <MenuItem text="Say" onClick={wrap(this.add.sayNode, point)} icon="comment" />
+            <MenuItem text="Execute" onClick={wrap(this.add.executeNode, point)} icon="code-block" />
+            <MenuItem text="Listen" onClick={wrap(this.add.listenNode, point)} icon="hand" />
+            <MenuItem text="Router" onClick={wrap(this.add.routerNode, point)} icon="search-around" />
           </Fragment>
         ) : null}
         <MenuItem tagName="button" text="Skills" icon="add">
@@ -188,13 +233,18 @@ class Diagram extends Component<Props> {
               key={skill.id}
               text={skill.name}
               tagName="button"
-              onClick={() => this.add.skillNode(point, skill.id)}
+              onClick={wrap(this.add.skillNode, point, skill.id)}
               icon={skill.icon}
             />
           ))}
         </MenuItem>
       </Menu>,
-      { left: event.clientX, top: event.clientY }
+      { left: event.clientX, top: event.clientY },
+      () => {
+        if (clearStartPortOnClose) {
+          this.dragPortSource = undefined
+        }
+      }
     )
   }
 
@@ -258,7 +308,7 @@ class Diagram extends Component<Props> {
               icon="minimize"
               text="Disconnect Node"
               onClick={() => {
-                this.manager.disconnectPorts(target)
+                this.manager.disconnectPorts(targetModel)
                 this.checkForLinksUpdate()
               }}
             />
@@ -277,32 +327,12 @@ class Diagram extends Component<Props> {
     )
   }
 
-  checkForProblems() {
+  checkForProblems = _.debounce(() => {
     this.props.updateFlowProblems(this.manager.getNodeProblems())
-  }
+  }, 500)
 
   createFlow(name: string) {
     this.props.createFlow(name + '.flow.json')
-  }
-
-  onDiagramDoubleClick = (event?: MouseEvent) => {
-    if (event) {
-      // We only keep 3 events for dbl click: full flow, standard nodes and skills. Adding temporarily router so it's editable
-      const target = this.diagramWidget.getMouseElement(event)
-      if (
-        target &&
-        !(
-          target.model instanceof StandardNodeModel ||
-          target.model instanceof SkillCallNodeModel ||
-          target.model instanceof RouterNodeModel
-        )
-      ) {
-        return
-      }
-    }
-
-    // TODO: delete this once 12.2.1 is out
-    toastInfo('Pssst! Just click once a node to inspect it, no need to double-click anymore.', Timeout.LONG)
   }
 
   canTargetOpenInspector = target => {
@@ -326,6 +356,11 @@ class Diagram extends Component<Props> {
     this.manager.sanitizeLinks()
     this.manager.cleanPortLinks()
 
+    if (selectedNode && selectedNode instanceof PointModel) {
+      this.dragPortSource = selectedNode
+      this.handleContextMenu(event as any)
+    }
+
     this.canTargetOpenInspector(target) ? this.props.openFlowNodeProps() : this.props.closeFlowNodeProps()
 
     if (!selectedNode) {
@@ -344,14 +379,22 @@ class Diagram extends Component<Props> {
     this.checkForLinksUpdate()
   }
 
-  checkForLinksUpdate() {
-    const links = this.manager.getLinksRequiringUpdate()
-    if (links) {
-      this.props.updateFlow({ links })
-    }
+  checkForLinksUpdate = _.debounce(
+    () => {
+      if (this.props.readOnly) {
+        return
+      }
 
-    this.checkForProblems()
-  }
+      const links = this.manager.getLinksRequiringUpdate()
+      if (links) {
+        this.props.updateFlow({ links })
+      }
+
+      this.checkForProblems()
+    },
+    500,
+    { leading: true }
+  )
 
   deleteSelectedElements() {
     const elements = _.sortBy(this.diagramEngine.getDiagramModel().getSelectedItems(), 'nodeType')
@@ -404,18 +447,12 @@ class Diagram extends Component<Props> {
       this.copySelectedElementToBuffer()
     } else if ((event.ctrlKey || event.metaKey) && event.key === 'v') {
       this.pasteElementFromBuffer()
-    } else if (event.code === 'Backspace' || event.code === 'Delete') {
-      this.deleteSelectedElements()
     }
   }
 
   handleFlowWideClicked = () => {
     this.props.switchFlowNode(null)
     this.props.openFlowNodeProps()
-  }
-
-  handleFilterChanged = event => {
-    this.setState({ highlightFilter: event.target.value })
   }
 
   renderCatchAllInfo() {
@@ -438,8 +475,8 @@ class Diagram extends Component<Props> {
               id="input-highlight-name"
               tabIndex={1}
               placeholder="Highlight nodes by name"
-              value={this.state.highlightFilter}
-              onChange={this.handleFilterChanged}
+              value={this.props.highlightFilter}
+              onChange={this.props.handleFilterChanged}
               autoFocus={true}
             />
             <Button icon="small-cross" onClick={this.props.hideSearch} />
@@ -549,6 +586,8 @@ interface Props {
   flowPreview: boolean
   showSearch: boolean
   hideSearch: () => void
+  handleFilterChanged: (event: object) => void
+  highlightFilter: string,
   skills: SkillDefinition[]
 }
 
@@ -592,9 +631,4 @@ const mapDispatchToProps = {
   buildSkill: buildNewSkill
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  null,
-  { withRef: true }
-)(Diagram)
+export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(Diagram)

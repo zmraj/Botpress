@@ -1,19 +1,18 @@
 import { Flow, Logger } from 'botpress/sdk'
 import { ObjectCache } from 'common/object-cache'
-import { FlowView, NodeView, FlowMutex } from 'common/typings'
+import { FlowMutex, FlowView, NodeView } from 'common/typings'
 import { ModuleLoader } from 'core/module-loader'
+import { RealTimePayload } from 'core/sdk/impl'
+import { KeyValueStore } from 'core/services/kvs'
+import RealtimeService from 'core/services/realtime'
 import { inject, injectable, tagged } from 'inversify'
 import _ from 'lodash'
+import moment from 'moment'
 import nanoid from 'nanoid/generate'
 
 import { GhostService } from '../..'
 import { TYPES } from '../../../types'
 import { validateFlowSchema } from '../validator'
-
-import { RealTimePayload } from 'core/sdk/impl'
-import RealtimeService from 'core/services/realtime'
-import { KeyValueStore } from 'core/services/kvs'
-import moment = require('moment')
 
 const PLACING_STEP = 250
 const MIN_POS_X = 50
@@ -138,7 +137,7 @@ export class FlowService {
     const flowFiles = await ghost.directoryListing(FLOW_DIR, '*.json')
     const fileToCreate = flowFiles.find(f => f === flow.name)
     if (fileToCreate) {
-      throw new Error(`Can not create an already existant flow : ${flow.name}`)
+      throw new Error(`Can not create an already existent flow : ${flow.name}`)
     }
 
     await this._upsertFlow(botId, flow)
@@ -182,7 +181,7 @@ export class FlowService {
     const { flowPath, uiPath, flowContent, uiContent } = await this.prepareSaveFlow(botId, flow, isNew)
 
     await Promise.all([
-      ghost.upsertFile(FLOW_DIR, flowPath, JSON.stringify(flowContent, undefined, 2)),
+      ghost.upsertFile(FLOW_DIR, flowPath!, JSON.stringify(flowContent, undefined, 2)),
       ghost.upsertFile(FLOW_DIR, uiPath, JSON.stringify(uiContent, undefined, 2))
     ])
 
@@ -231,6 +230,8 @@ export class FlowService {
       ghost.renameFile(FLOW_DIR, previousUiName, newUiName)
     ])
     this._allFlows.clear()
+
+    await this.moduleLoader.onFlowRenamed(botId, previousName, newName)
 
     this.notifyChanges({
       name: previousName,
@@ -309,7 +310,7 @@ export class FlowService {
     return this._upsertFlow(botId, flow)
   }
 
-  private async prepareSaveFlow(botId, flow, isNew: boolean) {
+  private async prepareSaveFlow(botId: string, flow: FlowView, isNew: boolean) {
     const schemaError = validateFlowSchema(flow)
     if (schemaError) {
       throw new Error(schemaError)
@@ -330,10 +331,10 @@ export class FlowService {
     }
 
     const flowPath = flow.location
-    return { flowPath, uiPath: this.uiPath(flowPath), flowContent, uiContent }
+    return { flowPath, uiPath: this.uiPath(flowPath!), flowContent, uiContent }
   }
 
-  private uiPath(flowPath) {
-    return flowPath.replace(/\.flow\.json/i, '.ui.json')
+  private uiPath(flowPath: string) {
+    return flowPath.replace(/\.flow\.json$/i, '.ui.json')
   }
 }

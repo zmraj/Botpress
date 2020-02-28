@@ -1,5 +1,5 @@
 import 'bluebird-global'
-import * as sdk from 'botpress'
+import * as sdk from 'botpress/sdk'
 import _ from 'lodash'
 
 import Analytics from './analytics'
@@ -45,7 +45,7 @@ const entryPoint: sdk.ModuleEntryPoint = {
   definition: {
     name: 'analytics',
     fullName: 'Analytics',
-    homepage: 'https://botpress.io',
+    homepage: 'https://botpress.com',
     menuIcon: 'timeline',
     menuText: 'Analytics'
   }

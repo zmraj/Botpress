@@ -11,8 +11,10 @@ export default class WebchatApi {
     this.axios = axiosInstance
     this.axios.interceptors.request.use(
       config => {
-        const prefix = config.url.indexOf('?') > 0 ? '&' : '?'
-        config.url += prefix + '__ts=' + new Date().getTime()
+        if (!config.url.includes('/botInfo')) {
+          const prefix = config.url.indexOf('?') > 0 ? '&' : '?'
+          config.url += prefix + '__ts=' + new Date().getTime()
+        }
         return config
       },
       error => {
@@ -23,7 +25,7 @@ export default class WebchatApi {
     this.axiosConfig = this.updateAxiosConfig()
   }
 
-  updateUserId(userId) {
+  updateUserId(userId: string) {
     this.userId = userId
   }
 
@@ -92,7 +94,7 @@ export default class WebchatApi {
     try {
       this.axios.post(`/conversations/${this.userId}/${convoId}/reset`, {}, this.axiosConfig)
     } catch (err) {
-      console.log(`Error while reseting convo`, err)
+      console.log(`Error while resetting convo`, err)
     }
   }
 
@@ -135,6 +137,14 @@ export default class WebchatApi {
     try {
       const config = { params: { conversationId: convoId }, ...this.axiosConfig }
       return this.axios.post(`/messages/${this.userId}/files`, data, config)
+    } catch (err) {
+      await this.handleApiError(err)
+    }
+  }
+
+  async setReference(reference: string, convoId: number): Promise<void> {
+    try {
+      return this.axios.post(`/conversations/${this.userId}/${convoId}/reference/${reference}`, {}, this.axiosConfig)
     } catch (err) {
       await this.handleApiError(err)
     }

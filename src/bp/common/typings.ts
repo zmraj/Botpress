@@ -161,9 +161,35 @@ export interface ChatUserAuth {
 export interface AuthPayload {
   /** User is considered authenticated until that date (duration is determined per channel) */
   authenticatedUntil?: Date
-  /** An authorized user has an acces (any) to the workspace the bot is part of */
+  /** An authorized user has an access (any) to the workspace the bot is part of */
   isAuthorized?: boolean
   /** User must provide a valid invite code before he's added to the workspace & authorized */
   inviteRequired?: boolean
   identity?: TokenUser
+}
+
+export interface ModuleInfo {
+  name: string
+  fullName?: string
+  description?: string
+  /** Archived modules must be unpacked before information is available */
+  archived?: boolean
+  /** The location of the module as listed in botpress config */
+  location: string
+  /** The complete location of the module */
+  fullPath: string
+  enabled: boolean
+}
+
+export interface ServerHealth {
+  serverId: string
+  hostname: string
+  bots: { [botId: string]: BotHealth }
+}
+
+export interface BotHealth {
+  status: 'healthy' | 'unhealthy' | 'disabled'
+  errorCount: number
+  criticalCount: number
+  warningCount: number
 }

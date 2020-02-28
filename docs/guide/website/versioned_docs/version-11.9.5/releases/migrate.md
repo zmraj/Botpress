@@ -60,7 +60,7 @@ my-module/views/lite/index.jsx
 
 This change implied modifications on how modules are packaged. Please clear the `node_modules` folder of every module, then run `yarn build`
 
-For more informations see: [Module Views](../../advanced/custom-module#views)
+For more information see: [Module Views](../advanced/custom-module#views)
 
 ## Migration from 11.3 to 11.4
 
@@ -99,7 +99,7 @@ Below is an example of a `workspaces.json`:
     "name": "Default",
     "users": [
       {
-        "email": "renaud@botpress.io",
+        "email": "renaud@botpress.com",
         "password": "<password>",
         "salt": "<salt>",
         "last_ip": "",
@@ -130,7 +130,10 @@ Below is an example of a `workspaces.json`:
         "id": "editor",
         "name": "Content Editor",
         "description": "Content Editors have read/write access to content and NLU, and read-only access to flows and actions.",
-        "rules": [{ "res": "*", "op": "+r" }, { "res": "admin.collaborators.*", "op": "-r" }]
+        "rules": [
+          { "res": "*", "op": "+r" },
+          { "res": "admin.collaborators.*", "op": "-r" }
+        ]
       }
     ],
     "defaultRole": "dev",
@@ -154,7 +157,7 @@ This guide will show you how to migrate your bot from Botpress X to Botpress Ser
 
 If your bot is using `bp.dialogEngine.registerActions`, this is no longer supported in the new version. Each registered actions must be in a separate `.js` file in the folder `data/global/actions`.
 
-If your bot has custom logic in `index.js`, such as in bp.hear, that concept has been changed. We replaced those with [hooks](../../main/code#hooks). They allow you to intercept events and tell Botpress how to handle them.
+If your bot has custom logic in `index.js`, such as in bp.hear, that concept has been changed. We replaced those with [hooks](../main/code#hooks). They allow you to intercept events and tell Botpress how to handle them.
 
 Content types are handled similarly, but the UI and Renderers are now bundled in a single file.
 

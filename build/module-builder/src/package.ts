@@ -39,8 +39,9 @@ const getTargetOSConfig = () => {
 async function installProductionDeps(modulePath) {
   debug('Installing production modules...')
   const { stdout } = await execAsync(
-    `cross-env npm_config_target_platform=${getTargetOSConfig()} yarn install --modules-folder node_production_modules --production --no-lockfile --ignore-scripts --force`,
+    `yarn install --modules-folder node_production_modules --production --no-lockfile --ignore-scripts --force`,
     {
+      env: { npm_config_target_platform: getTargetOSConfig() },
       cwd: modulePath
     }
   )
@@ -70,7 +71,7 @@ async function zipFiles(modulePath, outPath) {
     ignore: ['node_modules/**', 'src/**']
   })
 
-  debug(`Zipping ${files.length} files...`)
+  debug(`Zipping ${files.length} file${files.length === 1 ? '' : 's'}...`)
 
   await tar.create({ gzip: true, follow: true, file: outPath, portable: true }, files)
 }

@@ -68,7 +68,7 @@ export default class AuthService {
   async getAllUsers() {
     return _.flatten(
       await Promise.mapSeries(this.getAllStrategies(), strategy =>
-        Promise.mapSeries(this.users.getAllUsers(strategy.id), user => {
+        Promise.mapSeries(this.users.getAllUsers(strategy.id!), user => {
           return { email: user.email, strategy: user.strategy }
         })
       )
@@ -97,7 +97,8 @@ export default class AuthService {
     const audience = isGlobalStrategy ? TOKEN_AUDIENCE : CHAT_USERS_AUDIENCE
 
     const isSuperAdmin =
-      audience === TOKEN_AUDIENCE && !!config.superAdmins.find(x => x.strategy === strategy && x.email === email)
+      audience === TOKEN_AUDIENCE &&
+      !!config.superAdmins.find(x => x.strategy === strategy && x.email.toLowerCase() === email.toLowerCase())
 
     return generateUserToken(email, strategy, isSuperAdmin, duration, audience)
   }

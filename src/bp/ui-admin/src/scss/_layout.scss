@@ -4,19 +4,18 @@
   }
 
   &-menu {
-    min-width: 200px;
-    background-color: #fafafa;
-    border-right: 1px solid #dedede;
+    min-width: 225px;
+    background-color: #fcfcfc;
 
     &-header {
       font-weight: bold;
-      background-color: #dedede;
-      padding: 5px 0 5px 5px;
+      background-color: #f2f2f2;
+      padding: 5px 0 5px 15px;
     }
 
     &-item {
-      height: 30px;
-      padding: 3px 10px;
+      padding: 7px 10px 7px 20px;
+
       font-size: 0.9rem;
       cursor: pointer;
 
@@ -56,7 +55,7 @@
     padding: 5px 10px;
 
     background-color: #fff;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #efefef;
     font-weight: bold;
 
     span {
@@ -94,6 +93,10 @@
     color: var(--c-neutral--light-3);
     background-color: $dark-background-hover;
     font-size: 14px;
+  }
+
+  .bp3-navbar-divider {
+    border-left: 1px solid #efefef;
   }
 
   .dropdown-toggle.nav-link {
@@ -243,8 +246,65 @@
   }
 }
 
+.coverImg {
+  width: auto;
+  max-width: 100%;
+}
+
+.configUploadSuccess {
+  color: green;
+  margin-top: 1rem;
+}
+
+.with-sticky-action-bar {
+  // Height of the sticky action bar (51px) + 14px to have a small gap between the bottom of the form and the bar
+  padding-bottom: 65px;
+}
+
+.sticky-action-bar {
+  background: #fcfcfc;
+  bottom: 0;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  left: 0;
+  padding: 10px 15px;
+  position: absolute;
+  right: 0;
+  text-align: right;
+
+  button {
+    margin-left: 15px;
+  }
+
+  &--content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
+
 .dropdown-picture {
   height: 30px;
   width: 30px;
   border-radius: 50%;
+}
+
+.workspaceButton {
+  color: white !important;
+  font-weight: 500;
+
+  &.bp3-disabled {
+    cursor: auto !important;
+  }
+
+  svg {
+    fill: white !important;
+  }
+}
+
+.moduleItem {
+  display: flex;
+  padding-bottom: 10;
+}
+
+.moduleItemSwitch {
+  width: 40px;
 }

@@ -1,5 +1,5 @@
 import { clickOn, fillField } from '../expectPuppeteer'
-import { autoAnswerDialog, expectBotApiCallSuccess, gotoStudio } from '../utils'
+import { expectBotApiCallSuccess, gotoStudio } from '../utils'
 
 describe('Module - NLU', () => {
   beforeAll(async () => {
@@ -14,26 +14,17 @@ describe('Module - NLU', () => {
   })
 
   it('Create new intent', async () => {
-    autoAnswerDialog('hello_there')
-    await clickOn('button', { text: 'New intent' })
-    await expectBotApiCallSuccess('mod/nlu/intents', 'POST')
+    await clickOn('#btn-add-intent')
+    await fillField('#input-intent-name', 'hello_there')
+
+    await Promise.all([expectBotApiCallSuccess('mod/nlu/intents', 'POST'), clickOn('#btn-submit')])
   })
 
   it('Create new entity', async () => {
     await clickOn('span', { text: 'Entities' })
     await clickOn('button', { text: 'New entity' })
-    await fillField('input[placeholder="Name"]', 'cars')
-    await clickOn('button', { text: 'Create Entity' })
-    await expectBotApiCallSuccess('mod/nlu/entities', 'POST')
-  })
+    await fillField('input[placeholder="Entity name"]', 'cars')
 
-  // it('Create new slot', async () => {
-  //   await clickOn('button', { text: 'Create a slot' })
-  //   await fillField('input', 'hello')
-  //   await page.waitFor(3000)
-  //   await fillField('input[name="entity-type"]', '@system.any')
-  //   await page.waitFor(3000)
-  //   await clickOn('button')
-  //   await expectBotApiCallSuccess('mod/nlu/slots', 'POST')
-  // })
+    await Promise.all([expectBotApiCallSuccess('mod/nlu/entities', 'POST'), clickOn('#entity-submit')])
+  })
 })

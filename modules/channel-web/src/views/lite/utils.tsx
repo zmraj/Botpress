@@ -2,7 +2,7 @@ import ReactGA from 'react-ga'
 import snarkdown from 'snarkdown'
 
 export const getOverridedComponent = (overrides, componentName) => {
-  if (overrides && overrides[componentName]) {
+  if (overrides?.[componentName]) {
     const { module, component } = overrides[componentName]
     if (module && component) {
       return window.botpress[module][component]
@@ -62,6 +62,24 @@ export const initializeAnalytics = () => {
       ReactGA.pageview(window.location.pathname + window.location.search)
     } catch (err) {
       console.log('Error init analytics', err)
+    }
+  }
+}
+
+export const trackMessage = (direction: 'sent' | 'received') => {
+  if (window.SEND_USAGE_STATS) {
+    try {
+      ReactGA.event({ category: 'Interactions', action: `message ${direction}` })
+    } finally {
+    }
+  }
+}
+
+export const trackWebchatState = (state: 'show' | 'hide' | 'toggle') => {
+  if (window.SEND_USAGE_STATS) {
+    try {
+      ReactGA.event({ category: 'Display', action: state })
+    } finally {
     }
   }
 }

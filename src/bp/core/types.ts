@@ -72,8 +72,10 @@ const TYPES = {
   MigrationService: Symbol.for('MigrationService'),
   MonitoringService: Symbol.for('MonitoringService'),
   AlertingService: Symbol.for('AlertingService'),
+  BotMonitoringService: Symbol.for('BotMonitoringService'),
   EventRepository: Symbol.for('EventRepository'),
   EventCollector: Symbol.for('EventCollector'),
+  StatsService: Symbol.for('StatsService'),
   StrategyUsersRepository: Symbol.for('StrategyUsersRepository'),
   WorkspaceUsersRepository: Symbol.for('WorkspaceUsersRepository'),
   WorkspaceInviteCodesRepository: Symbol.for('WorkspaceInviteCodesRepository')

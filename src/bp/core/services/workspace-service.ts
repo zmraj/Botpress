@@ -70,7 +70,7 @@ export class WorkspaceService {
     const workspace = workspaces.find(x => x.id === workspaceId)
 
     if (!workspace) {
-      throw new Error(`Specified workspace "${workspaceId}" doesn't exists`)
+      throw new Error(`Specified workspace "${workspaceId}" doesn't exist`)
     }
 
     workspace.bots.push(botId)
@@ -84,12 +84,14 @@ export class WorkspaceService {
     const workspace = workspaces.find(x => x.id === botWorkspaceId)
 
     if (!workspace) {
-      throw new Error(`Specified workspace "${botWorkspaceId}" doesn't exists`)
+      throw new Error(`Specified workspace "${botWorkspaceId}" doesn't exist`)
     }
 
     const index = workspace.bots.findIndex(x => x === botId)
+    if (index === -1) {
+      return
+    }
     workspace.bots.splice(index, 1)
-
     return this.save(workspaces)
   }
 
@@ -256,7 +258,7 @@ export class WorkspaceService {
     const uniqStrategies = _.uniq(_.map(workspaceUsers, 'strategy'))
     const usersInfo = await this._getUsersAttributes(workspaceUsers, uniqStrategies, filteredAttributes)
 
-    return workspaceUsers.map(u => ({ ...u, attributes: usersInfo[u.email] }))
+    return workspaceUsers.map(u => ({ ...u, attributes: usersInfo[u.email.toLowerCase()] }))
   }
 
   private async _getUsersAttributes(users: WorkspaceUser[], strategies: string[], attributes: any) {
@@ -283,7 +285,7 @@ export class WorkspaceService {
     const role = [...workspace.roles, CHAT_USER_ROLE].find(r => r.id === roleId)
 
     if (!role) {
-      throw new NotFoundError(`Role "${roleId}" does not exists in workspace "${workspace.name}"`)
+      throw new NotFoundError(`Role "${roleId}" does not exist in workspace "${workspace.name}"`)
     }
     return role
   }
@@ -291,7 +293,7 @@ export class WorkspaceService {
   async getBotWorkspaceId(botId: string) {
     const workspaces = await this.getWorkspaces()
     const workspace = workspaces.find(x => !!x.bots.find(bot => bot === botId))
-    return (workspace && workspace.id) || 'default'
+    return workspace?.id ?? 'default'
   }
 
   async getRoleForUser(email: string, strategy: string, workspace: string): Promise<AuthRole | undefined> {
@@ -303,7 +305,7 @@ export class WorkspaceService {
     const workspaces = await this.getWorkspaces()
     const workspace = workspaces.find(x => x.id === workspaceId)
 
-    return workspace && workspace.pipeline
+    return workspace?.pipeline
   }
 
   async hasPipeline(workspaceId: string): Promise<boolean> {

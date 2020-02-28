@@ -3,25 +3,33 @@ import {
   Button,
   ButtonGroup,
   Callout,
+  InputGroup,
   Intent,
   Popover,
   PopoverInteractionKind,
   Position
 } from '@blueprintjs/core'
+import { BotConfig } from 'botpress/sdk'
+import { confirmDialog } from 'botpress/shared'
+import { ServerHealth } from 'common/typings'
 import _ from 'lodash'
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
+import { generatePath, RouteComponentProps } from 'react-router'
 import { Alert, Col, Row } from 'reactstrap'
 import { toastSuccess } from '~/utils/toaster'
+import { toastFailure } from '~/utils/toaster'
+import { filterList } from '~/utils/util'
+import PageContainer from '~/App/PageContainer'
+import SplitPage from '~/App/SplitPage'
+import { getActiveWorkspace } from '~/Auth'
 import { Downloader } from '~/Pages/Components/Downloader'
 
 import api from '../../../api'
-import { fetchBots } from '../../../reducers/bots'
+import { fetchBotHealth, fetchBots } from '../../../reducers/bots'
 import { fetchLicensing } from '../../../reducers/license'
 import AccessControl from '../../../App/AccessControl'
 import LoadingSection from '../../Components/LoadingSection'
-import SectionLayout from '../../Layouts/Section'
 
 import BotItemCompact from './BotItemCompact'
 import BotItemPipeline from './BotItemPipeline'
@@ -29,11 +37,15 @@ import CreateBotModal from './CreateBotModal'
 import ImportBotModal from './ImportBotModal'
 import RollbackBotModal from './RollbackBotModal'
 
+const botFilterFields = ['name', 'id', 'description']
+
 interface Props extends RouteComponentProps {
-  bots: any
+  bots: BotConfig[]
+  health: ServerHealth[]
   workspace: any
-  fetchBots: any
-  fetchLicensing: any
+  fetchBots: () => void
+  fetchLicensing: () => void
+  fetchBotHealth: () => void
   licensing: any
 }
 
@@ -44,11 +56,14 @@ class Bots extends Component<Props> {
     isImportBotModalOpen: false,
     focusedBot: null,
     archiveUrl: undefined,
-    archiveName: ''
+    archiveName: '',
+    filter: ''
   }
 
   componentDidMount() {
     this.props.fetchBots()
+    this.props.fetchBotHealth()
+
     if (!this.props.licensing) {
       this.props.fetchLicensing()
     }
@@ -70,22 +85,34 @@ class Bots extends Component<Props> {
   }
 
   async deleteBot(botId) {
-    if (window.confirm("Are you sure you want to delete this bot? This can't be undone.")) {
+    if (
+      await confirmDialog("Are you sure you want to delete this bot? This can't be undone.", {
+        acceptLabel: 'Delete'
+      })
+    ) {
       await api.getSecured().post(`/admin/bots/${botId}/delete`)
-      await this.props.fetchBots()
+      this.props.fetchBots()
     }
   }
 
-  renderEmptyBots() {
-    return (
-      <Callout title="This workspace has no bot, yet" style={{ textAlign: 'center' }}>
-        <p>
-          <br />
-          In Botpress, bots are always assigned to a workspace.
-          <br />
-          Create your first bot to start building.
-        </p>
-      </Callout>
+  async reloadBot(botId: string) {
+    try {
+      await api.getSecured().post(`/admin/bots/${botId}/reload`)
+      this.props.fetchBots()
+      this.props.fetchBotHealth()
+      toastSuccess(`Bot remounted successfully`)
+    } catch (err) {
+      console.log(err)
+      toastFailure(`Could not mount bot. Check server logs for details`)
+    }
+  }
+
+  viewLogs(botId: string) {
+    this.props.history.push(
+      generatePath(`/workspace/:workspaceId?/logs?botId=:botId`, {
+        workspaceId: getActiveWorkspace() || undefined,
+        botId
+      })
     )
   }
 
@@ -118,8 +145,9 @@ class Bots extends Component<Props> {
   }
 
   async requestStageChange(botId) {
-    await api.getSecured().post(`/admin/bots/${botId}/stage`)
-    await this.props.fetchBots()
+    await api.getSecured({ timeout: 60000 }).post(`/admin/bots/${botId}/stage`)
+    this.props.fetchBots()
+    toastSuccess('Bot promoted to next stage')
   }
 
   isLicensed = () => {
@@ -143,29 +171,45 @@ class Bots extends Component<Props> {
     toastSuccess('Rollback success')
   }
 
-  renderCompactView() {
-    if (!this.props.bots.length) {
-      return this.renderEmptyBots()
+  findBotError(botId: string) {
+    if (!this.props.health) {
+      return false
     }
+
+    return _.some(
+      this.props.health.map(x => x.bots[botId]),
+      s => s && s.status === 'unhealthy'
+    )
+  }
+
+  renderCompactView(bots: BotConfig[]) {
+    if (!bots.length) {
+      return null
+    }
+
     return (
       <div className="bp_table bot_views compact_view">
-        {this.props.bots.map(bot => (
-          <BotItemCompact
-            key={bot.id}
-            bot={bot}
-            deleteBot={this.deleteBot.bind(this, bot.id)}
-            exportBot={this.exportBot.bind(this, bot.id)}
-            createRevision={this.createRevision.bind(this, bot.id)}
-            rollback={this.toggleRollbackModal.bind(this, bot.id)}
-          />
+        {bots.map(bot => (
+          <Fragment key={bot.id}>
+            <BotItemCompact
+              bot={bot}
+              hasError={this.findBotError(bot.id)}
+              deleteBot={this.deleteBot.bind(this, bot.id)}
+              exportBot={this.exportBot.bind(this, bot.id)}
+              createRevision={this.createRevision.bind(this, bot.id)}
+              rollback={this.toggleRollbackModal.bind(this, bot.id)}
+              reloadBot={this.reloadBot.bind(this, bot.id)}
+              viewLogs={this.viewLogs.bind(this, bot.id)}
+            />
+          </Fragment>
         ))}
       </div>
     )
   }
 
-  renderPipelineView() {
+  renderPipelineView(bots: BotConfig[]) {
     const pipeline = this.props.workspace.pipeline
-    const botsByStage = _.groupBy(this.props.bots, 'pipeline_status.current_stage.id')
+    const botsByStage = _.groupBy(bots, 'pipeline_status.current_stage.id')
     const colSize = Math.floor(12 / pipeline.length)
 
     return (
@@ -178,16 +222,20 @@ class Bots extends Component<Props> {
                 {pipeline.length > 1 && <h3 className="pipeline_title">{stage.label}</h3>}
                 {idx === 0 && <div className="pipeline_bot create">{this.renderCreateNewBotButton()}</div>}
                 {(botsByStage[stage.id] || []).map(bot => (
-                  <BotItemPipeline
-                    key={bot.id}
-                    bot={bot}
-                    allowStageChange={allowStageChange}
-                    requestStageChange={this.requestStageChange.bind(this, bot.id)}
-                    deleteBot={this.deleteBot.bind(this, bot.id)}
-                    exportBot={this.exportBot.bind(this, bot.id)}
-                    createRevision={this.createRevision.bind(this, bot.id)}
-                    rollback={this.toggleRollbackModal.bind(this, bot.id)}
-                  />
+                  <Fragment key={bot.id}>
+                    <BotItemPipeline
+                      bot={bot}
+                      hasError={this.findBotError(bot.id)}
+                      allowStageChange={allowStageChange && !bot.disabled}
+                      requestStageChange={this.requestStageChange.bind(this, bot.id)}
+                      deleteBot={this.deleteBot.bind(this, bot.id)}
+                      exportBot={this.exportBot.bind(this, bot.id)}
+                      createRevision={this.createRevision.bind(this, bot.id)}
+                      rollback={this.toggleRollbackModal.bind(this, bot.id)}
+                      reloadBot={this.reloadBot.bind(this, bot.id)}
+                      viewLogs={this.viewLogs.bind(this, bot.id)}
+                    />
+                  </Fragment>
                 ))}
               </Col>
             )
@@ -198,9 +246,40 @@ class Bots extends Component<Props> {
   }
 
   renderBots() {
-    const botsView = this.isPipelineView ? this.renderPipelineView() : this.renderCompactView()
+    const filteredBots = filterList<BotConfig>(this.props.bots, botFilterFields, this.state.filter)
+    const hasBots = !!this.props.bots.length
+    const botsView = this.isPipelineView ? this.renderPipelineView(filteredBots) : this.renderCompactView(filteredBots)
+
     return (
       <div>
+        {hasBots && (
+          <Fragment>
+            <InputGroup
+              id="input-filter"
+              placeholder="Filter bots"
+              value={this.state.filter}
+              onChange={e => this.setState({ filter: e.target.value.toLowerCase() })}
+              autoComplete="off"
+              className="filterField"
+            />
+
+            {this.state.filter && !filteredBots.length && (
+              <Callout title="No bot matches your query" className="filterCallout" />
+            )}
+          </Fragment>
+        )}
+
+        {!hasBots && (
+          <Callout title="This workspace has no bots, yet" className="filterCallout">
+            <p>
+              <br />
+              In Botpress, bots are always assigned to a workspace.
+              <br />
+              Create your first bot to start building.
+            </p>
+          </Callout>
+        )}
+
         {this.hasUnlangedBots() && (
           <Alert color="warning">
             You have bots without specified language. Default language is mandatory since Botpress 11.8. Please set bot
@@ -222,40 +301,40 @@ class Bots extends Component<Props> {
     }
 
     return (
-      <Fragment>
-        <Downloader url={this.state.archiveUrl} filename={this.state.archiveName} />
+      <PageContainer title="Bots">
+        <SplitPage sideMenu={!this.isPipelineView && this.renderCreateNewBotButton()}>
+          <Fragment>
+            <Downloader url={this.state.archiveUrl} filename={this.state.archiveName} />
+            {this.renderBots()}
 
-        <SectionLayout
-          title="Bots"
-          helpText="This page lists all the bots created under the current workspace."
-          mainContent={this.renderBots()}
-          sideMenu={!this.isPipelineView && this.renderCreateNewBotButton()}
-        />
-        <AccessControl resource="admin.bots.*" operation="write">
-          <RollbackBotModal
-            botId={this.state.focusedBot}
-            isOpen={this.state.isRollbackModalOpen}
-            toggle={this.toggleRollbackModal}
-            onRollbackSuccess={this.handleRollbackSuccess}
-          />
-          <CreateBotModal
-            isOpen={this.state.isCreateBotModalOpen}
-            toggle={this.toggleCreateBotModal}
-            onCreateBotSuccess={this.props.fetchBots}
-          />
-          <ImportBotModal
-            isOpen={this.state.isImportBotModalOpen}
-            toggle={this.toggleImportBotModal}
-            onCreateBotSuccess={this.props.fetchBots}
-          />
-        </AccessControl>
-      </Fragment>
+            <AccessControl resource="admin.bots.*" operation="write">
+              <RollbackBotModal
+                botId={this.state.focusedBot}
+                isOpen={this.state.isRollbackModalOpen}
+                toggle={this.toggleRollbackModal}
+                onRollbackSuccess={this.handleRollbackSuccess}
+              />
+              <CreateBotModal
+                isOpen={this.state.isCreateBotModalOpen}
+                toggle={this.toggleCreateBotModal}
+                onCreateBotSuccess={this.props.fetchBots}
+              />
+              <ImportBotModal
+                isOpen={this.state.isImportBotModalOpen}
+                toggle={this.toggleImportBotModal}
+                onCreateBotSuccess={this.props.fetchBots}
+              />
+            </AccessControl>
+          </Fragment>
+        </SplitPage>
+      </PageContainer>
     )
   }
 }
 
 const mapStateToProps = state => ({
   bots: state.bots.bots,
+  health: state.bots.health,
   workspace: state.bots.workspace,
   loading: state.bots.loadingBots,
   licensing: state.license.licensing
@@ -263,10 +342,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchBots,
-  fetchLicensing
+  fetchLicensing,
+  fetchBotHealth
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Bots)
+export default connect(mapStateToProps, mapDispatchToProps)(Bots)

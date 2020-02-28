@@ -3,7 +3,7 @@ id: about-pro
 title: About
 ---
 
-## Additionnal Features
+## Additional Features
 
 | Feature                    | Community | Pro |
 | -------------------------- | --------- | --- |
@@ -14,13 +14,14 @@ title: About
 | Unlimited Bots             | ✔️        | ✔️  |
 | Unlimited Admins           |           | ✔️  |
 | White-Label Chat Interface |           | ✔️  |
-| RBAC                       |           | ✔️  |
+| Role-Based Access Control  |           | ✔️  |
 | High-Availability          |           | ✔️  |
 | Increased Performances     |           | ✔️  |
 | Standard Support           |           | ✔️  |
+| Multilanguage Bots         |           | ✔️  |
 
-For more details, visit our [pricing page](https://botpress.io/pricing/).
+For more details, [contact sales team](https://botpress.com/contact-sales/).
 
 ## Activation
 
-To enable Botpress Pro features simply set `pro.enabled` to `true` in your botpress.config.json file
+To enable Botpress Pro features simply set `pro.enabled` to `true` in your `botpress.config.json` file

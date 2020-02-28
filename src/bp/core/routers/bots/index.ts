@@ -128,7 +128,7 @@ export class BotsRouter extends CustomRouter {
     }
   }
 
-  getNewRouter(path: string, identity: string, options?: RouterOptions) {
+  getNewRouter(path: string, identity: string, options?: RouterOptions): Router {
     const router = Router({ mergeParams: true })
     if (_.get(options, 'checkAuthentication', true)) {
       router.use(this.checkTokenHeader)
@@ -179,7 +179,7 @@ export class BotsRouter extends CustomRouter {
   private setupRoutes() {
     /**
      * UNAUTHENTICATED ROUTES
-     * Do not return sensitive informations there. These must be accessible by unauthenticated users
+     * Do not return sensitive information there. These must be accessible by unauthenticated users
      */
     this.router.get('/studio-params', (req, res) => {
       const info = this.studioParams(req.params.botId)
@@ -226,6 +226,7 @@ export class BotsRouter extends CustomRouter {
               window.SHOW_POWERED_BY = ${!!config.showPoweredBy};
               window.BOT_LOCKED = ${!!bot.locked};
               window.WORKSPACE_ID = "${workspaceId}";
+              window.IS_BOT_MOUNTED = ${this.botService.isBotMounted(botId)};
               window.SOCKET_TRANSPORTS = ["${getSocketTransports(config).join('","')}"];
               ${app === 'studio' ? studioEnv : ''}
               ${app === 'lite' ? liteEnv : ''}

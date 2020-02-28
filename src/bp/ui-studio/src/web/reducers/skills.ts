@@ -1,12 +1,13 @@
 import { handleActions } from 'redux-actions'
 import {
+  actionsReceived,
   buildNewSkill,
   cancelNewSkill,
   editSkill,
+  intentsReceived,
   requestInsertNewSkill,
   requestUpdateSkill,
-  skillsReceived,
-  updateSkill
+  skillsReceived
 } from '~/actions'
 
 const defaultState = {
@@ -77,6 +78,16 @@ const reducer = handleActions(
         ...state.builder,
         opened: false
       }
+    }),
+
+    [intentsReceived]: (state, { payload }) => ({
+      ...state,
+      intents: payload
+    }),
+
+    [actionsReceived]: (state, { payload }) => ({
+      ...state,
+      actions: payload
     })
   },
   defaultState

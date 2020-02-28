@@ -1,8 +1,7 @@
 import { Logger, LoggerEntry } from 'botpress/sdk'
+import { BotpressConfig } from 'core/config/botpress.config'
 import fs from 'fs'
 import { injectable } from 'inversify'
-
-import { BotpressConfig } from 'core/config/botpress.config'
 import _ from 'lodash'
 import moment from 'moment'
 import ms from 'ms'
@@ -65,7 +64,7 @@ export class LoggerFilePersister {
         fs.accessSync(fullPath, fs.constants.W_OK)
         return true
       }
-      throw new Error(`Specified folder doesn't exists ("${fullPath}").`)
+      throw new Error(`Specified folder doesn't exist ("${fullPath}").`)
     } catch (err) {
       throw new Error(
         `Unable to write in the specified folder ("${fullPath}"). Please check configuration or disable log file output`
@@ -105,7 +104,7 @@ export class LoggerFilePersister {
     }
 
     if (process.env.DEBUG_LOGGER) {
-      this.logger.debug(`Saving ${this.batch.length} logs`)
+      this.logger.debug(`Saving ${this.batch.length} log${this.batch.length === 1 ? '' : 's'}`)
     }
 
     const content = this.batch.join('')

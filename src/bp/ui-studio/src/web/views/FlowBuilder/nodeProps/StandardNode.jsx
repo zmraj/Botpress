@@ -11,8 +11,11 @@ const style = require('./style.scss')
 
 export default class StandardNodePropertiesPanel extends Component {
   renameNode = text => {
-    if (text && text !== this.props.node.name) {
-      this.props.updateNode({ name: text })
+    if (text) {
+      const alreadyExists = this.props.flow.nodes.find(x => x.name === text)
+      if (!alreadyExists) {
+        this.props.updateNode({ name: text })
+      }
     }
   }
 
@@ -68,7 +71,7 @@ export default class StandardNodePropertiesPanel extends Component {
                 readOnly={readOnly}
                 items={node.onReceive}
                 header="On Receive"
-                waitable={true}
+                waitable
                 onItemsUpdated={items => this.props.updateNode({ onReceive: items })}
                 copyItem={item => this.props.copyFlowNodeElement({ action: item })}
                 pasteItem={() => this.props.pasteFlowNodeElement('onReceive')}

@@ -10,7 +10,6 @@ import { renderTemplate } from '../../../misc/templating'
 import { TYPES } from '../../../types'
 import ActionService from '../../action/action-service'
 import { VmRunner } from '../../action/vm'
-import { BPError } from '../errors'
 
 import { Instruction, InstructionType, ProcessingResult } from '.'
 
@@ -184,7 +183,14 @@ export class TransitionStrategy implements InstructionStrategy {
     }
   }
 
-  private async runCode(instruction, sandbox): Promise<any> {
+  private async runCode(instruction: Instruction, sandbox): Promise<any> {
+    if (instruction.fn === 'true') {
+      return true
+    } else if (instruction.fn && instruction.fn.match(/^event\.nlu\.intent\.name === '([a-zA-Z0-9_-]+)'$/)) {
+      const fn = new Function(...Object.keys(sandbox), `return ${instruction.fn}`)
+      return fn(...Object.values(sandbox))
+    }
+
     const vm = new NodeVM({
       wrapper: 'none',
       sandbox: sandbox,
