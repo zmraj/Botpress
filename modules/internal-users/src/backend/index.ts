@@ -4,10 +4,6 @@ import _ from 'lodash'
 
 import authGate from './authGate'
 
-const onServerStarted = async (bp: typeof sdk) => {}
-
-const onServerReady = async (bp: typeof sdk) => {}
-
 const skillsToRegister: sdk.Skill[] = [
   {
     id: 'AuthGate',
@@ -18,8 +14,6 @@ const skillsToRegister: sdk.Skill[] = [
 ]
 
 const entryPoint: sdk.ModuleEntryPoint = {
-  onServerStarted,
-  onServerReady,
   definition: {
     name: 'internal-users',
     menuIcon: 'users',
