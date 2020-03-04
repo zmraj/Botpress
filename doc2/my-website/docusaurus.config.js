@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2017-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 module.exports = {
   title: 'My Site',
   tagline: 'The tagline of my site',
@@ -36,14 +29,22 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Docs',
-              to: 'docs/overview'
+              label: 'Style Guide',
+              to: 'docs/doc1'
+            },
+            {
+              label: 'Second Doc',
+              to: 'docs/doc2'
             }
           ]
         },
         {
           title: 'Community',
           items: [
+            {
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/docusaurus'
+            },
             {
               label: 'Discord',
               href: 'https://discordapp.com/invite/docusaurus'
@@ -56,16 +57,19 @@ module.exports = {
             {
               label: 'Blog',
               to: 'blog'
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/facebook/docusaurus'
+            },
+            {
+              label: 'Twitter',
+              href: 'https://twitter.com/docusaurus'
             }
           ]
         }
       ],
-      logo: {
-        alt: 'Facebook Open Source Logo',
-        src: 'https://docusaurus.io/img/oss_logo.png',
-        href: 'https://opensource.facebook.com/'
-      },
-      copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc. Built with Docusaurus.`
+      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`
     }
   },
   presets: [
@@ -73,7 +77,8 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js')
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/'
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css')
