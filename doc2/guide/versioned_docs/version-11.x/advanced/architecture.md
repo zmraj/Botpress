@@ -1,7 +1,6 @@
 ---
-id: version-11.8.1-architecture
+id: architecture
 title: Architecture Overview
-original_id: architecture
 ---
 
 ## Cluster Overview

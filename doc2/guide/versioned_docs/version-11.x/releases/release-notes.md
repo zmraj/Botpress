@@ -1,7 +1,6 @@
 ---
-id: version-11.9.6-release-notes
+id: release-notes
 title: Release Notes
-original_id: release-notes
 ---
 
 ## Bug fixes

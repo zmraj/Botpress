@@ -1,7 +1,6 @@
 ---
-id: version-11.9.4-web
+id: web
 title: Website Embedding
-original_id: web
 ---
 
 ## Embedding

@@ -1,7 +1,6 @@
 ---
-id: version-11.8.1-converse
+id: converse
 title: Converse API
-original_id: converse
 ---
 
 The Converse API is an easy way to integrate Botpress with any application or any other channels. This API will allow you to speak to your bot and get an answer synchronously.

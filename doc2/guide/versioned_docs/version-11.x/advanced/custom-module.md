@@ -1,7 +1,6 @@
 ---
-id: version-11.8.1-custom-module
+id: custom-module
 title: Custom Module
-original_id: custom-module
 ---
 
 ## Module Templates

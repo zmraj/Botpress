@@ -1,7 +1,6 @@
 ---
-id: version-11.6.0-jump-to
+id: jump-to
 title: Jump To
-original_id: jump-to
 ---
 
 The flow-editor allows you to visually design the flow of the conversation. However, it may be easier for you to jump to a specific conversation node programmatically, when a specific set of conditions is met.

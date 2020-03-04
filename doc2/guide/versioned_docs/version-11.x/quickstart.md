@@ -1,7 +1,6 @@
 ---
-id: version-11.8.1-quickstart
+id: quickstart
 title: Quick Start
-original_id: quickstart
 ---
 
 ## Admin

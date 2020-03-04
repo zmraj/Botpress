@@ -1,7 +1,6 @@
 ---
-id: version-11.8.1-monitoring
+id: monitoring
 title: Monitoring & Alerting
-original_id: monitoring
 ---
 
 ## Server Monitoring

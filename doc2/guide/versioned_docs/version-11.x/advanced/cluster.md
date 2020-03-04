@@ -1,7 +1,6 @@
 ---
-id: version-11.9.5-cluster
+id: cluster
 title: Clustering
-original_id: cluster
 ---
 
 ## Requirements

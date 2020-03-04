@@ -1,7 +1,6 @@
 ---
-id: version-11.9.5-existing-backend
+id: existing-backend
 title: Connecting your bot with your existing backend
-original_id: existing-backend
 ---
 
 Botpress makes it easy to communicate data securely between your backend and your bot using JWT. Store any data you'd like in the token and pass it to the webchat using the `externalAuthToken` configuration option.

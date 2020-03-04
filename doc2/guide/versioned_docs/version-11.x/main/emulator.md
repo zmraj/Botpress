@@ -1,7 +1,6 @@
 ---
-id: version-11.9.5-emulator
+id: emulator
 title: Emulator
-original_id: emulator
 ---
 
 You can debug your bot conversation by using the built-in Emulator Window. The emulator is meant for developers to debug the conversations and is not meant to replicate what the end-users will see visually (i.e. some messages will not render properly). To visualize the full user experience, you should use the Web Channel directly.

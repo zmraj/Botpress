@@ -1,7 +1,6 @@
 ---
-id: version-11.9.5-debug
+id: debug
 title: Debug
-original_id: debug
 ---
 
 ## How To Use

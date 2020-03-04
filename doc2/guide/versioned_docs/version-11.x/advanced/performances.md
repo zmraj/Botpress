@@ -1,7 +1,6 @@
 ---
-id: version-11.8.1-performances
+id: performances
 title: Hardware & Performances
-original_id: performances
 ---
 
 ## Hardware Requirements

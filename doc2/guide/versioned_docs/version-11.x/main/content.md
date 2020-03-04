@@ -1,7 +1,6 @@
 ---
-id: version-11.8.1-content
+id: content
 title: CMS
-original_id: content
 ---
 
 Botpress includes its own **Content Management System** (or **CMS**) to manage all the content of a bot. Everything your bot says comes from the CMS. Before we start discussing how you can create and edit the content of your bot, we should understand the different concepts of the CMS in Botpress.

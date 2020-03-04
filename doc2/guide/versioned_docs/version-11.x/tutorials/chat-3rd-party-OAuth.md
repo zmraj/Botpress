@@ -1,7 +1,6 @@
 ---
-id: version-11.9.5-chat-3rd-party-OAuth
+id: chat-3rd-party-OAuth
 title: Authenticate a user against a 3rd Party OAuth
-original_id: chat-3rd-party-OAuth
 ---
 
 ## Overview

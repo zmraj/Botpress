@@ -1,7 +1,6 @@
 ---
-id: version-11.8.1-faq
+id: faq
 title: FAQ
-original_id: faq
 ---
 
 ## How can I test a channel locally?

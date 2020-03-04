@@ -1,7 +1,6 @@
 ---
-id: version-11.6.0-shortlinks
+id: shortlinks
 title: Shortlinks
-original_id: shortlinks
 ---
 
 In Botpress you can natively create shortlinks to your bot.

@@ -1,7 +1,6 @@
 ---
-id: version-11.9.5-pipelines
+id: pipelines
 title: Pipelines
-original_id: pipelines
 ---
 
 ## Overview

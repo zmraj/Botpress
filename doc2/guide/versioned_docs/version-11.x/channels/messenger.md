@@ -1,7 +1,6 @@
 ---
-id: version-11.8.3-messenger
+id: messenger
 title: Facebook Messenger
-original_id: messenger
 ---
 
 ## Requirements

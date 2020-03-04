@@ -1,7 +1,6 @@
 ---
-id: version-11.9.5-code
+id: code
 title: Actions & Hooks
-original_id: code
 ---
 
 There are two ways of easily adding custom code to enrich your bot's experience: **Actions** and **Hooks**.

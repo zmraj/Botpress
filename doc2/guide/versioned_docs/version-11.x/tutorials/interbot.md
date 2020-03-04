@@ -1,7 +1,6 @@
 ---
-id: version-11.7.1-interbot
+id: interbot
 title: Inter-bot Communication / Delegation
-original_id: interbot
 ---
 
 ## Overview

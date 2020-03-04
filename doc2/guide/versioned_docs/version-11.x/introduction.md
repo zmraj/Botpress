@@ -1,7 +1,6 @@
 ---
-id: version-11.0.1-introduction
+id: introduction
 title: Introduction
-original_id: introduction
 ---
 
 Building bots is something new and sounds like a fun challenge for most developers. To be able to create software that converses in a natural way with humans is an exciting new reality. The problem is that you don’t want to spend hundreds of hours learning and putting together all the infrastructure and boilerplate code required to get a basic conversational backend up and running.

@@ -1,7 +1,6 @@
 ---
-id: version-11.2.0-troubleshoot
+id: troubleshoot
 title: Troubleshoot
-original_id: troubleshoot
 ---
 
 If you didn't get any error when starting Botpress for the first time, you can ship this section and move to the [**Quick Start**](/docs/quickstart) guide.

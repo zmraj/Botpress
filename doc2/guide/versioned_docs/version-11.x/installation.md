@@ -1,7 +1,6 @@
 ---
-id: version-11.8.1-installation
+id: installation
 title: Installation
-original_id: installation
 ---
 
 Getting started with Botpress is very easy. We build and distribute binaries of the latest stable version and we also have nightly builds of the master branch on Github.

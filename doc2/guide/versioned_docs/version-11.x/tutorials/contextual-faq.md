@@ -1,7 +1,6 @@
 ---
-id: version-11.7.1-contextual-faq
+id: contextual-faq
 title: Contextual FAQ
-original_id: contextual-faq
 ---
 
 ## Create a context

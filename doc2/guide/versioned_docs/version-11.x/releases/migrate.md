@@ -1,7 +1,6 @@
 ---
-id: version-11.9.5-migrate
+id: migrate
 title: Migrations
-original_id: migrate
 ---
 
 ## Migration from 11.7 to 11.8

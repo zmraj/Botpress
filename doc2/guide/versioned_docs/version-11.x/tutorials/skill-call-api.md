@@ -1,7 +1,6 @@
 ---
-id: version-11.8.3-skill-call-api
+id: skill-call-api
 title: How to use Call API
-original_id: skill-call-api
 ---
 
 ## Overview

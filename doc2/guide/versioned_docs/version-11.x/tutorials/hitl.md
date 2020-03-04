@@ -1,7 +1,6 @@
 ---
-id: version-11.8.1-hitl
+id: hitl
 title: Human in the loop
-original_id: hitl
 ---
 
 Botpress allows you to build a powerful tool for autonomous communication with your users.
@@ -24,8 +23,8 @@ There are several ways you can pause the conversation:
 
 - from the admin-panel, toggling the appropriate button
 - by performing an API-request:
-  - POST /mod/hitl/sessions/{$id}/pause
-  - POST /mod/hitl/sessions/{$id}/unpause
+  - POST /mod/hitl/sessions/{\$id}/pause
+  - POST /mod/hitl/sessions/{\$id}/unpause
   - POST /mod/hitl/channel/{$channel}/user/{$userId}/pause
   - POST /mod/hitl/channel/{$channel}/user/{$userId}/unpause
 

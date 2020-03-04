@@ -1,7 +1,6 @@
 ---
-id: version-11.9.5-rbac
+id: rbac
 title: Configuring RBAC
-original_id: rbac
 ---
 
 > **Note**: This is a Botpress Pro feature

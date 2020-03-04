@@ -1,7 +1,6 @@
 ---
-id: version-11.9.0-skill-slot
+id: skill-slot
 title: How to use Slot Skill
-original_id: skill-slot
 ---
 
 ## Overview
