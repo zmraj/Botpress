@@ -48,11 +48,16 @@
       "version-11.x/tutorials/version-11.9.0-skill-slot",
       "version-11.x/tutorials/version-11.8.3-skill-call-api",
       "version-11.x/tutorials/version-11.9.2-external-api",
+      "version-11.x/tutorials/version-11.6.0-shortlinks",
       "version-11.x/tutorials/version-11.9.5-existing-backend",
       "version-11.x/tutorials/version-11.8.1-database",
-      "version-11.x/tutorials/version-11.8.1-hitl",
       "version-11.x/tutorials/version-11.8.1-timeouts",
-      "version-11.x/tutorials/version-11.9.5-chat-3rd-party-OAuth"
+      "version-11.x/tutorials/version-11.8.1-hitl",
+      "version-11.x/tutorials/version-11.6.0-jump-to",
+      "version-11.x/tutorials/version-11.7.1-interbot",
+      "version-11.x/tutorials/version-11.7.1-contextual-faq",
+      "version-11.x/tutorials/version-11.9.5-chat-3rd-party-OAuth",
+      "version-11.x/tutorials/version-11.7.3-listen-file-changes"
     ],
     "Pro Edition": [
       "version-11.x/pro/version-11.8.1-about-pro",
