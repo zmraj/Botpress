@@ -8,7 +8,7 @@ module.exports = {
   projectName: 'docusaurus', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: "| Developer's Guide",
       logo: {
         alt: 'Botpress',
         src: 'img/logo.svg'
@@ -31,12 +31,12 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Style Guide',
-              to: 'docs/doc1'
+              label: 'Getting Started',
+              to: 'docs/introduction'
             },
             {
-              label: 'Second Doc',
-              to: 'docs/doc2'
+              label: 'API Reference',
+              to: 'https://botpress.com/reference/'
             }
           ]
         },
@@ -44,34 +44,30 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus'
+              label: 'Forum',
+              href: 'https://forum.botpress.com/'
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus'
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/search?q=botpress'
             }
           ]
         },
         {
-          title: 'Social',
+          title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: 'blog'
-            },
-            {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus'
+              to: 'https://github.com/botpress'
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/docusaurus'
+              href: 'https://twitter.com/getbotpress'
             }
           ]
         }
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`
+      copyright: `Copyright © ${new Date().getFullYear()} Botpress, Inc.`
     }
   },
   presets: [
