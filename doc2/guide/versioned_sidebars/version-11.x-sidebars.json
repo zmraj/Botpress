@@ -19,7 +19,7 @@
       "version-11.x/advanced/version-11.9.5-pipelines",
       "version-11.x/advanced/version-11.9.5-cluster"
     ],
-    "Channels": [],
+    "Channels": ["version-11.x/channels/version-11.9.4-web"],
     "Tutorials": [
       "version-11.x/tutorials/version-11.9.5-proactive",
       "version-11.x/tutorials/version-11.9.5-existing-backend",
