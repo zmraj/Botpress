@@ -10,7 +10,7 @@ module.exports = {
     navbar: {
       title: 'My Site',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Botpress',
         src: 'img/logo.svg'
       },
       links: [
