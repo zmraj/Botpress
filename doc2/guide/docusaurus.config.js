@@ -1,3 +1,5 @@
+const versions = require('./versions.json')
+
 module.exports = {
   title: "Developer's Guide",
   tagline: 'The tagline of my site',
@@ -14,6 +16,17 @@ module.exports = {
         src: 'img/logo.svg'
       },
       links: [
+        {
+          to: 'versions',
+          label: `${versions[0]}`,
+          position: 'left',
+          style: {
+            whiteSpace: 'nowrap',
+            padding: '0.25rem 0.5rem 0.2rem 0.25rem',
+            fontSize: 'calc(0.9 * var(--ifm-font-size-base))',
+            textDecoration: 'underline'
+          }
+        },
         { to: 'docs/overview', label: 'Docs', position: 'right' },
         { to: 'https://botpress.com/reference/', label: 'SDK', position: 'right' },
         { to: 'https://forum.botpress.com/', label: 'Community', position: 'right' },

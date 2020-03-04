@@ -1,0 +1,278 @@
+{
+  "version-11.x/docs": [
+    {
+      "type": "category",
+      "label": "Release Notes",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-11.x/release-notes"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/migrate"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Getting Started",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-11.x/introduction"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/installation"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/quickstart"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/updating"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/troubleshoot"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Main Concepts",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-11.x/overview"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/content"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/dialog"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/code"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/memory"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/module"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/nlu"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/emulator"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Advanced Guides",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-11.x/debug"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/configuration"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/authentication"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/i18n"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/custom-module"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/analytics"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/performances"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/hosting"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/versions"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/pipelines"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/development-pipeline"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/cluster"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/monitoring"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Channels",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-11.x/web"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/messenger"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/telegram"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/teams"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/converse"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/slack"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/smooch"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/faq"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Tutorials",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-11.x/cluster-digital-ocean"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/intent-matching"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/proactive"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/carousel-postback"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/skill-slot"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/skill-call-api"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/external-api"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/shortlinks"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/existing-backend"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/database"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/timeouts"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/hitl"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/jump-to"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/interbot"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/contextual-faq"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/chat-3rd-party-OAuth"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/listen-file-changes"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/3rd-party-NLU"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/uipath"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Pro Edition",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-11.x/about-pro"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/licensing"
+        },
+        {
+          "type": "doc",
+          "id": "version-11.x/rbac"
+        }
+      ]
+    }
+  ]
+}
