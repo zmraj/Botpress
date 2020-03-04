@@ -1,5 +1,5 @@
 ---
-id: listen-for-file-changes
+id: listen-file-changes
 title: Listening for file changes
 ---
 

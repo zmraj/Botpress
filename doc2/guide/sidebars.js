@@ -7,61 +7,46 @@
 
 module.exports = {
   docs: {
-    'Getting Started': [
-      'introduction',
-      'installation',
-      'quickstart',
-      'about-pro',
-      'licensing',
-      'updating',
-      'troubleshoot'
-    ],
-    'Building Bots': [
-      'overview',
-      { type: 'category', label: 'Concepts', items: ['dialog', 'memory', 'code'] },
-      {
-        type: 'category',
-        label: 'Channels',
-        items: ['channels', 'web', 'teams', 'slack', 'converse', 'messenger', 'telegram']
-      },
-      { type: 'category', label: 'Flows', items: ['timeouts'] },
-      {
-        type: 'category',
-        label: 'NLU',
-        items: ['nlu', 'intent-matching', 'contextual-faq', 'skill-slot', '3rd-party-NLU']
-      },
-      { type: 'category', label: 'CMS', items: ['content', 'i18n', 'carousel-postback'] },
-      { type: 'category', label: 'Modules', items: ['module', 'hitl', 'custom-module', 'uipath'] },
-      { type: 'category', label: 'Debugging', items: ['debug', 'emulator'] },
-      { type: 'category', label: 'Skills', items: ['skill-call-api'] },
-      {
-        type: 'category',
-        label: 'Patterns',
-        items: ['jump-to', 'listen-for-file-changes', 'chat-3rd-party-OAuth', 'external-api', 'interbot']
-      },
-      'existing-backend',
-      'faq',
-      'migrate',
-      'proactive',
-      'shortlinks'
-    ],
-    'Managing Botpress': [
-      'hosting',
-      'database',
+    'Release Notes': ['release-notes', 'migrate'],
+    'Getting Started': ['introduction', 'installation', 'quickstart', 'updating', 'troubleshoot'],
+    'Main Concepts': ['overview', 'content', 'dialog', 'code', 'memory', 'module', 'nlu', 'emulator'],
+    'Advanced Guides': [
+      'debug',
       'configuration',
-      'cluster-digital-ocean',
-      'cluster',
-      'performances',
-      'rbac',
-      'analytics',
       'authentication',
-      'release-notes',
+      'i18n',
+      'custom-module',
+      'analytics',
+      'performances',
+      'hosting',
+      'versions',
       'pipelines',
       'development-pipeline',
-      'versions',
-      'authentication',
-      'sync-changes',
+      'cluster',
       'monitoring'
-    ]
+    ],
+    Channels: ['web', 'messenger', 'telegram', 'teams', 'converse', 'slack', 'smooch', 'faq'],
+    Tutorials: [
+      'cluster-digital-ocean',
+      'intent-matching',
+      'proactive',
+      'carousel-postback',
+      'skill-slot',
+      'skill-call-api',
+      'external-api',
+      'shortlinks',
+      'existing-backend',
+      'database',
+      'timeouts',
+      'hitl',
+      'jump-to',
+      'interbot',
+      'contextual-faq',
+      'chat-3rd-party-OAuth',
+      'listen-file-changes',
+      '3rd-party-NLU',
+      'uipath'
+    ],
+    'Pro Edition': ['about-pro', 'licensing', 'rbac']
   }
 }
