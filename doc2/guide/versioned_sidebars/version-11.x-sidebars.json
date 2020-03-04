@@ -4,7 +4,13 @@
       "version-11.x/releases/version-11.9.6-release-notes",
       "version-11.x/releases/version-11.9.5-migrate"
     ],
-    "Getting Started": ["version-11.x/version-11.9.5-updating"],
+    "Getting Started": [
+      "version-11.x/version-11.0.1-introduction",
+      "version-11.x/version-11.8.1-installation",
+      "version-11.x/version-11.8.1-quickstart",
+      "version-11.x/version-11.9.5-updating",
+      "version-11.x/version-11.2.0-troubleshoot"
+    ],
     "Main Concepts": [
       "version-11.x/main/version-11.9.2-overview",
       "version-11.x/main/version-11.8.1-content",
