@@ -7,8 +7,11 @@
     "Getting Started": ["version-11.x/version-11.9.5-updating"],
     "Main Concepts": [
       "version-11.x/main/version-11.9.2-overview",
+      "version-11.x/main/version-11.8.1-content",
+      "version-11.x/main/version-11.8.1-dialog",
       "version-11.x/main/version-11.9.5-code",
       "version-11.x/main/version-11.9.2-memory",
+      "version-11.x/main/version-11.8.1-module",
       "version-11.x/main/version-11.9.5-nlu",
       "version-11.x/main/version-11.9.5-emulator"
     ],
@@ -17,14 +20,22 @@
       "version-11.x/advanced/version-11.9.5-configuration",
       "version-11.x/advanced/version-11.9.5-authentication",
       "version-11.x/advanced/version-11.9.5-i18n",
+      "version-11.x/advanced/version-11.8.1-custom-module",
+      "version-11.x/advanced/version-11.8.1-analytics",
+      "version-11.x/advanced/version-11.8.1-architecture",
+      "version-11.x/advanced/version-11.8.1-performances",
       "version-11.x/advanced/version-11.9.5-hosting",
+      "version-11.x/advanced/version-11.8.1-versions",
       "version-11.x/advanced/version-11.9.5-pipelines",
-      "version-11.x/advanced/version-11.9.5-cluster"
+      "version-11.x/advanced/version-11.9.5-cluster",
+      "version-11.x/advanced/version-11.8.1-monitoring"
     ],
     "Channels": [
       "version-11.x/channels/version-11.9.4-web",
       "version-11.x/channels/version-11.8.3-messenger",
-      "version-11.x/channels/version-11.9.0-telegram"
+      "version-11.x/channels/version-11.9.0-telegram",
+      "version-11.x/channels/version-11.8.1-converse",
+      "version-11.x/channels/version-11.8.1-faq"
     ],
     "Tutorials": [
       "version-11.x/tutorials/version-11.9.5-proactive",
@@ -32,8 +43,15 @@
       "version-11.x/tutorials/version-11.8.3-skill-call-api",
       "version-11.x/tutorials/version-11.9.2-external-api",
       "version-11.x/tutorials/version-11.9.5-existing-backend",
+      "version-11.x/tutorials/version-11.8.1-database",
+      "version-11.x/tutorials/version-11.8.1-hitl",
+      "version-11.x/tutorials/version-11.8.1-timeouts",
       "version-11.x/tutorials/version-11.9.5-chat-3rd-party-OAuth"
     ],
-    "Pro Edition": ["version-11.x/pro/version-11.9.5-licensing", "version-11.x/pro/version-11.9.5-rbac"]
+    "Pro Edition": [
+      "version-11.x/pro/version-11.8.1-about-pro",
+      "version-11.x/pro/version-11.9.5-licensing",
+      "version-11.x/pro/version-11.9.5-rbac"
+    ]
   }
 }
