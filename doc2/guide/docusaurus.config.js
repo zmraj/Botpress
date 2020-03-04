@@ -14,9 +14,11 @@ module.exports = {
         src: 'img/logo.svg'
       },
       links: [
-        { to: 'docs/overview', label: 'Docs', position: 'left' },
+        { to: 'docs/overview', label: 'Docs', position: 'right' },
+        { to: 'https://botpress.com/reference/', label: 'SDK', position: 'right' },
+        { to: 'https://forum.botpress.com/', label: 'Community', position: 'right' },
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/botpress/botpress',
           label: 'GitHub',
           position: 'right'
         }
