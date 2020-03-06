@@ -34,10 +34,10 @@ The first time you run Botpress, the built-in modules take some time to install.
 
 Once the modules are installed and loaded, you should see something similar to the screenshot below.
 
-![First Run](assets/server-start.png)
+![First Run](/img/server-start.png)
 
 ### Commands
 
 You may also start Botpress Server using the Command Line Interface (CLI). To see all the commands available, run `./bp --help`.
 
-![CLI Start](assets/cli-help.png)
+![CLI Start](/img/cli-help.png)

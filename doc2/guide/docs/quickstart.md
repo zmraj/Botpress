@@ -20,7 +20,7 @@ In Botpress, bots are assigned to a workspace. When you start Botpress for the f
 
 Let's create a new bot by first navigating to your workspace, then click the "Create Bot" button.
 
-![Create Bot](assets/workspace_bot.png)
+![Create Bot](/img/workspace_bot.png)
 
 All you have to do is pick a name for your bot and a unique `Bot ID` will be generated for you.
 
@@ -42,15 +42,15 @@ You will notice on the left there are a couple of sections available. Some of th
 
 To test your bot, there are two different kinds of emulators. You can use the built-in chat emulator located in the bottom right corner, which is exactly what your visitors will face when they speak with your bot. You can also start a new conversation with your bot by clicking the reset button.
 
-![Toolbar Chat](assets/studio-toolbar.jpg)
+![Toolbar Chat](/img/studio-toolbar.jpg)
 
 Open the chat window and say "_Hello_". The bot should greet you with something like "_May I know your name?_".
 
-![Hello from the bot](assets/flow_page.png)
+![Hello from the bot](/img/flow_page.png)
 
 There is another emulator, which is specifically designed for you (the bot owner) to understand quickly why the bot gives you a specific answer. That emulator is only available for authenticated users. It includes all sorts of useful information: a list of suggested answers by module, nlu intents, and the elected suggestion.
 
-![Emulator Hello](assets/emulator_ng.png)
+![Emulator Hello](/img/emulator_ng.png)
 
 ### Question and Answer
 
@@ -68,7 +68,7 @@ The QnA module will automatically retrain the NLU model in the background and te
 
 ##### QnA Example
 
-![A new QnA](assets/newqna.png)
+![A new QnA](/img/newqna.png)
 
 ## Share your bot
 

@@ -5,7 +5,7 @@ title: Architecture Overview
 
 ## Cluster Overview
 
-![High-Level Diagram](assets/bp-cluster.png)
+![High-Level Diagram](/img/bp-cluster.png)
 
 ### Prerequisite
 
@@ -17,4 +17,4 @@ To deploy Botpress in production, you'll need the following software:
 
 ## Interfaces Overview
 
-![HTTP Interfaces](assets/http-interfaces.png)
+![HTTP Interfaces](/img/http-interfaces.png)
