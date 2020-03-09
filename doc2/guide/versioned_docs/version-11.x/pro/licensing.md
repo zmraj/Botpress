@@ -3,6 +3,8 @@ id: licensing
 title: Licensing
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Requirements
 
 To enable Botpress pro features, you need to create a Botpress account, customize & buy your license and finally activate it on your Botpress Server installation. Everything you need to know is in this guide, we'll walk you to the process step by step.
@@ -22,7 +24,7 @@ Before we move on, make sure to have the followings :
 
 In order to buy a pro license, you need to create an account on our botpress licensing server (different from the account you created to access your botpress installation). To do so, open your Botpress admin and go to My Account in your user top right menu.
 
-![BP account menu](/img/bp-account-menu.jpg)
+<img alt="BP account menu" src={useBaseUrl('img/bp-account-menu.jpg')} />
 
 Go on the **My Botpress Account** tab and click on **Login to Botpress**. There you'll end up on a login/register screen make sure to click on **Create an account** if you don't have any yet. Fill the form and hit Register. Check your mails, a verification email will be sent shortly.
 
@@ -36,11 +38,11 @@ Now that we have a Botpress account setup, we can buy license. Go ahead an click
 
 Note that all bots will run on a single instance, where you might end up with a scalability issue when your bot hit a certain messages / sec threshold. To address this problem, we allow our clients to scale their Botpress installation to [multiple nodes](/docs/advanced/cluster). You can add as many additional Nodes to your license as you need.
 
-![BP customize license](/img/bp-customize-license.jpg)
+<img alt="BP customize license" src={useBaseUrl('img/bp-customize-license.jpg')} />
 
 Don't worry, you don't have to plan everything in advance, you can always change your plan later on. If you feel like you need additional support from the Botpress team, you can check the Gold support. Go ahead and complete the checkout form! If all is fine, you should end up with a screen like the following :
 
-![BP license keys not active](/img/bp-keys-not-active.jpg)
+<img alt="BP license keys not active" src={useBaseUrl('img/bp-keys-not-active.jpg')} />
 
 ## Activate a license
 
@@ -55,7 +57,7 @@ To activate your license on your current Botpress installation, simply click on 
 
 This will add the license key in your Botpress.config.json file and assign your current cluster fingerprint to the license on our license server. Botpress pro features should now be unlocked, your key should be marked as assigned and there should be an **active** label on your license list.
 
-![BP license keys active](/img/bp-keys-active.jpg)
+<img alt="BP license keys active" src={useBaseUrl('img/bp-keys-active.jpg')} />
 
 ### Offline Server
 
@@ -67,19 +69,19 @@ This will add the license key in your Botpress.config.json file and assign your 
 1. Restart your **offline** server
 1. Go to `Admin > Server > Server License` and locate your Fingerprint
 
-![BP license fingerprint](/img/licensing-fingerprint.png)
+<img alt="BP license fingerprint" src={useBaseUrl('img/licensing-fingerprint.png')} />
 
 5. On the **online** server, assign the copied fingerprint to the license you purchased
 
-![BP assign fingerprint](/img/licensing-assign.png)
+<img alt="BP assign fingerprint" src={useBaseUrl('img/licensing-assign.png')} />
 
 6. Click "Reveal License Key" and copy the license
 
-![BP reveal license](/img/licensing-reveal.png)
+<img alt="BP reveal license" src={useBaseUrl('img/licensing-reveal.png')} />
 
 7. On the **offline** server, paste the license key to active it
 
-![BP license enter key](/img/licensing-enter-key.png)
+<img alt="BP license enter key" src={useBaseUrl('img/licensing-enter-key.png')} />
 
 Your license is now activated on your offline server. The access to internet is no longer required, but its always good to have a secured online instance to manage your licenses.
 
@@ -103,4 +105,4 @@ Once it's done, you can copy the license key visible in **Reveal License key** a
 
 If you happen to breach your license (e.g you try to add more nodes than allowed on your license), your bots wont work anymore until you either update your license or get back to an unbreached license state. If you don't remember the limits of your currently activated license, you can always go to the **Server Settings** page in your user top right menu. There you'll have all information on your current license.
 
-![BP license keys active](/img/bp-server-settings.jpg)
+<img alt="BP license keys active" src={useBaseUrl('img/bp-server-settings.jpg')} />

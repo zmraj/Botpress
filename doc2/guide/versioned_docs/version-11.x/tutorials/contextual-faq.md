@@ -3,6 +3,8 @@ id: contextual-faq
 title: Contextual FAQ
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Create a context
 
 To create context, you have two options:
@@ -23,7 +25,7 @@ Then append the name of your new contexts to `qnaCategories` like so:
 
 Once you have created your contexts, you can create your QNAs and assign a context to them. From the `category` menu, choose one of your contexts:
 
-![Category](/img/faq-qna-category.png)
+<img alt="Category" src={useBaseUrl('img/faq-qna-category.png')} />
 
 ## Add contexts to your flow
 
@@ -33,7 +35,7 @@ The final step is to set the desired context at the appropriate time in your flo
 
 To set a context, let's use the `appendContext` action and add our new context in the `contexts` field. You can use comma-separated values to pass multiple contexts.
 
-![Actions](/img/faq-append-context.png)
+<img alt="Actions" src={useBaseUrl('img/faq-append-context.png')} />
 
 ### TTL
 

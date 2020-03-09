@@ -3,6 +3,8 @@ id: memory
 title: Memory
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 In the course of a conversation, you may want to ask questions to the user, and remember his answers to use it later. You may also want to access the values of system parameters such as the values of the slots that were just extracted.
 
 ## System Parameters
@@ -96,7 +98,7 @@ You can consume a memory action just like any other action from the Botpress Flo
 
 ##### Memory Action Example
 
-![Flow Memory Action](/img/flow-memory-action.png)
+<img alt="Flow Memory Action" src={useBaseUrl('img/flow-memory-action.png')} />
 
 ### User Memory
 

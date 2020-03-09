@@ -3,9 +3,11 @@ id: architecture
 title: Architecture Overview
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Cluster Overview
 
-![High-Level Diagram](/img/bp-cluster.png)
+<img alt="High-Level Diagram" src={useBaseUrl('img/bp-cluster.png')} />
 
 ### Prerequisite
 
@@ -17,4 +19,4 @@ To deploy Botpress in production, you'll need the following software:
 
 ## Interfaces Overview
 
-![HTTP Interfaces](/img/http-interfaces.png)
+<img alt="HTTP Interfaces" src={useBaseUrl('img/http-interfaces.png')} />

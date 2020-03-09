@@ -3,6 +3,8 @@ id: pipelines
 title: Pipelines
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Overview
 
 Pipelines are built on top of the multi-bot capability of Botpress. They allow teams to work on bots with multiple **stages** the same way others would work on software products. Different versions of a bot can run and co-exist on different stages. In software development, each team has its own way of working with pipelines and reacting to events along the pipeline, Botpress pipelines let you do the same.
@@ -100,12 +102,12 @@ This simple configuration will activate the pipeline feature.
 
 After defining your pipeline, restart your server and open your admin panel and create a bot. You should then see a pipeline like the following :
 
-![Pipeline](/img/pipeline.png)
+<img alt="Pipeline" src={useBaseUrl('img/pipeline.png')} />
 Go ahead an pick the `promote to next stage` action. You'll see a **copy** of the bot appear in the Staging environment. (`promote_copy` in the stage definition)
-![Pipeline Promote](/img/pipeline_promote.png)
-![Pipeline Promote copy](/img/pipeline_promoted_copy.png)
+<img alt="Pipeline Promote" src={useBaseUrl('img/pipeline_promote.png')} />
+<img alt="Pipeline Promote copy" src={useBaseUrl('img/pipeline_promoted_copy.png')} />
 This time, pick the same action on the Staging bot, you'll notice the bot will **move** to Production. (`promote_move` in the stage definition)
-![Pipeline Promote move](/img/pipeline_promoted_move.png)
+<img alt="Pipeline Promote move" src={useBaseUrl('img/pipeline_promoted_move.png')} />
 
 Want to lock a bot in a particular stage or change it's name along the pipeline ? You can do so using [available hooks](#available-hooks)
 

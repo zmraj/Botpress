@@ -3,6 +3,8 @@ id: installation
 title: Installation
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 Getting started with Botpress is very easy. We build and distribute binaries of the latest stable version and we also have nightly builds of the master branch on Github.
 
 ## Download
@@ -34,10 +36,10 @@ The first time you run Botpress, the built-in modules take some time to install.
 
 Once the modules are installed and loaded, you should see something similar to the screenshot below.
 
-![First Run](/img/server-start.png)
+<img alt="First Run" src={useBaseUrl('img/server-start.png')} />
 
 ### Commands
 
 You may also start Botpress Server using the Command Line Interface (CLI). To see all the commands available, run `./bp --help`.
 
-![CLI Start](/img/cli-help.png)
+<img alt="CLI Start" src={useBaseUrl('img/cli-help.png')} />

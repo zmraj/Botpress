@@ -3,6 +3,8 @@ id: about-pro
 title: About
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Additional Features
 
 | Feature                    | Community | Pro |

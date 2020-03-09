@@ -3,6 +3,8 @@ id: nlu
 title: NLU
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## How it works
 
 The Botpress NLU module will process every incoming messages and will perform Intent Classification, Language Identification, Entity Extraction and Slot Tagging. The structure data that these tasks provide is added to the message metadata directly (under `event.nlu`), ready to be consumed by the other modules and components.
@@ -84,7 +86,7 @@ You can use that metadata in your flows to create transitions when a specific in
 
 ##### Example
 
-![Flow NLU Transition](/img/flow-nlu-transition.jpg)
+<img alt="Flow NLU Transition" src={useBaseUrl('img/flow-nlu-transition.jpg')} />
 
 ### Confidence and debugging
 
@@ -207,7 +209,7 @@ An example of placeholder entity would be : Please tell **Sarah** that **she's l
 
 As of today we provide 2 types of custom entities: [pattern](#pattern-extraction) and [list](#list-extraction) entities. To define a custom entity, head to the **Entity section** of the Understanding Module in your botpress studio side bar. From there you'll be able to define your custom entities that will be available for any input message treated by your chatbot. Go ahead and click on **create new entity**
 
-![](/img/nlu-create-entity.png)
+<img alt="" src={useBaseUrl('img/nlu-create-entity.png')} />
 
 ### Sensitive Information
 
@@ -223,7 +225,7 @@ Once you've created a pattern entity, Botpress Native NLU will perform a regex e
 
 Given a Pattern Entity definition with `[A-Z]{3}-[0-9]{4}-[A-Z]{3}` as pattern:
 
-![create slot](/img/nlu-pattern-entity.png)
+<img alt="create slot" src={useBaseUrl('img/nlu-pattern-entity.png')} />
 
 Extraction will go like:
 
@@ -255,7 +257,7 @@ List extraction will behave in a similar way. The major addition is that for you
 
 Let's take **Airport Codes** as an example:
 
-![create slot](/img/nlu-list-entity.png)
+<img alt="create slot" src={useBaseUrl('img/nlu-list-entity.png')} />
 
 Extraction will go like:
 
@@ -312,11 +314,11 @@ Botpress Native NLU will tag each _words_ (tokens) of user input. If it's correc
 
 To define a slot for a particular intent, head to the **Intent section** of the Understanding Module in your Botpress Studio side bar. From there select the intent you want to add slots to, then you'll be able to define your slots. Go ahead and click on **create a slot**
 
-![create slot](/img/nlu-create-slot.png)
+<img alt="create slot" src={useBaseUrl('img/nlu-create-slot.png')} />
 
 Let's use a `find_flight` intent. In order to book a flight, we'll define 2 slots: `airport_from` and `airport_to` both associated with the `Airport Codes` custom list entity. Once that is done, we need to identify every airport slots.
 
-![tag slots](/img/nlu-tag-slot.png)
+<img alt="tag slots" src={useBaseUrl('img/nlu-tag-slot.png')} />
 
 #### Example
 

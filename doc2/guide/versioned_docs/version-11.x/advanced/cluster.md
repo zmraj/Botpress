@@ -3,6 +3,8 @@ id: cluster
 title: Clustering
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Requirements
 
 - Botpress Pro License

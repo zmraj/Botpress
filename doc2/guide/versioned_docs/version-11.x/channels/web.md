@@ -3,6 +3,8 @@ id: web
 title: Website Embedding
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Embedding
 
 Embedding a bot to your existing site is quite straightforward. You will need to deploy your bot to a server or hosting provider and make it accessible via a URL. You will then be able to add the following script tag to the end of your `index.html` page.
@@ -35,7 +37,7 @@ There is an example included in the default botpress installation at `http://loc
 
 The information page displays information like the website url, a phone number, an e-mail contact address, and links to terms of services and privacy policies. You can also include a cover picture and an avatar for your bot.
 
-![Bot Info Page](/img/webchat-bot-info.png)
+<img alt="Bot Info Page" src={useBaseUrl('img/webchat-bot-info.png')} />
 
 How to set up the information page:
 
@@ -52,7 +54,7 @@ You will see the page when starting a new conversation. The page is always acces
 
 You can customize the look and feel of the Botpress Webchat with a custom stylesheet. Armed with the [list of all overridable classes](https://github.com/botpress/botpress/blob/master/modules/channel-web/assets/default.css) and your browser inspector, you can customize every element of the Webchat.
 
-![WebChat Customization](/img/webchat-customization.png)
+<img alt="WebChat Customization" src={useBaseUrl('img/webchat-customization.png')} />
 
 1. Add the `extraStylesheet: "path/to/custom-style.css"` property to your `window.botpressWebChat.init()` script.
 1. Create your `custom-style.css` file and override the classes of your choice.

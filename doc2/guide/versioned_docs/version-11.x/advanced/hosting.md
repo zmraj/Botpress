@@ -3,6 +3,8 @@ id: hosting
 title: Deployment
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 When you are ready to open your bot to the world, you should deploy it in production mode. When the bot is started in production, the botpress file system (BPFS) is enabled [click here for more details](versions) and debug logs are no longer displayed. We also strongly recommend using a Postgres database instead of the embedded SQLite.
 
 All you need to do is start Botpress with the `-p` flag, like this: `./bp -p`

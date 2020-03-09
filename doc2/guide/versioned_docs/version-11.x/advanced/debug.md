@@ -3,6 +3,8 @@ id: debug
 title: Debug
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## How To Use
 
 Botpress uses the [debug](https://www.npmjs.com/package/debug) package to log information about dialogs, hooks, middleware, nlu and others.
@@ -35,4 +37,4 @@ Go to `<your_url>/admin/debug` to see a complete list of the available namespace
 
 You can also enable or disable them from this screen:
 
-![Debugging](/img/debugging.png)
+<img alt="Debugging" src={useBaseUrl('img/debugging.png')} />

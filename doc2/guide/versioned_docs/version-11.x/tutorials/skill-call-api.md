@@ -3,11 +3,13 @@ id: skill-call-api
 title: How to use Call API
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Overview
 
 The Call API skill is meant to help the users to easily call an API within their flow.
 
-![From Flow Editor](/img/call-api-skill-flow.png)
+<img alt="From Flow Editor" src={useBaseUrl('img/call-api-skill-flow.png')} />
 
 ## Request Options
 
@@ -15,13 +17,13 @@ The Call API skill is meant to help the users to easily call an API within their
 
 The request body can be set here.
 
-![Main View](/img/call-api-skill.png)
+<img alt="Main View" src={useBaseUrl('img/call-api-skill.png')} />
 
 ### Headers
 
 The request headers can be set here and should respect the JSON format.
 
-![Headers](/img/call-api-skill-headers.png)
+<img alt="Headers" src={useBaseUrl('img/call-api-skill-headers.png')} />
 
 ## Response
 
@@ -29,7 +31,7 @@ The request headers can be set here and should respect the JSON format.
 
 To save the response, we use [Memory](../main/memory). By default the response will be saved in `temp.response`, but you can use the memory of your choice.
 
-![Memory](/img/call-api-skill-memory.png)
+<img alt="Memory" src={useBaseUrl('img/call-api-skill-memory.png')} />
 
 The saved response object should look like this:
 
@@ -48,4 +50,4 @@ When a response return a status code `400` and above, the request will result in
 
 Templating is supported in the `body` and the `headers` to get access to your variables stored in [Memory](../main/memory). All `bot`, `user`, `session`, `temp`, `event` are accessible via templating.
 
-![Template](/img/call-api-skill-template.png)
+<img alt="Template" src={useBaseUrl('img/call-api-skill-template.png')} />

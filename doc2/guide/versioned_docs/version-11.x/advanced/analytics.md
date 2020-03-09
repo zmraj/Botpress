@@ -3,6 +3,8 @@ id: analytics
 title: Custom Analytics
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 Custom analytics is all about adding your own metrics. For instance, you could track the number of visitors, the number of customers and the number of customers referrals for your bot.
 
 ### Requirements
@@ -50,7 +52,7 @@ const countGraph = {
 }
 ```
 
-![Count](/img/custom-analytics-count.png)
+<img alt="Count" src={useBaseUrl('img/custom-analytics-count.png')} />
 
 #### CountUniq
 
@@ -65,7 +67,7 @@ const countUniqGraph = {
 }
 ```
 
-![CountUniq](/img/custom-analytics-countuniq.png)
+<img alt="CountUniq" src={useBaseUrl('img/custom-analytics-countuniq.png')} />
 
 #### Percent
 
@@ -81,7 +83,7 @@ const percentGraph = {
 }
 ```
 
-![Percent](/img/custom-analytics-percent.png)
+<img alt="Percent" src={useBaseUrl('img/custom-analytics-percent.png')} />
 
 #### Piechart
 
@@ -96,13 +98,13 @@ const pieChart = {
 }
 ```
 
-![Piechart](/img/custom-analytics-piechart.png)
+<img alt="Piechart" src={useBaseUrl('img/custom-analytics-piechart.png')} />
 
 ## Metrics
 
 The analytics module provides three actions that you can use in your flows to set, increment or decrement your custom metrics.
 
-![Analytics Actions](/img/custom-analytics-actions.png)
+<img alt="Analytics Actions" src={useBaseUrl('img/custom-analytics-actions.png')} />
 
 ### Set
 

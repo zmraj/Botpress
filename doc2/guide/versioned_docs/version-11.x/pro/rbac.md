@@ -3,6 +3,8 @@ id: rbac
 title: Configuring RBAC
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 > **Note**: This is a Botpress Pro feature
 
 **RBAC** (Role-Based Access Control) allows you to control what collaborators have access to.
@@ -13,7 +15,7 @@ By default, Botpress ships with three roles (administrator, developer and conten
 
 From the Administration dashboard, navigate to the "Collaborators" tab and click the "more" arrow on any collaborator to change its role to an existing role.
 
-![RBAC](/img/rbac.png)
+<img alt="RBAC" src={useBaseUrl('img/rbac.png')} />
 
 ## Adding a new role
 
