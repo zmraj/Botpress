@@ -3,6 +3,8 @@ id: slack
 title: Slack
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Requirements
 
 - Set the `externalUrl` field in botpress.config.json

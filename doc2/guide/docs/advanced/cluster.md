@@ -3,6 +3,8 @@ id: cluster
 title: Clustering
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Cluster Overview
 
 ![High-Level Diagram](assets/bp-cluster.png)
@@ -58,7 +60,7 @@ Once the first node is started, use the same command to start Botpress on the ot
 
 Botpress can connect to multiple Redis server for better redundancy if one of the Redis server goes down. To enable this, you must set the `REDIS_URL` variable to a list of host/port combinations.
 
-The list must be provided as a JSON object, see the example below for the correct format. 
+The list must be provided as a JSON object, see the example below for the correct format.
 
 ```bash
 PRO_ENABLED=true

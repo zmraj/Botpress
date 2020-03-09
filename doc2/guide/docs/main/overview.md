@@ -3,6 +3,8 @@ id: overview
 title: Overview
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 There are some concepts that you need to understand before you can build a chatbot using Botpress. On this page you will learn the most important ones and how they play together.
 
 ## Dumb vs Smart
