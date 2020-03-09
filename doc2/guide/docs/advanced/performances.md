@@ -14,4 +14,4 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 Run Botpress with the `bench` command from the command line. You can run this on the Pro binary downloaded from the website. Make sure to adjust the `--url` and `--botId` to match your botpress server url and the ID of your bot.
 
-![Performances Benchmark Tool](assets/performances-benchmark.png)
+<img alt="Performances Benchmark Tool" src={useBaseUrl('img/performances-benchmark.png')} />

@@ -33,8 +33,8 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 2. Restart Botpress
 
-![botToken](assets/slack-botToken.png)
-![signingSecret](assets/slack-secret.png)
+<img alt="botToken" src={useBaseUrl('img/slack-botToken.png')} />
+<img alt="signingSecret" src={useBaseUrl('img/slack-secret.png')} />
 
 ### Configure Callback on Slack
 
