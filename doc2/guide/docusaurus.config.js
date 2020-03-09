@@ -2,12 +2,12 @@ const versions = require('./versions.json')
 
 module.exports = {
   title: "Developer's Guide",
-  tagline: 'The tagline of my site',
-  url: 'https://your-docusaurus-test-site.com',
+  tagline: 'Guides and references for all you need to know about Botpress',
+  url: 'https://botpress.com',
   baseUrl: '/docs2/',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'botpress', // Usually your GitHub org/user name.
+  projectName: 'botpress', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: "| Developer's Guide",
@@ -89,7 +89,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/'
+          editUrl: 'https://github.com/botpress/botpress/edit/master/docs/'
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css')

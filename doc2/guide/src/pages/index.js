@@ -1,78 +1,60 @@
-import React from 'react';
-import classnames from 'classnames';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import styles from './styles.module.css';
+import React from 'react'
+import classnames from 'classnames'
+import Layout from '@theme/Layout'
+import Link from '@docusaurus/Link'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+import styles from './styles.module.css'
 
 const features = [
   {
-    title: <>Easy to Use</>,
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
-    description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
-      </>
-    ),
+    title: <>🚀 Getting Started</>,
+    href: 'docs/introduction',
+    description: <>New to Botpress? This documentation will help you learn the ropes quickly.</>
   },
   {
-    title: <>Focus on What Matters</>,
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
-    description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
-    ),
+    title: <>💡 Tutorials</>,
+    href: 'docs/tutorials/cluster-digital-ocean',
+    description: <>Guides and examples solving typical issues you may run into.</>
   },
   {
-    title: <>Powered by React</>,
-    imageUrl: 'img/undraw_docusaurus_react.svg',
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
-    ),
+    title: <>📘 SDK Reference</>,
+    href: 'https://botpress.com/reference/',
+    description: <>Find all the code references you need in this always up-to-date Botpress SDK Reference.</>
   },
-];
+  {
+    title: <>💻 Code Examples</>,
+    href: 'https://github.com/botpress/botpress/tree/master/examples',
+    description: <>Advanced examples for developers on how you can use Botpress.</>
+  }
+]
 
-function Feature({imageUrl, title, description}) {
-  const imgUrl = useBaseUrl(imageUrl);
+function Feature({ title, href, description }) {
   return (
-    <div className={classnames('col col--4', styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
-        </div>
-      )}
-      <h3>{title}</h3>
+    <div className={classnames('col col--3', styles.feature)}>
+      <h3>
+        <a href={href}>{title}</a>
+      </h3>
       <p>{description}</p>
     </div>
-  );
+  )
 }
 
 function Home() {
-  const context = useDocusaurusContext();
-  const {siteConfig = {}} = context;
+  const context = useDocusaurusContext()
+  const { siteConfig = {} } = context
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+    <Layout title={`Hello from ${siteConfig.title}`} description="Description will go into a meta tag in <head />">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
-              className={classnames(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              to={useBaseUrl('docs/doc1')}>
-              Get Started
+              className={classnames('button button--outline button--secondary button--lg', styles.getStarted)}
+              to={useBaseUrl('docs/doc1')}
+            >
+              Try it out
             </Link>
           </div>
         </div>
@@ -91,7 +73,7 @@ function Home() {
         )}
       </main>
     </Layout>
-  );
+  )
 }
 
-export default Home;
+export default Home
