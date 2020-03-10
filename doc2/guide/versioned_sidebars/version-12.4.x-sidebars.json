@@ -1,0 +1,68 @@
+{
+  "version-12.4.x/docs": {
+    "Release Notes": ["version-12.4.x/releases/release-notes", "version-12.4.x/releases/migrate"],
+    "Getting Started": [
+      "version-12.4.x/introduction",
+      "version-12.4.x/installation",
+      "version-12.4.x/quickstart",
+      "version-12.4.x/updating",
+      "version-12.4.x/troubleshoot"
+    ],
+    "Main Concepts": [
+      "version-12.4.x/main/overview",
+      "version-12.4.x/main/content",
+      "version-12.4.x/main/dialog",
+      "version-12.4.x/main/code",
+      "version-12.4.x/main/memory",
+      "version-12.4.x/main/module",
+      "version-12.4.x/main/nlu",
+      "version-12.4.x/main/emulator"
+    ],
+    "Advanced Guides": [
+      "version-12.4.x/advanced/debug",
+      "version-12.4.x/advanced/configuration",
+      "version-12.4.x/advanced/authentication",
+      "version-12.4.x/advanced/i18n",
+      "version-12.4.x/advanced/custom-module",
+      "version-12.4.x/advanced/analytics",
+      "version-12.4.x/advanced/performances",
+      "version-12.4.x/advanced/hosting",
+      "version-12.4.x/advanced/versions",
+      "version-12.4.x/advanced/pipelines",
+      "version-12.4.x/advanced/development-pipeline",
+      "version-12.4.x/advanced/cluster",
+      "version-12.4.x/advanced/monitoring"
+    ],
+    "Channels": [
+      "version-12.4.x/channels/web",
+      "version-12.4.x/channels/messenger",
+      "version-12.4.x/channels/telegram",
+      "version-12.4.x/channels/teams",
+      "version-12.4.x/channels/converse",
+      "version-12.4.x/channels/slack",
+      "version-12.4.x/channels/faq"
+    ],
+    "Tutorials": [
+      "version-12.4.x/tutorials/cluster-digital-ocean",
+      "version-12.4.x/tutorials/intent-matching",
+      "version-12.4.x/tutorials/proactive",
+      "version-12.4.x/tutorials/carousel-postback",
+      "version-12.4.x/tutorials/skill-slot",
+      "version-12.4.x/tutorials/skill-call-api",
+      "version-12.4.x/tutorials/external-api",
+      "version-12.4.x/tutorials/shortlinks",
+      "version-12.4.x/tutorials/existing-backend",
+      "version-12.4.x/tutorials/database",
+      "version-12.4.x/tutorials/timeouts",
+      "version-12.4.x/tutorials/hitl",
+      "version-12.4.x/tutorials/jump-to",
+      "version-12.4.x/tutorials/interbot",
+      "version-12.4.x/tutorials/contextual-faq",
+      "version-12.4.x/tutorials/chat-3rd-party-OAuth",
+      "version-12.4.x/tutorials/listen-file-changes",
+      "version-12.4.x/tutorials/3rd-party-NLU",
+      "version-12.4.x/tutorials/uipath"
+    ],
+    "Pro Edition": ["version-12.4.x/pro/about-pro", "version-12.4.x/pro/licensing", "version-12.4.x/pro/rbac"]
+  }
+}
