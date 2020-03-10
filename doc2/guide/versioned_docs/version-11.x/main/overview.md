@@ -111,4 +111,4 @@ A module is an extra component outside of the Botpress Core itself that you can 
 
 This is a complete overview of the components implied in processing an event (ex: a message sent by a user). It is mostly informational, you won't use directly most of these components; it's only to get a bigger picture of what is involved and how you can interact
 
-[![Event engine](/img/eventflow.png)](/img/eventflow.png)
+<img alt="Event engine" src={useBaseUrl('img/eventflow.png')} />
