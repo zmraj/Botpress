@@ -339,8 +339,8 @@ module.exports = {
     type: 'object',
     required: ['textEn', 'textAr'],
     properties: {
-      textEn: { type: 'string', title: 'Text (English)' },
-      textAr: { type: 'string', title: 'Text (Arabic)' }
+      textEn: { type: 'string', title: 'Text (English' },
+      textAr: { type: 'string', title: 'Text (Arabic' }
     }
   },
   uiSchema: {},
@@ -406,4 +406,4 @@ temp.quote = quote
 
 And then use the temp memory in another node:
 
-![Get Quote Flow](assets/get-quote.png)
+<img alt="Get Quote Flow" src={useBaseUrl('img/get-quote.png')} />

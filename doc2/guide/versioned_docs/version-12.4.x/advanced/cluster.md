@@ -7,11 +7,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## Cluster Overview
 
-![High-Level Diagram](assets/bp-cluster.png)
+<img alt="High-Level Diagram" src={useBaseUrl('img/bp-cluster.png')} />
 
 ## Interfaces Overview
 
-![HTTP Interfaces](assets/http-interfaces.png)
+<img alt="HTTP Interfaces" src={useBaseUrl('img/http-interfaces.png')} />
 
 ## Requirements
 

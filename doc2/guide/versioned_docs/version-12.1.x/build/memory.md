@@ -26,7 +26,7 @@ You can consume a memory action just like any other action from the Botpress Flo
 
 ##### Memory Action Example
 
-![Flow Memory Action](assets/flow-memory-action.png)
+<img alt="Flow Memory Action" src={useBaseUrl('img/flow-memory-action.png')} />
 
 ### User Memory
 

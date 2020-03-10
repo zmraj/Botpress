@@ -11,11 +11,11 @@ In this tutorial, you will learn how a chatbot could "delegate" questions or tas
 
 The code for this example is available in the [examples](https://github.com/botpress/botpress/tree/master/examples/interbot) directory of our GitHub repository.
 
-![Example](assets/tutorials_interbot-example.png)
+<img alt="Example" src={useBaseUrl('img/tutorials_interbot-example.png')} />
 
 ## Structure
 
-![Diagram](assets/tutorials_interbot-diagram.png)
+<img alt="Diagram" src={useBaseUrl('img/tutorials_interbot-diagram.png')} />
 
 ## Step 1 – Creating the bots
 
@@ -41,7 +41,7 @@ Next, you will need to create a flow that make use of that action. For the sake 
 
 In the `main.flow.json` flow of your master bot, recreate the structure below.
 
-![Flow](assets/tutorials_interbot-flow.png)
+<img alt="Flow" src={useBaseUrl('img/tutorials_interbot-flow.png')} />
 
 The content of the text element is the following:
 

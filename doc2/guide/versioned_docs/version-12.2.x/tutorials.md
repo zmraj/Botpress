@@ -338,8 +338,8 @@ module.exports = {
     type: 'object',
     required: ['textEn', 'textAr'],
     properties: {
-      textEn: { type: 'string', title: 'Text (English)' },
-      textAr: { type: 'string', title: 'Text (Arabic)' }
+      textEn: { type: 'string', title: 'Text (English' },
+      textAr: { type: 'string', title: 'Text (Arabic' }
     }
   },
   uiSchema: {},

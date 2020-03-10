@@ -14,7 +14,7 @@ Modules are a powerful way to extend the default functionalities of Botpress. Th
 
 Example of Module Views for Analytics, NLU and QNA:
 
-![Sidebar Modules](assets/modules-views.gif)
+<img alt="Sidebar Modules" src={useBaseUrl('img/modules-views.gif')} />
 
 ## List of existing modules
 

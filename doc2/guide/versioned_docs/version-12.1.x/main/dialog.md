@@ -41,7 +41,7 @@ Nodes are the primary units of the conversational logic of your bot. **An active
 
 A _node_ is separated into three different stages: **onEnter** (A), **onReceive** (B) and **onNext** (C).
 
-![Typical Flow Node](assets/flow_node.png)
+<img alt="Typical Flow Node" src={useBaseUrl('img/flow_node.png')} />
 
 ### Node Lifecycle
 
@@ -55,7 +55,7 @@ A _node_ is separated into three different stages: **onEnter** (A), **onReceive*
 
 When this property is left unused, the node is non-blocking (black), which means it will flow straight from the `onEnter` to the `onNext`.
 
-![Blocking vs Non-Blocking Nodes](assets/node_blocking.png)
+<img alt="Blocking vs Non-Blocking Nodes" src={useBaseUrl('img/node_blocking.png')} />
 
 #### Flow-wide onReceive
 
@@ -68,7 +68,7 @@ You can define an onReceive instruction that will **always** be executed before 
 > - Sentiment Analysis: Making sure the sentiment of the conversation is staying healthy
 
 To define new _Flow-wide On Receive Actions_, navigate to the relevant flow, then double click anywhere on the checkered background to show the _Flow Properties Pop up_. You can also click on the links in the top left corner of the flow editor. Under the _On Receive_ section, click the _Add Action_ button to add a new action.
-![Flow Properties](assets/flow_wide_onreceive.png)
+<img alt="Flow Properties" src={useBaseUrl('img/flow_wide_onreceive.png')} />
 
 #### onNext
 
@@ -101,7 +101,7 @@ Each conversation has a **State** associated with it. The state is created when 
 
 In the context of this tutorial, this means that a state is created just before the "_entry_" node is entered and just after the "_over_" node is executed.
 
-![Lifetime of a conversation state](assets/stateLifetime.jpg)
+<img alt="Lifetime of a conversation state" src={useBaseUrl('img/stateLifetime.jpg')} />
 
 > **Note:** The state is global to the conversation, so if the conversation spans multiple flows, **the state is shared for all the flows**.
 
@@ -149,7 +149,7 @@ Every skills must be exposed by a module. Modules can host any number of skills.
 
 Skills are meant to be used by the Botpress Flows GUI. After installing a skill module, navigate to a flow in the Graphical Flows Editor, then locate the "Insert Skill" dropdown in the top toolbar:
 
-![Using the skills from the GUI](assets/skillsMenu.jpg)
+<img alt="Using the skills from the GUI" src={useBaseUrl('img/skillsMenu.jpg')} />
 
 After filling in the form, you'll be able to click anywhere in the flow to insert the skill to be consumed by the other nodes.
 
@@ -159,10 +159,10 @@ Skills are stored as flows under the `data/bots/your-bot/flows/skills` folder.
 
 You can also visualize the generated skills from the GUI:
 
-![Generated skills from GUI](assets/skillsPanel.jpg)
+<img alt="Generated skills from GUI" src={useBaseUrl('img/skillsPanel.jpg')} />
 
 ### Editing skills
 
 Once a skill node has been generated, you may click on that node and click "Edit" on the left panel to edit that node, which will update the generated flow automatically behind the scenes.
 
-![Editing a skill from GUI](assets/skillsEdit.jpg)
+<img alt="Editing a skill from GUI" src={useBaseUrl('img/skillsEdit.jpg')} />

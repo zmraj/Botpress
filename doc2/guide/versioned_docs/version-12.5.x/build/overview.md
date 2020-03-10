@@ -23,7 +23,7 @@ A bot is pretty simple:
 
 ##### Lifecycle
 
-![High-Level Diagram](assets/hld.png)
+<img alt="High-Level Diagram" src={useBaseUrl('img/hld.png')} />
 
 <br/>
 

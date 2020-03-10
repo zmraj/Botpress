@@ -39,4 +39,4 @@ Go to `<your_url>/admin/debug` to see a complete list of the available namespace
 
 You can also enable or disable them from this screen:
 
-![Debugging](assets/debugging.png)
+<img alt="Debugging" src={useBaseUrl('img/debugging.png')} />
