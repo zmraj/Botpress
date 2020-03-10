@@ -5,6 +5,8 @@ title: Syncing Changes
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 [TODO] Explain how BPFS works and how to download and sync changes with the source code
 
 # 🔧 Maintenance

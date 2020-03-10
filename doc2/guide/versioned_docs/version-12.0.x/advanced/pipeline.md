@@ -3,6 +3,8 @@ id: pipelines
 title: Pipelines
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Overview
 
 Pipelines are built on top of the multi-bot capability of Botpress. They allow teams to work on bots with multiple **stages** the same way others would work on software products. Different versions of a bot can run and co-exist on different stages. In software development, each team has its own way of working with pipelines and reacting to events along the pipeline, Botpress pipelines let you do the same.

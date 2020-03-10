@@ -3,6 +3,8 @@ id: architecture
 title: Architecture Overview
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Cluster Overview
 
 ![High-Level Diagram](assets/bp-cluster.png)

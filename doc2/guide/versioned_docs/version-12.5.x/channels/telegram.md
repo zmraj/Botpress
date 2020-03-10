@@ -3,6 +3,8 @@ id: telegram
 title: Telegram
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Requirements
 
 - Use Telegram's BotFather to create a bot. Please refer to [How do I create a bot?](https://core.telegram.org/bots#3-how-do-i-create-a-bot)

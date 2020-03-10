@@ -3,6 +3,8 @@ id: licensing
 title: Licensing
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Obtaining a License
 
 Please contact sales@botpress.io to obtain a license.

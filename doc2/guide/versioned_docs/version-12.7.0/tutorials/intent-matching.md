@@ -5,6 +5,8 @@ title: How to act on an intent
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Switch Case Method
 
 Let's start by creating intents. We created `book-flight`, `cancel-flight` and `get-prices`.

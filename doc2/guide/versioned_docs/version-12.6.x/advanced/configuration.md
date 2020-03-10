@@ -3,6 +3,8 @@ id: configuration
 title: Configurations
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 Most of the configuration is done using `JSON` files. There are also some configurations that can be edited by using environment variables.
 
 On this page, you will learn about the Botpress global configuration, individual bot configuration, module configuration, and environment variables.

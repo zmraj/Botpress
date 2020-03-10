@@ -5,6 +5,8 @@ title: Actions & Hooks
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 There are two ways of easily adding custom code to enrich your bot's experience: **Actions** and **Hooks**.
 
 Both are executed in a virtual machine to prevent server crash if there is a scripting error. Your scripts may require any module that is loaded by botpress by default (for example: lodash, axios, moment, nanoid, and [much more](https://github.com/botpress/botpress/blob/master/package.json)).

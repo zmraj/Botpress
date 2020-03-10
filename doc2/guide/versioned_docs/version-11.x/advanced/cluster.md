@@ -5,6 +5,8 @@ title: Clustering
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Requirements
 
 - Botpress Pro License

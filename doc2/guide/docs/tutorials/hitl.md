@@ -5,6 +5,8 @@ title: Human in the loop
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 Botpress allows you to build a powerful tool for autonomous communication with your users.
 However there may be cases where it is difficult or very resource-consuming to implement a conversation flow within the bot. At this point you may consider having a human take over the conversation and continue to communicate with your user.
 

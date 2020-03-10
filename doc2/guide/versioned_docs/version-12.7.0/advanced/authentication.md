@@ -5,6 +5,8 @@ title: Authentication Methods
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 There's three different types of authentication:
 
 1. **Collaborators**: These users are able to access the Admin UI and will have access to manage and edit bots based on their roles.

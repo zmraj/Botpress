@@ -3,6 +3,8 @@ id: authentication
 title: Authentication Methods
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 There's two different types of authentication, and different methods for each:
 
 1. **Admin**: Allow a user to access the Admin UI and manage bots

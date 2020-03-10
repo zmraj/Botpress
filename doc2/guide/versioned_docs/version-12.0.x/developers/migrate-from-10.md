@@ -3,6 +3,8 @@ id: migrate-from-10
 title: Migrating from 10.X
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## How to migrate your bots to 11.0
 
 This guide will show you how to migrate your bot from Botpress X to Botpress Server.

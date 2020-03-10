@@ -3,6 +3,8 @@ id: shortlinks
 title: Shortlinks
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 In Botpress you can natively create shortlinks to your bot.
 
 This has a number of advantages:

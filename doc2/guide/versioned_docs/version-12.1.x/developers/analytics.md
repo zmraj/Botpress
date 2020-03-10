@@ -3,6 +3,8 @@ id: analytics
 title: Custom Analytics
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 Custom analytics is all about adding your own metrics. For instance, you could track the number of visitors, the number of customers and the number of customers referrals for your bot.
 
 ### Requirements

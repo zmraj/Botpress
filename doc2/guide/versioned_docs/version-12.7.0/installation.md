@@ -5,6 +5,8 @@ title: Installation
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 Getting started with Botpress is very easy. We build and distribute binaries of the latest stable version and we also have nightly builds of the master branch on Github.
 
 ## Download

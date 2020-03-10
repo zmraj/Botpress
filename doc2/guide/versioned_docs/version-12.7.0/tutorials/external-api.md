@@ -5,6 +5,8 @@ title: Calling an API in a Custom Action
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Overview
 
 One of the most popular use-case for Actions is to call an API, get some data and use it in your flow. That's what we're going to demonstrate here.

@@ -3,6 +3,8 @@ id: existing-backend
 title: Connecting your bot with your existing backend
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 Botpress makes it easy to communicate data securely between your backend and your bot using JWT. Store any data you'd like in the token and pass it to the webchat using the `externalAuthToken` configuration option.
 
 If the token is valid, the content will be available under `event.credentials` when processing the event. If there is no token or if it is invalid, `credentials` will stay undefined.

@@ -5,6 +5,8 @@ title: Clustering
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Cluster Overview
 
 <img alt="High-Level Diagram" src={useBaseUrl('img/bp-cluster.png')} />

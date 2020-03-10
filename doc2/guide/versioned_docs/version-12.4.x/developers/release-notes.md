@@ -3,6 +3,8 @@ id: release-notes
 title: Release Notes
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 The transition from Botpress to Botpress X was a huge game changer, and the latest one from Botpress X to Botpress Server (v11) is even bigger.
 
 ## What's new in Botpress Server

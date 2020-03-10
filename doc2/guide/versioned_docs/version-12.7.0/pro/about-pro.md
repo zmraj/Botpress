@@ -5,6 +5,8 @@ title: About
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Additional Features
 
 | Feature                    | Community | Pro |

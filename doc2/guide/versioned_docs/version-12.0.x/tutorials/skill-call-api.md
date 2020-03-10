@@ -3,6 +3,8 @@ id: skill-call-api
 title: How to use Call API
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Overview
 
 The Call API skill is meant to help the users to easily call an API within their flow.

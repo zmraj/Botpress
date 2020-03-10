@@ -5,6 +5,8 @@ title: Quick Start
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Admin
 
 The admin dashboard is the place where you'll be able to manage and configure everything related to your Botpress Server installation, including:

@@ -5,6 +5,8 @@ title: Performances
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Hardware Requirements
 
 - Hard Drive: Recommended 64 GB of free space or above.

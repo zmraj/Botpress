@@ -3,6 +3,8 @@ id: dialogs
 title: Flows & Dialogs
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 Botpress use what we call the **Dialog Engine** to handle conversations. The Dialog Engine is responsible for every interaction with a bot. It handles the user input and the bot response. But between the two, there's a whole lot happening.
 
 ## Overview

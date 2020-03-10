@@ -3,6 +3,8 @@ id: memory
 title: Bot Memory and Data Retention
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Introduction
 
 In the course of a conversation, you may want to ask questions to the user, and remember his answer to use it later. There are four different kind of memories in Botpress; the difference between each of them is the duration and the scope.

@@ -3,6 +3,8 @@ id: configuration
 title: Configuration
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 There is currently no graphical interface on Botpress to manage your server or your bot's configuration. Most of the configuration is done using `JSON` files.
 
 There are also some configurations that can be edited by using environment variables.

@@ -3,6 +3,8 @@ id: channels
 title: Messaging Channels
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Converse API
 
 The Converse API is an easy way to integrate Botpress with any application or any other channels. This API will allow you to speak to your bot and get an answer synchronously.

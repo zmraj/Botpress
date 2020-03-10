@@ -3,6 +3,8 @@ id: database
 title: Supported databases
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 Botpress comes with support for SQL databases out-the-box and can be accessed by:
 
 1. The key-value store - This can be accessed via functions like `bp.kvs.get('key')` and `bp.kvs.set('key', 'value', 'path')`

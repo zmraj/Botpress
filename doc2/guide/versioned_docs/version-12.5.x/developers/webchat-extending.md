@@ -3,6 +3,8 @@ id: webchat-extending
 title: Extending the webchat
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## The Basics
 
 Every message sent by the bot to a user consist of a `payload`. That payload has a `type` property, that tells the webchat how the other information included on that payload should be rendered on screen.

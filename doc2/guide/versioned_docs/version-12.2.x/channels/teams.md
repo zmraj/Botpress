@@ -3,6 +3,8 @@ id: teams
 title: Microsoft Teams
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Requirements
 
 - Microsoft account with access to Azure

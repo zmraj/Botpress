@@ -3,6 +3,8 @@ id: create-module
 title: Creating Modules
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 <br/>
 
 > ⚠️ Not yet finalized, subject to breaking changes

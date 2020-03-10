@@ -3,6 +3,8 @@ id: rbac
 title: Configuring RBAC
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 > **Note**: This is a Botpress Pro feature
 
 **RBAC** (Role-Based Access Control) allows you to control what collaborators have access to.

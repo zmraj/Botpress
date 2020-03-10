@@ -3,6 +3,8 @@ id: debug
 title: Debugging
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Debugging Botpress
 
 Botpress uses the [debug](https://www.npmjs.com/package/debug) package to log information about dialogs, hooks, middleware, nlu and others.

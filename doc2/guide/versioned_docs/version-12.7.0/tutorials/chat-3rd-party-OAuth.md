@@ -5,6 +5,8 @@ title: Authenticate a user against a 3rd Party OAuth
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Overview
 
 Ever wanted to authenticate a user against a 3rd party authentication system to act on its behalf, just like you would do in a mobile/web app? In this tutorial, we will do just that. We will build a simple module that authenticates a user to Twitter and save its credentials to its attributes so it can be used to query its Twitter account.

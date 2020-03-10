@@ -3,6 +3,8 @@ id: messenger
 title: Facebook Messenger
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Requirements
 
 Messenger requires you to have a Facebook App and a Facebook Page to setup your bot.

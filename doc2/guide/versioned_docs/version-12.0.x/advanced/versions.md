@@ -3,6 +3,8 @@ id: versions
 title: Version control
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 Once your bot is deployed, the good part is that you (and non-technical team members) **can still make changes to your bots from the Botpress studio**. This is one major advantage of using Botpress. This is made possible by our built-in versioning system.
 
 ## Overview

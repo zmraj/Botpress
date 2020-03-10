@@ -3,6 +3,8 @@ id: migrate
 title: Migrations
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Migration from 11.9 to 12.0
 
 ### Auto-migrate

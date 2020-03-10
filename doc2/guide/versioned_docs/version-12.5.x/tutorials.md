@@ -3,6 +3,8 @@ id: tutorials
 title: Tutorials
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Embedding the bot on your website
 
 Embedding a bot to your existing site is quite straightforward. You will need to deploy your bot to a server or hosting provider and make it accessible via a URL. You will then be able to add the following script tag to the end of your `index.html` page.

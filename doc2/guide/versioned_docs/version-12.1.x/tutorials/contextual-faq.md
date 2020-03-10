@@ -3,6 +3,8 @@ id: contextual-faq
 title: Contextual FAQ
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Create a context
 
 To create context, you have two options:

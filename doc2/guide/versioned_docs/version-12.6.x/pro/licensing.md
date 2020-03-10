@@ -3,6 +3,8 @@ id: licensing
 title: Licensing
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 ## Obtaining a License
 
 Please contact us through our [webform](https://botpress.typeform.com/to/QaznSq).
