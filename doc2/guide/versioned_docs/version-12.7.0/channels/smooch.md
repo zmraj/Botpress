@@ -5,8 +5,6 @@ title: Smooch (Sunshine Conversations)
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 ## Prerequisite
 
 - An HTTPS Endpoint to your bot

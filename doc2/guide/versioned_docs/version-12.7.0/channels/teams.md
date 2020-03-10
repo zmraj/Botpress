@@ -5,8 +5,6 @@ title: Microsoft Teams
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 ## Requirements
 
 - Microsoft account with access to Azure

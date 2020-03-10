@@ -5,8 +5,6 @@ title: Acting Proactively
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 ## Overview
 
 You may wish to make your bot act proactively on your website in response to some action. E.g., make the bot speak first, suggest they buy the product they are viewing after a set time or ask them for feedback on services they were using.

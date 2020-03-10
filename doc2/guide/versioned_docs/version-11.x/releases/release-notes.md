@@ -5,8 +5,6 @@ title: Release Notes
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 ## Bug fixes
 
 - Use content picker for invalid content in Choice Skill

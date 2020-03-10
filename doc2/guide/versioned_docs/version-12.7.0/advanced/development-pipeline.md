@@ -5,8 +5,6 @@ title: Development Pipelines
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 ## Workflow
 
 A best practice is to keep the changes of your bots in your prefered Source Control Management tool (e.g Git) and always deploy the master branch in production. Once deployed, you can regularly [pull](versions#pull) changes and apply them to your SCM or revert them at any moment. With this tip you can harness the power of your SCM for branches, merge conflicted files, review changes and create revisions.

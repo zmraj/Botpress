@@ -5,8 +5,6 @@ title: Using the UiPath integration for Botpress
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 **Disclaimer:** This module is currently in **beta**. Breaking changes might appear in the future. Use in production with care.
 
 ## About

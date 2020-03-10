@@ -5,8 +5,6 @@ title: How to use Slot Skill
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 ## Overview
 
 The Slot skill is used to help with something that we refer as _slot filling_. It handles input validation and bot reply when the input is invalid.

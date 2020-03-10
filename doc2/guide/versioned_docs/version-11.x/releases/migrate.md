@@ -5,8 +5,6 @@ title: Migrations
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 ## Migration from 11.7 to 11.8
 
 ### Channel-Web Refactor

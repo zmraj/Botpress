@@ -5,8 +5,6 @@ title: Monitoring & Alerting
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 ## Server Monitoring
 
 Monitoring is an essential part of any software deployment. Botpress includes, out of the box, a simple but intuitive dashboard

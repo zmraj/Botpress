@@ -5,8 +5,6 @@ title: NLU
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 ## How it works
 
 The Botpress NLU module will process every incoming messages and will perform Intent Classification, Language Identification, Entity Extraction and Slot Tagging. The structured data that these tasks provide is added to the message metadata directly (under `event.nlu`), ready to be consumed by the other modules and components.

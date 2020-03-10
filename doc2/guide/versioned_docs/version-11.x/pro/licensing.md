@@ -5,8 +5,6 @@ title: Licensing
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 ## Requirements
 
 To enable Botpress pro features, you need to create a Botpress account, customize & buy your license and finally activate it on your Botpress Server installation. Everything you need to know is in this guide, we'll walk you to the process step by step.

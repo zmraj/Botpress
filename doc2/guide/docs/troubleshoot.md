@@ -5,8 +5,6 @@ title: Troubleshoot
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 If you didn't get any error when starting Botpress for the first time, you can ship this section and move to the [**Quick Start**](quickstart) guide.
 
 ## > I see `Error Training Model`

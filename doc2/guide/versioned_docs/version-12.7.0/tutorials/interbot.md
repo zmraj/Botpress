@@ -5,8 +5,6 @@ title: Inter-bot Communication / Delegation
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 ## Overview
 
 In this tutorial, you will learn how a chatbot could "delegate" questions or tasks to other bots. We call this concept "inter-bot" communication.
