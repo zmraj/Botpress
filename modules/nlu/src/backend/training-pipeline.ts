@@ -93,8 +93,54 @@ const PreprocessInput = async (input: TrainInput, tools: Tools): Promise<TrainOu
 
   const intents = await ProcessIntents(input.intents, input.languageCode, list_entities, tools)
 
+  // tslint:disable
+  const lexiconByTopic = {
+    'Services essentiels': ['pharmacie'],
+    'Personnes à risque': ['enceinte', 'immunosupprimé', 'âgé', 'cancer', 'chsld', 'hôpital'],
+    'Santé Mental': ['anxiété', 'dépression', 'suicide', 'panique', 'stress'],
+    Voyageurs: [],
+    'Isolement volontaire': [],
+    "État d'urgence": [],
+    'Autres questions': [],
+    autochtones: [],
+    'Tourisme - loisir - culture - sport': [],
+    'Municipalités - Élections': [],
+    'Transport - déplacements': [],
+    Éducation: [],
+    'Employeurs - travailleurs - normes du travail': [],
+    'Prévention - Symptômes - traitements': [],
+    'Secteur bioalimentaire': [],
+    'Consommateurs - Nourriture - Animaux': [],
+    Famille: ['garderie', 'famille', 'garde', 'enfant', 'cpe'],
+    'Commerces - lieux publics - services': [],
+    "Programmes d'aide": [
+      'emploi',
+      'prestation',
+      'inscription',
+      'bénéficier',
+      'finance',
+      'admissibilité',
+      'formulaire',
+      'entreprise',
+      'assurance',
+      'patt',
+      'pacme'
+    ],
+    Smalltalk: [],
+    'Habitation et logement': []
+  }
+
+  const lexiconTokens = _.chain(lexiconByTopic)
+    .values()
+    .flatten()
+    .uniq()
+    .value()
+  const lexicon = await tools.vectorize_tokens(lexiconTokens, input.languageCode)
+
   return {
     ..._.omit(input, 'list_entities', 'intents'),
+    // @ts-ignore
+    lexicon,
     list_entities,
     intents
   } as TrainOutput
@@ -243,7 +289,8 @@ const TrainContextClassifier = async (
       .map(intent =>
         intent.utterances.map(utt => ({
           label: ctx,
-          coordinates: getSentenceEmbeddingForCtx(utt)
+          // @ts-ignore
+          coordinates: getSentenceEmbeddingForCtx(utt, input.lexicon)
         }))
       )
   }).filter(x => x.coordinates.filter(isNaN).length === 0)
@@ -419,6 +466,7 @@ const TrainSlotTagger = async (input: TrainOutput, tools: Tools, progress: progr
 }
 
 const TrainOutOfScope = async (input: TrainOutput, tools: Tools, progress: progressCB): Promise<string | undefined> => {
+  return
   debugTraining.forBot(input.botId, 'Training out of scope classifier')
   const trainingOptions: sdk.MLToolkit.SVM.SVMOptions = {
     c: [10],
@@ -507,7 +555,9 @@ export const Trainer: Trainer = async (input: TrainInput, tools: Tools): Promise
       intent_model_by_ctx,
       slots_model,
       vocabVectors: buildVectorsVocab(output.intents),
-      exact_match_index
+      exact_match_index,
+      // @ts-ignore
+      lexicon: output.lexicon
       // kmeans: {} add this when mlKmeans supports loading from serialized data,
     }
 

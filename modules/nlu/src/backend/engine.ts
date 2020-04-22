@@ -1,10 +1,6 @@
 import { MLToolkit, NLU } from 'botpress/sdk'
 import _ from 'lodash'
 
-// YOU ARE BASICALLY AT TESTING IF TARGET CONTEXT SELECTOR WORKS
-// THEN YOU ARE AT TESTING THAT IT WORKS PRE-NDU
-// THEN YOU ARE AT TESTING THAT IT WORKS WITH NDU
-
 import { isPOSAvailable } from './language/pos-tagger'
 import { computeModelHash, Model } from './model-service'
 import { Predict, PredictInput, Predictors, PredictOutput } from './predict-pipeline'
@@ -135,6 +131,7 @@ export default class Engine implements NLUEngine {
     // TODO if model or predictor not valid, throw and retry
     this.predictorsByLang[model.languageCode] = await this._makePredictors(model)
     this.modelsByLang[model.languageCode] = model
+    trainDebug('model loaded')
   }
 
   private async _makePredictors(model: Model): Promise<Predictors> {
@@ -153,7 +150,8 @@ export default class Engine implements NLUEngine {
       (c, [ctx, intentModel]) => ({ ...c, [ctx]: new tools.mlToolkit.SVM.Predictor(intentModel as string) }),
       {} as _.Dictionary<MLToolkit.SVM.Predictor>
     )
-    const oos_classifier = isPOSAvailable(model.languageCode) ? new tools.mlToolkit.SVM.Predictor(oos_model) : undefined
+    // const oos_classifier = isPOSAvailable(model.languageCode) ? new tools.mlToolkit.SVM.Predictor(oos_model) : undefined
+    const oos_classifier = undefined
     const slot_tagger = new SlotTagger(tools.mlToolkit)
     slot_tagger.load(artefacts.slots_model)
 

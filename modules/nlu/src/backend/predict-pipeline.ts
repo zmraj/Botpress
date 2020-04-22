@@ -175,11 +175,13 @@ async function predictContext(input: PredictStep, predictors: Predictors): Promi
     }
   }
 
-  const features = getSentenceEmbeddingForCtx(input.utterance)
+  // @ts-ignore
+  const features = getSentenceEmbeddingForCtx(input.utterance, predictors.lexicon)
   let ctx_predictions = await classifier.predict(features)
 
   if (input.alternateUtterance) {
-    const alternateFeats = getSentenceEmbeddingForCtx(input.alternateUtterance)
+    // @ts-ignore
+    const alternateFeats = getSentenceEmbeddingForCtx(input.alternateUtterance, predictors.lexicon)
     const alternatePreds = await classifier.predict(alternateFeats)
 
     // we might want to do this in intent election intead or in NDU
@@ -356,6 +358,7 @@ function electIntent(input: PredictStep): PredictStep {
 }
 
 async function predictOutOfScope(input: PredictStep, predictors: Predictors, tools: Tools): Promise<PredictStep> {
+  return input
   if (!isPOSAvailable(input.languageCode) || !predictors.oos_classifier) {
     return input
   }
@@ -541,8 +544,8 @@ export const Predict = async (
     stepOutput = await predictContext(stepOutput, predictors)
     stepOutput = await predictIntent(stepOutput, predictors)
     stepOutput = electIntent(stepOutput)
-    stepOutput = detectAmbiguity(stepOutput)
-    stepOutput = await extractSlots(stepOutput, predictors)
+    // stepOutput = detectAmbiguity(stepOutput)
+    // stepOutput = await extractSlots(stepOutput, predictors)
     return MapStepToOutput(stepOutput, t0)
   } catch (err) {
     if (err instanceof InvalidLanguagePredictorError) {
