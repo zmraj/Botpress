@@ -23,6 +23,7 @@ import {
   TrainingSession
 } from './typings'
 import Utterance, { buildUtteranceBatch, UtteranceToken, UtteranceToStringOptions } from './utterance/utterance'
+import { Lexicon, LexiconVectors } from './vocab/lexicon'
 
 // TODO make this return artefacts only and move the make model login in E2
 export type Trainer = (input: TrainInput, tools: Tools) => Promise<Model>
@@ -35,6 +36,7 @@ export type TrainInput = Readonly<{
   contexts: string[]
   intents: Intent<string>[]
   trainingSession: TrainingSession
+  lexicon: Lexicon
 }>
 
 export type TrainOutput = Readonly<{
@@ -46,12 +48,14 @@ export type TrainOutput = Readonly<{
   intents: Intent<Utterance>[]
   tfIdf?: TFIDF
   kmeans?: sdk.MLToolkit.KMeans.KmeansResult
+  lexiconVecs: LexiconVectors
 }>
 
 export interface TrainArtefacts {
   list_entities: ListEntityModel[]
   tfidf: TFIDF
   vocabVectors: Token2Vec
+  lexiconVecs: LexiconVectors
   // kmeans: KmeansResult
   ctx_model: string
   intent_model_by_ctx: Dic<string>
@@ -86,64 +90,37 @@ const KMEANS_OPTIONS = {
 
 const PreprocessInput = async (input: TrainInput, tools: Tools): Promise<TrainOutput> => {
   debugTraining.forBot(input.botId, 'Preprocessing intents')
-  input = _.cloneDeep(input)
-  const list_entities = await Promise.map(input.list_entities, list =>
-    makeListEntityModel(list, input.languageCode, tools)
-  )
+  const data = _.cloneDeep(input)
 
-  const intents = await ProcessIntents(input.intents, input.languageCode, list_entities, tools)
+  const list_entities = await processListEntities(data.list_entities, input.languageCode, tools)
+  const intents = await ProcessIntents(data.intents, input.languageCode, list_entities, tools)
+  const lexiconVecs = await processLexicon(data.lexicon, input.languageCode, tools)
 
-  // tslint:disable
-  const lexiconByTopic = {
-    'Services essentiels': ['pharmacie'],
-    'Personnes à risque': ['enceinte', 'immunosupprimé', 'âgé', 'cancer', 'chsld', 'hôpital'],
-    'Santé Mental': ['anxiété', 'dépression', 'suicide', 'panique', 'stress'],
-    Voyageurs: [],
-    'Isolement volontaire': [],
-    "État d'urgence": [],
-    'Autres questions': [],
-    autochtones: [],
-    'Tourisme - loisir - culture - sport': [],
-    'Municipalités - Élections': [],
-    'Transport - déplacements': [],
-    Éducation: [],
-    'Employeurs - travailleurs - normes du travail': [],
-    'Prévention - Symptômes - traitements': [],
-    'Secteur bioalimentaire': [],
-    'Consommateurs - Nourriture - Animaux': [],
-    Famille: ['garderie', 'famille', 'garde', 'enfant', 'cpe'],
-    'Commerces - lieux publics - services': [],
-    "Programmes d'aide": [
-      'emploi',
-      'prestation',
-      'inscription',
-      'bénéficier',
-      'finance',
-      'admissibilité',
-      'formulaire',
-      'entreprise',
-      'assurance',
-      'patt',
-      'pacme'
-    ],
-    Smalltalk: [],
-    'Habitation et logement': []
-  }
+  return {
+    ..._.omit(data, 'list_entities', 'intents', 'lexicon'),
+    lexiconVecs,
+    list_entities,
+    intents
+  } as TrainOutput
+}
 
-  const lexiconTokens = _.chain(lexiconByTopic)
+const processLexicon = async (lexicon: Lexicon, languageCode: string, tools: Tools): Promise<number[][]> => {
+  // we might need to tokenize this,
+  // at the moment we expect valid, single word examples
+  const lexiconTokens = _.chain(lexicon)
     .values()
     .flatten()
     .uniq()
     .value()
-  const lexicon = await tools.vectorize_tokens(lexiconTokens, input.languageCode)
+  return tools.vectorize_tokens(lexiconTokens, languageCode)
+}
 
-  return {
-    ..._.omit(input, 'list_entities', 'intents'),
-    // @ts-ignore
-    lexicon,
-    list_entities,
-    intents
-  } as TrainOutput
+const processListEntities = async (
+  listEntities: ListEntity[],
+  languageCode: string,
+  tools: Tools
+): Promise<ListEntityModel[]> => {
+  return Promise.map(listEntities, list => makeListEntityModel(list, languageCode, tools))
 }
 
 const makeListEntityModel = async (entity: ListEntity, languageCode: string, tools: Tools) => {
@@ -289,8 +266,7 @@ const TrainContextClassifier = async (
       .map(intent =>
         intent.utterances.map(utt => ({
           label: ctx,
-          // @ts-ignore
-          coordinates: getSentenceEmbeddingForCtx(utt, input.lexicon)
+          coordinates: getSentenceEmbeddingForCtx(utt, input.lexiconVecs)
         }))
       )
   }).filter(x => x.coordinates.filter(isNaN).length === 0)
@@ -556,8 +532,7 @@ export const Trainer: Trainer = async (input: TrainInput, tools: Tools): Promise
       slots_model,
       vocabVectors: buildVectorsVocab(output.intents),
       exact_match_index,
-      // @ts-ignore
-      lexicon: output.lexicon
+      lexiconVecs: output.lexiconVecs
       // kmeans: {} add this when mlKmeans supports loading from serialized data,
     }
 

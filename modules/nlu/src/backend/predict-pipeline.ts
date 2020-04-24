@@ -175,13 +175,11 @@ async function predictContext(input: PredictStep, predictors: Predictors): Promi
     }
   }
 
-  // @ts-ignore
-  const features = getSentenceEmbeddingForCtx(input.utterance, predictors.lexicon)
+  const features = getSentenceEmbeddingForCtx(input.utterance, predictors.lexiconVecs)
   let ctx_predictions = await classifier.predict(features)
 
   if (input.alternateUtterance) {
-    // @ts-ignore
-    const alternateFeats = getSentenceEmbeddingForCtx(input.alternateUtterance, predictors.lexicon)
+    const alternateFeats = getSentenceEmbeddingForCtx(input.alternateUtterance, predictors.lexiconVecs)
     const alternatePreds = await classifier.predict(alternateFeats)
 
     // we might want to do this in intent election intead or in NDU
@@ -544,8 +542,8 @@ export const Predict = async (
     stepOutput = await predictContext(stepOutput, predictors)
     stepOutput = await predictIntent(stepOutput, predictors)
     stepOutput = electIntent(stepOutput)
-    // stepOutput = detectAmbiguity(stepOutput)
-    // stepOutput = await extractSlots(stepOutput, predictors)
+    stepOutput = detectAmbiguity(stepOutput)
+    stepOutput = await extractSlots(stepOutput, predictors)
     return MapStepToOutput(stepOutput, t0)
   } catch (err) {
     if (err instanceof InvalidLanguagePredictorError) {

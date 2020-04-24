@@ -8,6 +8,7 @@ import SlotTagger from './slots/slot-tagger'
 import { isPatternValid } from './tools/patterns-utils'
 import { computeKmeans, ProcessIntents, Trainer, TrainInput, TrainOutput } from './training-pipeline'
 import { ListEntity, NLUEngine, Tools, TrainingSession } from './typings'
+import { LexiconByLang } from './vocab/lexicon'
 
 const trainDebug = DEBUG('nlu').sub('training')
 
@@ -27,7 +28,8 @@ export default class Engine implements NLUEngine {
     intentDefs: NLU.IntentDefinition[],
     entityDefs: NLU.EntityDefinition[],
     languageCode: string,
-    trainingSession?: TrainingSession
+    trainingSession?: TrainingSession,
+    lexicon: LexiconByLang = {}
   ): Promise<Model> {
     trainDebug.forBot(this.botId, `Started ${languageCode} training`)
 
@@ -74,7 +76,8 @@ export default class Engine implements NLUEngine {
           contexts: x.contexts,
           utterances: x.utterances[languageCode],
           slot_definitions: x.slots
-        }))
+        })),
+      lexicon: lexicon[languageCode] || {}
     }
 
     // Model should be build here, Trainer should not have any idea of how this is stored

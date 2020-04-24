@@ -10,6 +10,7 @@ import { getIntents } from '../intents/intent-service'
 import * as ModelService from '../model-service'
 import { makeTrainingSession, makeTrainSessionKey } from '../train-session-service'
 import { NLUState } from '../typings'
+import { getLexicon } from '../vocab/lexicon'
 
 const missingLangMsg = botId =>
   `Bot ${botId} has configured languages that are not supported by language sources. Configure a before incoming hook to call an external NLU provider for those languages.`
@@ -37,6 +38,7 @@ export function getOnBotMount(state: NLUState) {
         const intentDefs = await getIntents(ghost)
         const entityDefs = await getCustomEntities(ghost)
         const hash = ModelService.computeModelHash(intentDefs, entityDefs)
+        const lexicon = await getLexicon(ghost, bot.languages)
 
         const kvs = bp.kvs.forBot(botId)
         await kvs.set(KVS_TRAINING_STATUS_KEY, 'training')
@@ -54,7 +56,7 @@ export function getOnBotMount(state: NLUState) {
               const trainSession = makeTrainingSession(languageCode, lock)
               state.nluByBot[botId].trainSessions[languageCode] = trainSession
 
-              model = await engine.train(intentDefs, entityDefs, languageCode, trainSession)
+              model = await engine.train(intentDefs, entityDefs, languageCode, trainSession, lexicon)
               if (model.success) {
                 await ModelService.saveModel(ghost, model, hash)
               }
