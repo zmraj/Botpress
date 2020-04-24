@@ -1,8 +1,7 @@
 import _ from 'lodash'
 
-import { computeNorm, ndistance, scalarDivide, vectorAdd, zeroes } from '../tools/math'
+import { computeNorm, cosineSimilarity, scalarDivide, vectorAdd, zeroes } from '../tools/math'
 import Utterance, { UtteranceToken } from '../utterance/utterance'
-// import { Lexicon } from '../training-pipeline'
 
 function shouldConsiterToken(token: UtteranceToken): boolean {
   const isSysOrPatternEntity = token.entities.some(
@@ -13,14 +12,8 @@ function shouldConsiterToken(token: UtteranceToken): boolean {
 
 function getLexiconDistanceVec(utt: Utterance, lexiconVecs: number[][]): number[] {
   return lexiconVecs.map(vec => {
-    const val =
-      Math.min(
-        ...utt.tokens
-          .filter(t => t.isWord)
-          .map(t => _.clamp(ndistance(<number[]>t.vector, vec), 10))
-          .filter(n => n !== NaN && n >= 0)
-      ) || 10
-    return val / 10
+    const allSim = utt.tokens.map(t => cosineSimilarity(<number[]>t.vector, vec)).filter(n => n !== NaN && n >= 0)
+    return Math.max(...allSim)
   })
 }
 

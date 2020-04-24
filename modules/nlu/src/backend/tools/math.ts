@@ -1,5 +1,32 @@
 import _ from 'lodash'
-import { log, std, mean } from 'mathjs'
+import { log, mean, round, std } from 'mathjs'
+import { distance, similarity } from 'ml-distance'
+
+/**
+ * @summary Computes Euclidean distance between 2 N-dimensional vectors A and B
+ * @param A N-dimensional vector
+ * @param B N-dimensional vector
+ */
+export function euclideanDistance(A: number[], B: number[]): number {
+  if (A.length !== B.length) {
+    throw new Error(`Can't comput distance between vectors of different length (${A.length} vs ${B.length})`)
+  }
+
+  return round(distance.euclidean(A, B), 3)
+}
+
+/**
+ * @summary Computes Cosine similarity between 2 N-dimensional vectors A and B
+ * @param A N-dimensional vector
+ * @param B N-dimensional vector
+ */
+export function cosineSimilarity(A: number[], B: number[]): number {
+  if (A.length !== B.length) {
+    throw new Error(`Can't comput distance between vectors of different length (${A.length} vs ${B.length})`)
+  }
+
+  return round(similarity.cosine(A, B), 3)
+}
 
 /**
  * Vectorial distance between two N-dimentional points
