@@ -1,7 +1,9 @@
 {
   "name": "nlu",
-  "version": "10.47.1",
-  "description": "Botpress NLU module",
+  "fullName": "Natural Language Understanding",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Provides everything required to understand the user's request",
   "private": true,
   "main": "dist/backend/index.js",
   "scripts": {
@@ -17,10 +19,10 @@
     "@types/lru-cache": "^5.1.0",
     "@types/slate": "^0.47.1",
     "@types/slate-react": "^0.22.5",
+    "@types/tar": "^4.0.3",
     "rimraf": "^3.0.2"
   },
   "dependencies": {
-    "@blueprintjs/select": "^3.11.2",
     "axios": "^0.19.0",
     "bluebird": "^3.5.3",
     "bluebird-global": "^1.0.1",
@@ -41,6 +43,7 @@
     "slate": "^0.47.4",
     "slate-react": "^0.22.4",
     "slate-react-placeholder": "^0.2.4",
+    "tar": "^6.0.1",
     "tmp": "^0.0.33",
     "utility-types": "^3.7.0",
     "verror": "^1.10.0",

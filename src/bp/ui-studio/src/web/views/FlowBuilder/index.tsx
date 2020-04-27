@@ -1,3 +1,4 @@
+import { toast, utils } from 'botpress/shared'
 import { FlowView } from 'common/typings'
 import _ from 'lodash'
 import React, { Component } from 'react'
@@ -14,10 +15,8 @@ import {
   switchFlow
 } from '~/actions'
 import { Container } from '~/components/Shared/Interface'
-import { Timeout, toastFailure, toastInfo } from '~/components/Shared/Utils'
 import { isOperationAllowed } from '~/components/Shared/Utils/AccessControl'
 import DocumentationProvider from '~/components/Util/DocumentationProvider'
-import { isInputFocused } from '~/keyboardShortcuts'
 import { getDirtyFlows, RootReducer } from '~/reducers'
 import { UserReducer } from '~/reducers/user'
 
@@ -52,7 +51,6 @@ interface State {
   initialized: any
   readOnly: boolean
   panelPermissions: PanelPermissions[]
-  flowPreview: boolean
   mutexInfo: MutexInfo
   showSearch: boolean
   highlightFilter: string
@@ -68,7 +66,6 @@ class FlowBuilder extends Component<Props, State> {
     initialized: false,
     readOnly: false,
     panelPermissions: this.allPermissions,
-    flowPreview: false,
     mutexInfo: undefined,
     showSearch: Boolean(this.highlightFilter),
     highlightFilter: this.highlightFilter
@@ -117,12 +114,9 @@ class FlowBuilder extends Component<Props, State> {
     }
 
     if (!prevProps.errorSavingFlows && this.props.errorSavingFlows) {
-      const { status } = this.props.errorSavingFlows
-      const message =
-        status === 403
-          ? 'Unauthorized flow update. You have insufficient role privileges to modify flows.'
-          : 'There was an error while saving, deleting or renaming a flow. Last modification might not have been saved on server. Please reload page before continuing flow edition'
-      toastFailure(message, Timeout.LONG, this.props.clearErrorSaveFlows)
+      const { status, data } = this.props.errorSavingFlows
+      const message = status === 403 ? 'studio.flow.unauthUpdate' : 'studio.flow.errorWhileSaving'
+      toast.failure(message, data, { timeout: 'long', delayed: true, onDismiss: this.props.clearErrorSaveFlows })
     }
 
     const flowsHaveChanged = !_.isEqual(prevProps.flowsByName, this.props.flowsByName)
@@ -178,7 +172,7 @@ class FlowBuilder extends Component<Props, State> {
     this.props.history.replace(newUrl)
   }
 
-  pushFlowState = (flow) => {
+  pushFlowState = flow => {
     const hash = this.state.showSearch ? searchTag + this.state.highlightFilter : ''
     this.props.history.push(`/flows/${flow.replace(/\.flow\.json$/i, '')}${hash}`)
   }
@@ -214,16 +208,12 @@ class FlowBuilder extends Component<Props, State> {
         const { pathname } = this.props.location
         this.props.history.replace(this.state.showSearch ? pathname + searchTag + this.state.highlightFilter : pathname)
       },
-      'preview-flow': e => {
-        e.preventDefault()
-        this.setState({ flowPreview: true })
-      },
       save: e => {
         e.preventDefault()
-        toastInfo('Pssst! Flows now save automatically, no need to save anymore.', Timeout.LONG)
+        toast.info('studio.flow.nowSaveAuto')
       },
       delete: e => {
-        if (!isInputFocused()) {
+        if (!utils.isInputFocused()) {
           e.preventDefault()
           this.diagram.deleteSelectedElements()
         }
@@ -236,12 +226,11 @@ class FlowBuilder extends Component<Props, State> {
     }
 
     return (
-      <Container keyHandlers={keyHandlers} sidePanelWidth={320}>
+      <Container keyHandlers={keyHandlers}>
         <SidePanel
           readOnly={this.state.readOnly}
           mutexInfo={this.state.mutexInfo}
           permissions={panelPermissions}
-          flowPreview={this.state.flowPreview}
           onCreateFlow={name => {
             this.diagram.createFlow(name)
             this.props.switchFlow(`${name}.flow.json`)
@@ -250,12 +239,10 @@ class FlowBuilder extends Component<Props, State> {
         <div className={style.diagram}>
           <Diagram
             readOnly={readOnly}
-            flowPreview={this.state.flowPreview}
             showSearch={this.state.showSearch}
             hideSearch={this.hideSearch}
             ref={el => {
               if (!!el) {
-                // @ts-ignore
                 this.diagram = el.getWrappedInstance()
               }
             }}
@@ -264,7 +251,7 @@ class FlowBuilder extends Component<Props, State> {
           />
         </div>
 
-        <DocumentationProvider file="flows" />
+        <DocumentationProvider file="main/dialog" />
         <SkillsBuilder />
       </Container>
     )
@@ -291,7 +278,4 @@ const mapDispatchToProps = {
   refreshIntents
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(FlowBuilder))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FlowBuilder))

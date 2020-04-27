@@ -1,9 +1,11 @@
 import * as sdk from 'botpress/sdk'
 import _ from 'lodash'
+import multer from 'multer'
+import path from 'path'
 
 import Editor from './editor'
 import { RequestWithPerms } from './typings'
-import { getPermissionsMw, validateFilePayloadMw } from './utils_router'
+import { getPermissionsMw, validateFilePayloadMw, validateFileUploadMw } from './utils_router'
 
 const debugRead = DEBUG('audit:code-editor:read')
 const debugWrite = DEBUG('audit:code-editor:write')
@@ -32,7 +34,8 @@ export default async (bp: typeof sdk, editor: Editor) => {
   router.get('/files', loadPermsMw, async (req: RequestWithPerms, res, next) => {
     try {
       const rawFiles = req.query.rawFiles === 'true'
-      res.send(await editor.forBot(req.params.botId).getAllFiles(req.permissions, rawFiles))
+      const includeBuiltin = req.query.includeBuiltin === 'true'
+      res.send(await editor.forBot(req.params.botId).getAllFiles(req.permissions, rawFiles, includeBuiltin))
     } catch (err) {
       bp.logger.attachError(err).error('Error fetching files')
       next(err)
@@ -102,6 +105,25 @@ export default async (bp: typeof sdk, editor: Editor) => {
       next(err)
     }
   })
+
+  router.post(
+    '/upload',
+    loadPermsMw,
+    validateFileUploadMw,
+    multer().single('file'),
+    async (req: RequestWithPerms, res, next) => {
+      const folder = path.dirname(req.body.location)
+      const filename = path.basename(req.body.location)
+
+      try {
+        await bp.ghost.forRoot().upsertFile(folder, filename, req.file.buffer)
+        res.sendStatus(200)
+      } catch (err) {
+        bp.logger.attachError(err).error('Could not upload file')
+        next(err)
+      }
+    }
+  )
 
   router.get('/permissions', loadPermsMw, async (req: RequestWithPerms, res, next) => {
     try {
