@@ -1,0 +1,51 @@
+{
+  "name": "kb",
+  "fullName": "Knowledge Base",
+  "version": "1.0.0",
+  "status": "experimental",
+  "description": "Automatic question answering from knowledge base",
+  "private": true,
+  "main": "dist/backend/index.js",
+  "scripts": {
+    "build": "node ../../build/module-builder/bin/entry build",
+    "watch": "node ../../build/module-builder/bin/entry watch",
+    "package": "node ../../build/module-builder/bin/entry package"
+  },
+  "author": "Botpress, Inc.",
+  "license": "AGPL-3.0-only",
+  "webpack": {
+    "externals": {
+      "react": "React",
+      "react-dom": "ReactDOM",
+      "react-bootstrap": "ReactBootstrap",
+      "botpress/elements-list": "ElementsList",
+      "botpress/utils": "BotpressUtils"
+    }
+  },
+  "devDependencies": {
+    "@types/react-bootstrap": "^0.32.19",
+    "@types/react-select": "^2.0.19"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bluebird": "^3.5.3",
+    "bluebird-retry": "^0.11.0",
+    "classnames": "^2.2.6",
+    "fs-extra": "^9.0.0",
+    "https-proxy-agent": "^5.0.0",
+    "joi": "^13.6.0",
+    "lodash": "^4.17.11",
+    "lru-cache": "^5.1.1",
+    "ml-distance": "^3.0.0",
+    "mljs": "^8.0.9",
+    "moment": "^2.24.0",
+    "ms": "^2.1.2",
+    "multer": "^1.4.2",
+    "nanoid": "^2.0.1",
+    "react-select": "^2.4.2"
+  },
+  "resolutions": {
+    "fstream": ">=1.0.12",
+    "lodash": ">=4.17.12"
+  }
+}

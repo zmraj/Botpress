@@ -13,6 +13,8 @@
       "env": {
         "BP_MODULES_PATH": "${workspaceFolder}/modules:${workspaceFolder}/internal-modules",
         "NODE_PATH": "${workspaceFolder}/out/bp",
+        "BP_MODULE_KB_ENDPOINT": "https://covid-qc-qna.botpress.cloud",
+        "BP_NLU_DISABLE_TRAINING": "false",
         "DEBUG": "bp:none",
         "BLUEBIRD_DEBUG": "1"
       },

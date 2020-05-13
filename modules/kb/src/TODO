@@ -1,0 +1,15 @@
+- Content upload
+  - Content (title, similar questions (if any), response blocs)
+  - Version
+  - Churn old version
+- Training
+  - Get the embeddings for each content (HTTP)
+  - Cache the results (model)
+- Evaluation
+  - Apply spell-correction (Alternate utterance from NLU)
+  - Get the embeddings for the corrected phrase (HTTP)
+  - Blended Proximity Search
+    - x% title, y% similar questions, z% response blocs
+    - Re-weight responses (based on +1 / -1 and the weight of those, by source (confirmed vs unconfirmed))
+    - Election of the best candidate
+    - Get the response answer (HTTP)
