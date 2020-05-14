@@ -9,6 +9,7 @@ interface CssExports {
   'intentBox': string;
   'mainView': string;
   'mainViewTable': string;
+  'predsView': string;
   'progressBox': string;
   'shortcut': string;
   'stickyActionBar': string;

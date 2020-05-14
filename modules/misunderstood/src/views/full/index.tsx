@@ -1,4 +1,4 @@
-import { Button, InputGroup, Intent, NonIdealState } from '@blueprintjs/core'
+import { Button, ControlGroup, InputGroup, Intent, NonIdealState } from '@blueprintjs/core'
 import * as sdk from 'botpress/sdk'
 import { utils } from 'botpress/shared'
 import { Container, SidePanel } from 'botpress/ui'
@@ -14,10 +14,15 @@ import Progress from './v2/Progress'
 import StickyActionBar from './v2/StickyActionBar'
 import ChatPreview from './MainScreen/ChatPreview'
 
+const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0
+const controlKey = isMac ? 'command' : 'ctrl'
+
 interface Props {
   bp: any
   contentLang: string
 }
+
+const PREDICTIONS_COUNT = 7
 
 export type Resolution = 'done' | 'deleted' | 'skipped'
 
@@ -37,11 +42,11 @@ export type FullProgressHistory = {
 export const keyMap = {
   moveUtteranceUp: 'up',
   moveUtteranceDown: 'down',
-  moveIntentUp: 'ctrl+up',
-  moveIntentDown: 'ctrl+down',
+  moveIntentUp: `${controlKey}+up`,
+  moveIntentDown: `${controlKey}+down`,
   markSelected: 'space',
-  unMarkSelected: 'ctrl+space',
-  focusSearch: 'ctrl+f',
+  unMarkSelected: `${controlKey}+space`,
+  focusSearch: `${controlKey}+f`,
   loseFocus: 'esc',
   goToNextTask: 'right',
   goToPreviousTask: 'left',
@@ -53,6 +58,7 @@ export const keyMap = {
 
 interface State {
   filterDuplicates: boolean
+  searching: boolean
   loading: boolean
   eventDetails: ApiFlaggedEvent
   events: ApiFlaggedEvent[]
@@ -97,10 +103,10 @@ const mainReducer = (state: State, action): State => {
       ...state,
       eventDetails: data,
       query,
-      markedUtterance: resolutionParams?.utterances ?? [],
+      markedUtterance: resolutionParams?.positive_examples ?? [],
       loading: true,
       uttIndex: 0,
-      intentIndex: 0
+      intentIndex: 1
     }
   } else if (type === 'moveIntentUp') {
     const nextIndex = state.intentIndex - 1
@@ -119,7 +125,12 @@ const mainReducer = (state: State, action): State => {
     if (prevIntentIndex > -1) {
       const intentName = state.predictions[prevIntentIndex]?.label
       const intent = state.intents.find(x => x.name === intentName)
-      const utteranceCount = intent?.utterances[state.language].length ?? 0
+      let utteranceCount = intent?.utterances[state.language].length ?? 0
+
+      // Intent at index 0 is a special placeholder for selected value
+      if (prevIntentIndex === 0) {
+        utteranceCount = _.uniq(state.markedUtterance).length
+      }
 
       return { ...state, intentIndex: prevIntentIndex, uttIndex: utteranceCount - 1 }
     }
@@ -143,7 +154,8 @@ const mainReducer = (state: State, action): State => {
   } else if (type === 'changeEvent') {
     return { ...state, markedUtterance: [] }
   } else if (type === 'updatePredictions') {
-    return { ...state, predictions: _.take(data, 7), loading: false }
+    const firstPred = { label: 'active selection', confidence: 100, utterances: [] }
+    return { ...state, predictions: [firstPred, ..._.take(data, PREDICTIONS_COUNT)], loading: false }
   } else if (type === 'setIntentIndex') {
     return { ...state, intentIndex: data }
   } else if (type === 'setCurrentUtterance') {
@@ -182,6 +194,8 @@ const mainReducer = (state: State, action): State => {
     return { ...state, uttIndex: data.uttIndex, intentIndex: data.intentIndex }
   } else if (type === 'toggleDuplicates') {
     return { ...state, filterDuplicates: !state.filterDuplicates }
+  } else if (type === 'toggleSearch') {
+    return { ...state, searching: data }
   }
 
   return { ...state }
@@ -193,6 +207,7 @@ const Main: FC<Props> = props => {
   const [state, dispatch] = React.useReducer(mainReducer, {
     language: props.contentLang,
     filterDuplicates: false,
+    searching: false,
     loading: false,
     eventDetails: undefined,
     events: [],
@@ -211,6 +226,7 @@ const Main: FC<Props> = props => {
     events,
     intents,
     loading,
+    searching,
     filterDuplicates,
     currentEventIndex,
     eventDetails,
@@ -227,6 +243,8 @@ const Main: FC<Props> = props => {
   useEffect(() => {
     // tslint:disable-next-line: no-floating-promises
     loadEvents()
+
+    document.getElementById('hotkeyContainer').focus()
   }, [])
 
   useEffect(() => {
@@ -271,6 +289,11 @@ const Main: FC<Props> = props => {
 
   const debouncePredict = useRef(_.debounce(extractNlu, 400)).current
   const searchInput = useRef(null)
+  const predictionsRef = useRef([])
+
+  useEffect(() => {
+    predictionsRef.current = predictionsRef.current.slice(0, predictions.length)
+  }, [predictions])
 
   const loadEvent = async (eventId: number) => {
     if (eventId) {
@@ -334,15 +357,29 @@ const Main: FC<Props> = props => {
 
     goToPreviousTask: () => dispatch({ type: 'goToPrevTask' }),
     goToNextTask: () => skipToNextTask(),
-    goToIntentIndex: e => dispatch({ type: 'setIntentIndex', data: +e.key }),
+    goToIntentIndex: e => {
+      const index = +e.key
 
-    loseFocus: () => document.getElementById('hotkeyContainer').focus(),
+      dispatch({ type: 'setIntentIndex', data: index })
+      const prediction = predictionsRef.current[index]
+      const container = document.getElementById('predictions')
+
+      container.scrollTop = prediction.offsetTop - container.offsetTop
+    },
+
+    loseFocus: () => {
+      dispatch({ type: 'toggleSearch', data: false })
+      document.getElementById('hotkeyContainer').focus()
+    },
+
     focusSearch: e => {
       e.preventDefault()
+      dispatch({ type: 'toggleSearch', data: true })
       searchInput.current.focus()
     },
 
-    unMarkAllUtterances: () => {
+    unMarkAllUtterances: e => {
+      e.preventDefault()
       if (!utils.isInputFocused()) {
         dispatch({ type: 'unMarkUtterance' })
       }
@@ -358,6 +395,8 @@ const Main: FC<Props> = props => {
       }
     }
   }
+
+  const allPredictions = [{ ...predictions[0], utterances: _.uniq(markedUtterance) }, ...predictions.slice(1)]
 
   return (
     <Container sidePanelWidth={400} keyHandlers={keyHandlers} keyMap={keyMap}>
@@ -378,25 +417,33 @@ const Main: FC<Props> = props => {
 
       <div className={style.mainView}>
         <div className={style.input}>
-          <InputGroup
-            value={query}
-            autoFocus
-            inputRef={searchInput as any}
-            onChange={e => dispatch({ type: 'setPredictQuery', data: e.currentTarget.value })}
-          />
+          <ControlGroup>
+            <InputGroup
+              value={query}
+              disabled={!searching}
+              fill
+              autoFocus
+              inputRef={searchInput as any}
+              onChange={e => dispatch({ type: 'setPredictQuery', data: e.currentTarget.value })}
+            />
+            <Button text="Search" onClick={() => dispatch({ type: 'toggleSearch', data: !searching })}></Button>
+          </ControlGroup>
         </div>
 
-        <div>
+        <div className={style.predsView} id="predictions">
           {loading && <NonIdealState title="Loading" description="Querying NLU predictions..."></NonIdealState>}
           {!loading &&
-            predictions?.map((x, idx) => (
+            allPredictions?.map((x, idx) => (
               <Prediction
                 key={x.label}
+                // @ts-ignore
+                ref={el => (predictionsRef.current[idx] = el)}
                 intents={intents}
                 index={idx}
                 intentName={x.label}
                 lang={props.contentLang}
                 confidence={x.confidence}
+                utterances={x.utterances}
                 isActive={idx === intentIndex}
                 setCurrentUtterance={utt => dispatch({ type: 'setCurrentUtterance', data: utt })}
                 markedUtterance={markedUtterance}

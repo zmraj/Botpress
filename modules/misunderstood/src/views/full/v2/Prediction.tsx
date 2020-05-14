@@ -12,21 +12,23 @@ interface PredProps {
   intentName: string
   confidence: number
   isActive?: boolean
+  utterances?: string[]
   uttIndex: number
   lang: string
   setCurrentUtterance: (text: string) => void
   markedUtterance: string[]
+  refere: any
   switchIntent: (isNext: boolean) => void
   utteranceClicked: (text: string, uttIndex: number, intentIndex: number, add?: boolean) => void
 }
 
-const Prediction: FC<PredProps> = props => {
+const Prediction: FC<PredProps> = React.forwardRef((props, ref: any) => {
   const { index, intentName, confidence, isActive, uttIndex, lang, markedUtterance } = props
 
   const intent = props.intents.find(x => x.name === intentName)
-  const utterances = intent?.utterances?.[lang]
+  const utterances = props.utterances ?? intent?.utterances?.[lang]
 
-  if (!utterances) {
+  if (!utterances?.length) {
     return null
   }
 
@@ -43,7 +45,7 @@ const Prediction: FC<PredProps> = props => {
   }, [isActive, uttIndex])
 
   return (
-    <div style={{ padding: 10 }} className={cx(style.intentBox, { [style.activeIntent]: isActive })}>
+    <div style={{ padding: 10 }} className={cx(style.intentBox, { [style.activeIntent]: isActive })} ref={ref}>
       <Tag>{index}</Tag> <Tag intent={Intent.PRIMARY}>{_.round(confidence, 2)}%</Tag>
       <span style={{ marginLeft: 30 }}>
         <small>{intentName}</small>
@@ -68,6 +70,6 @@ const Prediction: FC<PredProps> = props => {
       ))}
     </div>
   )
-}
+})
 
 export default Prediction

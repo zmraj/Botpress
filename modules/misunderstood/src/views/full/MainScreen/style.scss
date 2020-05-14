@@ -19,7 +19,7 @@
   padding-bottom: 0;
   margin: 10px 0;
   border-radius: 1px;
-  border: 1px solid #999;
+  border-top: 1px solid #999;
   background: white;
 }
 
@@ -85,7 +85,7 @@
 
     &:before {
       position: absolute;
-      content: "";
+      content: '';
       width: 0;
       height: 0;
       border-top: 8px solid transparent;
@@ -98,7 +98,7 @@
 
     &:after {
       position: absolute;
-      content: "";
+      content: '';
       width: 15px;
       height: 3px;
       left: 0;

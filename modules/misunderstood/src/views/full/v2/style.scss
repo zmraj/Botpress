@@ -1,7 +1,7 @@
 .mainView {
   padding: 10px;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: hidden;
 
   & > h3 {
     margin-top: 0;
@@ -10,6 +10,12 @@
   &Table {
     width: 100%;
   }
+}
+
+.predsView {
+  padding: 10px;
+  height: 90%;
+  overflow-y: auto;
 }
 
 .stickyActionBar {
@@ -34,6 +40,7 @@
 
 .input {
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .chatPreview {
