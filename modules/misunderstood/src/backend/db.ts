@@ -121,7 +121,8 @@ export default class Db {
           direction: eventObj.direction,
           preview: (eventObj.preview || '').replace(/<[^>]*>?/gm, ''),
           payloadMessage: get(eventObj, 'payload.message'),
-          isCurrent: id === messageId
+          isCurrent: id === messageId,
+          event: id === messageId && eventObj
         }
       })
 

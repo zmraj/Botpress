@@ -1,223 +1,420 @@
-import { AxiosStatic } from 'axios'
-import { lang } from 'botpress/shared'
-import { Container, SidePanel, SplashScreen } from 'botpress/ui'
-import classnames from 'classnames'
-import React from 'react'
+import { Button, InputGroup, Intent, NonIdealState } from '@blueprintjs/core'
+import * as sdk from 'botpress/sdk'
+import { utils } from 'botpress/shared'
+import { Container, SidePanel } from 'botpress/ui'
+import _ from 'lodash'
+import React, { FC, useEffect, useRef } from 'react'
 
-import { FLAGGED_MESSAGE_STATUS, FlaggedEvent, ResolutionData } from '../../types'
+import { ApiFlaggedEvent, ContextMessage } from '../../types'
 
-import style from './style.scss'
-import ApiClient from './ApiClient'
-import MainScreen from './MainScreen'
-import SidePanelContent from './SidePanel'
+import { makeApi } from './v2/api'
+import style from './v2/style.scss'
+import Prediction from './v2/Prediction'
+import Progress from './v2/Progress'
+import StickyActionBar from './v2/StickyActionBar'
+import ChatPreview from './MainScreen/ChatPreview'
 
 interface Props {
+  bp: any
   contentLang: string
-  bp: {
-    axios: AxiosStatic
-  }
+}
+
+export type Resolution = 'done' | 'deleted' | 'skipped'
+
+export interface ProgressHistory {
+  position?: number
+  eventId: number
+  utterance: string
+  positive_examples: string[]
+  language: string
+  resolution: Resolution
+}
+
+export type FullProgressHistory = {
+  negative_examples: string[]
+} & ProgressHistory
+
+export const keyMap = {
+  moveUtteranceUp: 'up',
+  moveUtteranceDown: 'down',
+  moveIntentUp: 'ctrl+up',
+  moveIntentDown: 'ctrl+down',
+  markSelected: 'space',
+  unMarkSelected: 'ctrl+space',
+  focusSearch: 'ctrl+f',
+  loseFocus: 'esc',
+  goToNextTask: 'right',
+  goToPreviousTask: 'left',
+  acceptMarkedUtterances: 'a',
+  ignoreFlaggedEvent: 'i',
+  unMarkAllUtterances: 'r',
+  goToIntentIndex: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 }
 
 interface State {
-  languages: string[] | null
-  language: string | null
-  eventCounts: { [status: string]: number } | null
-  selectedStatus: FLAGGED_MESSAGE_STATUS
-  events: FlaggedEvent[] | null
-  selectedEventIndex: number | null
-  selectedEvent: FlaggedEvent | null
+  filterDuplicates: boolean
+  loading: boolean
+  eventDetails: ApiFlaggedEvent
+  events: ApiFlaggedEvent[]
+  intents: sdk.NLU.IntentDefinition[]
+  predictions: any
+  markedUtterance: string[]
+  history: ProgressHistory[]
+  query: string
+  currentUtterance: string
+  currentEventIndex: number
+  intentIndex: number
+  uttIndex: number
+  language: string
 }
 
-export default class MisunderstoodMainView extends React.Component<Props, State> {
-  state = {
-    languages: null,
-    language: null,
-    eventCounts: null,
-    selectedStatus: FLAGGED_MESSAGE_STATUS.new,
-    events: null,
-    selectedEventIndex: null,
-    selectedEvent: null
+const getHistoryEntry = (event: ApiFlaggedEvent, resolution: Resolution, utterances?: string[]): ProgressHistory => {
+  return {
+    eventId: event.id,
+    utterance: event.context.find(x => x.isCurrent).preview,
+    positive_examples: utterances ?? [],
+    resolution,
+    language: event.language
+  }
+}
+
+const mainReducer = (state: State, action): State => {
+  const { type, data } = action
+
+  if (type === 'setup') {
+    const { events, intents } = action.data
+    return {
+      ...state,
+      events: state.filterDuplicates ? _.uniqBy(events, 'preview') : events,
+      intents,
+      currentEventIndex: 0
+    }
+  } else if (type === 'loadEvent') {
+    const { context, resolutionParams } = data
+    const query = context.find(x => x.isCurrent).preview
+
+    return {
+      ...state,
+      eventDetails: data,
+      query,
+      markedUtterance: resolutionParams?.utterances ?? [],
+      loading: true,
+      uttIndex: 0,
+      intentIndex: 0
+    }
+  } else if (type === 'moveIntentUp') {
+    const nextIndex = state.intentIndex - 1
+    if (nextIndex > -1) {
+      return { ...state, intentIndex: nextIndex, uttIndex: 0 }
+    }
+  } else if (type === 'moveIntentDown') {
+    return { ...state, intentIndex: state.intentIndex + 1, uttIndex: 0 }
+  } else if (type === 'moveUtteranceUp') {
+    const nextIndex = state.uttIndex - 1
+    if (nextIndex >= 0) {
+      return { ...state, uttIndex: nextIndex }
+    }
+
+    const prevIntentIndex = state.intentIndex - 1
+    if (prevIntentIndex > -1) {
+      const intentName = state.predictions[prevIntentIndex]?.label
+      const intent = state.intents.find(x => x.name === intentName)
+      const utteranceCount = intent?.utterances[state.language].length ?? 0
+
+      return { ...state, intentIndex: prevIntentIndex, uttIndex: utteranceCount - 1 }
+    }
+  } else if (type === 'moveUtteranceDown') {
+    return { ...state, uttIndex: state.uttIndex + 1 }
+  } else if (type === 'markUtterance') {
+    if (state.markedUtterance.length < 3) {
+      return { ...state, markedUtterance: [...state.markedUtterance, data] }
+    }
+  } else if (type === 'unMarkUtterance') {
+    if (!data) {
+      return { ...state, markedUtterance: [] }
+    }
+    const idx = state.markedUtterance.findIndex(x => x === data)
+    if (idx !== -1) {
+      return {
+        ...state,
+        markedUtterance: [...state.markedUtterance.slice(0, idx), ...state.markedUtterance.slice(idx + 1)]
+      }
+    }
+  } else if (type === 'changeEvent') {
+    return { ...state, markedUtterance: [] }
+  } else if (type === 'updatePredictions') {
+    return { ...state, predictions: _.take(data, 7), loading: false }
+  } else if (type === 'setIntentIndex') {
+    return { ...state, intentIndex: data }
+  } else if (type === 'setCurrentUtterance') {
+    return { ...state, currentUtterance: data }
+  } else if (type === 'setPredictQuery') {
+    return { ...state, query: data, loading: true }
+  } else if (type === 'goToNextTask') {
+    const newIndex = state.currentEventIndex + 1
+    if (newIndex < state.events.length) {
+      return { ...state, currentEventIndex: newIndex, loading: true }
+    }
+  } else if (type === 'goToPrevTask') {
+    const nextIndex = state.currentEventIndex - 1
+    if (nextIndex > -1) {
+      return { ...state, currentEventIndex: nextIndex, loading: true }
+    }
+  } else if (type === 'addToHistory') {
+    const existing = state.history.find(x => x.eventId === data.eventId)
+    if (!existing) {
+      return { ...state, history: [{ ...data, position: state.history.length + 1 }, ...state.history] }
+    }
+  } else if (type === 'updateHistory') {
+    const existing = state.history.find(x => x.eventId === data.eventId)
+    if (existing) {
+      const newHistory = [
+        ...state.history.filter(x => x.eventId !== data.eventId),
+        { ...existing, resolution: data.resolution, utterances: data.utterances }
+      ]
+
+      return {
+        ...state,
+        history: _.orderBy(newHistory, 'position', 'desc')
+      }
+    }
+  } else if (type === 'focusUtterance') {
+    return { ...state, uttIndex: data.uttIndex, intentIndex: data.intentIndex }
+  } else if (type === 'toggleDuplicates') {
+    return { ...state, filterDuplicates: !state.filterDuplicates }
   }
 
-  apiClient: ApiClient
+  return { ...state }
+}
 
-  constructor(props: Props) {
-    super(props)
-    this.apiClient = new ApiClient(props.bp.axios)
+const Main: FC<Props> = props => {
+  const api = makeApi(props.bp)
+
+  const [state, dispatch] = React.useReducer(mainReducer, {
+    language: props.contentLang,
+    filterDuplicates: false,
+    loading: false,
+    eventDetails: undefined,
+    events: [],
+    intents: [],
+    predictions: [],
+    markedUtterance: [],
+    history: [],
+    query: '',
+    currentUtterance: '',
+    currentEventIndex: -1,
+    intentIndex: 0,
+    uttIndex: 0
+  })
+
+  const {
+    events,
+    intents,
+    loading,
+    filterDuplicates,
+    currentEventIndex,
+    eventDetails,
+    query,
+    predictions,
+    currentUtterance,
+    markedUtterance,
+    history,
+    intentIndex,
+    uttIndex,
+    language
+  } = state
+
+  useEffect(() => {
+    // tslint:disable-next-line: no-floating-promises
+    loadEvents()
+  }, [])
+
+  useEffect(() => {
+    // tslint:disable-next-line: no-floating-promises
+    loadEvent(events?.[currentEventIndex]?.id)
+  }, [currentEventIndex, events])
+
+  useEffect(() => {
+    // tslint:disable-next-line: no-floating-promises
+    debouncePredict(query)
+  }, [query])
+
+  useEffect(() => {
+    // tslint:disable-next-line: no-floating-promises
+    loadEvents()
+  }, [filterDuplicates])
+
+  const loadEvents = async () => {
+    dispatch({
+      type: 'setup',
+      data: { intents: await api.fetchIntents(), events: await api.fetchEvents(props.contentLang) }
+    })
   }
 
-  fetchEventCounts(language: string) {
-    return this.apiClient.getEventCounts(language)
-  }
+  const extractNlu = async query => {
+    if (query) {
+      const predict = await api.predict(query, [])
+      const preds = predict.nlu.predictions
 
-  fetchEvents(language: string, status: string) {
-    return this.apiClient.getEvents(language, status)
-  }
-
-  fetchEvent(id: string) {
-    return this.apiClient.getEvent(id)
-  }
-
-  async componentDidMount() {
-    await this.setLanguage(this.props.contentLang)
-  }
-
-  setStateP<K extends keyof State>(update: Pick<State, K>) {
-    return new Promise(resolve => {
-      this.setState(update, () => {
-        resolve()
+      const ajustedPreds = _.flatMap(Object.keys(preds), p => {
+        return preds[p].intents.map(i => ({ label: i.label, confidence: i.confidence * preds[p].confidence }))
       })
-    })
-  }
 
-  updateEventsCounts = async (language?: string) => {
-    const eventCounts = await this.fetchEventCounts(language || this.state.language)
-    await this.setStateP({ eventCounts })
-  }
+      const withoutNone = ajustedPreds.filter(x => x.label !== 'none')
+      const ordered = _.orderBy(withoutNone, 'confidence', 'desc')
 
-  setLanguage = async (language: string) => {
-    await this.setStateP({ language, eventCounts: null, events: null, selectedEventIndex: null, selectedEvent: null })
-    await Promise.all([this.setEventsStatus(FLAGGED_MESSAGE_STATUS.new), this.updateEventsCounts(language)])
-  }
+      console.log(ordered)
 
-  setEventsStatus = async (selectedStatus: FLAGGED_MESSAGE_STATUS) => {
-    await this.setStateP({ selectedStatus, events: null, selectedEventIndex: null, selectedEvent: null })
-    const events = await this.fetchEvents(this.state.language, selectedStatus)
-    await this.setStateP({ events })
-    await this.setEventIndex(0)
-    await this.updateEventsCounts()
-  }
-
-  setEventIndex = async (selectedEventIndex: number) => {
-    const { events } = this.state
-    if (selectedEventIndex >= events.length) {
-      selectedEventIndex = events.length - 1
-    }
-    await this.setStateP({ selectedEventIndex, selectedEvent: null })
-    if (events && events.length) {
-      const event = await this.fetchEvent(events[selectedEventIndex].id)
-      await this.setStateP({ selectedEvent: event })
+      dispatch({ type: 'updatePredictions', data: ordered })
     }
   }
 
-  skipCurrentEvent = () => {
-    const { selectedEventIndex, eventCounts, selectedStatus } = this.state
-    if (
-      selectedStatus === FLAGGED_MESSAGE_STATUS.new &&
-      eventCounts &&
-      selectedEventIndex < eventCounts[selectedStatus]
-    ) {
-      return this.setEventIndex(selectedEventIndex + 1)
+  const debouncePredict = useRef(_.debounce(extractNlu, 400)).current
+  const searchInput = useRef(null)
+
+  const loadEvent = async (eventId: number) => {
+    if (eventId) {
+      const event = await api.fetchEvent(eventId)
+
+      dispatch({ type: 'loadEvent', data: event })
+      dispatch({ type: 'addToHistory', data: getHistoryEntry(event, 'skipped', markedUtterance) })
     }
   }
 
-  async alterEventsList(oldStatus: FLAGGED_MESSAGE_STATUS, newStatus: FLAGGED_MESSAGE_STATUS) {
-    // do some local state patching to prevent unneeded content flash
-    const { eventCounts, selectedEventIndex, events, selectedEvent } = this.state
-    const newEventCounts = {
-      ...eventCounts,
-      [oldStatus]: eventCounts[oldStatus] - 1,
-      [newStatus]: (eventCounts[newStatus] || 0) + 1
+  const getIntentName = (context: ContextMessage[]) => {
+    const fullEvent = context.find(x => x.isCurrent)?.['event']
+
+    const nduQna = fullEvent.ndu?.actions.find(x => x.action === 'send')?.data?.sourceDetails
+    const stdQna = fullEvent.nlu?.intent?.name
+
+    return nduQna ?? stdQna
+  }
+
+  const saveEvent = async (resolution: Resolution) => {
+    const intentName = getIntentName(eventDetails.context)
+
+    const historyEntry = {
+      ...getHistoryEntry(eventDetails, resolution, markedUtterance),
+      negative_examples: intents.find(x => x.name === intentName)?.utterances?.[language] ?? [],
+      language
     }
-    await this.setStateP({
-      eventCounts: newEventCounts,
-      selectedEvent: null,
-      events: events.filter(event => event.id !== selectedEvent.id)
-    })
 
-    // advance to the next event
-    await this.setEventIndex(selectedEventIndex)
+    await api.updateEvent(eventDetails.id, resolution, historyEntry)
 
-    // update the real events counts from the back-end
-    await this.updateEventsCounts()
+    dispatch({ type: 'updateHistory', data: historyEntry })
+    dispatch({ type: 'goToNextTask' })
   }
 
-  deleteCurrentEvent = async () => {
-    const { selectedEvent } = this.state
-
-    if (selectedEvent) {
-      await this.apiClient.updateStatus(selectedEvent.id, FLAGGED_MESSAGE_STATUS.deleted)
-
-      return this.alterEventsList(FLAGGED_MESSAGE_STATUS.new, FLAGGED_MESSAGE_STATUS.deleted)
-    }
-  }
-
-  undeleteEvent = async (id: string) => {
-    await this.apiClient.updateStatus(id, FLAGGED_MESSAGE_STATUS.new)
-    return this.alterEventsList(FLAGGED_MESSAGE_STATUS.deleted, FLAGGED_MESSAGE_STATUS.new)
-  }
-
-  resetPendingEvent = async (id: string) => {
-    await this.apiClient.updateStatus(id, FLAGGED_MESSAGE_STATUS.new)
-    return this.alterEventsList(FLAGGED_MESSAGE_STATUS.pending, FLAGGED_MESSAGE_STATUS.new)
-  }
-
-  amendCurrentEvent = async (resolutionData: ResolutionData) => {
-    const { selectedEvent } = this.state
-
-    await this.apiClient.updateStatus(selectedEvent.id, FLAGGED_MESSAGE_STATUS.pending, resolutionData)
-    return this.alterEventsList(FLAGGED_MESSAGE_STATUS.new, FLAGGED_MESSAGE_STATUS.pending)
-  }
-
-  applyAllPending = async () => {
-    await this.apiClient.applyAllPending()
-    await this.updateEventsCounts()
-    return this.setEventsStatus(FLAGGED_MESSAGE_STATUS.applied)
-  }
-
-  async componentDidUpdate(prevProps: Props) {
-    if (prevProps.contentLang !== this.props.contentLang) {
-      await this.setLanguage(this.props.contentLang)
+  const switchIntent = (isNext: boolean) => {
+    if (isNext) {
+      keyHandlers.moveIntentDown()
+    } else {
+      keyHandlers.moveIntentUp()
     }
   }
 
-  render() {
-    const { eventCounts, selectedStatus, events, selectedEventIndex, selectedEvent } = this.state
+  const utteranceClicked = (text: string, uttIndex: number, intentIndex: number, add?: boolean) => {
+    dispatch({ type: add ? 'markUtterance' : 'unMarkUtterance', data: text })
+    dispatch({ type: 'focusUtterance', data: { intentIndex, uttIndex } })
+  }
 
-    const { contentLang } = this.props
+  const skipToNextTask = () => {
+    dispatch({ type: 'addToHistory', data: getHistoryEntry(eventDetails, 'skipped') })
+    dispatch({ type: 'goToNextTask' })
+  }
 
-    const dataLoaded =
-      selectedStatus === FLAGGED_MESSAGE_STATUS.new ? selectedEvent || (events && events.length === 0) : events
+  const keyHandlers = {
+    moveIntentUp: () => dispatch({ type: 'moveIntentUp' }),
+    moveIntentDown: () => dispatch({ type: 'moveIntentDown' }),
 
-    return (
-      <Container sidePanelWidth={320}>
-        <SidePanel>
-          <SidePanelContent
-            eventCounts={eventCounts}
-            selectedStatus={selectedStatus}
-            events={events}
-            selectedEventIndex={selectedEventIndex}
-            onSelectedStatusChange={this.setEventsStatus}
-            onSelectedEventChange={this.setEventIndex}
-            applyAllPending={this.applyAllPending}
+    moveUtteranceUp: () => dispatch({ type: 'moveUtteranceUp' }),
+    moveUtteranceDown: () => dispatch({ type: 'moveUtteranceDown' }),
+    markSelected: () => dispatch({ type: 'markUtterance', data: currentUtterance }),
+    unMarkSelected: () => dispatch({ type: 'unMarkUtterance', data: currentUtterance }),
+
+    goToPreviousTask: () => dispatch({ type: 'goToPrevTask' }),
+    goToNextTask: () => skipToNextTask(),
+    goToIntentIndex: e => dispatch({ type: 'setIntentIndex', data: +e.key }),
+
+    loseFocus: () => document.getElementById('hotkeyContainer').focus(),
+    focusSearch: e => {
+      e.preventDefault()
+      searchInput.current.focus()
+    },
+
+    unMarkAllUtterances: () => {
+      if (!utils.isInputFocused()) {
+        dispatch({ type: 'unMarkUtterance' })
+      }
+    },
+    acceptMarkedUtterances: async () => {
+      if (!utils.isInputFocused()) {
+        await saveEvent('done')
+      }
+    },
+    ignoreFlaggedEvent: async () => {
+      if (!utils.isInputFocused()) {
+        await saveEvent('deleted')
+      }
+    }
+  }
+
+  return (
+    <Container sidePanelWidth={400} keyHandlers={keyHandlers} keyMap={keyMap}>
+      <SidePanel>
+        <Progress
+          api={api}
+          history={history}
+          currentEvent={eventDetails}
+          loadEvent={loadEvent}
+          filterDuplicates={filterDuplicates}
+          toggleDuplicates={() => dispatch({ type: 'toggleDuplicates' })}
+          eventsCount={events?.length ?? 0}
+          language={language}
+        />
+
+        <div className={style.chatPreview}>{eventDetails && <ChatPreview messages={eventDetails.context} />}</div>
+      </SidePanel>
+
+      <div className={style.mainView}>
+        <div className={style.input}>
+          <InputGroup
+            value={query}
+            autoFocus
+            inputRef={searchInput as any}
+            onChange={e => dispatch({ type: 'setPredictQuery', data: e.currentTarget.value })}
           />
-        </SidePanel>
+        </div>
 
-        {eventCounts && dataLoaded ? (
-          <div className={classnames(style.padded, style.mainView, style.withStickyActionBar)}>
-            <MainScreen
-              axios={this.props.bp.axios}
-              language={contentLang}
-              selectedEvent={selectedEvent}
-              selectedEventIndex={selectedEventIndex}
-              totalEventsCount={eventCounts[selectedStatus] || 0}
-              selectedStatus={selectedStatus}
-              events={events}
-              skipEvent={this.skipCurrentEvent}
-              deleteEvent={this.deleteCurrentEvent}
-              undeleteEvent={this.undeleteEvent}
-              resetPendingEvent={this.resetPendingEvent}
-              amendEvent={this.amendCurrentEvent}
-              applyAllPending={this.applyAllPending}
-            />
-          </div>
-        ) : (
-          <SplashScreen
-            title={lang.tr('module.misunderstood.loading')}
-            description={lang.tr('module.misunderstood.waitWhileDataLoading')}
-          />
-        )}
-      </Container>
-    )
-  }
+        <div>
+          {loading && <NonIdealState title="Loading" description="Querying NLU predictions..."></NonIdealState>}
+          {!loading &&
+            predictions?.map((x, idx) => (
+              <Prediction
+                key={x.label}
+                intents={intents}
+                index={idx}
+                intentName={x.label}
+                lang={props.contentLang}
+                confidence={x.confidence}
+                isActive={idx === intentIndex}
+                setCurrentUtterance={utt => dispatch({ type: 'setCurrentUtterance', data: utt })}
+                markedUtterance={markedUtterance}
+                switchIntent={switchIntent}
+                uttIndex={uttIndex}
+                utteranceClicked={utteranceClicked}
+              />
+            ))}
+        </div>
+
+        <StickyActionBar>
+          <Button text="Accept" intent={Intent.SUCCESS} onClick={async () => await saveEvent('done')}></Button>
+          <Button text="Ignore" intent={Intent.DANGER} onClick={async () => await saveEvent('deleted')}></Button>
+          <Button text="Skip" intent={Intent.WARNING} onClick={skipToNextTask}></Button>
+        </StickyActionBar>
+      </div>
+    </Container>
+  )
 }
+
+export default Main

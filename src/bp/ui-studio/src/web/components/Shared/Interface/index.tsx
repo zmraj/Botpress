@@ -49,7 +49,7 @@ export const Container = (props: ContainerProps) => {
   const children = React.Children.toArray(props.children)
 
   return (
-    <HotKeys handlers={keyHandlers} keyMap={props.keyMap || {}} className={style.fullsize} focused>
+    <HotKeys handlers={keyHandlers} keyMap={props.keyMap || {}} id="hotkeyContainer" className={style.fullsize} focused>
       <div className={classnames(style.container, { [style.sidePanel_hidden]: !sidePanelVisible })}>
         <SplitPane
           split={'vertical'}

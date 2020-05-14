@@ -1,0 +1,75 @@
+.mainView {
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+
+  & > h3 {
+    margin-top: 0;
+  }
+
+  &Table {
+    width: 100%;
+  }
+}
+
+.stickyActionBar {
+  background: #fcfcfc;
+  bottom: 0;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  left: 0;
+  padding: 10px 15px;
+  position: absolute;
+  right: 0;
+  z-index: 9;
+
+  button {
+    margin-left: 5px;
+  }
+
+  &Content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
+
+.input {
+  margin-bottom: 10px;
+}
+
+.chatPreview {
+  height: 500px;
+}
+
+.intentBox {
+  padding: 10px;
+}
+
+.activeIntent {
+  border: 2px solid darkgray;
+  border-radius: 10px;
+}
+
+.utterance {
+  cursor: pointer;
+  margin-left: 25px;
+}
+
+.activeUtterance {
+  font-weight: bold;
+  color: darkblue;
+}
+
+.activeHistory {
+  font-weight: bold;
+}
+
+.shortcut {
+  width: 50px;
+  display: inline-block;
+}
+
+.progressBox {
+  overflow-y: scroll;
+  height: 230px;
+  padding: 10px;
+}

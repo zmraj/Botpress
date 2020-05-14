@@ -116,7 +116,7 @@
 }
 
 .thPhrase {
-  width: 35%
+  width: 35%;
 }
 
 .thUpdated {
@@ -155,4 +155,20 @@
     max-width: 1000px;
     margin: 0 auto;
   }
+}
+
+.intentBox {
+  padding: 10px;
+}
+
+.activeIntent {
+  border: 2px solid black;
+}
+
+.utterance {
+  margin-left: 20px;
+}
+
+.activeUtterance {
+  background-color: yellow;
 }

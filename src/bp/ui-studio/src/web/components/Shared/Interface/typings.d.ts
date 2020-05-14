@@ -49,7 +49,7 @@ export interface ContainerProps {
   sidePanelHidden?: boolean
   /** Register a new combination of keyboard shortcuts for your container, for ex: ctrl+b, ctrl+alt+z, esc */
   keyMap?: {
-    [id: string]: string
+    [id: string]: string | string[]
   }
   /** Makes the content scrollable vertically on overflow */
   yOverflowScroll?: boolean
