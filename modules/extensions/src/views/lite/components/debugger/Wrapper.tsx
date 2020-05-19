@@ -5,7 +5,7 @@ import style from './style.scss'
 
 export class Wrapper extends React.Component<WrapperProps> {
   handleMessageClicked = () => {
-    updater.callback(this.props.incomingEventId)
+    updater.callback(this.props.eventId)
   }
 
   render() {
@@ -18,6 +18,6 @@ export class Wrapper extends React.Component<WrapperProps> {
 }
 
 interface WrapperProps {
-  incomingEventId: string
+  eventId: string
   store: any
 }

@@ -50,6 +50,7 @@ export default class WebchatDb {
         return this.knex.createTableIfNotExists('web_messages', function(table) {
           table.string('id').primary()
           table.integer('conversationId')
+          table.string('eventId')
           table.string('incomingEventId')
           table.string('userId')
           table.string('message_type') // @ deprecated Remove in a future release (11.9)
@@ -82,6 +83,7 @@ export default class WebchatDb {
     const message = {
       id: uuid.v4(),
       conversationId,
+      eventId: incomingEventId,
       incomingEventId,
       userId,
       full_name: fullName,
@@ -114,12 +116,13 @@ export default class WebchatDb {
     )
   }
 
-  async appendBotMessage(botName, botAvatar, conversationId, payload, incomingEventId) {
+  async appendBotMessage(botName, botAvatar, conversationId, payload, incomingEventId, eventId: string) {
     const { type, text, raw, data } = payload
     const message = {
       id: uuid.v4(),
       conversationId: conversationId,
       incomingEventId,
+      eventId,
       userId: undefined,
       full_name: botName,
       avatar_url: botAvatar,

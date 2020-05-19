@@ -17,8 +17,7 @@ const onServerReady = async (bp: typeof sdk) => {
     '/events/:eventId',
     asyncMiddleware(async (req, res) => {
       const storedEvents = await bp.events.findEvents({
-        incomingEventId: req.params.eventId,
-        direction: 'incoming',
+        id: req.params.eventId,
         botId: req.params.botId
       })
       if (storedEvents.length) {

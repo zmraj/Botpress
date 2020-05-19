@@ -237,6 +237,7 @@ export type CurrentConversation = {
 export interface Message {
   id: string
   userId: string
+  eventId?: string
   incomingEventId: string
   conversationId: number
   avatar_url: string | undefined

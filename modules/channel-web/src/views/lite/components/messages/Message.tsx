@@ -80,6 +80,7 @@ class Message extends Component<MessageProps> {
     delete messageDataProps.component
 
     const sanitizedProps = pick(this.props, [
+      'eventId',
       'incomingEventId',
       'isLastGroup',
       'isLastOfGroup',

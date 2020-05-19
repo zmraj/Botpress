@@ -104,6 +104,7 @@ class MessageGroup extends React.Component<Props> {
                   isLastOfGroup={i >= this.props.messages.length - 1}
                   isLastGroup={this.props.isLastGroup}
                   isBotMessage={!data.userId}
+                  eventId={data.eventId}
                   incomingEventId={data.incomingEventId}
                   payload={payload}
                   sentOn={data.sent_on}
