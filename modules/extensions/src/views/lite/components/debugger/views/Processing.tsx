@@ -1,4 +1,4 @@
-import { Colors, H5, HTMLTable, Icon } from '@blueprintjs/core'
+import { Icon, Intent } from '@blueprintjs/core'
 import * as sdk from 'botpress/sdk'
 import _ from 'lodash'
 import moment from 'moment'
@@ -42,13 +42,16 @@ export const Processing: FC<{ event: sdk.IO.Event }> = props => {
       {processed
         .filter(x => x.status !== 'skipped')
         .map((entry, idx) => {
-          const name = entry.name ? ' - ' + entry.name : ''
-          const status = entry.status ? ' - ' + entry.status : ''
-
           return (
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <div>
-                {idx}. {getType(entry.type)} {name} {status}
+                {idx}.
+                {entry.status === 'error' ? (
+                  <Icon icon="small-cross" intent={Intent.DANGER} />
+                ) : (
+                  <Icon icon="small-tick" intent={Intent.SUCCESS} />
+                )}
+                {getType(entry.type)} {entry.name ? ' - ' + entry.name : ''}
               </div>
               <div>{entry.execTime || 0} ms</div>
             </div>
