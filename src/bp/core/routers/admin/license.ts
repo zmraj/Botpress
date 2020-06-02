@@ -2,6 +2,7 @@ import { Logger } from 'botpress/sdk'
 import LicensingService, { LicenseInfo, LicenseStatus } from 'common/licensing-service'
 import { RequestWithUser } from 'common/typings'
 import { ConfigProvider } from 'core/config/config-loader'
+import { StatsService } from 'core/services/stats-service'
 import { Router } from 'express'
 import _ from 'lodash'
 
@@ -27,7 +28,12 @@ const defaultResponse: LicensingStatus = {
 }
 
 export class LicenseRouter extends CustomRouter {
-  constructor(logger: Logger, private licenseService: LicensingService, private configProvider: ConfigProvider) {
+  constructor(
+    logger: Logger,
+    private licenseService: LicensingService,
+    private configProvider: ConfigProvider,
+    private statsService: StatsService
+  ) {
     super('License', logger, Router({ mergeParams: true }))
     this.setupRoutes()
   }
@@ -36,19 +42,34 @@ export class LicenseRouter extends CustomRouter {
     const router = this.router
     const svc = this.licenseService
 
+    // this.router.get(
+    //   '/telemetry',
+    //   this.asyncMiddleware(async (req, res) => {
+    //     const unsent = this.statsService.unsentTelemetry
+    //     if (unsent.length) {
+    //       res.send(unsent)
+    //     } else {
+    //       res.sendStatus(200)
+    //     }
+    //   })
+    // )
+
     router.get(
       '/status',
       this.asyncMiddleware(async (req, res) => {
         const { tokenUser } = <RequestWithUser>req
 
+        const unsent = this.statsService.getUnsentTelemetry()
+        const response = { ...defaultResponse, telemetry: unsent }
+
         if (!process.IS_PRO_ENABLED) {
-          return sendSuccess<LicensingStatus>(res, 'License status', { ...defaultResponse, isPro: false })
+          return sendSuccess<LicensingStatus>(res, 'License status', { ...response, isPro: false })
         }
 
         const status = await svc.getLicenseStatus()
         if (!tokenUser || !tokenUser.isSuperAdmin) {
           return sendSuccess<LicensingStatus>(res, 'License status', {
-            ...defaultResponse,
+            ...response,
             isPro: true,
             status: status.status
           })
@@ -63,7 +84,7 @@ export class LicenseRouter extends CustomRouter {
         } catch (err) {}
 
         return sendSuccess<LicensingStatus>(res, 'License status', {
-          ...defaultResponse,
+          ...response,
           fingerprints: {
             cluster_url: clusterFingerprint
           },

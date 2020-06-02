@@ -53,6 +53,7 @@ import { LogsService } from './services/logs/service'
 import MediaService from './services/media'
 import { MonitoringService } from './services/monitoring'
 import { NotificationsService } from './services/notification/service'
+import { StatsService } from './services/stats-service'
 import { WorkspaceService } from './services/workspace-service'
 import { TYPES } from './types'
 
@@ -102,6 +103,8 @@ export default class HTTPServer {
   private jwksClient?: jwksRsa.JwksClient
   private jwksKeyId?: string
 
+  private realHost?: string
+
   constructor(
     @inject(TYPES.ConfigProvider) private configProvider: ConfigProvider,
     @inject(TYPES.Logger)
@@ -127,7 +130,8 @@ export default class HTTPServer {
     @inject(TYPES.MonitoringService) private monitoringService: MonitoringService,
     @inject(TYPES.AlertingService) private alertingService: AlertingService,
     @inject(TYPES.JobService) private jobService: JobService,
-    @inject(TYPES.LogsRepository) private logsRepo: LogsRepository
+    @inject(TYPES.LogsRepository) private logsRepo: LogsRepository,
+    @inject(TYPES.StatsService) private statsService: StatsService
   ) {
     this.app = express()
 
@@ -168,7 +172,8 @@ export default class HTTPServer {
       this.alertingService,
       moduleLoader,
       this.jobService,
-      this.logsRepo
+      this.logsRepo,
+      statsService
     )
     this.shortLinksRouter = new ShortLinksRouter(this.logger)
     this.botsRouter = new BotsRouter({
@@ -254,6 +259,13 @@ export default class HTTPServer {
           return res.status(503).send('Botpress is loading. Please try again in a minute.')
         }
       }
+
+      const { host } = req.headers
+      if (!this.realHost && !host?.includes('localhost')) {
+        this.realHost = host
+        this.statsService.setRealHost(host!)
+      }
+
       next()
     })
 

@@ -11,6 +11,7 @@ import AuthService, { TOKEN_AUDIENCE } from 'core/services/auth/auth-service'
 import { BotService } from 'core/services/bot-service'
 import { JobService } from 'core/services/job-service'
 import { MonitoringService } from 'core/services/monitoring'
+import { StatsService } from 'core/services/stats-service'
 import { WorkspaceService } from 'core/services/workspace-service'
 import { RequestHandler, Router } from 'express'
 import httpsProxyAgent from 'https-proxy-agent'
@@ -55,14 +56,15 @@ export class AdminRouter extends CustomRouter {
     alertingService: AlertingService,
     moduleLoader: ModuleLoader,
     jobService: JobService,
-    private logsRepository: LogsRepository
+    private logsRepository: LogsRepository,
+    statsService: StatsService
   ) {
     super('Admin', logger, Router({ mergeParams: true }))
     this.checkTokenHeader = checkTokenHeader(this.authService, TOKEN_AUDIENCE)
     this.botsRouter = new BotsRouter(logger, this.workspaceService, this.botService, configProvider)
     this.workspacesRouter = new WorkspacesRouter(logger, workspaceService, botService, configProvider)
     this.usersRouter = new UsersRouter(logger, this.authService, this.workspaceService)
-    this.licenseRouter = new LicenseRouter(logger, this.licenseService, configProvider)
+    this.licenseRouter = new LicenseRouter(logger, this.licenseService, configProvider, statsService)
     this.versioningRouter = new VersioningRouter(logger, this.ghostService, this.botService)
     this.rolesRouter = new RolesRouter(logger, this.workspaceService)
     this.serverRouter = new ServerRouter(

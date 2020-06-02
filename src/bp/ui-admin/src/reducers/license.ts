@@ -27,5 +27,24 @@ export const fetchLicensing = () => {
       type: FETCH_LICENSING_RECEIVED,
       licensing: data.payload
     })
+
+    try {
+      const { data } = await api
+        .getSecured({ toastErrors: false })
+        .post(`https://telemetry.botpress.io/ingest`, { test: '123' })
+      console.log(data)
+    } catch (err) {
+      console.error(err)
+    }
+
+    // if (data.payload.telemetry?.length) {
+    //   console.log('TELEM')
+    //   for(const entry of data.payload.telemetry){
+    //     const { data } = await api.getSecured({ toastErrors: false }).post(`https://telemetrye.botpress.io/ingest`, entry)
+    //     console.log(data.)
+    //   }
+
+    //   //
+    // }
   }
 }

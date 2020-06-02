@@ -20,10 +20,12 @@ import { WorkspaceService } from './workspace-service'
 
 const LOCK_RESOURCE = 'botpress:statsService'
 const debug = DEBUG('stats')
-const JOB_INTERVAL = '6 hours'
+const JOB_INTERVAL = '2m'
 
 @injectable()
 export class StatsService {
+  private unsentTelemetry: any[] = []
+
   constructor(
     @inject(TYPES.ConfigProvider) private config: ConfigProvider,
     @inject(TYPES.JobService) private jobService: JobService,
@@ -36,6 +38,16 @@ export class StatsService {
     @inject(TYPES.UserRepository) private userRepository: UserRepository,
     @inject(TYPES.Database) private database: Database
   ) {}
+
+  public setRealHost(hostname: string) {
+    console.log('Real', hostname)
+  }
+
+  public getUnsentTelemetry() {
+    const telemetry = [...this.unsentTelemetry]
+    this.unsentTelemetry = []
+    return telemetry
+  }
 
   public start() {
     // tslint:disable-next-line: no-floating-promises
@@ -55,9 +67,9 @@ export class StatsService {
     const stats = await this.getStats()
     debug('Sending stats: %o', stats)
     try {
-      await axios.post('https://telemetry.botpress.io/ingest', stats)
+      await axios.post('https://telemetrye.botpress.io/ingest', stats)
     } catch (err) {
-      // silently fail (only while the telemetry endpoint is under construction)
+      this.unsentTelemetry.push(stats)
     }
   }
 
