@@ -171,7 +171,8 @@ export class EventEngine {
 
   async sendEvent(event: sdk.IO.Event): Promise<void> {
     this.validateEvent(event)
-    this.eventCollector.storeEvent(event, 'received')
+    event.addStep('received')
+    this.eventCollector.storeEvent(event)
 
     if (event.direction === 'incoming') {
       debugIncoming.forBot(event.botId, 'send ', event)
@@ -206,8 +207,8 @@ export class EventEngine {
   }
 
   private async getBotMiddlewareChains(botId: string) {
-    const incoming = new MiddlewareChain(this.eventCollector)
-    const outgoing = new MiddlewareChain(this.eventCollector)
+    const incoming = new MiddlewareChain()
+    const outgoing = new MiddlewareChain()
 
     for (const mw of this.incomingMiddleware) {
       incoming.use(mw)

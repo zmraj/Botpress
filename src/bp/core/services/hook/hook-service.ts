@@ -2,6 +2,7 @@ import * as sdk from 'botpress/sdk'
 import { IO } from 'botpress/sdk'
 import { Incident } from 'botpress/sdk'
 import { ObjectCache } from 'common/object-cache'
+import { ActionScope } from 'common/typings'
 import { UntrustedSandbox } from 'core/misc/code-sandbox'
 import { printObject } from 'core/misc/print'
 import { WorkspaceUserAttributes } from 'core/repositories/workspace_users'
@@ -14,9 +15,8 @@ import { NodeVM } from 'vm2'
 import { GhostService } from '..'
 import { clearRequireCache, requireAtPaths } from '../../modules/require'
 import { TYPES } from '../../types'
-import { filterDisabled } from '../action/utils'
+import { filterDisabled, runOutsideVm } from '../action/utils'
 import { VmRunner } from '../action/vm'
-import { EventCollector } from '../middleware/event-collector'
 
 const debug = DEBUG('hooks')
 const DEBOUNCE_DELAY = ms('2s')
@@ -159,8 +159,7 @@ export class HookService {
     @tagged('name', 'HookService')
     private logger: sdk.Logger,
     @inject(TYPES.GhostService) private ghost: GhostService,
-    @inject(TYPES.ObjectCache) private cache: ObjectCache,
-    @inject(TYPES.EventCollector) private eventCollector: EventCollector
+    @inject(TYPES.ObjectCache) private cache: ObjectCache
   ) {
     this._listenForCacheInvalidation()
     this._invalidateDebounce = _.debounce(this._invalidateRequire, DEBOUNCE_DELAY, { leading: true, trailing: false })
@@ -265,7 +264,7 @@ export class HookService {
   }
 
   private async runScript(hookScript: HookScript, hook: Hooks.BaseHook) {
-    const scope = hookScript.botId ? `bots/${hookScript.botId}` : 'global'
+    const scope = (hookScript.botId ? `bots/${hookScript.botId}` : 'global') as ActionScope
     const hookPath = `/data/${scope}/hooks/${hook.folder}/${hookScript.path}.js`
 
     const dirPath = path.resolve(path.join(process.PROJECT_LOCATION, hookPath))
@@ -277,7 +276,7 @@ export class HookService {
     hook.debug.forBot(botId, 'before execute %o', { path: hookScript.path, botId, args: _.omit(hook.args, ['bp']) })
     process.BOTPRESS_EVENTS.emit(hook.folder, hook.args)
 
-    if (process.DISABLE_GLOBAL_SANDBOX) {
+    if (runOutsideVm(scope)) {
       await this.runWithoutVm(hookScript, hook, botId, _require)
     } else {
       await this.runInVm(hookScript, hook, botId, _require)
@@ -286,11 +285,10 @@ export class HookService {
     hook.debug.forBot(botId, 'after execute')
   }
 
-  private shouldStore = (hook: Hooks.BaseHook) => hook instanceof Hooks.EventHook && hook.args?.event
-
-  private storeEvent = (hookName: string, status: 'completed' | 'error', hook: Hooks.BaseHook) => {
-    if (hook instanceof Hooks.EventHook && hook.args?.event) {
-      this.eventCollector.storeEvent(hook.args.event, `hook:${hookName}:${status}`)
+  private addEventStep = (hookName: string, status: 'completed' | 'error', hook: Hooks.BaseHook) => {
+    if (hook instanceof Hooks.EventHook && hook.args?.event?.addStep) {
+      const event = hook.args.event as IO.Event
+      event.addStep(`hook:${hookName}:${status}`)
     }
   }
 
@@ -305,10 +303,10 @@ export class HookService {
     try {
       const fn = new Function(...Object.keys(args), hookScript.code)
       await fn(...Object.values(args))
-      this.storeEvent(hookScript.name, 'completed', hook)
+      this.addEventStep(hookScript.name, 'completed', hook)
       return
     } catch (err) {
-      this.storeEvent(hookScript.name, 'error', hook)
+      this.addEventStep(hookScript.name, 'error', hook)
       this.logScriptError(err, botId, hookScript.path, hook.folder)
     }
   }
@@ -340,9 +338,9 @@ export class HookService {
 
     await vmRunner
       .runInVm(vm, hookScript.code, hookScript.path)
-      .then(() => this.storeEvent(hookScript.name, 'completed', hook))
+      .then(() => this.addEventStep(hookScript.name, 'completed', hook))
       .catch(err => {
-        this.storeEvent(hookScript.name, 'error', hook)
+        this.addEventStep(hookScript.name, 'error', hook)
         this.logScriptError(err, botId, hookScript.path, hook.folder)
       })
   }

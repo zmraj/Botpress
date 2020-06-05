@@ -71,19 +71,6 @@ export class DecisionEngine {
         const flowName = flow.endsWith('.flow.json') ? flow : `${flow}.flow.json`
 
         await this.dialogEngine.jumpTo(sessionId, event, flowName, node)
-
-        if (action === 'startWorkflow') {
-          event.state.session.lastWorkflows = [
-            {
-              workflow: flowName,
-              eventId: event.id,
-              active: true
-            },
-            ...(event.state.session.lastWorkflows || [])
-          ]
-
-          BOTPRESS_CORE_EVENT('bp_core_workflow_started', { botId: event.botId, channel: event.channel, wfName: flow })
-        }
       }
     }
 
@@ -159,6 +146,8 @@ export class DecisionEngine {
           }
         })
         const processedEvent = await this.dialogEngine.processEvent(sessionId, event)
+        event.addStep('dialog:completed')
+
         // In case there are no unknown errors, remove skills/ flow from the stacktrace
         processedEvent.state.__stacktrace = processedEvent.state.__stacktrace.filter(x => !x.flow.startsWith('skills/'))
         this.onAfterEventProcessed && (await this.onAfterEventProcessed(processedEvent))
@@ -170,6 +159,8 @@ export class DecisionEngine {
           .forBot(event.botId)
           .attachError(err)
           .error('An unexpected error occurred.')
+
+        event.addStep('dialog:error')
 
         await this._processErrorFlow(sessionId, event)
       }

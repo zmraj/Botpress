@@ -23,7 +23,6 @@ import { clearRequireCache, requireFromString } from '../../modules/require'
 import { TYPES } from '../../types'
 import { BotService } from '../bot-service'
 import { ActionExecutionError } from '../dialog/errors'
-import { EventCollector } from '../middleware/event-collector'
 import { WorkspaceService } from '../workspace-service'
 
 import { extractMetadata } from './metadata'
@@ -33,7 +32,8 @@ import {
   getBaseLookupPaths,
   isTrustedAction,
   prepareRequire,
-  prepareRequireTester
+  prepareRequireTester,
+  runOutsideVm
 } from './utils'
 import { VmRunner } from './vm'
 
@@ -55,7 +55,7 @@ const ACTION_SERVER_RESPONSE_SCHEMA = joi.object({
 
 @injectable()
 export default class ActionService {
-  private _scopedActions: Map<string, ScopedActionService> = new Map()
+  private _scopedActions: Map<string, Promise<ScopedActionService>> = new Map()
   private _invalidateDebounce
 
   constructor(
@@ -64,7 +64,6 @@ export default class ActionService {
     @inject(TYPES.TasksRepository) private tasksRepository: TasksRepository,
     @inject(TYPES.WorkspaceService) private workspaceService: WorkspaceService,
     @inject(TYPES.BotService) private botService: BotService,
-    @inject(TYPES.EventCollector) private eventCollector: EventCollector,
     @inject(TYPES.Logger)
     @tagged('name', 'ActionService')
     private logger: Logger
@@ -78,21 +77,15 @@ export default class ActionService {
       return this._scopedActions.get(botId)!
     }
 
-    if (!(await this.botService.botExists(botId, true))) {
-      throw new NotFoundError(`This bot does not exist`)
-    }
+    const service = new Promise<ScopedActionService>(async cb => {
+      if (!(await this.botService.botExists(botId, true))) {
+        throw new NotFoundError(`This bot does not exist`)
+      }
 
-    const workspaceId = await this.workspaceService.getBotWorkspaceId(botId)
+      const workspaceId = await this.workspaceService.getBotWorkspaceId(botId)
+      cb(new ScopedActionService(this.ghost, this.logger, botId, this.cache, this.tasksRepository, workspaceId))
+    })
 
-    const service = new ScopedActionService(
-      this.ghost,
-      this.logger,
-      botId,
-      this.cache,
-      this.tasksRepository,
-      workspaceId,
-      this.eventCollector
-    )
     this._scopedActions.set(botId, service)
     return service
   }
@@ -134,8 +127,7 @@ export class ScopedActionService {
     private botId: string,
     private cache: ObjectCache,
     private tasksRepository: TasksRepository,
-    private workspaceId: string,
-    private eventCollector: EventCollector
+    private workspaceId: string
   ) {
     this._listenForCacheInvalidation()
   }
@@ -185,13 +177,13 @@ export class ScopedActionService {
       }
 
       debug.forBot(incomingEvent.botId, 'done running', { actionName, actionArgs })
-      this.eventCollector.storeEvent(incomingEvent, `action:${actionName}:completed`)
+      incomingEvent.addStep(`action:${actionName}:completed`)
     } catch (err) {
       this.logger
         .forBot(this.botId)
         .attachError(err)
         .error(`An error occurred while executing the action "${actionName}`)
-      this.eventCollector.storeEvent(incomingEvent, `action:${actionName}:error`)
+      incomingEvent.addStep(`action:${actionName}:error`)
       throw new ActionExecutionError(err.message, actionName, err.stack)
     }
   }
@@ -295,7 +287,7 @@ export class ScopedActionService {
   ) {
     const { actionName, actionArgs, incomingEvent, runType } = props
 
-    const { code, _require, dirPath } = await this.loadLocalAction(actionName)
+    const { code, _require, dirPath, action } = await this.loadLocalAction(actionName)
 
     const args = {
       event: incomingEvent,
@@ -313,6 +305,9 @@ export class ScopedActionService {
         return this._runWithoutVm(code, { bp: await createForAction(), ...args }, _require)
       }
       case 'legacy': {
+        if (runOutsideVm(action.scope)) {
+          return this._runWithoutVm(code, { bp: await createForAction(), ...args }, _require)
+        }
         // bp is created here because it cannot be created in the Local Action Server thread
         return this._runInVm(code, dirPath, { bp: await createForAction(), ...args }, _require)
       }
@@ -363,11 +358,11 @@ export class ScopedActionService {
       await this._checkActionRequires(actionName)
     }
 
-    const { code, dirPath, lookups } = await this._getActionDetails(actionName)
+    const { code, dirPath, lookups, action } = await this._getActionDetails(actionName)
 
     const _require = prepareRequire(dirPath, lookups)
 
-    return { code, _require, dirPath }
+    return { code, _require, dirPath, action }
   }
 
   private _listenForCacheInvalidation() {

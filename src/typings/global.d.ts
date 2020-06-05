@@ -49,11 +49,9 @@ declare namespace NodeJS {
     IS_FAILSAFE: boolean
     /** A random ID generated on server start to identify each server in a cluster */
     SERVER_ID: string
-    /**
-     * When true, global hooks and actions will be executed outside of the sandbox.
-     * This gives a boost in performances for code deemed "safe", while bot-specific content is executed in the sandbox
-     */
     DISABLE_GLOBAL_SANDBOX: boolean
+    DISABLE_BOT_SANDBOX: boolean
+    DISABLE_TRANSITION_SANDBOX: boolean
     WEB_WORKER: number
     ML_WORKERS: number[]
   }
@@ -192,6 +190,12 @@ declare type BotpressEnvironmentVariables = {
    */
   readonly DISABLE_GLOBAL_SANDBOX?: boolean
 
+  /** When true, bot-scoped actions and hooks are executed outside of the sandbox  */
+  readonly DISABLE_BOT_SANDBOX?: boolean
+
+  /** When true, transitions are executed outside of the sandbox  */
+  readonly DISABLE_TRANSITION_SANDBOX?: boolean
+
   /** Runs all migrations from v12.0.0 up to the latest migration found in modules and core */
   readonly TESTMIG_ALL?: boolean
 
@@ -277,8 +281,8 @@ declare type BOTPRESS_CORE_EVENTS = {
   bp_core_workflow_completed: { botId: string; channel: string; wfName: string }
   bp_core_workflow_failed: { botId: string; channel: string; wfName: string }
   bp_core_enter_flow: { botId: string; channel: string; flowName: string }
-  bp_core_feedback_positive: { botId: string; channel: string; type: string; eventId?: number }
-  bp_core_feedback_negative: { botId: string; channel: string; type: string; eventId?: number }
+  bp_core_feedback_positive: { botId: string; channel: string; type: string; eventId?: string }
+  bp_core_feedback_negative: { botId: string; channel: string; type: string; eventId?: string }
 }
 
 interface IEmitCoreEvent {
