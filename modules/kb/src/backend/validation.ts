@@ -36,5 +36,21 @@ export const KbEntry = Joi.object().keys({
           .not()
           .empty()
       )
+    ),
+  feedback: Joi.object()
+    .optional()
+    .default({})
+    .pattern(
+      /[A-Z]{1,3}/i,
+      Joi.array().items(
+        Joi.object().keys({
+          utterance: Joi.string()
+            .required()
+            .not()
+            .empty(),
+          polarity: Joi.bool().required(),
+          approved: Joi.bool().default(false)
+        })
+      )
     )
 })

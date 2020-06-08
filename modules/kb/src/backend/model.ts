@@ -1,28 +1,27 @@
 import axios, { AxiosInstance } from 'axios'
 import retry from 'bluebird-retry'
+import crypto from 'crypto'
 import fse from 'fs-extra'
 import httpsProxyAgent from 'https-proxy-agent'
 import _, { debounce, sumBy } from 'lodash'
 import lru from 'lru-cache'
+import { add, divide, multiply, norm, subtract } from 'mathjs'
 import { distance, similarity } from 'ml-distance'
 import ms from 'ms'
 import path from 'path'
 
 import { sanitizeText } from './storage'
-import { Entry, Model, Prediction } from './typings'
+import { Entry, Model, Prediction, TrainedModel } from './typings'
 
 const debug = DEBUG('kb').sub('lang')
 
-type Cache = {
-  [str: string]: number[]
-}
+const hash = str =>
+  crypto
+    .createHash('md5')
+    .update(str)
+    .digest('hex')
 
-// TODO:
-// local cache
-// retry axios
-// batch get
-// get content too
-// get
+let _cacheDumpDisabled = false
 
 const _vectorsCachePath = path.join(process.APP_DATA_PATH, 'cache', 'mod_kb_vectors.json')
 const _vectorsCache: lru<string, Float32Array> = new lru<string, Float32Array>({
@@ -37,29 +36,29 @@ const _vectorsCache: lru<string, Float32Array> = new lru<string, Float32Array>({
 })
 
 const onVectorsCacheChanged = debounce(async () => {
-  if (!this._cacheDumpDisabled) {
-    await this.dumpVectorsCache()
+  if (!_cacheDumpDisabled) {
+    await dumpVectorsCache()
   }
 }, ms('5s'))
 
 async function dumpVectorsCache() {
   try {
-    await fse.ensureFile(this._vectorsCachePath)
-    await fse.writeJSON(this._vectorsCachePath, this._vectorsCache.dump())
-    debug('vectors cache updated at: %s', this._vectorsCachePath)
+    await fse.ensureFile(_vectorsCachePath)
+    await fse.writeJSON(_vectorsCachePath, _vectorsCache.dump())
+    debug('vectors cache updated at: %s', _vectorsCachePath)
   } catch (err) {
+    _cacheDumpDisabled = true
     debug('could not persist vectors cache, error: %s', err.message)
-    this._cacheDumpDisabled = true
   }
 }
 
 async function restoreVectorsCache() {
   try {
-    if (await fse.pathExists(this._vectorsCachePath)) {
-      const dump = await fse.readJSON(this._vectorsCachePath)
+    if (await fse.pathExists(_vectorsCachePath)) {
+      const dump = await fse.readJSON(_vectorsCachePath)
       if (dump) {
         const kve = dump.map(x => ({ e: x.e, k: x.k, v: Float32Array.from(Object.values(x.v)) }))
-        this._vectorsCache.load(kve)
+        _vectorsCache.load(kve)
       }
     }
   } catch (err) {
@@ -67,13 +66,13 @@ async function restoreVectorsCache() {
   }
 }
 
+const restoreCachePromise = restoreVectorsCache()
+
 const ENDPOINT = process.env.BP_MODULE_KB_ENDPOINT || 'https://covid-qc-qna.botpress.cloud'
 const getCacheKey = (lang: string, input: string) =>
-  `${lang.toLowerCase().trim()}___${encodeURI(sanitizeText(input))
+  `${hash(sanitizeText(input))
     .toLowerCase()
-    .trim()}`
-
-// async function getEmbeddings() {}
+    .trim()}//${lang.toLowerCase().trim()}`
 
 export default class RemoteModel implements Model {
   private training = false
@@ -82,9 +81,36 @@ export default class RemoteModel implements Model {
   constructor(
     private entries: Entry[] = [],
     private langs: string[] = [],
-    private cache: Cache = {},
-    private trained: boolean = false
+    private trained: boolean = false,
+    private model?: TrainedModel
   ) {}
+
+  private async getPhraseVector(phrase: string, lang: string): Promise<number[] | undefined> {
+    try {
+      const cacheKey = getCacheKey(lang, phrase)
+
+      if (_vectorsCache.has(cacheKey)) {
+        return Array.from(_vectorsCache.get(cacheKey).values())
+      }
+
+      const {
+        data: { embeddings }
+      } = await axios.post(ENDPOINT + '/embeddings', {
+        lang: lang.toLowerCase().trim(),
+        text: sanitizeText(phrase)
+      })
+
+      if (!embeddings || !embeddings.length || isNaN(embeddings[0])) {
+        throw new Error('Received invalid embeddings')
+      }
+
+      _vectorsCache.set(getCacheKey(lang, phrase), embeddings)
+      onVectorsCacheChanged() // TODO:
+      return embeddings
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   async train(data: Entry[]): Promise<boolean> {
     if (this.training) {
@@ -95,12 +121,13 @@ export default class RemoteModel implements Model {
       throw new Error('Already trained')
     }
 
+    await restoreCachePromise // TODO:
+
     this.trained = false
     this.cancelled = false
     this.training = true
 
     try {
-      const cache: Cache = {}
       const langs = _.uniq(_.flatten(data.map(x => [...Object.keys(x.content), ...Object.keys(x.title)])))
       const { progress } = (function() {
         let i = 0
@@ -112,6 +139,8 @@ export default class RemoteModel implements Model {
         return { progress }
       })()
 
+      const model: TrainedModel = { entries: [...data], support_vectors: [], trained_on: new Date() }
+
       for (const entry of data) {
         if (this.cancelled) {
           break
@@ -120,51 +149,50 @@ export default class RemoteModel implements Model {
           if (this.cancelled) {
             break
           }
-          const unseen = _.uniq([_.get(entry, 'title.' + lang)].filter(Boolean).map(sanitizeText))
-            .filter(Boolean)
-            .filter(p => !cache[getCacheKey(lang, p)])
 
-          // const unseen = _.uniq(
-          //   [_.get(entry, 'title.' + lang), ..._.get(entry, 'content.' + lang)].filter(Boolean).map(sanitizeText)
-          // )
-          //   .filter(Boolean)
-          //   .filter(p => !cache[getCacheKey(lang, p)])
+          const questions = _.uniq([
+            entry.title[lang],
+            ...entry.feedback[lang].filter(x => x.polarity).map(x => x.utterance)
+          ])
 
-          for (const p of unseen) {
-            if (this.cancelled) {
-              break
-            }
-
-            // check if local cache has it
-            // if not fetch remote + store local + update cache
-
-            try {
-              const {
-                data: { embeddings }
-              } = await axios.post(ENDPOINT + '/embeddings', {
-                lang: lang.toLowerCase().trim(),
-                text: sanitizeText(p)
-              })
-
-              if (!embeddings || !embeddings.length || isNaN(embeddings[0])) {
-                throw new Error('Received invalid embeddings')
-              }
-
-              cache[getCacheKey(lang, p)] = embeddings
-            } catch (err) {
-              console.log(err)
-            }
+          const contentEmb = await this.getPhraseVector(entry.title[lang], lang)
+          let mutedEmb = [...contentEmb]
+          if (!contentEmb) {
+            continue
           }
+
+          for (const question of questions) {
+            const questionEmb = await this.getPhraseVector(question, lang)
+            if (!questionEmb) {
+              continue
+            }
+            const questionEmbNorm = multiply(norm(mutedEmb) / norm(questionEmb), [...questionEmb])
+            const direction = subtract(questionEmbNorm, mutedEmb)
+            mutedEmb = add(mutedEmb, multiply(0.1, direction))
+            model.support_vectors.push({
+              vector: questionEmb,
+              lang: lang,
+              content: entry.content[lang][0],
+              entry_id: entry.id
+            })
+          }
+
+          // model.support_vectors.push({
+          //   vector: mutedEmb,
+          //   lang: lang,
+          //   content: entry.content[lang][0],
+          //   entry_id: entry.id
+          // })
         }
+
         progress()
       }
 
       if (!this.cancelled) {
         this.entries = data
-        this.cache = cache
         this.langs = langs
-
         this.trained = true
+        this.model = model
       }
     } catch (err) {
       this.trained = false
@@ -184,6 +212,107 @@ export default class RemoteModel implements Model {
     this.cancelled = true
   }
 
+  // async predict(input: string, langCode: string): Promise<Prediction[]> {
+  //   if (!this.trained) {
+  //     throw new Error("Can't predict because model is not trained")
+  //   }
+
+  //   if (this.training) {
+  //     throw new Error("Can't predict because model is currently training")
+  //   }
+
+  //   langCode = langCode.toLowerCase().trim()
+  //   input = sanitizeText(input)
+
+  //   // get input embeddings
+
+  //   const {
+  //     data: { embeddings }
+  //   } = await axios.post(ENDPOINT + '/embeddings', {
+  //     lang: langCode,
+  //     text: input
+  //   })
+
+  //   const results = _.chain(this.entries)
+  //     .filter(e => !!e.title[langCode])
+  //     .map(entry => {
+  //       const dist = (a, b) => (similarity.cosine(a, b) * (4 - Math.min(distance.euclidean(a, b), 4))) / 4
+  //       const titleEmb = this.cache[getCacheKey(langCode, entry.title[langCode])]
+  //       const content = (entry.content[langCode] || [])
+  //         .map((x, i) => ({
+  //           index: i,
+  //           content: x,
+  //           embedding: this.cache[getCacheKey(langCode, x)],
+  //           confidence: 0
+  //         }))
+  //         .filter(x => !!x.embedding && x.content && x.content.length >= 20)
+  //         .map(c => ({
+  //           ...c,
+  //           confidence: dist(c.embedding, embeddings)
+  //         }))
+
+  //       const titleDist = titleEmb ? dist(embeddings, titleEmb) : 0
+
+  //       const confidences = [titleDist]
+
+  //       const topContent = _.maxBy(content, 'confidence')
+  //       if (topContent?.confidence > 0) {
+  //         // confidences.push(topContent.confidence)
+  //       }
+
+  //       return {
+  //         ...entry,
+  //         confidence: _.mean(confidences),
+  //         content: entry.content[langCode] && entry.content[langCode].join(' ')
+  //       }
+  //     })
+  //     .filter(x => !isNaN(x.confidence) && x.confidence > 0)
+  //     .orderBy('confidence', 'desc')
+  //     .take(3)
+  //     .value()
+
+  //   try {
+  //     const {
+  //       data: { answers }
+  //     } = await axios.post(ENDPOINT + '/answers', {
+  //       lang: langCode.toLowerCase().trim(),
+  //       question: sanitizeText(input),
+  //       docs: results.map(result => result.content)
+  //     })
+
+  //     return _.orderBy(
+  //       results.map((r, i) => ({
+  //         title: r.title[langCode],
+  //         content: r.content,
+  //         confidence: r.confidence,
+  //         entry_id: r.id,
+  //         highlight_start: answers[i].start,
+  //         highlight_end: answers[i].end,
+  //         answer: r.content.substr(answers[i].start, answers[i].end),
+  //         answerSnippet: r.content.substr(
+  //           Math.max(0, r.content.lastIndexOf('.', answers[i].start)),
+  //           r.content.indexOf('.', answers[i].start) > 0 ? r.content.indexOf('.', answers[i].start) : undefined
+  //         )
+  //       })),
+  //       'confidence',
+  //       'desc'
+  //     )
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+
+  //   return results.map((r, i) => ({
+  //     title: r.title[langCode],
+  //     content: r.content,
+  //     confidence: r.confidence,
+  //     entry_id: r.id,
+  //     highlight_start: -1,
+  //     highlight_end: -1,
+  //     answer: null,
+  //     answerSnippet: null
+  //   }))
+  // }
+
   async predict(input: string, langCode: string): Promise<Prediction[]> {
     if (!this.trained) {
       throw new Error("Can't predict because model is not trained")
@@ -194,95 +323,57 @@ export default class RemoteModel implements Model {
     }
 
     langCode = langCode.toLowerCase().trim()
-    input = sanitizeText(input)
 
-    // get input embeddings
+    const embeddings = await this.getPhraseVector(input, langCode)
+
+    const sv = this.model.support_vectors
+      .filter(x => x.lang === langCode)
+      .map(sv => ({
+        ...sv,
+        confidence: similarity.cosine(sv.vector, embeddings)
+      }))
+
+    const top = _.chain(sv)
+      .filter(x => !isNaN(x.confidence) && x.confidence > 0)
+      // .groupBy('entry_id')
+      // .values()
+      // .map(group => _.maxBy(group, 'confidence'))
+      .orderBy('confidence', 'desc')
+      .take(5)
+      .value()
+      .map(res => ({
+        ...res,
+        ...this.model.entries.find(x => x.id === res.entry_id)
+      }))
 
     const {
-      data: { embeddings }
-    } = await axios.post(ENDPOINT + '/embeddings', {
-      lang: langCode,
-      text: input
+      data: { answers }
+    } = await axios.post(ENDPOINT + '/answers', {
+      lang: langCode.toLowerCase().trim(),
+      question: sanitizeText(input),
+      docs: top.map(result => result.content)
     })
 
-    const results = _.chain(this.entries)
-      .filter(e => !!e.title[langCode])
-      .map(entry => {
-        const dist = (a, b) => (similarity.cosine(a, b) * (4 - Math.min(distance.euclidean(a, b), 4))) / 4
-        const titleEmb = this.cache[getCacheKey(langCode, entry.title[langCode])]
-        const content = (entry.content[langCode] || [])
-          .map((x, i) => ({
-            index: i,
-            content: x,
-            embedding: this.cache[getCacheKey(langCode, x)],
-            confidence: 0
-          }))
-          .filter(x => !!x.embedding && x.content && x.content.length >= 20)
-          .map(c => ({
-            ...c,
-            confidence: dist(c.embedding, embeddings)
-          }))
+    console.log(answers)
 
-        const titleDist = titleEmb ? dist(embeddings, titleEmb) : 0
-
-        const confidences = [titleDist]
-
-        const topContent = _.maxBy(content, 'confidence')
-        if (topContent?.confidence > 0) {
-          // confidences.push(topContent.confidence)
-        }
-
-        return {
-          ...entry,
-          confidence: _.mean(confidences),
-          content: entry.content[langCode] && entry.content[langCode].join(' ')
-        }
-      })
-      .filter(x => !isNaN(x.confidence) && x.confidence > 0)
-      .orderBy('confidence', 'desc')
-      .take(3)
-      .value()
-
-    try {
-      const {
-        data: { answers }
-      } = await axios.post(ENDPOINT + '/answers', {
-        lang: langCode.toLowerCase().trim(),
-        question: sanitizeText(input),
-        docs: results.map(result => result.content)
-      })
-
-      return _.orderBy(
-        results.map((r, i) => ({
-          title: r.title[langCode],
-          content: r.content,
-          confidence: r.confidence,
-          entry_id: r.id,
-          highlight_start: answers[i].start,
-          highlight_end: answers[i].end,
-          answer: r.content.substr(answers[i].start, answers[i].end),
-          answerSnippet: r.content.substr(
-            Math.max(0, r.content.lastIndexOf('.', answers[i].start)),
-            r.content.indexOf('.', answers[i].start) > 0 ? r.content.indexOf('.', answers[i].start) : undefined
-          )
-        })),
-        'confidence',
-        'desc'
-      )
-    } catch (err) {
-      console.log(err)
-    }
-
-    return results.map((r, i) => ({
-      title: r.title[langCode],
-      content: r.content,
-      confidence: r.confidence,
-      entry_id: r.id,
-      highlight_start: -1,
-      highlight_end: -1,
-      answer: null,
-      answerSnippet: null
-    }))
+    return []
+    // return _.orderBy(
+    //   results.map((r, i) => ({
+    //     title: r.title[langCode],
+    //     content: r.content,
+    //     confidence: r.confidence,
+    //     entry_id: r.id,
+    //     highlight_start: answers[i].start,
+    //     highlight_end: answers[i].end,
+    //     answer: r.content.substr(answers[i].start, answers[i].end),
+    //     answerSnippet: r.content.substr(
+    //       Math.max(0, r.content.lastIndexOf('.', answers[i].start)),
+    //       r.content.indexOf('.', answers[i].start) > 0 ? r.content.indexOf('.', answers[i].start) : undefined
+    //     )
+    //   })),
+    //   'confidence',
+    //   'desc'
+    // )
   }
 
   toJSON(): string {
@@ -297,13 +388,13 @@ export default class RemoteModel implements Model {
     return JSON.stringify({
       trained: this.trained,
       entries: this.entries,
-      cache: this.cache,
+      model: this.model,
       langs: this.langs
     })
   }
 
   static async fromJSON(data: string): Promise<RemoteModel> {
-    const { cache, langs, entries, trained } = JSON.parse(data)
-    return new RemoteModel(entries, langs, cache, trained)
+    const { model, langs, entries, trained } = JSON.parse(data)
+    return new RemoteModel(entries, langs, trained, model)
   }
 }

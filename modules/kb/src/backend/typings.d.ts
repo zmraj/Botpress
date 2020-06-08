@@ -19,6 +19,17 @@ export interface Entry {
   }
 }
 
+export interface TrainedModel {
+  trained_on: Date
+  support_vectors: {
+    lang: string
+    vector: number[]
+    content: string
+    entry_id: string
+  }[]
+  entries: Entry[]
+}
+
 export interface Feedback {
   utterance: string
   polarity: boolean // +1 / -1 -> true / false

@@ -33,7 +33,7 @@ export const initModule = async (bp: typeof sdk, bots: ScopedBots) => {
     }
 
     if (scopedBot && scopedBot.loadedModel) {
-      const result = await scopedBot.loadedModel.predict(event.preview, 'en')
+      const result = await scopedBot.loadedModel.predict(event.preview, 'fr')
       // const predictions = await loadedModel.predict(event.preview, 'fr')
       bp.logger.debug(
         `\n\nQuestion: ${event.preview}\n-----------------------\n\n` +
