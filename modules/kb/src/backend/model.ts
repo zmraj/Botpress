@@ -11,7 +11,7 @@ import ms from 'ms'
 import path from 'path'
 
 import { sanitizeText } from './storage'
-import { Entry, Model, Prediction, TrainedModel } from './typings'
+import { Entry, Model, Prediction, SupportVector, TrainedModel } from './typings'
 
 const debug = DEBUG('kb').sub('lang')
 
@@ -155,11 +155,12 @@ export default class RemoteModel implements Model {
             ...entry.feedback[lang].filter(x => x.polarity).map(x => x.utterance)
           ])
 
-          const contentEmb = await this.getPhraseVector(entry.title[lang], lang)
-          let mutedEmb = [...contentEmb]
+          const contentEmb = await this.getPhraseVector(entry.content[lang][0], lang)
+          const titleEmb = await this.getPhraseVector(entry.title[lang], lang)
           if (!contentEmb) {
             continue
           }
+          let mutedEmb = [...contentEmb]
 
           for (const question of questions) {
             const questionEmb = await this.getPhraseVector(question, lang)
@@ -169,16 +170,18 @@ export default class RemoteModel implements Model {
             const questionEmbNorm = multiply(norm(mutedEmb) / norm(questionEmb), [...questionEmb])
             const direction = subtract(questionEmbNorm, mutedEmb)
             mutedEmb = add(mutedEmb, multiply(0.1, direction))
-            model.support_vectors.push({
-              vector: questionEmb,
-              lang: lang,
-              content: entry.content[lang][0],
-              entry_id: entry.id
-            })
+            _vectorsCache.set(getCacheKey(lang, entry.content[lang][0]), Float32Array.from(mutedEmb))
           }
-
+          model.support_vectors.push({
+            content_embedding: mutedEmb,
+            title_embedding: titleEmb,
+            lang: lang,
+            content: entry.content[lang][0],
+            title: entry.title[lang],
+            entry_id: entry.id
+          })
           // model.support_vectors.push({
-          //   vector: mutedEmb,
+          //   vector: questionEmb,
           //   lang: lang,
           //   content: entry.content[lang][0],
           //   entry_id: entry.id
@@ -313,6 +316,21 @@ export default class RemoteModel implements Model {
   //   }))
   // }
 
+  compute_confidence(support_vectors: SupportVector, question_embed) {
+    const conf_content = similarity.cosine(support_vectors.content_embedding, question_embed)
+    const conf_title = similarity.cosine(support_vectors.title_embedding, question_embed)
+    const confidence = (conf_title + conf_content) / 2
+    // TODO
+    // timestamps = np.array([sub_dic["ts"] for sub_dic in dico.values()])
+    // min_ts = np.min(timestamps)
+    // max_ts = np.max(timestamps)
+    // trunc_ts = np.floor(min_ts / max_ts * 100
+    // score_ts = 1 / (1 + exp((timestamp / max_ts * 100) - trunc_ts))
+    //     weight_cos = WEIGHT_CONTENT
+    //     pertinance = (weight_cos * score_cos + score_ts) / (weight_cos + 1)
+    return confidence
+  }
+
   async predict(input: string, langCode: string): Promise<Prediction[]> {
     if (!this.trained) {
       throw new Error("Can't predict because model is not trained")
@@ -324,13 +342,13 @@ export default class RemoteModel implements Model {
 
     langCode = langCode.toLowerCase().trim()
 
-    const embeddings = await this.getPhraseVector(input, langCode)
+    const question_embed = await this.getPhraseVector(input, langCode)
 
     const sv = this.model.support_vectors
       .filter(x => x.lang === langCode)
       .map(sv => ({
         ...sv,
-        confidence: similarity.cosine(sv.vector, embeddings)
+        confidence: this.compute_confidence(sv, question_embed)
       }))
 
     const top = _.chain(sv)

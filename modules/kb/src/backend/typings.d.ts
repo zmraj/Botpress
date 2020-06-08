@@ -19,14 +19,17 @@ export interface Entry {
   }
 }
 
+export interface SupportVector {
+  content_embedding: number[]
+  title_embedding: number[]
+  lang: string
+  content: string
+  title: string
+  entry_id: string
+}
 export interface TrainedModel {
   trained_on: Date
-  support_vectors: {
-    lang: string
-    vector: number[]
-    content: string
-    entry_id: string
-  }[]
+  support_vectors: SupportVector[]
   entries: Entry[]
 }
 
