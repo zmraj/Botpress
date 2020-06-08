@@ -1,0 +1,36 @@
+{
+  "id": "ngk8e5m2ne_quoi_faire_si_j_ai_besoin_de_consulter_en_m_decine",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53190"
+      ],
+      "en": [
+        "source://quebec.ca/c53190"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quoi faire si j’ai besoin de consulter en médecine de famille en temps de pandémie?",
+        "J'ai des symptômes graves de gastroentérite. Quoi faire ?",
+        "Comment procéder si j'ai besoin de consulter un médecin mais je n’ai pas des symptômes d’allure grippale ni de gastroentérite.",
+        "Où appeler si j'ai des symptômes de grippe ou de gastroentérite ?",
+        "J'ai des symptômes de grippe. Quoi faire ?"
+      ],
+      "en": [
+        "what should I do if I need to consult family medicine during a pandemic?",
+        "i have severe symptoms of gastroenteritis. What should I do?",
+        "what to do if I need to see a doctor but I don't have flu-like symptoms or gastroenteritis.",
+        "where do I call if I have flu symptoms or gastroenteritis?",
+        "i have flu-like symptoms. What should I do?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

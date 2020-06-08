@@ -1,0 +1,62 @@
+{
+  "id": "yponl5sq22_quelles_sont_les_directives___observer_si_je_trava",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46441"
+      ],
+      "en": [
+        "source://quebec.ca/c46441"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les directives à observer si je travaille dans un ministère ou un organisme?",
+        "Directives pour le personnel de la fonction publique.",
+        "Doit-on faire du télétravail quand on travail pour le gouvernement québécois?",
+        "Je suis dans un ministère est-ce que je pourrai faire du télétravail ?",
+        "Qui peut faire du télétravail dans les ministères Québécois?",
+        "Si je fonctionnaire, puis-je faire du télétravail.?",
+        "Est-ce qu'il y a des règles pour le télétravail des employés de Québec?",
+        "Focntionnaire Québécois, je peux-tu faire du télétravail",
+        "Les fonctionnaires doivent-ils faire du télétravail ?",
+        "C'est tu obligatoire de faire du télétravail si je suis fonctionnaire?",
+        "Si je suis fonctionnaire je peux tu faire du télétravail?",
+        "Tous les fonctionnaires doivent faire du télétravail?",
+        "C'est tu possible que je fasse du télétravail si je suis fonctionnaire?",
+        "Dans le cadre de mon travail de fonctionnaire, quels sont les mesures du gouvernement pour assurer ma sécurité en rapport au Coronavirus (COVID-19)?",
+        "Concernant le télétravail des employés de l'état où puis-je trouver une directive générale?",
+        "Si je n’ai pas d'ordinateur pour le télétravail, comme fonctionnaire suis-je payée ?",
+        "Pourrais-je enfin accéder au télétravail dans le cadre de mon emploi au gouvernement?",
+        "Que fait le gouvernement pour protéger ses travailleurs?"
+      ],
+      "en": [
+        "what are the guidelines if I work in a department or agency?",
+        "guidelines for public service personnel.",
+        "do you have to telework when you work for the Quebec government?",
+        "i'm in a department will I be able to telework?",
+        "who can telework in Quebec departments?",
+        "if I'm a civil servant, can I telework?",
+        "are there rules for telework for quebec employees?",
+        "quebec government official, I can you telework",
+        "should public servants telework?",
+        "do you have to telecommute if I'm a civil servant?",
+        "if I'm a civil servant, can you telework?",
+        "all public servants must telework?",
+        "is it possible for me to telecommute if I'm a civil servant?",
+        "in my work as a public servant, what are the government's measures to ensure my safety in relation to the coronavirus (covid-19)?",
+        "concerning telework for state employees where can I find a general directive?",
+        "if I don't have a computer for telecommuting, as a public servant am I paid?",
+        "will I finally be able to access telework as part of my government job?",
+        "what is the government doing to protect its workers?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Employeurs - travailleurs - normes du travail"
+    ]
+  }
+}

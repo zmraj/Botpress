@@ -1,0 +1,52 @@
+{
+  "id": "jjo98qy74s_je_n_ai_plus_de_revenu__que_dois_je_faire",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48817"
+      ],
+      "en": [
+        "source://quebec.ca/c48817"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je n’ai plus de revenu. Que dois-je faire?",
+        "Je n'ai plus de paye. Qu'est-ce que je fais ?",
+        "programme Prestation canadienne d’urgence (PCU).",
+        "Mon employeur ne me verse plus de salaire. Qu'est-ce que je peux faire ?",
+        "Je suis admissibles à l’assurance‑emploi, vais-je receoir une aide?",
+        "Je n'ai plus de revenu d'emploi, qu'est-ce que je fais?",
+        "Je m'occupe d’un enfant et je dois rester à la maison au lieu de travailler, vais-je reçevor une compensation financière du gouvernement?",
+        "J'ai perdu des revenus car je dois rester à la maison pour soigner une personne atteinte du virus plutôt que de travailler.",
+        "Perte de revenu à cause de l'isolement.",
+        "Vais-je reçevoir une aide si je suis en quarantaine et que cela me fait perdre du revenu?",
+        "Que fait le gouvernement fédéral poru ceux qui ont perdus leur travail?",
+        "Quelle aide pour les Canadiens qui ne peuvent plus travailler à cause de la pandémire?",
+        "Je ne reçoit aucun revenu car mon entreprise est fermée à cause du corona, mais j'ai toujours un emploi. suis-je admissible à une aide de l'état?"
+      ],
+      "en": [
+        "i don't have any income left. What should I do?",
+        "i don't get paid anymore. What do I do?",
+        "canadian emergency benefit (ceb) program.",
+        "my employer no longer pays me a salary. What can I do?",
+        "if I am eligible for employment insurance, will I get help?",
+        "i don't have any more employment income, what do I do?",
+        "i'm taking care of a child and I have to stay at home instead of working, will I receive financial compensation from the government?",
+        "i have lost income because I have to stay at home to care for someone with the virus instead of working.",
+        "loss of income due to isolation.",
+        "will I get help if I am quarantined and lose income?",
+        "what is the federal government doing for those who have lost their jobs?",
+        "what help is there for Canadians who can no longer work because of the pandemic?",
+        "i don't receive any income because my business is closed because of the corona, but i still have a job. am i eligible for government assistance?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

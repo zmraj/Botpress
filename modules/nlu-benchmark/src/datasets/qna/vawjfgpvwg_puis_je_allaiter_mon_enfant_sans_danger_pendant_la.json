@@ -1,0 +1,34 @@
+{
+  "id": "vawjfgpvwg_puis_je_allaiter_mon_enfant_sans_danger_pendant_la",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c52257"
+      ],
+      "en": [
+        "source://quebec.ca/c52257"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Puis-je allaiter mon enfant sans danger pendant la pandémie? Et, si j’ai des symptômes de la COVID-19, devrais-je cesser d’allaiter?",
+        "En prévention, est-ce que le COVID-19 se transmet dans le lait maternel?",
+        "Quelle précautions prendre, en prévention, pour l'allaitement maternel?",
+        "Puis-je allaiter même si j'ai des symptômes?"
+      ],
+      "en": [
+        "is it safe to breastfeed my baby during the pandemic? and if i have symptoms of covid-19, should i stop breastfeeding?",
+        "for prevention, is covid-19 transmitted in breast milk?",
+        "what precautions should be taken to prevent breastfeeding?",
+        "can i breastfeed even if i have symptoms?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

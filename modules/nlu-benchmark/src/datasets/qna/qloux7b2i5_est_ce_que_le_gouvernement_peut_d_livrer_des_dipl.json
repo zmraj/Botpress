@@ -1,0 +1,46 @@
+{
+  "id": "qloux7b2i5_est_ce_que_le_gouvernement_peut_d_livrer_des_dipl",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50675"
+      ],
+      "en": [
+        "source://quebec.ca/c50675"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que le gouvernement peut délivrer des diplômes sans que les élèves aient à passer les épreuves finales ou ministérielles?",
+        "Est-ce que les tests ministériels auront toujours lieu?",
+        "Je suis au secondaire, j'ai des bonnes notes pour mes étapes, \nje pourrai avoir mon diplôme ?",
+        "Mon enfant ne fera pas les épreuves finales, pourra-t-il avoir son \ndiplôme pareil?",
+        "Je veux obtenir mon diplôme de secondaire",
+        "Mon enfant va-t-il devoir faire les examens ministérielles?",
+        "Est-ce que les épreuves finales du ministère de l'Éducation sont annulées?",
+        "J'aimerais savoir comment les élèves vont passer un niveau?",
+        "Est-ce que les résutats des deux prmières étapes seront pris en considration",
+        "Épreuves ministérielles à faire pour graduer"
+      ],
+      "en": [
+        "can the government issue diplomas without students having to take final or ministerial exams?",
+        "will departmental testing still take place?",
+        "i'm in high school, I have good grades for my steps, can I graduate?",
+        "my child won't make the final exams, will he be able to graduate the same way?",
+        "i want to graduate from high school",
+        "will my child have to do the departmental reviews?",
+        "are the Ministry of Education finals cancelled?",
+        "i'd like to know how the students are going to pass a level?",
+        "will the results of the first two steps be taken into consideration?",
+        "ministerial tests to be taken for graduation"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

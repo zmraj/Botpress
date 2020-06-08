@@ -1,0 +1,42 @@
+{
+  "id": "9lxfwafa6s_est_il_n_cessaire_d_utiliser_de_l_eau_chaude_pour",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49646"
+      ],
+      "en": [
+        "source://quebec.ca/c49646"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il nécessaire d’utiliser de l’eau chaude pour se laver les mains ou pour nettoyer les vêtements? À quelle température élimine-t-on le virus?",
+        "Puis-je laver mes mains à l'eau froide ?",
+        "Est-ce que je peux me laver les mains seulement à l'eau tiède, sans savon?",
+        "Faut-il se laver les mains à l'eau chaude ou à l'eau froide?",
+        "Influence de la température de l'eau sur le lavage des mains.",
+        "Est-il possible de mieux éliminer le virus avec de l'eau chaude?",
+        "Les vêtements doivent être lavés à l'eau chaude pour tuer le virus?",
+        "Faut-il plutôt se laver les mains avec de l'eau chaude ou froide?"
+      ],
+      "en": [
+        "is it necessary to use hot water to wash hands or clothes? At what temperature is the virus eliminated?",
+        "can I wash my hands with cold water?",
+        "can I wash my hands only with warm water, no soap?",
+        "should I wash my hands in hot or cold water?",
+        "influence of water temperature on hand washing.",
+        "is it possible to eliminate the virus better with hot water?",
+        "clothes need to be washed in hot water to kill the virus?",
+        "should we wash our hands with hot or cold water instead?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

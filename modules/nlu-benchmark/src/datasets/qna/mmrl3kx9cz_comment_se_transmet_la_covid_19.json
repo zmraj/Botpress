@@ -1,0 +1,38 @@
+{
+  "id": "mmrl3kx9cz_comment_se_transmet_la_covid_19",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46793"
+      ],
+      "en": [
+        "source://quebec.ca/c46793"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment se transmet la COVID‑19?",
+        "Quels est le principal mode d'infection du coronavirus?",
+        "Infection au coronavirus par le nez, la gorge ou les poumons.",
+        "Quels sont les modes d'infections du coronavirus?",
+        "Par où passe le virus pour infecter un humain?",
+        "La COVID-19 passe-t-elle par le nez, la gorge et les poumons?"
+      ],
+      "en": [
+        "...how is covid-19 transmitted?",
+        "what is the main mode of coronavirus infection?",
+        "coronavirus infection through the nose, throat, or lungs.",
+        "what are the modes of coronavirus infection?",
+        "where does the virus go to infect a human?",
+        "does covid-19 pass through the nose, throat and lungs?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

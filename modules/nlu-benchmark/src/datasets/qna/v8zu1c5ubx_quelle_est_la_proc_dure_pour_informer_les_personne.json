@@ -1,0 +1,38 @@
+{
+  "id": "v8zu1c5ubx_quelle_est_la_proc_dure_pour_informer_les_personne",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c20501"
+      ],
+      "en": [
+        "source://quebec.ca/c20501"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelle est la procédure pour informer les personnes dont le dossier juridique pourrait être reporté en raison de l’application des mesures exceptionnelles liées à la pandémie?",
+        "Mesures du ministère de la Justice.",
+        "Mon dossier juridique est-il reporté ?",
+        "Est-ce que mon dossier juridique sera reporté ?",
+        "Est-ce possible de voir un report dans mon dossier avec la Justice, où puis-je trouver l'information?",
+        "J'ai un dossier en justice qui était en cours avant la pandémie, peut-il être reporté?"
+      ],
+      "en": [
+        "what is the procedure for informing persons whose legal file may be delayed due to the application of the exceptional measures related to the pandemic?",
+        "measures of the Ministry of Justice.",
+        "is my legal case postponed?",
+        "will my legal case be postponed?",
+        "is it possible to see a deferral in my file with the courts, where can I find the information?",
+        "i have a court case that was pending before the pandemic, can it be postponed?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Autres questions"
+    ]
+  }
+}

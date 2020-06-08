@@ -1,0 +1,32 @@
+{
+  "id": "bmis6q13ln_quel_est_le_d_tail_de_l_aide_financi_re_offerte_pa",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50712"
+      ],
+      "en": [
+        "source://quebec.ca/c50712"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quel est le détail de l'aide financière offerte par le  PACME afin de maintenir les emplois?",
+        "Est-ce que le programme PACME peut-être jumelé avec d'autres aides ?",
+        "Jumeler le programme actions concertées pour le maintien au travail avec d'autres aides financières."
+      ],
+      "en": [
+        "what are the details of the financial assistance offered by the pacme to maintain jobs?",
+        "can the pacme program be combined with other aids?",
+        "twinning the concerted action programme for job retention with other financial assistance."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "3vq0pmprk4_j_ai_fait_une_demande_au_patt_et_je_n_ai_pas_re_u",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53511"
+      ],
+      "en": [
+        "source://quebec.ca/c53511"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "J’ai fait une demande au PATT et je n’ai pas reçu de réponse. Que va-t-il se passer, compte tenu de l’arrêt du programme?",
+        "Les demandes en cours du PATT COVID-19) vont-elle être examinées malgré la fin du programme?",
+        "Est-ce que les demandes déjà adressées au PATT seront examinées?",
+        "Les demandes déjà adressées au Programme d’aide temporaire aux travailleurs (PATT COVID-19) seront-elle examinées?",
+        "Examen des demandes déjà adressées au PATT COVID-19.",
+        "Si je n’ai pas encore reçu de réponse, que se passe-t-il avec ma demande au PATT COVID-19?"
+      ],
+      "en": [
+        "i have made a request to the patt and have not received a response. what will happen with the program being discontinued?",
+        "will ongoing applications for patt covid-19) be considered despite the end of the program?",
+        "will applications already submitted to the patt be considered?",
+        "will applications already submitted to the temporary help worker program (patt covid-19) be considered?",
+        "review of requests already made to patt covid-19.",
+        "if i have not yet received a response, what happens to my application to patt covid-19?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "id": "3b5ydaz4sy_quel_est_le_nombre_de_cas_confirm_s_par_r_gion_li",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50214"
+      ],
+      "en": [
+        "source://quebec.ca/c50214"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quel est le nombre de cas confirmés par région lié au COVID-19 au Québec ?",
+        "Liste du nombre de cas confirmés de coronavirus par région au Québec.",
+        "Puis-je connaître le nombre de cas confirmés de COVID par région au Québec ?",
+        "Je veux le détail du nombre de cas confirmés par région au Québec de corona."
+      ],
+      "en": [
+        "what is the number of confirmed cases by region related to covid-19 in quebec?",
+        "list of the number of confirmed cases of coronavirus by region in quebec.",
+        "can i find out the number of confirmed covid cases by region in quebec?",
+        "i want a breakdown of the number of confirmed cases by region in quebec from corona."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Autres questions"
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "nrnd9o0qvy_dois_je_continuer___rembourser_mon_pr_t__tudiant",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50695"
+      ],
+      "en": [
+        "source://quebec.ca/c50695"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Dois-je continuer à rembourser mon prêt étudiant?",
+        "Est-ce que les intérêts vont s'accumuler sur le montant du prêt étudiant à rembourser?",
+        "Pendant la suspension de paiement  du prêt étudiant, est-ce que les intérêt du prêt étudiant vont s'accumuler sur le montant de ma dette?",
+        "Est-ce qu'il y a une démarche ou un formulaire à compléter pour profiter de la suspension du paiement de tous les prêts contractés dans le cadre du programme des prêts et bourses?",
+        "Dois-je continuer à payer les intérêts sur mon prêt pendant cette période?",
+        "Je n'ai pas de prêt étudiant du gouvernement, je paie mes études avec \nune marge de crédit de mon nstituion financère"
+      ],
+      "en": [
+        "do i still have to pay off my student loan?",
+        "will interest accrue on the amount of the student loan to be repaid?",
+        "while my student loan is suspended, will the interest on my student loan accrue on the amount of my debt?",
+        "is there a process or form to be completed to take advantage of the suspension of all loans under the loans and bursaries program?",
+        "do i still have to pay interest on my loan during this period?",
+        "i don't have a government student loan, I pay for my education with a line of credit from my financial institution"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

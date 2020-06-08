@@ -1,0 +1,34 @@
+{
+  "id": "4hvqzcan44_est_il_envisag__de_reporter_le_d_lai_pour_d_poser",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50905"
+      ],
+      "en": [
+        "source://quebec.ca/c50905"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il envisagé de reporter le délai pour déposer une demande de révision à l’égard d’un rôle d’évaluation foncière entré en vigueur le 1er janvier 2020?",
+        "Est-ce prévu de reporter le délai des dépôts de demande de révision des évaluations foncières?",
+        "Quel est le délai fixé pour déposer une demande de révision du rôle d'évaluation foncière?",
+        "Est-ce qu'on peut reporter le délai des dépôts de demande de révision du rôle de la valeur locative?"
+      ],
+      "en": [
+        "is consideration being given to extending the deadline for filing a Request for Reconsideration for a property assessment roll effective January 1, 2020?",
+        "is there a plan to extend the deadline for filing a Request for Property Assessment Review?",
+        "what is the deadline for filing an application for a property assessment roll review?",
+        "can the deadline for filing an application for a rental value roll review be extended?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

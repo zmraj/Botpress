@@ -1,0 +1,35 @@
+{
+  "id": "mv5zx4imqs_les_toilettes_des_restaurants_offrant_des_mets_pr",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49856"
+      ],
+      "en": [
+        "source://quebec.ca/c49856"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les toilettes des restaurants offrant des mets prêts-à-emporter doivent-elles être accessibles aux clients?",
+        "Est-ce qu'un restaurateur de mets à emporter peut donner accès à ses toilettes?",
+        "Les clients n'ont pas à avoir accès aux toilettes réservées au personnel",
+        "Si je veux utiliser les toilettes d'un restaurant qui offre des mets à emporter, est-ce possible?",
+        "est-ce que je peux commander en ligne ?"
+      ],
+      "en": [
+        "should washrooms in ready-to-go restaurants be accessible to patrons?",
+        "can a take-out restaurant provide access to its washrooms?",
+        "clients are not required to have access to staff washrooms",
+        "if I want to use the washroom at a take-out restaurant, is that okay?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces - lieux publics - services"
+    ]
+  }
+}

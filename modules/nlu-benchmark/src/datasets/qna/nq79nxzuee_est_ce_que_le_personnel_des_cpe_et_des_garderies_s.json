@@ -1,0 +1,52 @@
+{
+  "id": "nq79nxzuee_est_ce_que_le_personnel_des_cpe_et_des_garderies_s",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46766"
+      ],
+      "en": [
+        "source://quebec.ca/c46766"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que le personnel des CPE et des garderies subventionnées continuera d’être payé?",
+        "Est-ce que les travailleurs des CPE et garderies subventionnées recevront un salaire ?",
+        "Paiement du salaire du personnel des CPE.",
+        "Paiement du salaire du personnel des garderies subventionnées.",
+        "Les employés des CPE seront payés?",
+        "Les employés des garderies subventionnées seront-ils payés comme d'habitude ?",
+        "Est-ce que les employés des CPE et des garderies subventionnées recevront leur paie ?",
+        "Le salaire sera-t-il toujours versé pour le personnel des CPE et des garderies subventionnées ?",
+        "Les employés des CPE et des garderies subventionnées recevront-ils leur salaire ?",
+        "Est-ce qu'il est prévu de payer normalement les employés des CPE et garderies subventionnées ?",
+        "Est-ce que le personnel des CPE et garderies subventionnées recevra sa paie ?",
+        "Je travaille dans un CPE, est-ce que je serai payé?",
+        "Est-ce que je recevrai une paye en tant que salarié du CPE, même s'il est fermé?"
+      ],
+      "en": [
+        "will staff in cps and subsidized daycares continue to be paid?",
+        "will workers in the cpe and subsidized daycares be paid a salary?",
+        "payment of cpe staff salaries.",
+        "payment of salaries for staff in subsidized daycare centres.",
+        "will the cpe employees get paid?",
+        "will employees in subsidized daycare centres be paid as usual?",
+        "will employees in cps and subsidized daycares receive their pay?",
+        "will wages still be paid for staff in cps and subsidized daycares?",
+        "will employees in cps and subsidized daycares receive their wages?",
+        "are there plans to pay employees in cpe and subsidized daycare centres as a matter of course?",
+        "will staff in cpe and subsidized daycares receive their pay?",
+        "i work at a college, will I get paid?",
+        "will i get paid as an employee of the cpe, even though it's closed?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

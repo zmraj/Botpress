@@ -1,0 +1,36 @@
+{
+  "id": "36mxhyfk2a_est_ce_que_la_r_sidence_priv_e_pour_a_n_s_peut_fac",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53282"
+      ],
+      "en": [
+        "source://quebec.ca/c53282"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que la résidence privée pour aînés peut facturer des frais pour aller porter les repas à la chambre ou au logement d’un résident en raison de la COVID-19?",
+        "Doit-on donner des pourboires lors de la livraison ?",
+        "Combien coûtent les frais chargés pour la livraison ?",
+        "Où signaler si un organisme nous charge des frais de livraison ?",
+        "Y a-t-il des frais à notre charge lors de la livraison ?"
+      ],
+      "en": [
+        "can the private seniors' residence charge a fee to bring meals to a resident's room or lodging because of covid-19?",
+        "do we have to tip on delivery?",
+        "how much are the fees charged for delivery?",
+        "where to report if an organization is charging us for delivery costs?",
+        "are there any costs to be paid by us upon delivery?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Autres questions"
+    ]
+  }
+}

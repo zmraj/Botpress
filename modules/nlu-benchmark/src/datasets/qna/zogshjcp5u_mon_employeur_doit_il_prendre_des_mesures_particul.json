@@ -1,0 +1,66 @@
+{
+  "id": "zogshjcp5u_mon_employeur_doit_il_prendre_des_mesures_particul",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47132"
+      ],
+      "en": [
+        "source://quebec.ca/c47132"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Mon employeur doit-il prendre des mesures particulières pour protéger la santé des travailleurs ?",
+        "Est-ce que mon employeur va prendre des mesures pour nous protéger",
+        "Comment mon entreprise va-t-elle nous protéger",
+        "Est-ce que mon entreprise va mettre en place des façons de sécuriser notre travail",
+        "Est-il prévu de sécuriser les lieux du travail",
+        "Qu'est-ce que mon employeur doit prendre comme actions pour nous protéger",
+        "Est-ce que mon patron doit s'assurer de notre sécurité",
+        "Que doit faire mon employeur pour s'assurer que l'intégrité physique des employés est protégee?",
+        "Mon patron es-tu obligé d'agir pour ma sécurité",
+        "Comment mon employeur doit faire pour protéger notre santé",
+        "Comment mon employeur va me protéger",
+        "Est-ce qui faut que ma job me protège",
+        "Mesures de l'employeur pour protéger la sécurité des travailleurs.",
+        "C'est quoi que mon employeur doit faire pour protéger ses salariés",
+        "Mon employeur fait rien pour me protéger ya tu le droit",
+        "Si mon employeur fait rien pour me protéger je fais quoi",
+        "Pratiques de travail pour minimiser les risques.",
+        "Est-ce qui faut que mon boss protège ma santé",
+        "Est-ce qui faut que mon boss prenne des mesures pour protéger la santé de ses employés",
+        "Comment mon boss peut protéger ma santé"
+      ],
+      "en": [
+        "does my employer need to take any special measures to protect the health of workers?",
+        "is my employer going to take steps to protect us",
+        "how is my company going to protect us",
+        "is my company going to put in place ways to make our work safer",
+        "is there a plan to secure the workplace",
+        "what actions should my employer take to protect us",
+        "does my boss need to make sure we're safe..",
+        "what must my employer do to ensure that the physical integrity of employees is protected?",
+        "my boss, are you obligated to act for my safety..",
+        "how my employer should protect our health",
+        "how my employer will protect me",
+        "does my job have to protect me",
+        "employer's measures to protect the safety of workers.",
+        "is what my employer has to do to protect his employees..",
+        "my employer does nothing to protect me. You have every right",
+        "if my employer doesn't do anything to protect me, what do I do?",
+        "work practices to minimize risks.",
+        "does my boss need to protect my health",
+        "does my boss need to take steps to protect the health of his employees",
+        "how my boss can protect my health"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Employeurs - travailleurs - normes du travail"
+    ]
+  }
+}

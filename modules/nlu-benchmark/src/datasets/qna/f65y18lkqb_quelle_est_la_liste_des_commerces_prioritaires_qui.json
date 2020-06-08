@@ -1,0 +1,78 @@
+{
+  "id": "f65y18lkqb_quelle_est_la_liste_des_commerces_prioritaires_qui",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48424"
+      ],
+      "en": [
+        "source://quebec.ca/c48424"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelle est la liste des commerces prioritaires qui sont ouverts durant la pandémie?",
+        "Quels commerces sont des services essentiels et vont rester ouvert?",
+        "Liste des commerces essentiels.",
+        "Donne moi la lise des commerces prioritaires.",
+        "Est-ce que certains commerces sont des services essentiels ?",
+        "Est-ce que les campings sont considérés comme un service indispendable ?",
+        "Est-ce que les hôtels ou môtels sont dans la liste des commerces essentiels ?",
+        "Est-ce que les campings sont considérés comme un service prioritaire ?",
+        "Quelle est la liste des commerces visés comme services essentiels ?",
+        "Réparation de moteurs électriques ou de climatiseurs",
+        "Les garages automobiles peuvent-ils faire les changements des pneus?",
+        "Les pharmacies vont-elles rester ouverte?",
+        "Je dois me rendre à la quincaillerie, est-ce qu'elle sera ouverte?",
+        "Mion dépanneur va-t-il fermer?",
+        "Est-ce que les centre commerciaux vont rester fermés?",
+        "J'ai besoin de produits pour exploitations agricoles.",
+        "La SAAQ (Société des alcools du Québec) et la SQC (Société québécoise du cannabis) sont des commerces priotaires?",
+        "Je dois me procurer de l'équipements de travail (sécurité et protection).",
+        "Puis-je faire appel à des déménageurs?",
+        "Nourrir son chat, son chien, son oiseau, son animal de compagnie.",
+        "Est-ce que les commerces de fournitures pour les animaux sont des services essentiels ?",
+        "J'ai besoin de meubles et électroménagers, comment je fais?",
+        "Les entreprises de services funéraires et cimetières sont-elels toujours en opération?",
+        "J'ai besoin de laver mon linge alors est-ce que les nettoyeurs, lavomats et buanderies restent ouverts?",
+        "Les commerces d’articles médicaux et orthopédiques vont fermer?",
+        "est-ce qu'il y a une liste des commerces ouverts?",
+        "est-ce que la vente et l'achat d'auto pourront reprendre bientôt?"
+      ],
+      "en": [
+        "what is the list of priority businesses that are open during the pandemic?",
+        "which businesses are essential services and will remain open?",
+        "list of essential shops.",
+        "give me the priority shopping list.",
+        "are certain businesses essential services?",
+        "are campsites considered an indispensible service?",
+        "are hotels or motels in the list of essential businesses?",
+        "are campsites considered a priority service?",
+        "what is the list of businesses targeted as essential services?",
+        "repair of electric motors or air conditioners",
+        "can garages do tire changes?",
+        "will the pharmacies stay open?",
+        "i have to go to the hardware store, will it be open?",
+        "is my convenience store going to close?",
+        "are the malls going to stay closed?",
+        "i need farm produce.",
+        "the saaq (société des alcools du québec) and the sqc (société québécoise du cannabis) are primary businesses?",
+        "i have to get work equipment (safety and protection).",
+        "can i use movers?",
+        "feed her cat, dog, bird, pet.",
+        "are animal supply businesses essential services?",
+        "i need furniture and appliances, how do I do it?",
+        "are funeral homes and cemeteries still in operation?",
+        "i need to wash my laundry, so do the cleaners, laundromats and laundries stay open?",
+        "the medical and orthopedic stores are closing?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services essentiels"
+    ]
+  }
+}

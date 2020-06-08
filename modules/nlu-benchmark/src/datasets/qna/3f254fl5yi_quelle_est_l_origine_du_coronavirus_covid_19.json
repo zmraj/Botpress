@@ -1,0 +1,46 @@
+{
+  "id": "3f254fl5yi_quelle_est_l_origine_du_coronavirus_covid_19",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46361"
+      ],
+      "en": [
+        "source://quebec.ca/c46361"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelle est l'origine du coronavirus COVID-19?",
+        "D'où vient la COVID-19?",
+        "La pandémie est partie d'où?",
+        "De quel pays vient le virus ?",
+        "Historique de la pandémie.",
+        "Point de départ de la pandémie.",
+        "Quelle est l'origine de la COVID-19?",
+        "Le coronavirusça a commencé comment ?",
+        "quels sont les chances que je meure ? ",
+        "est-ce que je vais mourir de la covid?",
+        "je vais-tu mourir si j'attrape la covid?",
+        "le covid est tu mortel"
+      ],
+      "en": [
+        "what is the origin of covid-19 coronavirus?",
+        "...where did covid-19 come from?",
+        "where did the pandemic come from?",
+        "what country does the virus come from?",
+        "history of the pandemic.",
+        "starting point of the pandemic.",
+        "what is the origin of covid-19?",
+        "how did the coronavirus start?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

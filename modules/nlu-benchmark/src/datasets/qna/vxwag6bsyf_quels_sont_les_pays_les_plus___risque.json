@@ -1,0 +1,52 @@
+{
+  "id": "vxwag6bsyf_quels_sont_les_pays_les_plus___risque",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46813"
+      ],
+      "en": [
+        "source://quebec.ca/c46813"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les pays les plus à risque?",
+        "Quels sont les pays les plus touchés ?",
+        "Pays à risque COVID-19.",
+        "Y a-t-il des pays plus à risque que d'autres pendant la pandémie?",
+        "Est-ce que des pays sont considérés très à risque ?",
+        "Quels pays sont vraiment les plus risqués?",
+        "Est-ce que certains pays sont plus risqués que d'autres?",
+        "Est-ce que tous les pays sont à risque avec le corona?",
+        "Quels sont les pays les plus dangereux?",
+        "Est-ce que les pays sont tous dangereux à cause du virus?",
+        "Combien de pays sont à éviter?",
+        "Est-ce que toutes les nations sont risquées?",
+        "Quels sont les pays à risque?"
+      ],
+      "en": [
+        "which countries are most at risk?",
+        "which countries are most affected?",
+        "covid-19 risk countries.",
+        "are some countries more at risk than others during the pandemic?",
+        "are any countries considered high risk?",
+        "which countries are really the riskiest?",
+        "are some countries riskier than others?",
+        "are all countries at risk with corona?",
+        "what are the most dangerous countries?",
+        "are all countries dangerous because of the virus?",
+        "how many countries are to be avoided?",
+        "are all nations risky?",
+        "which countries are at risk?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Voyageurs"
+    ]
+  }
+}

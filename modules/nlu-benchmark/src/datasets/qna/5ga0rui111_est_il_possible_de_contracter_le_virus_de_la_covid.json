@@ -1,0 +1,72 @@
+{
+  "id": "5ga0rui111_est_il_possible_de_contracter_le_virus_de_la_covid",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49634"
+      ],
+      "en": [
+        "source://quebec.ca/c49634"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il possible de contracter le virus de la COVID-19 par transmission aérienne, c’est-à-dire dans l’air ambiant?",
+        "Est-ce que je peux attraper le virus en respirant de l'air ambiant à plus de 2m d'une personne infectée?",
+        "Est-ce que je peux être contaminé(e) en touchant un objet ou une surface touché par une personne contaminée?",
+        "Le coronavirus se communique-t-il en ouvrant les fenêtres d'un logement?",
+        "Comment le virus infecte-t-il les gens?",
+        "Quelle est la manière d'attraper la COVID-19 ?",
+        "Est-ce que la COVID-19 se propage facilement ?",
+        "De quelle façon se transmet la COVID-19 ?",
+        "Quels sont les facteurs de transmission de la COVID-19 ?",
+        "Comment se transmet le virus?",
+        "Comment s'attrape le virus?",
+        "Par quel moyen puis-je attraper la corona ?",
+        "De quelle façon transmet-on le virus?",
+        "Comment qu'on fait pour transmettre la COVID-19 ?",
+        "Le covid-19 se transmet comment ?",
+        "Ça s'attrape comment le coronavirus ?",
+        "Comment s'attrape le coronavirus (COVID-19) et comment l'éviter?",
+        "De quelle façon je peux attraper le coronavirus ?",
+        "Pendant combien de temsp survit le virus ?",
+        "Combien de temps le virus peut demeurer sur les poignées de porte ?",
+        "Quels sont les modes de transmission de la COVID-19?",
+        "Quelles parties du corps risquent le plus de transmettre le coronavirus ?",
+        "Transmission aérienne du virus.",
+        "Les gouttelettes respiratoires contiennent-elles la COVID?"
+      ],
+      "en": [
+        "is it possible to contract the covid-19 virus by airborne transmission, i.e. in the ambient air?",
+        "can i get the virus by breathing in the air more than 2m away from an infected person?",
+        "can i become contaminated by touching an object or surface touched by a contaminated person?",
+        "is coronavirus spread by opening the windows of a dwelling?",
+        "how does the virus infect people?",
+        "what's the way to catch covid-19?",
+        "does covid-19 spread easily?",
+        "how is covid-19 transmitted?",
+        "what are the transmission factors for covid-19?",
+        "how is the virus transmitted?",
+        "how do you get the virus?",
+        "how do I get the corona?",
+        "how do we transmit covid-19?",
+        "How do you get the coronavirus?",
+        "how do you get coronavirus (covid-19) and how do you avoid it?",
+        "how do I get the coronavirus?",
+        "how long does the virus survive?",
+        "how long can the virus stay on doorknobs?",
+        "...what are the modes of transmission of covid-19?",
+        "which parts of the body are most likely to transmit coronavirus?",
+        "aerial transmission of the virus.",
+        "do the respiratory droplets contain covid?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "id": "o0ajjq7h9d_est_il_possible_pour_une_municipalit__de_constitue",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c52490"
+      ],
+      "en": [
+        "source://quebec.ca/c52490"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il possible pour une municipalité de constituer et de gérer un fonds d’aide alimentaire?",
+        "Est-ce que les municipalités disposent des pouvoirs nécessaires pour constituer un fonds d'aide alimentaire?",
+        "Que prévoit la Loi sur les compétences municipales?",
+        "Une municipalité peut-elle constituer et gérer un fonds d'aide alimentaire?"
+      ],
+      "en": [
+        "is it possible for a municipality to establish and manage a food assistance fund?",
+        "do municipalities have the authority to establish a food aid fund?",
+        "what does the Municipal Powers Act say?",
+        "can a municipality establish and manage a food aid fund?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

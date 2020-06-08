@@ -1,0 +1,34 @@
+{
+  "id": "0yshj28gwj_je_dois_fermer_les_portes_de_mon__tablissement__qu",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53290"
+      ],
+      "en": [
+        "source://quebec.ca/c53290"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je dois fermer les portes de mon établissement. Que faire avec mes surplus d'aliments?",
+        "Où puis-je appeler pour offrir mes surplus alimentaires ?",
+        "Dans quel centre je peux déposer mes surplus d'aliments ?",
+        "Est-ce des bénévoles qui peuvent venir chercher mes surplus alimentaires ?"
+      ],
+      "en": [
+        "i have to close the doors of my establishment. What do I do with my surplus food?",
+        "where can I call to donate my surplus food?",
+        "where can I drop off my surplus food?",
+        "can volunteers come and pick up my food surplus?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Employeurs - travailleurs - normes du travail"
+    ]
+  }
+}

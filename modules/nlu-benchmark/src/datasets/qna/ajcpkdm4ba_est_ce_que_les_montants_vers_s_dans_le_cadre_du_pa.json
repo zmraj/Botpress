@@ -1,0 +1,47 @@
+{
+  "id": "ajcpkdm4ba_est_ce_que_les_montants_vers_s_dans_le_cadre_du_pa",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48925"
+      ],
+      "en": [
+        "source://quebec.ca/c48925"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les montants versés dans le cadre du PATT seront imposables?",
+        "Imposition du programme d'aide temporaire aux travailleurs PATT COVID-19.",
+        "Est-ce que je vais payer de l'impôt sur mon montant d'aide financière PATT ?",
+        "Est-ce qu'un montant d'imposition sera retiré de mon versement du programme d'aide temporaire aux travailleurs?",
+        "Est-ce que le montant du PATT COVID-19 est libre d'impôt ?",
+        "Quel est le montant que je recevrai après déduction de l'impôt sur le PATT?",
+        "Combien d'impôt doit être payé sur le montant d'aide financière qu'on reçoit dans le cadre du programme d'aide temporaire aux travailleurs?",
+        "Le PATT est-il libre d'impôt ?",
+        "Est-ce que le PATT est imposable?",
+        "L'aide financière PATT COVID-19 est-elle imposable?",
+        "est-ce que je vais me faire imposer sur l'aide reçue"
+      ],
+      "en": [
+        "will the amounts paid under the patt be taxable?",
+        "imposition of the temporary assistance program for workers patt covid-19.",
+        "am I going to pay tax on my patt?",
+        "will there be any tax deducted from my Temporary Help for Workers payment?",
+        "is the amount of patt covid-19 tax-free?",
+        "how much money will I receive after deducting the tax on the leg?",
+        "how much tax must be paid on the amount of financial assistance received under the temporary help for workers program?",
+        "is the patt tax-free?",
+        "is the leg taxable?",
+        "is patt covid-19 financial assistance taxable?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

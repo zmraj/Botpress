@@ -1,0 +1,56 @@
+{
+  "id": "pw5rj2479j_dois_je_m_inqui_ter_de_la_situation_entourant_la_c",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46800\nCas par âge = source://quebec.ca/c50213\nNombre de cas = source://quebec.ca/c50212\nDécès par région = source://quebec.ca/c51880\nHospitalisation par région = source://quebec.ca/c50210\nScénarios = source://quebec.ca/c51903"
+      ],
+      "en": [
+        "source://quebec.ca/c46800\ncases by age = source://quebec.ca/c50213\nnumber of cases = source://quebec.ca/c50212\ndeaths by region = source://quebec.ca/c51880\nhospitalization by region = source://quebec.ca/c50210\nscenarios = source://quebec.ca/c51903"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Dois-je m’inquiéter de la situation entourant la COVID‑19?",
+        "Pourcentage de cas confirmés par groupe d’âge",
+        "Je veux le détail du pourcentage de cas confirmés de coronavirus par groupe d’âge lié au corona.",
+        "Nombre de personnes sous investigation, de cas négatifs et confirmés",
+        "Est-ce que la situation concernant la COVID-19 est inquiétante au Québec?",
+        "Est-ce que la situation de la pandémie est sous contrôle au Québec?",
+        "Je suis inquiet de la propagation du virus au Québec.",
+        "Ai-je raison d'être inquiet de la situation au Québec?",
+        "Est-ce que je devrais être apeuré de la situation au Québec concernant le coronavirus ?",
+        "Est-ce que je dois être inquiet de la propagation du corona au Québec ?",
+        "Combien de cas y a-t-il au Québec",
+        "Combien d'hospitalisations y a-t-il ?",
+        "Quelle région est la plus touchée aui Québec?",
+        "Est-ce qu'il y beaucoup de déces par le coronavirus au Québec ?",
+        "Est-ce qu'on peut avoir plus d'information sur l'état de l'épidémie"
+      ],
+      "en": [
+        "should I be concerned about the situation surrounding covid-19?",
+        "percentage of confirmed cases by age group",
+        "i want a breakdown of the percentage of confirmed coronavirus cases by age group related to corona.",
+        "number of persons under investigation, negative and confirmed cases",
+        "is the situation regarding covid-19 worrisome in quebec?",
+        "is the pandemic situation under control in quebec?",
+        "i'm concerned about the spread of the virus in quebec.",
+        "am i right to be concerned about the situation in quebec?",
+        "should i be afraid of the coronavirus situation in quebec?",
+        "should I be concerned about the spread of corona in quebec?",
+        "how many cases are there in quebec",
+        "how many hospitalizations are there?",
+        "which region is most affected in quebec?",
+        "are there a lot of coronavirus deaths in quebec?",
+        "can we get more information on the status of the epidemic"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "État d'urgence"
+    ]
+  }
+}

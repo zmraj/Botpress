@@ -1,0 +1,43 @@
+{
+  "id": "w5a0bh3fxv_qu_impose_le_gouvernement_canadien_dans_la_loi_sur",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47680"
+      ],
+      "en": [
+        "source://quebec.ca/c47680"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Qu'impose le gouvernement Canadien dans la Loi sur la mise en quarantaine par le gouvernement du Canada?",
+        "Contrainte légal pour les voyageurs de retour des USA par le Canada.",
+        "Qu'impose la loi fédérale sur les retours de voyage ?",
+        "Que peut-il m'arriver si je ne respecte pas la Loi sur la mise en quarantaine par le gouvernement du Canada à mon retour de voyage?",
+        "Quelle est la position légale du gouvernement canadien sur les voyageurs de retour?",
+        "Les autorités Canadiennes peuvent-elles remettre une contravention si une personne ne s'isole pas à son retour de voyage ?",
+        "Que se passe-t-il pour ceux qui ne respectent pas l'isolement volontaire de retour de Floride en regard de la Loi sur la mise en quarantaine par le gouvernement du Canada?",
+        "Quelles sont les obligations légales Canadienne d'un voyageur de retour de voyage?",
+        "est-ce que je suis obligé d'être en isolement volontaire?"
+      ],
+      "en": [
+        "what does the government of canada's quarantine legislation require?",
+        "legal constraints for travellers returning from the usa via canada.",
+        "what is required by the federal law on return trips?",
+        "what can happen to me if I don't comply with the quarantine law by the government of canada when I return from my trip?",
+        "what is the Canadian government's legal position on returning travellers?",
+        "can Canadian authorities issue a ticket if a person does not isolate himself or herself upon return from a trip?",
+        "what happens to those who do not respect the voluntary isolation back from florida under the quarantine act by the government of canada?",
+        "what are the canadian legal obligations of a returning traveller?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Voyageurs"
+    ]
+  }
+}

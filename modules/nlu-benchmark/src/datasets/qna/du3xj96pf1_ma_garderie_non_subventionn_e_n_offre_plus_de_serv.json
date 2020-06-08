@@ -1,0 +1,32 @@
+{
+  "id": "du3xj96pf1_ma_garderie_non_subventionn_e_n_offre_plus_de_serv",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50779"
+      ],
+      "en": [
+        "source://quebec.ca/c50779"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Ma garderie non subventionnée n’offre plus de service d’urgence. Comment faire pour trouver un autre service de garde?",
+        "Où puis-je m'adresser pour trouver un service d'urgence de garde éducatif à l'enfance?",
+        "Localisateur de service d'urgence de garde éducatif à l'enfance pour les parents."
+      ],
+      "en": [
+        "my unsubsidized daycare no longer offers emergency services. how do i find another daycare?",
+        "where can i go to find emergency child care?",
+        "emergency child care locator for parents."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille"
+    ]
+  }
+}

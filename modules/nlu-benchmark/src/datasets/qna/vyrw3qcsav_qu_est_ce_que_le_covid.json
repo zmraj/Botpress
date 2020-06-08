@@ -1,0 +1,33 @@
+{
+  "id": "vyrw3qcsav_qu_est_ce_que_le_covid",
+  "data": {
+    "answers": {
+      "fr": [
+        "La COVID-19 appartient à la grande famille des coronavirus. Ce virus provoque une infection respiratoire qui cause des symptômes pouvant être légers et s’apparenter à ceux du rhume, mais qui peuvent aussi être plus sévères, comme ceux associés à la pneumonie et à l’insuffisance pulmonaire. On peut s'en protéger en se lavant fréquemment les mains, et en évitant de se toucher le visage."
+      ],
+      "en": [
+        "In December 2019, the World Health Organization was alerted to several cases of pneumonia in Wuhan, China. The virus responsible for the disease did not match any other known virus. On January 7, 2020, China confirmed that a new virus from the coronavirus family had been identified that was responsible for this new disease called COVID‑19."
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Qu'est-ce que le COVID?",
+        "C'est quoi ça, la COVID-19?",
+        "C'est quoi le Coronavirus?",
+        "Je veux savoir c'est quoi le corona"
+      ],
+      "en": [
+        "what is covid-19",
+        "what is the coronavirus",
+        "tell me what covid-19 is please"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Autres questions"
+    ]
+  }
+}

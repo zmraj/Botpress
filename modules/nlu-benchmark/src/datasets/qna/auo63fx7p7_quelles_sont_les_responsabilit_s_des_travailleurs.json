@@ -1,0 +1,42 @@
+{
+  "id": "auo63fx7p7_quelles_sont_les_responsabilit_s_des_travailleurs",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48045"
+      ],
+      "en": [
+        "source://quebec.ca/c48045"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les responsabilités des travailleurs qui dispensent des services de soutien à domicile dans le cadre de l’allocation directe/chèque emploi-service?",
+        "Travailleurs donnant des services de soutien à domicile dans le cadre de l’allocation directe/chèque emploi-service.",
+        "Quels sont les particularités pour les employés donnant des services de soutien à domicile dans le cadre de l’allocation directe/chèque emploi-service?",
+        "Quels sont les obligations pour le personnel travaillant dans les secteurs de la santé, de l’éducation et des milieux de garde ainsi que\npour les travailleurs qui dispensent des services de soutien à domicile dans le cadre de l’allocation directe/chèque emploi-service ?",
+        "Quelles sont les informations importantes aux travailleurs qui dispensent des services de soutien à domicile dans le cadre de l’allocation directe/chèque emploi-service?",
+        "Quelles sont les directives à appliquer par le personnel travaillant dans les services de soutien à domicile dans le cadre de l’allocation directe/chèque emploi-service ?",
+        "Je travaille dans les services de soutien à domicile. Est-ce qu'il y a des directives à appliquer dans le cadre de l’allocation directe/chèque emploi-service ?",
+        "Est-ce qu'il y a des directives à appliquer par les travailleurs qui dispensent des services de soutien à domicile ?"
+      ],
+      "en": [
+        "what are the responsibilities of workers providing home support services under the direct benefit/employment service cheque?",
+        "workers providing home support services as part of the direct benefit/employment service voucher.",
+        "what are the special features for employees providing home support services under the direct benefit/employment service cheque?",
+        "what are the obligations for staff working in the health, education and childcare sectors and for workers providing home support services under the direct benefit/employment service voucher?",
+        "what information is important for workers providing home support services under the direct benefit/employment service voucher?",
+        "what are the guidelines to be applied by staff working in home support services under the direct benefit/employment service voucher?",
+        "i work in home support services. are there any guidelines to apply for direct benefit/employment service cheques?",
+        "are there guidelines for workers providing home support services?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Employeurs - travailleurs - normes du travail"
+    ]
+  }
+}

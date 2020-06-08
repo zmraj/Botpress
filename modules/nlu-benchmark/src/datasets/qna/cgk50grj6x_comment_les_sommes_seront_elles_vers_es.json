@@ -1,0 +1,44 @@
+{
+  "id": "cgk50grj6x_comment_les_sommes_seront_elles_vers_es",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48189"
+      ],
+      "en": [
+        "source://quebec.ca/c48189"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment les sommes seront-elles versées?",
+        "De quelle manière on me versera les sommes du programme d'aide temporaire aux travailleurs COVID-19?",
+        "Est-ce que je peux recevoir mon paiement de PATT COVID-19 par chèque?",
+        "Est-ce que je peux aller à la banque pour déposer mon versement du programme d'aide temporaire aux travailleurs PATT COVID-19?",
+        "Qui s'occupe d'envoyer les versements d'aide PATT COVID-19",
+        "Comment je fais pour accepter mon virement PATT quand je vais l'avoir reçu?",
+        "Comment je vais recevoir mon aide financière PATT COVID-189?",
+        "Est-ce que toutes les banques vont accepter les virements du gouvernement pour le programme d'aide temporaire aux travailleurs PATT COVID-19?",
+        "Les versements PATT COVID-19 seront envoyés par qui?"
+      ],
+      "en": [
+        "how will the money be paid out?",
+        "how will I receive the money from the temporary help for covid-19 workers program?",
+        "can i receive my patt covid-19 payment by cheque?",
+        "can i go to the bank to deposit my patt covid-19 temporary worker assistance payment?",
+        "who's in charge of sending the aid payments patt covid-19",
+        "how do I accept my money transfer when I get it?",
+        "how am I going to get my financial aid from patt covid-189?",
+        "will all the banks accept government transfers for the temporary worker assistance program patt covid-19?",
+        "patt covid-19 payments will be sent by whom?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

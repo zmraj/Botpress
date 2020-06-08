@@ -1,0 +1,39 @@
+{
+  "id": "zaw4hvyvuw_17__vous__tes_une_personne_consid_r_e_vuln_rable",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47134"
+      ],
+      "en": [
+        "source://quebec.ca/c47134"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "17. Vous êtes une personne considérée vulnérable, c’est-à-dire âgée de 70 ans ou plus, immunosupprimée ou atteinte d’une maladie chronique ? Que faire ?",
+        "Puis-je être exempté de travailler étant donné une situation de santé précaire?",
+        "Comment faire si ma santé est trop fragile ou à risque pour me présenter au travail?",
+        "Comment travailler étant une personne avec une santé fragile?",
+        "J'ai plus de 70 ans et ne peut faire de télétravail, est-ce que mon traitement est maintenu?",
+        "Je suis atteinte d'une maladie chronique comment évaluer mes tâches à faire en télétravail?",
+        "je suis une personne immunosupprimée, je ne veux pas que mes enfants retournent à l'école.qu'elles sont mes ressources? "
+      ],
+      "en": [
+        "17. you are a person considered vulnerable, i.e., 70 years of age or older, immunosuppressed or have a chronic disease? than faire ?",
+        "can i be exempted from working due to a precarious health situation?",
+        "what if my health is too fragile or at risk to report for work?",
+        "how to work being a person with fragile health?",
+        "i am over 70 years old and cannot telework, is my salary maintained?",
+        "i have a chronic illness How do I evaluate my telework tasks?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Personnes à risque"
+    ]
+  }
+}

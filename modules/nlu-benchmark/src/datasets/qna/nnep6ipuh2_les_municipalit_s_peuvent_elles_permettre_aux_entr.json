@@ -1,0 +1,34 @@
+{
+  "id": "nnep6ipuh2_les_municipalit_s_peuvent_elles_permettre_aux_entr",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50907"
+      ],
+      "en": [
+        "source://quebec.ca/c50907"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les municipalités peuvent-elles permettre aux entreprises désirant participer à un appel d'offres public de déposer leur soumission par voie électronique?",
+        "Une municipalité veut déposer un  appel d'offres public via un système électronique, est-ce c'est possible?",
+        "Le dépôt des appels d'offres public par les municipalités est possible par Postes Canada",
+        "Est-ce qu'il sera possible de permettre la transmission électronique de soumissions pour le milieu municipal?"
+      ],
+      "en": [
+        "can municipalities allow companies wishing to participate in a public tender to submit their bids electronically?",
+        "a municipality wants to submit a public tender via an electronic system, is this possible?",
+        "public tendering by municipalities is possible through canada post",
+        "will it be possible to allow electronic transmission of bids for the municipal community?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

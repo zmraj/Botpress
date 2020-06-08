@@ -1,0 +1,32 @@
+{
+  "id": "lpssfpewk5_les_municipalit_s_sont_elles_oblig_es_de_tenir_des",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50893"
+      ],
+      "en": [
+        "source://quebec.ca/c50893"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les municipalités sont-elles obligées de tenir des séances du conseil publiques?",
+        "Les ville sont-elles autorisées à tenir des scéances du conseil à huis clos et à distance?",
+        "Par souci de transparence, les municipalités pourraient-elles diffuser la séance sur des plateformes numériques?"
+      ],
+      "en": [
+        "are municipalities required to hold public council meetings?",
+        "are cities allowed to hold council meetings in camera and at a distance?",
+        "for the sake of transparency, could municipalities broadcast the session on digital platforms?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

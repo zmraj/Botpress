@@ -1,0 +1,40 @@
+{
+  "id": "93f80el32s_est_il_possible_d_acc_der___l_une_de_ces_r_gions_p",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49120"
+      ],
+      "en": [
+        "source://quebec.ca/c49120"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il possible d’accéder à l’une de ces régions pour aller chercher son enfant dans un contexte de garde partagée?",
+        "Est-ce que je peux aller chercher mon enfant en garde partagée dans une région fermée?",
+        "Possibilité d'aller dans une région fermée pour une garde partagée.",
+        "Que faire avec la garde partagée si les parents vivent dans deux régions différentes?",
+        "Est-ce que je peux aller chercher mon enfant en garde partagée\nqui est dans une région à accès limité?",
+        "Est-ce que je peux amener mon enfant en garde partagée dans une zone fermée?",
+        "Est-ce que je peux amener mon enfant en garde partagée \ndans une zone fermée?",
+        "est-ce que mes enfants peuvent aller chez leur père en fin de semaine?"
+      ],
+      "en": [
+        "is it possible to access one of these regions to pick up the child in a shared custody arrangement?",
+        "can i pick up my child from a shared custody arrangement in a closed area?",
+        "possibility of going to a closed area for shared custody.",
+        "what to do with shared custody if the parents live in two different regions?",
+        "can i pick up my child from a shared custody arrangement that is in a limited access area?",
+        "can I bring my child into a shared custody arrangement in a closed area?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transport - déplacements"
+    ]
+  }
+}

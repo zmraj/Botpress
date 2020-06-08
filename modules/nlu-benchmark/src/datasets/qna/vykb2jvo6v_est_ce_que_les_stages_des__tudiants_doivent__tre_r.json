@@ -1,0 +1,32 @@
+{
+  "id": "vykb2jvo6v_est_ce_que_les_stages_des__tudiants_doivent__tre_r",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50683"
+      ],
+      "en": [
+        "source://quebec.ca/c50683"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les stages des étudiants doivent être reportés?",
+        "Puis-je être pénalisé, car je ne peux pas faire mon stage?",
+        "J'aimerais savoir si je peux faire un stage."
+      ],
+      "en": [
+        "do student placements have to be deferred?",
+        "can I be penalized for not being able to do my internship?",
+        "i'd like to know if I can get an internship."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

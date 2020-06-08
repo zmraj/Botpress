@@ -1,0 +1,34 @@
+{
+  "id": "uy8s7d16ps_l_aide_financi_re_accord_e_aux_festivals_et_aux__v",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53252"
+      ],
+      "en": [
+        "source://quebec.ca/c53252"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "L’aide financière accordée aux festivals et aux événements reportés ou annulés pourrait-elle s’appliquer à l’édition de 2021?",
+        "Pour les festivals et événements reportés ou annulés, l'aide financière est-elle uniquement pour 2020?",
+        "En 2021, est-ce que les promoteurs d'événements pourront déposer une nouvelle demande d'aide financière?",
+        "Les coûts encourus pour des festivals et événements annulés en 2020 sont-ils couverts par une aide financière?"
+      ],
+      "en": [
+        "could funding for postponed or cancelled festivals and events be applied to the 2021 edition?",
+        "for postponed or cancelled festivals and events, is the funding only for 2020?",
+        "in 2021, will event promoters be able to reapply for financial assistance?",
+        "are the costs incurred for festivals and events cancelled in 2020 covered by financial assistance?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

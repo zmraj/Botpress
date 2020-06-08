@@ -1,0 +1,74 @@
+{
+  "id": "y14ceykhp9_est_ce_que_je_dois_laver_tous_les_articles_emball",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49851\nAliments importés = source://quebec.ca/c49850\nAliments non emballés = source://quebec.ca/c49852"
+      ],
+      "en": [
+        "source://quebec.ca/c49851\nimported food = source://quebec.ca/c49850\nunpackaged food = source://quebec.ca/c49852"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que je dois laver tous les articles emballés achetés à l’épicerie?",
+        "Il est important de se laver les mains fréquemment, dès le retour à la maison et après avoir rangé les articles et les aliments",
+        "De retour à la maison, est-ce nécessaire de nettoyer tous mes achats?",
+        "Est-ce que les exploitants de commerce de détail ont mis en place plusieurs mesures d'hygiène?",
+        "La nourriture est-elle une source ou une voie probable de transmission de la COVID-19?",
+        "La bouffe peut-elle être infectée au corona?",
+        "La bouffe importée des pays très contaminés au virus est-elle dangereuse ?",
+        "Si une personne contaminée partage sa bouffe, est-ce les autres personnes vont l'attraper en la mangeant ?",
+        "Lavage des fruits et légumes pendant la pandémie.",
+        "Contamination au COVID par la nourriture.",
+        "Est-ce que la COVID-19 se transmet par ce que l'on mange?",
+        "Est-ce que je peux me faire contaminer àa la COVID avec de la nourriture à emporter?",
+        "Y a-t-il des précautions à prendre avec les repas, plats à emporter ou livraisons?",
+        "Dois-je laver tous mes achats d'épicerie avant de les ranger pour éviter de tomber malade?",
+        "Je travaille dans une cuisine. S'il y a un employé contaminé, que doit-on faire avec la bouffe des clients ?",
+        "Un malade au COVID-19 dans un magasin peut-il transmettre le virus en infectant la nourriture?",
+        "Est-il risqué de consommer des fruits et légumes à cause du corona?",
+        "Est-il conseillé de laver les articles achetés à l’épicerie pour se débarrasser du coronavirus?",
+        "Comment assurer la salubrité des aliments en période d'épidémie?",
+        "Je suis producteur maraîcher. Qu'est-ce que je fais avec ma production de légumes si un de mes gars est contaminé ?",
+        "Je travaille dans une shop de transformation alimentaire. Je fais quoi si j'oublie de tousser dans mon coude ?",
+        "Les aliments peuvent-ils transmettre le coronavirus ?",
+        "Plein de monde touchent aux légumes dans les épiceries et peuvent être infectés. Est-ce que c'est sécure de toucher à ça ?",
+        "Est-ce que je dois laver tout ce que je rapporte de l'épicerie?"
+      ],
+      "en": [
+        "do I have to wash all packaged items purchased at the grocery store?",
+        "it is important to wash your hands frequently, both when you return home and after putting away items and foodstuffs",
+        "when I get home, is it necessary to clean up all my purchases?",
+        "have retail operators implemented several hygiene measures?",
+        "is food a likely source or route of transmission of covid-19?",
+        "can the food be infected with corona?",
+        "is food imported from countries with high levels of the virus dangerous?",
+        "if an infected person shares his food, will other people catch it by eating it?",
+        "washing fruits and vegetables during the pandemic.",
+        "covid contamination from food.",
+        "is covid-19 transmitted by what we eat?",
+        "can I get covid contaminated with take-out food?",
+        "are there any precautions to take with meals, take-outs or deliveries?",
+        "do i need to wash all my groceries before putting them away to avoid getting sick?",
+        "i work in a kitchen. If there's a contaminated employee, what should we do with the customers' food?",
+        "can a covid-19 patient in a store transmit the virus by infecting food?",
+        "is it risky to eat fruits and vegetables because of corona?",
+        "is it advisable to wash groceries to get rid of the coronavirus?",
+        "how do we ensure food safety during an outbreak?",
+        "i'm a vegetable farmer. What do I do with my vegetable production if one of my guys is contaminated?",
+        "i work in a food processing shop. What do I do if I forget to cough into my elbow?",
+        "can food transmit coronavirus?",
+        "lots of people touch vegetables in grocery stores and can get infected. Is it safe to touch this?",
+        "do I have to wash everything I bring home from the grocery store?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consommateurs - Nourriture - Animaux"
+    ]
+  }
+}

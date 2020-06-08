@@ -1,0 +1,55 @@
+{
+  "id": "czijlnwrrl_comment_rester_en_contact_avec_nos_proches__dans_l",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50171\nGarder contact avec une personne en CHSLD = source://quebec.ca/c50173"
+      ],
+      "en": [
+        "source://quebec.ca/c50171\nkeep in touch with someone in chsld = source://quebec.ca/c50173"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment rester en contact avec nos proches, dans leurs divers milieux de vie, en contexte de distanciation physique et de lutte à la pandémie?",
+        "Quels sont les moyens de communication alternatifs que je peux utiliser pour communiquer avec mes proches?",
+        "Comment entrer en contact avec une personne âgée qui n'a pas accès à internet?",
+        "Comment communiquer avec une personne sans accès à Internet ?",
+        "Comment maximiser mes moyens de communications avec mes proches?",
+        "Est-ce que je peux utiliser des moyens de communication directs?",
+        "Ma petite fille veut aller saluer sa grand-mère qui sort sur son balcon, est-ce correct?",
+        "Quelles sont les stratégies de socialisation à distance?",
+        "Je veux maintenir les liens avec mes proches dans leur milieu de vie, comment je peux faire?",
+        "je veux voir ma mère",
+        "est-ce que je peux visiter mes parents",
+        "est-ce que je peux voir ma mère",
+        "puis-je aller voir mes amis ? ",
+        "est-ce que je peux faire un party avec mes amis",
+        "est-ce que je peux aller aider ma fille à déménager?",
+        "je peux aller voir des amis ? ",
+        "puis-je avoir des rendez-vous amoureux ?",
+        "est-ce que je peux voir mes amis",
+        "est-ce que je peux aller chez ma famille",
+        "les enfants peuvent-ils retrouver leurs amis en privé pour jouer ? "
+      ],
+      "en": [
+        "how can we stay in touch with our loved ones, in their various living environments, in a context of physical distancing and the fight against the pandemic?",
+        "what alternative means of communication can I use to communicate with my loved ones?",
+        "how do I get in touch with an elderly person who does not have access to the internet?",
+        "how to communicate with a person without internet access?",
+        "how can I maximize my means of communication with my loved ones?",
+        "can I use direct means of communication?",
+        "my granddaughter wants to say hello to her grandmother who's going out on her balcony, is that correct?",
+        "what are the strategies for remote socialization?",
+        "i want to maintain ties with my loved ones in their environment, how can I do that?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Personnes à risque"
+    ]
+  }
+}

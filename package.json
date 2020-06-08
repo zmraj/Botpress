@@ -85,6 +85,7 @@
     "socketio-jwt": "^4.5.0",
     "tar": "^4.4.6",
     "tmp": "^0.0.33",
+    "tokenizers": "^0.6.2",
     "universal-analytics": "^0.4.20",
     "unzipper": "^0.10.3",
     "verror": "^1.10.0",

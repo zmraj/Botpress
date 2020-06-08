@@ -1,0 +1,46 @@
+{
+  "id": "s9wfrluo7s_est_ce_que_mon_employeur_peut_me_mettre_en_arr_t_d",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47300"
+      ],
+      "en": [
+        "source://quebec.ca/c47300"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que mon employeur peut me mettre en arrêt de travail non-payé à cause du coronavirus?",
+        "Est-ce que mon patron peut arrêter de me payer s'il me met en arrêt de travail?",
+        "Arrêt de travail en lien avec la COVID-19.",
+        "Est-il possible que je perdre mon emploi à cause du COVID?",
+        "Est-ce que mon boss pourrait ne pas me payer si je suis en arrêt de travail à cause de la pandémie?",
+        "Est-ce que je peux arrêter d'être payé par mon employeur à cause du corona?",
+        "Est-ce que mon patron peut décider de ne plus me payer en cas de COVID?",
+        "Est-ce que je peux ne plus recevoir de salaire suite à un arrêt de l'entreprise à cause du coronavirus?",
+        "Mon salaire sera-t-il coupé à cause de la COVID-19?",
+        "Est-ce que je serai au chômage à cause de la crise du virus?"
+      ],
+      "en": [
+        "can my employer put me on unpaid leave because of the coronavirus?",
+        "can my boss stop paying me if he takes me off work?",
+        "work stoppage in connection with covid-19.",
+        "is it possible that I could lose my job because of the covid?",
+        "could my boss not pay me if I'm off work because of the pandemic?",
+        "can I stop getting paid by my employer because of the corona?",
+        "can my boss decide not to pay me any more in case of a covid?",
+        "can I stop receiving salary after a company shutdown due to coronavirus?",
+        "...will my salary be cut because of covid-19?",
+        "will I be unemployed because of the virus crisis?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Employeurs - travailleurs - normes du travail"
+    ]
+  }
+}

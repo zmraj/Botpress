@@ -1,0 +1,36 @@
+{
+  "id": "9phw2p7j8c_existe_t_il_de_l_aide_financi_re_pour_appuyer_les",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53400"
+      ],
+      "en": [
+        "source://quebec.ca/c53400"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Existe-t-il de l’aide financière pour appuyer les entreprises qui doivent fournir des soins aux animaux de compagnie ou de loisir qu’ils possèdent ou gardent?",
+        "Je suis propriétaire d'un pet shop, est-ce que je suis admissible au PCU ?",
+        "Je suis un vendeur de fleurs ambulatoire, puis-je avoir de l'aide financière ?",
+        "J'ai un commerce dans mon sous-sol, y a-til de l'aide financière pour ça ?",
+        "Y a-t-il des subventions pour les organisateurs d'événement ?"
+      ],
+      "en": [
+        "is there financial assistance available to support businesses that need to provide care for pets or recreational animals they own or keep?",
+        "i own a pet shop, do I qualify for the pcu?",
+        "i'm an ambulatory flower salesman, can I get financial help?",
+        "i have a business in my basement, is there any financial help for that?",
+        "are there subsidies for event organizers?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces - lieux publics - services"
+    ]
+  }
+}

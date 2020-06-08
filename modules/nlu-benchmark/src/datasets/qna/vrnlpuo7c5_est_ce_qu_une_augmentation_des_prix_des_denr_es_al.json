@@ -1,0 +1,34 @@
+{
+  "id": "vrnlpuo7c5_est_ce_qu_une_augmentation_des_prix_des_denr_es_al",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c51909"
+      ],
+      "en": [
+        "source://quebec.ca/c51909"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu’une augmentation des prix des denrées alimentaires est à prévoir?",
+        "J'ai peur qu'il y ait une pénurie d'aliments",
+        "Est-il envisageable que le prix des produits alimentaires fluctue?",
+        "Le prix des aliments va-t-il augmenter?"
+      ],
+      "en": [
+        "is an increase in food prices to be expected?",
+        "i'm afraid there's a food shortage",
+        "is it possible for food prices to fluctuate?",
+        "will food prices go up?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consommateurs - Nourriture - Animaux"
+    ]
+  }
+}

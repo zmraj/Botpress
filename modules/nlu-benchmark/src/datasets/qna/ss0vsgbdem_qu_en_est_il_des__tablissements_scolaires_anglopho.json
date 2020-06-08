@@ -1,0 +1,36 @@
+{
+  "id": "ss0vsgbdem_qu_en_est_il_des__tablissements_scolaires_anglopho",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50673"
+      ],
+      "en": [
+        "source://quebec.ca/c50673"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Qu’en est-il des établissements scolaires anglophones?",
+        "Est-ce que les mêmes consignes sont appliquées aux établissements anglophones?",
+        "Quels mesures s'appliquent aux établissements anglophones?",
+        "Mon enfant étudie dans une école anglophone",
+        "Les enfants anglophones ont aussi de l'école?"
+      ],
+      "en": [
+        "what about English-language schools?",
+        "are the same guidelines applied to English-language institutions?",
+        "what measures apply to English-language institutions?",
+        "my child studies in an English-speaking school",
+        "english-speaking children also have school?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

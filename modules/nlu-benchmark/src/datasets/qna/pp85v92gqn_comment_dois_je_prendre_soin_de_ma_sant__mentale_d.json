@@ -1,0 +1,78 @@
+{
+  "id": "pp85v92gqn_comment_dois_je_prendre_soin_de_ma_sant__mentale_d",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47204"
+      ],
+      "en": [
+        "source://quebec.ca/c47204"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment dois-je prendre soin de ma santé mentale dans cette période de pandémie ?",
+        "Qu'est-ce que je peux faire pour prendre soin de ma santé mental durant l'épidémie?",
+        "Quels sont les conseils pour conserver une bonne santé mentale malgré le COVID-19?",
+        "Garder sa santé mentale contre le virus.",
+        "Est-ce qu'il y-a des gestes simples pour aider sa santé mentale en temps de crise?",
+        "Conseils pour prendre soin de soi pendant la pandémie.",
+        "Quoi faire si je suis stressé à cause du virus?",
+        "Quels moyens je peux prendre pour faire attention à moi lors d'une situation de stress lié au corona?",
+        "Je peux faire quoi pour prendre soin de ma santé mentale avec qui se passe avec la COVID?",
+        "Malgré la COVID-19 je veux prendre soin de ma santé mentale",
+        "Quelles sont les effets possibles de la crise du coronavirus au niveau du stress, à l’anxiété et à la déprime?",
+        "Surmonter le stress, l’anxiété ou la déprime prendant la pandémie.",
+        "Qu'est-ce que je peux faire pour avoins moins d'anxiété ?",
+        "Comment faire pour baisser mon stress ?",
+        "Je suis déprimé, est-ce que je peux avoir des trucs pour améliorer mon humeur ?",
+        "Je vis du stress et de l'anxiété en raison de la pandémie, qu'est-ce que je peux faire pour me changer les idées ?",
+        "Comment je peux gérer mon stress qui est causé par mon confinement à la maison ?",
+        "En quoi les informations de ce site peuvent m'aider à passer au travers cett pandémie?",
+        "Comment m'aider dans mon quotidien difficile depuis le début de cette pandémie?",
+        "Comment procéder pour minimiser les répercussions quotidiennes causés par cette pandémie?",
+        "Je me sens impuissant face à la pandémie, que faire ?",
+        "Je vis plus de stress qu'avant, puis-je avoir des conseils?",
+        "Je suis plus stressé au travail depuis la pandémie, est-ce que je peux y faire quelquechose?",
+        "Comment prendre soin de moi, je suis plus stressé à la maison depuis la pandémie",
+        "Je suis plus longtemps stressé depuis je dois rester à la maison, comment prendre soin de moi?",
+        "Je suis plus stressé depuis que je dois rester en isolement, comment améliorer les choses?"
+      ],
+      "en": [
+        "how should i take care of my mental health in this time of pandemic?",
+        "what can I do to take care of my mental health during the outbreak?",
+        "what are the tips for maintaining good mental health despite covid-19?",
+        "keep her sane against the virus.",
+        "are there simple things you can do to help your mental health in times of crisis?",
+        "tips for taking care of yourself during the pandemic.",
+        "what if I'm stressed out about the virus?",
+        "what can I do to take care of myself during a corona-related stress situation?",
+        "what can I do to take care of my mental health with what's going on with the covid?",
+        "despite covid-19 I want to take care of my mental health",
+        "what are the possible effects of the coronavirus crisis on stress, anxiety and depression?",
+        "coping with the stress, anxiety or depression of the pandemic.",
+        "what can I do to make it less anxiety-provoking?",
+        "how can I lower my stress?",
+        "i'm depressed, can I get some stuff to improve my mood?",
+        "i'm experiencing stress and anxiety because of the pandemic, what can I do to take my mind off it?",
+        "how can I deal with the stress of being confined to my home?",
+        "how can the information on this site help me through this pandemic?",
+        "how can you help me in my difficult daily life since the beginning of the pandemic?",
+        "how can we minimize the day-to-day impact of this pandemic?",
+        "i feel helpless in the face of the pandemic, what can I do?",
+        "i'm under more stress than before, can I get some advice?",
+        "i'm more stressed at work since the pandemic, is there anything I can do about it?",
+        "how to take care of myself, I'm more stressed at home since the pandemic",
+        "i'm more stressed since I have to stay at home, how can I take care of myself?",
+        "i'm more stressed since I've been in solitary, how can I make things better?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Santé Mental"
+    ]
+  }
+}

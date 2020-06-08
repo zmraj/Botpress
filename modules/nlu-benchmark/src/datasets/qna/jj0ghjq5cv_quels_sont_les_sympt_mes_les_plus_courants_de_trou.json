@@ -1,0 +1,36 @@
+{
+  "id": "jj0ghjq5cv_quels_sont_les_sympt_mes_les_plus_courants_de_trou",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47208"
+      ],
+      "en": [
+        "source://quebec.ca/c47208"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les symptômes les plus courants de troubles de la santé mentale sur le plan comportemental ?",
+        "Problèmes comportementaux à surveiller durant le confinement contre le COVID-19.",
+        "Liste de symptômes de trouble de la santé mentale sur le plan comportemental à surveiller.",
+        "Reconnaitre les symptômes de trouble de la santé mentale sur le plan comportemental à surveiller.",
+        "Un trouble de la santé mentale sur le plan comportemental va se manifester comment ?"
+      ],
+      "en": [
+        "what are the most common symptoms of behavioural mental health disorders?",
+        "behavioural problems to watch for during containment against covid-19.",
+        "list of behavioural symptoms of a mental health disorder to watch for.",
+        "recognize the symptoms of mental health disorders in terms of behaviour to watch for.",
+        "a behavioural mental health disorder will manifest itself how?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Santé Mental"
+    ]
+  }
+}

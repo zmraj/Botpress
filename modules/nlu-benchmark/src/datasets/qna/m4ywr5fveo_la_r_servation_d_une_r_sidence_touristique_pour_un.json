@@ -1,0 +1,66 @@
+{
+  "id": "m4ywr5fveo_la_r_servation_d_une_r_sidence_touristique_pour_un",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49064"
+      ],
+      "en": [
+        "source://quebec.ca/c49064"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "La réservation d’une résidence touristique pour un séjour prévu en juillet doit-elle être annulée?",
+        "J'ai réservé un chalet pour ma famille cet été. Qu'est-ce que je fais avec ça ?",
+        "J'ai réservé un roulotte de camping pour ma famille cet été. Qu'est-ce que je fais avec ça ?",
+        "Mon site de camping annuel me demande de payer ma location annuelle maintenant. Devrais-je la payer ou attendre ?",
+        "J'ai loué une résidence touristique pour le mois de juillet est-ce qu'il faut que j'annule ma réservation ?",
+        "Faut-il annuler la réservation du chalet que j'ai faite pour juillet ?",
+        "J'ai effectuer une location de chalet cet été en juillet je vais tu être pogné pour annuler ?",
+        "Est-ce que je vais pouvoir aller au chalet que j'ai loué pour la période estivale ?",
+        "Est-ce que je devrais tout de suite annuler ma réservation que j'ai faite cet été pour le mois de juillet ?",
+        "On fait quoi avec la réservation qu'on a faite pour une résidence touristique en juillet cet été ?",
+        "Quelles sont les directives pour les séjours prévus dans des chalets à compter du mois de juillet ?",
+        "J'ai loué un chalet pour me réfugier en paix pendant la crise. Vais-je pouvoir y aller ?",
+        "Je fais quoi avec le chalet que j'ai loué pour le début avril ?",
+        "J'avais envie de louer un chalet du 29 mars au 13 avril pour me reposer vu que je peux pas travailler. Je peux tu y aller ?",
+        "Est-ce que j'ai le droit d'aller au chalet que j'ai loué même si c'est début avril ?",
+        "Je veux me rendre au chalet que j'ai loué pour passer à travers la crise je peux tu ?",
+        "Ça fait longtemps que j'avais loué un chalet pour début avril je vais tu être obligé d'annuler ?",
+        "Est-ce que je vais pouvoir aller au chalet que j'ai loué début avril ?",
+        "Ceux qui ont loué un chalet entre le 29 mars et le 13 avril  pourront-ils y aller ?",
+        "J'ai loué un chalet du 29 mars au 13 mai je peux-tu y aller pareil ?"
+      ],
+      "en": [
+        "does the reservation of a tourist residence for a stay in July have to be cancelled?",
+        "i booked a cabin for my family this summer. What do I do with it?",
+        "i booked a camping trailer for my family this summer. What do I do with it?",
+        "my annual campsite is asking me to pay my annual rental now. should i pay or wait?",
+        "i have rented a tourist residence for the month of July, do I have to cancel my reservation?",
+        "should I cancel the cottage reservation I made for July?",
+        "i have a cottage rental this summer in July. I'm gonna get busted for canceling?",
+        "will I be able to go to the cottage I rented for the summer?",
+        "should I cancel my reservation I made this summer for July right away?",
+        "what do we do with the reservation we made for a vacation home in July this summer?",
+        "what are the guidelines for stays in cottages from July onwards?",
+        "i've rented a cottage to take refuge in peace during the crisis. Will I be able to go there?",
+        "what do I do with the cabin I rented for early April?",
+        "i wanted to rent a cottage from March 29th to April 13th to rest since I can't work. Can you go?",
+        "am I allowed to go to the cottage I rented even if it's early April?",
+        "i want to get to the cabin I rented to get through the crisis. Can you?",
+        "It's been a long time since I rented a cabin for early April. Am I going to have to cancel?",
+        "will I be able to go to the cottage I rented at the beginning of April?",
+        "will those who rented a cottage between March 29th and April 13th be able to go?",
+        "i rented a cottage from March 29th to May 13th. Can you go there as well?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

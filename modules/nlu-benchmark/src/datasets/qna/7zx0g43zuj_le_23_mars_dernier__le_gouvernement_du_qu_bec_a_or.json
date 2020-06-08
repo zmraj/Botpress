@@ -1,0 +1,48 @@
+{
+  "id": "7zx0g43zuj_le_23_mars_dernier__le_gouvernement_du_qu_bec_a_or",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49050"
+      ],
+      "en": [
+        "source://quebec.ca/c49050"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Le 23 mars dernier, le gouvernement du Québec a ordonné la fermeture des commerces et des services non essentiels jusqu’au 13 avril. Pourquoi la fermeture des établissements d’hébergement touristique non essentiels est-elle exigée jusqu’à nouvel ordre?",
+        "Pourquoi les hôtels non essentiels doivent fermer ?",
+        "Pourquoi le gouvernement m'a obligé à fermer mon établissement d'hébergement touristique ?",
+        "Risques liés à la fréquentation d’établissements d’hébergement touristique.",
+        "Pourquoi mon hôtel doit être fermé jusqu'au 13 avril ?",
+        "Quels sont les causes de la fermeture des établissements d’hébergement touristique par le gouvernement du Québec?",
+        "Est-ce que la fermeture des établissements d’hébergement touristique par le gouvernement québécois est justifiée ?",
+        "Fermeture des établissements d’hébergement touristique par le gouvernemetn du Québec.",
+        "Pour quelle raison mon hôtel doit être fermé ?",
+        "Pourquoi je ne peux plus louer un chalet dans une autre région?",
+        "Pourquoi les établissements touristiques doivent fermés?"
+      ],
+      "en": [
+        "on march 23, the quebec government ordered the closure of businesses and non-essential services until april 13. why is the closure of non-essential tourist accommodation required until further notice?",
+        "why do non-essential hotels have to close?",
+        "why did the government force me to close my tourist accommodation establishment?",
+        "risks related to the use of tourist accommodation establishments.",
+        "why does my hotel have to be closed until April 13th?",
+        "what are the causes of the quebec government's closure of tourist accommodation establishments?",
+        "is the closure of tourist accommodation establishments by the Quebec government justified?",
+        "closure of tourist accommodation establishments by the quebec government.",
+        "why does my hotel have to be closed?",
+        "why can't I rent a cottage in another region anymore?",
+        "why do tourist establishments have to close?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

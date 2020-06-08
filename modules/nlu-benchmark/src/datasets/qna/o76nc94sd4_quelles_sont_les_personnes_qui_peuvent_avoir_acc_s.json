@@ -1,0 +1,52 @@
+{
+  "id": "o76nc94sd4_quelles_sont_les_personnes_qui_peuvent_avoir_acc_s",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49737"
+      ],
+      "en": [
+        "source://quebec.ca/c49737"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les personnes qui peuvent avoir accès à une région fermée?",
+        "Qui peut avoir accès à une région non accessible?",
+        "Liste des personnes autorisées d'accès à une région fermée.",
+        "Est-ce que je fait parti des personnes pouvant aller dans une région fermée?",
+        "Un déplacement est considéré essentiel pour quelles personnes?",
+        "Pour quel gens un déplacement est désigné comme essentiel?",
+        "Un transporteur de biens permettant la continuité de l’offre de services prioritaires peut-il entrée dans une région à accés restreint?",
+        "Les travailleur ou professionnel exerçant dans un milieu de travail où sont offerts des services prioritaires sont isl autorisés à se déplacer entre régions?",
+        "Ma présence est requise par une ordonnance contenue dans un jugement rendu par un tribunal, puis entrer dans une région fermée?",
+        "Les personnes effectuant un déplacement pour un motif humanitaire peuvent ils se déplacer entre régions?",
+        "Un proche doit recevoir des soins de santé dans une région fermée.",
+        "J'ai été autorisé par un directeur de santé publique, ou une personne autorisée à agir au nom du directeur de santé publique, ou un médecin, à me déplacer dans une utre région.",
+        "concernant les déplacements et régions fermées. j'aimerais savoir si c'est possible d'avoir une permission de me déplacer. je suis dans la mrc montcalm à lanaudière (saint-roch-de-l'achigan)",
+        "est-ce que je peux aller à mon chalet?"
+      ],
+      "en": [
+        "who can have access to a closed area?",
+        "who may have access to an inaccessible area?",
+        "list of persons authorized to access a closed area.",
+        "am I one of the people who can go to a closed area?",
+        "for which people is displacement considered essential?",
+        "for which people is travel designated as essential?",
+        "can a carrier of goods that allows for the continuity of priority service delivery enter a restricted area?",
+        "are workers or professionals working in a priority service workplace allowed to move between regions?",
+        "my presence is required by an order contained in a court judgment, and then enter a closed area?",
+        "can people on humanitarian travel move between regions?",
+        "a relative must receive health care in a closed area.",
+        "i have been authorized by a Public Health Director, or a person authorized to act on behalf of the Public Health Director, or a physician, to travel to another area."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transport - déplacements"
+    ]
+  }
+}

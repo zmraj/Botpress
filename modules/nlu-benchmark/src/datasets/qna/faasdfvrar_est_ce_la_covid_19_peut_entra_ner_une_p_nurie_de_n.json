@@ -1,0 +1,60 @@
+{
+  "id": "faasdfvrar_est_ce_la_covid_19_peut_entra_ner_une_p_nurie_de_n",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46819\nChangement des prix = source://quebec.ca/c51909"
+      ],
+      "en": [
+        "source://quebec.ca/c46819\nprice change = source://quebec.ca/c51909"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce la COVID-19 peut entraîner une pénurie de nourriture?",
+        "Est-ce qu'une pénurie de nourriture au Québec est à craindre?",
+        "Va-t-on manquer de nourriture ?",
+        "Pénurie de nourriture.",
+        "Je suis stressé de manquer de provisions",
+        "Quelles sont les probabilités que nous manquions de nourriture",
+        "La nourriture pourrait-elle être en pénurie?",
+        "Va-t-on manquer de légumes avec les fermetures de frontières ?",
+        "Dois-je commencer à faire des provisions?",
+        "est-ce qu'il y a des chances que la nourriture soit rationnée pendant l'épidémie?",
+        "allons-nous devoir faire des réserves de nouriture en prévision d'une pénurie?",
+        "Est-ce possible que les épiceries ne soit plus approvisionnées?",
+        "Va-t-on manquer à manger",
+        "Dois-je faire des réserves de nourriture pendant la pandémie?",
+        "est-ce que ya une pénurie de nourriture",
+        "est ce qu'on va manquer de bouffe à cause du virus?",
+        "j'ai peur de manquer de bouffe à cause du corona."
+      ],
+      "en": [
+        "can covid-19 cause a food shortage?",
+        "is a food shortage in quebec feared?",
+        "are we gonna run out of food?",
+        "food shortage.",
+        "i'm stressed from running out of supplies",
+        "what are the odds that we're gonna run out of food",
+        "could food be in short supply?",
+        "are we gonna run out of vegetables with the border closures?",
+        "should I start stocking up?",
+        "is there any chance that food will be rationed during the outbreak?",
+        "are we going to have to stockpile food in anticipation of a shortage?",
+        "is it possible that grocery stores are out of stock?",
+        "are we going to run out of food",
+        "do i need to stockpile food during the pandemic?",
+        "is there a food shortage",
+        "are we gonna run out of food because of the virus?",
+        "i'm afraid I'm running out of food because of the corona."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consommateurs - Nourriture - Animaux"
+    ]
+  }
+}

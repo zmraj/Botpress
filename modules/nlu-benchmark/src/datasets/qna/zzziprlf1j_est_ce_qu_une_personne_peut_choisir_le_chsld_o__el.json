@@ -1,0 +1,34 @@
+{
+  "id": "zzziprlf1j_est_ce_qu_une_personne_peut_choisir_le_chsld_o__el",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c51038"
+      ],
+      "en": [
+        "source://quebec.ca/c51038"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu’une personne peut choisir le CHSLD où elle veut être hébergée?",
+        "Ma mère veut choisir où elle va aller en CHSLD, est-ce quelle peut?",
+        "En période de pandémie, est-ce que c'est l'établissement qui accorde les priorités ?",
+        "Le transfert vers le CHSLD pourra se faire quand la pandémie sera terminée"
+      ],
+      "en": [
+        "can a person choose the chsld where they want to be hosted?",
+        "my mother wants to choose where she's going to go in chsld, can she?",
+        "in times of pandemic, does the institution set the priorities?",
+        "transfer to the chsld can take place when the pandemic is over"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Habitation et logement"
+    ]
+  }
+}

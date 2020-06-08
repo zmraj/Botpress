@@ -1,0 +1,74 @@
+{
+  "id": "vfn3apxdfw_quels_sont_les_groupes_de_personnes___risque_de_co",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49791"
+      ],
+      "en": [
+        "source://quebec.ca/c49791"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les groupes de personnes à risque de complications suite à une infection au COVID-19?",
+        "Quelles sont personnes à risque de décéder à la suite des complications respiratoires graves si elles sont infectées par le coronavirus?",
+        "Quelle proportion des gens contractant la COVID-19 vont guérir?",
+        "Quels sont mes chances de survie si je suis atteint du COVID-19 ?",
+        "Suis-je plus à risque avec le COVID si j'ai un problème cardiaque?",
+        "Pourquoi le monde s'inquiète du COVID-19 ?",
+        "Quelle est la différence de danger que pose le virus pour différentes tranches d'âge?",
+        "Personnes vulnérables au corona.",
+        "Personnes à risque de complication en lien avec le coronavirus.",
+        "Quel goupe de personnes a le risque d'avoir le plus haut taux de mortalité?",
+        "Risque de décès pour les personnes vulnérables au COVID-19.",
+        "Suis-je à risque de complication des suites du COVID même si je suis un jeune adulte?",
+        "Est-ce que l'ashtme fait de moi une personne risuant des complicatiosn graves",
+        "J'ai une maladie cardiaque, suis-je plus à risque de décéder du corona?",
+        "J'ai des problèmes aux reins, est-ce que je afis parti des personnes à risque?",
+        "Les patients atteints de maladies rénales sont-ils plus à risque de complications du COVID?",
+        "Les maladies pulmonaires font elles courrir plus de risque de complications avec le coronavirus?",
+        "Les fumeurs sont-ils plus à risque de complications du COVID?",
+        "Suis-plus vulnérable au corona avec mon système immunitaire affaibli?",
+        "Quelles sont lesgroupes de personnes les plus fragiles vis-à-vis de la COVID-19?",
+        "Je fais de l'asthme, est-ce que je suis plus à risque de complications des suites d'une infection au COVID-19?",
+        "La dystrophie musculaire de Duchenne rent-elle plus vulnérable au COVID-19?",
+        "Je suis insuffisant cardiaque, suis-je plus à risque de mourrir du corona?",
+        "J'ai plus de 70 ans, est-ce que je suis à risque d'être hospitalisé à cause du virus?"
+      ],
+      "en": [
+        "what groups of people are at risk of complications from covid-19 infection?",
+        "who is at risk of dying from serious respiratory complications if infected with coronavirus?",
+        "what proportion of people who contract covid-19 will recover?",
+        "...what are my chances of survival if I get covid-19?",
+        "am I more at risk with the covid if I have a heart condition?",
+        "why does the world care about covid-19?",
+        "what is the difference in danger posed by the virus to different age groups?",
+        "people vulnerable to corona.",
+        "people at risk of coronavirus-related complications.",
+        "which group of people is at risk of having the highest mortality rate?",
+        "risk of death for those vulnerable to covid-19.",
+        "am i at risk of complications from covid even if i am a young adult?",
+        "does the asthma make me a person at risk of serious complicity",
+        "i have heart disease, am I more likely to die from corona?",
+        "i've got kidney problems, did I go to people at risk?",
+        "are patients with kidney disease at increased risk of complications from covid?",
+        "do lung diseases increase the risk of complications with coronavirus?",
+        "are smokers more at risk of complications from covid?",
+        "am I more vulnerable to corona with my weakened immune system?",
+        "which groups of people are most vulnerable to covid-19?",
+        "if i have asthma, am i at increased risk of complications from covid-19 infection?",
+        "does duchenne muscular dystrophy make you more vulnerable to covid-19?",
+        "i'm a heart failure patient, am I more likely to die of corona?",
+        "i am over 70 years old, am I at risk of being hospitalized with the virus?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Personnes à risque"
+    ]
+  }
+}

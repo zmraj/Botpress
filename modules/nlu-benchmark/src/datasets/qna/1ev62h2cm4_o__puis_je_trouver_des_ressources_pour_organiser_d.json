@@ -1,0 +1,34 @@
+{
+  "id": "1ev62h2cm4_o__puis_je_trouver_des_ressources_pour_organiser_d",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50917"
+      ],
+      "en": [
+        "source://quebec.ca/c50917"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Où puis-je trouver des ressources pour organiser des activités de formation en ligne?",
+        "Je veux offrir mes services de formatteur, où m'adresser ?",
+        "Puis-je recevoir des cours d'anglais ?",
+        "La formation s'adresse-t-elle aux adultes ?"
+      ],
+      "en": [
+        "where can I find resources for organizing online training activities?",
+        "i want to offer my services as a trainer, where do I go?",
+        "can i receive english lessons?",
+        "is the training intended for adults?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

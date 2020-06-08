@@ -1,0 +1,56 @@
+{
+  "id": "52h16vqbjw_de_quelles_mani_res_les_producteurs_peuvent_ils_ve",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c52251\nLivraison = source://quebec.ca/c52241\nOrnements = source://quebec.ca/c52231\nVente en ligne = source://quebec.ca/c52252"
+      ],
+      "en": [
+        "source://quebec.ca/c52251\ndelivery = source://quebec.ca/c52241\nornaments = source://quebec.ca/c52231\nonline sale = source://quebec.ca/c52252"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "De quelles manières les producteurs peuvent-ils vendre leurs végétaux tout en respectant les directives de santé publique?",
+        "Est-ce que je peux passer ma commande au centre de jardinage en ligne ou par téléphone, puis passer chercher ma commande?",
+        "Est-ce que la vente en ligne et livraison des produits horticoles (pots, substrats, semences, outils de jardinage, arbustes, etc.) est permise?",
+        "Est-ce que les pépinières ont le droit de vendre en ligne et de livrer leur produits?",
+        "Est-ce que les centres d'horticulture ont le droit de vendre et livrer leur produits?",
+        "Une pépinière peut-elle livrer à la maison ses produits horticoles (pots, substrats, semences, outils de jardinage, arbustes, etc.) si on commande en ligne?",
+        "Un centre d'horticulture peut-il vendre en ligne ses produits et les livrer à domicile?",
+        "Un pépinière a-t-elle de droit de vendre leurs produits (pots, substrats, semences, outils de jardinage, arbustes, etc.) puis de faire la livraison à domicile?",
+        "Vente en ligne et livraison à domicile par les centres jardin.",
+        "La livraison à domicile ou le service à l’auto est-elle possible par les centres jardin qui font de la vente en ligne?",
+        "Comment les producteurs du secteur bioalimentaire peuvent-ils vendre leur produit tout en respectant les normes de la santé publique?",
+        "Je suis dans le secteur bioalimentaire, comment puis-je vendre mes produits?",
+        "De quelle manière les producteurs du bioalimentaire peuvent-ils écouler leurs produits?",
+        "Comment puis-je écouler mes produits du secteur bioalimentaire out en respectant les normes de santé publique?",
+        "De quelle façon peut-on vendre la production bioalimentaire tout en respectant les normes de santé publique?"
+      ],
+      "en": [
+        "how can growers sell their plants while respecting public health guidelines?",
+        "can I place my order at the garden centre online or by phone and then pick it up?",
+        "is online sale and delivery of horticultural products (pots, substrates, seeds, gardening tools, shrubs, etc.) permitted?",
+        "are nurseries allowed to sell online and deliver their products?",
+        "are horticulture centres allowed to sell and deliver their products?",
+        "can a nursery deliver its horticultural products (pots, substrates, seeds, gardening tools, shrubs, etc.) to the home if ordered online?",
+        "can a horticultural centre sell its products online and deliver them to my home?",
+        "does a nursery have the right to sell their products (pots, substrates, seeds, gardening tools, shrubs, etc.) and then make home delivery?",
+        "online sales and home delivery by garden centres.",
+        "is home delivery or car service available through garden centres that sell online?",
+        "how can bio-food producers sell their product while meeting public health standards?",
+        "i am in the bio-food sector, how can I sell my products?",
+        "how can bio-food producers market their products?",
+        "how can I sell my bio-food products out in compliance with public health standards?",
+        "how can bio-food production be sold while respecting public health standards?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Secteur bioalimentaire"
+    ]
+  }
+}

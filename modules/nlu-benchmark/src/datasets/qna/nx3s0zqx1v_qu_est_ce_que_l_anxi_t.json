@@ -1,0 +1,38 @@
+{
+  "id": "nx3s0zqx1v_qu_est_ce_que_l_anxi_t",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47199"
+      ],
+      "en": [
+        "source://quebec.ca/c47199"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Qu'est-ce que l’anxiété?",
+        "Quelle est la définition de l'anxiété?",
+        "Définition de l'anxiété",
+        "Comment déterminer si je fais de l'anxiété?",
+        "Quelle est la définition officielle de l'anxiété?",
+        "Je veux la définition de l'anxiété."
+      ],
+      "en": [
+        "what is anxiety?",
+        "what is the definition of anxiety?",
+        "anxiety definition",
+        "how do I know if I'm anxious?",
+        "what is the official definition of anxiety?",
+        "i want the definition of anxiety."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Santé Mental"
+    ]
+  }
+}

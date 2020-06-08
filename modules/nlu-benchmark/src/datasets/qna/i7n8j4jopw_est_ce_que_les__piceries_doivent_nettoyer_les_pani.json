@@ -1,0 +1,40 @@
+{
+  "id": "i7n8j4jopw_est_ce_que_les__piceries_doivent_nettoyer_les_pani",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50234\nNettoyage des tissus = source://quebec.ca/c50237"
+      ],
+      "en": [
+        "source://quebec.ca/c50234\nfabric cleaning = source://quebec.ca/c50237"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les épiceries doivent nettoyer les paniers d'épicerie?",
+        "Je travaille dans le secteur de l'alimentation, quelles recommandations dois-je suivre pour le lavage des objets en tissus?",
+        "Secteur de l'alimentation doit augmenter les fréquences de nettoyage des surfaces",
+        "Si je veux plus de détails sur le nettoyage de surfaces, quel document consulter ?",
+        "Les commerces alimentaires doivent-ils nettoyer les paniers d'épicerie?",
+        "Où peut-on trouver la documentation relative aux bonnes pratiques de nettoyage des paniers d'épiceries?",
+        "Est-ce que les paniers d'épicerie sont désinfectés?"
+      ],
+      "en": [
+        "do grocery stores have to clean out grocery baskets?",
+        "i work in the food industry, what recommendations should I follow for washing fabric items?",
+        "power supply must increase the frequency of surface cleaning",
+        "if I want more details on surface cleaning, which document should I consult?",
+        "do food stores have to clean out grocery baskets?",
+        "where can I find documentation on good grocery basket cleaning practices?",
+        "are the grocery baskets disinfected?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Secteur bioalimentaire"
+    ]
+  }
+}

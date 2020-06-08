@@ -1,0 +1,52 @@
+{
+  "id": "s69ade5ksc_quelles_sont_les_d_penses_couvertes_dans_le_cadre",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49769"
+      ],
+      "en": [
+        "source://quebec.ca/c49769"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les dépenses couvertes dans le cadre de l'aide d’urgence aux petites et moyennes entreprises?",
+        "Détails sur l'aide d’urgence aux PME.",
+        "Quel est le montant maximal du prêt consenti aux PME par le gouvernement?",
+        "Quels sont les conditions pour obtenir du financement pour mon entreprise?",
+        "Je suis patron d'entreprise et j'ai des problèmes de liquidités.",
+        "Mon entreprise n'a plus la capacité de livrer des produits, biens ou services, ou ses marchandises.",
+        "Ma PME manque de liquidités.",
+        "En tant quwe dirigeant d'entreprise peut-on avoir des prêts ou des garanties pour nous aider?",
+        "J'ai une entreprise qui éprouve des problèmes d’approvisionnement en matières premières, est-ce que je vais obtenir du financement?",
+        "Mon entreprise peut-elle avoir de l'aide avec les problèmes d’approvisionnement en matières premières ou en produits (biens ou services)?",
+        "Quelle forme prendra l'aide accordée aux entreprises?",
+        "Le prêt accordé comme financement aux entreprises est de combien?",
+        "Le manque de liquidités est causé par quoi?"
+      ],
+      "en": [
+        "what expenditure is covered under emergency aid for small and medium-sized enterprises?",
+        "details on emergency assistance to smes.",
+        "what is the maximum amount of the loan granted to smes by the government?",
+        "what are the conditions for obtaining financing for my business?",
+        "i'm a business owner and I'm having cash flow problems.",
+        "my business no longer has the capacity to deliver products, goods or services, or its merchandise.",
+        "my mom's running out of cash.",
+        "as a business leader can we get loans or guarantees to help us?",
+        "i have a company that's having problems sourcing raw materials, am I going to get financing?",
+        "can my business get help with problems with the supply of raw materials or products (goods or services)?",
+        "what form will the aid to companies take?",
+        "how much is the loan provided as business financing?",
+        "the cash shortfall is caused by what?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

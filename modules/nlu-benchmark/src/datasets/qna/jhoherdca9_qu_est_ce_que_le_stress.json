@@ -1,0 +1,36 @@
+{
+  "id": "jhoherdca9_qu_est_ce_que_le_stress",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47198"
+      ],
+      "en": [
+        "source://quebec.ca/c47198"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Qu’est-ce que le stress?",
+        "Quelle est la définition du stress?",
+        "Définition de stress.",
+        "Comment identifier le stress?",
+        "Je veux la définition de stress."
+      ],
+      "en": [
+        "what is stress?",
+        "what is the definition of stress?",
+        "definition of stress.",
+        "how to identify stress?",
+        "i want the definition of stress."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Santé Mental"
+    ]
+  }
+}

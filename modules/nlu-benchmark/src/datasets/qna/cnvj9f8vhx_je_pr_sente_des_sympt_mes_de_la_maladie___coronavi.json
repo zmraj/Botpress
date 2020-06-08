@@ -1,0 +1,48 @@
+{
+  "id": "cnvj9f8vhx_je_pr_sente_des_sympt_mes_de_la_maladie___coronavi",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49678"
+      ],
+      "en": [
+        "source://quebec.ca/c49678"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je présente des symptômes de la maladie à coronavirus (COVID-19) ou je suis atteint de la COVID-19. Que faire pour me soigner?",
+        "Je crois avoir attrappé le coronavirus. Que dois-je faire ?",
+        "J'ai peut-être la COVID-19, je fais quoi?",
+        "Dois-je me rendre à l'urgence si je pense avoir la covid?",
+        "C'est quoi les symptômes de la COVID-19, je feel pas bien.",
+        "Je crois avoir la covid, qu'est-ce que je dois surveiller?",
+        "J'ai peut-être le coronavirus,  je dois me soigner comment?",
+        "Comment me soigner si j'ai attraper le coronavirus",
+        "Quelles sont les complications à surveiller maintenant que j'ai été testé positif au virus ?",
+        "Je me soigne comment maintenant que je suis atteind du corona ?",
+        "Soins à faire si je suis malade?"
+      ],
+      "en": [
+        "i have symptoms of coronavirus disease (covid-19) or i have covid-19. what can you do to treat me?",
+        "i think I've got the coronavirus. What should I do?",
+        "i may have covid-19, what do I do?",
+        "should I go to the emergency room if I think I have the covid?",
+        "what are the symptoms of covid-19, I don't feel well.",
+        "i think I have the covid, what should I watch for?",
+        "i might have coronavirus, how do I treat it?",
+        "how to treat me if I have coronavirus",
+        "what are the complications to watch out for now that I've tested positive for the virus?",
+        "how do I treat myself now that I have corona?",
+        "care if I'm sick?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "uf3xvs7g9s_que_se_passe_t_il_s_il_y_a_une_personne_qui_pr_sen",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c51044"
+      ],
+      "en": [
+        "source://quebec.ca/c51044"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Que se passe-t-il s’il y a une personne qui présente des symptômes liés à la COVID-19 parmi les résidents du CHSLD?",
+        "C'est quoi la zone chaude ?",
+        "Est-que les mesures de protections sont augmentées si un résident a la covid-19?",
+        "Est-que l'état de santé des résidents atteints de la covid-19 est surveillé?",
+        "Si un résident est atteint de la covid-19 est-ce qu'il est isolé?",
+        "Qui appeler si un résident présente des symptômes ?",
+        "Un résident avec des symptômes devrait-il aller à l'hopital ?"
+      ],
+      "en": [
+        "what happens if there is a person with covid-19-related symptoms among chsld residents?",
+        "what's the hot zone?",
+        "are protections increased if a resident has covid-19?",
+        "is the health status of residents with covid-19 being monitored?",
+        "if a resident has covid-19 is they isolated?",
+        "who do I call if a resident shows symptoms?",
+        "should a resident with symptoms go to the hospital?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

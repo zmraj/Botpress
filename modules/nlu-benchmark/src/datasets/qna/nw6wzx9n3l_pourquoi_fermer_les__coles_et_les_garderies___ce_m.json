@@ -1,0 +1,48 @@
+{
+  "id": "nw6wzx9n3l_pourquoi_fermer_les__coles_et_les_garderies___ce_m",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46771"
+      ],
+      "en": [
+        "source://quebec.ca/c46771"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pourquoi fermer les écoles et les garderies à ce moment-ci? N’est-ce pas prématuré?",
+        "N'est-il pas trop tôt pour fermer les écoles ?",
+        "Il me semble que les écoles ont fermées vite",
+        "Aurait-on dû attendre avant de fermer les écoles ?",
+        "Pourquoi fermer les écoles aussi rapidement?",
+        "Pourquoi fermer les garderies aussi rapidement?",
+        "Il semble que les écoles et les garderies ont fermées vite",
+        "Pourquoi avoir fermé les écoles ?",
+        "Pourquoi fermer les garderies à ce momemt-ci?",
+        "Je n'aurais pas fermer les écoles et les garderies",
+        "Je n'aime pas que les écoles soient déjà fermées"
+      ],
+      "en": [
+        "why are we closing schools and daycares at this time? Isn't it premature?",
+        "isn't it too early to close the schools?",
+        "it seems to me that schools have been closing fast",
+        "should we have waited before closing the schools?",
+        "why close schools so quickly?",
+        "why close the daycare centres so quickly?",
+        "it seems that schools and daycares have been closing fast",
+        "why did you close the schools?",
+        "why close the day care at this time?",
+        "i wouldn't have closed the schools and daycares..",
+        "i don't like that schools are already closed"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

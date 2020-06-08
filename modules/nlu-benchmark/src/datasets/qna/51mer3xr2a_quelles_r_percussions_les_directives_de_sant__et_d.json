@@ -1,0 +1,52 @@
+{
+  "id": "51mer3xr2a_quelles_r_percussions_les_directives_de_sant__et_d",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49084"
+      ],
+      "en": [
+        "source://quebec.ca/c49084"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles répercussions les directives de santé et de sécurité en lien avec la COVID-19 ont-elles sur le fonctionnement et les services du ministère du Tourisme?",
+        "Le confinement demandé par le gouvernement a-t-il une incidence sur le fonctionnement et les services du ministère du Tourisme ?",
+        "Maintien des activités du Ministère du Tourisme",
+        "Le Ministère du Tourisme est il ouvert?",
+        "La Régie des installations olympiques est-elle en opération durant la pandémie?",
+        "Le Palais des congrès de Montréal est-il encore en activité?",
+        "Le Centre des congrès de Québec est-il ouvert pendant la crise du coronavirus?",
+        "Fermeture des sociétés d’État sous la responsabilité du Ministère du Tourisme.",
+        "Fermeture des centre infotouristes.",
+        "Est-ce que le ministère du Tourisme est encore ouvert ?",
+        "Est-ce que les employés du ministère du Tourisme travaillent actuellement ?",
+        "Est-ce que les dossiers du ministère du Tourisme sont encore traités malgré la crise ?",
+        "Les employés du ministère du Tourisme font quoi actuellement ?"
+      ],
+      "en": [
+        "what impact do the health and safety guidelines related to covid-19 have on the operations and services of the Ministry of Tourism?",
+        "does the containment requested by the government affect the operations and services of the Department of Tourism?",
+        "maintenance of the activities of the Ministry of Tourism",
+        "is the Ministry of Tourism open?",
+        "is the olympic facilities board in operation during the pandemic?",
+        "is the palais des congrès de montréal still in operation?",
+        "is the quebec city convention centre open during the coronavirus crisis?",
+        "closure of Crown corporations under the responsibility of the Ministry of Tourism.",
+        "closure of the infotourist centres.",
+        "is the Ministry of Tourism still open?",
+        "are the employees of the Ministry of Tourism currently working?",
+        "are the files of the Ministry of Tourism still being processed despite the crisis?",
+        "what are the employees of the Ministry of Tourism doing right now?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

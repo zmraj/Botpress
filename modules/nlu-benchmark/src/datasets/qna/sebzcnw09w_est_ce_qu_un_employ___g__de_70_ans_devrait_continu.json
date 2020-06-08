@@ -1,0 +1,48 @@
+{
+  "id": "sebzcnw09w_est_ce_qu_un_employ___g__de_70_ans_devrait_continu",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48243"
+      ],
+      "en": [
+        "source://quebec.ca/c48243"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu’un employé âgé de 70 ans devrait continuer de travailler ?",
+        "Les travailleurs de plus de 70 ans doivent-ils entrer au travail ?",
+        "Si j'ai plus de 70 ans, est-ce que je devrais travailler ?",
+        "Les employés de 70 ans et plus peuvent-ils aller travailler?",
+        "Est-ce que tous les employés de plus de 70 ans doivent arrêter de travailler ?",
+        "Est-ce sécuritaire de travailler si on a plus de 70 ans ?",
+        "Est-ce qu'un employé agé devrait continuer de travailler ?",
+        "Est-ce qu'un ainé peut continuer à travailler en période de pandémie?",
+        "Est-ce qu'un travailleur essentiel de plus de 70 ans doit s'arrêter de travailler?",
+        "Employé âgé de plus de 70 ans à l'emploi.",
+        "Un ainé peut-il rester à l'emploi dans l'entreprise?"
+      ],
+      "en": [
+        "should a 70-year-old employee continue to work?",
+        "should workers over 70 enter the workforce?",
+        "if I'm over 70, should I be working?",
+        "can employees aged 70 and over go to work?",
+        "do all employees over 70 have to stop working?",
+        "is it safe to work if you're over 70?",
+        "should an older employee continue to work?",
+        "can an Elder continue to work during a pandemic?",
+        "does a key worker over 70 have to stop working?",
+        "employee over 70 years of age in employment.",
+        "can an older person remain employed in the company?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Employeurs - travailleurs - normes du travail"
+    ]
+  }
+}

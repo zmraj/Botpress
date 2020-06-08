@@ -1,0 +1,36 @@
+{
+  "id": "5bbm3mbrmc_mon_entreprise_alimentaire_fait_elle_partie_des_se",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53406"
+      ],
+      "en": [
+        "source://quebec.ca/c53406"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Mon entreprise alimentaire fait-elle partie des services et activités prioritaires?",
+        "Comment savoir si mon entreprise fait partie des services essentiels?",
+        "Ou trouver de l'information sur les services prioritaires en alimentation?",
+        "Comment faire pour que mon entreprise alimentaire fasse partie des services essentiels?",
+        "Comment savoir si une entreprise agricole fait partie des services prioritaires?"
+      ],
+      "en": [
+        "is my food business one of the priority services and activities?",
+        "how do i know if my business is an essential service?",
+        "or find information on priority food services?",
+        "how do I make my food business an essential service?",
+        "how do you know if a farm business is a priority service?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services essentiels"
+    ]
+  }
+}

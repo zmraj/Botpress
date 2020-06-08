@@ -1,0 +1,34 @@
+{
+  "id": "uhdr60jdrb_est_ce_que_les_propri_taires_d__tablissement_d_h_b",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c51888"
+      ],
+      "en": [
+        "source://quebec.ca/c51888"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les propriétaires d’établissement d’hébergement touristique (résidences de tourisme, gîtes, etc.) autres que les hôtels et certains campings peuvent louer leur établissement aux voyageurs qui doivent se mettre en quarantaine?",
+        "Quels sont les deux types d'établissements d'hébergement nommé par le gouvernement du Québec qui peuvent offrir des services essentiels?",
+        "Je suis propritétaire d'un gîte, est-ce que je peux héberger des voyageurs qui doivent se mettre en quarantaine?",
+        "Est-ce qu'il y a des établissements d'hébergement autres que les hôtels"
+      ],
+      "en": [
+        "can owners of tourist accommodation establishments (vacation homes, bed and breakfasts, etc.) other than hotels and some campgrounds rent out their establishments to travellers who need to quarantine themselves?",
+        "what are the two types of accommodation facilities appointed by the quebec government that can provide essential services?",
+        "i own a lodge, can I accommodate travellers who have to quarantine themselves?",
+        "are there any accommodation establishments other than hotels"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

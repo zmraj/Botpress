@@ -1,0 +1,38 @@
+{
+  "id": "57xyhcd1xp_qu_en_est_il_de_la_formation_professionnelle_et_de",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50678"
+      ],
+      "en": [
+        "source://quebec.ca/c50678"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Qu’en est-il de la formation professionnelle et de l’éducation aux adultes?",
+        "Est-ce que les établissements en formation professionnelle peuvent favoriser la reconnaissance des acquis \npour décerner les diplômes, les attestations et les certifications?",
+        "Est-ce qu'un adulte en formation à l'éducation aux adultes pourra se voir\ndécerner son diplôme ?",
+        "Je fréquente l'éducation aux adultes, est-ce ce que mes acquis pourront m'être reconnus?",
+        "Est-ce que ma formation professionnelle sera reconnue ?",
+        "Je vais aux adultes. Est-ce que je vais avoir droit à mon diplôme"
+      ],
+      "en": [
+        "what about vocational training and adult education?",
+        "can vocational training institutions promote the recognition of prior learning in order to award diplomas, certificates and certifications?",
+        "will an adult in adult education training be able to graduate?",
+        "if I attend adult education, will I be recognized for what I have learned?",
+        "will my professional training be recognized?",
+        "i'm going to the adults. Am I going to get my diploma"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

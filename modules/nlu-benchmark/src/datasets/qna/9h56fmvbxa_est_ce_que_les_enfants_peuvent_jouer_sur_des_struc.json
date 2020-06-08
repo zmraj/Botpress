@@ -1,0 +1,62 @@
+{
+  "id": "9h56fmvbxa_est_ce_que_les_enfants_peuvent_jouer_sur_des_struc",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48565"
+      ],
+      "en": [
+        "source://quebec.ca/c48565"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les enfants peuvent jouer sur des structures de jeux au parc?",
+        "Puis-je amener mes enfants dans les jeux du parc?",
+        "Mes flos peuvent-tu aller jouer au parc sans risque ?",
+        "Mon fils peut-il jouer avec des structures communes à l'extérieur?",
+        "S'assoir sur un banc public est-ce risqué à cause du virus?",
+        "Aller à piscine intérieure de mon immeuble c'est autorisé?",
+        "Je peux promener dans un parc ?",
+        "Je veux me balader dans un parc, je peux ?",
+        "Mes enfants peuvent-ils attraper la COVID s'ils jouent avec les modules dans un parc ?",
+        "Peut-on se promener au parc si on ne touche pas aux structures ?",
+        "est-ce que je peux tomber malade si je viens m'asseoir sur un banc de parc public?",
+        "Je veux aller faire du soccer seul sur un terrain public.",
+        "Est-ce que mon kid peut jouer dans le parc à côté de la maison?",
+        "Est-ce qu'on peut aller se balanciner au parc malgré la pandémie?",
+        "Ma fille veut jouer à l'extérieur avec des jeux publiques.",
+        "Les aînés pourront-ils aller s'assoir sur les bancs dans les espaces publics?",
+        "Peut-on aller pique-niquer sur le gazon du parc si personne n'est malade?",
+        "Les enfants peuvent-ils aller courir sur la pelouse au parc?"
+      ],
+      "en": [
+        "can children play on play structures in the park?",
+        "can i take my children to the park playground?",
+        "my flos can you go play in the park safely?",
+        "can my son play with common structures outside?",
+        "is sitting on a park bench risky because of the virus?",
+        "is going to the indoor pool in my building allowed?",
+        "can I take a walk in the park?",
+        "i want to go for a walk in the park, may I?",
+        "can my children catch the covid if they play with the modules in a park?",
+        "can you walk in the park if you don't touch the structures?",
+        "can I get sick if I sit on a park bench?",
+        "i want to go play soccer alone on a public field.",
+        "can my kid play in the park next to the house?",
+        "can we go swinging in the park despite the pandemic?",
+        "my daughter wants to play outside with public games.",
+        "will seniors be able to sit on benches in public spaces?",
+        "can we go picnicking on the park lawn if no one is sick?",
+        "can the kids go running on the lawn at the park?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces - lieux publics - services"
+    ]
+  }
+}

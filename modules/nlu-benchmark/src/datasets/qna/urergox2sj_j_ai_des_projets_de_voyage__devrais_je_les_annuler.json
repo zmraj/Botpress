@@ -1,0 +1,76 @@
+{
+  "id": "urergox2sj_j_ai_des_projets_de_voyage__devrais_je_les_annuler",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46814"
+      ],
+      "en": [
+        "source://quebec.ca/c46814"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "J'ai des projets de voyage, devrais-je les annuler?",
+        "Que conseille le gouvernement du Québec à propos des voyages ?",
+        "Position du gouvernement du Québec sur les déplacements à l'étranger.",
+        "Je dois partir en voyage prochainement, est-ce que je dois annuler mon voyage ?",
+        "Mon voyage est déjà acheté, est-ce que je dois l'annuler par avance ?",
+        "Mon voyage était déjà planifié, est-ce obligatoire de l'annuler ?",
+        "Je pars en voyage sous peu, dois-je annuler mon voyage ?",
+        "Est-ce que je pourrais aller en croisière cet été ?",
+        "Je planifiais faire un voyage prochainement, devrais-je l'annuler ?",
+        "Quelle est la positions des autorités envers les voyages à l'extérieur?",
+        "Est-ce qu'il y a des mises en garde pour les voyageurs ?",
+        "Je dois voyager à l'extérieur du pays, quelles sont les précautions à prendre?",
+        "Je voulais voyager bientôt, dois-je annuler mon projet ?",
+        "Est-ce que j'annule mon projet de voyage à l'étranger?",
+        "Est-ce que je peux prévoir de partir en croisière?",
+        "Je ne veux pas annuler mes projets de voyage, est-ce que c'est correct?",
+        "Est-ce que je peux conserver mes projets de voyage?",
+        "Est-ce que je peux planifier un voyage?",
+        "Je veux voyager, où est-ce que je peux aller?",
+        "Est-ce qu'il y a un endroit où je peux voyager?",
+        "Est-ce que c'est ok d'aller en France?",
+        "Puis-je aller prendre des vacances dans un autre pays?",
+        "est-ce que je peux prendre l'avion ?",
+        "je peux rentrer en france ? ",
+        "je suis immigré, puis-je rentrer dans mon pays d'origine ? ",
+        "je peux quitter le pays ? ",
+        "je peux sortir du pays ? ",
+        "est-ce que je peux aller en espagne la semaine prochaine ?"
+      ],
+      "en": [
+        "i have travel plans, should I cancel them?",
+        "what does the quebec government advise about travel?",
+        "position of the quebec government on foreign travel.",
+        "i have to go on a trip soon, should I cancel my trip?",
+        "my trip is already bought, do I have to cancel it in advance?",
+        "my trip was already planned, do I have to cancel it?",
+        "i'm leaving on a trip soon, should I cancel my trip?",
+        "could I go on a cruise this summer?",
+        "i was planning a trip in the near future, should I cancel it?",
+        "what is the position of the authorities towards foreign travel?",
+        "are there any travel advisories?",
+        "i have to travel out of the country, what precautions should I take?",
+        "i wanted to travel soon, should I cancel my project?",
+        "do I cancel my plans to travel abroad?",
+        "can I plan to go on a cruise?",
+        "i don't want to cancel my travel plans, is that okay?",
+        "can I keep my travel plans?",
+        "can I plan a trip?",
+        "i want to travel, where can I go?",
+        "is there somewhere I can travel to?",
+        "is it okay to go to France?",
+        "can I go on holiday to another country?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Voyageurs"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "z6mbsidnf1_je_suis_chauffeur_de_taxi__que_puis_je_faire_afin",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49191"
+      ],
+      "en": [
+        "source://quebec.ca/c49191"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je suis chauffeur de taxi. Que puis-je faire afin de me protéger et de protéger mes clients?",
+        "Comment protéger mes passagers et moi-même lorsqu'ils montent dans mon taxi?",
+        "j'ai peur de prendre un taxi",
+        "Je veux prendre un taxi, quelles sont les mesures de protection obligatoires ?",
+        "Dois-je me laver les mains après avoir pris un taxi ?",
+        "est-ce que les taxis et uber sont encore en fonction?",
+        "Est-il possible d'attraper le covid-19 dans un taxi ?",
+        "c'est tu sécuritaire de prendre un chauffeur privé",
+        "Est-ce que les poignées de porte des taxis sont désinfecter ?"
+      ],
+      "en": [
+        "i'm a taxi driver. What can I do to protect myself and my customers?",
+        "how do I protect my passengers and myself when they get into my taxi?",
+        "i'm afraid to take a taxi",
+        "i want to take a taxi, what are the mandatory safeguards?",
+        "do I have to wash my hands after I get in a cab?",
+        "are the taxis and uber still in operation?",
+        "is it possible to catch covid-19 in a taxi?",
+        "is it safe to take a private driver",
+        "are the door handles of taxis disinfected?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transport - déplacements"
+    ]
+  }
+}

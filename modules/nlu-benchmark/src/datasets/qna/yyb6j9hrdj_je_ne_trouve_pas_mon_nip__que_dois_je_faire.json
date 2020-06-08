@@ -1,0 +1,38 @@
+{
+  "id": "yyb6j9hrdj_je_ne_trouve_pas_mon_nip__que_dois_je_faire",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49309"
+      ],
+      "en": [
+        "source://quebec.ca/c49309"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je ne trouve pas mon NIP. Que dois-je faire?",
+        "Qui dois-je appeler, si je ne trouve pas mon NIP du programme d'aide temporaire aux travailleurs?",
+        "Je n'ai pas de courriel pour recevoir mon NIP du programme d'aide temporaire aux travailleurs qui dois-je contacter?",
+        "Qui je dois appeler si je n'ai pas reçu mon NIP PATT COVID-19 par courriel?",
+        "Croix-Rouge ne m'a pas envoyé de NIP PATT. Où appeler ?",
+        "Quel numéro appeler pour des problèmes avec mon NIP pour le PATT ?"
+      ],
+      "en": [
+        "i can't find my nip. What should I do?",
+        "who do I call if I can't find my Temporary Help Worker PIN?",
+        "i don't have an email address to receive my temporary help worker PIN, who do i contact?",
+        "who should i call if i have not received my nip patt covid-19 by email?",
+        "red Cross didn't send me a nip patt. Where to call?",
+        "what number to call for problems with my nip for the patt?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

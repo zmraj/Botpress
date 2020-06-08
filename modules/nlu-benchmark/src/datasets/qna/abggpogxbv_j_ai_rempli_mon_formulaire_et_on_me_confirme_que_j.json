@@ -1,0 +1,40 @@
+{
+  "id": "abggpogxbv_j_ai_rempli_mon_formulaire_et_on_me_confirme_que_j",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49303"
+      ],
+      "en": [
+        "source://quebec.ca/c49303"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "J’ai rempli mon formulaire et on me confirme que je suis admissible. Est-ce normal qu’on ne me demande pas mes coordonnées bancaires?",
+        "Comment l'aide financière du Programme d’aide temporaire aux travailleurs sera envoyée?",
+        "J'ai reçu la confirmation d'admission à l'aide financière PATT mais on ne m'a pas demandé mes coordonnées bancaires. Est-ce normal ?",
+        "De quelle manière je vais recevoir l'aide financière PATT ? On m'a confirmé mon admissibilité.",
+        "Est-ce que je suis supposée de donner mes coordonnées bancaires pour recevoir l'aide financière du Programme d’aide temporaire aux travailleurs ?",
+        "C'est normal qu'on me demande pas mes coordonnées bancaires même si je suis admissible à l'aide financière PATT COVID-19?",
+        "L'aide financière du Programme d’aide temporaire aux travailleurs est versée de quelle façon ?"
+      ],
+      "en": [
+        "i have completed my application and I am confirmed as eligible. Is it normal that I am not asked for my bank account information?",
+        "how will financial assistance under the temporary help for workers program be sent?",
+        "i received confirmation of admission to patt financial aid but was not asked for my bank details. is this normal?",
+        "how will i receive financial aid patt? i've been confirmed eligible.",
+        "am i supposed to give my bank information to receive financial assistance from the temporary help for workers program?",
+        "is it normal that I am not asked for my bank account information even though I am eligible for financial assistance under patt covid-19?",
+        "how is financial assistance under the temporary help for workers program paid out?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}
