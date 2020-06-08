@@ -93,13 +93,14 @@ export default class RemoteModel implements Model {
         return Array.from(_vectorsCache.get(cacheKey).values())
       }
 
-      const {
+      let {
         data: { embeddings }
       } = await axios.post(ENDPOINT + '/embeddings', {
         lang: lang.toLowerCase().trim(),
-        text: sanitizeText(phrase)
+        documents: [sanitizeText(phrase)]
       })
 
+      embeddings = embeddings[0]
       if (!embeddings || !embeddings.length || isNaN(embeddings[0])) {
         throw new Error('Received invalid embeddings')
       }
@@ -155,37 +156,46 @@ export default class RemoteModel implements Model {
             ...entry.feedback[lang].filter(x => x.polarity).map(x => x.utterance)
           ])
 
-          const contentEmb = await this.getPhraseVector(entry.content[lang][0], lang)
-          const titleEmb = await this.getPhraseVector(entry.title[lang], lang)
-          if (!contentEmb) {
-            continue
-          }
-          let mutedEmb = [...contentEmb]
+          // TODO use every content here instead of only the 1st one
+          const title = entry.title[lang]
+          const title_embedding = await this.getPhraseVector(title, lang)
 
-          for (const question of questions) {
-            const questionEmb = await this.getPhraseVector(question, lang)
-            if (!questionEmb) {
+          for (const content of entry.content[lang]) {
+            const originalContentEmb = await this.getPhraseVector(content, lang)
+            if (!originalContentEmb) {
               continue
             }
-            const questionEmbNorm = multiply(norm(mutedEmb) / norm(questionEmb), [...questionEmb])
-            const direction = subtract(questionEmbNorm, mutedEmb)
-            mutedEmb = add(mutedEmb, multiply(0.1, direction))
-            _vectorsCache.set(getCacheKey(lang, entry.content[lang][0]), Float32Array.from(mutedEmb))
+            let reranked_emb = [...originalContentEmb]
+            for (const question of questions) {
+              const questionEmb = await this.getPhraseVector(question, lang)
+              if (!questionEmb) {
+                continue
+              }
+              const questionEmbNorm = multiply(norm(reranked_emb) / norm(questionEmb), [...questionEmb])
+              const direction = subtract(questionEmbNorm, reranked_emb)
+              reranked_emb = add(reranked_emb, multiply(0.1, direction))
+              _vectorsCache.set(getCacheKey(lang, content), Float32Array.from(reranked_emb))
+            }
+
+            // note that we do this after the for loop so we can use the latest version of mutedEmb (yes, we edit in place ...)
+            model.support_vectors.push({
+              content_embedding: reranked_emb,
+              entry_id: entry.id,
+              title_embedding,
+              lang,
+              content,
+              title
+            })
+            //
+            //
+            //
+            // model.support_vectors.push({
+            //   vector: questionEmb,
+            //   lang: lang,
+            //   content: entry.content[lang][0],
+            //   entry_id: entry.id
+            // })
           }
-          model.support_vectors.push({
-            content_embedding: mutedEmb,
-            title_embedding: titleEmb,
-            lang: lang,
-            content: entry.content[lang][0],
-            title: entry.title[lang],
-            entry_id: entry.id
-          })
-          // model.support_vectors.push({
-          //   vector: questionEmb,
-          //   lang: lang,
-          //   content: entry.content[lang][0],
-          //   entry_id: entry.id
-          // })
         }
 
         progress()
@@ -320,7 +330,9 @@ export default class RemoteModel implements Model {
     const conf_content = similarity.cosine(support_vectors.content_embedding, question_embed)
     const conf_title = similarity.cosine(support_vectors.title_embedding, question_embed)
     const confidence = (conf_title + conf_content) / 2
-    // TODO
+
+    // TODO : timestamp should affect confidence
+
     // timestamps = np.array([sub_dic["ts"] for sub_dic in dico.values()])
     // min_ts = np.min(timestamps)
     // max_ts = np.max(timestamps)
@@ -351,28 +363,19 @@ export default class RemoteModel implements Model {
         confidence: this.compute_confidence(sv, question_embed)
       }))
 
-    const top = _.chain(sv)
+    const top: SupportVector[] = _.chain(sv)
       .filter(x => !isNaN(x.confidence) && x.confidence > 0)
-      // .groupBy('entry_id')
-      // .values()
-      // .map(group => _.maxBy(group, 'confidence'))
       .orderBy('confidence', 'desc')
-      .take(5)
+      .take(3)
       .value()
-      .map(res => ({
-        ...res,
-        ...this.model.entries.find(x => x.id === res.entry_id)
-      }))
 
-    const {
-      data: { answers }
-    } = await axios.post(ENDPOINT + '/answers', {
+    const paylaod = {
       lang: langCode.toLowerCase().trim(),
       question: sanitizeText(input),
-      docs: top.map(result => result.content)
-    })
-
-    console.log(answers)
+      documents: _.flatMap(top, res => [res.content, res.title])
+    }
+    const { data } = await axios.post(ENDPOINT + '/answers', paylaod)
+    console.log(data.answers)
 
     return []
     // return _.orderBy(

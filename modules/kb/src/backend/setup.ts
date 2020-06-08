@@ -4,6 +4,8 @@ import _ from 'lodash'
 import Storage from './storage'
 import { BotParams, ScopedBots } from './typings'
 
+const EVENTS_TO_IGNORE = ['session_reference', 'session_reset', 'bp_dialog_timeout', 'visit', 'say_something', '']
+
 export const initBot = async (bp: typeof sdk, botId: string, bots: ScopedBots) => {
   const config = await bp.config.getModuleConfigForBot('kb', botId)
   const defaultLang = (await bp.bots.getBotById(botId)).defaultLanguage //
@@ -18,7 +20,7 @@ export const initModule = async (bp: typeof sdk, bots: ScopedBots) => {
     name: 'kb.incoming',
     direction: 'incoming',
     handler: async (event: sdk.IO.IncomingEvent, next) => {
-      if (!event.hasFlag(bp.IO.WellKnownFlags.SKIP_QNA_PROCESSING)) {
+      if (!event.hasFlag(bp.IO.WellKnownFlags.SKIP_QNA_PROCESSING) && !EVENTS_TO_IGNORE.includes(event.type)) {
         await processEvent(event, bots[event.botId])
         next()
       }
