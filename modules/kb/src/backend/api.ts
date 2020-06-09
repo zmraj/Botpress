@@ -1,6 +1,9 @@
 import * as sdk from 'botpress/sdk'
 import { Request, Response } from 'express'
+import { parse, writeToPath } from 'fast-csv'
+import fs from 'fs'
 import _ from 'lodash'
+import { resolve } from 'path'
 import yn from 'yn'
 
 import RemoteModel from './model'
@@ -34,6 +37,37 @@ export default async (bp: typeof sdk, bots: ScopedBots) => {
     } catch (e) {
       next(new Error(e.message))
     }
+  })
+
+  router.get('/predictCSV', async (req: Request, res: Response) => {
+    // Load Model
+    const model = await bots[req.params.botId].storage.loadLatestModel()
+    bp.logger.forBot(req.params.botId).info(`Model loaded successfully`)
+    // Load Csv
+    const all_rows = []
+    fs.createReadStream(resolve(__dirname, 'historique_1000.csv'))
+      .pipe(parse({ headers: true }))
+      .on('error', error => console.error(error))
+      .on('data', row => all_rows.push(row))
+      .on('end', (rowCount: number) => console.log(`Parsed ${rowCount} rows`))
+    bp.logger.forBot(req.params.botId).info(`CSV loaded successfully`)
+    // Predict all questions
+    const all_prediction = [['Questions', 'Reponse']]
+    for (const question_reponse of all_rows) {
+      const q: string = question_reponse.Question
+      const res = await model.predict(q, 'fr')
+      const content: string = res[0].content
+      all_prediction.push([q, content])
+    }
+    bp.logger.forBot(req.params.botId).info(`Predictions successfully`)
+    const filePath = resolve(__dirname, 'deep_historique_1000.csv')
+    writeToPath(filePath, all_prediction)
+      .on('error', err => console.error(err))
+      .on('finish', () => {
+        console.log('Done')
+      })
+    bp.logger.forBot(req.params.botId).info(`CSV write successfully : ALL DONE`)
+    res.send('Done')
   })
 
   router.post('/train', async (req: Request, res: Response, next: Function) => {

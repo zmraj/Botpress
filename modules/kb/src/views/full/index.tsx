@@ -13,6 +13,11 @@ interface Props {
 export default class KbPage extends Component<Props> {
   state = {}
 
+  predictFromCSV = async () => {
+    const { axios } = this.props.bp
+    const { data } = await axios.get('/mod/kb/predictCSV')
+    console.log(data)
+  }
   trainFromQnA = async () => {
     const { axios } = this.props.bp
     const items = []
@@ -75,6 +80,7 @@ export default class KbPage extends Component<Props> {
           <Panel.Body>
             <Button onClick={() => this.props.bp.axios.post(`/mod/kb/train`)}>Train</Button>
             <Button onClick={this.trainFromQnA}>Train from QnA</Button>
+            <Button onClick={this.predictFromCSV}>Train from QnA</Button>
             <Button onClick={() => this.props.bp.axios.post(`/mod/kb/train/cancel`)}>Cancel</Button>
           </Panel.Body>
         </Panel>
