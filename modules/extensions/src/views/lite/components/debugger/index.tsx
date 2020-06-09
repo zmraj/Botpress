@@ -20,7 +20,6 @@ import FetchingEvent from './FetchingEvent'
 import Header from './Header'
 import SplashScreen from './SplashScreen'
 import Unauthorized from './Unauthorized'
-
 export const updater = { callback: undefined }
 
 const WEBCHAT_WIDTH = 400
@@ -227,6 +226,7 @@ export class Debugger extends React.Component<Props, State> {
     const ndu = _.get(this.state, 'event.ndu')
     const isOutgoing = this.state.event?.direction === 'outgoing'
     const hasProcessing = !!this.state.event?.processing
+    const lang = this.props.store?.botUILanguage || 'en'
 
     return (
       <div className={style.content}>
@@ -234,7 +234,9 @@ export class Debugger extends React.Component<Props, State> {
           {!isOutgoing && <Tab id="basic" title="Summary" panel={<Summary event={this.state.event} />} />}
           {!isOutgoing && ndu && <Tab id="ndu" title="NDU" panel={<NDU ndu={ndu} />} />}
           <Tab id="advanced" title="Raw JSON" panel={<Inspector data={this.state.event} />} />
-          {hasProcessing && <Tab id="processing" title="Processing" panel={<Processing event={this.state.event} />} />}
+          {hasProcessing && (
+            <Tab id="processing" title="Processing" panel={<Processing event={this.state.event} lang={lang} />} />
+          )}
           {eventError && (
             <Tab
               id="errors"
