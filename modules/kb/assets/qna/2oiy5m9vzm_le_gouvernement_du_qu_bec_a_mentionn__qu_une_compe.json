@@ -1,0 +1,36 @@
+{
+  "id": "2oiy5m9vzm_le_gouvernement_du_qu_bec_a_mentionn__qu_une_compe",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50844"
+      ],
+      "en": [
+        "source://quebec.ca/c50844"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Le gouvernement du Québec a mentionné qu’une compensation financière serait versée aux garderies non subventionnées. Quelles sont les modalités de cette compensation?",
+        "Est-que les garderies non subventionnée ont droit à de l'aide financière?",
+        "L'aide financière aux garderies non subventionnées sera donnée jusqu'à quelle date?",
+        "Qu'est-ce qui va être couvert par l'aide financière aux garderies ?",
+        "L'aide financière aux garderies non subventionnées va couvrir quels frais?"
+      ],
+      "en": [
+        "the government of quebec mentioned that financial compensation would be paid to non-subsidized daycares. what are the terms and conditions of this compensation?",
+        "are unsubsidized daycares eligible for financial assistance?",
+        "until when will financial assistance for non-subsidized daycare centres be provided?",
+        "what is going to be covered by the child care subsidy?",
+        "what costs will financial assistance to unsubsidized child care cover?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "id": "fgkofapk9x_est_ce_qu_il_faut__viter_de_se_d_placer_d_une_r_gi",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c52313"
+      ],
+      "en": [
+        "source://quebec.ca/c52313"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu'il faut éviter de se déplacer d'une région à l'autre au Québec?",
+        "Est-ce que je peux rendre visite à des gens habitants dans une autre région ?",
+        "Est-ce que je peux me déplacer en région ?",
+        "Je dois absolument prendre l'avion pour le travail. Est-ce que les passagers sont espacés les uns des autres?",
+        "Je m'inquiète pour la santé de mes parents en région, puis-je aller les voir ?",
+        "J'ai des proches qui habitent loin de chez moi qui ont besoin de ma présence. Commentaller les rejoindre sécuritairementr?",
+        "Est-ce que déménager dans une région fermée est possible?",
+        "Les déplacements par voitures sont-ils surveillés?",
+        "Y at-il du contrôl pour les déplacements?",
+        "J'ai tu le droit de déménager même si la région dans laquelle je déménage est fermée ?",
+        "Est-ce que je dois annuler mon déménagement si la région où je déménage est fermée ?",
+        "La région où je déménage est fermée est-ce que je vais pouvoir déménager quand même ?",
+        "On fait quoi si on devait déménager dans une région \nfermée ?",
+        "Je suis supposé déménager bientôt mais la région où je déménage est fermée. C'est quoi je dois faire ?",
+        "Je peux tu déménager même si la région est fermée ?",
+        "Je peux-tu encore déménager dans une région avec accès limité ?",
+        "Est-ce que les compagnies de déménagement sont considérées comme services essentiels?",
+        "Si je veux me rendre dans le Bas-Saint-Laurent, est-ce que je peux?",
+        "J'ai acheté une maison dans une des régions fermées, est-ce que je vais pouvoir déménager quand même ?",
+        "C'est tu encore possible de déménager dans une région fermée ?",
+        "Ma maison est vendue et je veux déménager dans une région qui n'est plus accessible. Est-ce possible ?",
+        "Mon déménagement est prévu bientôt dans une zone fermée. Je fais quoi ?",
+        "Puis-je aller voir une personne qui me manque terriblement?",
+        "Puis je aller visiter des connaissances qui ne sont pas infectées?",
+        "Aller porter de l'aide alimentaire à une personne dans le besoin est permis?",
+        "Je dois me déplacer par transport collectif en dehors de ma région, que se passera t-il si l'on découvre un passager atteint de symptômes?",
+        "Est-ce que je peux sortir de chez moi pour des raisons d'agréments?",
+        "est-ce que je peux aller passer la fin de semaine au chalet?",
+        "puis-je aller dans une autre région pour faire changer mes pneus qui y sont entreposés?"
+      ],
+      "en": [
+        "should we avoid moving from one region to another in quebec?",
+        "can I visit people living in another region?",
+        "can I move around the region?",
+        "i absolutely have to fly to work. Are the passengers spaced apart?",
+        "i'm worried about my parents' health in the region, can I go see them?",
+        "i have relatives who live far from my home and need my presence. How can I reach them safely?",
+        "is it possible to move to a closed area?",
+        "are car journeys monitored?",
+        "is there any movement control?",
+        "am I allowed to move even if the area I'm moving to is closed?",
+        "do I have to cancel my move if the area I'm moving to is closed?",
+        "the area I'm moving to is closed will I still be able to move?",
+        "what would we do if we had to move to a closed area?",
+        "i'm supposed to move soon but the area I'm moving to is closed. What am I supposed to do?",
+        "can you move even if the area is closed?",
+        "can I still move to a restricted area?",
+        "are moving companies considered essential services?",
+        "if I want to go to the Lower Saint Lawrence, can I?",
+        "i bought a house in one of the closed areas, will I still be able to move?",
+        "is it still possible for you to move to a closed area?",
+        "my house is sold and I want to move to an area that is no longer accessible. is this possible?",
+        "i'm moving to a closed area soon. What do I do?",
+        "can I go see someone I miss terribly?",
+        "can I go visit uninfected acquaintances?",
+        "is it allowed to carry food aid to a person in need?",
+        "i have to travel by public transit outside my region, what will happen if a passenger with symptoms is discovered?",
+        "can I go out of my house for pleasure?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transport - déplacements"
+    ]
+  }
+}

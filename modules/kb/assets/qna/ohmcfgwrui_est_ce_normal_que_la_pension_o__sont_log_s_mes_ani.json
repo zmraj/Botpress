@@ -1,0 +1,34 @@
+{
+  "id": "ohmcfgwrui_est_ce_normal_que_la_pension_o__sont_log_s_mes_ani",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49861"
+      ],
+      "en": [
+        "source://quebec.ca/c49861"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce normal que la pension où sont logés mes animaux ait changé ses services dans le contexte actuel?",
+        "Est-ce que les pensions pour animaux sont des services prioritaires?",
+        "Mon cheval est en pension, est-ce que je peux aller le voir?",
+        "Le propriétaire de la pension et ses employés sont responsables de fournir les soins de base aux animaux en pension"
+      ],
+      "en": [
+        "is it normal that the boarding house where my animals are housed has changed its services in the current context?",
+        "are boarding houses a priority service?",
+        "my horse is in boarding school, can I go see him?",
+        "the owner of the boarding house and his employees are responsible for providing basic care for the boarded animals"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consommateurs - Nourriture - Animaux"
+    ]
+  }
+}

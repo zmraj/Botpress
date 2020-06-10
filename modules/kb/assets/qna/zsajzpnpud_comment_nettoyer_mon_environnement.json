@@ -1,0 +1,70 @@
+{
+  "id": "zsajzpnpud_comment_nettoyer_mon_environnement",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49661"
+      ],
+      "en": [
+        "source://quebec.ca/c49661"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment nettoyer mon environnement?",
+        "Quels produits à favoriser pour laver la maison?",
+        "Comment assurer la propreté de mon environnement?",
+        "La COVID se transmet-elle via les poignées de porte, les téléphones portables ou d’autres objets de la vie courante ?",
+        "Si je suis atteint de le covid, comment je dois laver mes vêtements?",
+        "Le corona peut se fixer sur quelles surfaces ?",
+        "Est-ce que je dois laver les colis que je reçois par la poste?",
+        "J'ai la covid. Comment je dois nettoyer  ma maison pour  ne pas que mes proches l'attrapent?",
+        "Quels sont les conseils d'entretien de notre  maison lorsqu'une personne du foyer est atteinte de covid?",
+        "Avec quels produits je dois nettoyer ma maison si un membre de la famille est atteint?",
+        "J'utilise quoi pour nettoyer mon ligne et ma maison si je suis atteint de covid?",
+        "Quel est le temps de survi du virus sur les surfaces ?",
+        "Peut-il y avoir la COVID-19 sur une porte ?",
+        "Est-ce que le virus survit sur les objets ?",
+        "Est-ce que le coronavirus demeure longtemps sur les objets qui nous entourent ?",
+        "Est-ce que la COVID-19 peut être sur mes vêtements ?",
+        "Est-ce que je peux attraper le virus en touchant à des objets ?",
+        "Combien de temps survit le virus à l'extérieur?",
+        "Est-ce que le virus meurt sur les objets",
+        "Je peux tu attraper le virus sur une pognée de porte",
+        "Survie du virus dans l'environnement.",
+        "Temps de survie du coronavirus sur les surfaces."
+      ],
+      "en": [
+        "how do I clean up my environment?",
+        "which products to favour for washing the house?",
+        "how do I keep my environment clean?",
+        "is the covid transmitted via door handles, mobile phones or other everyday objects?",
+        "if I have covid, how do I wash my clothes?",
+        "the corona can attach itself to what surfaces?",
+        "do I have to wash the parcels I receive in the mail?",
+        "i have the covid. How am I supposed to clean my house so my family doesn't catch it?",
+        "what are the tips for maintaining our home when someone in the household has covid?",
+        "what products should I use to clean my home if a family member is affected?",
+        "what do I use to clean my line and my house if I have covid?",
+        "how long does the virus survive on surfaces?",
+        "can there be covid-19 on a door?",
+        "does the virus survive on objects?",
+        "how long does the coronavirus stay on the objects around us?",
+        "can covid-19 be on my clothes?",
+        "can I get the virus from touching things?",
+        "how long does the virus survive outside?",
+        "does the virus die on the objects",
+        "i can get the virus from a doorknob",
+        "survival of the virus in the environment.",
+        "survival time of the coronavirus on surfaces."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

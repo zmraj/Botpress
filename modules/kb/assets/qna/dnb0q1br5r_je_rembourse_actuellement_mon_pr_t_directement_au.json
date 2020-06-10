@@ -1,0 +1,38 @@
+{
+  "id": "dnb0q1br5r_je_rembourse_actuellement_mon_pr_t_directement_au",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50702"
+      ],
+      "en": [
+        "source://quebec.ca/c50702"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je rembourse actuellement mon prêt directement au Ministère de l'Éducation et de l'Enseignement supérieur. Est-ce que cette annonce s’applique à moi?",
+        "Est-ce que cette annonce s'applique aussi pour les remboursements de prêts au Ministère de l'Éducation et de l'Enseigment supérieur?",
+        "Est-ce que cette annonce s'applique aussi au service de recouvrement de l'Aide financière aux études?",
+        "Je rembourse mon prêt au service de recouvrement de l'Aide financière aux études, est-ce que cette annonce ou mesure s'appiique aussi à moi?",
+        "Est-ce que la mesure de suspension des remboursements s'applique aussi aux prêts \nque l'on rembourse directement à notre instituition financière?",
+        "je rembourse mon prêt à l'institution fiancière"
+      ],
+      "en": [
+        "i am currently repaying my loan directly to the Ministry of Education and Higher Education. Does this announcement apply to me?",
+        "does this announcement also apply to loan repayments to the Ministry of Education and Higher Education?",
+        "does this announcement also apply to the student financial assistance recovery service?",
+        "i am repaying my loan to the student financial assistance recovery service, does this announcement or measure apply to me as well?",
+        "does the suspension of repayments also apply to loans that are repaid directly to our financial institution?",
+        "i'm paying back my loan to the fiancial institution"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

@@ -80,7 +80,7 @@ export default class KbPage extends Component<Props> {
           <Panel.Body>
             <Button onClick={() => this.props.bp.axios.post(`/mod/kb/train`)}>Train</Button>
             <Button onClick={this.trainFromQnA}>Train from QnA</Button>
-            <Button onClick={this.predictFromCSV}>Train from QnA</Button>
+            <Button onClick={this.predictFromCSV}>Predict Csv</Button>
             <Button onClick={() => this.props.bp.axios.post(`/mod/kb/train/cancel`)}>Cancel</Button>
           </Panel.Body>
         </Panel>

@@ -1,0 +1,64 @@
+{
+  "id": "f6cdsxzcym_les_lieux_de_culte___glises__mosqu_es__synagogues",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47130"
+      ],
+      "en": [
+        "source://quebec.ca/c47130"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les lieux de culte (églises, mosquées, synagogues, etc.) devront-ils faire l’objet de fermetures?",
+        "Puis-je aller à la messe le dimanche?",
+        "Est-que la mosquée est ouverte?",
+        "Dois-je reporter mon baptême?",
+        "Est-ce que les lieux de culte sont ouverts?",
+        "Est-ce que les services religieux essentiels peuvent avoir lieu?",
+        "Est-ce que je peux me rendre à la synagogue?",
+        "Est-ce que je peux aller à la messe",
+        "Les chapelles et monastères sont-ils ouverts ?",
+        "L'oratoire St-Joseph est-il ouvert ?",
+        "La cathédrale Ste-Anne-de-Beaupré est-elle ouverte ?",
+        "Est-ce que la messe sera annulée",
+        "Est-ce que je pourrai me rendre prier à l'Église",
+        "Est-ce que je pourrai me rendre prier à la mosquée",
+        "C'est tu correct d'aller prier?",
+        "Puis-je aller visiter l'oratoire St-Joseph ?",
+        "J'annule tu mon mariage ou quoi?",
+        "Les mosquées sont-elles ouvertes ?",
+        "Les synagogues sont-elles ouvertes ?"
+      ],
+      "en": [
+        "will places of worship (churches, mosques, synagogues, etc.) have to be closed?",
+        "can I go to mass on Sundays?",
+        "is the mosque open?",
+        "should I postpone my baptism?",
+        "are the places of worship open?",
+        "can essential religious services take place?",
+        "can I go to the synagogue?",
+        "can I go to mass",
+        "are the chapels and monasteries open?",
+        "is St. Joseph's Oratory open?",
+        "is ste-anne-de-beaupré cathedral open?",
+        "will mass be cancelled",
+        "will I be able to go to church and pray..",
+        "will I be able to go to the mosque to pray..",
+        "is it okay to go pray?",
+        "may I go and visit St. Joseph's Oratory?",
+        "do you want me to call off my wedding or what?",
+        "are the mosques open?",
+        "are the synagogues open?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces - lieux publics - services"
+    ]
+  }
+}

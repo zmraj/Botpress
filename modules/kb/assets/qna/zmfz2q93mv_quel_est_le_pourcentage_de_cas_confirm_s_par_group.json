@@ -1,0 +1,34 @@
+{
+  "id": "zmfz2q93mv_quel_est_le_pourcentage_de_cas_confirm_s_par_group",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50213"
+      ],
+      "en": [
+        "source://quebec.ca/c50213"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quel est le pourcentage de cas confirmés par groupe d’âge au COVID-19 au Québec ?",
+        "Liste du pourcentage de cas confirmés de coronavirus par groupe d’âge.",
+        "Puis-je connaître le pourcentage de cas confirmés de COVID-19 par groupe d’âge au Québec ?",
+        "Je veux le détail du pourcentage de cas confirmés de coronavirus par groupe d’âge lié au corona."
+      ],
+      "en": [
+        "what is the percentage of confirmed cases by age group at covid-19 in quebec?",
+        "list of the percentage of confirmed coronavirus cases by age group.",
+        "can i find out the percentage of confirmed cases of covid-19 by age group in quebec?",
+        "i want a breakdown of the percentage of confirmed coronavirus cases by age group related to corona."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Autres questions"
+    ]
+  }
+}

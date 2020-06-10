@@ -1,0 +1,34 @@
+{
+  "id": "uosz0ou3z0_si_j_ai_d_j__re_u_une_aide_du_patt__est_ce_que_je",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53523"
+      ],
+      "en": [
+        "source://quebec.ca/c53523"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Si j’ai déjà reçu une aide du PATT, est-ce que je vais aussi pouvoir recevoir un soutien financier de la PCU?",
+        "Ai-je droit à la Prestation canadienne d'urgence (PCU) si j’ai déjà l'aide du Programme d’aide temporaire aux travailleurs (PATT COVID-19)?",
+        "Recevoir la Prestation canadienne d'urgence (PCU) en plus de l'aide du Programme d’aide temporaire aux travailleurs (PATT COVID-19).",
+        "Peut-on cumuler la Prestation canadienne d'urgence (PCU) à l'aide du PATT COVID-19?"
+      ],
+      "en": [
+        "if i have already received assistance from the patt, will i also be able to receive financial support from the pcu?",
+        "am i entitled to the canada emergency benefit (ccu) if i already have the help of the temporary help worker program (patt covid-19)?",
+        "receive the canada emergency benefit (ccu) in addition to assistance from the temporary help for workers program (patt covid-19).",
+        "can the canadian emergency benefit (ccu) be stacked with patt covid-19?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

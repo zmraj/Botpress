@@ -93,14 +93,14 @@ export default class RemoteModel implements Model {
         return Array.from(_vectorsCache.get(cacheKey).values())
       }
 
-      let {
-        data: { embeddings }
-      } = await axios.post(ENDPOINT + '/embeddings', {
+      const { data } = await axios.post(ENDPOINT + '/embeddings', {
         lang: lang.toLowerCase().trim(),
         documents: [sanitizeText(phrase)]
       })
+      // console.log(data)
+      // console.log(data.data)
 
-      embeddings = embeddings[0]
+      const embeddings = data.data[0]
       if (!embeddings || !embeddings.length || isNaN(embeddings[0])) {
         throw new Error('Received invalid embeddings')
       }
@@ -180,7 +180,6 @@ export default class RemoteModel implements Model {
             // note that we do this after the for loop so we can use the latest version of mutedEmb (yes, we edit in place ...)
             model.support_vectors.push({
               content_embedding: reranked_emb,
-              entry_id: entry.id,
               title_embedding,
               lang,
               content,
@@ -343,7 +342,7 @@ export default class RemoteModel implements Model {
     return confidence
   }
 
-  async predict(input: string, langCode: string): Promise<Prediction[]> {
+  async predict(input: string, langCode: string): Promise<any> {
     if (!this.trained) {
       throw new Error("Can't predict because model is not trained")
     }
@@ -363,21 +362,28 @@ export default class RemoteModel implements Model {
         confidence: this.compute_confidence(sv, question_embed)
       }))
 
-    const top: SupportVector[] = _.chain(sv)
+    const top: any[] = _.chain(sv)
       .filter(x => !isNaN(x.confidence) && x.confidence > 0)
       .orderBy('confidence', 'desc')
       .take(3)
       .value()
 
-    const paylaod = {
-      lang: langCode.toLowerCase().trim(),
-      question: sanitizeText(input),
-      documents: _.flatMap(top, res => [res.content, res.title])
-    }
-    const { data } = await axios.post(ENDPOINT + '/answers', paylaod)
-    console.log(data.answers)
+    // const paylaod = {
+    //   lang: langCode.toLowerCase().trim(),
+    //   question: sanitizeText(input),
+    //   // documents: _.flatMap(top, res => [res.content, res.title])
+    //   documents: [top[0].content, top[0].title]
+    // }
+    // const { data } = await axios.post(ENDPOINT + '/answers', paylaod)
 
-    return []
+    return {
+      docs: [
+        { content: top[0].content, score: top[0].confidence },
+        { content: top[1].content, score: top[1].confidence },
+        { content: top[2].content, score: top[2].confidence }
+      ]
+      // answer: { content: data.answer, score: data.score }
+    }
     // return _.orderBy(
     //   results.map((r, i) => ({
     //     title: r.title[langCode],

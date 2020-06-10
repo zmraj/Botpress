@@ -1,0 +1,32 @@
+{
+  "id": "3v6uh3mp9n_est_il_risqu__d_acheter_des_fruits_et_l_gumes_qui",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49852"
+      ],
+      "en": [
+        "source://quebec.ca/c49852"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il risqué d’acheter des fruits et légumes qui ne sont pas emballés?",
+        "J'ai acheté des fruits pas emballés, est-qu'il y a un risque?",
+        "Si je lave mes légumes à l'eau seulement, est-ce suffisant?"
+      ],
+      "en": [
+        "is it risky to buy fruits and vegetables that are not packaged?",
+        "i bought unwrapped fruit, is there a risk?",
+        "if I wash my vegetables with water only, is that enough?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consommateurs - Nourriture - Animaux"
+    ]
+  }
+}

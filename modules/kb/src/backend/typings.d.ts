@@ -25,7 +25,6 @@ export interface SupportVector {
   lang: string
   content: string
   title: string
-  entry_id: string
 }
 export interface TrainedModel {
   trained_on: Date
@@ -51,7 +50,7 @@ export interface Model {
   // readonly modelType: string // if we have more than remote model later
   train(data: Entry[]): Promise<boolean>
   cancelTraining(): void
-  predict(input: string, langCode: string): Promise<Prediction[]>
+  predict(input: string, langCode: string): Promise<any>
   toJSON(): string
 }
 

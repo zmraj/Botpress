@@ -1,0 +1,38 @@
+{
+  "id": "1huzy9fyqz_comment_les_mesures_d_exception_ont_elles__t__d_te",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50879"
+      ],
+      "en": [
+        "source://quebec.ca/c50879"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment les mesures d’exception ont-elles été déterminées?",
+        "Y a t-il des mesures exceptionnels que le gouvernement compte mettre en place pour donner du pouvoir aux municipalités d'agir plus concrètement?",
+        "En situation d'urgence, est-ce que le pouvoir municipal peut outrepasser le pouvoir provincial?",
+        "Une municipalité faisant face à une situation exceptionnelle peut-être imposer des règles sanitaires radicales?",
+        "Les règles sanitaires pour les municipalités vont-elles êtres assouplit?",
+        "Est-ce que le gouvernement du Québec adopte des mesures pour que les municipalités puissent assurer leurs responsabilités?"
+      ],
+      "en": [
+        "how were the exemptions determined?",
+        "are there any exceptional measures that the government intends to put in place to empower municipalities to take more concrete action?",
+        "in an emergency, can municipal power override provincial power?",
+        "a municipality facing an exceptional situation may impose radical health regulations?",
+        "will the health rules for municipalities be relaxed?",
+        "is the government of quebec adopting measures so that municipalities can assume their responsibilities?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

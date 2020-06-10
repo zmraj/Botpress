@@ -2,6 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Python : Fichier actuel",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/modules/kb/assets"
+    },
+    {
       "type": "node",
       "runtimeVersion": "10.11.0",
       "request": "launch",

@@ -1,0 +1,32 @@
+{
+  "id": "d7d9xr2y48_pourquoi_un_agent_virtuel_sur_le_site_du_gouvernem",
+  "data": {
+    "answers": {
+      "fr": [
+        "L'objectif de la mise en place d'un agent virtuel sur ce site est de vous permettre d'accéder à l'information sur la COVID-19 par un autre moyen qui peut être plus rapide et convivial pour certaines personnes. Vous n'avez pas à chercher vous-même l'information dans le site. Vous n'avez qu'à me poser la question."
+      ],
+      "en": [
+        "The purpose of setting up a virtual agent on this site is to allow you to access information on VIDOC-19 in another way that may be faster and more user-friendly for some people. You do not have to search the site for information yourself. All you have to do is ask me."
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pourquoi un agent virtuel sur le site du gouvernement?",
+        "À quoi ça sert ce robot dans un site du gouvernement?",
+        "Pourquoi vous avez mis un chatbot dans Québec.ca?"
+      ],
+      "en": [
+        "Why did you create a chatbot",
+        "how does a chatbot help covid-19",
+        "why a robot instead of humans"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Autres questions"
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "fmo8v3unyq_j_ai_des_sympt_mes_de_la_covid_19__puis_je_prendre",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48752"
+      ],
+      "en": [
+        "source://quebec.ca/c48752"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "J’ai des symptômes de la COVID-19. Puis-je prendre les transports en commun ou le taxi?",
+        "Je crois avoir été en contact avec un malade. Puis-je prendre l'autobus quand même ?",
+        "Il y a un malade dans mon entourage. Que dois-je faire s'il a besoin de prendre un taxi pour se rendre à l'hopital ?",
+        "Je ne possède pas de voiture. Comment faire pour me rendre à mon travail sans me faire infecter ?",
+        "Est-ce que les transports ferrovière de banlieues sont sécuritaires pour ne pas attraper le virus ?",
+        "On m'a dit de faire attention aux taxis durant la pandémie. Si je suis forcé d'en prendre un, que dois-je faire pour me protéger ?",
+        "Comment faire pour ne pas être contaminé dans le métro si j'ai besoin de m'asseoir sur un siège ?",
+        "Est-ce que porter des gants est une bonne chose en taxi ?",
+        "Est-ce que je pourrais porter un masque pour éviter de contaminer les autres dans les autocars ?",
+        "Est-ce que les trains et les avions sont sécuritaires pendant la pandémie ?",
+        "Quels sont les produits à utiliser pour nettoyer mes mains avant de prendre un taxi ?",
+        "Est-ce qu'il est permis d'utiliser les vélos Bixis pendant la crise ?",
+        "Je suis membre de Communauto pour mes déplacements en automobile. Est-ce que je devrais cesser de l'utiliser ?",
+        "Est-ce que les mêmes restrictions s'appliquent pour Uber que celles pour les taxis ?",
+        "Je fais du covoiturage avec mes collègues de travail. Est-ce que je devrais arrêter cette pratique immédiatement ?",
+        "Est-ce que les services de traversiers sont corrects pendant l'épidémie ?"
+      ],
+      "en": [
+        "i have symptoms of covid-19. can i take public transportation or a taxi?",
+        "i think I've been in contact with a patient. Can I take the bus anyway?",
+        "there's a sick person in my circle. What should I do if he needs to take a taxi to the hospital?",
+        "i don't own a car. How am I supposed to get to work without getting infected?",
+        "is suburban rail transport safe to avoid catching the virus?",
+        "i've been told to watch out for taxis during the pandemic. If I'm forced to take one, what should I do to protect myself?",
+        "how do I keep from getting contaminated on the subway if I need to sit in a seat?",
+        "is wearing gloves a good thing in a cab?",
+        "could I wear a mask to avoid contaminating others on the buses?",
+        "are trains and planes safe during the pandemic?",
+        "what products should I use to clean my hands before taking a taxi?",
+        "is it allowed to use bixis during the crisis?",
+        "i am a member of communauto for my car trips. should i stop using it?",
+        "do the same restrictions apply to uber as for taxis?",
+        "i carpool with my co-workers. Should I stop this practice immediately?",
+        "are ferry services okay during the outbreak?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transport - déplacements"
+    ]
+  }
+}

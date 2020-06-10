@@ -1,0 +1,62 @@
+{
+  "id": "xzlgd437lf_je_travaille_dans_le_secteur_priv__et_je_dois_me_p",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46810"
+      ],
+      "en": [
+        "source://quebec.ca/c46810"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je travaille dans le secteur privé et je dois me placer en isolement. Est-ce que mon employeur peut me congédier?",
+        "Est-ce que mon employeur du secteur privé peut me mettre à pied si je dois me placer en isolement ?",
+        "Est-ce que je vais perdre ma job si je me mets en isolation volontaire ? Je travaille dans le secteur privé.",
+        "Je dois me mettre en isolation volontaire, y-a-t il un risque  que  je sois mis à la porte pour ça?",
+        "Vais-je être licencié si je me place en isolement et que ma shop reste ouverte ?",
+        "Je travaille dans une entreprise privée et je dois rester à la maison, est-ce que mon employeur a le droit de me congédier ?",
+        "Je suis engagé par une entreprise privée et je dois demeurer en isolement, est-ce que mon employeur a le droit de me mettre à pied ?",
+        "Je travaille pour un employeur privé et je dois rester en isolement volontaire à la maison. Mon employeur peut-il me donner mon 4 % ?",
+        "Je dois rester en isolement volontaire et je travaille pour une entreprise privée. Est-ce que mon employeur peut me congédier ?",
+        "Est-ce que je peux être renvoyé si je refuse de me présenter à la job?",
+        "Je suis un travailleur du secteur privé.Est-ce que je peux perdre mon emploi parce que je suis en l'isolement volontaire?",
+        "Mon employeur est une entreprise privée. Est-ce que je peux être renvoyé parce que je dois rester en isolement volontaire?",
+        "Je travaille dans une entreprise privée et je présente des symptômes, puis-je être mis à pied parce que je suis en isolement volontaire?",
+        "Je travaille dans une compagnie privée et je reviens de voyage. Est-ce que mon patron peut me renvoyer?",
+        "Est-ce que des mesures de congédiement peuvent être prises à l'endroit d'un travailleur du secteur privé qui est en isolement volontaire?",
+        "Est-ce que les travailleurs du secteur privé peuvent se placer en isolement volontaire sans être congédiés?",
+        "Est-ce que je peux me faire congédié si je dois m'isoler?",
+        "L'isolement me met-il à risque de perdre mon emploi?"
+      ],
+      "en": [
+        "i work in the private sector and I have to go into segregation. Can my employer fire me?",
+        "can my private sector employer lay me off if I have to go into segregation?",
+        "will I lose my job if I go into voluntary isolation? I work in the private sector.",
+        "i have to put myself in voluntary isolation, is there a risk I'll get kicked out for that?",
+        "am I going to get fired if I go into solitary and my shop stays open?",
+        "i work in a private company and I have to stay at home, does my employer have the right to fire me?",
+        "i am hired by a private company and I have to stay in segregation, is my employer allowed to lay me off?",
+        "i work for a private employer and I have to stay in voluntary isolation at home. Can my employer give me my 4%?",
+        "i have to stay in voluntary isolation and i work for a private company. can my employer fire me?",
+        "can I get fired if I refuse to report for work?",
+        "i am a private sector worker. Can I lose my job because I am in voluntary isolation?",
+        "my employer is a private company. can i be fired because i have to stay in voluntary isolation?",
+        "i work in a private company and I have symptoms, can I be laid off because I am in voluntary isolation?",
+        "i work for a private company and I just got back from a trip. Can my boss fire me?",
+        "can a private sector worker who is in voluntary segregation be dismissed?",
+        "can private sector workers be placed in voluntary isolation without being fired?",
+        "can I get fired if I have to isolate myself?",
+        "does isolation put me at risk of losing my job?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Employeurs - travailleurs - normes du travail"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "hilsc2lhhn_quels_sont_parmis_les_m_dias_ceux_qui_sont_jug_s_c",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48457"
+      ],
+      "en": [
+        "source://quebec.ca/c48457"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont parmis les médias ceux qui sont jugés comme des services essentiels?",
+        "Maintien des médias pendant la pandémie.",
+        "Les Câblodistributeurs sont-ils un service essentiel?",
+        "Les imprimeurs peuvent-ils continuer à travailler pendant la crise du COVID-19 ?",
+        "Services de Télécommunications (réseau et équipements) en tant de crise du coronavirus.",
+        "Est-ce que tous les médias sont des services essentiels ?",
+        "Les Agences de communication (publicité, production, rétro information) sont elles fermées pendant la crise?",
+        "Les médias locaux sont-ils des services essentiels ?",
+        "Je veux la liste des médias qui sont des services prioritaires.",
+        "Quels sont les médias considérés comme services essentiels pendant la crise du corona?",
+        "Où puis-je trouver la liste des médias identifiés comme étant des services essentiels ?"
+      ],
+      "en": [
+        "which of the media are considered essential services?",
+        "media maintenance during the pandemic.",
+        "are cable companies an essential service?",
+        "can the printers keep working during the covid-19 crisis?",
+        "telecommunications services (network and equipment) as a coronavirus crisis.",
+        "are all media essential services?",
+        "are communication agencies (advertising, production, feedback) closed during the crisis?",
+        "are local media essential services?",
+        "i want a list of media outlets that are priority services.",
+        "what media are considered essential services during the corona crisis?",
+        "where can I find the list of media identified as essential services?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services essentiels"
+    ]
+  }
+}

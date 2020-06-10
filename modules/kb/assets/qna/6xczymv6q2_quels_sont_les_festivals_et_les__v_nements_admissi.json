@@ -1,0 +1,34 @@
+{
+  "id": "6xczymv6q2_quels_sont_les_festivals_et_les__v_nements_admissi",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53240"
+      ],
+      "en": [
+        "source://quebec.ca/c53240"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les festivals et les événements admissibles aux mesures d’assouplissement?",
+        "Les événements annulés en mars et avril 2020 peuvent-ils bénéficier des mesures d'assouplissement?",
+        "Est-ce que le promoteur peut se prévaloir des mesures d'assouplissement s'il a obtenu une aide financière?",
+        "En raison de la COVID-19 les évévements annulés sont-ils admissibles aux mesures d'assouplissement?"
+      ],
+      "en": [
+        "what festivals and events are eligible for the flexibility measures?",
+        "can the events cancelled in March and April 2020 benefit from the flexibility measures?",
+        "can the proponent take advantage of the flexibility measures if it has obtained financial assistance?",
+        "due to covid-19 are cancelled events eligible for the flexibility measures?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

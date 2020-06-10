@@ -1,0 +1,34 @@
+{
+  "id": "bvi15u2upv_quelles_r_gles_s_appliquent_aux_municipalit_s_en_m",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50912"
+      ],
+      "en": [
+        "source://quebec.ca/c50912"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles règles s’appliquent aux municipalités en matière de gestion du personnel dans le contexte de l’état d’urgence sanitaire?",
+        "Les services municipaux sont suspendus en raison du contexte d'urgence sanitaire, quelles sont les mesures adoptées par chaque municipalité?",
+        "Dans le contexte d'urgence sanitaire, une municipalité pourait privilégier quelles mesures?",
+        "Est-ce que les municipalités peuvent maintenir en poste le plus grand nombre  d'employés possible?"
+      ],
+      "en": [
+        "what rules apply to municipalities for personnel management in the context of a health emergency?",
+        "if municipal services are suspended due to the health emergency, what are the measures adopted by each municipality?",
+        "in the context of a health emergency, which measures might a municipality favour?",
+        "can municipalities retain as many employees as possible?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

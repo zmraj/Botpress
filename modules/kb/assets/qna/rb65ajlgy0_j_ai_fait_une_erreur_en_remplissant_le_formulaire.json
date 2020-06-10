@@ -1,0 +1,50 @@
+{
+  "id": "rb65ajlgy0_j_ai_fait_une_erreur_en_remplissant_le_formulaire",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49307"
+      ],
+      "en": [
+        "source://quebec.ca/c49307"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "J’ai fait une erreur en remplissant le formulaire. Comment puis-je la corriger?",
+        "Est-il possible de modifier le formulaire du programme d'aide temporaire aux travailleurs PATT COVID-19?",
+        "Modifier le formulaire du programme d'aide temporaire aux travailleurs PATT COVID-19.",
+        "J'ai fait une erreur en complétant le formulaire PATT COVID-19. Est-ce possible de la corriger ?",
+        "Est-ce qu'on peut corriger une erreur faite en complétant le formulaire PATT ?",
+        "J'ai complété le formulaire d'aide financière PATT mais j'ai fait une erreur. Comment je peux la corriger ?",
+        "Comment je dois faire pour corriger une erreur que j'ai faite quand j'ai complété le formulaire programme d'aide temporaire aux travailleurs PATT COVID-19?",
+        "Si on fait une erreur en complétant le formulaire programme d'aide temporaire aux travailleurs, peut-on la corriger ?",
+        "Mon formulaire de demande d'aide financière PATT a une erreur comment je peux la corriger ?",
+        "C'est possible de corriger l'erreur que j'ai faite en complétant le formulaire du programme d'aide temporaire aux travailleurs ?",
+        "Comment peut-on corriger une erreur faite en complétant le formulaire PATT COVID-19?",
+        "Puis-je corriger une erreur dans le formulaire du programme d'aide temporaire aux travailleurs PATT COVID-19 ?"
+      ],
+      "en": [
+        "i made a mistake when filling out the form. how can i correct it?",
+        "is it possible to modify the temporary help worker program form patt covid-19?",
+        "amend the temporary worker assistance program form patt covid-19.",
+        "i made a mistake filling out the patt covid-19 form. Is it possible to correct it?",
+        "can we correct a mistake made by filling out the patt form?",
+        "i filled out the patt financial aid form but i made a mistake. how can i fix it?",
+        "how do i correct a mistake i made when i completed the temporary help worker program form patt covid-19?",
+        "if a mistake is made when filling out the temporary help worker program form, can it be corrected?",
+        "my patt financial aid application form has an error how can i correct it?",
+        "is it possible to correct the mistake I made in filling out the Temporary Help Worker Program form?",
+        "how can an error made when completing the patt covid-19 form be corrected?",
+        "can i correct an error in the temporary help worker program form patt covid-19?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

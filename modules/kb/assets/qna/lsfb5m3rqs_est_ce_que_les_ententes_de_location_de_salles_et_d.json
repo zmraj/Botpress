@@ -1,0 +1,36 @@
+{
+  "id": "lsfb5m3rqs_est_ce_que_les_ententes_de_location_de_salles_et_d",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50680"
+      ],
+      "en": [
+        "source://quebec.ca/c50680"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les ententes de location de salles et de partage des infrastructures sont maintenues?",
+        "J'ai loué des locaux de l'école",
+        "je devais tenir une activité culturelle à l'école, serais-je remboursé ?",
+        "Est-ce que activités connexes telles que la location de locaux ainsi que les activités\nsportives et culturelles sont  visées par la fermeture ?",
+        "Je louais le gymnase de l'école pour des activités sportives, \nest-ce couvert par la fermeture?"
+      ],
+      "en": [
+        "are the room rental and infrastructure-sharing agreements maintained?",
+        "i rented some space at the school..",
+        "i had to hold a cultural event at school, would I get reimbursed?",
+        "are related activities such as rental of premises and sports and cultural activities affected by the closure?",
+        "i was renting the school gym for sports activities, is that covered by the closure?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

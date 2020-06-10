@@ -1,0 +1,48 @@
+{
+  "id": "hcf6rlcmui_j_ai_d_pos__une_demande_de_financement_aupr_s_du_m",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49035"
+      ],
+      "en": [
+        "source://quebec.ca/c49035"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "J’ai déposé une demande de financement auprès du Ministère. Est-ce qu’elle sera traitée selon les délais habituels?",
+        "Je viens de faire une demande de financement auprès du Ministère du Tourisme, quand est-ce que je vais avoir un retour ?",
+        "Financement auprès du Ministère du Tourisme.",
+        "Aide offerte par Ministère du Tourisme aux enterprises et organisations du domaine du tourisme.",
+        "Soutien aux entreprises du secteur du tourisme.",
+        "J'ai demandé à l'office du tourisme un prêt pour mes activités estivales. Quand est-ce que je vais avoir le cash ?",
+        "Quelles sont les délais de traitement pour l'aide financière du Ministère du Tourisme?",
+        "J'ai besoin d'aide financière du Ministère du Tourisme, c'est quoi les délais pour le traitement de ma demande ?",
+        "Délai pour otenir un financement par le Ministère du Tourisme?",
+        "C'est quoi le délai de traitement pour les demandes de financement par le Ministère du Tourisme?",
+        "Est-ce que le ministère du Tourisme respecte les délais habituels pour le traitement des demandes de financement ?"
+      ],
+      "en": [
+        "i have submitted a funding application to the department. Will it be processed within the usual timeframe?",
+        "i've just applied for funding from the Ministry of Tourism, when am I going to get a return?",
+        "funding from the Ministry of Tourism.",
+        "assistance offered by the Ministry of Tourism to businesses and organizations in the field of tourism.",
+        "support for businesses in the tourism sector.",
+        "i applied to the tourist office for a loan for my summer activities. When do I get the cash?",
+        "what are the processing times for financial assistance from the ministry of tourism?",
+        "i need financial assistance from the Ministry of Tourism, what are the deadlines for processing my application?",
+        "how long does it take to receive funding from the Ministry of Tourism?",
+        "what is the processing time for applications for funding from the ministry of tourism?",
+        "does the Ministry of Tourism meet the usual deadlines for processing funding applications?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "nlbmcs6z8c_est_ce_que_les__l_ves_devront_reprendre_le_temps_s",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49939"
+      ],
+      "en": [
+        "source://quebec.ca/c49939"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les élèves devront reprendre le temps scolaire suspendu durant l’été?",
+        "Est-il question de prolonger l'année scolaire durant l'été?",
+        "Prolongation de l’année scolaire durant l’été.",
+        "Fin de l'année scolaire cet été",
+        "Est-ce que les enfants devront terminer leur années scolaire pendant l'été?"
+      ],
+      "en": [
+        "will students have to return to suspended school time during the summer?",
+        "is there any question of extending the school year into the summer?",
+        "extension of the school year during the summer.",
+        "end of the school year this summer",
+        "will the children have to finish their school year in the summer?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

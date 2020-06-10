@@ -1,0 +1,34 @@
+{
+  "id": "c213wi4fpo_puis_je_livrer_les_produits_de_mon_entreprise_de_v",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c52231"
+      ],
+      "en": [
+        "source://quebec.ca/c52231"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Puis-je livrer les produits de mon entreprise de végétaux d’ornement qui prend les commandes en ligne, par courriel ou un autre moyen à distance?",
+        "Mon entreprise fait du commerce en ligne et par téléphone. Est-ce que je peux faire la livraison au domicile des végétaux d'ornement?",
+        "Mon entreprise produit des végétaux d'ornement et autres plants, est-ce que je peux effectuer la livraison  à domicile ou dans d'autres commerces?",
+        "Est-ce que mon entreprise qui produit de plants ornementaux peut aller livrer à domicile ou dans les commerces les commandes reçuess en ligne?"
+      ],
+      "en": [
+        "can i deliver products from my ornamental plant business that takes orders online, by email or other remote means?",
+        "my company trades online and by phone. can i deliver ornamental plants to my home?",
+        "my business produces ornamental plants and other plants, can I deliver them to your home or other businesses?",
+        "can my company that produces ornamental plants deliver online orders to homes and businesses?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Secteur bioalimentaire"
+    ]
+  }
+}

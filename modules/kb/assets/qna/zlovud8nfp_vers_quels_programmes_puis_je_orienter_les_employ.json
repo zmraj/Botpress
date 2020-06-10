@@ -1,0 +1,34 @@
+{
+  "id": "zlovud8nfp_vers_quels_programmes_puis_je_orienter_les_employ",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50238"
+      ],
+      "en": [
+        "source://quebec.ca/c50238"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Vers quels programmes puis-je orienter les employés que je ne peux plus rémunérer en raison de la crise de la COVID-19?",
+        "Quels programmes sont offerts aux employés du secteur bioalimentaire qui ne peuvent plus être rémunéré en raison de la crise de la COVID-19?",
+        "En tant que chef d'entreprise bioalimentaire, comment puis-je aide les employés à qui je ne peux plsu verser de salaire en raison de la pandémie?",
+        "Programmes d'aide financière pour les employés du secteur bioalimentaire sans rémunération à cause de la crise du coronavirus."
+      ],
+      "en": [
+        "what programs can I refer employees to who I can no longer pay because of the covid-19 crisis?",
+        "what programs are available to employees in the bio-food sector who can no longer be paid because of the covid-19 crisis?",
+        "as a bio-food business owner, how can I help employees who cannot be paid a salary due to the pandemic?",
+        "financial assistance programs for employees in the bio-food sector without pay because of the coronavirus crisis."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Secteur bioalimentaire"
+    ]
+  }
+}

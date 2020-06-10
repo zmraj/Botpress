@@ -1,0 +1,42 @@
+{
+  "id": "i1hwxns5wq_quelles_sont_les_effets_psychologiques_et__motionn",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47207"
+      ],
+      "en": [
+        "source://quebec.ca/c47207"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les effets psychologiques et émotionnelles possibles reliés au stress, à la déprime ou à l’anxiété?",
+        "Quelles sont les conséquences psychologiques possibles de rester en confinement ?",
+        "Liste de symptômes de trouble de la santé mentale sur le plan psychologique et émotionnel.",
+        "Reconnaitre les symptômes de trouble de la santé mentale sur le plan psychologique et émotionnel.",
+        "Un trouble de la santé mentale sur le plan psychologique et émotionnel se manifeste comment ?",
+        "Quelles sont les manifestations possibles du stress, de l’anxiété et de la déprime sur le plan psychologique et émotionnel?",
+        "Quels sont les problèmes psychologiques à surveiller durant la quarantaine?",
+        "Quelles sont les possibles conséquences du confinement sur le plan psychologique et émotionnel?"
+      ],
+      "en": [
+        "what are the possible psychological and emotional effects related to stress, depression or anxiety?",
+        "what are the possible psychological consequences of remaining in confinement?",
+        "list of symptoms of a mental health disorder on a psychological and emotional level.",
+        "recognize the symptoms of mental health disorders at the psychological and emotional level.",
+        "how does a mental health disorder at the psychological and emotional level manifest itself?",
+        "what are the possible manifestations of psychological and emotional stress, anxiety and depression?",
+        "what are the psychological issues to watch for in your 40s?",
+        "what are the possible psychological and emotional consequences of confinement?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Santé Mental"
+    ]
+  }
+}

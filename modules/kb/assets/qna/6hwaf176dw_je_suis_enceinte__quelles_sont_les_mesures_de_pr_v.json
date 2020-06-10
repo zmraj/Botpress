@@ -1,0 +1,42 @@
+{
+  "id": "6hwaf176dw_je_suis_enceinte__quelles_sont_les_mesures_de_pr_v",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48509"
+      ],
+      "en": [
+        "source://quebec.ca/c48509"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je suis enceinte, quelles sont les mesures de prévention à prendre ?",
+        "J'attends un bébé,quelles mesures de prévention je peux faire?",
+        "Quelles sont les mesures de prévention que je dois prendre puisque je suis enceinte ?",
+        "Mesures de préventions pour une femme enceinte.",
+        "Y a-t-il des recommandations pour les femmes enceintes ?",
+        "Les femmes enceintes devraient-elles rester en tout temps à la maison ?",
+        "Les femmes enceintes doivent-elles prendre des mesures de prévention supplémentaires ?",
+        "Quelles sont les recommandations pour les femmes enceintes en période de pandémie?"
+      ],
+      "en": [
+        "i am pregnant, what preventive measures should I take?",
+        "i'm expecting a baby, what preventative measures can I take?",
+        "what preventive measures should I take since I am pregnant?",
+        "preventive measures for a pregnant woman.",
+        "are there any recommendations for pregnant women?",
+        "should pregnant women stay home at all times?",
+        "do pregnant women need to take additional preventive measures?",
+        "what are the recommendations for pregnant women during a pandemic?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Personnes à risque"
+    ]
+  }
+}

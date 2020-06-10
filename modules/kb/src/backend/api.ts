@@ -1,15 +1,20 @@
 import * as sdk from 'botpress/sdk'
 import { Request, Response } from 'express'
-import { parse, writeToPath } from 'fast-csv'
+import * as csv from 'fast-csv'
 import fs from 'fs'
 import _ from 'lodash'
-import { resolve } from 'path'
+import path from 'path'
 import yn from 'yn'
 
 import RemoteModel from './model'
 import { Entry, ScopedBots } from './typings'
 import { KbEntry } from './validation'
-
+interface CSVRow {
+  Type: string
+  Source: string
+  Question: string
+  Reponse: string
+}
 export default async (bp: typeof sdk, bots: ScopedBots) => {
   const jsonUploadStatuses = {}
   const router = bp.http.createRouterForBot('kb')
@@ -44,24 +49,38 @@ export default async (bp: typeof sdk, bots: ScopedBots) => {
     const model = await bots[req.params.botId].storage.loadLatestModel()
     bp.logger.forBot(req.params.botId).info(`Model loaded successfully`)
     // Load Csv
-    const all_rows = []
-    fs.createReadStream(resolve(__dirname, 'historique_1000.csv'))
-      .pipe(parse({ headers: true }))
-      .on('error', error => console.error(error))
-      .on('data', row => all_rows.push(row))
-      .on('end', (rowCount: number) => console.log(`Parsed ${rowCount} rows`))
+    const readCSV = (): Promise<CSVRow[]> =>
+      new Promise(resolve => {
+        const returnRows: CSVRow[] = []
+        csv
+          .parseFile(path.join(__dirname, '..', '..', 'assets', 'datas', 'historique_1000.csv'), {
+            headers: ['Type', 'Source', 'Question', 'Reponse']
+          })
+          .on('data', data => returnRows.push(data))
+          .on('end', () => {
+            resolve(returnRows)
+          })
+      })
+    const all_rows: CSVRow[] = await readCSV()
+    console.log(all_rows)
     bp.logger.forBot(req.params.botId).info(`CSV loaded successfully`)
     // Predict all questions
-    const all_prediction = [['Questions', 'Reponse']]
-    for (const question_reponse of all_rows) {
-      const q: string = question_reponse.Question
-      const res = await model.predict(q, 'fr')
-      const content: string = res[0].content
-      all_prediction.push([q, content])
+    const all_prediction = []
+    for (const question_reponse of all_rows.slice(1)) {
+      // console.log(question_reponse.Question)
+      const res = await model.predict(question_reponse.Question, 'fr')
+      all_prediction.push([
+        question_reponse.Type,
+        question_reponse.Source,
+        question_reponse.Question,
+        question_reponse.Reponse,
+        res.docs[0].content
+      ])
     }
     bp.logger.forBot(req.params.botId).info(`Predictions successfully`)
-    const filePath = resolve(__dirname, 'deep_historique_1000.csv')
-    writeToPath(filePath, all_prediction)
+    const filePath = path.join(__dirname, '..', '..', 'assets', 'datas', 'deep_historique_1000.csv')
+    csv
+      .writeToPath(filePath, all_prediction)
       .on('error', err => console.error(err))
       .on('finish', () => {
         console.log('Done')

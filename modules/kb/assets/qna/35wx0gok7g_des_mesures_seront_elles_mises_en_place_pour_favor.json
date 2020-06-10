@@ -1,0 +1,40 @@
+{
+  "id": "35wx0gok7g_des_mesures_seront_elles_mises_en_place_pour_favor",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50672"
+      ],
+      "en": [
+        "source://quebec.ca/c50672"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Des mesures seront-elles mises en place pour favoriser l’apprentissage à la maison, par exemple des cours en ligne?",
+        "Y a-t-il des outils d'aide en ligne pour les étudiants du primaire?",
+        "Y a-t-il des outils d'aide en ligne pour les étudiants du secondaire?",
+        "Est-ce que les enfants seront évalués pour les travaux qu'ils font en linge?",
+        "Comment stimuler l'apprentisage à la maison?",
+        "Plataforme en ligne pour les élèves",
+        "Outils d'apprentisage pour les élèves à la maison"
+      ],
+      "en": [
+        "will measures be put in place to encourage learning at home, such as online courses?",
+        "are there online help tools for elementary students?",
+        "are there online help tools for high school students?",
+        "will the children be evaluated for the work they do on the line?",
+        "how to stimulate learning at home?",
+        "online plataform for students",
+        "learning tools for students at home"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

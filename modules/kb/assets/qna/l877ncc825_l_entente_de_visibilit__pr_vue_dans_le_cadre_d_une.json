@@ -1,0 +1,32 @@
+{
+  "id": "l877ncc825_l_entente_de_visibilit__pr_vue_dans_le_cadre_d_une",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53251"
+      ],
+      "en": [
+        "source://quebec.ca/c53251"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "L’entente de visibilité prévue dans le cadre d’une aide financière accordée par le biais du programme Aide financière aux festivals et aux événements touristiques doit-elle être renégociée?",
+        "Est-ce que la Direction des communications du ministère du Tourisme exigera la négociation d’une nouvelle entente de visibilité dans le cadre d'une aide financière?",
+        "Si un festival a lieu, est-ce que l'entente de visibilité de l'année dernière s'appliquera?"
+      ],
+      "en": [
+        "does the visibility agreement for financial assistance under the Financial Assistance for Tourist Festivals and Events Program need to be renegotiated?",
+        "will the Communications Branch of the Department of Tourism require the negotiation of a new visibility agreement as part of the financial assistance?",
+        "if a festival takes place, will last year's visibility agreement apply?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

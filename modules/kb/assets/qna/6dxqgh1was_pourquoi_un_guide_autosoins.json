@@ -1,0 +1,42 @@
+{
+  "id": "6dxqgh1was_pourquoi_un_guide_autosoins",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49784"
+      ],
+      "en": [
+        "source://quebec.ca/c49784"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pourquoi un guide autosoins?",
+        "À quoi sert le guide autosoins?",
+        "Quel est l'intérêt d'un guide autosoins?",
+        "Que faire si je pense avoir attrapé le coronavirus ou si un de mes proches est atteint?",
+        "En quoi le guide autosoins va m'être utile?",
+        "Où puis-je trouver une tableau d'aide à la décision pour pour mes proches et moi?",
+        "Guide d'autosoin.",
+        "Le guide autosoins est-il disponible en anglais?"
+      ],
+      "en": [
+        "why a self-care guide?",
+        "What is the Self-Care Guide for?",
+        "what is the purpose of a self-care guide?",
+        "what should I do if I think I have coronavirus or if someone close to me has it?",
+        "how is the self-care guide going to help me?",
+        "where can I find a decision support board for me and my family?",
+        "self-care guide.",
+        "is the self-care guide available in English?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

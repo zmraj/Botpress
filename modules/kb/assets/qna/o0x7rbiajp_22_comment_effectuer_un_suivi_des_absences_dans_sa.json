@@ -1,0 +1,48 @@
+{
+  "id": "o0x7rbiajp_22_comment_effectuer_un_suivi_des_absences_dans_sa",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47139"
+      ],
+      "en": [
+        "source://quebec.ca/c47139"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "22.Comment effectuer un suivi des absences dans SAGIR?",
+        "Pendant la période de télétravail à la maison, comment est suivi les absences dans SAGIR du personnel de la fonction publique?",
+        "Personnel de la fonction publique Québécoise et suivi des absences dans SAGIR.",
+        "Comment inscrire le temps d'absence d'un employé de la fonction publique à la maison?",
+        "C'est quoi le code dans sagir une absence quand on est un personnel de la fonction publique?",
+        "Personnel de la fonction publique payé par sagir, quel code d'absence je dois utiliser?",
+        "Est-ce qu'il y a un code d'absence spécifique à rentrer dans sagir pour le télétravail des employés de la fonction publique Québécoise ?",
+        "Est-ce qu'il y a un code d'absence particulier dans sagir quand on est un personnel de la fonction publique en télétravail?",
+        "Est-ce qu'il y a des exceptions ou conditions particulières pour les absences du personnel de la fonction publique?",
+        "Fonctionnaire de Québec, est-ce qu'il y a des conditions pour le code d'absence dans sagir?",
+        "C'est le même code d'absence pour tous les employés de l'état Québécois?"
+      ],
+      "en": [
+        "22.how to track absences in sagir?",
+        "during the period of telework at home, how are absences of public service employees tracked?",
+        "personnel in the Quebec public service and follow-up on absences in sagir.",
+        "how to record the time of absence of a public service employee at home?",
+        "what is the code for absence when you are a public servant?",
+        "public service employees paid by sagir, what absence code should i use?",
+        "is there a specific absence code to be entered for telework for employees of the quebec public service?",
+        "is there a specific absence code in sagir when one is a public service employee teleworking?",
+        "are there any exceptions or special conditions for absences of public service employees?",
+        "quebec civil servant, are there any conditions for the absence code in sagir?",
+        "is it the same absence code for all employees of the Quebec government?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Employeurs - travailleurs - normes du travail"
+    ]
+  }
+}

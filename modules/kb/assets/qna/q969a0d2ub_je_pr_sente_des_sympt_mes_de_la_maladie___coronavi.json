@@ -1,0 +1,58 @@
+{
+  "id": "q969a0d2ub_je_pr_sente_des_sympt_mes_de_la_maladie___coronavi",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49676"
+      ],
+      "en": [
+        "source://quebec.ca/c49676"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je présente des symptômes de la maladie à coronavirus (COVID-19) ou je suis atteint de la COVID-19. Que faire pour protéger mon entourage?",
+        "Je présente des symptômes de la maladie à coronavirus qu'est-ce que je peux faire pour protéger l'entourage avec lequel je vis?",
+        "Quelles précautions prendre avec les membres de la famille vivant ensemble si j'ai des symptômes du virus?",
+        "Comment protéger mon entourage à l'intérieur si je suis testé positif au COVID ?",
+        "Comment minimiser les risques de transmettre le covid à une personne à risque au domicile?",
+        "Gestes pour protéger la famille au domicile.",
+        "Comment ne pas rendre ma mère malade alors qu'elle habite aussi à la maison?",
+        "Peut-on reçevoir des visiteurs parceque mon grand-père vit avec nous?",
+        "J'habite avec ma grand-mère, est-ce qu'on reçevoir des visiteurs?",
+        "quels sont les gestes pour minimiser les risques de transmettre le covid à une personne vulnérable habitant au domicile?",
+        "Quoi faire pour éviter de contaminer une personne vulnérable qui vit à la maison?",
+        "Que faire pour ne pas contaminer mon père qui est une personne à risque qui vit à la maison?",
+        "Vivre avec une personne à risque.",
+        "Je vis avec mon père qui est une personne vulnérable.",
+        "Dans la maison je suis le seul malade, comment éviter de rendre mon entourage malade ?",
+        "que faire pour protéger mon entourage alors que j'ai de fièvre, de la toux et mal à la gorge ?"
+      ],
+      "en": [
+        "i have symptoms of coronavirus disease (covid-19) or i have covid-19. what can i do to protect those around me?",
+        "i have symptoms of coronavirus disease. What can I do to protect the people I live with?",
+        "what precautions should I take with family members living together if I have symptoms of the virus?",
+        "how can I protect those around me on the inside if I test positive for covid?",
+        "how to minimize the risk of transmitting the covid to a person at risk in the home?",
+        "actions to protect the family at home.",
+        "how can I not make my mother sick when she lives at home too?",
+        "can we have visitors because my grandfather lives with us?",
+        "i live with my grandmother, do we get visitors?",
+        "what can be done to minimize the risk of transmitting the covid to a vulnerable person living in the home?",
+        "what can be done to avoid infecting a vulnerable person living at home?",
+        "what can I do to avoid infecting my father, who is a person at risk living at home?",
+        "living with a person at risk.",
+        "i live with my father who's a vulnerable person.",
+        "in the house I'm the only one who's sick, how can I avoid making those around me sick?",
+        "what can I do to protect those around me when I have a fever, cough and sore throat?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

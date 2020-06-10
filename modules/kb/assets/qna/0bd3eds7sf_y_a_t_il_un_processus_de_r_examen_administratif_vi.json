@@ -1,0 +1,64 @@
+{
+  "id": "0bd3eds7sf_y_a_t_il_un_processus_de_r_examen_administratif_vi",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49183"
+      ],
+      "en": [
+        "source://quebec.ca/c49183"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Y-a-t'il un processus de réexamen administratif visant la décision d'aide financière du Programme d’aide temporaire aux travailleurs ?",
+        "Demande d'aide temporaire aux travailleurs refusée.",
+        "Si ma demande PATT a été refusée, puis-je refaire un examen?",
+        "Qu'est-ce que je dois faire si ma demande PATT COVID-19 a été refusée?",
+        "Comment je fais pour faire réviser ma demande d'aide temporaire aux travailleurs?",
+        "C'est quoi les étapes pour faire une demande de révision d'isncription au PATT?",
+        "Ma demande PATT COVID-19 a été refusée, qu'est-ce que je peux faire?",
+        "Si ma demande d'aide temporaire aux travailleurs est refusée, à quel endroit je peux faire une demande de révision?",
+        "Est-ce que je peux faire réviser ma demande PATT si elle est refusée?",
+        "Est-ce que je peux m'opposer à la décision de refus à l'aide temporaire aux travailleurs?",
+        "Contester le refus d'admission au programme d'aide temporaire aux travailleurs PATT-19.",
+        "Que faire en cas de refus au PATT COVID-19?",
+        "Quelles sont les informations à savoir sur la décision rendue en vertu du PATT COVID-19 ?",
+        "Quelles sont les précisions relatives au processus de réexamen administratif du Programme d’aide temporaire aux travailleurs ?",
+        "La décision rendue lors d’un réexamen administratif du PATT est-elle finale et sans appel ?",
+        "Je ne suis pas d'accord avec la décision concernant mon rejet du droit au PATT-19, qu'elles sont mes recours?",
+        "Est-ce possible de contester sa non admission au programme d'aide temporaire aux travailleurs?",
+        "En combien de temps la décision de réexamen du Programme d’aide temporaire aux travailleurs est elle rendue ?",
+        "Comment est-ce-que je serais prévenue de la décision du réexamen du PATT COVID-19?"
+      ],
+      "en": [
+        "is there an administrative review process for the Temporary Help Worker Program funding decision?",
+        "application for temporary help for workers refused.",
+        "if my patt application has been refused, can i redo an exam?",
+        "what should i do if my application for patt covid-19 has been denied?",
+        "how do i get my application for temporary help for workers reviewed?",
+        "what are the steps to apply for a patent review?",
+        "my application for patt covid-19 has been denied, what can I do?",
+        "if my application for temporary help for workers is refused, where can I apply for a review?",
+        "can i get my patt application reviewed if it is denied?",
+        "can i object to the decision to refuse temporary help for workers?",
+        "challenge the denial of admission to the temporary assistance program for patt-19 workers.",
+        "...what if patt covid-19 is rejected?",
+        "what information is known about the decision under patt covid-19?",
+        "what are the details of the administrative review process for the temporary help worker program?",
+        "is the decision in an administrative review of the patt final and without appeal?",
+        "i disagree with the decision regarding my denial of the right to patt-19, what are my recourses?",
+        "is it possible to challenge his non-admission to the temporary help for workers program?",
+        "how long does it take to issue a decision to reconsider the temporary help for workers program?",
+        "how would i be notified of the decision to reconsider patt covid-19?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

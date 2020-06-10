@@ -1,0 +1,64 @@
+{
+  "id": "rfy96wzjrl_est_il_possible_d_aller_porter_de_la_nourriture_ou",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46788"
+      ],
+      "en": [
+        "source://quebec.ca/c46788"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il possible d’aller porter de la nourriture ou des biens essentiels à des personnes âgées qui habitent encore dans leur maison?",
+        "Ma mère habite seule, est-ce que je peux faire son épicerie et aller lui porter ?",
+        "Je peux aller porter des plats pour mes parents à leur domicile?",
+        "Si je tousse, est-ce que je peux aller porter des repas fait maison à ma voisine qui est âgée?",
+        "Est-ce que je peux aider une personne vulnérable qui habite chez-elle?",
+        "Si je reviens de voyage, est-ce conseillé d'aller faire l'épicerie pour mes parents à la retraite et aller leur porter?",
+        "Est-ce que c'est possible de faire les commissions de ma mère et d'aller les porter chez elle?",
+        "Est-ce que je peux faire la commande de ma grand-mère et la lui livrer?",
+        "Est-ce possible de faire le marché de ma grande tante et aller la porter chez elle?",
+        "Est-ce possible d'aller porter chez mes parents leur prescription de médicaments?",
+        "J'ai des choses à acheter pour mes parents c'est tu correct d'aller leur porter à leur maison",
+        "C'est tu grave d'aller porter de la bouffe à nos parents s'ils sont encore dans leur maison",
+        "Est-ce que j'ai encore le droit de faire l'épicerie et d'aller la porter à ma mère de 80 ans elle est encore dans sa maison",
+        "Est-ce que ma mère doit faire elle-même son épicerie ou je peux encore aller lui porter",
+        "J'ai pas le virus et je veux aller porter des biens essentiels à mes parents qui sont vulnérables, ils ont encore leur maison est-ce correct",
+        "C'est tu correct de faire l'épicerie pour des personnes âgées qui habitent encore dans leur maison",
+        "Ma mère peut pas sortir est-ce que je peux aller lui faire son épicerie et lui livrer",
+        "Est-ce que je peux aller porter de la bouffe à mon grand père qui est une personne à risque?",
+        "Je veux aller porter de la nourriture à une personne à risque, est-ce que je peux?"
+      ],
+      "en": [
+        "is it possible to carry food or essential items to seniors still living in their homes?",
+        "my mom lives alone, can I do her groceries and take it to her?",
+        "can I go to my parents' house and carry food for them?",
+        "if I cough, can I take home-cooked meals to my elderly neighbor?",
+        "can I help a vulnerable person who lives at home?",
+        "if I'm coming back from a trip, is it advisable to go grocery shopping for my retired parents and take it to them?",
+        "is it possible to run my mother's errands and take them home?",
+        "can I make my grandmother's order and deliver it to her?",
+        "is it possible to go to my great aunt's market and carry her home?",
+        "is it possible to take my parents' prescription medicine to their house?",
+        "i have things to buy for my parents. It's okay to take them home",
+        "it's okay to take food to our parents if they're still in the house",
+        "am I still allowed to shop for groceries and take it to my 80-year-old mother who's still in her house?",
+        "does my mom have to do her own grocery shopping or can I still take it to her?",
+        "i don't have the virus and I want to go and carry essential goods to my parents who are vulnerable, they still have their house, is that ok?",
+        "is it okay to shop for old people who still live in their own homes?",
+        "can't my mom go out? Can I go to the grocery store and deliver her",
+        "can I take food to my grandfather who's a person at risk?",
+        "i want to go and carry food to someone at risk, can I?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Personnes à risque"
+    ]
+  }
+}

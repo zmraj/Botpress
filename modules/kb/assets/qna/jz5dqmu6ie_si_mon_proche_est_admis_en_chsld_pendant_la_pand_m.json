@@ -1,0 +1,34 @@
+{
+  "id": "jz5dqmu6ie_si_mon_proche_est_admis_en_chsld_pendant_la_pand_m",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c51040"
+      ],
+      "en": [
+        "source://quebec.ca/c51040"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Si mon proche est admis en CHSLD pendant la pandémie, pourrais-je l’accompagner au moment de son accueil?",
+        "Pour permettre au résident de rester en contact avec l'extérieur, est-ce que le personnel du CHLSD pourra l'aider à utiliser le téléphone?",
+        "Est-ce que toutes les visitent sont interdites dans les CHSLD du Québec?",
+        "Pendant la pandémie, est-ce que je peux accompagner un de mes proches au moment de son accueil?"
+      ],
+      "en": [
+        "if my family member is admitted to chsld during the pandemic, can i accompany him/her to the reception?",
+        "to keep the resident in contact with the outside world, will chlsd staff be able to help the resident use the telephone?",
+        "are all visits prohibited in quebec's chslds?",
+        "during the pandemic, can I accompany a loved one to the reception?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Habitation et logement"
+    ]
+  }
+}

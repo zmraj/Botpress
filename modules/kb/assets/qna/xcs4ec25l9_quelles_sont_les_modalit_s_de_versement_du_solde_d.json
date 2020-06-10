@@ -1,0 +1,34 @@
+{
+  "id": "xcs4ec25l9_quelles_sont_les_modalit_s_de_versement_du_solde_d",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53241"
+      ],
+      "en": [
+        "source://quebec.ca/c53241"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les modalités de versement du solde de l’aide financière?",
+        "Le versement du solde de l'aide financière se fera selon quelles modalités?",
+        "Pour une annulation d'événement un second versement sera effectué, est-ce que la présentation des pièces justificatives est nécessaire?",
+        "Dans les modalités de versement du solde de l'aide financière, est-ce que le cumul des aides gouvernementales doit être respecté?"
+      ],
+      "en": [
+        "what are the terms and conditions for payment of the balance of the financial assistance?",
+        "how will the balance of the financial assistance be paid out?",
+        "for a cancellation of an event a second payment will be made, is the presentation of supporting documents necessary?",
+        "in the terms and conditions for payment of the balance of the financial assistance, must the accumulation of government assistance be respected?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

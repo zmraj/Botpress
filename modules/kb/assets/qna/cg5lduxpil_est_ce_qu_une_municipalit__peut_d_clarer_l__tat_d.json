@@ -1,0 +1,34 @@
+{
+  "id": "cg5lduxpil_est_ce_qu_une_municipalit__peut_d_clarer_l__tat_d",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50883"
+      ],
+      "en": [
+        "source://quebec.ca/c50883"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu’une municipalité peut déclarer l’état d’urgence local dans les conditions actuelles d’urgence sanitaire COVID-19?",
+        "Une municipalité doit-elle obtenir l'autorisation du direction national de la santé publique pour déclarer l'état d'urgence?",
+        "Que doit faire une municipalité pour décréter l'état d'urgence?",
+        "Une municipalité qui veut déclarer l'état d'urgence sanitaire, à qui doit-elle s'adresser?"
+      ],
+      "en": [
+        "can a municipality declare a local state of emergency under the current covid-19 health emergency conditions?",
+        "does a municipality need to obtain authorization from the National Directorate of Public Health to declare a state of emergency?",
+        "what must a municipality do to declare a state of emergency?",
+        "if a municipality wants to declare a health emergency, who should it contact?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

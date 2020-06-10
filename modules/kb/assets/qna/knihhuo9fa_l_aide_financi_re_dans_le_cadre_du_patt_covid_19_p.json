@@ -1,0 +1,46 @@
+{
+  "id": "knihhuo9fa_l_aide_financi_re_dans_le_cadre_du_patt_covid_19_p",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48924"
+      ],
+      "en": [
+        "source://quebec.ca/c48924"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "L'aide financière dans le cadre du PATT COVID-19 peut-elle être cédée et est-elle saisissable?",
+        "PATT COVID-19 incessible et insaisissable.",
+        "Est-ce que l'aide financière versée dans le cadre du PATT COVID-19 peut être saisie ?",
+        "Les montants versés dans le cadre du programme d'aide temporaire aux travailleurs peuvent-ils être saisis en cas de faillite personnelle?",
+        "Puis-je céder mon aide financière du PATT?",
+        "Puis-je céder les montants reçus dans le cadre du programme d'aide temporaire aux travailleurs à quelqu'un?",
+        "J'ai reçu un montant pour de l'aide financière via le PATT COVID-19, est-ce qu'il peut être saisi?",
+        "Le montant venant du PATT COVID-19 est-il incessible?",
+        "Pourrait-on saisir l'aide financière reçue dans le cadre du PATT COVID-19",
+        "Est-ce qu'on peut saisir le montant du PATT COVID-19 que j'ai reçu?"
+      ],
+      "en": [
+        "is financial assistance under patt covid-19 assignable and seizable?",
+        "patt covid-19 untransferable and elusive.",
+        "can financial assistance paid under patt covid-19 be seized?",
+        "can amounts paid under the temporary help for workers program be seized in the event of personal bankruptcy?",
+        "can i transfer my financial support from the patt?",
+        "can i transfer the money i receive under the temporary help for workers program to someone else?",
+        "i have received an amount for financial assistance via patt covid-19, can it be seized?",
+        "is the amount from patt covid-19 non-transferable?",
+        "could the financial assistance received under patt covid-19 be seized?",
+        "can we seize the amount of patt covid-19 that I received?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

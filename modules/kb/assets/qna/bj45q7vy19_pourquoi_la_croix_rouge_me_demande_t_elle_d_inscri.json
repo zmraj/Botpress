@@ -1,0 +1,38 @@
+{
+  "id": "bj45q7vy19_pourquoi_la_croix_rouge_me_demande_t_elle_d_inscri",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49293"
+      ],
+      "en": [
+        "source://quebec.ca/c49293"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pourquoi la Croix-Rouge me demande-t-elle d’inscrire les membres de ma famille lors de mon inscription?",
+        "Est-ce que si j'inscris tous les membres de ma famille, ils doivent s'inscrire individuellement au programme d'aide temporaire aux travailleurs COVID-19?",
+        "Portail d’inscription de la Croix-Rouge au programme d'aide temporaire aux travailleurs COVID-19 et membres de la famille.",
+        "Est-ce que si j'inscris tous les membres de ma famille, ils sont inscrit au programme d'aide temporaire aux travailleurs COVID-19?",
+        "Est-ce que j'inscris seulement les membres de ma famille qui sont encore dans la maison quand je demande le PATT COVID-19 ?",
+        "Est-ce que j'inscris toute ma famille ou seulement conjoint/conjointe et enfants sur le portail d’inscription de la Croix-Rouge pour le PATT ?"
+      ],
+      "en": [
+        "why does the red cross ask me to register my family members when I register?",
+        "if i register all my family members, do they have to register individually for the covid-19 temporary help worker program?",
+        "red cross registration portal for the covid-19 temporary help program for workers and family members.",
+        "if I register all my family members, are they registered in the temporary help for workers program covid-19?",
+        "do i list only my family members who are still in the house when i ask for patt covid-19?",
+        "do i register my entire family or only spouse and children on the red cross registration portal for the patt?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

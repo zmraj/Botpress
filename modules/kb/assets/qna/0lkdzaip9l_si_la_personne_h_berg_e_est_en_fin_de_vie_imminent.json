@@ -1,0 +1,35 @@
+{
+  "id": "0lkdzaip9l_si_la_personne_h_berg_e_est_en_fin_de_vie_imminent",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c51049"
+      ],
+      "en": [
+        "source://quebec.ca/c51049"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Si la personne hébergée est en fin de vie imminente, est-ce que je pourrai aller la visiter?",
+        "Est-ce que je peux rendre visite à une personne en fin de vie hébergée en CHSLD ?",
+        "Rendre visite à une personne proche de la mort qui est hébergée en CHSLD.",
+        "Visiter un ami en fin de vie restant en CHSLD.",
+        "ma conjointe va bientôt accoucher. est-ce que je peux assister à l'accouchement sans danger?"
+      ],
+      "en": [
+        "if the person being housed is nearing the end of his or her life, will I be able to visit him or her?",
+        "can i visit a person at the end of their life in chsld?",
+        "visiting a near-death experience in chsld.",
+        "visit a friend at the end of his life remaining in chsld."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Personnes à risque"
+    ]
+  }
+}

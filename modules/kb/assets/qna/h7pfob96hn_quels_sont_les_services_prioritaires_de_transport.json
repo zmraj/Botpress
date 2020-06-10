@@ -1,0 +1,48 @@
+{
+  "id": "h7pfob96hn_quels_sont_les_services_prioritaires_de_transport",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48428"
+      ],
+      "en": [
+        "source://quebec.ca/c48428"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les services prioritaires de transport et logistique?",
+        "Quels sont les services de transport qui sont prioritaires ?",
+        "Est-ce qu'il y a des services prioritaires de transport ?",
+        "Les services d'autobus sont-ils toujours en fonction?",
+        "Est-ce que le transport collectif est toujours maintenu?",
+        "Est-ce que le déneigement se fera si il y a tempête?",
+        "Les services postaux sont toujours actifs?",
+        "Les livraisons de paquets sont toujours en cours?",
+        "Les aéroports sont toujours ouvertes?",
+        "Les autobus opèrent-ils encore normalement?",
+        "Les commandes livrées par colis sont encore assurées par un bon service?"
+      ],
+      "en": [
+        "what are the priority transport and logistics services?",
+        "which transportation services have priority?",
+        "are there priority transportation services?",
+        "are bus services still operating?",
+        "is public transit still maintained?",
+        "will snow removal be done if there is a storm?",
+        "are the postal services still active?",
+        "are the package deliveries still in progress?",
+        "are the airports still open?",
+        "are the buses still operating normally?",
+        "orders delivered by parcel are still assured by a good service?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transport - déplacements"
+    ]
+  }
+}

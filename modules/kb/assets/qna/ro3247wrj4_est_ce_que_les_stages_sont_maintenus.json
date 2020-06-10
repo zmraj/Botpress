@@ -1,0 +1,34 @@
+{
+  "id": "ro3247wrj4_est_ce_que_les_stages_sont_maintenus",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50687"
+      ],
+      "en": [
+        "source://quebec.ca/c50687"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les stages sont maintenus?",
+        "Sous quelles conditions est-ce que les stages de formation sont maintenus?",
+        "Bien que le stage de formation soit confirmé, je ne peux pas rencontrer les nouvelles exigences?",
+        "Mon Cegep n'a pas encore confirmé si mon stage est maintenu. Vais-je être pénalisé ?"
+      ],
+      "en": [
+        "are the internships still in place?",
+        "under what conditions are training courses maintained?",
+        "even though the training course is confirmed, I can't meet the new requirements?",
+        "my cegep hasn't confirmed if my internship is still on. will i be penalized?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

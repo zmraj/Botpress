@@ -1,0 +1,34 @@
+{
+  "id": "hynvx3qv8k_est_ce_que_les_campeurs_saisonniers_peuvent_se_ren",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c51890"
+      ],
+      "en": [
+        "source://quebec.ca/c51890"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les campeurs saisonniers peuvent se rendre sur leur terrain de camping sans y séjourner pour effectuer certains travaux qui leur éviteraient des dommages lors du dégel (ex. : retrait des toiles de protection hivernale pour empêcher l’humidité)?",
+        "Si je suis un campeur saisonnier, est-ce que je peux me rendre sur les terrains de camping?",
+        "L'interdiction de se déplacer d'une région à l'autre, est-ce que ça s'adresse aussi aux campeurs?",
+        "J'ai des travaux à effectuer au camping, est-ce que je peux me rendre?"
+      ],
+      "en": [
+        "can seasonal campers go to their campground without staying there to do certain work that would prevent damage during thaw (e.g., removal of winter covers to prevent humidity)?",
+        "if I am a seasonal camper, can I go to the campgrounds?",
+        "the ban on moving from one region to another, does that apply to campers as well?",
+        "i have work to do at the campsite, can I go?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

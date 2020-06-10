@@ -1,0 +1,34 @@
+{
+  "id": "46nwc6nezx_est_ce_que_les_personnes_r_sidant_en_r_sidence_pri",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53264"
+      ],
+      "en": [
+        "source://quebec.ca/c53264"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les personnes résidant en résidence privée pour aînés peuvent sortir à l’extérieur pour se rendre à leurs rendez-vous médicaux?",
+        "Précautions à prendre si une personne âgée doit sortir de sa résidence.",
+        "Je suis âgé et j'ai un rendez-vous urgent mais je ne peux pas y aller seule.",
+        "Quelles sont les précautions à prendre pour un accompagnateur?"
+      ],
+      "en": [
+        "can people living in private seniors' residences go outside for medical appointments?",
+        "precautions to be taken if an elderly person has to leave his or her residence.",
+        "i'm old and I have an urgent appointment but I can't go alone.",
+        "what are the precautions to take for an accompanying person?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "id": "k9rdo91pj3_si_un_service_de_garde__ducatif___l_enfance_consta",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50846"
+      ],
+      "en": [
+        "source://quebec.ca/c50846"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Si un service de garde éducatif à l’enfance constate qu’un enfant semble avoir les symptômes de la COVID-19, que doit-il faire?",
+        "Est-ce que les services de garde éducatif doivent suivre les directives de la santé publique?",
+        "Ou je peux m'imformer pour avoir les directives de la santé publique pour les services de garde éducatif à l'enfance?",
+        "Est-ce que la santé publique a émise des directives pour les services de garde éducatif à l'enfance?"
+      ],
+      "en": [
+        "if an educational child care centre finds that a child appears to have covid-19 symptoms, what should it do?",
+        "do educational child care centres have to follow public health guidelines?",
+        "or can I get the public health guidelines for early learning and child care?",
+        "has public health issued guidelines for early childhood education and care?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

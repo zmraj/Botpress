@@ -1,0 +1,36 @@
+{
+  "id": "kkzxpb8k0u_comment_g_rer_les_risques_de_transmission_de_la_co",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50052"
+      ],
+      "en": [
+        "source://quebec.ca/c50052"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment gérer les risques de transmission de la COVID-19 liés au changement de garde de mon enfant?",
+        "Est-ce que l'on continue les gardes partagées dans ce contecte de pandémie?",
+        "La garde partagée continue si une personne est infectée dans l'entourgage de mon ex-conjoint?",
+        "Mon ex-conjoint travail avec le publique, est-ce que l'on doit cesser la garde partagée?",
+        "Comment cela foncitonne t-il pour les enfants en garde partagée dans le contexte de la COVID-19?"
+      ],
+      "en": [
+        "how do i manage the risks of covid-19 transmission related to my child's change of custody?",
+        "are we still sharing guards in this pandemic situation?",
+        "does joint custody continue if there is an infected person in my ex-spouse's yard?",
+        "my ex-husband is working with the public, should we stop shared custody?",
+        "how does this work for children in shared custody in the context of covid-19?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille"
+    ]
+  }
+}

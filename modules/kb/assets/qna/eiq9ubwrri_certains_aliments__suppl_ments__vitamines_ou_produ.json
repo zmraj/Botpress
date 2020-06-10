@@ -1,0 +1,44 @@
+{
+  "id": "eiq9ubwrri_certains_aliments__suppl_ments__vitamines_ou_produ",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49652"
+      ],
+      "en": [
+        "source://quebec.ca/c49652"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Certains aliments, suppléments, vitamines ou produits de santé naturels peuvent-ils prévenir, traiter ou soigner la COVID-19?",
+        "Une bonne alimentation peut-elle m'aider à ne pas attrapper la COVID-19?",
+        "Que puis-je manger pour prévenir la covid?",
+        "Qu'est ce que je peux manger pour m'aider à stimuler mon système immunitaire contre le virus?",
+        "Quels sont les produits naturels les plus efficace pour ne pas tomber malade pendant l'épidémie?",
+        "Existe t-il des vitamines pour m'aider à combattre la covid?",
+        "Renforcer mon système immunitaire par l’alimentation.",
+        "J'ai attrapé la covid, quelles vitamines à prendre pour me soigner?",
+        "J'peux tu prendre des suppléments alimentaires pour pas attraper le corona ?"
+      ],
+      "en": [
+        "can certain foods, supplements, vitamins or natural health products prevent, treat or cure covid-19?",
+        "can good nutrition help me avoid covid-19?",
+        "what can I eat to prevent covid?",
+        "what can I eat to help boost my immune system against the virus?",
+        "what are the most effective natural products to avoid getting sick during the epidemic?",
+        "are there any vitamins to help me fight covid?",
+        "strengthen my immune system through food.",
+        "i caught the covid, what vitamins should I take to cure myself?",
+        "can you take some supplements so I don't get the corona?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

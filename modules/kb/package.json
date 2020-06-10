@@ -24,9 +24,11 @@
   },
   "devDependencies": {
     "@types/react-bootstrap": "^0.32.19",
-    "@types/react-select": "^2.0.19"
+    "@types/react-select": "^2.0.19",
+    "@types/node": "^10.10.3"
   },
   "dependencies": {
+    "@types/node": "^10.10.3",
     "axios": "^0.19.0",
     "bluebird": "^3.5.3",
     "bluebird-retry": "^0.11.0",

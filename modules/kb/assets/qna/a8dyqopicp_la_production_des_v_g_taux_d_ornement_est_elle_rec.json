@@ -1,0 +1,34 @@
+{
+  "id": "a8dyqopicp_la_production_des_v_g_taux_d_ornement_est_elle_rec",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c52228"
+      ],
+      "en": [
+        "source://quebec.ca/c52228"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "La production des végétaux d’ornement est-elle reconnue comme un service prioritaire?",
+        "La production horticole a été incluse à la liste des activités prioritaires, qu'est-ce que ça comprend?",
+        "Jusqu'à quelle date est en vigueur la liste des services et activités prioritaires?",
+        "Est-ce que les producteurs horticoles doivent suivre les directives de l'INSPQ?"
+      ],
+      "en": [
+        "is ornamental plant production recognized as a priority service?",
+        "horticultural production has been included in the list of priority activities, what does this include?",
+        "until what date is the list of priority services and activities in effect?",
+        "do horticultural producers have to follow inspq guidelines?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Secteur bioalimentaire"
+    ]
+  }
+}

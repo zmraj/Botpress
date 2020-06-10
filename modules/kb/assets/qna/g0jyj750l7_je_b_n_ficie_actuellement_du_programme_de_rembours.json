@@ -1,0 +1,36 @@
+{
+  "id": "g0jyj750l7_je_b_n_ficie_actuellement_du_programme_de_rembours",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50704"
+      ],
+      "en": [
+        "source://quebec.ca/c50704"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je bénéficie actuellement du Programme de remboursement différé. Comment cela va-t-il changer ma situation?",
+        "Pendant combien de temps aucun montant ne sera exigé pour rembourser mon prêt étudiant ?",
+        "Aide financière aux études pendant la pandémie.",
+        "Comment fonctionne le programme de remboursement différé du prêt étudiant ?",
+        "Je suis étudiant, quel est le fonctionnement du programme de remboursement différé d'un prêt étudiant ?"
+      ],
+      "en": [
+        "i am currently on the deferred payment program. How will this change my situation?",
+        "how long will no amount be required to pay off my student loan?",
+        "financial assistance for education during the pandemic.",
+        "how does the deferred student loan repayment program work?",
+        "i am a student, how does the Deferred Student Loan Repayment Program work?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

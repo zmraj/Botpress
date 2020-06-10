@@ -1,0 +1,42 @@
+{
+  "id": "562mic9pah_les_assises_du_tourisme_2020_sont_elles_annul_es",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49037"
+      ],
+      "en": [
+        "source://quebec.ca/c49037"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les Assises du tourisme 2020 sont-elles annulées?",
+        "À quel moment auront lieu les Assises du tourisme 2020?",
+        "Assises du tourisme 2020.",
+        "Est-ce que les Assises du tourime sont reportées?",
+        "Est-ce que les Assises du tourisme 2020 auront lieu?",
+        "Pourquoi les Assises du tourisme sont reportées?",
+        "Est-ce que les Assises du tourime auront lieu cette année ?",
+        "Les Assises du tourisme 2020 seront elles aussi reportées ?"
+      ],
+      "en": [
+        "are the foundations of tourism 2020 cancelled?",
+        "when will the 2020 tourism foundation take place?",
+        "foundation for tourism 2020.",
+        "are the trials of tourime postponed?",
+        "will the foundations of tourism 2020 be laid?",
+        "why is the foundation of tourism being postponed?",
+        "will the tourime assizes take place this year?",
+        "will the foundations of tourism 2020 also be postponed?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

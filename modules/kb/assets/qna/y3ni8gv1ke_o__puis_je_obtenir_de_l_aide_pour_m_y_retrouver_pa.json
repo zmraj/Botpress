@@ -1,0 +1,92 @@
+{
+  "id": "y3ni8gv1ke_o__puis_je_obtenir_de_l_aide_pour_m_y_retrouver_pa",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49369\nAide pour l'industrie du Tourisme = source://quebec.ca/c49013"
+      ],
+      "en": [
+        "source://quebec.ca/c49369\nassistance for the tourism industry = source://quebec.ca/c49013"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Où puis-je obtenir de l’aide pour m’y retrouver parmi les programmes d’aide financière dans le cadre de la COVID-19?",
+        "Puis-je avoir de l’aide pour m’y retrouver parmi les programmes d’aide financière dans le cadre de la pandémie?",
+        "Listes des programmes d'aide gouvernementale.",
+        "J'ai perdu ma job je fais quoi pour savoir à quelles aides j'ai le droit?",
+        "Outils pour trouver les aides offerts aux travailleurs qui perdent leur revenu en raison de la COVID-19.",
+        "Quelles sont les mesures mises en place par le Gouvernement du Québec pour soutenir les entreprises et les travailleurs pendant la crise du COVID-19?",
+        "Pour aider les entreprises et les employés à passer la crise du COVID-19, quels moyens sont mis en place ?",
+        "Est-ce qu'il y a de l'aide économique pour les PME pour passer la crise?",
+        "Mesures de soutien aux petites entreprises contre le COVID-19.",
+        "Quelles sont les mesures pour soutenir les entreprises et les travailleurs durant la période de crise ?",
+        "C'est quoi les programmes disponibles pour aider les travailleurs et les entreprises à passer la pandémie ?",
+        "Je travaille dans une entreprise touchée par la COVID-19, comment le gouverment peut m'aider ?",
+        "Je dirige une entreprise, comment je peux obtenir de l'aide financière durant la crise de la COVID-19 ?",
+        "Travailleur à mon compte sans revenu, que puis-je faire?",
+        "Mon patron m'a mis à pied à cause de la covid, est-ce que je peux avoir de l'aide?",
+        "J'ai perdu mon emploi qu'est-ce que je dois faire?",
+        "Aides gouvernementales autre que le chômage.",
+        "C'est quoi les programmes d'aide pour cceux qui n'ont plus de job?",
+        "Je n'ai plus de travail à cause de la covid, je fais comment pour avoir de l'argent du gouvernement?",
+        "Où  trouver de l'information sur les programmes d'aide en lien avec la COVID-19?",
+        "Quels sont les programmes d'aide si j'ai perdu mon emploi?",
+        "J'ai perdu mon emploi, où puis-je appeler pour de l'aide sur les programmes d'aide financière?",
+        "Je suis sans revenu comment je fais pour avoir de l'aide financière?",
+        "Je veux obtenir de l'aide gouvernementale parce que je suis un travailleur, quelles sont les mesures disponibles ?",
+        "Je suis un travailleur, quels programmes existent pour m'aider dans la situation du COVID-19 ?",
+        "Je peux obtenir de l'aide financière si je suis travailleur ou travailleuse ?",
+        "Je suis au chômage présentement est-ce que je peux avoir de l'aide quand même du gouvernement",
+        "Ai-je le droit de démissionner et de reçevoir des aides gouvernementales ?",
+        "Ma compagnie a fermé à cause de la covid, est-ce que je peux avoir de l'aide gouvernementale?",
+        "Dans quelle situation je peux demander de l'aide financière?",
+        "Je suis un travailleur qui a perdu son emploi, comment je fais pour avoir de l'aide financière?",
+        "quels sont les délais pour obtenir du chômage?",
+        "j'ai perdu ma job, c'est quoi je peux faire ?",
+        "je n'ai pas droit à l'assurance emploi, que faire?",
+        "je vais tout perdre, ma pme, ma maison, à cause de l'état d'urgence... est-ce que j'ai des recours?"
+      ],
+      "en": [
+        "where can i get help navigating the covid-19 financial assistance programs?",
+        "can i get help navigating the pandemic financial assistance programs?",
+        "lists of government assistance programs.",
+        "i've lost my job. What do I do to find out what kind of help I'm entitled to?",
+        "tools to find help for workers who lose income due to covid-19.",
+        "what measures has the quebec government put in place to support businesses and workers during the covid-19 crisis?",
+        "to help companies and employees get through the covid-19 crisis, what means are being put in place?",
+        "is there any economic help for smes to get through the crisis?",
+        "small business support measures against covid-19.",
+        "what are the measures to support companies and workers during the crisis period?",
+        "what programs are available to help workers and businesses get through the pandemic?",
+        "i work at a company affected by covid-19, how can the government help me?",
+        "i run a business, how do I get financial aid during the covid-19 crisis?",
+        "self-employed worker with no income, what can I do?",
+        "my boss laid me off because of the covid, can I get some help?",
+        "i've lost my job, what should I do?",
+        "government assistance other than unemployment.",
+        "what are the programs to help people who don't have jobs anymore?",
+        "i don't have a job because of the covid, how do I get money from the government?",
+        "where can i find information on assistance programs related to covid-19?",
+        "what are the programs to help me if I have lost my job?",
+        "i have lost my job, where can I call for help with financial assistance programs?",
+        "i have no income. How can I get financial help?",
+        "i want government assistance because I am a worker, what measures are available?",
+        "i'm a worker, what programs exist to help me in the covid-19 situation?",
+        "can i get financial assistance if i am a worker?",
+        "i'm unemployed right now. Can I still get help from the government?",
+        "do I have the right to resign and receive government assistance?",
+        "my company shut down because of the covid, can I get government assistance?",
+        "in what situation can I apply for financial assistance?",
+        "i am a worker who has lost his job, how do I get financial assistance?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

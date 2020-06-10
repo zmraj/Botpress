@@ -1,0 +1,72 @@
+{
+  "id": "y0marzddpy_quels_sont_les_services_de_s_curit__publique_qui_s",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48420\nServices gouvernementaux = source://quebec.ca/c48421\nServices de soins de santé = source://quebec.ca/c48419"
+      ],
+      "en": [
+        "source://quebec.ca/c48420\ngovernment services = source://quebec.ca/c48421\nhealth care services = source://quebec.ca/c48419"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les services de sécurité publique qui sont des services essentiels?",
+        "Est-ce que tous les services de sécurité publique sont des services essentiels ?",
+        "Quels sont les services de sécurité publique qui sont essentiels ?",
+        "Quelle est la liste des services de sécurité publique essentiels ?",
+        "Puis-je avoir la liste des services de sécurité publique essentiels ?",
+        "Donne moi la liste des services de sécurité publique essentiels",
+        "Liste des services de sécurité publique.",
+        "Les services de police municipaux sont-ils assurés?",
+        "Est-ce que les services d’incendie fonctionnent normalement durant la pandémie?",
+        "Les services correctionnels sont-ils essentiels?",
+        "Est-ce que les constables spéciaux travaillent toujours?",
+        "Les contrôleurs routiers sont ils au travail?",
+        "Les agents de protection de la faune travaillent?",
+        "Les agences de sécurité sont-elles fermées?",
+        "Services essentiels du Ministère de la Sécurité publique .",
+        "Est-ce que les pompiers forestiers vont travailler?",
+        "Est-ce que les services de communication vont être assurés?",
+        "Les entreprises associées aux urgences environnementales offrent-elles un service essentiel ?",
+        "Les opérations des centres de répartition d’appels d’urgence sont-ils essentiels?",
+        "La Sûreté du Québec opère-t-elle comme d'habitude?",
+        "Que fait la sécurité civile?",
+        "Les coroners travaillent-ils comme d'habitude?",
+        "est-ce que vos haltes routières et/ou aires de services sont ouvertes et accessibles aux usagers de la route en service essentiels ? si oui, sont-elles toutes disponibles ? sinon, lesquelles le sont ? ",
+        "je peu tu aller voir le médecin"
+      ],
+      "en": [
+        "which public safety services are essential services?",
+        "are all public safety services essential services?",
+        "which public safety services are essential?",
+        "what is the list of essential public safety services?",
+        "can I get a list of essential public safety services?",
+        "give me a list of essential public safety services",
+        "list of public security services.",
+        "are municipal police services insured?",
+        "will fire departments function normally during the pandemic?",
+        "are correctional services essential?",
+        "are the special constables still working?",
+        "are the traffic controllers at work?",
+        "wildlife officers are working?",
+        "are the security agencies closed?",
+        "essential services of the Department of Public Safety .",
+        "are the forest firefighters going to work?",
+        "will communication services be provided?",
+        "do companies associated with environmental emergencies provide an essential service?",
+        "are the operations of emergency dispatch centres essential?",
+        "is quebec security operating as usual?",
+        "what does the civil security do?",
+        "are the coroners working as usual?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services essentiels"
+    ]
+  }
+}

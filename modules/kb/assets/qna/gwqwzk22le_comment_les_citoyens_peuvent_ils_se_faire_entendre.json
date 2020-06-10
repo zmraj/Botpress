@@ -1,0 +1,38 @@
+{
+  "id": "gwqwzk22le_comment_les_citoyens_peuvent_ils_se_faire_entendre",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50918"
+      ],
+      "en": [
+        "source://quebec.ca/c50918"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment les citoyens peuvent-ils se faire entendre lorsque le conseil se saisit d’une demande de dérogation mineure ou d’usage conditionnel?",
+        "De quelle façon les citoyens peuvent-ils contester des demandes de dérogation mineures ?",
+        "Est-ce que les citoyens peuvent encore se faire entendre lorsque le conseil prend une décision sur une dérogation mineure ?",
+        "Les citoyens peuvent-ils encore s'opposer à des demandes de dérogation mineure ou d'usage conditionnel ?",
+        "Les citoyens ont-ils des moyens pour s'opposer à des demandes de dérogation mineure ou d'usage conditionnel ?",
+        "Quels sont les recours des citoyens pour contester des demandes de dérogation mineure ou d'usage conditionnel ?"
+      ],
+      "en": [
+        "how can citizens be heard when the council considers a request for a minor variance or conditional use?",
+        "how can citizens challenge minor derogation requests?",
+        "can citizens still be heard when council makes a decision on a minor variance?",
+        "can citizens still object to requests for minor variances or conditional use?",
+        "do citizens have any means to oppose requests for minor variances or conditional use?",
+        "what recourse do citizens have to contest requests for minor variances or conditional use?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

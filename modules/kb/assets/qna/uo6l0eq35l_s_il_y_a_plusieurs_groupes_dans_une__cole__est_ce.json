@@ -1,0 +1,36 @@
+{
+  "id": "uo6l0eq35l_s_il_y_a_plusieurs_groupes_dans_une__cole__est_ce",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49944"
+      ],
+      "en": [
+        "source://quebec.ca/c49944"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "S’il y a plusieurs groupes dans une école, est-ce qu’il faut mettre en place des mesures de distanciation?",
+        "Est-ce que les services de garde en milieu scolaire doivent respecter les mesures de distanciation?",
+        "Consigne de distanciation dans les service de garde en milieux scolaires.",
+        "Comment peut-on respecter la distanciation dans un service de garde?",
+        "Est-ce que distanciation doit être respectée dans les services de garde en milieu scolaire?"
+      ],
+      "en": [
+        "if there are several groups in a school, should there be distancing measures in place?",
+        "is school-age child care required to adhere to distancing measures?",
+        "distance instruction in school-age child care centres.",
+        "how can distance be maintained in a child care centre?",
+        "is distance to be respected in school-age child care?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}
