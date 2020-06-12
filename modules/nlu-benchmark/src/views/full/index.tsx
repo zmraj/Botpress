@@ -8,6 +8,7 @@ import style from './style.scss'
 
 const Modeltable = props => {
   const [models, setModels] = useState([])
+  const [new_model_input, setNewModelInput] = useState('')
   const [checked, setChecked] = useState({ embeddings: [], qa: [], intents: [] } as {
     embeddings: string[]
     qa: string[]
@@ -24,8 +25,15 @@ const Modeltable = props => {
     setModels(data)
   }
 
+  const importNewTfModel = async () => {
+    const { data } = await props.bp.axios.get('/mod/nlu-benchmark/importOnnxModels', { new_model_input })
+  }
+  const importNewOnnxModel = async () => {
+    const { data } = await props.bp.axios.get('/mod/nlu-benchmark/importTfSavedmodel', { new_model_input })
+  }
+
   useEffect(() => {
-    fetchModel()
+    fetchModel().catch(e => console.log(e))
   }, [])
 
   const changeCheckedState = (event: React.FormEvent<HTMLInputElement>) => {
@@ -109,6 +117,17 @@ const Modeltable = props => {
         </div>
         <div>
           <button onClick={runTests}>Launch tests</button>
+        </div>
+        <div>
+          <input
+            type="text"
+            value={new_model_input}
+            onChange={event => {
+              setNewModelInput(event.target.value)
+            }}
+          />
+          <button onClick={importNewOnnxModel}>Import new Onnx model</button>
+          <button onClick={importNewTfModel}>Import new TF model</button>
         </div>
       </div>
     </Container>

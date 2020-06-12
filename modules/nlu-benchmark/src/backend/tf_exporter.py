@@ -1,11 +1,12 @@
 import logging
 import os
-import shutil
 
 import tensorflow as tf
 import transformers
-from pick import pick
+# from pick import pick
 from rich import print
+
+# import shutil
 
 logging.disable(logging.WARNING)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -69,7 +70,7 @@ model_modules = {
 }
 
 
-def save_tensorflow_model(model_name: str, cache_path: str):
+def save_tensorflow_model(model_name: str, model_path):
     print(f"Got name : [cyan1] {model_name} [/cyan1] :rocket:")
     print("All other models are available at : ")
     print("https://huggingface.co/models")
@@ -95,50 +96,19 @@ def save_tensorflow_model(model_name: str, cache_path: str):
     config_module = getattr(transformers, config_name)
     TFbertizer_module = getattr(transformers, "TF" + bertizer_name)
 
-    # Create directory for the model
-    model_cache_folder_pt = os.path.join(cache_path, "pytorch")
-    model_cache_folder_tf = os.path.join(cache_path, "tensorflow")
-
-    this_model_cache_tf = os.path.join(model_cache_folder_tf, model_name)
-    this_model_cache_pt = os.path.join(model_cache_folder_pt, model_name)
-    if not os.path.exists(this_model_cache_pt):
-        os.makedirs(this_model_cache_pt)
-        print(
-            ":inbox_tray: Loading [green1]pytorch[/green1] tokenizer and model from the world wide web"
-        )
-        tokenizer = tokenizer_module.from_pretrained(model_name)
-        bertizer = bertizer_module.from_pretrained(model_name)
-    else:
-        print(
-            ":inbox_tray: Loading [green1]pytorch[/green1] tokenizer and model from the cache"
-        )
-        tokenizer = tokenizer_module.from_pretrained(this_model_cache_pt)
-        bertizer = bertizer_module.from_pretrained(this_model_cache_pt)
-
-    if not os.path.exists(this_model_cache_tf):
-        os.makedirs(this_model_cache_tf)
-    else:
-        check = input(
-            f"[orange_red1]Tensorflow[/orange_red1] cache folder for {model_name} already exist, do you want to override ? [y/n]  "
-        )
-        if check != "y":
-            os.abort()
+    tokenizer = tokenizer_module.from_pretrained(model_name)
+    bertizer = bertizer_module.from_pretrained(model_name)
 
     # Save pytorch model in deepnodecache and remove the pytorch cache
     print(":floppy_disk: Saving [green1]pytorch[/green1] tokenizer and model")
-    tokenizer.save_pretrained(this_model_cache_pt)
-    bertizer.save_pretrained(this_model_cache_pt)
-    print(":cyclone: Deleting [green1]pytorch[/green1] cache")
-    torch_cache = os.path.join(cache_path, 'torch', 'transformers')
-    shutil.rmtree(torch_cache)
-    os.mkdir(torch_cache)
+    tokenizer.save_pretrained(model_path)
+    bertizer.save_pretrained(model_path)
 
     # Load the model in tensorflow
-    print(
-        ":inbox_tray: Loading [orange_red1]Tensorflow[/orange_red1] model from [green1]pytorch[/green1] saved one"
-    )
-    config = config_module.from_json_file(this_model_cache_pt + "/config.json")
-    TFmodel = TFbertizer_module.from_pretrained(this_model_cache_pt,
+    print(""":inbox_tray: Loading [orange_red1]Tensorflow[/orange_red1] model
+        from [green1]pytorch[/green1] saved one""")
+    config = config_module.from_json_file(model_path + "/config.json")
+    TFmodel = TFbertizer_module.from_pretrained(model_path,
                                                 from_pt=True,
                                                 config=config)
 
@@ -147,41 +117,38 @@ def save_tensorflow_model(model_name: str, cache_path: str):
         tf.TensorSpec([None, None], tf.int32, name="attention_mask")
     ])
     print(":floppy_disk: Saving [orange_red1]Tensorflow[/orange_red1] model")
-    tf.saved_model.save(TFmodel,
-                        this_model_cache_tf,
-                        signatures=concrete_function)
-    print(
-        f":heart_eyes: Done saving [cyan1]{model_name}[/cyan1] in {deepnode_cache} :+1:"
-    )
+    tf.saved_model.save(TFmodel, model_path, signatures=concrete_function)
+    print(f""":heart_eyes: Done saving [cyan1]{model_name}[/cyan1]
+        in {model_path} :+1:""")
 
 
-def clean_models(model_type):
-    deepnode_cache = os.path.expanduser(
-        os.path.join(os.getenv('XDG_CACHE_HOME', "~/.cache"), "deepnode"))
-    deepnode_cache_tf = os.path.join(deepnode_cache, "tensorflow")
-    deepnode_cache_pt = os.path.join(deepnode_cache, "pytorch")
-    choices = []
-    if model_type == "torch":
-        choices = os.listdir(deepnode_cache_pt)
-    if model_type == "tensorflow":
-        choices = os.listdir(deepnode_cache_tf)
-    if model_type == "all":
-        input(
-            "Select from tensorflow folder, it will try to delete in the pytorch folder"
-        )
-        choices = os.listdir(deepnode_cache_tf)
-    selected = pick(choices,
-                    'Please choose models to delete :',
-                    multiselect=True,
-                    min_selection_count=1)
-    for folder, _ in selected:
-        if model_type == "tensorflow" or model_type == "all":
-            shutil.rmtree(os.path.join(deepnode_cache_tf, folder),
-                          ignore_errors=True)
-        if model_type == "pytorch" or model_type == "all":
-            shutil.rmtree(os.path.join(deepnode_cache_pt, folder),
-                          ignore_errors=True)
-
+# def clean_models(model_type):
+#     deepnode_cache = os.path.expanduser(
+#         os.path.join(os.getenv('XDG_CACHE_HOME', "~/.cache"), "deepnode"))
+#     deepnode_cache_tf = os.path.join(deepnode_cache, "tensorflow")
+#     deepnode_cache_pt = os.path.join(deepnode_cache, "pytorch")
+#     choices = []
+#     if model_type == "torch":
+#         choices = os.listdir(deepnode_cache_pt)
+#     if model_type == "tensorflow":
+#         choices = os.listdir(deepnode_cache_tf)
+#     if model_type == "all":
+#         input(
+#             "Select from tensorflow folder,
+# it will try to delete in the pytorch folder"
+#         )
+#         choices = os.listdir(deepnode_cache_tf)
+#     selected = pick(choices,
+#                     'Please choose models to delete :',
+#                     multiselect=True,
+#                     min_selection_count=1)
+#     for folder, _ in selected:
+#         if model_type == "tensorflow" or model_type == "all":
+#             shutil.rmtree(os.path.join(deepnode_cache_tf, folder),
+#                           ignore_errors=True)
+#         if model_type == "pytorch" or model_type == "all":
+#             shutil.rmtree(os.path.join(deepnode_cache_pt, folder),
+#                           ignore_errors=True)
 
 if __name__ == "__main__":
     import argparse
@@ -194,20 +161,21 @@ if __name__ == "__main__":
                         action="store",
                         help='The hugging face model name')
     parser.add_argument('--cache',
-                        dest="cache_path",
+                        dest="model_path",
                         action="store",
-                        help='The cache path to store the models')
-    parser.add_argument(
-        '-c',
-        '--clean',
-        # nargs="?",
-        # const=None,
-        dest="clean",
-        action="store",
-        choices=["torch", "tensorflow", "all"],
-        help='Interactive cleaning models')
+                        help='The path where the model will be stored')
+    # parser.add_argument(
+    #     '-c',
+    #     '--clean',
+    #     # nargs="?",
+    #     # const=None,
+    #     dest="clean",
+    #     action="store",
+    #     choices=["torch", "tensorflow", "all"],
+    #     help='Interactive cleaning models')
     args = parser.parse_args()
-    if args.clean:
-        clean_models(args.clean)
-    if not args.clean:
-        save_tensorflow_model(args.model_name, args.cache_path)
+    # if args.clean:
+    #     clean_models(args.clean)
+    # if not args.clean:
+    #     save_tensorflow_model(args.model_name, args.model_path)
+    save_tensorflow_model(args.model_name, args.model_path)

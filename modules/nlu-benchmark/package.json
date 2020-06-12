@@ -16,7 +16,7 @@
   "dependencies": {
     "@blueprintjs/docs-theme": "^3.6.0",
     "@tensorflow/tfjs-node": "^2.0.0",
-    "onnxruntime": "0.0.1-dev.20200506.1",
+    "onnxruntime": "^0.0.1-dev.20200506.1",
     "tokenizers": "^0.6.2"
   },
   "devDependencies": {

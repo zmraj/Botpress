@@ -789,7 +789,8 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var style_scss_1 = __importDefault(__webpack_require__(/*! ./style.scss */ "./src/views/full/style.scss"));
 var Modeltable = function (props) {
     var _a = react_1.useState([]), models = _a[0], setModels = _a[1];
-    var _b = react_1.useState({ embeddings: [], qa: [], intents: [] }), checked = _b[0], setChecked = _b[1];
+    var _b = react_1.useState(''), new_model_input = _b[0], setNewModelInput = _b[1];
+    var _c = react_1.useState({ embeddings: [], qa: [], intents: [] }), checked = _c[0], setChecked = _c[1];
     var runTests = function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -814,8 +815,30 @@ var Modeltable = function (props) {
             }
         });
     }); };
+    var importNewTfModel = function () { return __awaiter(void 0, void 0, void 0, function () {
+        var data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, props.bp.axios.get('/mod/nlu-benchmark/importOnnxModels', { new_model_input: new_model_input })];
+                case 1:
+                    data = (_a.sent()).data;
+                    return [2 /*return*/];
+            }
+        });
+    }); };
+    var importNewOnnxModel = function () { return __awaiter(void 0, void 0, void 0, function () {
+        var data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, props.bp.axios.get('/mod/nlu-benchmark/importTfSavedmodel', { new_model_input: new_model_input })];
+                case 1:
+                    data = (_a.sent()).data;
+                    return [2 /*return*/];
+            }
+        });
+    }); };
     react_1.useEffect(function () {
-        fetchModel();
+        fetchModel().catch(function (e) { return console.log(e); });
     }, []);
     var changeCheckedState = function (event) {
         var updatedChecked = __assign({}, checked);
@@ -858,7 +881,13 @@ var Modeltable = function (props) {
                     return react_1.default.createElement("li", { key: 'intent' + name }, name);
                 }))),
             react_1.default.createElement("div", null,
-                react_1.default.createElement("button", { onClick: runTests }, "Launch tests")))));
+                react_1.default.createElement("button", { onClick: runTests }, "Launch tests")),
+            react_1.default.createElement("div", null,
+                react_1.default.createElement("input", { type: "text", value: new_model_input, onChange: function (event) {
+                        setNewModelInput(event.target.value);
+                    } }),
+                react_1.default.createElement("button", { onClick: importNewOnnxModel }, "Import new Onnx model"),
+                react_1.default.createElement("button", { onClick: importNewTfModel }, "Import new TF model")))));
 };
 // export default Modeltable
 // class Modeltable extends React.Component {
