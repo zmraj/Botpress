@@ -1,0 +1,40 @@
+{
+  "id": "fhpci639jl_consid_rant_la_perte_de_revenu_due_au_contexte__co",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50694"
+      ],
+      "en": [
+        "source://quebec.ca/c50694"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Considérant la perte de revenu due au contexte économique instable, est-ce que des ajustements rapides peuvent être apportés à l’aide financière aux études?",
+        "Quels seront les revenus pris en considération pour l'aide financière aux étudiants pour l'année 2019-2020?",
+        "Quels seront les revenus pris en considération pour l'aide financière aux étudiants pour l'année 2020-2021?",
+        "Quels seront les revenus qui entreront dans le calcul des prêts et bourses ou aide financière aux étudiants?",
+        "Comment les fluctuations de revenus vont influencer le calcul de l'aide financière aux étudiants?",
+        "Je n'ai plus de revenu. Je ne peux payer mon prèt pour études à temps partiel",
+        "J'ai obtenu une bourse du gouvernement."
+      ],
+      "en": [
+        "considering the loss of income due to the unstable economic environment, can rapid adjustments be made to student financial assistance?",
+        "what income will be taken into consideration for student financial assistance for the year 2019-2020?",
+        "what income will be considered for student financial assistance for the year 2020-2021?",
+        "what income will be used to calculate loans and grants or student financial assistance?",
+        "how will income fluctuations affect the calculation of student financial assistance?",
+        "i have no income. I can't pay my college loans part-time",
+        "i got a government scholarship."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

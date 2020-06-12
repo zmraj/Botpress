@@ -1,0 +1,47 @@
+{
+  "id": "z1pwexs",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://Z1Vpw5w\nLes festivals, événements culturels et événements sportifs dans le contexte de la COVID-19 = page://Z1Vpw5w"
+      ],
+      "en": [
+        "page://Z1Vpw5w\nfestivals, cultural events and sporting events in the context of covid-19 = page://z1vpw5w"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu'il va y avoir des festivals?",
+        "C'est quoi les événements annulés?",
+        "Les matchs de Football de la CFL vont-ils avoir lieux",
+        "Est-ce qu'on va pouvoir aller dans des spectacles cette été?",
+        "Les salles de spectacles vont-elle réouvrir",
+        "festival",
+        "événement culturel",
+        "rassemblements sportifs",
+        "C'est quoi les chances qu'on est des événements culturels cette été?",
+        "Est-ce que tous les événements sont annulés pour l'été?",
+        "Je veux savoir si on va avoir des événements culturel au Québec"
+      ],
+      "en": [
+        "are there going to be festivals?",
+        "what are the cancelled events?",
+        "will the cfl football matches take place?",
+        "are we gonna be able to go to any shows this summer?",
+        "are the theaters going to reopen",
+        "cultural event",
+        "sports events",
+        "what are the odds we're cultural events this summer?",
+        "are all events cancelled for the summer?",
+        "i want to know if we're going to have any cultural events in quebec"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Sports, loisirs et culture"
+    ]
+  }
+}

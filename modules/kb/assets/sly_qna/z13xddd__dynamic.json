@@ -1,0 +1,40 @@
+{
+  "id": "z13xddd__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "À l’heure actuelle, les femmes enceintes peuvent être accompagnées par une personne qui leur est chère pour leur accouchement dans les hôpitaux du Québec. Certaines mesures particulières peuvent toutefois être prises par les centres hospitaliers, comme c’est le cas présentement à l’Hôpital général juif de Montréal. Pour obtenir plus d’information à cet effet, les femmes enceintes peuvent contacter leur centre hospitalier.\nGrossesse, accouchement et postnatal en contexte de pandémie = page://Z2lxqso"
+      ],
+      "en": [
+        "At present, pregnant women can be accompanied by a loved one when giving birth in Québec hospitals. However, hospitals may adopt certain specific measures, as is the case at the Montreal Jewish General Hospital. To obtain additional information in this regard, pregnant women can contact their hospital.\npregnancy, childbirth and postpartum in the context of a pandemic = page://z2lxqso"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les accompagnements sont permis pendant l'accouchement?",
+        "Mon chum peut tu venir à l'hôpital quand je vais accoucher?",
+        "Je peux tu aller voir ma femme qui accouche?",
+        "Quand ma blonde va accoucher, est-ce que je peux l'accompagner à l'hôpital?",
+        "Est-ce que mon conjoint peut assister à la naissance de notre enfant?",
+        "Est-ce que je peux aller voir une maman qui vient d'accoucher à l'hôpital?",
+        "Est-ce que les accompagnements sont permis pour les accouchement?"
+      ],
+      "en": [
+        "are accompaniments allowed during childbirth?",
+        "can my boyfriend come to the hospital when I'm in labor?",
+        "can you go see my wife who's having a baby?",
+        "when my girlfriend goes into labor, can I go with her to the hospital?",
+        "can my spouse attend the birth of our child?",
+        "can I go see a mom who just had a baby in the hospital?",
+        "are accompaniments allowed for births?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Soutien aux personnes"
+    ]
+  }
+}

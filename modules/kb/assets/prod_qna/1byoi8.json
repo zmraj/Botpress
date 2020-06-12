@@ -1,0 +1,88 @@
+{
+  "id": "1byoi8",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z1FyiqJ\nÉlections partielles = section://Z1FyiqJ"
+      ],
+      "en": [
+        "section://Z1FyiqJ\nby-elections = section://z1fyiqj"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles mesures de protection des renseignements personnels contenus dans une liste électorale une municipalité doit-elle prévoir?",
+        "Dans une liste électorale, une municipalité doit prévoir quelles mesures de protection des renseignements personnels",
+        "Afin d'assurer la confidentialité des renseignements personnels, les personnes autorisées à utiliser la liste électorale devraient s'engager par écrit à quoi?",
+        "Une municipalité doit-elle prévoir des mesures de protection des renseignements personnels?",
+        "Une municipalité peut-elle demander au Directeur général des élections (DGE) de produire une nouvelle liste électorale aux fins de communiquer avec ses citoyens pendant l’état d’urgence sanitaire?",
+        "Est-ce que le Directeur général des élections (DGE) produira une nouvelle liste électorale aux fins de communiquer avec les citoyens pendant l’état d’urgence sanitaire?",
+        "Est-ce que des élections municipales prévues avant le 26 avril peuvent avoir lieu?",
+        "Une municipalité veut une nouvelle liste électorale aux fins de communiquer avec ses citoyens pendant l’état d’urgence sanitaire.",
+        "Pendant l’état d’urgence sanitaire, le Directeur général des élections (DGE) peut-il produire une nouvelle liste électorale aux fins de communiquer avec les citoyens?",
+        "Quel est l’effet de l’état d’urgence sanitaire sur le processus de division en districts électoraux de la municipalité prévu à la Loi sur les élections et les référendums dans les municipalités (LERM)?",
+        "Je veux avoir de l'information sur l'effet de l'état d'urgence sanitaire sur le processus de division en districts électoraux de la municipalité prévu à la LERM.",
+        "Est-ce que l'état d'urgence sanitaire a un impact sur la LERM?",
+        "En quoi l'état d'urgence sanitaire a un effet sur le processus de division en districts électoraux de la municipalité?",
+        "Comment le processus de division en districts électoraux de la municipalité est impacté par l'état d'urgence sanitaire?",
+        "Les scrutins référendaires doivent-ils être tenus?",
+        "Est-ce que les scrutins référendaires peuvent avoir lieu ?",
+        "Est-il possible de tenir les scrutins référendaires ?",
+        "Est-ce que les scrutins référendaires doivent être annulés ?",
+        "Un scrutin référendaire déjà planifié peut-il avoir lieu comme prévu ?",
+        "Les processus de scrutin référendaire peuvent-ils être maintenus ?",
+        "Faut-il suspendre ou annuler les procédures de scrutin référendaire ?",
+        "Comment les citoyens peuvent-ils se faire entendre lorsque le conseil se saisit d’une demande de dérogation mineure ou d’usage conditionnel?",
+        "De quelle façon les citoyens peuvent-ils contester des demandes de dérogation mineures ?",
+        "Est-ce que les citoyens peuvent encore se faire entendre lorsque le conseil prend une décision sur une dérogation mineure ?",
+        "Les citoyens peuvent-ils encore s'opposer à des demandes de dérogation mineure ou d'usage conditionnel ?",
+        "Les citoyens ont-ils des moyens pour s'opposer à des demandes de dérogation mineure ou d'usage conditionnel ?",
+        "Quels sont les recours des citoyens pour contester des demandes de dérogation mineure ou d'usage conditionnel ?",
+        "Que doivent faire les municipalités ayant adopté une politique de participation publique?",
+        "Quelle option ont les municipalités ayant adopté une politique de participation publique pour consulter leur monde?",
+        "Une municipalité s’est dotée d’une politique de participation publique conformément aux articles 80.1 à 80.5 de la Loi sur l’aménagement et l’urbanisme.",
+        "Est-ce que tous les projets des municipalités ayant adopté une politique de participation publique peuvent utiliser le processus de transmission de commentaires écrits?"
+      ],
+      "en": [
+        "what safeguards are required to protect the privacy of the personal information contained in a list of electors in a municipality?",
+        "in a list of electors, a municipality must set out what safeguards are in place to protect the privacy of personal information",
+        "to ensure the confidentiality of personal information, those authorized to use the list of electors should make a written commitment to what?",
+        "does a municipality need to have privacy safeguards in place?",
+        "can a municipality ask the chief electoral officer (ceo) to produce a new list of electors for the purpose of communicating with its citizens during a health emergency?",
+        "will the chief electoral officer (ceo) produce a new list of electors for the purpose of communicating with citizens during a health emergency?",
+        "can municipal elections scheduled before April 26 be held?",
+        "a municipality wants a new voters list for the purpose of communicating with its citizens during a health emergency.",
+        "during a health emergency, can the chief electoral officer (ceo) produce a new list of electors for the purpose of communicating with citizens?",
+        "what is the effect of the state of health emergency on the process of division into electoral districts of the municipality provided for in the law on elections and referendums in municipalities (lerm)?",
+        "i want information on the effect of the state of health emergency on the process of dividing the municipality into electoral districts under the lerm.",
+        "does the health emergency have an impact on the lerm?",
+        "how does the state of health emergency affect the process of dividing the municipality into electoral districts?",
+        "how is the process of dividing the municipality into electoral districts impacted by the state of health emergency?",
+        "should referendum ballots be held?",
+        "can referendum ballots be held?",
+        "is it possible to hold referendum ballots?",
+        "should referendum ballots be cancelled?",
+        "can a referendum ballot that has already been planned take place as planned?",
+        "can referendum voting processes be maintained?",
+        "should referendum voting procedures be suspended or cancelled?",
+        "how can citizens be heard when the council considers a request for a minor variance or conditional use?",
+        "how can citizens challenge minor derogation requests?",
+        "can citizens still be heard when council makes a decision on a minor variance?",
+        "can citizens still object to requests for minor variances or conditional use?",
+        "do citizens have any means to oppose requests for minor variances or conditional use?",
+        "what recourse do citizens have to contest requests for minor variances or conditional use?",
+        "what should municipalities with a public participation policy do?",
+        "what option do municipalities with a public participation policy have to consult their world?",
+        "a municipality has a public participation policy in accordance with sections 80.1 to 80.5 of the Planning and Development Act.",
+        "can all projects from municipalities with a public participation policy use the written comment process?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités"
+    ]
+  }
+}

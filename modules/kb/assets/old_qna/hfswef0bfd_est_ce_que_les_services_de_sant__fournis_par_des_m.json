@@ -1,0 +1,40 @@
+{
+  "id": "hfswef0bfd_est_ce_que_les_services_de_sant__fournis_par_des_m",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46801"
+      ],
+      "en": [
+        "source://quebec.ca/c46801"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les services de santé fournis par des moyens de télécommunication sont couverts par la RAMQ?",
+        "Est-ce que la RAMQ couvre les services de santé qui proviennent des services de télécommunication?",
+        "Si je rencontre mon médecin par téléphone, est-ce que ses services seront couverts par la RAMQ ?",
+        "Si je reçois une ordonnance par mon médecin, est-ce que ses honoraires sont payés?",
+        "Est-ce que la RAMQ paye pour les services de mon médecin via des services de télécommunication ?",
+        "Est-ce que la RAMQ couvre les services de santé lors d'une téléconsultation ?",
+        "Est-ce que la télémédecine est couverte par la RAMQ?"
+      ],
+      "en": [
+        "are health services provided by telecommunication means covered by the ramq?",
+        "does the ramq cover health services that are derived from telecommunication services?",
+        "if i see my doctor over the phone, will his services be covered by the ramq?",
+        "if I get a prescription from my doctor, is my doctor's fee paid?",
+        "does ramq pay for my doctor's services via telecommunication services?",
+        "does the ramq cover health services during a teleconsultation?",
+        "is telemedicine covered by the ramq?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

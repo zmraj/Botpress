@@ -1,0 +1,48 @@
+{
+  "id": "1hysxf__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "La COVID-19 se transmet d’une personne à une autre par le contact avec les gouttelettes qui sont projetées dans l’air quand une personne malade parle, tousse ou éternue. Elle peut aussi se propager par des mains infectées portées à la bouche, au nez ou aux yeux après avoir eu un contact avec une personne ou une surface infectée. La transmission par des surfaces ou des objets contaminés est possible, mais ne représente pas le mode de transmission principal. Il est aussi possible que le virus soit transmis par les selles d’une personne infectée.\nLes connaissances actuelles ne permettent pas de préciser avec exactitude le mode de transmission de la COVID‑19. Il est toutefois considéré que la personne atteinte de la COVID‑19 peut être contagieuse 48 heures avant l’apparition de ses symptômes. Des recherches sont encore en cours.\nEn général, les coronavirus ne survivent pas longtemps sur les objets. Ils vont survivre sur les surfaces de quelques heures à plusieurs jours. Cela dépend notamment du type de surface (par exemple : cuivre, carton, acier inoxydable, plastique), de la température et de l’humidité ambiante. Des données expérimentales récentes indiquent que le virus pourrait être présent jusqu’à :\n*   4 heures sur le cuivre;\n*   24 heures sur du carton;\n*   48 heures (2 jours) sur de l’acier inoxydable;\n*   72 heures (3 jours) sur du plastique.\nAu Québec, aucune évidence ne suggère un risque que des personnes puissent contracter la COVID‑19 par les animaux ou par des produits animaux.\nInformations générales sur la COVID-19 = section://1VstJt"
+      ],
+      "en": [
+        "COVID‑19 is spread from person to person by contact with droplets projected into the air when a person who is sick talks, coughs or sneezes. It can also be spread by infected hands. This means that you can contract a coronavirus by touching your mouth, nose or eyes after contact with an infected person or surface. While it can be spread by contaminated objects or surfaces, this is not the main mode of transmission. The virus can also be spread through an infected person’s stool.\nThe exact mode of transmission of COVID‑19 is unknown at this time. However, a person with COVID‑19 is thought to be contagious from 48 hours before their symptoms appear. Studies are ongoing.\nIn general, coronaviruses do not survive for long on objects. They can survive on surfaces for a few hours to several days. It mainly depends on the type of surface (for example, copper, cardboard, stainless steel, plastic), the temperature and ambient humidity. According to findings from a recent experiment, the virus might be able to survive up to:\n*   4 hours on copper;\n*   24 hours on cardboard;\n*   48 hours (2 days) on stainless steel;\n*   72 hours (3 days) on plastic.\nIn Québec, there is no evidence to suggest that people are at risk of contracting COVID‑19 from animals or animal products.\ngeneral information on covid-19 = section://1vstjt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment se transmet la COVID‑19?",
+        "Quels est le principal mode d'infection du coronavirus?",
+        "Infection au coronavirus par le nez, la gorge ou les poumons.",
+        "Quels sont les modes d'infections du coronavirus?",
+        "Par où passe le virus pour infecter un humain?",
+        "Est-ce que la covid est reliée au 5G?",
+        "La COVID-19 passe-t-elle par le nez, la gorge et les poumons?",
+        "Est-ce que les moustiques peuvent transmettre le coronavirus?",
+        "Si une personne a déjà eu le covid, est-elle contagieuse?",
+        "Est-ce que je peux pogner le covid-19 par une blessure sur la main?",
+        "Comment le virus est-il transmis?"
+      ],
+      "en": [
+        "...how is covid-19 transmitted?",
+        "what is the main mode of coronavirus infection?",
+        "coronavirus infection through the nose, throat, or lungs.",
+        "what are the modes of coronavirus infection?",
+        "where does the virus go to infect a human?",
+        "is the covid connected to the 5g?",
+        "does covid-19 pass through the nose, throat and lungs?",
+        "can mosquitoes transmit coronavirus?",
+        "if a person's already had the covid, is it contagious?",
+        "can I poach covid-19 through a hand injury?",
+        "how is the virus transmitted?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "lp3jol0nnr_o__est_il_possible_de_trouver_des_informations_g_n",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53236\nConseils Juridiques par téléphone = source://quebec.ca/c53235"
+      ],
+      "en": [
+        "source://quebec.ca/c53236\nlegal advice by phone = source://quebec.ca/c53235"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Où est-il possible de trouver des informations générales sur le droit familial?",
+        "J'aimerais avoir de l'information sur le droit familial.",
+        "Quels sites peuvent me donner de l'information sur le droit familial?",
+        "Est-ce qu'il y a de l'information sur le droit familial?",
+        "Qui puis-je contacter si je vis du stress par rapport au droit familial?"
+      ],
+      "en": [
+        "where can I find general information on family law?",
+        "i'd like some information on family law.",
+        "what sites can give me information on family law?",
+        "is there any information on family law?",
+        "who can I contact if I am experiencing stress related to family law?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille"
+    ]
+  }
+}

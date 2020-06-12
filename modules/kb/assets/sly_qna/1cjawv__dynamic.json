@@ -1,0 +1,42 @@
+{
+  "id": "1cjawv__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Les entreprises de déménagement font partie des services et activités prioritaires. L’Institut national de santé publique du Québec a d’ailleurs émis des [recommandations intérimaires pour les déménageurs](https://www.inspq.qc.ca/sites/default/files/covid/2923-demenageurs-covid19.pdf) afin de prévenir les risques de prévention de la COVID-19.\nSi vous ne pouvez faire appel à des déménageurs et que vous devez absolument recevoir de l’aide pour votre déménagement, il est possible de faire appel à des proches en s’assurant de respecter certains critères.\nTout d’abord, assurez-vous qu’aucun de ces proches ne présente des symptômes associés à la COVID-19, ne revienne de voyage depuis moins de 14 jours ou n’a été en contact avec des personnes infectées.\nÉgalement, vous devez limiter autant que possible le nombre de personnes présentes ainsi que la durée de leur présence. Gardez toujours, dans la mesure du possible, une distance de deux mètres entre l’ensemble des personnes.\nLavez-vous régulièrement les mains à l’eau tiède et au savon pendant au moins 20 secondes et respectez les autres consignes sanitaires de base (évitez le contact direct pour les salutations, comme les poignées de main; toussez dans votre coude; évitez de porter vos mains à votre visage, etc.).\nLes déménagements = section://Z1brdUQ"
+      ],
+      "en": [
+        "Moving companies are included on the list of priority services and activities. Moreover, the Institut national de santé publique du Québec has issued [temporary recommendations for movers ](https://www.inspq.qc.ca/sites/default/files/covid/2923-demenageurs-covid19.pdf) to prevent the risk of spreading COVID-19.\nIf you cannot rely on movers and must obtain help for your move, it is possible to call on your loved ones while abiding by certain criteria.\nFirst, make sure that no one displays COVID-19 symptoms, has returned from a trip within the past 14 days or has been in contact with infected individuals.\nYou must also limit as much as possible the number of people present and the duration of their presence. As far as possible, always remain 2 metres from each other.\nFrequently wash your hands for at least 20 seconds with warm water and soap. Abide by the other basic health recommendations: avoid direct contact when greeting other people, such as shaking hands; cough into the crook of your elbow; avoid touching your face; and so on.\nmoves = section://z1brduq"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Puis-je faire appel à des proches pour obtenir de l’aide lors de mon déménagement?",
+        "est-ce qu'un ami peut m'aider à déménager",
+        "mon ami peut-il m'aider à déménager",
+        "puis-je faire appel à ma famille pour transporter mes meubles",
+        "mes amis peuvent tu m'aider à déménager",
+        "Est-ce que je peux demander aux proches de m'aider à déménager?",
+        "Puis-je me faire aider par des amis pour déménager?",
+        "Est-ce qu'un ami peut m'aider à déménager?"
+      ],
+      "en": [
+        "can i call on relatives for help with my move?",
+        "can a friend help me move",
+        "can my friend help me move",
+        "can I call on my family to transport my furniture",
+        "my friends can help me move",
+        "can I ask relatives to help me move?",
+        "can I get some friends to help me move?",
+        "can a friend help me move?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

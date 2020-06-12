@@ -1,0 +1,32 @@
+{
+  "id": "6bu3k8bld8_est_il_permis_d_aller_habiter__le_temps_du_confine",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53357"
+      ],
+      "en": [
+        "source://quebec.ca/c53357"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il permis d’aller habiter, le temps du confinement, chez un proche aîné demeurant dans la même région que soi afin de lui rendre service?",
+        "Puis-je aller habiter chez un proche aîné demeurant dans la même région afin de lui rendre service?",
+        "Comment procéder pour aller habiter chez un proche ainée?"
+      ],
+      "en": [
+        "is it permissible to go and live, during the time of confinement, with an elderly relative living in the same region as oneself in order to be of service to him/her?",
+        "can i go and live with a senior relative living in the same area as a favour to him or her?",
+        "how do you go about living with a senior relative?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Personnes à risque"
+    ]
+  }
+}

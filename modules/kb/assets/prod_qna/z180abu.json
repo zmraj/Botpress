@@ -1,0 +1,52 @@
+{
+  "id": "z180abu",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z29qfnU\nTout savoir sur les rassemblements = page://Z1100pc"
+      ],
+      "en": [
+        "section://Z29qfnU\nall about gatherings = page://z1100pc"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "je peux tu organiser un souper d'amis",
+        "est-ce que je peux inviter des amis à souper",
+        "Quelle distance faudra respecter entre personnes?",
+        "est-ce que je peux fêter l'anniversaire à ma mère?",
+        "je veux organiser une soirée mais nous respecterons la distanciation, est-ce ok?",
+        "Est-ce que je peux recevoir du monde à la maison pendant la pandémie?",
+        "Est-ce qu'on faire un party avec la famille pendant l'épidémie?",
+        "Ai-je le droit de rejoindre des amis au parc malgré la crise?",
+        "Est-ce que je peux inviter ma fille chez moi?",
+        "est-ce que mes enfants peuvent venir me visiter?",
+        "En déconfinement, notre fils d'une région éloignée peut-il venir nous voir et coucher à la maison?",
+        "je vis seule dans mon appartement condo, puis-je recevoir une amie?",
+        "Comment rester en contact avec ses proches?"
+      ],
+      "en": [
+        "i can set up a dinner party for friends",
+        "can I invite some friends over for dinner",
+        "how far apart should people be?",
+        "can I celebrate my mother's birthday?",
+        "i want to throw a party, but we'll respect the distance, is that okay?",
+        "can I have people over during the pandemic?",
+        "are we having a party with the family during the outbreak?",
+        "am I allowed to join friends in the park despite the crisis?",
+        "can I invite my daughter into my home?",
+        "can my children come and visit me?",
+        "in deconfinement, can our son from a remote area come to our house and sleep over?",
+        "i live alone in my condo apartment, can I have a friend over?",
+        "how do you stay in touch with your loved ones?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

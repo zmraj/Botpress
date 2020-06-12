@@ -1,0 +1,88 @@
+{
+  "id": "c76lpn837k_je_reviens_de_voyage__que_dois_je_faire",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46809"
+      ],
+      "en": [
+        "source://quebec.ca/c46809"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je reviens de voyage, que dois-je faire?",
+        "J'arrive de voyage, qu'est-ce que je dois faire ?",
+        "Rester à la maison après un voyage à l'étranger.",
+        "Isolement volontaire après avoir voyagé.",
+        "Retour de voyage.",
+        "Je suis de retour de voyage, que dois-je faire ?",
+        "De retour de voyage faut il que je me mette en quarantaine ?",
+        "Je fais quoi si je suis de retour de voyage ?",
+        "Que dois-je faire si je suis de retour de l'étranger ?",
+        "Qu'est-ce que je dois faire si je suis de retour de voyage ?",
+        "Je fais quoi si je reviens des États-unis ?",
+        "Est-ce que je peux aller voir mes parents qui reviennent de Miami?",
+        "Que dois-je faire si je reviens de retour de voyage ?",
+        "Je reviens de voyage à l'étranger",
+        "Je suis aller en Europe la semaine dernière que dois je faire?",
+        "Mesures aux frontières",
+        "J'arrive d'un voyage au Mexique, est-ce que je dois m'isoler?",
+        "J'arrive de Chine le mois passé, quel est le protocole?",
+        "Quelles sont les mesures prises pour les personnes qui arrivent de l'extérieur du pays ?",
+        "Les personnes qui reviennent de l'extérieur du pays doivent-elles s'isoler même s'ils ne sont pas malade   ?",
+        "Est ce qu'une personne qui revient de voyage et qui est en siolement peut sortir pour prendre une petite marche?",
+        "y'a t-il des mesures de contrôles pour les personnes qui reviennent de voyage?",
+        "Que dois-je faire si je reviens de voyage d'après le gouvernement canadien?",
+        "Je reviens de l'étranger, je dois faire quoi ?",
+        "C'est quoi les obligations pour le vacancier de retour ?",
+        "Je reviens de voyage, je dois me mettre en quarantaine ?",
+        "C'est obligé l'isolement pour les Québécois de retour de voyage ?",
+        "Je reviens de voyage, quel est le nombre de jour pour l'isolement?",
+        "Je suis de retour au pays, je fais quoi ?",
+        "Il se passe quoi quand on revient d'un déplacement aux USA ?",
+        "je dois faire quoi, je remonte de Floride."
+      ],
+      "en": [
+        "i've just come back from a trip, what should I do?",
+        "i just got back from a trip, what should I do?",
+        "stay at home after a trip abroad.",
+        "voluntary isolation after travel.",
+        "return from trip.",
+        "i'm back from a trip, what should I do?",
+        "on my way back from a trip do I need to quarantine myself?",
+        "what do I do if I'm back from my trip?",
+        "what should I do if I'm back from abroad?",
+        "what should I do if I'm back from my trip?",
+        "what do I do if I come back from the States?",
+        "can I go see my parents when they get back from miami?",
+        "what should I do if I come back from my trip?",
+        "i've just returned from a trip abroad",
+        "i went to europe last week. What should I do?",
+        "border measures",
+        "i just got back from a trip to mexico, should I isolate myself?",
+        "i just flew in from China last month, what's the protocol?",
+        "what are the measures taken for people arriving from outside the country?",
+        "do people returning from outside the country have to isolate themselves even if they are not sick?",
+        "can a person returning from a trip who is in siolement go out for a walk?",
+        "are there any controls for people returning from travel?",
+        "what should i do if the canadian government says i'm coming back from a trip?",
+        "i just got back from abroad, what should I do?",
+        "what are the obligations for the returning vacationer?",
+        "i just got back from a trip, do I have to quarantine myself?",
+        "does it have to be isolation for Quebecers returning from a trip?",
+        "i just got back from a trip, what's the number of days in solitary confinement?",
+        "i'm back home, what do I do?",
+        "what happens when you come back from a trip to the u.s.?",
+        "what am I supposed to do, go back up from Florida."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Voyageurs"
+    ]
+  }
+}

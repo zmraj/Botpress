@@ -1,0 +1,42 @@
+{
+  "id": "zwxlli",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://1VstJt\nInformations générales sur la COVID-19 = section://1VstJt"
+      ],
+      "en": [
+        "section://1VstJt\ngeneral information on covid-19 = section://1vstjt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "c'est quoi le covid?",
+        "Comment je fais pour savoir si j'ai le COVID",
+        "Je veux de l'information sur le coronavirus",
+        "Avez-vous de l'info sur le covid-19",
+        "Je me demande d'où vient le coronavirus",
+        "Tout savoir su le COVID-19",
+        "Est-ce que vous  auriez une page sur le COVID-19",
+        "Le COVID-19 est-il un virus"
+      ],
+      "en": [
+        "what's the covid?",
+        "how do I know if I have the covid",
+        "i want information on the coronavirus",
+        "do you have any info on covid-19?",
+        "i wonder where the coronavirus came from",
+        "all about covid-19",
+        "do you have a page on covid-19?",
+        "is covid-19 a virus"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

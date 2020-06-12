@@ -1,0 +1,54 @@
+{
+  "id": "efjmmsdkjw_les_parents_qui_utilisent_les_services_de_garde__d",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50794"
+      ],
+      "en": [
+        "source://quebec.ca/c50794"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les parents qui utilisent les services de garde éducatifs à l’enfance durant la situation d'urgence auront-ils à payer des frais de garde?",
+        "Est-ce que la contribution parentale sera payée par le gouvernement provincial?",
+        "Est-que les services de garde d'urgence sont gratuits?",
+        "Frais payables pour les services de garde d'urgence.",
+        "Dois-je continuer à payer la garderie pour ma fille?",
+        "Est-ce que je dois payer les frais de garderie de mes enfants?",
+        "Est-ce obligatoire de payer les garderies pendant la période de deux semaines ?",
+        "Est-ce que des mesures sont prévues pour aider les parents à payer les garderies ?",
+        "Est-ce que je dois payer pour le service de garde de mon fils alors que je ne peux pas l'utiliser ?",
+        "Est-ce à moi de payer pour la garderie de mon enfant comme elle est fermée ?",
+        "J'vais tu devoir continuer à payer pour la garderie de mon kid?",
+        "J'vais tu être obligé de payer pour les frais de garde de mes kids?",
+        "C'est tu important de payer l'argent pour la garderie de mon fils et mes filles?",
+        "Je ne veux plus payer pour la garderie des kids, est-ce que je peux?"
+      ],
+      "en": [
+        "will parents who use ECEC during the emergency have to pay child care fees?",
+        "will the parental contribution be paid by the provincial government?",
+        "is emergency childcare free?",
+        "fees payable for emergency childcare services.",
+        "do I still have to pay for daycare for my daughter?",
+        "do I have to pay for childcare for my children?",
+        "is it mandatory to pay for daycare during the two-week period?",
+        "are there any measures to help parents pay for child care?",
+        "do I have to pay for my son's daycare when I can't use it?",
+        "is it up to me to pay for my child's daycare since it's closed?",
+        "am I gonna have to keep paying for my kid's day care?",
+        "am I gonna have to pay for my kids' daycare?",
+        "is it important to you to pay the money for daycare for my son and daughters?",
+        "i don't want to pay for daycare anymore, can I?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

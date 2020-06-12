@@ -1,0 +1,71 @@
+{
+  "id": "2mnvuy__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Pour inscrire votre enfant à un service de garde d’urgence, vous devez suivre la démarche suivante. Veuillez bien évaluer la nécessité d’utiliser ce service de garde d’urgence avant de faire une demande.\nLes services de garde d'urgence = page://QmcNQ"
+      ],
+      "en": [
+        "\nemergency childcare services = page://qmcnq"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment inscrire un enfant à un service de garde éducatif à l’enfance durant la situation d'urgence?",
+        "Procédure pour inscrire mes enfants au service de garde d'urgence.",
+        "Est-ce que je dois passer par le guichet unique d'accès aux service de garde pour inscrire mon enfant au service de garde d'urgence?",
+        "Est-que je dois signer des documents pour le service de garde d'urgence?",
+        "Quelle est la marche à suivre pour inscrire mon enfant dans un service de garde d'urgence ?",
+        "Quelle est la façon de procéder pour inscrire mes enfants au service de garde d'urgence ?",
+        "Comment inscrire nos enfants dans les services de garde d'urgence ?",
+        "Où sont les instructions pour s'inscrire aux services de garde d'urgence ?",
+        "Comment peut-on inscrire nos enfants dans les services de garde d'urgence ?",
+        "Est-ce que je peux utiliser les services de garde d'urgence ?",
+        "Est-ce possible d'utiliser les services de garde d'urgence ?",
+        "Est-ce que les services de garde d'urgence peuvent être utilisés pour mes enfants ?",
+        "Qui va me dire comment faire pour inscrire mon enfant au service de garde d'urgence ?",
+        "Comment je fais pour inscrire mon fils au service de garde d'urgence ?",
+        "C'est comment qu'on fait pour inscrire notre enfant au service de garde d'urgence ?",
+        "Comment ça marche pour inscrire notre enfant au service de garde d'urgence ?",
+        "Comment que je peux enregistrer mon enfant au service de garde d'urgence ?",
+        "Inscrire ma fille et mes fils au service de garde d'urgence, c'est possible ?",
+        "Je peux-tu inscrire mon kid au service de garde d'urgence ?",
+        "Inscription au service de garde d'urgence un enfant",
+        "C'est comment qu'on inscrit dans le service de garde d'urgence ?",
+        "Je fais quoi pour inscrire mes filles au service de garde d'urgence ?",
+        "Comment s'inscrire au service de garde d'urgence?"
+      ],
+      "en": [
+        "how do you register a child for educational child care during an emergency?",
+        "procedure for registering my children for emergency childcare.",
+        "do i have to go through the one-stop child care access centre to register my child for emergency child care?",
+        "do I have to sign any documents for the emergency childcare service?",
+        "how do i register my child for emergency child care?",
+        "how do i register my children for emergency childcare?",
+        "how do we enroll our children in emergency child care?",
+        "where are the instructions for registering for emergency childcare?",
+        "can I use emergency childcare?",
+        "is it possible to use emergency childcare?",
+        "can emergency childcare be used for my children?",
+        "who's going to tell me how to get my child into emergency child care?",
+        "how do I sign my son up for emergency childcare?",
+        "is how do we get our kid into emergency child care?",
+        "how does it work to get our child into emergency child care?",
+        "how can I register my child for emergency childcare?",
+        "register my daughter and sons for emergency childcare, is that possible?",
+        "can you sign my kid up for emergency childcare?",
+        "emergency child care registration one child",
+        "what's it like to sign up for emergency child care?",
+        "what do I do to get my daughters into emergency childcare?",
+        "how do i register for emergency childcare?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services de garde"
+    ]
+  }
+}

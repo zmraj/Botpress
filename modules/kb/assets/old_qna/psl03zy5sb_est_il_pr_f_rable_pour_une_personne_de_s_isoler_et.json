@@ -1,0 +1,50 @@
+{
+  "id": "psl03zy5sb_est_il_pr_f_rable_pour_une_personne_de_s_isoler_et",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46799"
+      ],
+      "en": [
+        "source://quebec.ca/c46799"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il préférable pour une personne de s’isoler et de rester à la maison pour les semaines à venir même si elle ne revient pas de voyage?",
+        "Est-ce nécessaire de s'isoler lorsqu'on ne revient pas de voyage ?",
+        "Est-ce possible de faire des visites en Centre Hospitaliers de longue durée ?",
+        "Comment réduire la propagation de la COVID-19 ?",
+        "Est-ce qu'une personne en santé doit s'isoler même si elle ne revient pas de voyage ?",
+        "Si je suis atteint d'une maladie chronique, est-ce obligatoire de m'isoler puisque je ne reviens pas de voyage ?",
+        "Si je ne reviens pas de voyage et que je suis en santé et que j'ai moins de 70 ans, est-ce que je peux continuer mes activités habituelles ?",
+        "Est-ce obligatoire de rester à la maison lorsqu'on ne revient pas de voyage ?",
+        "Pour quelle raison doit-on rester à la maison si on ne revient pas de voyage ?",
+        "Je ne reviens pas de voyage, est-ce que je dois m'isoler et rester à la maison ?",
+        "Je suis en santé, je dois tu m'isoler quand même?",
+        "Comment éviter la propagation du covid"
+      ],
+      "en": [
+        "is it better for a person to isolate themselves and stay home for the next few weeks even if they don't return from a trip?",
+        "is it necessary to isolate yourself when you don't come back from a trip?",
+        "is it possible to make long-term hospital visits?",
+        "how to reduce the spread of covid-19?",
+        "does a healthy person have to isolate themselves even if they don't return from a trip?",
+        "if I have a chronic illness, is it mandatory to isolate myself since I do not return from a trip?",
+        "if I do not return from a trip and I am healthy and under 70 years of age, can I continue my usual activities?",
+        "is it mandatory to stay home when not returning from a trip?",
+        "why do you have to stay home if you don't come back from your trip?",
+        "i don't come back from a trip, should I isolate myself and stay at home?",
+        "i'm healthy, I still need you to isolate me?",
+        "how to avoid the spread of covid"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Isolement volontaire"
+    ]
+  }
+}

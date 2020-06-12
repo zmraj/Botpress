@@ -1,0 +1,42 @@
+{
+  "id": "job7ezpjge_quelles_sont_les_consignes_pour_les_personnes_de_r",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48224"
+      ],
+      "en": [
+        "source://quebec.ca/c48224"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les consignes pour les personnes de retour de croisière?",
+        "Quelle est la période de confinement obligatoire au retour de croisière?",
+        "Est-ce qu'on doit rester plus de 14 jours en isolement si on revient de croisière ?",
+        "Y-a-t-il des risques particuliers en lien avec le COVID suite à une croisière ces dernières semaines ?",
+        "Je reviens de croisière et je n'ai pas de symptômes est-ce obligatoire d'être en isolement ?",
+        "Dans un contexte d'isolement suite à un retour d'une croisière, qu'en est-il des membres de ma famille?",
+        "J'étais sur une croisière et je suis rentré",
+        "Il n'y avait pas de malade dans mon bateau de croisière, je dois m'isoler pareil ?"
+      ],
+      "en": [
+        "what are the instructions for people returning from a cruise?",
+        "what is the mandatory return containment period?",
+        "do we have to spend more than 14 days in solitary if we come back from the cruise?",
+        "are there any particular risks associated with the covid following a cruise in recent weeks?",
+        "i just got back from a cruise and I don't have any symptoms. Is it mandatory to be in isolation?",
+        "in isolation after returning from a cruise, what about my family members?",
+        "i was on a cruise and I came home..",
+        "there wasn't a sick person on my cruise ship, I have to isolate myself like that?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Voyageurs"
+    ]
+  }
+}

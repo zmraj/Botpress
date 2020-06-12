@@ -1,0 +1,40 @@
+{
+  "id": "t6woc__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Le risque de complications graves pour les personnes atteintes de la COVID‑19 augmente avec l’âge, mais il est présent même chez les jeunes adultes. Le risque de décès à la suite de complications respiratoires graves (pneumonie ou syndrome respiratoire aigu) dues à la COVID‑19 est particulièrement élevé chez :\n*   les personnes âgées de 70 ans et plus;\n*   les personnes ayant un système immunitaire affaibli;\n*   les personnes atteintes de maladies chroniques telles que :\n    *   le diabète;\n    *   les maladies cardiaques;\n    *   les maladies pulmonaires;\n    *   les maladies rénales.\n*   le diabète;\n*   les maladies cardiaques;\n*   les maladies pulmonaires;\n*   les maladies rénales.\nInformations générales sur la COVID-19 = section://1VstJt"
+      ],
+      "en": [
+        "The risk of serious complications for people with COVID-19 increases with age, but even young adults are at risk. The risk of dying from serious respiratory complications (pneumonia or acute respiratory distress syndrome) due to COVID-19 is especially high in:\n*   people age 70 and older;\n*   people who have a weakened immune system;\n*   people who have a chronic disease; such as:\n    *   diabetes;\n    *   heart disease;\n    *   lung disease;\n    *   kidney disease.\n*   diabetes;\n*   heart disease;\n*   lung disease;\n*   kidney disease.\ngeneral information on covid-19 = section://1vstjt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je vais tu mourir du coronavirus",
+        "Est-ce que le virus est mortel?",
+        "C'est quoi les probabilités de mourir du COVID-19?",
+        "mourir du covid-19",
+        "À quel point c'est dangereux cette maladie-là?",
+        "Quel est le pire qui peut m'arriver avec le covid-19",
+        "Quel âge ont les gens qui décèdent de la covid?"
+      ],
+      "en": [
+        "i'm gonna kill you with the coronavirus",
+        "is the virus lethal?",
+        "what are the odds of dying from covid-19?",
+        "die of covid-19",
+        "how dangerous is this disease?",
+        "what's the worst that can happen to me with covid-19?",
+        "how old are the people who die from the covid?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

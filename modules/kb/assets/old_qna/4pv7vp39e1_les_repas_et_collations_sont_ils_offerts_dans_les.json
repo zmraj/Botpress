@@ -1,0 +1,34 @@
+{
+  "id": "4pv7vp39e1_les_repas_et_collations_sont_ils_offerts_dans_les",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50843"
+      ],
+      "en": [
+        "source://quebec.ca/c50843"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les repas et collations sont-ils offerts dans les services de garde éducatifs à l’enfance?",
+        "Est-ce que les services de garde éducatifs offrent toujours leurs services habituels?",
+        "Service dans les services de garde éducatifs.",
+        "Est-ce que les services habituels sont encore en vigueur dans les services de garde éducatifs?"
+      ],
+      "en": [
+        "are meals and snacks provided in early childhood education and care centres?",
+        "does the educational child care centre still provide its usual services?",
+        "service in educational child care.",
+        "are the usual services still in place in early childhood education and care?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

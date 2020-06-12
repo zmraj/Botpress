@@ -1,0 +1,42 @@
+{
+  "id": "qyolllc0d3_quels_sont_les_crit_res_d_admissibilit__au_program",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46319"
+      ],
+      "en": [
+        "source://quebec.ca/c46319"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les critères d'admissibilité au programme d’aide temporaire aux travailleurs PATT COVID-19?",
+        "Critères d'admissibilité au PATT COVID-19.",
+        "Qui peut avoir du programme d'aide provisoir aux travailleurs ?",
+        "Les travailleurs étrangers ont-ils droit au PATT ?",
+        "Je suis un étudiant provenant de l'étranger avec un emploi à temps partiel, est-ce que je suis admissible au programme d’aide temporaire aux travailleurs ?",
+        "Suis-je admissible au PATT si je suis déjà inscrit à un autre programme de demande de subvention ?",
+        "Qui est  visé par le programme PATT ?",
+        "Le programme d'aide aux travailleurs s'adresse-t-il aux personnes de plus de 18ans?"
+      ],
+      "en": [
+        "what are the eligibility criteria for the patt covid-19 temporary help worker program?",
+        "eligibility criteria for patt covid-19.",
+        "who can get the interim worker's comp program?",
+        "are foreign workers entitled to the patt?",
+        "i am a student from outside Canada with part-time employment, am I eligible for the Temporary Help for Workers program?",
+        "am i eligible for the patt if i am already enrolled in another grant application program?",
+        "who is targeted by the patt program?",
+        "is the worker assistance program for people over 18 years of age?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

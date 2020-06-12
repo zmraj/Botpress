@@ -1,0 +1,66 @@
+{
+  "id": "1rcou9",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://ZyOPJq\nProtéger nos personnes âgées = section://ZyOPJq"
+      ],
+      "en": [
+        "section://ZyOPJq\nprotecting our seniors = section://zyopjq"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les visites dans les hôpitaux, les CHSLD, les ressources intermédiaires, les ressources de type familial pour les aînés et les adultes vulnérables ainsi que dans les résidences privées pour aînés sont permises?",
+        "Est-ce que les visites dans les milieux de vie hospitaliers et pour personnes vulnérables sont autorisées?",
+        "Est-ce que je peux aller voir ma mère malade à l'hôpital?",
+        "Puis-je accompagner ma femme à l'hopital si elle accouche?",
+        "Mon père de 80 ans veut aller voir sa femme au foyer? Est-ce correct ?",
+        "Je peux-tu aller voir ma mère à sa résidence pour personnes agées",
+        "Est-ce possible de faire des visites à un proche en CHSLD?",
+        "Est-ce que je peux aller visiter une amie à la maternité?",
+        "Est-ce conseillé d'aller visiter les gens hospitalisés?",
+        "Est-il possible d'aller voir mes grands-parents dans leur résidence de personnes âgées ?",
+        "Ma mère est dans une résidence je peux-tu aller la voir?",
+        "C'est tu possible que je continue d'aller rendre visite à mes parents dans leur résidence de personnes âgées?",
+        "Ma mère a le coronavirus et est seule au CHSLD je peux tu aller m'en occuper?",
+        "J'ai tu le droit d'aller rendre visite à un aîné?",
+        "Est-ce qu'on peut recevoir de la visite quand on est en CHSLD?",
+        "Je dois me faire opérer est-ce que quelqu'un peut m'accompagner?",
+        "On a tu encore le droit d'aller visiter des gens à l'hôpital ou au CHSLD?",
+        "Je peux-tu être accompagné quand je vais accoucher?",
+        "Maman est très malade, on ne sait combien de temps elle va durer, je veux aller la voir à l'hopital.",
+        "Est-ce que mon conjoint peut être présent  quand je vais accoucher ?"
+      ],
+      "en": [
+        "are visits to hospitals, chslds, intermediate resources, family-type resources for seniors and vulnerable adults, and private seniors' residences permitted?",
+        "are visits to hospital and vulnerable living environments permitted?",
+        "can I go see my sick mother in the hospital?",
+        "can I take my wife to the hospital if she's having a baby?",
+        "my 80-year-old father wants to go see his housewife? Is that correct?",
+        "can you go visit my mom at her senior center?",
+        "is it possible to visit a relative in chsld?",
+        "can I go visit a friend in the maternity ward?",
+        "is it advisable to visit people in hospital?",
+        "is it possible to visit my grandparents in their retirement home?",
+        "my mom's in a dorm. Can you go see her?",
+        "is it possible I could still visit my parents at their nursing home?",
+        "my mom has coronavirus and is alone in the hospital. Can you go take care of her?",
+        "am I allowed to visit an elder?",
+        "can we have visitors when we're in chsld?",
+        "i'm going into surgery. Is there anyone who can come with me?",
+        "are we still allowed to visit people in the hospital or at the chsld?",
+        "can I bring you along when I give birth?",
+        "mom is very sick, we don't know how long she'll last, I want to go see her in the hospital.",
+        "can my partner be present when I give birth?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Soutien aux personnes"
+    ]
+  }
+}

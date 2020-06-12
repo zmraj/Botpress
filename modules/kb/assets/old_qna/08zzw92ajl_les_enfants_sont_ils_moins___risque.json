@@ -1,0 +1,48 @@
+{
+  "id": "08zzw92ajl_les_enfants_sont_ils_moins___risque",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47175"
+      ],
+      "en": [
+        "source://quebec.ca/c47175"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les enfants sont-ils moins à risque?",
+        "Les enfants peuvent-ils l'attrapper ?",
+        "Je suis en quarantaine volontaire car j'ai voyagé durant la semaine de relâche avec eux, qu'est-ce qui se passe avec les enfants ?",
+        "Est-ce que les enfants sont immunisés ?",
+        "Est-ce vrai que les enfants ne peuvent pas l'attraper ?",
+        "Est-ce vrai que les enfants ont moins de chance de l'attraper ?",
+        "C'est tu moins dangereux pour les enfants ?",
+        "Si mon kid pogne le corona est-ce que c'est dangereux pour lui ?",
+        "Est-ce que le virus est moins dangereux pour mon enfant ?",
+        "Est-ce que mon enfant peut transmettre le virus ?",
+        "Mon fils et ma fille n'ont pas de symptômes, peuvent-ils quand même avoir le virus ?"
+      ],
+      "en": [
+        "are the children less at risk?",
+        "can the kids catch it?",
+        "i'm in voluntary quarantine because I traveled over the spring break with them, what's going on with the kids?",
+        "are the children immunized?",
+        "is it true that children can't catch it?",
+        "is it true that children are less likely to catch it?",
+        "are you less dangerous to the children?",
+        "if my kid punches the corona, is it dangerous for him?",
+        "is the virus less dangerous for my child?",
+        "can my child transmit the virus?",
+        "my son and daughter have no symptoms, can they still have the virus?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Personnes à risque"
+    ]
+  }
+}

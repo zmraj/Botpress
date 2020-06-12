@@ -1,0 +1,32 @@
+{
+  "id": "oyoqkbhf3g_quels_enfants_peuvent_b_n_ficier_des_services_de_g",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50730"
+      ],
+      "en": [
+        "source://quebec.ca/c50730"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels enfants peuvent bénéficier des services de garde éducatifs à l’enfance durant la situation d'urgence?",
+        "Je travaille dans un service essentiel, qui peut venir garder mes enfants à la maison?",
+        "Comment je fais pour savoir si je travaille dans un service essentiel et profiter du service de garde d'urgence?"
+      ],
+      "en": [
+        "which children are eligible for early childhood education and care during the emergency?",
+        "i work in an essential service, who can come and look after my children at home?",
+        "how do i know if i work in an essential service and take advantage of emergency child care?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "owr8rn4xso_je_dois_envoyer_des_documents___un_employ__du_mini",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49364"
+      ],
+      "en": [
+        "source://quebec.ca/c49364"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je dois envoyer des documents à un employé du Ministère. Quelle est la meilleure façon de procéder?",
+        "De quelle façon je dois envoyer des documents à un employé du ministère du Tourisme ?",
+        "Contacter le Ministère du Tourisme.",
+        "Soumettre des demandes au Ministère du Tourisme.",
+        "Est-ce qu'il y a encore moyen d'envoyer des documents à un employé du ministère du Tourisme? Comment on fait ?",
+        "Quelle est la marche à suivre pour envoyer des documents à un employé du ministère du Tourisme?",
+        "Est-ce que je peux envoyer des documents par la poste au Ministère du Tourisme?",
+        "Comment joindre les employés du Ministère du Tourisme?",
+        "Est-ce qu'on peut utliser des fax pour envoyer des papiers au Ministère du Tourisme?",
+        "Communiquer avec le Ministère du Tourisme.",
+        "Est-ce que je peux conacter le ministère du Tourisme par email pour envoyer des pièces jointes ?"
+      ],
+      "en": [
+        "i need to send documents to a departmental employee. What is the best way to do this?",
+        "how do I send documents to an employee of the Ministry of Tourism?",
+        "contact the Ministry of Tourism.",
+        "submit applications to the Ministry of Tourism.",
+        "is there still a way to send documents to an employee of the Ministry of Tourism? How do you do it?",
+        "what is the procedure for sending documents to an employee of the ministry of tourism?",
+        "can i mail documents to the ministry of tourism?",
+        "how do i reach ministry of tourism employees?",
+        "can we use faxes to send papers to the Ministry of Tourism?",
+        "contact the Department of Tourism.",
+        "can I email the Ministry of Tourism to send attachments?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "z3e4dc09q8_existe_t_il_une_trousse_d_outils___destination_des",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c52628"
+      ],
+      "en": [
+        "source://quebec.ca/c52628"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Existe-t-il une trousse d'outils à destination des municipalités pour la communication avec le citoyen en cas de crise ?",
+        "Comment les municipalités vont communiquer avec les gens dans les maisons sont inondées?",
+        "S'il y a des inondations comment les municipalités vont s'assurer qu'il n'y aura pas de propagation du virus?",
+        "Inondation en cas de pandémie.",
+        "En cas d'inondation qui va protéger mes biens?",
+        "Outils pour les villes sur la communication aux citoyens en situation crise.",
+        "Y-a-t-il une trousse pour les municipalités pour les aider dans leur communication de crise avec le citoyen?"
+      ],
+      "en": [
+        "is there a toolkit for municipalities to use in communicating with citizens in the event of a crisis?",
+        "how will municipalities communicate with people in flooded homes?",
+        "if there is flooding, how will municipalities ensure that the virus will not spread?",
+        "flooding in the event of a pandemic.",
+        "in the event of a flood that will protect my property?",
+        "tools for cities on communication to citizens in crisis situations.",
+        "is there a kit for municipalities to help them in their crisis communication with citizens?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "zshgak__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Les photographes professionnels peuvent reprendre leurs activités tant à l’extérieur qu’à l’intérieur. Les studios de photographie ayant un accès extérieur habituellement utilisé par la clientèle peuvent reprendre leurs activités à la même date que les commerces de détail, selon l’endroit où ils se trouvent. Ainsi, les studios de photographie situés en dehors de la communauté métropolitaine de Montréal (CMM) peuvent rouvrir dès aujourd’hui, tandis que ceux situés sur le territoire de la CMM pourront le faire à compter du 25 mai 2020.\nLa réouverture des commerces = section://Z2tycKs"
+      ],
+      "en": [
+        "Professional photographers may resume their activities both indoors and outdoors. Photography studios that have direct exterior access that customers usually use may resume their activities on the same date as retail businesses, according to their location. Thus photography studios located outside the Communauté métropolitaine de Montréal (CMM) may reopen as of today, whereas those located within the territory of the CMM may do so starting from May 25, 2020.\nthe reopening of shops = section://z2tycks"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les photographes professionnels peuvent ouvrir?",
+        "Quand est-ce que les photographes professionnels pourront recommencer à travailler?",
+        "Je suis photographe, est-ce que je peux recommencer à prendre des photos de mes clients?",
+        "Je peux tu me faire prendre en photo par un photographe à l'extérieur?",
+        "Qu'en est-il de la photographie?"
+      ],
+      "en": [
+        "can professional photographers open?",
+        "when can professional photographers start working again?",
+        "i'm a photographer, can I start taking pictures of my clients again?",
+        "can you get me a picture taken by a photographer outside?",
+        "what about photography?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

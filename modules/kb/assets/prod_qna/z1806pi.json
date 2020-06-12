@@ -1,0 +1,68 @@
+{
+  "id": "z1806pi",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://Z1j1ouN\nLes services de garde d'urgence = page://QmcNQ"
+      ],
+      "en": [
+        "page://Z1j1ouN\nemergency childcare services = page://qmcnq"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que je peux retourner mon enfant dans un service de garde non-subventionné?",
+        "Dois-je payer pour les jours où mon enfant ne fréquente pas le service de garde?",
+        "Contribution parentale dans les CPE",
+        "Est-ce que je peux garder ma place en garderie si je n'envoie pas mon enfant à cause du virus?",
+        "Calendrier ouverture cpe",
+        "Quand ma garderie ouvrira t-elle?",
+        "est-ce qu'on peut refuser un enfant à la garderie si les règles ne sont pas respectées?",
+        "les centres de la petite enfance",
+        "Est-ce qu'un cpe doit avertir s'il y a un cas de covid dans son établissement?",
+        "Doit-on payer la garderie si notre enfant ne le fréquente pas dû au covid19?",
+        "Dans un cpe, que faire si un enfant de la famille fait de la fièvre, dois-je retourner son frère à la maison également?",
+        "À quand le retour à la normale pour les cpe?",
+        "Quand les garderies vont ouvrir comme avant?",
+        "Quelle est la date de retour à la capacité normale des garderies?",
+        "Est-ce que je peux envoyer mon enfant à la garderie?",
+        "Un enfant de la garderie fait 39 de fièvre ce soir, doit-il rester à la maison pendant 48 heures?",
+        "Je suis un parent qui cherche un service de garde en milieu familial, quelle date on peut aller visiter?",
+        "J,ai un enfant qui a fait de la fièvre hier, peut-il réintégrer la garderie aujourd'hui?",
+        "J'aimerais savoir quelle est la date de retour des services de garde pour les enfants dont les parents ne travaillent pas dans un service essentiel?",
+        "Un parent doit-il payer des frais de garde à partir du 1er juin s'il fréquente un service de garde subventionné?",
+        "Services de garde éducatifs à l'enfance (CPE, milieu familial)"
+      ],
+      "en": [
+        "can i return my child to unsubsidized child care?",
+        "do i have to pay for the days my child does not attend child care?",
+        "parental contribution in the cpe",
+        "can i keep my daycare space if i don't send my child because of the virus?",
+        "calendar opening cpe",
+        "when will my daycare center open?",
+        "can a child be turned away from daycare if the rules are not followed?",
+        "early childhood centres",
+        "does a cpe have to report if there is a case of covid in his establishment?",
+        "do we have to pay for daycare if our child doesn't attend due to covid19?",
+        "in a cpe, what should I do if a child in the family has a fever, should I send his brother home as well?",
+        "when's the back to normal for college kids?",
+        "when the daycare centers open like they used to?",
+        "what is the date when the daycare centres return to normal capacity?",
+        "can I send my child to daycare?",
+        "a child in daycare has a fever tonight, does he have to stay home for 48 hours?",
+        "i'm a parent looking for family child care, what date can we visit?",
+        "i have a child who had a fever yesterday. Can he go back into daycare today?",
+        "i would like to know what is the return date for child care for children whose parents do not work in an essential service?",
+        "does a parent have to pay child care fees starting June 1 if he or she attends a subsidized child care centre?",
+        "early childhood education and care (cpe, family child care)"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services de garde"
+    ]
+  }
+}

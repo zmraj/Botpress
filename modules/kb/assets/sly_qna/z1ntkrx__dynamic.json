@@ -1,0 +1,76 @@
+{
+  "id": "z1ntkrx__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Les personnes qui reviennent d’un séjour à l’extérieur du pays ont l’obligation de s’isoler pour une période de 14 jours. Cet isolement vise autant les voyageurs malades ou qui ressentent des symptômes que ceux qui n’en ont pas et qui sont en parfaite santé.\nLes personnes qui sont en isolement doivent rester à la maison, surveiller leurs symptômes et appeler au [1 877 644‑4545](tel:+1-877-644-4545) si elles présentent l’un des symptômes suivants :\n*   apparition ou aggravation d’une toux;\n*   [fièvre](https://www.quebec.ca/sante/problemes-de-sante/a-z/informations-generales-sur-le-coronavirus/#c46469);\n*   difficultés respiratoires;\n*   perte soudaine de l’odorat sans congestion nasale, avec ou sans perte de goût.\nCertaines pratiques sont recommandées si elles habitent avec d’autres personnes qui n’ont pas voyagé. Pour plus de détails sur les consignes à suivre, se référer à la section [Consignes d'isolement](https://www.quebec.ca/sante/problemes-de-sante/a-z/informations-generales-sur-le-coronavirus/#c53638).\nLes consignes aux voyageurs = section://Z7Fhoo"
+      ],
+      "en": [
+        "Anyone returning from a stay outside Canada must self-isolate for 14 days. Such isolation covers both travellers who are sick or display symptoms and those who do not have symptoms and are in perfect health.\nIndividuals in self-isolation must stay at home, monitor their symptoms and call [1‑877‑644‑4545](tel:+1-877-644-4545) if they develop any of the following symptoms:\n*   new or worse cough;\n*   [fever](https://www.quebec.ca/en/health/health-issues/a-z/general-information-about-coronavirus/#c46539);\n*   difficulty breathing;\n*   sudden loss of sense of smell without a stuffy nose, with or without loss of sense of taste.\nCertain practices are recommended if they live with other people who have not travelled. To obtain additional information on the procedures to follow, please [refer to the Self-isolating instructions section](https://www.quebec.ca/en/health/health-issues/a-z/general-information-about-coronavirus/#c53639).\ninstructions to travellers = section://z7fhoo"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pour les citoyens de retour de voyage",
+        "Qu'impose le gouvernement Canadien dans la Loi sur la mise en quarantaine par le gouvernement du Canada?",
+        "Contrainte légal pour les voyageurs de retour des USA par le Canada.",
+        "Qu'impose la loi fédérale sur les retours de voyage ?",
+        "Que peut-il m'arriver si je ne respecte pas la Loi sur la mise en quarantaine par le gouvernement du Canada à mon retour de voyage?",
+        "Quelle est la position légale du gouvernement canadien sur les voyageurs de retour?",
+        "Les autorités Canadiennes peuvent-elles remettre une contravention si une personne ne s'isole pas à son retour de voyage ?",
+        "Que se passe-t-il pour ceux qui ne respectent pas l'isolement volontaire de retour de Floride en regard de la Loi sur la mise en quarantaine par le gouvernement du Canada?",
+        "Un membre de ma famille arrive de l'étranger, combien de temps doit-elle rester en isolement?",
+        "Quelles sont les obligations légales Canadienne d'un voyageur de retour de voyage?",
+        "Je reviens de voyage, que dois-je faire?",
+        "J'arrive de voyage, qu'est-ce que je dois faire ?",
+        "Rester à la maison après un voyage à l'étranger.",
+        "Isolement volontaire après avoir voyagé.",
+        "Retour de voyage.",
+        "Je suis de retour de voyage, que dois-je faire ?",
+        "De retour de voyage faut il que je me mette en quarantaine ?",
+        "Je fais quoi si je suis de retour de voyage ?",
+        "Que dois-je faire si je suis de retour de l'étranger ?",
+        "Qu'est-ce que je dois faire si je suis de retour de voyage ?",
+        "Je fais quoi si je reviens des États-unis ?",
+        "Est-ce que je peux aller voir mes parents qui reviennent de Miami?",
+        "Que dois-je faire si je reviens de retour de voyage ?",
+        "Je reviens de voyage à l'étranger",
+        "Je suis aller en Europe la semaine dernière que dois je faire?"
+      ],
+      "en": [
+        "for returning citizens",
+        "what does the government of canada's quarantine legislation require?",
+        "legal constraints for travellers returning from the usa via canada.",
+        "what is required by the federal law on return trips?",
+        "what can happen to me if I don't comply with the quarantine law by the government of canada when I return from my trip?",
+        "what is the Canadian government's legal position on returning travellers?",
+        "can Canadian authorities issue a ticket if a person does not isolate himself or herself upon return from a trip?",
+        "what happens to those who do not respect the voluntary isolation back from florida under the quarantine act by the government of canada?",
+        "a family member arrives from abroad, how long should they be in isolation?",
+        "what are the canadian legal obligations of a returning traveller?",
+        "i've just come back from a trip, what should I do?",
+        "i just got back from a trip, what should I do?",
+        "stay at home after a trip abroad.",
+        "voluntary isolation after travel.",
+        "return from trip.",
+        "i'm back from a trip, what should I do?",
+        "on my way back from a trip do I need to quarantine myself?",
+        "what do I do if I'm back from my trip?",
+        "what should I do if I'm back from abroad?",
+        "what should I do if I'm back from my trip?",
+        "what do I do if I come back from the States?",
+        "can I go see my parents when they get back from miami?",
+        "what should I do if I come back from my trip?",
+        "i've just returned from a trip abroad",
+        "i went to europe last week. What should I do?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

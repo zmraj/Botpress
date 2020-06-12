@@ -1,0 +1,70 @@
+{
+  "id": "zha1mh__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Lorsque les milieux de stage ont confirmé la continuité de leurs services, que les étudiants évoluent dans un endroit où les consignes de la Santé publique sont respectées et que les étudiants peuvent réaliser leur stage, par exemple en recourant au télétravail, les stages sont possibles. Cependant, aucun étudiant ne peut être pénalisé en raison de son incapacité à répondre aux exigences.\nLes stages pour étudiant = section://1ckl4s"
+      ],
+      "en": [
+        "If internship settings have confirmed the continuation of the internship, the students’ workplace respects the guidelines issued by the public health authority, and the students are able to complete the internship, for example, by working remotely, then internships are possible. However, students cannot be penalized for their inability to meet requirements.\nstudent internships = section://1ckl4s"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Qu’advient-il des stages pour les étudiants en enseignement?",
+        "Je suis un étudiant en enseignement, qu'en est-t-il des stages?",
+        "Y-a-t-il des solutions pour les stages des étudiants en enseignement?",
+        "Qu'en est-il pour la suspension des stages des étudiants en enseignement?",
+        "Est-ce que mon directeur de stage en enseignement va pouvoir m'aider ?",
+        "Est-ce que les stages sont maintenus?",
+        "Sous quelles conditions est-ce que les stages de formation sont maintenus?",
+        "Bien que le stage de formation soit confirmé, je ne peux pas rencontrer les nouvelles exigences?",
+        "Mon Cegep n'a pas encore confirmé si mon stage est maintenu. Vais-je être pénalisé ?",
+        "Est-ce que les stages des étudiants doivent être reportés?",
+        "Puis-je être pénalisé, car je ne peux pas faire mon stage?",
+        "J'aimerais savoir si je peux faire un stage.",
+        "Est-ce que les stages des élèves d’âge adulte doivent être reportés?",
+        "Qu'est-ce que je fais avec mon stage en entreprise?",
+        "Mon stage est suspendu",
+        "Puis-je compléter mon stage?",
+        "Pourquoi mon stage doit être suspendu?",
+        "Mon stage doit être complété, pourquoi ?",
+        "est-ce que les stages en entreprise sont annulés?",
+        "Je vais-tu pouvoir finir mon stage?",
+        "J'ai un stage de prévu cet été. est-ce que ca va avoir lieu ?",
+        "Est-ce que mon stage va être reporté ?"
+      ],
+      "en": [
+        "what happens to teacher candidates' practicum placements?",
+        "i'm a teaching student, what about internships?",
+        "are there solutions for teacher candidates' practicum placements?",
+        "what about suspension of teacher candidates' practicum placements?",
+        "is my teaching supervisor going to be able to help me?",
+        "are the internships still in place?",
+        "under what conditions are training courses maintained?",
+        "even though the training course is confirmed, I can't meet the new requirements?",
+        "my cegep hasn't confirmed if my internship is still on. will i be penalized?",
+        "do student placements have to be deferred?",
+        "can I be penalized for not being able to do my internship?",
+        "i'd like to know if I can get an internship.",
+        "should adult students' placements be deferred?",
+        "what do I do with my internship?",
+        "my internship is suspended",
+        "can i complete my internship?",
+        "why does my internship have to be suspended?",
+        "my internship needs to be completed, why?",
+        "are internships cancelled?",
+        "...will you be able to finish my internship?",
+        "i have an internship coming up this summer. Is it going to happen?",
+        "is my internship going to be postponed?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Écoles et éducation"
+    ]
+  }
+}

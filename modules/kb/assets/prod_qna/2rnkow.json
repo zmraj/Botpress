@@ -1,0 +1,44 @@
+{
+  "id": "2rnkow",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://1O6Ojk\nInformations générales sur la COVID-19 = section://1VstJt"
+      ],
+      "en": [
+        "section://1O6Ojk\ngeneral information on covid-19 = section://1vstjt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Existe-t-il un traitement contre la COVID‑19?",
+        "Est-ce qu'un vaccin sur la COVID-19 existe ?",
+        "Y-a-t-il un traitement pour guérir le coronavirus ?",
+        "Quel est le médicament pour aider la guérison de la COVID-19 ?",
+        "Quelle est la solution pour le traitement de la pandémie?",
+        "Est-ce que la COVID-19 se guérit?",
+        "Est-ce qu'il existe actuellement un traitement ou vaccin pour traiter la maladie à coronavirus (COVID-19)?",
+        "Quand est-ce que je peux me faire vacciner?",
+        "Est-ce qu'il existe un vaccin?"
+      ],
+      "en": [
+        "is there a treatment for covid-19?",
+        "is there a vaccine on covid-19?",
+        "is there a cure for coronavirus?",
+        "what is the drug to help cure covid-19?",
+        "what is the solution for the treatment of the pandemic?",
+        "...is covid-19 curable?",
+        "is there currently a treatment or vaccine to treat coronavirus disease (covid-19)?",
+        "when can I get the vaccine?",
+        "is there a vaccine?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

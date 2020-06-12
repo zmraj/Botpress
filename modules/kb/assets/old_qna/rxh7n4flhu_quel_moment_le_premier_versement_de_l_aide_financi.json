@@ -1,0 +1,34 @@
+{
+  "id": "rxh7n4flhu_quel_moment_le_premier_versement_de_l_aide_financi",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53239"
+      ],
+      "en": [
+        "source://quebec.ca/c53239"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "À quel moment le premier versement de l’aide financière sera-t-il effectué?",
+        "Le premier versement de l'aide financière correspond à quel montant?",
+        "Le versement de 80 % d'aide financière sera effectué quand?",
+        "Suite à la signature de la convention, est-ce que le premier versement de l'aide financière sera versé?"
+      ],
+      "en": [
+        "When will the first installment of the financial assistance be paid out?",
+        "how much is the first instalment of financial assistance?",
+        "when will the 80% financial assistance payment be made?",
+        "following the signing of the agreement, will the first instalment of the financial assistance be paid out?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

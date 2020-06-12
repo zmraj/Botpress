@@ -1,0 +1,52 @@
+{
+  "id": "z16bftf",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://1AhE5I\nLes informations sur la chasse & la pêche = section://1AhE5I"
+      ],
+      "en": [
+        "section://1AhE5I\nhunting & fishing information = section://1ahe5i"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "La pratique de la chasse et de la pèche sont elles autorisées pendant la pandémie?",
+        "Est-ce que je peux aller chasser?",
+        "La pêche est-elle ouverte?",
+        "C'est quoi les réglements de chasse et pêche durant le COVID-19",
+        "On peut-tu sortir chasser durant le coronavirus?",
+        "Chasse et pêche",
+        "J'aimerais ça aller chasser, c'est possible?",
+        "C'est tu interdis d'aller pêcher durant le coronavirus",
+        "Peut-on aller pêcher dans une autre région?",
+        "Je peux tu aller à la pêche dans une chaloupe de 16 pieds avec une autre personne?",
+        "Peut-on faire du bateau?",
+        "Peut-on être 2 dans la même chaloupe si on a pas la même adresse?",
+        "Est-il possible d'être deux personnes dans une chaloupe pour pêcher?"
+      ],
+      "en": [
+        "are hunting and fishing permitted during the pandemic?",
+        "can I go hunting?",
+        "is the fishery open?",
+        "what are the hunting and fishing regulations during covid-19?",
+        "can we go out hunting during the coronavirus?",
+        "hunting and fishing",
+        "i'd like to go hunting, is it possible?",
+        "you're not allowed to go fishing during coronavirus",
+        "can we go fishing in another area?",
+        "can you go fishing in a 16-foot rowboat with another person?",
+        "can we go boating?",
+        "can we be 2 in the same boat if we don't have the same address?",
+        "is it possible to be two people in a rowboat to fish?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Sports, loisirs et culture"
+    ]
+  }
+}

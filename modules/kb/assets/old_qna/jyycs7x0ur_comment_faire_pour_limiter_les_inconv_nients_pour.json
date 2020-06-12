@@ -1,0 +1,36 @@
+{
+  "id": "jyycs7x0ur_comment_faire_pour_limiter_les_inconv_nients_pour",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53228"
+      ],
+      "en": [
+        "source://quebec.ca/c53228"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment faire pour limiter les inconvénients pour l’enfant dans la situation où il serait difficile de respecter les droits de garde habituels?",
+        "Je n'ai pas Internet et mon fils veut toujours parler à son père. Les frais de longue distance me coûtent chers",
+        "La connexion Internet n'est pas de qualité dans ma région. Que dois-je faire pour mon enfant qui veut toujours communiquer avec son autre parent  ?",
+        "Quoi faire pour mon enfant qui veut entrer en communication avec son père ?",
+        "La télécommunication est-elle un service essentiel si on a un enfant en garde partagée ?"
+      ],
+      "en": [
+        "how can we limit the harm to the child in situations where it would be difficult to respect normal custody rights?",
+        "i don't have internet and my son still wants to talk to his father. Long distance charges cost me a lot of money",
+        "the internet connection is not good in my area. what should I do for my child who still wants to communicate with the other parent?",
+        "what can I do for my child who wants to get in touch with his father?",
+        "is telecommunications an essential service if you have a child in shared custody?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "id": "a97nse45pw_quelles_sont_les_r_gles_de_pr_vention_mises_en_pla",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c51047"
+      ],
+      "en": [
+        "source://quebec.ca/c51047"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les règles de prévention mises en place pour éviter que le personnel propage le coronavirus dans le CHSLD?",
+        "Est-ce que le personnel du CHSLD doit respecter des  règles de prévention pour éviter la propagation du coronavirus dans le CHSLD?",
+        "De plus, des équipements de protection individuelle sont utilisés par le personnel selon",
+        "Est-ce qu'il y a des recommandations en ce qui concerne les équipements de protection individuelle utilisés par le personnel du CHSLD selon les recommandations émises par l’INSPQ ?"
+      ],
+      "en": [
+        "what prevention rules are in place to prevent staff from spreading coronavirus in chsld?",
+        "do chsld staff have to comply with prevention rules to avoid the spread of coronavirus in chsld?",
+        "in addition, personal protective equipment is used by the personnel according to",
+        "are there any recommendations regarding the personal protective equipment used by chsld staff according to the recommendations issued by inspq?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

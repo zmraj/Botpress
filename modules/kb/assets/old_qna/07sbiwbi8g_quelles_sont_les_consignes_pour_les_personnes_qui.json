@@ -1,0 +1,32 @@
+{
+  "id": "07sbiwbi8g_quelles_sont_les_consignes_pour_les_personnes_qui",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53167"
+      ],
+      "en": [
+        "source://quebec.ca/c53167"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les consignes pour les personnes qui doivent cohabiter avec quelqu'un qui a voyagé?",
+        "Consignes pour les personnes qui cohabite avec quelque'un qui revient de voyage ?",
+        "Je reviens de voyage, quelles sont les consignes pour protéger ceux avec qui je vis ?"
+      ],
+      "en": [
+        "what are the instructions for people who have to live with someone who has travelled?",
+        "instructions for people who are cohabiting with someone who has just returned from a trip?",
+        "i just came back from a trip, what are the instructions to protect the people I live with?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Voyageurs"
+    ]
+  }
+}

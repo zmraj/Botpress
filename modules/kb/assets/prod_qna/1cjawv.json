@@ -1,0 +1,42 @@
+{
+  "id": "1cjawv",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z1OevV7\nLes déménagements = section://Z1brdUQ"
+      ],
+      "en": [
+        "section://Z1OevV7\nmoves = section://z1brduq"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Puis-je faire appel à des proches pour obtenir de l’aide lors de mon déménagement?",
+        "est-ce qu'un ami peut m'aider à déménager",
+        "mon ami peut-il m'aider à déménager",
+        "puis-je faire appel à ma famille pour transporter mes meubles",
+        "mes amis peuvent tu m'aider à déménager",
+        "Est-ce que je peux demander aux proches de m'aider à déménager?",
+        "Puis-je me faire aider par des amis pour déménager?",
+        "Est-ce qu'un ami peut m'aider à déménager?"
+      ],
+      "en": [
+        "can i call on relatives for help with my move?",
+        "can a friend help me move",
+        "can my friend help me move",
+        "can I call on my family to transport my furniture",
+        "my friends can help me move",
+        "can I ask relatives to help me move?",
+        "can I get some friends to help me move?",
+        "can a friend help me move?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

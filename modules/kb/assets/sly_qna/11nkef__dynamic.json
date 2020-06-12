@@ -1,0 +1,48 @@
+{
+  "id": "11nkef__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Tout indique que la COVID-19 se transmet de personne à personne à la suite d’un contact étroit.\nRien n’indique que les animaux jouent un rôle dans la propagation de la maladie. Au Québec, aucune évidence ne suggère un risque d’infection des humains par les animaux ou par des produits animaux.\nDes cas de transmission de l'humain vers certains animaux à la suite de contacts étroits ont été établis dans quelques pays. Les connaissances actuelles indiquent notamment que les chats, les furets et les chiens peuvent être infectés.\nLes animaux qui sont exposés au virus peuvent être assimilés à une surface contaminée qui est difficilement désinfectable et généralement mobile. Les risques de contamination sont réduits en appliquant les mesures suivantes :​\n*   [Recommandations du ministère de la Santé et des Services sociaux](https://www.quebec.ca/sante/problemes-de-sante/a-z/coronavirus-2019/)  \n*   [Mesures de biosécurité](https://www.mapaq.gouv.qc.ca/fr/Productions/santeanimale/maladies/soussurveillance/Pages/Biosecuriteferme.aspx) \n*   [Mesures d’hygiène relatives au contact avec des animaux](https://www.mapaq.gouv.qc.ca/fr/Productions/santeanimale/maladies/transmissibleshumain/Pages/transmissibles.aspx)\nCompte tenu du peu de connaissances scientifiques dont on dispose au sujet des animaux, des principes de précaution s’appliquent pour les personnes ayant des symptômes de la COVID-19 ou qui sont en isolement conformément aux consignes des autorités de santé publique.\nConsignes sur les interactions avec les animaux = section://20S4yL"
+      ],
+      "en": [
+        "Evidence suggests that COVID-19 is transmitted from person to person through close contact.\nIn fact, no case of transmission from a human (or other animal) to a domestic animal has been identified. In Québec, there is no evidence to suggest a risk of infection of humans by animals or animal products.\nCases of transmission from humans to certain animals as a result of close contact have been established in a few countries. At present time, we know that cats, ferrets and dogs can be infected.\nAnimals exposed to the virus can be similar to a contaminated surface that is difficult to disinfect and is generally mobile. The risks of contamination are limited by the following measures:\n*   [Recommendations of the Ministère de la Santé et des Services sociaux](https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/) \n*   [Biosecurity measures](http://www.mapaq.gouv.qc.ca/fr/Productions/santeanimale/maladies/soussurveillance/) \n*   [Hygiene measures relating to contact with animals](http://www.mapaq.gouv.qc.ca/zoonoses)\nDue to the lack of scientific knowledge available on animals, precautionary principles apply for people experiencing COVID-19 symptoms or those who are in isolation, as directed by public health authorities.\nanimal interaction instructions = section://20s4yl"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Si je suis malade de la corona, qu'est-ce que je dois faire avec les animaux ?",
+        "Je suis atteinte du coronavirus. Puis-je caresser mon chien?",
+        "Est-il dangereux d'être en contact avec mon chien si j'ai la Covid-19?",
+        "J'ai le virus. Est-ce que je peux m'occuper de mon chat?",
+        "Mon oiseau peut-il voler sur mes épaules si je suis testé positif au virus?",
+        "Est-ce que ça peut que mon chien attrape la covid s'il dort avec moi qui en est atteint?",
+        "Je dois m'occuper de mon cheval, je dois prendre des précautions?",
+        "Comment s'occuper des animaux de compagnie pendant la quarantaine?",
+        "mon animal peut-il me transmettre la covid ?",
+        "Étant en isolement volontaire, je peux laisser mes chats aller dehors?",
+        "est-ce qu'un chat qui est infecté par la covid-19 peut infecter son maître qui le flatte?"
+      ],
+      "en": [
+        "if I get corona, what do I do with the animals?",
+        "i have coronavirus. Can I pet my dog?",
+        "is it dangerous to be in contact with my dog if I have covid-19?",
+        "i have the virus. Can I take care of my cat?",
+        "can my bird fly on my shoulders if I test positive for the virus?",
+        "can my dog get covid if he sleeps with me with covid?",
+        "i have to take care of my horse, do I have to take precautions?",
+        "how to care for pets during quarantine?",
+        "can my pet give me the covid?",
+        "being in voluntary isolation, can I let my cats go outside?",
+        "can a cat infected with covid-19 infect its owner who is flattering it?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

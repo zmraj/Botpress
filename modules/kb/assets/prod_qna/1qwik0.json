@@ -1,0 +1,34 @@
+{
+  "id": "1qwik0",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://zY2WR\nEffectuer des déplacements entre les régions = page://Ze8dRW"
+      ],
+      "en": [
+        "section://zY2WR\nmove between regions = page://ze8drw"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "C'est quoi les déplacements jugés essentiels?",
+        "Est-ce que je peux traverser de région pour un service essentiel?",
+        "Est-ce que c'est essentiel d'aller se promener en auto?",
+        "Qu'est-ce qui est considéré comme un déplacement essentiel?"
+      ],
+      "en": [
+        "what is essential travel?",
+        "can I cross from one region to another for an essential service?",
+        "is it essential to go for a drive?",
+        "what is considered an essential trip?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transports et déplacements"
+    ]
+  }
+}

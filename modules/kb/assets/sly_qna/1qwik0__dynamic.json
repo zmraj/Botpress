@@ -1,0 +1,34 @@
+{
+  "id": "1qwik0__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "*   Personne dont la présence est requise par une ordonnance contenue dans un jugement rendu par un tribunal.\n*   Personne qui effectue un déplacement pour un motif humanitaire.\n*   Personne qui doit recevoir des soins de santé.\n*   Personne autorisée par un directeur de santé publique, ou une personne autorisée à agir au nom du directeur de santé publique, ou un médecin.\n*   Résident de la région.\n*   Transporteur de biens permettant la continuité de l’offre de services prioritaires.\n*   Travailleur ou professionnel exerçant dans un milieu de travail où sont offerts des services prioritaires.\nEffectuer des déplacements entre les régions = page://Ze8dRW"
+      ],
+      "en": [
+        "*   A person whose presence is required under an order issued in a court judgment.\n*   A person who is travelling for humanitarian reasons.\n*   A person who is travelling to receive health care.\n*   A person authorized by a public health director; a  person authorized to act on behalf of a public health director;  physicians.\n*   A person who resides in the region.\n*   A person transporting goods that are needed for priority services.\nmove between regions = page://ze8drw"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "C'est quoi les déplacements jugés essentiels?",
+        "Est-ce que je peux traverser de région pour un service essentiel?",
+        "Est-ce que c'est essentiel d'aller se promener en auto?",
+        "Qu'est-ce qui est considéré comme un déplacement essentiel?"
+      ],
+      "en": [
+        "what is essential travel?",
+        "can I cross from one region to another for an essential service?",
+        "is it essential to go for a drive?",
+        "what is considered an essential trip?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transports et déplacements"
+    ]
+  }
+}

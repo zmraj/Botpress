@@ -1,0 +1,38 @@
+{
+  "id": "idlxzrbus1_les_assembl_es_publiques_de_consultation_exig_es_p",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50915"
+      ],
+      "en": [
+        "source://quebec.ca/c50915"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les assemblées publiques de consultation exigées par les lois ou les règlements doivent-elles être tenues?",
+        "Dans le cas de la suspension des assemblées publiques de consultation exigées par les lois ou les règlements que doit faire la municipalité?",
+        "Dans le cas du remplacement des assemblées publiques de consultation exigées par les lois ou les règlements que doit faire la municipalité?",
+        "Dans quel cas une municipalité doit remplacer les assemblées publiques de consultation exigées par les lois ou les règlements par une consultation écrite?",
+        "Quels types de projets des municipalités reliés aux assemblées publiques de consultation exigées par les lois ou les règlements sont évalués comme prioritaires?",
+        "Est-ce que les municipalités peuvent tenir des consultations qui sont facultatives?"
+      ],
+      "en": [
+        "are public consultation meetings required by legislation or regulations to be held?",
+        "in the case of the suspension of public consultation meetings required by laws or by-laws to be held by the municipality?",
+        "in the case of the replacement of public consultation meetings required by laws or regulations to be held by the municipality?",
+        "when should a municipality replace public consultation meetings required by law or regulation with written consultation?",
+        "what types of municipal projects related to public consultation meetings required by legislation or by-laws are assessed as priorities?",
+        "can municipalities hold consultations that are optional?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "z16bftf__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Les dates pour l’ouverture des saisons de chasse et de pêche sont maintenues, mais les amateurs de chasse et de pêche seront tenus de respecter les interdictions gouvernementales. Ainsi, ils devront se conformer en tout temps aux directives et recommandations de la Direction nationale de la santé publique visant à endiguer l’épidémie de COVID-19, notamment :\n*   Éviter de se déplacer d’une région ou d’une ville à l’autre, sauf en cas de nécessité. Les déplacements en lien avec les loisirs ne sont pas considérés « nécessaires ».\n*   Interdiction de se rassembler à l’intérieur ou à l’extérieur.\n*   Maintenir en tout temps une distance de 2 mètres entre les individus.\n*   Pas de camping dans les zones d’exploitation contrôlée (zecs).\nPour en savoir plus, [consultez cette page du ministère des Forêts, de la Faune et des Parcs](https://mffp.gouv.qc.ca/covid-19-impacts-saisons-chasse-peche-2020-04-03/) .\nLes informations sur la chasse & la pêche = section://1AhE5I"
+      ],
+      "en": [
+        "The opening dates of the hunting and fishing seasons are being maintained but hunters and anglers must abide by government prohibitions. Accordingly, they must always comply with the directives and recommendations of the Direction nationale de la santé publique aimed at curbing the COVID-19 pandemic:\n*   avoid travelling from one region to another or from one city to another, except where necessary. Travel related to leisure activities is not deemed necessary;\n*   indoor or outdoor gatherings are prohibited;\n*   always stay at least 2 metres away from other people;\n*   camping is prohibited in controlled harvesting zones (zecs).\nTo obtain additional information, please [visit this page on the ministère des Forêts, de la Faune et des Parcs website](https://mffp.gouv.qc.ca/covid-19-impact-hunting-fishing-seasons-2020-04-03/?lang=en) .\nhunting & fishing information = section://1ahe5i"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "La pratique de la chasse et de la pèche sont elles autorisées pendant la pandémie?",
+        "Est-ce que je peux aller chasser?",
+        "La pêche est-elle ouverte?",
+        "C'est quoi les réglements de chasse et pêche durant le COVID-19",
+        "On peut-tu sortir chasser durant le coronavirus?",
+        "Chasse et pêche",
+        "J'aimerais ça aller chasser, c'est possible?",
+        "C'est tu interdis d'aller pêcher durant le coronavirus",
+        "Peut-on aller pêcher dans une autre région?",
+        "Je peux tu aller à la pêche dans une chaloupe de 16 pieds avec une autre personne?",
+        "Peut-on faire du bateau?",
+        "Peut-on être 2 dans la même chaloupe si on a pas la même adresse?",
+        "Est-il possible d'être deux personnes dans une chaloupe pour pêcher?"
+      ],
+      "en": [
+        "are hunting and fishing permitted during the pandemic?",
+        "can I go hunting?",
+        "is the fishery open?",
+        "what are the hunting and fishing regulations during covid-19?",
+        "can we go out hunting during the coronavirus?",
+        "hunting and fishing",
+        "i'd like to go hunting, is it possible?",
+        "you're not allowed to go fishing during coronavirus",
+        "can we go fishing in another area?",
+        "can you go fishing in a 16-foot rowboat with another person?",
+        "can we go boating?",
+        "can we be 2 in the same boat if we don't have the same address?",
+        "is it possible to be two people in a rowboat to fish?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Sports, loisirs et culture"
+    ]
+  }
+}

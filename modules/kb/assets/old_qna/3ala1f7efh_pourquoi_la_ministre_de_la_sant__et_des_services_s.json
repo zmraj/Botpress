@@ -1,0 +1,36 @@
+{
+  "id": "3ala1f7efh_pourquoi_la_ministre_de_la_sant__et_des_services_s",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50877"
+      ],
+      "en": [
+        "source://quebec.ca/c50877"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pourquoi la ministre de la Santé et des Services sociaux adopte-t-elle des mesures qui concernent les municipalités?",
+        "Pourquoi des mesures qui concernent les municipalités sont prises par le ministère de la Santé et des Services sociaux?",
+        "Comment la Loi sur la santé publique départage le pouvoir entre le Ministère de la santé et le Ministère des Affaires Municipales et de l'Habitation?",
+        "Quels pouvoirs, sur les municipalités, détient la ministre de la santé lorsque l'état d'urgence est décrété?",
+        "Le ministère des Affaires Municipales et de l'Habitation peut-il occtroyer des pouvoirs supplémentaires aux municipalités pour mieux gérer la crise du COVID-19?"
+      ],
+      "en": [
+        "why is the Minister of Health and Social Services taking action that affects municipalities?",
+        "why are actions that affect municipalities being taken by the Ministry of Health and Social Services?",
+        "how does the Public Health Act divide power between the Ministry of Health and the Ministry of Municipal Affairs and Housing?",
+        "what powers does the Minister of Health have over municipalities when a state of emergency is declared?",
+        "can the ministry of municipal affairs and housing give additional powers to municipalities to better manage the covid-19 crisis?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

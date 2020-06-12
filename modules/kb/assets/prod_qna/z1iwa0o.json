@@ -1,0 +1,48 @@
+{
+  "id": "z1iwa0o",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z1sJQAq\nAide financière aux études (AFE) = page://ZiCh50"
+      ],
+      "en": [
+        "section://Z1sJQAq\neducational financial assistance (efa) = page://zich50"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Report du remboursement de la dette d’études",
+        "Est-ce qu'il y a un report des paiements de la dette d'étude?",
+        "Report de la dette d’études.",
+        "Je suis en recouvrement est-ce que je peux arrêter de payer mon prêt étudiant?",
+        "Est-ce que je peux reporter les paiements de mon prêt étudiant?",
+        "Est-ce que je dois remplir un formulaire pour reporter les paiements de mon prêt étudiant?",
+        "Est-ce qu'il va y avoir des intérêts additionnels avec le report de la dette étudiante?",
+        "Je suis étudiant puis-je arrêter de payer mon prêt?",
+        "Est-ce que je peux demander à ma banque de suspendre mes remboursements de prêts étudiants?",
+        "Est-ce que je devrai payer des intérêts si je reporte mes paiements pour mon prêt étudiant?",
+        "Est-ce qu'il existe des mesures d'aide pour les prêts étudiants?"
+      ],
+      "en": [
+        "deferring repayment of student debt",
+        "is there a deferral of student debt payments?",
+        "deferral of student debt.",
+        "i'm in debt collection. Can I stop paying my student loan?",
+        "can i defer my student loan payments?",
+        "do i need to fill out a form to defer my student loan payments?",
+        "is there going to be additional interest with the deferral of student debt?",
+        "i am a student, can I stop paying my loan?",
+        "can I ask my bank to suspend my student loan payments?",
+        "will i have to pay interest if i defer my student loan payments?",
+        "is there any assistance for student loans?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Écoles et éducation"
+    ]
+  }
+}

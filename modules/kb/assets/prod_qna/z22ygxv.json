@@ -1,0 +1,49 @@
+{
+  "id": "z22ygxv",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z2tycKs\nLa réouverture des commerces = section://Z2tycKs"
+      ],
+      "en": [
+        "section://Z2tycKs\nthe reopening of shops = section://z2tycks"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les commerces qui pourraient ouvrir?",
+        "C'est prévu pour quand la réouverture?",
+        "A quand la réouverture des commerces?",
+        "L'ouverture des commerce de détail",
+        "Comment va se passer l'ouverture des commerce",
+        "Est-ce que tous les commerces vont ouvrir leurs portes",
+        "J'ai entendu parlé de la réouverture",
+        "Qu'est-ce qui va réouvrir et quand?",
+        "Est-ce que tous les magasins vont ouvrir?",
+        "C'est quoi les entreprises qui vont pouvoir recommencer les activités?",
+        "Est-ce que je peux ouvrir mon commerce qui est chez moi?",
+        "carwash"
+      ],
+      "en": [
+        "what businesses could open?",
+        "when's the reopening scheduled?",
+        "when will the shops reopen?",
+        "the opening up of the retail trade",
+        "how is the opening of trade going to happen",
+        "are all the businesses going to open their doors",
+        "i heard about the reopening",
+        "what will reopen and when?",
+        "are all the stores going to open?",
+        "what are the companies that are going to be able to start up again?",
+        "can I open my business at home?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "d3mg7uy8ip_est_ce_que_les_inspections_se_poursuivent",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53507\nActivités d'inspections = source://quebec.ca/c53411"
+      ],
+      "en": [
+        "source://quebec.ca/c53507\ninspection activities = source://quebec.ca/c53411"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les inspections se poursuivent?",
+        "Est-ce que les inspecteurs en salubrité continuent leur activités?",
+        "Est-ce que les inspecteur continuent l'accompagnement des exploitants?",
+        "Est-ce que des inspections ont lieu pour la préparation et la transformation des aliments?",
+        "Je veux faire une demande de permis alimentaire, où je vais pour télécharger le formulaire?",
+        "En raison de la crise épidémiologique actuelle, est-ce qu'il y a des délais supplémentaires à prévoir dans le traitement des demandes?",
+        "permis alimentaire",
+        "Pour compléter une demande de permis alimentaire, comment faire pour télécharger le formulaire?"
+      ],
+      "en": [
+        "are the inspections continuing?",
+        "do the health inspectors continue to operate?",
+        "do inspectors continue to accompany operators?",
+        "do inspections take place for food preparation and processing?",
+        "i want to apply for a food permit, where do I go to download the form?",
+        "because of the current epidemiological crisis, are there additional delays in processing applications?",
+        "food permit",
+        "to complete a food permit application, how do I download the form?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Secteur bioalimentaire"
+    ]
+  }
+}

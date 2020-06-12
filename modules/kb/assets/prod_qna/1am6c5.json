@@ -1,0 +1,52 @@
+{
+  "id": "1am6c5",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://136JHr\nGuide autosoins - COVID-19 = page://ZnRbVt"
+      ],
+      "en": [
+        "section://136JHr\nself-care guide - covid-19 = page://znrbvt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Nous contacter",
+        "j'aimerais vous contacter",
+        "comment parler à un humain",
+        "c'est quoi votre numéro de téléphone?",
+        "j'ai des questions à poser à un humain",
+        "Pouvons-nous parler à une personne?",
+        "Je veux parler avec un agent",
+        "Je veux parler à une personne.",
+        "Est-ce possible de parler avec quelqu'un et ne pas seulement avoir des réponses automatiques?",
+        "humain",
+        "vous contacter",
+        "Bonjoiur j'aimerais parler à un vrai humain",
+        "Parler à un humain"
+      ],
+      "en": [
+        "contact us",
+        "i would like to contact you",
+        "how to talk to a human",
+        "what's your phone number?",
+        "i have questions to ask a human",
+        "can we talk to one person?",
+        "i want to talk to an agent",
+        "i want to talk to someone.",
+        "is it possible to talk to someone and not just have automatic responses?",
+        "human",
+        "contact you",
+        "hi. I'd like to talk to a real human",
+        "talk to a human"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

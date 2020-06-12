@@ -1,0 +1,48 @@
+{
+  "id": "kqfux",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://1JesKy\nProgrammes PACME et PIRTE = section://1JesKy"
+      ],
+      "en": [
+        "section://1JesKy\npacme and pirte programs = section://1jesky"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment s'inscrire au programme PACME ou PIRTE?",
+        "pacme",
+        "pirte",
+        "Est-ce que le programme pacme est encore disponible pour les organisations?",
+        "Quand est-ce que le premier versement du programme pirte aura lieu?",
+        "C'est quoi le pacme?",
+        "Pacme: faut-il avoir complété la formation avant le 30 septembre 2020?",
+        "Est-ce que la demande de subvention du pacme doit être faite par l'entreprise?",
+        "Est-ce qu'il est trop tard pour soumettre sa demande au pacme?",
+        "Quelle est la marche à suivre pour déposer une demande pour le pacme pour une entreprise?",
+        "Comment puis-je appliquer au pacme en tant qu'entreprise?",
+        "Quel est le numéro de téléphone pour rejoindre un responsable du pirte?"
+      ],
+      "en": [
+        "how do i join the pacme or pirte program?",
+        "is the pacme program still available to organizations?",
+        "when will the first installment of the pirte program be paid?",
+        "what's the pacme?",
+        "pacme: must the training be completed by 30 september 2020?",
+        "does the company have to apply for the pacme grant?",
+        "is it too late to apply to pacme?",
+        "how do i apply for the pacme for a business?",
+        "how can i apply to pacme as a company?",
+        "what's the phone number for a pirte manager?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide et revenus"
+    ]
+  }
+}

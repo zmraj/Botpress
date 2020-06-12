@@ -1,0 +1,33 @@
+{
+  "id": "khq1u6f36z_parles_tu_anglais_aussi",
+  "data": {
+    "answers": {
+      "fr": [
+        "Si vous consultez Québec.ca dans sa version anglaise, je pourrai vous répondre en anglais."
+      ],
+      "en": [
+        "Yes. I speak English and French."
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Parles-tu anglais aussi",
+        "Can I talk to you in English?",
+        "Parles-tu d'autres langues que le français?"
+      ],
+      "en": [
+        "Do you speak french?",
+        "Do you speak english?",
+        "Can I speak in english?",
+        "Do you you understand the english language"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Autres questions"
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "2fkrg0",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://19bh0H\nLes lieux publics = page://ZD3Os4"
+      ],
+      "en": [
+        "section://19bh0H\npublic places = page://zd3os4"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Puis-je aller à la messe le dimanche?",
+        "Est-que la mosquée est ouverte?",
+        "Dois-je reporter mon baptême?",
+        "Est-ce que les lieux de culte sont ouverts?",
+        "Est-ce que les services religieux essentiels peuvent avoir lieu?",
+        "Est-ce que je peux me rendre à la synagogue?",
+        "Est-ce que je peux aller à la messe",
+        "Les chapelles et monastères sont-ils ouverts ?",
+        "L'oratoire St-Joseph est-il ouvert ?",
+        "La cathédrale Ste-Anne-de-Beaupré est-elle ouverte ?",
+        "Est-ce que la messe sera annulée",
+        "Est-ce que je pourrai me rendre prier à l'Église",
+        "Est-ce que je pourrai me rendre prier à la mosquée",
+        "C'est tu correct d'aller prier?",
+        "Puis-je aller visiter l'oratoire St-Joseph ?",
+        "J'annule tu mon mariage ou quoi?",
+        "Les mosquées sont-elles ouvertes ?",
+        "Est-ce que les églises sans le public peuvent ouvrir?",
+        "Est-ce que le staff des lieux de culte peuvent retourner au travail?",
+        "Les synagogues sont-elles ouvertes ?",
+        "À quand le réouverture des lieux de culte?",
+        "Avez-vous une idée de quand les lieux de culte ouvriront?",
+        "églises",
+        "Quand les églises seront ouvertes?"
+      ],
+      "en": [
+        "can I go to mass on Sundays?",
+        "is the mosque open?",
+        "should I postpone my baptism?",
+        "are the places of worship open?",
+        "can essential religious services take place?",
+        "can I go to the synagogue?",
+        "can I go to mass",
+        "are the chapels and monasteries open?",
+        "is St. Joseph's Oratory open?",
+        "is ste-anne-de-beaupré cathedral open?",
+        "will mass be cancelled",
+        "will I be able to go to church and pray..",
+        "will I be able to go to the mosque to pray..",
+        "is it okay to go pray?",
+        "may I go and visit St. Joseph's Oratory?",
+        "do you want me to call off my wedding or what?",
+        "are the mosques open?",
+        "can churches without the public open?",
+        "can the staff of the houses of worship go back to work?",
+        "are the synagogues open?",
+        "when will the places of worship reopen?",
+        "do you have any idea when the houses of worship will open?",
+        "churches",
+        "when the churches are open?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "id": "a4ie465qvy_est_ce_qu_un_service_de_garde__ducatif___l_enfance",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50845"
+      ],
+      "en": [
+        "source://quebec.ca/c50845"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu’un service de garde éducatif à l’enfance peut refuser un enfant?",
+        "Est-ce que le service de garde éducatif peut refuser mon enfant si je suis en quarantaine?",
+        "Je ne travaille pas dans un service essentiel, est-ce que le service de garde éducatif peut refuser mon enfant?",
+        "Le service de garde éducatif peut refuser mon enfant si je ne travaille pas pour un service essentiel?"
+      ],
+      "en": [
+        "can an educational child care centre refuse a child?",
+        "can the child care centre refuse my child if I am in quarantine?",
+        "i don't work in an essential service, can the educational child care centre refuse my child?",
+        "can the child care centre refuse my child if I don't work for an essential service?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

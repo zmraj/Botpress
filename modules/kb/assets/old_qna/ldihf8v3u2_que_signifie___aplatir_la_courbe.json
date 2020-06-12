@@ -1,0 +1,34 @@
+{
+  "id": "ldihf8v3u2_que_signifie___aplatir_la_courbe",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c52279"
+      ],
+      "en": [
+        "source://quebec.ca/c52279"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Que signifie « aplatir la courbe » ?",
+        "Pourquoi doit-on aplatir la courbe ?",
+        "Est-ce que le nombre de décès peut influencer l'aplatissement de la courbe ?",
+        "Quoi faire pour aplatir la courbe ?"
+      ],
+      "en": [
+        "what does \"flatten the curve\" mean?",
+        "why do we need to flatten the curve?",
+        "can the number of deaths influence the flattening of the curve?",
+        "what can be done to flatten the curve?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "État d'urgence"
+    ]
+  }
+}

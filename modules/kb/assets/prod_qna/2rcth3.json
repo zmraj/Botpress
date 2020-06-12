@@ -1,0 +1,67 @@
+{
+  "id": "2rcth3",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z1deTQT\nGestion de la garde partagée durant la COVID-19 = section://Z1deTQT"
+      ],
+      "en": [
+        "section://Z1deTQT\nmanagement of shared custody during covid-19 = section://z1detqt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il possible d’accéder à l’une de ces régions pour aller chercher son enfant dans un contexte de garde partagée?",
+        "Est-ce que je peux aller chercher mon enfant en garde partagée dans une région fermée?",
+        "Possibilité d'aller dans une région fermée pour une garde partagée.",
+        "Que faire avec la garde partagée si les parents vivent dans deux régions différentes?",
+        "Est-ce que je peux aller chercher mon enfant en garde partagée\nqui est dans une région à accès limité?",
+        "Est-ce que je peux amener mon enfant en garde partagée dans une zone fermée?",
+        "Est-ce que je peux amener mon enfant en garde partagée \ndans une zone fermée?",
+        "Quand mes enfants pourront-ils revoir leur père?",
+        "est-ce que mes enfants peuvent aller voir leur père?",
+        "Quelle est la consigne pour les enfants en garde partagée?",
+        "Garde partagée",
+        "Je suis inquiet des risques de transmission de la COVID-19 liés au changement de garde de mon enfant.",
+        "Est-ce que je dois respecter l’ordonnance de garde et d’accès?",
+        "Que puis-je faire s’il est impossible de m’entendre avec mon ex?",
+        "Comment faire pour limiter les inconvénients pour l’enfant dans la situation où il serait difficile de respecter les droits de garde habituels?",
+        "Nous avons une garde partagée qui implique plusieurs changements de milieu familial dans la semaine. Devons-nous continuer de la même façon?",
+        "Nous habitons dans deux régions différentes, devons-nous effectuer le changement de garde?",
+        "Mon ex-conjoint travaille dans le milieu de la santé, ce qui m’inquiète",
+        "Je suis inquiet parce que mon ex-conjoint prend le transport en commun.",
+        "on fait quoi avec la garde partagée?",
+        "Où est-il possible de trouver des informations générales sur le droit familial?"
+      ],
+      "en": [
+        "is it possible to access one of these regions to pick up the child in a shared custody arrangement?",
+        "can i pick up my child from a shared custody arrangement in a closed area?",
+        "possibility of going to a closed area for shared custody.",
+        "what to do with shared custody if the parents live in two different regions?",
+        "can i pick up my child from a shared custody arrangement that is in a limited access area?",
+        "can I bring my child into a shared custody arrangement in a closed area?",
+        "when can my children see their father again?",
+        "can my children go see their father?",
+        "what are the guidelines for children in shared custody?",
+        "shared parenting",
+        "i'm concerned about the risk of transmission of covid-19 due to my child's change of custody.",
+        "do I have to comply with the custody and access order?",
+        "what can I do if I can't get along with my ex?",
+        "how can we limit the harm to the child in situations where it would be difficult to respect normal custody rights?",
+        "we have a shared custody arrangement that involves several changes in the family environment during the week. Should we continue in the same way?",
+        "we live in two different regions, do we have to change custody?",
+        "my ex-husband works in health care, which worries me",
+        "i'm worried because my ex-partner takes public transit.",
+        "what do we do with shared custody?",
+        "where can I find general information on family law?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

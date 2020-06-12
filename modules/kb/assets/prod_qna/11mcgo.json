@@ -1,0 +1,44 @@
+{
+  "id": "11mcgo",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://QmcNQ\nLes services de garde d'urgence = page://QmcNQ"
+      ],
+      "en": [
+        "page://QmcNQ\nemergency childcare services = page://qmcnq"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les enfants d’âge scolaire peuvent-ils être reçus dans les services de garde éducatifs à l’enfance durant la situation d'urgence?",
+        "Est-ce que tous mes enfants peuvent aller dans le même service de garde d'urgence?",
+        "Recommandation pour les services de garde d'urgence concernant les fratries.",
+        "Est-ce qu'un service de garde peut refuser une fratrie?",
+        "Les personnes qui occupent un emploi se trouvant dans la liste des emplois et des services essentiels doivent-elles en faire la preuve à leur service de garde?",
+        "Est-ce que je dois présenter une preuve d'emploi pour avoir droit au service de garde d'urgence?",
+        "Est-ce que ma carte d'employé est suffisante comme preuve pour le service de garde d'urgence?",
+        "Quel document je dois fournir pour avoir droit au service de garde d'urgence?",
+        "Comment on prouve qu'on travaille dans un service essentiel pour avoir droit au garderie d'urgence ?"
+      ],
+      "en": [
+        "can school-age children be accommodated in ECEC during the emergency?",
+        "can all my children go to the same emergency childcare facility?",
+        "recommendation for emergency sibling day care services.",
+        "can a daycare centre refuse a sibling?",
+        "do people who are employed in the list of essential jobs and services have to demonstrate this to their child care centre?",
+        "do i need to show proof of employment to qualify for emergency childcare?",
+        "is my employee card sufficient proof for emergency childcare?",
+        "what documentation do I need to provide to qualify for emergency childcare?",
+        "how do you prove that you work in an essential service to qualify for emergency day care?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services de garde"
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "z1jkhfw",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://Z1Kbsrt\nLa réouverture des commerces = section://Z2tycKs"
+      ],
+      "en": [
+        "page://Z1Kbsrt\nthe reopening of shops = section://z2tycks"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quel est le plan de déconfinement?",
+        "Quelles sont les phases du plan de déconfinement?",
+        "À quand le déconfinement au Québec?",
+        "Où puis-je trouver le plan de déconfinement?",
+        "Où trouver le plan pour le réouverture des secteurs et activités?",
+        "Planification déconfinement",
+        "À quand l'ouverture des centres de conditionnement physique?",
+        "Centres de conditionnement physique et d’entraînement intérieurs (ex. : entraînement en salle, yoga, cardiovélo, tennis, soccer, etc.)",
+        "est-ce que je peux aller au gym",
+        "Gymnases",
+        "Est-ce que les centres d'entrainements sont ouverts?",
+        "je veux aller m'entraîner au gym",
+        "Réouverture des gyms?"
+      ],
+      "en": [
+        "what's the decontainment plan?",
+        "what are the phases of the deconfinement plan?",
+        "when will there be deconfinement in quebec?",
+        "where can I find the decontainment plan?",
+        "where to find the plan for the reopening of sectors and activities?",
+        "deconfinement planning",
+        "when will the fitness centres open?",
+        "indoor fitness and training centres (e.g., indoor training, yoga, cardio, tennis, soccer, etc.)",
+        "can I go to the gym",
+        "gymnasiums",
+        "are the training centers open?",
+        "i want to go to the gym",
+        "reopening the gyms?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

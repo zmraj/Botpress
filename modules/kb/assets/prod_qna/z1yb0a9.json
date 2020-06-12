@@ -1,0 +1,57 @@
+{
+  "id": "z1yb0a9",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://Z2pFQl5\nSéquence d'ouverture des établissements scolaires = page://Z2pFQl5"
+      ],
+      "en": [
+        "page://Z2pFQl5\nschool opening sequence = page://z2pfql5"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "est-ce que les écoles primaires vont ouvrir bientôt?",
+        "C'est quoi la date prévu d'ouverture des écoles",
+        "Le secondaire va-t-il ouvrir avant juin?",
+        "Je veux savoir si mon fils qui fréquente l'école secondaire pourra attendre à Septembre pour retourner à l'école",
+        "réouverture écoles",
+        "écoles",
+        "établissements scolaires",
+        "Quand les cegepiens sauront-ils s’ils auront accès au cegep en septembre",
+        "Est-ce que je peux aller chercher les livres de mon enfant à l'école?",
+        "Le préscolaire des régions froide est prévu pour ouvrir quand",
+        "Quel sera le mode d'enseignement prévilégié pour l'enseignement collégial et universitaire?",
+        "Les profs vont-ils mettre des notes aux élèves?",
+        "Règle pour les évaluations au deuxième cycle du secondaire",
+        "Ouverture écoles formation professionnelle",
+        "Est-ce que les élèves du secteur privé peuvent finir leurs études ?",
+        "Est-il possible de rassembler tous les finissants d'une même école?"
+      ],
+      "en": [
+        "are the elementary schools going to open soon?",
+        "what's the projected opening date of the schools",
+        "will the high school open before June?",
+        "i want to know if my son who is in high school can wait until September to go back to school",
+        "school reopening",
+        "schools",
+        "when will the cegepians know if they'll have access to the cegep in september",
+        "can I pick up my child's books from school?",
+        "the cold regions preschool is scheduled to open when",
+        "what will be the preferred mode of instruction for college and university education?",
+        "will teachers be putting notes to the students?",
+        "rule for upper secondary school evaluations",
+        "opening schools vocational training",
+        "can students in the private sector finish their studies?",
+        "is it possible to gather all the graduates from the same school?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Écoles et éducation"
+    ]
+  }
+}

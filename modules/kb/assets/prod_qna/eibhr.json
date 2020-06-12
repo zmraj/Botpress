@@ -1,0 +1,67 @@
+{
+  "id": "eibhr",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://ZIgeO0\nLa réouverture des commerces = section://Z2tycKs"
+      ],
+      "en": [
+        "section://ZIgeO0\nthe reopening of shops = section://z2tycks"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les restaurants peuvent demeurer ouverts?",
+        "Fermeture des restaurants et salles à manger imposée par le gouvernement du québec.",
+        "Les commandes pour emporter, les livraisons et les services à l’auto sont-ils permis?",
+        "Est-ce que les buffets sont ouverts?",
+        "Le service à l'automobile de McDonald est-il encore disponible?",
+        "Est-ce qu'on peut aller au restaurant ?",
+        "Mon restaurant préféré est fermé. Doit-il ouvrir ?",
+        "Un restaurateur a-t-il le droit de faire de la livraison à domicile?",
+        "Puis aller au service à l'auto du fast food?",
+        "Est-ce que les restaurants restent ouverts",
+        "Est-ce que le service à l'auto de Tim Hortons est ouvert?",
+        "Quels sont les restaurants qui resteront ouverts",
+        "Est-ce que tous les restaurants vont fermer",
+        "Je veux aller au resto, est-ce que c'est possible",
+        "Est-ce que les restaurants sont ouverts?",
+        "À quand l'ouverture des resto-bars?",
+        "Est-ce que les restaurants vont ouvrir sous peu?",
+        "Est-il possible d'aller au restaurant avec les membres d'un autre ménage?",
+        "restaurants",
+        "Les ainés de 70 ans et plus pourront-ils aller au restaurant à compter du 15 juin?",
+        "Quand aura lieu l'ouverture des restaurants et terrasses?"
+      ],
+      "en": [
+        "can restaurants stay open?",
+        "closure of restaurants and dining rooms imposed by the quebec government.",
+        "are take-out orders, deliveries and drive-through services permitted?",
+        "are the buffets open?",
+        "is mcdonald's auto service still available?",
+        "can we go to a restaurant?",
+        "my favorite restaurant is closed. Should it open?",
+        "is a restaurant owner allowed to deliver to a home?",
+        "and then go to the fast food drive-through?",
+        "do restaurants stay open",
+        "is the tim hortons car service open?",
+        "which restaurants will remain open",
+        "are all the restaurants going to close",
+        "i want to go to the diner, is it possible..",
+        "are the restaurants open?",
+        "When do the diner bars open?",
+        "are the restaurants going to open soon?",
+        "is it possible to go to a restaurant with members of another household?",
+        "will seniors 70 and over be able to go to restaurants starting June 15?",
+        "when will the restaurants and terraces open?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

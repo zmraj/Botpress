@@ -1,0 +1,48 @@
+{
+  "id": "o21ly6u6we_est_ce_que_la_covid_19_peut_se_propager_dans_l_eau",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49628"
+      ],
+      "en": [
+        "source://quebec.ca/c49628"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que la COVID-19 peut se propager dans l’eau potable?",
+        "Existe-t-il un risque d'être contaminé par le COVID-19 en buvant de l'eau potable?",
+        "Contamication de l'eau potable par le COVID-19.",
+        "Est-ce que l'eau que je bois du robinet peut-être contaminée?",
+        "Le système de distribution d'eau potable est-il contaminé au coronavirus?",
+        "Puis-je boire l'eau du robinet dans risque de tomber malade du corona?",
+        "Y a-t-il un risque d'attraper la COVID-19 en buvant l'eau du robinet ?",
+        "Faut-il boire de l'eau en bouteille pour éviter d'attraper le virus ?",
+        "Le virus peut-il se trouver dans l'eau potable ?",
+        "Est-ce qu'il y a des risques d'attraper la COVID-19 en buvant l'eau du robinet ?",
+        "Est-ce nécessaire de boire de l'eau embouteillée pour éviter la COVID-19?"
+      ],
+      "en": [
+        "can covid-19 be spread in drinking water?",
+        "is there a risk of becoming contaminated with covid-19 through drinking water?",
+        "contamination of drinking water with covid-19.",
+        "can the water I drink from the tap be contaminated?",
+        "is the drinking water system contaminated with coronavirus?",
+        "can i drink tap water if i am at risk of getting corona?",
+        "is there a risk of catching covid-19 from drinking tap water?",
+        "do you have to drink bottled water to avoid catching the virus?",
+        "can the virus be found in drinking water?",
+        "is there any risk of catching covid-19 from drinking tap water?",
+        "is it necessary to drink bottled water to avoid covid-19?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consommateurs - Nourriture - Animaux"
+    ]
+  }
+}

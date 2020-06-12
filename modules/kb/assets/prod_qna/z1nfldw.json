@@ -1,0 +1,77 @@
+{
+  "id": "z1nfldw",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://ZQWBT\nTout savoir sur les rassemblements = page://Z1100pc"
+      ],
+      "en": [
+        "section://ZQWBT\nall about gatherings = page://z1100pc"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "est-ce que je peux voir ma blonde",
+        "j'habite pas avec mon chum, est-que je peux le voir",
+        "c'est tu correct d'être sur tinder",
+        "on peut tu continuer à fréquenter quelqu'un",
+        "one night",
+        "Est-ce que je peux voir mon conjoint s'il n'a pas la même adresse que moi?",
+        "Est-ce que je peux aller chez mon conjoint?",
+        "Puis-je voir ma blonde si je n'habite pas à la même adresse qu'elle?",
+        "c'est tu illégal de voir ma copine amoureuse",
+        "Est-ce qu'un couple qui ne demeure pas ensemble peut se voir?",
+        "Est-ce que 2 conjoints qui ne demeurent pas à la même adresse peuvent se voir?",
+        "est-ce que j'ai le droit d'aller voir ma blonde qui ne demeure pas avec moi",
+        "je veux recevoir mon amoureux chez moi, puis-je?",
+        "Est-ce que je peux inviter ma copine à la maison?",
+        "Peut-on visiter un conjoint dans une autre région?",
+        "Aller voir sa copine chez ses beaux-parents, est-ce légal?",
+        "Visiter ma conjointe",
+        "Je peux voir mon chéri?",
+        "Est-ce que deux personnes en couple mais qui n'habitent pas ensemble peuvent se voir?",
+        "Les couples qui ne vivent pas ensemble peuvent-ils se visiter oui ou non?",
+        "Je peux aller voir ma blonde?",
+        "Puis-je revoir ma copine?",
+        "Est-ce que je peux voir mon amoureux?",
+        "Puis-je voir mon amoureux si nous n'habitons pas ensemble?",
+        "Est-ce qu'il y a possibilité d'avoir ma conjointe chez moi quelques jours?",
+        "Maintenir une vie sociale active durant la pandémie"
+      ],
+      "en": [
+        "can I see my girlfriend",
+        "i don't live with my boyfriend, can I see him?",
+        "is it okay to be on tinder?",
+        "can you keep seeing someone..",
+        "can I see my spouse if he does not have the same address as me?",
+        "can I go to my spouse's house?",
+        "can I see my girlfriend if I don't live at the same address as her?",
+        "are you making it illegal for my girlfriend to see my girlfriend in love",
+        "can a couple who don't stay together see each other?",
+        "can two spouses who do not live at the same address see each other?",
+        "am I allowed to go see my girlfriend who's not staying with me..",
+        "i want to receive my lover in my home, may I?",
+        "can I invite my girlfriend home?",
+        "can we visit a spouse in another region?",
+        "...to visit his girlfriend at her in-laws' house, is that legal?",
+        "visit my wife",
+        "can I see my darling?",
+        "can two people who are a couple but do not live together see each other?",
+        "can couples who do not live together visit each other?",
+        "can I go see my girlfriend?",
+        "can I see my girlfriend again?",
+        "can I see my lover?",
+        "can I see my lover if we don't live together?",
+        "is it possible to have my wife stay with me for a few days?",
+        "maintain an active social life during the pandemic"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

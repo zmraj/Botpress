@@ -1,0 +1,66 @@
+{
+  "id": "dq2rzvxkaf_puis_je_avoir_de_l_information_sur_la_fermeture_de",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47909"
+      ],
+      "en": [
+        "source://quebec.ca/c47909"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Puis-je avoir de l'information sur la fermeture des établissements scolaires et la disponibilité des services de garde d'urgence?",
+        "Pour quelle population sont destinés les services de garde d'urgence?",
+        "Jusqu'à quelle date le gouvernement du Québec a annoncé le prolongement de la fermeture des établissements scolaires (écoles primaires et secondaires, centres de formation, établissements d’enseignement privés) ?",
+        "Est-ce que des services de garde d’urgence sont ouverts en milieu scolaire pour les enfants de 4 à 13 ans des travailleurs de la santé, des services sociaux et des services essentiels ?",
+        "Les garderies en milieu familiales sont-elles accessibles au personnel de la santé?",
+        "Où se situent les garderies qui resteront ouvertes?",
+        "Qui a accés aux garderies demeurant ouvertes?",
+        "Où puis-je trouver des ressources pour aider mes enfants dans leur scolarité?",
+        "À partir de quelle date, les services de garde non subventionnés doivent cesser leurs activités?",
+        "Est-ce que les garderies sont ouvertes pour le personnel de la santé?",
+        "Fermeture des établissements scolaires.",
+        "Est-ce que les garderies restent ouvertes pour le personnel de la santé?",
+        "Tranche d'âge des enfants dans les garderies autorisées à rester ouvertes.",
+        "Services de garde subventionnés.",
+        "Qui a droit aux services de garde d'urgence ?",
+        "Garderie pour les enfants du personnel de la santé, des services sociaux et des services essentiels.",
+        "Prolongement de la fermeture des garderies.",
+        "A quand la réouverture des établissements scolaires?",
+        "Ressources pour apprendre, créer et divertir les jeunes.",
+        "CPE et services de garde subventionnés pour les enfants en bas âge."
+      ],
+      "en": [
+        "can i get information on school closures and the availability of emergency child care?",
+        "for what population are emergency childcare services intended?",
+        "up to what date did the quebec government announce the extension of school closures (primary and secondary schools, training centres, private educational institutions)?",
+        "are emergency school-based child care services available for children aged 4 to 13 years of age from health, social and essential services workers?",
+        "are family day care centres accessible to health care staff?",
+        "where are the daycares that will remain open?",
+        "who has access to the remaining day care centres?",
+        "where can I find resources to help my children with their schooling?",
+        "On what date must unsubsidized child care services cease to operate?",
+        "are day care centres open for health care workers?",
+        "school closures.",
+        "do daycare centres remain open for health care staff?",
+        "age range of children in day care centres authorized to remain open.",
+        "subsidized child care.",
+        "who's entitled to emergency childcare?",
+        "daycare for children of health, social and essential services personnel.",
+        "extension of the closure of daycare centres.",
+        "when will schools reopen?",
+        "resources to learn, create and entertain youth.",
+        "cpe and subsidized child care for young children."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

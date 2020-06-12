@@ -1,0 +1,38 @@
+{
+  "id": "z1rqsw9",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://1yRRcv\nLes services de garde d'urgence = page://QmcNQ"
+      ],
+      "en": [
+        "section://1yRRcv\nemergency childcare services = page://qmcnq"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les emplois visés par les services essentiels?",
+        "Quels sont les travailleurs ayant froit aux services essentiels ?",
+        "Quels emplois permettent l'accès à des services de garde d'urgence ?",
+        "Quel travail est considéré essentiel est donne droit aux services de garde d'urgence?",
+        "Est-ce que j'ai un emploi essentiel qui ouvre deroit aux services de garde d'urgence?",
+        "Quels sont les emplois visés par les services et activités prioritaires?"
+      ],
+      "en": [
+        "what jobs are covered by essential services?",
+        "which workers are entitled to essential services?",
+        "what jobs provide access to emergency childcare?",
+        "what work is considered essential and is eligible for emergency child care?",
+        "do i have a critical job that requires emergency childcare?",
+        "what jobs are targeted by the priority services and activities?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services de garde"
+    ]
+  }
+}

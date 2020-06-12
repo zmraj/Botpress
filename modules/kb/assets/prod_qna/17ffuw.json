@@ -1,0 +1,37 @@
+{
+  "id": "17ffuw",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://23j7LV\nLa réouverture des commerces = section://Z2tycKs"
+      ],
+      "en": [
+        "section://23j7LV\nthe reopening of shops = section://z2tycks"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "doit-on continuer à faire du télétravail",
+        "les compagnies doivent-elles faire du télétravail encore",
+        "les bureaux peuvent-ils réouvrir même si je peux travailler à distance",
+        "télétravail",
+        "travail à distance",
+        "Qu’en est-il des travailleurs qui peuvent faire du télétravail?"
+      ],
+      "en": [
+        "should we continue to telecommute",
+        "do companies still have to telecommute?",
+        "can the offices reopen even though I can work remotely..",
+        "teleworking",
+        "what about workers who can telework?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

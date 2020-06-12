@@ -1,0 +1,52 @@
+{
+  "id": "u102fsdbx8_est_ce_qu_une_attention_particuli_re_est_port_e",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48245\nMontréal = source://quebec.ca/c48526\nRessources disponibles = source://quebec.ca/c48253\nÀ l'extérieur = source://quebec.ca/c48247"
+      ],
+      "en": [
+        "source://quebec.ca/c48245\nmontreal = source://quebec.ca/c48526\navailable resources = source://quebec.ca/c48253\noutdoors = source://quebec.ca/c48247"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu’une attention particulière est portée à l’égard des communautés autochtones, et comment se déroulent les échanges avec celles-ci?",
+        "Est-ce qu'il y a partage d'information entre le gouvernement et les autochtones?",
+        "Y a-t-il des échanges réguliers avec les communautés autochtones et si oui de quelle façon ?",
+        "Est-ce que le gouvernement se soucie des communautés autochtones pendant la pandémie ?",
+        "Partage de l’information avec les Premières Nations",
+        "Comment est transmis l'information à la population Inuits?",
+        "Comment s'informer quand on est membre des Premières Nations sur la pandémie?",
+        "Comment s'organise la coordination entre les Premières nations et les gouvernements québécois et canadien?",
+        "Canaux de communications sur le coronavirus avec les communautés autochtones, les Premières Nations et les Inuits.",
+        "Y'a-t-il une cellule de crise autochtone dédiée à la gestion du COVID-19?",
+        "Est-ce que les communautés autochtones reçoivent les consignes du gouvernement ?",
+        "Puis-je avoir de l'information dédiée Premières Nations, communauté autochtones ou Inuits pendant l'épidémie de virus?",
+        "En tant que membre d'une communautés autochtones y-a-t-il de l'information pour nous de santé locale sur la COVID?"
+      ],
+      "en": [
+        "is special attention paid to Aboriginal communities and how are exchanges with them conducted?",
+        "is there information sharing between the government and Aboriginal people?",
+        "are there regular exchanges with Aboriginal communities and if so, how?",
+        "does the government care about aboriginal communities during the pandemic?",
+        "information sharing with first nations",
+        "how is information communicated to the Inuit population?",
+        "how can first nations people learn about the pandemic?",
+        "how is the coordination between the first nations and the governments of Quebec and Canada organized?",
+        "coronavirus communication channels with Aboriginal communities, First Nations and Inuit.",
+        "is there an aboriginal crisis unit dedicated to the management of covid-19?",
+        "do Aboriginal communities receive instructions from the government?",
+        "can i have dedicated first nations, aboriginal or inuit community information during the virus outbreak?",
+        "as a member of an aboriginal community is there any local health information for us about the covid?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "autochtones"
+    ]
+  }
+}

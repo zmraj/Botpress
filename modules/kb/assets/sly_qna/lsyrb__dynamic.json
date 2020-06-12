@@ -1,0 +1,38 @@
+{
+  "id": "lsyrb__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Dans le contexte actuel, les autorités de santé publique recommandent la suspension des visites aux logements pour le moment.\nSi, malgré cela, il y a une visite, il y a des mesures de précaution à prendre.\nEn premier lieu, il est important de reporter toutes les visites des logements dont les locataires sont atteints de la COVID‑19 ou s’ils sont en isolement en raison de symptômes grippaux ou d’un retour de voyage.\nVoici les mesures à prendre avant la visite :\n*   partager toute information pertinente sur les logements afin de s’assurer de l’intérêt des visiteurs;\n*   vérifier que les visiteurs n’ont pas voyagé dans les 14 derniers jours et qu’ils ne ressentent aucun symptôme grippal;\n*   demander aux visiteurs qu’ils se lavent les mains avant d’entrer dans les logements;\nVoici les mesures à prendre pendant la visite :\n*   limiter le nombre de personnes, préférablement à un seul visiteur à la fois;\n*   restreindre la durée de la visite à l’essentiel;\n*   demander à toutes les personnes présentes de se tenir à une distance d’au moins un à deux mètres;\n*   demander aux visiteurs de ne rien toucher dans les logements;\nAprès chaque visite, il est important de désinfecter les poignées de toutes les portes des logements.\nFaire des visites de logement durant la COVID-19 = section://Z1BuWe2"
+      ],
+      "en": [
+        "Given the current situation, public health authorities recommend suspending apartment viewings for now. If, despite this, you want to show an apartment, you must take precautions. First, it is important to postpone all viewings of apartments where the tenants have COVID-19 or are self-isolating because they have flu-like symptoms or have returned from travelling. You must take the following measures before the viewing:\n*   provide any relevant information about the apartments to the viewers to make sure of their interest;\n*   make sure that viewers have not been travelling in the last 14 days and do not have any flu-like symptoms;\n*   ask viewers to wash their hands before they enter apartments;\nYou must take the following measures during the viewing:\n*   limit the number of people, preferably to one viewer at a time;\n*   keep the viewing as short as possible;\n*   ask everyone who is there to keep at least one to two metres apart;\n*   ask viewers not to touch anything in the apartments;\nAfter each viewing, it is important to disinfect all the doorknobs in the apartments.\nmaking housing visits during covid-19 = section://z1buwe2"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "La fin des baux approche et les propriétaires veulent tout de même faire visiter les logements. Doit-on limiter les visites?",
+        "Quelles sont les précautions à prendre avant d'aller visiter un logement",
+        "Est-ce qu'on peut aller visiter le logement d'une personne en isolement?",
+        "Est-ce que la visite des logements est suspendue?",
+        "Quelle mesure de sécurité je dois prendre si je dois aller visiter un appartement à louer?",
+        "Est-ce que les visites de logement sont permises?"
+      ],
+      "en": [
+        "the end of the leases is approaching and the landlords still want to show the units. Should there be a limit on the number of visits?",
+        "what precautions should be taken before visiting an accommodation",
+        "can we go and visit the home of a person in isolation?",
+        "is the tour of the units suspended?",
+        "what safety precautions should I take if I need to visit an apartment for rent?",
+        "are home visits permitted?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

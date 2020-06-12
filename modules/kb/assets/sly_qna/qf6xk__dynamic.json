@@ -1,0 +1,60 @@
+{
+  "id": "qf6xk__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "*   Nouveau[Jetravaille! Un service d’offres d’emploi simplifié et gratuit](https://www.quebec.ca/emploi/offres-d-emploi/besoins-urgents-covid-19/)\n*   [Réouverture et maintien des activités économiques](https://www.quebec.ca/sante/problemes-de-sante/a-z/coronavirus-2019/reouverture-maintien-activites-economiques-covid-19/)\n*   [Outils en santé et sécurité au travail pour les employeurs et les travailleurs](https://www.cnesst.gouv.qc.ca/salle-de-presse/covid-19/Pages/trousse.aspx) \n*   [Formation en ligne pour les travailleurs](https://www.inspq.qc.ca/covid-19/formations/sante-au-travail)\n[Voir la section](https://www.quebec.ca/sante/problemes-de-sante/a-z/coronavirus-2019/entreprises-maindoeuvre-covid19/)\nFormation de 3 mois pour PAB = section://Z1M3dcS"
+      ],
+      "en": [
+        "\n3 months training for pab = section://z1m3dcs"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment peut-on s'inscrire pour la formation de préposé aux bénéficiaires de 3 mois annoncée par le gouvernement?",
+        "Comment puis-je m'inscrire pour suivre la formation de 3 mois du 10 juin?",
+        "Où postuler pour formation en chsld?",
+        "Comment puis-je avoir une formation pour travailler en chsld?",
+        "Où on peut suivre le cours de préposé aux bénéficiaires en 3 mois?",
+        "Cours préposé",
+        "Ou puis-je m'inscrire pour le recrutement de 10 000 préposées aux bénéficiaires?",
+        "nouvelle formation 3 mois pour chsld",
+        "Où s'inscrire pour les 10000 préposées?",
+        "C'est quoi le programme de formation de 3 mois offert par le gouvernement?",
+        "J'aimerais savoir comment je joins le programme de préposé aux bénéficiaires en chsld?",
+        "Une personne vivant à l'étranger peut-elle suivre la formation pour devenir préposée aux bénéficiaires?",
+        "Le nouveau programme en 3 mois",
+        "J'aimerais savoir où on peut s'inscrire pour devenir préposée aux bénéficiaires?",
+        "Programme pab 3 mois",
+        "Comment donner notre nom pour devenir préposée aux bénéficiares?",
+        "La formation aux préposés aux bénéficiaires, comment m'inscrire?"
+      ],
+      "en": [
+        "how do i register for the 3-month beneficiary attendant training announced by the government?",
+        "how do i register for the 3-month training on june 10?",
+        "where to apply for chsld training?",
+        "how can i get training to work in chsld?",
+        "where you can take the Beneficiary Attendant Course in 3 months?",
+        "instructor-led course",
+        "or can I register for the recruitment of 10,000 Beneficiary Attendants?",
+        "new 3-month training for chsld",
+        "where to register for the 10,000 attendants?",
+        "what is the 3-month training program offered by the government?",
+        "i would like to know how do i join the chsld beneficiary attendant program?",
+        "can a person living outside Canada take the training to become a beneficiary attendant?",
+        "the new program in 3 months",
+        "i would like to know where to register to become a Beneficiary Attendant?",
+        "pab program 3 months",
+        "how do we give our name to become a beneficiary attendant?",
+        "beneficiary Attendant training, how do I register?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services de santé"
+    ]
+  }
+}

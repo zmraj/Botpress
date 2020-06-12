@@ -1,0 +1,42 @@
+{
+  "id": "z17h3um__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Dans toutes les régions du Québec, à l’exception de la communauté métropolitaine de Montréal et de la MRC de Joliette, les commerces de vente au détail peuvent ouvrir, y compris ceux situés dans les centres commerciaux.\nSur les territoires de la communauté métropolitaine de Montréal et de la MRC de Joliette, les commerces de vente au détail qui exercent des activités ou qui offrent des services jugés prioritaires ainsi que ceux qui disposent d’une porte extérieure habituellement utilisée par la clientèle peuvent ouvrir. La date de réouverture des centres commerciaux situés dans ces régions n’a pas encore été annoncée.\nLes entreprises de la chaîne d’approvisionnement de ces commerces peuvent également exercer leurs activités.\nLes marchés publics, kiosques = section://Z2tycKs"
+      ],
+      "en": [
+        "In all regions of Québec, except for the Communauté métropolitaine de Montréal and the MRC de Joliette, retail stores can open, including those situated in shopping centres.\nIn the territories of the Communauté métropolitaine de Montréal and the MRC de Joliette, retail stores that engage in priority activities or that offer priority services and stores with an outside customer entrance can open. The reopening date for shopping centres situated in these regions has yet to be announced.\nCompanies in the supply chain of these businesses may also exercise their activities.\npublic markets, kiosks = section://z2tycks"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les marchés publics peuvent-ils maintenir leurs activités?",
+        "marchés publics",
+        "les kiosques de ventes en libre-service sont-ils ouverts?",
+        "Je peux tu aller aux marchés publics?",
+        "Est-ce que je peux manger sur place dans les marchés publics?",
+        "Je peux tu goûter les aliments au marché public?",
+        "Y'a t-il des démonstrations culinaires dans les marchés publics?",
+        "Je peux tu goûter la bouffe dans les kiosques?"
+      ],
+      "en": [
+        "can public procurement markets continue to operate?",
+        "government procurement",
+        "are self-serve kiosks open?",
+        "can you go to the farmers' market?",
+        "can I eat at farmers' markets?",
+        "can you taste the food at the farmers' market?",
+        "are there cooking demonstrations in public markets?",
+        "can you taste the food at the newsstands?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "id": "iaflmznags_est_ce_que_je_peux_continuer___consommer_des_alime",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49850"
+      ],
+      "en": [
+        "source://quebec.ca/c49850"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que je peux continuer à consommer des aliments en provenance de l'étranger?",
+        "Les aliments importés comportent-ils plus de risque de transmission du virus?",
+        "Est-ce que le coronavirus peut se multiplier dans les aliments?",
+        "Les fruits en provenance de pays étrangers peuvent-ils être consommés?"
+      ],
+      "en": [
+        "can i continue to eat food from abroad?",
+        "does imported food carry a higher risk of virus transmission?",
+        "can coronavirus multiply in food?",
+        "can fruit from foreign countries be eaten?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consommateurs - Nourriture - Animaux"
+    ]
+  }
+}

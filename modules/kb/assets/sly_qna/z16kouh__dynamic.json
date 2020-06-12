@@ -1,0 +1,46 @@
+{
+  "id": "z16kouh__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Il n’est pas possible de faire la différence entre la COVID‑19 et la grippe en se basant seulement sur les symptômes, car ils se ressemblent trop. La seule façon d’être certain est de faire un test de détection, désormais réservé à certains groupes de personnes.\nPar contre, si vous développez des symptômes d’infection respiratoire alors que vous vivez avec une personne qui a reçu la confirmation qu’elle était atteinte de la COVID‑19, il est presque certain que vous êtes également atteint.\nLes consignes d’isolement = section://Z2wooYS"
+      ],
+      "en": [
+        "You cannot tell the difference between COVID-19 and the flu based on the symptoms alone because they are too alike. The only way to be sure is to get tested. Testing is now reserved for certain groups of people.\nHowever, if you develop symptoms of a respiratory tract infection and you live with someone who has tested positive for COVID-19, it is almost certain that you have it too.\nisolation instructions = section://z2wooys"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment peut-on faire la différence entre les symptômes de la COVID-19 et ceux de la grippe?",
+        "Est-ce que c'est possible de différencier les symptômes de la grippe et ceux de la COVID-19?",
+        "Qu'est-ce que je dois faire pour savoir si j'ai la covid-19 et pas la grippe?",
+        "Les symptômes de la grippe et de la COVID-19 sont-il différenciable?",
+        "Puis-je faire la différence entre des symptômes grippaux et ceux de la COVID-19?",
+        "Est-ce que les symptômes du coronavirus s'apparentent à ceux de la grippe ?",
+        "Quelle sont les différences entre le coronavirus et la grippe ou l'influenza?",
+        "Les symptômes du corona c'est tu comme la grippe ?",
+        "Comment distinguer allergies saisonnières et covid?",
+        "Vous pensez avoir la grippe"
+      ],
+      "en": [
+        "how can you tell the difference between covid-19 and flu symptoms?",
+        "is it possible to differentiate between flu symptoms and covid-19 symptoms?",
+        "what do I have to do to find out if I have covid-19 and not the flu?",
+        "are the symptoms of influenza and covid-19 distinguishable?",
+        "can i tell the difference between flu-like symptoms and covid-19?",
+        "are the symptoms of coronavirus similar to those of the flu?",
+        "what are the differences between coronavirus and influenza?",
+        "are corona symptoms like the flu?",
+        "how to distinguish between seasonal and covid allergies?",
+        "you think you have the flu"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

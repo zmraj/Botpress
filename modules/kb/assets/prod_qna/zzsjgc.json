@@ -1,0 +1,62 @@
+{
+  "id": "zzsjgc",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://ZIjf4B\nLes épreuves ministérielles & diplomation = section://ZIjf4B"
+      ],
+      "en": [
+        "section://ZIjf4B\nministerial tests & graduation = section://zijf4b"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que le gouvernement peut délivrer des diplômes sans que les élèves aient à passer les épreuves finales ou ministérielles?",
+        "Est-ce que les tests ministériels auront toujours lieu?",
+        "Je suis au secondaire, j'ai des bonnes notes pour mes étapes, \nje pourrai avoir mon diplôme ?",
+        "Mon enfant ne fera pas les épreuves finales, pourra-t-il avoir son \ndiplôme pareil?",
+        "Je veux obtenir mon diplôme de secondaire",
+        "Mon enfant va-t-il devoir faire les examens ministérielles?",
+        "Est-ce que les épreuves finales du ministère de l'Éducation sont annulées?",
+        "J'aimerais savoir comment les élèves vont passer un niveau?",
+        "Est-ce que les résutats des deux prmières étapes seront pris en considration",
+        "Est-ce que les enseignants peuvent bonifier les notes pour le passage d'un niveau à un autre?",
+        "Épreuves ministérielles à faire pour graduer",
+        "Vais-je passer mon année si je ne me présente pas à mes cours en ligne?",
+        "évaluation",
+        "Quelle est la directive au secondaire concernant les évaluations?",
+        "bulletin",
+        "Ma fille ne peut pas faire sa reprise d'examen d'histoire de 4e secondaire, va-t-elle avoir ses crédits automatiquement?",
+        "Comment seront évalués les élèves du secondaire?",
+        "Comment sera évalué le troisième bulletin avec les cours en ligne?"
+      ],
+      "en": [
+        "can the government issue diplomas without students having to take final or ministerial exams?",
+        "will departmental testing still take place?",
+        "i'm in high school, I have good grades for my steps, can I graduate?",
+        "my child won't make the final exams, will he be able to graduate the same way?",
+        "i want to graduate from high school",
+        "will my child have to do the departmental reviews?",
+        "are the Ministry of Education finals cancelled?",
+        "i'd like to know how the students are going to pass a level?",
+        "will the results of the first two steps be taken into consideration?",
+        "can teachers improve marks for moving from one level to another?",
+        "ministerial tests to be taken for graduation",
+        "will I pass my year if I don't show up for my online courses?",
+        "evaluation",
+        "what is the secondary school policy regarding assessments?",
+        "newsletter",
+        "my daughter can't retake her eighth grade history exam, will she get her credits automatically?",
+        "how will high school students be evaluated?",
+        "how will the third report card be evaluated with the online courses?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Écoles et éducation"
+    ]
+  }
+}

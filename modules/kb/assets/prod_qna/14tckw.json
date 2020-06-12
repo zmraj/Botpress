@@ -1,0 +1,42 @@
+{
+  "id": "14tckw",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z1IskKn\nEffectuer des déplacements entre les régions = page://Ze8dRW"
+      ],
+      "en": [
+        "section://Z1IskKn\nmove between regions = page://ze8drw"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelle est la procédure si je dois me rendre aux Iles-de-la-Madelaine?",
+        "Quel formulaire dois-je remplir pour aller aux Iles-de-la-Madelaine?",
+        "Iles-de-la-Madelaine",
+        "J'ai tu le droit d'aller au Iles-de-la-Madelaine?",
+        "déplacement Iles-de-la-madelaine",
+        "Transport aux iles de la madelaine, comment procéder?",
+        "Quelle est la dernière mise à jour pour les Iles-de-la-Madelaine?",
+        "Procédure pour déplacement aux Iles-de-la-Madelaine"
+      ],
+      "en": [
+        "what is the procedure if I have to go to the Magdalen Islands?",
+        "what form do i need to fill out to go to the islands?",
+        "iles-de-la-madelaine",
+        "am I allowed to go to the Isle of Madelaine?",
+        "iles-de-la-madelaine travel",
+        "transport to the islands of madelaine, how to proceed?",
+        "what's the latest update for the isles-de-la-madelaine?",
+        "procedure for travel to the isles-de-la-madelaine"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transports et déplacements"
+    ]
+  }
+}

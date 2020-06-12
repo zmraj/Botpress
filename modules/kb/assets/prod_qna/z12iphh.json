@@ -1,0 +1,50 @@
+{
+  "id": "z12iphh",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://TnMWl\nLes CHSLD = section://TnMWl"
+      ],
+      "en": [
+        "section://TnMWl\nthe chsld = section://tnmwl"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Hôpitaux, CHSLD, et autres établissements pour aînés et adultes vulnérables",
+        "Est-ce qu'il est interdit d'aller faire une visite à quelqu'un dans les hôpitaux, CHSLD, et autres établissements pour aînés et adultes vulnérables?",
+        "Depuis quand les visites non essentielles dans les établissements de soins aux aînés sont interdites ?",
+        "Pourquoi les visites sont interdites ?",
+        "Pour qui le confinement est obligatoire dans les ressources d'hébergement ?",
+        "Je peux rendre visite à ma mère au centre d'hébergement?",
+        "Proche aidant",
+        "Je peux rendre visite à mon père au centre d'hébergement?",
+        "Visites permises pour proches aidants dans les CHSLD?",
+        "Les propriétaires de résidences pour personnes agées peuvent-ils empêcher les résidents de sortir?",
+        "Quelles sont les consignes dans les CHSLD?",
+        "Est-ce que je peux sortir mon mari de son chsld pour lui faire prendre l'air?"
+      ],
+      "en": [
+        "hospitals, chsld, and other facilities for seniors and vulnerable adults",
+        "is it against the law to visit someone in hospitals, chsld, and other facilities for seniors and vulnerable adults?",
+        "since when have non-essential visits to elder care facilities been prohibited?",
+        "why aren't visitors allowed?",
+        "for whom containment is mandatory in housing resources?",
+        "can I visit my mother at the shelter?",
+        "family caregiver",
+        "can I visit my father at the shelter?",
+        "visits allowed for caregivers in the chsld?",
+        "can owners of seniors' residences prevent residents from leaving?",
+        "what are the instructions in the chsld?",
+        "can I get my husband out of his chsld to get some air?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services de santé"
+    ]
+  }
+}

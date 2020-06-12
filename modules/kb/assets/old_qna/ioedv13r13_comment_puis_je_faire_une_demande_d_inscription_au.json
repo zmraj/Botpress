@@ -1,0 +1,60 @@
+{
+  "id": "ioedv13r13_comment_puis_je_faire_une_demande_d_inscription_au",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49287"
+      ],
+      "en": [
+        "source://quebec.ca/c49287"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment puis-je faire une demande d’inscription au Programme d’aide temporaire aux travailleurs?",
+        "Où se trouve le formulaire d'inscription au  programme d'aide temporaire aux travailleurs PATT COVID-19?",
+        "Trouver le formulaire d'inscription au  programme d'aide temporaire aux travailleurs PATT COVID-19.",
+        "Où je trouve le formulaire pour le programme d'aide temporaire aux travailleurs?",
+        "Pour appeler la croix-rouge afin de s'incsrire au programme d'aide temporaire aux travailleurs COVID-19 c'est un numéro sans frais?",
+        "Comment faire une demande d'aide financière PATT aux travailleurs si je n'ai pas d'accès à Internet?",
+        "Comment je fais pour faire une demande d'aide APTT COVID-19 si je n'ai pas d'internet?",
+        "Est-ce que je peux parler à quelqu'un pour avoir de l'aide pour s'inscrire au programme d'aide temporaire aux travailleurs COVID-19",
+        "Existe-t-il un formulaire pour faire une demande d'inscription au PATT COVID-19?",
+        "Puis-je faire une demande d'inscription par téléphone au PATT?",
+        "Je n'ai pas d'internet je fais quoi pour m'inscrire au programme d'aide temporaire aux travailleurs PATT COVID-19?",
+        "Comment faire une demande au Programme d'aide temporaire aux travailleurs si je n'ai pas d'internet?",
+        "Est-ce que je peux m'inscrire en ligne ou je dois téléphoner à quelque part ppour programme d'aide temporaire aux travailleurs PATT COVID-19?",
+        "Où puis-je appeler pour m'inscrire par téléphone au PATT?",
+        "Est-ce que je vais pouvoir parler à quelqu'un si je m'inscris par téléphone au PATT COVID-19?",
+        "Qu'est-ce que je dois faire pour l'inscription au programme d'aide financière PATT?",
+        "Est-ce que je peux faire une demande en parlant à quelqu'un au téléphone pour le programme d'aide temporaire aux travailleurs COVID-19?"
+      ],
+      "en": [
+        "how do i apply for the temporary help worker program?",
+        "where is the patt covid-19 temporary help worker registration form?",
+        "find the patt covid-19 temporary help worker registration form.",
+        "where do I find the form for the Temporary Help Worker Program?",
+        "to call the red cross to register for the covid-19 temporary help worker program is a toll-free number?",
+        "how do i apply for worker financial assistance if i don't have internet access?",
+        "how do i apply for aptt covid-19 if i don't have internet?",
+        "can i talk to someone to get help registering for the covid-19 temporary help worker program?",
+        "is there a form to apply for patt covid-19?",
+        "can i apply by phone to the patt?",
+        "i don't have internet what do i have to do to sign up for the patt covid-19 temporary help worker program?",
+        "how do i apply for the temporary help worker program if i don't have internet?",
+        "can i register online or do i need to call somewhere for temporary help worker program patt covid-19?",
+        "where can i call to register by phone at the patt?",
+        "will I be able to talk to anyone if I sign up by phone at patt covid-19?",
+        "what do i need to do to register for the patt financial assistance program?",
+        "can i apply by talking to someone on the phone about the covid-19 temporary help worker program?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

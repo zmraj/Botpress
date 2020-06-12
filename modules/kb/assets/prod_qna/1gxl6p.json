@@ -1,0 +1,50 @@
+{
+  "id": "1gxl6p",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://2e3tpq\nLes activités et services commerciaux prioritaires = section://ZKQueG"
+      ],
+      "en": [
+        "page://2e3tpq\npriority business activities and services = section://zkqueg"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "un de mes employés est tombé malade, que faire?",
+        "consignes quand un employé présente des symptômes",
+        "présence au travail si malaise",
+        "dois-je aller travailler si je me sens pas bien",
+        "un employé est tombé malade, qu'est-ce que je dois faire",
+        "J'ai un employé qui a attrapé la covid, est-ce que je dois mettre en quarantaine tous les employés qui ont été en contact avec?",
+        "Que doit faire la direction si un employé développe des symptômes en milieu de travail?",
+        "Cas de covid au travail, que faire?",
+        "J'ai un travailleur ayant des symptômes de fièvre, peut-il revenir travailler?",
+        "Est-ce qu'on doit fermer un établissement où il y a un certain nombre de personnes qui présentent des symptômes?",
+        "employé positif",
+        "Quelle est la procédure si un employé a des symptômes?"
+      ],
+      "en": [
+        "one of my employees got sick, what can I do?",
+        "instructions when an employee shows symptoms",
+        "work attendance so uneasy",
+        "do I have to go to work if I don't feel well",
+        "an employee got sick, what am I supposed to do",
+        "i have an employee who caught the covid, do I have to quarantine all employees who came in contact with it?",
+        "what should management do if an employee develops symptoms in the workplace?",
+        "covid case at work, what to do?",
+        "i have a worker with symptoms of fever, can he come back to work?",
+        "should we close a facility where there are a number of people with symptoms?",
+        "positive employee",
+        "what is the procedure if an employee has symptoms?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

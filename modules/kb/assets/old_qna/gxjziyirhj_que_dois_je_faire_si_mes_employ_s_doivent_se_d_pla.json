@@ -1,0 +1,36 @@
+{
+  "id": "gxjziyirhj_que_dois_je_faire_si_mes_employ_s_doivent_se_d_pla",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53402"
+      ],
+      "en": [
+        "source://quebec.ca/c53402"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Que dois-je faire si mes employés doivent se déplacer d'une région à l'autre pour assurer la continuité de l'offre de services prioritaires?",
+        "Est-ce qu'un document est nécessaire pour les employés du bioalimentaire pour qu'ils se déplacent d'une région à l'aute?",
+        "Quels sont les travailleurs du bioalimentaire qui peuvent se déplacer d'une région à l'autre?",
+        "Qui justifie le déplacement des travailleurs du bioalimentaire d'une région à l'autre?",
+        "Quels sont les documents nécessaires aux travailleurs du bioalimentaire pour se déplacer d'une région à l'autre?"
+      ],
+      "en": [
+        "what should I do if my employees need to move from one region to another to ensure continuity of priority services?",
+        "is a document required for bio-food employees to travel from one region to another?",
+        "which bio-food workers can move from one region to another?",
+        "that justifies the movement of bio-food workers from one region to another?",
+        "what documentation do bio-food workers need to move from one region to another?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Employeurs - travailleurs - normes du travail"
+    ]
+  }
+}

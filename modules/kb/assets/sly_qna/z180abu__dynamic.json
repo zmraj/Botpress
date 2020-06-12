@@ -1,0 +1,52 @@
+{
+  "id": "z180abu__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Misez sur des stratégies de socialisation à distance, qui vous aideront à maintenir et même augmenter les liens avec vos proches en utilisant des moyens de communication alternatifs.\nIl ne faut pas minimiser les effets positifs de la socialisation à distance, puisque le maintien de vos relations sociales a un impact positif sur votre santé physique et psychologique dans chaque étape de la vie.\nPar exemple, vous pouvez utiliser des moyens de communication directs, indirects ou encore vous montrer créatifs :\n*   Moyens directs : appels téléphoniques ou vidéos, messages texte, réseaux sociaux, applications numériques (WhatsApp, Skype, etc.) ou autres moyens technologiques.\n*   Moyens indirects : messages vocaux ou vidéos préenregistrés, lettres, cartes postales, photos numériques.\n*   Moyens créatifs : dessins, bricolage, montage photo, enregistrement de la lecture d’une histoire pour les petits enfants, rendez-vous pour se saluer du balcon ou de la rue, souper en tête à tête par Skype.\nPour maximiser votre expérience, identifiez vos préférences et celles de vos proches concernant les moyens de communication et la fréquence à privilégier.\nTout savoir sur les rassemblements = page://Z1100pc"
+      ],
+      "en": [
+        "Distance socializing strategies, such as using alternative ways of communicating, can help you stay connected and even become closer to family and friends.\nDon’t minimize the positive effects of distance socializing, since continuing to socialize has a positive impact on your physical and psychological health at every stage of life.\nFor example, you can use direct or indirect means of communication or even get creative:\n*   Direct: phone calls, video chats, text messages, social networks, digital apps (WhatsApp, Skype, etc.) or other technologies.\n*   Indirect: prerecorded voice messages or videos, letters, postcards, digital photos.\n*   Creative: drawings, crafts, photo collages, a recording of yourself reading a children’s story, arrange a time to say hello from your balcony or the street, dinner for two by Skype.\nTo get the most out of your experience, find out which means of communication you and your family and friends like best and decide how often you will use them.\nall about gatherings = page://z1100pc"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "je peux tu organiser un souper d'amis",
+        "est-ce que je peux inviter des amis à souper",
+        "Quelle distance faudra respecter entre personnes?",
+        "est-ce que je peux fêter l'anniversaire à ma mère?",
+        "je veux organiser une soirée mais nous respecterons la distanciation, est-ce ok?",
+        "Est-ce que je peux recevoir du monde à la maison pendant la pandémie?",
+        "Est-ce qu'on faire un party avec la famille pendant l'épidémie?",
+        "Ai-je le droit de rejoindre des amis au parc malgré la crise?",
+        "Est-ce que je peux inviter ma fille chez moi?",
+        "est-ce que mes enfants peuvent venir me visiter?",
+        "En déconfinement, notre fils d'une région éloignée peut-il venir nous voir et coucher à la maison?",
+        "je vis seule dans mon appartement condo, puis-je recevoir une amie?",
+        "Comment rester en contact avec ses proches?"
+      ],
+      "en": [
+        "i can set up a dinner party for friends",
+        "can I invite some friends over for dinner",
+        "how far apart should people be?",
+        "can I celebrate my mother's birthday?",
+        "i want to throw a party, but we'll respect the distance, is that okay?",
+        "can I have people over during the pandemic?",
+        "are we having a party with the family during the outbreak?",
+        "am I allowed to join friends in the park despite the crisis?",
+        "can I invite my daughter into my home?",
+        "can my children come and visit me?",
+        "in deconfinement, can our son from a remote area come to our house and sleep over?",
+        "i live alone in my condo apartment, can I have a friend over?",
+        "how do you stay in touch with your loved ones?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

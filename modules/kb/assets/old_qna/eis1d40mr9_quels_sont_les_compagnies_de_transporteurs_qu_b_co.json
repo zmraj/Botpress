@@ -1,0 +1,44 @@
+{
+  "id": "eis1d40mr9_quels_sont_les_compagnies_de_transporteurs_qu_b_co",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53259\nDessertes aériennes = source://quebec.ca/c53284\nDépenses admissibles = source://quebec.ca/c53289"
+      ],
+      "en": [
+        "source://quebec.ca/c53259\nair services = source://quebec.ca/c53284\neligible expenses = source://quebec.ca/c53289"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les compagnies de transporteurs Québécois admissibles pour le maintien des services aériens ?",
+        "Transporteurs aériens pouvant bénéficier du programme d’aide pour le maintien des services régionaux essentiels pendant la pandémie.",
+        "Quels sont les dessertes aériennes admissibles pour le maintien des services pendant la pandémie?",
+        "Quelles sont les dépenses admissibles des entreprises participant au maintien des services régionaux aériens pendant la pandémie?",
+        "Dépenses admissibles du programme de maintien des services essentiels en région aérien.",
+        "Régions desservies pour le maintien des services aériens essentiels.",
+        "Est-ce que les services essentiels seront maintenus pour les régions éloignées du québec?",
+        "Services aériens pour les régions isolées et loin du Québec durant l'urgence sanitaire.",
+        "Type de transport aérien pour les régions isolées."
+      ],
+      "en": [
+        "which Quebec carrier companies are eligible to maintain air services?",
+        "air carriers eligible for the program to help maintain essential regional services during the pandemic.",
+        "what air services are eligible for continued service during the pandemic?",
+        "what are the eligible expenses of companies involved in maintaining regional air services during the pandemic?",
+        "eligible expenses of the Air Critical Services Maintenance Program.",
+        "areas served for the maintenance of essential air services.",
+        "will essential services be maintained for remote areas of quebec?",
+        "air services for isolated regions and far from quebec during the health emergency.",
+        "type of air transport for isolated areas."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transport - déplacements"
+    ]
+  }
+}

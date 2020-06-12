@@ -1,0 +1,52 @@
+{
+  "id": "z25fbju",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://2oHyhF\nLa réouverture des commerces = section://Z2tycKs"
+      ],
+      "en": [
+        "section://2oHyhF\nthe reopening of shops = section://z2tycks"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "À quand l'ouverture des centres commerciaux?",
+        "Est-ce que les centres d'achat vont rouvrir?",
+        "Je peux tu aller au centre d'achat?",
+        "Quand est-ce que le mail va ouvrir?",
+        "À quand l'ouverture des centres d'achat?",
+        "Je peux tu aller magasiner en ville?",
+        "Est-ce que les centres commerciaux vont rester fermés?",
+        "C'est tu possible d'aller faire mes commissions dans le centre d'achat?",
+        "Peut-on aller aux centres commerciaux?",
+        "Centres commerciaux de Montréal: y'a-t-il une date de réouverture?",
+        "La date pour l'ouverture des centres d'achat à Montréal",
+        "Quand ouverture centres commerciaux à Montréal",
+        "Quand est-ce que les centres d'achat pourront ouvrir?"
+      ],
+      "en": [
+        "when will the malls open?",
+        "are the malls going to reopen?",
+        "can you go to the mall?",
+        "when will the email open?",
+        "when will the shopping centres open?",
+        "can you go shopping in the city?",
+        "are the malls going to stay closed?",
+        "is it possible for you to go to the mall and do my errands?",
+        "can we go to the malls?",
+        "montreal shopping centres: is there a reopening date?",
+        "the date for the opening of the shopping centres in montréal",
+        "when opening shopping centres in montreal",
+        "when will shopping centres be able to open?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

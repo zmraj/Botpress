@@ -1,0 +1,40 @@
+{
+  "id": "1iagdk",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://2qJgQx\nTravailleurs étrangers temporaires dans le secteur bioalimentaire = page://2qJgQx"
+      ],
+      "en": [
+        "page://2qJgQx\ntemporary foreign workers in the bio-food sector = page://2qjgqx"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les travailleurs étrangers sont autorisés à entrer au Canada?",
+        "Les mexicains peuvent tu venir cueillir des légumes au Québec?",
+        "travailleurs étrangers temporaires",
+        "travailleurs provenant de l'étranger peuvent-ils venir au Québec?",
+        "Y-a-t'il une compensation financière pour l'isolation de 14 jours des travailleurs étrangers?",
+        "Quel est le protocole pour l'accueil des travailleurs étrangers temporaires au Québec?",
+        "Mexicains qui viennent travailler au Québec"
+      ],
+      "en": [
+        "are foreign workers allowed to enter canada?",
+        "can mexicans pick vegetables in quebec?",
+        "temporary foreign workers",
+        "can workers from abroad come to quebec?",
+        "is there any financial compensation for the 14-day isolation of foreign workers?",
+        "what is the protocol for the reception of temporary foreign workers in quebec?",
+        "mexicans who come to work in quebec"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": false,
+    "contexts": [
+      "Entreprises et main d'oeuvre"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "0x83rbiego_pourquoi_le_programme_d_aide_temporaire_aux_travai",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53509"
+      ],
+      "en": [
+        "source://quebec.ca/c53509"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pourquoi le Programme d’aide temporaire aux travailleurs (PATT) cesse-t-il d’être offert?",
+        "Pourquoi arrêter le Programme d’aide aux travailleurs (PATT)?",
+        "Quelles sont les raison du gouvernement Québecois d'arrêter le Programme d’aide temporaire aux travailleurs (PATT)?"
+      ],
+      "en": [
+        "why is the temporary help for workers (patt) program being discontinued?",
+        "why stop the workers' assistance program (patt)?",
+        "what are the quebec government's reasons for stopping the temporary help for workers (patt) program?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "zcyt9t",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z1Fhcx4\nRecommandations de mesures préventives = section://Z1Fhcx4"
+      ],
+      "en": [
+        "section://Z1Fhcx4\nrecommendations for preventive measures = section://z1fhcx4"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les mesures préventive qui devrait être prise par les entreprises?",
+        "Comment adapter mon commerces dans la situation du COVID-19?",
+        "Est-ce que je dois faire des changements à mes opérations en vue de la réouverture?",
+        "Liste de recommendations pour établissements commercials",
+        "C'est quoi les outils disponible pour aider les commerces à s'adapter",
+        "Est-ce que les gens qui manipule des aliments devraient changer leur manière de faire?",
+        "En tant qu'employeur, comment est-ce que je préviens le coronavirus dans mon entreprise?",
+        "Je suis un employé qui retourne travailler. Est-ce que je dois prendre des mesures préventive?",
+        "Recommandations pour les établissements",
+        "Conseils pour bien adapté l'environnement de travail dans un contexte de covid-19",
+        "Quelles sont les gestes à poser pour se protéger en milieu de travail?",
+        "Sur quel site Web les outils d’aide sont disponibles en milieu de travail pour lutter contre la COVID-19?",
+        "Quels sont les méthodes pour prévenir le coronavirus en milieu de travail?",
+        "Dans mon milieu de travail qu'est-ce que je dois faire pour me protéger de la COVID ?"
+      ],
+      "en": [
+        "what preventive measures should be taken by companies?",
+        "how do i adapt my business to the covid-19 situation?",
+        "do I need to make any changes to my operations in preparation for the reopening?",
+        "list of recommendations for commercial establishments",
+        "what are the tools available to help businesses adapt?",
+        "should people who handle food change the way they do it?",
+        "as an employer, how do I prevent coronavirus in my company?",
+        "i'm an employee returning to work. Should I take preventative measures?",
+        "institutional guidelines",
+        "tips for a well-adapted work environment in a covid-19 context",
+        "what can you do to protect yourself in the workplace?",
+        "on what website are the workplace tools available to assist in the fight against covid-19?",
+        "what are the methods to prevent coronavirus in the workplace?",
+        "in my workplace what do I need to do to protect myself from covid?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": false,
+    "contexts": [
+      "Entreprises et main d'oeuvre"
+    ]
+  }
+}

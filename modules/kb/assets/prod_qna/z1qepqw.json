@@ -1,0 +1,44 @@
+{
+  "id": "z1qepqw",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://2gwSEj\nInformations générales sur la COVID-19 = section://1VstJt"
+      ],
+      "en": [
+        "section://2gwSEj\ngeneral information on covid-19 = section://1vstjt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les mesures prise par le gouvernement?",
+        "Est-ce que le gouvernement pose des actions concrêtes?",
+        "J'aimerais savoir ce que le gouvernement fait comme mesure",
+        "Je cherche une liste des mesures prises par le gouvernement",
+        "Est-ce qu'il existe un répertoire des action fait par la province",
+        "Il fait quoi le premier ministre pour gérer la crise",
+        "C'est tu bien gérer cette crise là?",
+        "Ils foutent quoi les ministres",
+        "Les mesures prises par le gouvernement"
+      ],
+      "en": [
+        "what is the government doing?",
+        "is the government taking concrete action?",
+        "i'd like to know what the government is doing about it",
+        "i'm looking for a list of actions taken by the government..",
+        "is there a directory of actions done by the province",
+        "what's the Prime Minister doing to manage the crisis",
+        "are you handling this crisis well?",
+        "what the hell are the ministers doing",
+        "the actions taken by the government"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

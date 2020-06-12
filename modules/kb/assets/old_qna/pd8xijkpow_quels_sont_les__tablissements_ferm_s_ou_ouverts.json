@@ -1,0 +1,34 @@
+{
+  "id": "pd8xijkpow_quels_sont_les__tablissements_ferm_s_ou_ouverts",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49938"
+      ],
+      "en": [
+        "source://quebec.ca/c49938"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les établissements fermés ou ouverts?",
+        "Est-il possible que certains centres ou établissements soient ouverts?",
+        "École cet été",
+        "Est-ce que le personnel d'un établissement doit se présenter au travail?"
+      ],
+      "en": [
+        "which establishments are closed or open?",
+        "is it possible that some centres or facilities may be open?",
+        "school this summer",
+        "do staff in a facility have to report for work?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

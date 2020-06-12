@@ -1,0 +1,42 @@
+{
+  "id": "14tckw__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Les voyageurs qui doivent emprunter le route et le traversier afin de se rendre aux Îles-de-la-Madeleine ou en revenir doivent dorénavant remplir un formulaire pour avoir le droit de traverser le Nouveau-Brunswick et l’Île-du-Prince-Édouard.\nIls doivent imprimer ce formulaire et l’avoir en main lors de leur déplacement de même que leur réservation à bord du traversier CTMA ainsi que tous les documents confirmant le motif valable de leur voyage (preuve de résidence principale, de résidence secondaire \\[compte de taxes\\], papier médical, document fourni par un employeur, etc.).\n**Si le voyageur remplit le formulaire en français, il lui est recommandé d’imprimer aussi la version anglaise du formulaire sans le remplir pour faciliter les vérifications par les autorités du Nouveau-Brunswick et de l’Île-du-Prince-Édouard.**\nCette autodéclaration ne garantit pas le droit de traverser le Nouveau-Brunswick et l’Île-du-Prince-Édouard. Ce sont les autorités de ces provinces qui prennent la décision lorsque les voyageurs se présentent aux points de contrôle.\n[Remplir le formulaire](https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/securite-publique/publications-adm/formulaires/autodeclaration_iles-de-la-madeleine_MSP.pdf?1590422170)\nEffectuer des déplacements entre les régions = page://Ze8dRW"
+      ],
+      "en": [
+        "Travellers who have to use the road and ferry to travel to and from Îles-de-la-Madeleine must now fill out a form to be allowed to cross New Brunswick and Prince Edward Island.\nThey must print this form and have it on hand when they travel, along with their reservation on board the CTMA ferry and all documents confirming the valid reason for their trip (proof of principal residence, secondary residence \\[tax account\\], medical paper, document provided by an employer, etc.).\n**If the traveller completes the form in French, it is recommended that he or she also print the English version of the form without completing it in order to facilitate verification by New Brunswick and Prince Edward Island authorities.**\n[Complete the form](https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/securite-publique/publications-adm/formulaires/madatory_iles-de-la-madeleine_MSP.pdf?1590422170)\nmove between regions = page://ze8drw"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelle est la procédure si je dois me rendre aux Iles-de-la-Madelaine?",
+        "Quel formulaire dois-je remplir pour aller aux Iles-de-la-Madelaine?",
+        "Iles-de-la-Madelaine",
+        "J'ai tu le droit d'aller au Iles-de-la-Madelaine?",
+        "déplacement Iles-de-la-madelaine",
+        "Transport aux iles de la madelaine, comment procéder?",
+        "Quelle est la dernière mise à jour pour les Iles-de-la-Madelaine?",
+        "Procédure pour déplacement aux Iles-de-la-Madelaine"
+      ],
+      "en": [
+        "what is the procedure if I have to go to the Magdalen Islands?",
+        "what form do i need to fill out to go to the islands?",
+        "iles-de-la-madelaine",
+        "am I allowed to go to the Isle of Madelaine?",
+        "iles-de-la-madelaine travel",
+        "transport to the islands of madelaine, how to proceed?",
+        "what's the latest update for the isles-de-la-madelaine?",
+        "procedure for travel to the isles-de-la-madelaine"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transports et déplacements"
+    ]
+  }
+}

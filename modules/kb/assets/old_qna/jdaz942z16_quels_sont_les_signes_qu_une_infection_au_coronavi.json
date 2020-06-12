@@ -1,0 +1,38 @@
+{
+  "id": "jdaz942z16_quels_sont_les_signes_qu_une_infection_au_coronavi",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49803"
+      ],
+      "en": [
+        "source://quebec.ca/c49803"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les signes qu'une infection au coronavirus se manifeste chez une personne âgée?",
+        "Est-ce qu'une personne âgée est plus fragile et plus à risque de décès en raison du coronavirus (COVID-19) ?",
+        "Comment puis-je donner des soins à ma mère qui est vieille?",
+        "Quelles sont les différentes façons que peuvent se manifester une infection au coronavirus chez une personne âgée ?",
+        "Que dois faire une personne âgée si elle contracte la COVID-19?",
+        "La fièvre est-elle un signe qu'une personne âgée est infectée?"
+      ],
+      "en": [
+        "what are the signs that a coronavirus infection occurs in an older person?",
+        "is an elderly person more fragile and at greater risk of death due to coronavirus (covid-19)?",
+        "how can I care for my mother who is old?",
+        "what are the different ways a coronavirus infection can manifest itself in an older person?",
+        "what should an elderly person do if they contract covid-19?",
+        "is a fever a sign that an older person is infected?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Personnes à risque"
+    ]
+  }
+}

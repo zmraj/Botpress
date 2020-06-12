@@ -1,0 +1,46 @@
+{
+  "id": "w9vlcffdsl_est_ce_que_les_stages_des__l_ves_d__ge_adulte_doiv",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49940\nMaintien des stages = source://quebec.ca/c50687\nReport des stages = source://quebec.ca/c50683"
+      ],
+      "en": [
+        "source://quebec.ca/c49940\nmaintaining internships = source://quebec.ca/c50687\npostponement of internships = source://quebec.ca/c50683"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les stages des élèves d’âge adulte doivent être reportés?",
+        "Qu'est-ce que je fais avec mon stage en entreprise?",
+        "Mon stage est suspendu",
+        "Puis-je compléter mon stage?",
+        "Pourquoi mon stage doit être suspendu?",
+        "Mon stage doit être complété, pourquoi ?",
+        "est-ce que les stages en entreprise sont annulés?",
+        "Je vais-tu pouvoir finir mon stage?",
+        "J'ai un stage de prévu cet été. est-ce que ca va avoir lieu ?",
+        "Est-ce que mon stage va être reporté ?"
+      ],
+      "en": [
+        "should adult students' placements be deferred?",
+        "what do I do with my internship?",
+        "my internship is suspended",
+        "can i complete my internship?",
+        "why does my internship have to be suspended?",
+        "my internship needs to be completed, why?",
+        "are internships cancelled?",
+        "...will you be able to finish my internship?",
+        "i have an internship coming up this summer. Is it going to happen?",
+        "is my internship going to be postponed?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

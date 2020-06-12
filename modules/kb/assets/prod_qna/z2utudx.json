@@ -1,0 +1,62 @@
+{
+  "id": "z2utudx",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://EjljU\nGuide autosoins - COVID-19 = page://ZnRbVt"
+      ],
+      "en": [
+        "section://EjljU\nself-care guide - covid-19 = page://znrbvt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment soulager les maux de gorge?",
+        "Comment faire pour atténuer le mal à la gorge?",
+        "Comment diminuer les douleurs reliées au maux de gorge?",
+        "Quelle est la quantité de sel à mettre dans l'eau pour se gargariser?",
+        "Est-ce que les bonbons durs ou les pastilles peuvent soulager le mal de gorge?",
+        "J'ai full mal à la gorge, comment me soulager?",
+        "Je fais quoi avec mon gros mal de gorge?",
+        "Qu'est-ce que je dois faire pour soulager mes maux de gorge?",
+        "Comment soulager la fièvre?",
+        "Comment diminuer la fièvre?",
+        "Quels médicaments prendre contre la fièvre?",
+        "Pourquoi je fais de la fièvre?",
+        "Je fais beaucoup de fièvre, comment me soulager?",
+        "Je suis fièvreux, quoi faire?",
+        "À combien fait-on de la fièvre chez l'adulte?",
+        "Je donne quoi à mon enfant qui fait de la fièvre?",
+        "Que dois-je faire si mon enfant a fait un peu de fièvre cette nuit?",
+        "Comment soulager les symptômes?"
+      ],
+      "en": [
+        "how to relieve a sore throat?",
+        "how do you alleviate a sore throat?",
+        "how to reduce the pain associated with sore throats?",
+        "how much salt do you have to put in the water to gargle?",
+        "can hard candy or lozenges relieve a sore throat?",
+        "i've got a sore throat, how can I relieve it?",
+        "what do I do with my sore throat?",
+        "what should I do to relieve my sore throat?",
+        "how to relieve the fever?",
+        "how to lower the fever?",
+        "what medications to take for fever?",
+        "why am I running a fever?",
+        "i'm running a high fever, how can I relieve it?",
+        "i'm feverish, what should I do?",
+        "How high is the fever in adults?",
+        "what should I give my child who has a fever?",
+        "what should I do if my child has had a slight fever last night?",
+        "how to relieve the symptoms?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

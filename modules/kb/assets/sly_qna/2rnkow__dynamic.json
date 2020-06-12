@@ -1,0 +1,44 @@
+{
+  "id": "2rnkow__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Il n'existe pas de traitement spécifique ni de vaccin pour la COVID‑19 pour l’instant. La plupart des personnes atteintes du virus se rétablissent par elles-mêmes en restant à la maison, sans avoir besoin d’aller à l’hôpital.\nToutefois, les personnes infectées par le virus, surtout celles qui sont gravement malades, doivent recevoir des soins particuliers pour soulager et traiter les symptômes. Par exemple, il peut être nécessaire de leur administrer de l’acétaminophène en cas de fièvre, de l’oxygène en cas de difficultés respiratoires ou de leur faire une perfusion en cas de déshydratation.\nCertaines personnes présentant de grandes difficultés respiratoires auront besoin d’un traitement de soutien supplémentaire pour les aider à respirer (exemples : tube dans le conduit respiratoire et respirateur mécanique).\nEnfin, plusieurs études sont en cours afin d’évaluer l’efficacité de médicaments ou de traitements déjà utilisés pour d’autres maladies chez les patients ayant un diagnostic de COVID‑19, notamment la chloroquine. Par ailleurs, plusieurs équipes de chercheurs tentent de développer de nouveaux médicaments, mais aucun n’est actuellement disponible.\nInformations générales sur la COVID-19 = section://1VstJt"
+      ],
+      "en": [
+        "There is no specific treatment or vaccine for COVID-19 for the moment. Most people with the virus will recover on their own by remaining at home without needing to go to the hospital.\nHowever, people who are infected with the virus, especially people who are seriously ill, must receive special care to relieve and treat the symptoms. For example, they may need to be given acetaminophen if they have a fever, oxygen if they have difficulty breathing or an infusion if they are dehydrated.\nSome people who have severe difficulty breathing will need additional supportive treatment to help them breathe (for example, a tube in the airway, a mechanical ventilator).\nLastly, many studies are being conducted to assess the efficacy of medications or treatments that are already being used for other diseases in patients diagnosed with COVID-19, in particular chloroquine. In addition, many research teams are trying to develop new medications, but none are available at the moment.\ngeneral information on covid-19 = section://1vstjt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Existe-t-il un traitement contre la COVID‑19?",
+        "Est-ce qu'un vaccin sur la COVID-19 existe ?",
+        "Y-a-t-il un traitement pour guérir le coronavirus ?",
+        "Quel est le médicament pour aider la guérison de la COVID-19 ?",
+        "Quelle est la solution pour le traitement de la pandémie?",
+        "Est-ce que la COVID-19 se guérit?",
+        "Est-ce qu'il existe actuellement un traitement ou vaccin pour traiter la maladie à coronavirus (COVID-19)?",
+        "Quand est-ce que je peux me faire vacciner?",
+        "Est-ce qu'il existe un vaccin?"
+      ],
+      "en": [
+        "is there a treatment for covid-19?",
+        "is there a vaccine on covid-19?",
+        "is there a cure for coronavirus?",
+        "what is the drug to help cure covid-19?",
+        "what is the solution for the treatment of the pandemic?",
+        "...is covid-19 curable?",
+        "is there currently a treatment or vaccine to treat coronavirus disease (covid-19)?",
+        "when can I get the vaccine?",
+        "is there a vaccine?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

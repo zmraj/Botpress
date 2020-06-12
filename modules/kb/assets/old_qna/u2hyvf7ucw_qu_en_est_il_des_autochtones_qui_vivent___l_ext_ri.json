@@ -1,0 +1,49 @@
+{
+  "id": "u2hyvf7ucw_qu_en_est_il_des_autochtones_qui_vivent___l_ext_ri",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c48247"
+      ],
+      "en": [
+        "source://quebec.ca/c48247"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Qu’en est-il des Autochtones qui vivent à l’extérieur de leurs communautés?",
+        "À qui je m'adresse si je suis un autochtone habitant en milieu urbain?",
+        "Je réside en ville et je suis un autochtone, est-ce que je peux m'adresser aux autorités de ma communauté ?",
+        "Consignes pour autochtones en milieu urbain.",
+        "Mesures pour les autochtones vivant à l’extérieur de leur communauté.",
+        "Je vis en dehors de ma communauté des Premières Nations, quels sont les consignes que je dois suivre?",
+        "Est-ce qu'il y a des mesures particulières à suivre si je suis un autochtone qui vit en ville ?",
+        "Mon conseil de bande a-t-il des recommandations alors que je vis en dehors de notre nation?",
+        "Membre des Premières nations en milieu urbain.",
+        "Je suis un amérindien et j'habite en dehors de ma réserve, quelle est la marche à suivre à propos du COVID-19 ?",
+        "Si j'habite hors de ma communauté Inu, est-ce qu'il y a des mesures particulières à suivre ?",
+        "quest-ce que le gouvernement fait pour aider les communauté dans le nord?"
+      ],
+      "en": [
+        "what about Aboriginal people living outside their communities?",
+        "Who do I talk to if I am an urban Aboriginal person?",
+        "i live in the city and I'm a native, can I go to the authorities in my community?",
+        "instructions for urban aboriginals.",
+        "measures for Aboriginal people living outside their communities.",
+        "i live outside of my first nations community, what are the guidelines I have to follow?",
+        "are there any special measures to follow if I am an aboriginal person living in the city?",
+        "does my band council have any recommendations when I live outside our nation?",
+        "urban First Nations people.",
+        "i'm a native american and i live off my reservation, what is the procedure for covid-19?",
+        "if I live outside of my Inuit community, are there any special measures that I need to follow?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "autochtones"
+    ]
+  }
+}

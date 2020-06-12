@@ -1,0 +1,58 @@
+{
+  "id": "1mjqle",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://2rol2T\nInformation pour le personnel de la fonction publique = page://2rol2T"
+      ],
+      "en": [
+        "page://2rol2T\ninformation for public service personnel = page://2rol2t"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pendant la période de télétravail à la maison, comment est suivi les absences dans SAGIR du personnel de la fonction publique?",
+        "Personnel de la fonction publique Québécoise et suivi des absences dans SAGIR.",
+        "Comment inscrire le temps d'absence d'un employé de la fonction publique à la maison?",
+        "C'est quoi le code dans sagir une absence quand on est un personnel de la fonction publique?",
+        "Personnel de la fonction publique payé par sagir, quel code d'absence je dois utiliser?",
+        "Est-ce qu'il y a un code d'absence spécifique à rentrer dans sagir pour le télétravail des employés de la fonction publique Québécoise ?",
+        "Est-ce qu'il y a un code d'absence particulier dans sagir quand on est un personnel de la fonction publique en télétravail?",
+        "Est-ce qu'il y a des exceptions ou conditions particulières pour les absences du personnel de la fonction publique?",
+        "Fonctionnaire de Québec, est-ce qu'il y a des conditions pour le code d'absence dans sagir?",
+        "C'est le même code d'absence pour tous les employés de l'état Québécois?",
+        "En isolement ou en télétravail, pouvez-vous utiliser vos équipements technologiques personnels ?",
+        "Est-ce que mon employeur peut me fournir de l'équipement pour faciliter mon télétravail comme je suis un employé de l'état québécois?",
+        "Utilisation d'équipements technologiques personnel par le personnel de la fonction publique en télétravail.",
+        "Personnel de la fonction publique en télétravail, à qui je m'adresse pour commander un équipement?",
+        "Je travail de la maison comme employé de la fonction publique, si j'ai des questions sur mes équipements technologiques personnels, que doit faire le gestionnaire?",
+        "Membre de la fonction publique, j'utilise mes équipements informatiques et j'ai avisé mon gestionnaire qui a besoin d'information, il doit se référé à qui?"
+      ],
+      "en": [
+        "during the period of telework at home, how are absences of public service employees tracked?",
+        "personnel in the Quebec public service and follow-up on absences in sagir.",
+        "how to record the time of absence of a public service employee at home?",
+        "what is the code for absence when you are a public servant?",
+        "public service employees paid by sagir, what absence code should i use?",
+        "is there a specific absence code to be entered for telework for employees of the quebec public service?",
+        "is there a specific absence code in sagir when one is a public service employee teleworking?",
+        "are there any exceptions or special conditions for absences of public service employees?",
+        "quebec civil servant, are there any conditions for the absence code in sagir?",
+        "is it the same absence code for all employees of the Quebec government?",
+        "in isolation or teleworking, can you use your technological equipment personnels ?",
+        "can my employer provide me with equipment to facilitate my telework as I am an employee of the Quebec government?",
+        "use of personal technology equipment by public service employees teleworking.",
+        "who do I contact to order equipment for public service teleworkers?",
+        "i work from home as a public service employee, if I have questions about my personal technological equipment, what should the manager do?",
+        "as a member of the public service, I use my computer equipment and I have notified my manager who needs information, to whom should he refer?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": false,
+    "contexts": [
+      "Entreprises et main d'oeuvre"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "mlsmu",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Zx0UnY\nLes activités et services commerciaux prioritaires = section://ZKQueG"
+      ],
+      "en": [
+        "section://Zx0UnY\npriority business activities and services = section://zkqueg"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Si un client tousse et présente des symptômes, devrais-je lui dire de quitter l'épicerie?",
+        "Dans mon établissement alimentaire, il y a un client qui tousse, je fais quoi?",
+        "que faire quand un client tousse à l'épicerie",
+        "peut-on expulser quelqu'un qui présente des symptomes d'un commerce?",
+        "j'ai vu quelqu'un tousse sur des aliments",
+        "Quelle est la responsabilité du propriétaire d'un restaurant ou d'une épicerie quand un des clients présente des symtômes de COVID-19?",
+        "Pour préserver la santé publique dans son épicerie ou restaurant, le propriétaire est responsable de prendre les mesures nécessaires.",
+        "Si un client présente des symptômes, devrais-je lui dire de quitter l'épicerie?"
+      ],
+      "en": [
+        "if a customer has a cough and symptoms, should I tell them to leave the grocery store?",
+        "in my food establishment, there's a customer coughing, what do I do?",
+        "what to do when a customer coughs in the grocery store",
+        "can you deport someone who shows symptoms of a trade?",
+        "i saw someone coughing on some food..",
+        "what is the responsibility of the owner of a restaurant or grocery store when one of the customers has covid-19 symptoms?",
+        "to preserve public health in his grocery store or restaurant, the owner is responsible for taking the necessary measures.",
+        "if a client is symptomatic, should I tell them to leave the grocery store?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

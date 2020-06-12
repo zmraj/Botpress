@@ -1,0 +1,43 @@
+{
+  "id": "rhxah",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://1Q1Ajg\nTout savoir sur les rassemblements = page://Z1100pc"
+      ],
+      "en": [
+        "page://1Q1Ajg\nall about gatherings = page://z1100pc"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "est-ce que je peux avoir des contacts sexuels avec un partenaire qui n'habite pas à la même adresse que moi?",
+        "Est-ce que je peux avoir des rapprochements avec mon chum s'il n'habite pas dans ma région?",
+        "Est-ce que je peux avoir des rapports sexuels si j'ai la Covid-19?",
+        "contacts sexuels",
+        "plans cul",
+        "j'peux tu fréquenter ma date si elle habite pas chez moi",
+        "Est-ce que cela peut être transmissible quand nous avons des rapports sexuels moi et mon conjoint?",
+        "Mon conjoint est rétabli du covid, est-ce que le virus est dans son sperme?",
+        "Contacts sexuels"
+      ],
+      "en": [
+        "can I have sexual contact with a partner who does not live at the same address as me?",
+        "can I get close to my boyfriend if he doesn't live in my area?",
+        "can I have sex if I have covid-19?",
+        "sexual contacts",
+        "booty calls",
+        "can you hang out with my date if she doesn't live at my place?",
+        "can it be transmitted when we have sex with my partner?",
+        "my spouse is recovered from covid, is the virus in his sperm?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

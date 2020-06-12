@@ -1,0 +1,102 @@
+{
+  "id": "z1nokdf",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://ZQ8B7e\nInformation pour les communautés autochtones = page://ZQ8B7e"
+      ],
+      "en": [
+        "page://ZQ8B7e\ninformation for indigenous communities = page://zq8b7e"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Note d’information destinée aux communautés autochtones",
+        "Est-ce qu'il y a de l'information destinée aux communautés autochtones résumant les principales consignes et mesures gouvernementales?",
+        "Est-ce qu'une note d'information destinée aux communautés autochtones a été produite et traduite ?",
+        "Résumé des consignes et mesures gouvernementales concernant la COVID-19 à l’intention des communautés autochtones, des premières nations et Inuits.",
+        "Notes d'informations pour les Cris du Nord, les Atikamekws, les Innus en Inuktitut, ou pour le Nunavik",
+        "Liste des notes d’information à l’intention des communautés autochtones.",
+        "Quelles sont les ressources disponibles pour les Premières Nations et les Inuits à Montréal?",
+        "Pour un membre des Premières Nations habitant à Montréal, quelles sont les ressources disponibles?",
+        "Liste des organismes communautaires montréalais pour la clientèle autochtone.",
+        "Quelle est la liste des organismes communautaires montréalais reconnus pour desservir principalement la clientèle autochtone ?",
+        "À Montréal, quels sont les organismes qui peuvent aider les autochtones ?",
+        "Quels organismes peuvent desservir la clientèle autochtone à Montréal ?",
+        "Ressources pour les autochtones dans la grande métropole.",
+        "Aide pour un membre d'une Première Nation à Montréal et sa banlieu.",
+        "Pour les autochtones, quels organismes peuvent les aider dans la métropole ?",
+        "Je fais partie d'une communauté autochtone, c'est quoi les organismes communautaires qui sont disponibles à Montréal ?",
+        "Je suis autochtone, quels organismes communautaires à Montréal peuvent m'aider ?",
+        "Les autochtones peuvent fréquenter quels organismes à Montréal pour les aider ?",
+        "Quelles sont les ressources disponibles pour les Premières Nations et les Inuits?",
+        "Est-ce que des ressources ont été mises en place pour aider les Premières Nations et les Inuits en lien avec la COVID-19 ?",
+        "Liste des ressources pour les communautés autochnones, Premières Nations et les Inuits.",
+        "Quelles sont les mesures pour les communautés autochtones durant la pandémie ?",
+        "Est-ce que je peux savoir quelles sont les ressources offertes pour les Premières Nations et les Inuits du Québec ?",
+        "Je fais partie de la communauté des Premières Nations, est-ce qu'il y a des ressources disponibles pour moi ?",
+        "Quelle est la liste des ressources pour les Premièeres Nations et les inuits ?",
+        "Pouvez-vous me donner le nom des ressources offertes aux autochtones ?",
+        "J'aimerais connaître les ressources accessibles pour les communautés des Premières Nations et des Inuits, pouvez-vous me les donner ?",
+        "Je veux connaître les organismes disponibles pour les Premières Nations et les inuits svp ?",
+        "Est-ce que les communautés autochnones ont accès à des tests?",
+        "Les autochtones ont-ils accès aux tests de dépistage?",
+        "Tests de dépistage du COVID-19 pour les Premières Nations et les Inuits.",
+        "Les Premières Nations sont-elle prioritaires pour les tests de dépistage au coronavirus?",
+        "Est-ce que les Inuits vont recevoir des tests pour détecter le virus?",
+        "Dépistage dans les collectivités autochtones.",
+        "Je suis de la Premioère nation cri, est-ce que je peux faire un test?",
+        "J'aimerais ça me faire tester sur ma réserve autochtone , c'est possible?",
+        "Ma communauté autochtone va-t-elle recevoir des tests",
+        "Le dépistage ne semble pas arriver dans la communauté Inuit."
+      ],
+      "en": [
+        "briefing note for indigenous communities",
+        "is there information for Aboriginal communities summarizing key government policies and actions?",
+        "has a briefing note for Aboriginal communities been produced and translated?",
+        "summary of the government's covid-19 guidelines and measures for aboriginal, first nations and inuit communities.",
+        "information notes for the Northern Cree, Atikamekws, Innu in Inuktitut, or for nunavik",
+        "list of briefing notes for Aboriginal communities.",
+        "what resources are available to first nations and inuit in montreal?",
+        "what resources are available to a first nations person living in montreal?",
+        "list of montreal community organizations for the aboriginal clientele.",
+        "what is the list of Montreal community organizations recognized as serving mainly Aboriginal clientele?",
+        "in montreal, what organizations can help aboriginal people?",
+        "which organizations can serve the aboriginal clientele in montreal?",
+        "resources for natives in the great metropolis.",
+        "help for a first nation member in montreal and its suburbs.",
+        "for the natives, what organizations can help them in the metropolis?",
+        "i am part of an aboriginal community, what community organizations are available in montreal?",
+        "i am aboriginal, what community organizations in montreal can help me?",
+        "what organizations in montreal can aboriginal people go to for help?",
+        "what resources are available to first nations and inuit?",
+        "have resources been put in place to assist first nations and inuit in relation to covid-19?",
+        "list of resources for aboriginal, first nations and inuit communities.",
+        "what are the measures for aboriginal communities during the pandemic?",
+        "can i find out what resources are available for first nations and inuit in quebec?",
+        "i'm part of the first nations community, are there resources available to me?",
+        "what is the list of resources for first nations and inuit?",
+        "can you give me the names of the resources available to aboriginal people?",
+        "i would like to know what resources are available to first nations and Inuit communities, can you give me those?",
+        "i want to know what organizations are available for first nations and inuit please?",
+        "do aboriginal communities have access to testing?",
+        "do aboriginal people have access to testing?",
+        "covid-19 testing for first nations and inuit.",
+        "are first nations a priority for coronavirus testing?",
+        "will inuit be tested for the virus?",
+        "screening in Aboriginal communities.",
+        "i'm from the First Cree Nation, can I take a test?",
+        "i'd like to get tested on my native reservation, is that possible?",
+        "is my aboriginal community going to be tested",
+        "screening does not seem to be happening in the Inuit community."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Soutien aux personnes"
+    ]
+  }
+}

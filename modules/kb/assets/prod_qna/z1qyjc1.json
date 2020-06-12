@@ -1,0 +1,48 @@
+{
+  "id": "z1qyjc1",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Fxoi1\nLes festivals, événements culturels et événements sportifs dans le contexte de la COVID-19 = page://Z1Vpw5w"
+      ],
+      "en": [
+        "section://Fxoi1\nfestivals, cultural events and sporting events in the context of covid-19 = page://z1vpw5w"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "À quand est prévu l'ouverture de certaines activités du domaine culturel (musée, bibliothèques, ciné-parc)?",
+        "Est-ce que les musées sont ouverts?",
+        "musée",
+        "bibliothèques",
+        "ciné-parc",
+        "Quelles mesures seront prises dans les musées?",
+        "Quelles sont les bibliothèques ouvertes?",
+        "Je peux tu aller louer un livre à la bibli?",
+        "C'est quand que les ciné-parcs ouvrent?",
+        "Quels seront les règlements pour les bibliothèques?",
+        "Ouverture de certaines activités du domaine culturel"
+      ],
+      "en": [
+        "When are some cultural activities (museums, libraries, cinemas) scheduled to open?",
+        "are the museums open?",
+        "museum",
+        "libraries",
+        "drive-in",
+        "what measures will be taken in the museums?",
+        "which libraries are open?",
+        "can you go to the library and rent a book?",
+        "when do drive-in theaters open?",
+        "what will be the rules for libraries?",
+        "opening of certain activities in the cultural field"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Sports, loisirs et culture"
+    ]
+  }
+}

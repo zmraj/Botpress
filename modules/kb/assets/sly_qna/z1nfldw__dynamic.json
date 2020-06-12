@@ -1,0 +1,75 @@
+{
+  "id": "z1nfldw__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Nous faisons appel à la collaboration et au bon jugement des gens dans cette situation. La réponse à cette question dépend de plusieurs facteurs : est-ce que ces personnes vivent seules, est-ce qu’elles continuent de travailler, etc.\nSi ces personnes décident de se voir, il faut s’assurer que :\n*   chacune d’elle a respecté et respecte les [consignes sanitaires pour tous](https://www.quebec.ca/sante/problemes-de-sante/a-z/informations-generales-sur-le-coronavirus/#c53182) émises par la Santé publique;\n*   elles sont toutes deux en bonne santé ou ne sont pas des personnes vulnérables (ex. : malade chronique ou personne de 70 ans ou plus);\n*   aucune d’elles ne présente des symptômes de fièvre, d’apparition ou d’aggravation d’une toux, de difficultés respiratoires ou de perte soudaine de l’odorat sans congestion nasale, avec ou sans perte de goût;\n*   aucune d’elles ne doit respecter de [consignes d’isolement](https://www.quebec.ca/sante/problemes-de-sante/a-z/informations-generales-sur-le-coronavirus/#c53638);\n*   aucune d’elle ne réside avec une personne vulnérable (ex. : malade chronique ou personne de 70 ans ou plus).\nS’il n’est pas possible pour les conjoints de se voir, nous conseillons de maintenir les liens en utilisant des moyens de communication alternatifs (appels téléphoniques, messages textes, réseaux sociaux, photos numériques, rendez-vous pour se saluer au balcon, souper en tête à tête sur Skype ou autre, etc.).\nTout savoir sur les rassemblements = page://Z1100pc"
+      ],
+      "en": [
+        "We are asking people in this situation to cooperate and use their judgement. The answer to this question depends on a number of factors: do the people live alone, are they still working, etc.\nIf they decide to see each other, they must make sure:\n*   they have both followed and are following the [health recommendations for everyone](https://www.quebec.ca/en/health/health-issues/a-z/general-information-about-coronavirus/#c53183) issued by the public health authorities;\n*   they are both healthy or are not vulnerable (e.g., chronically ill or 70 years of age or older);\n*   neither of them has symptoms of fever, new or worse cough, difficulty breathing or sudden loss of smell without a stuffy nose, with or without loss of taste;\n*   neither of them have been told to [self-isolate](https://www.quebec.ca/en/health/health-issues/a-z/general-information-about-coronavirus/#c53639);\n*   neither of them live with a vulnerable person (e.g., chronically ill or 70 years of age or older).\nIf partners cannot see each other, they are advised to stay in touch by using other ways of communicating (telephone calls, text messages, social media, digital photos, arranging a time to say hello from their balcony, dinner for two by Skype or another platform, etc.).\nall about gatherings = page://z1100pc"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "est-ce que je peux voir ma blonde",
+        "j'habite pas avec mon chum, est-que je peux le voir",
+        "c'est tu correct d'être sur tinder",
+        "on peut tu continuer à fréquenter quelqu'un",
+        "one night",
+        "Est-ce que je peux voir mon conjoint s'il n'a pas la même adresse que moi?",
+        "Est-ce que je peux aller chez mon conjoint?",
+        "Puis-je voir ma blonde si je n'habite pas à la même adresse qu'elle?",
+        "c'est tu illégal de voir ma copine amoureuse",
+        "Est-ce qu'un couple qui ne demeure pas ensemble peut se voir?",
+        "Est-ce que 2 conjoints qui ne demeurent pas à la même adresse peuvent se voir?",
+        "est-ce que j'ai le droit d'aller voir ma blonde qui ne demeure pas avec moi",
+        "je veux recevoir mon amoureux chez moi, puis-je?",
+        "Est-ce que je peux inviter ma copine à la maison?",
+        "Peut-on visiter un conjoint dans une autre région?",
+        "Aller voir sa copine chez ses beaux-parents, est-ce légal?",
+        "Visiter ma conjointe",
+        "Je peux voir mon chéri?",
+        "Est-ce que deux personnes en couple mais qui n'habitent pas ensemble peuvent se voir?",
+        "Les couples qui ne vivent pas ensemble peuvent-ils se visiter oui ou non?",
+        "Je peux aller voir ma blonde?",
+        "Puis-je revoir ma copine?",
+        "Est-ce que je peux voir mon amoureux?",
+        "Est-ce qu'il y a possibilité d'avoir ma conjointe chez moi quelques jours?",
+        "Maintenir une vie sociale active durant la pandémie"
+      ],
+      "en": [
+        "can I see my girlfriend",
+        "i don't live with my boyfriend, can I see him?",
+        "is it okay to be on tinder?",
+        "can you keep seeing someone..",
+        "can I see my spouse if he does not have the same address as me?",
+        "can I go to my spouse's house?",
+        "can I see my girlfriend if I don't live at the same address as her?",
+        "are you making it illegal for my girlfriend to see my girlfriend in love",
+        "can a couple who don't stay together see each other?",
+        "can two spouses who do not live at the same address see each other?",
+        "am I allowed to go see my girlfriend who's not staying with me..",
+        "i want to receive my lover in my home, may I?",
+        "can I invite my girlfriend home?",
+        "can we visit a spouse in another region?",
+        "...to visit his girlfriend at her in-laws' house, is that legal?",
+        "visit my wife",
+        "can I see my darling?",
+        "can two people who are a couple but do not live together see each other?",
+        "can couples who do not live together visit each other?",
+        "can I go see my girlfriend?",
+        "can I see my girlfriend again?",
+        "can I see my lover?",
+        "is it possible to have my wife stay with me for a few days?",
+        "maintain an active social life during the pandemic"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "id": "11cpul__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Concernant les piscines **extérieures**, un guide a été élaboré par l’Association des responsables aquatiques du Québec pour informer les propriétaires sur les règles à suivre et est disponible sur son site Web.\nLe gouvernement évalue, en collaboration avec les différents organismes partenaires ainsi qu’avec les propriétaires et gestionnaires des installations récréatives et sportives (municipalités, établissements scolaires, entreprises privées) la possibilité d’autoriser les activités aquatiques en piscine **intérieure** dans le respect des mesures sanitaires édictées par la Santé publique. Les annonces seront faites en temps et lieu.\nLes activités de loisirs et de sports extérieurs = section://Z2fa5vo"
+      ],
+      "en": [
+        "\noutdoor recreation and sports activities = section://z2fa5vo"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que la baignade en piscine est permise?",
+        "Est-ce que le chlore dans l'eau de piscine tue le virus?",
+        "Je peux tu aller me baigner chez mes amis?",
+        "Je peux tu envoyer mon enfant se baigner dans une piscine?",
+        "Mon fils veut aller se baigner dans la piscine des voisins, peut-il?",
+        "Il fait chaud, je peux tu aller me saucer dans la piscine des amis?",
+        "Peut-on aller se baigner chez des amis?",
+        "Puis-je me baigner chez un ami en respectant le 2 mètres?",
+        "Est-ce que je peux me baigner dans la piscine de ma cousine?",
+        "Les piscines de condo peuvent-elles ouvrir?",
+        "Peut-on aller dans une piscine privée chez des amis?",
+        "Est-ce qu'un enfant peut se baigner dans une piscine privée avec d'autres enfants s'ils respectent la distanciation?",
+        "Peut-on ouvrir l'accès à la piscine privée de copropriété?",
+        "Pouvons-nous ouvrir les piscines intérieures de copropriétés?",
+        "Peut-on se servir des piscines intérieures dans un condo?",
+        "Pour une piscine privée extérieure en condo, est-ce qu'on peut installer des chaises longues?",
+        "Qu'en est-il de l'ouverture des piscines de condo?",
+        "Est-ce possible d'ouvrir une piscine extérieure dans un immeuble à plusieurs logements?",
+        "Est-ce que les spas peuvent ouvrir?",
+        "Qu'en est-il des spas publics?",
+        "Spa scandinave"
+      ],
+      "en": [
+        "is swimming in the pool permitted?",
+        "does chlorine in pool water kill the virus?",
+        "can you go swimming at my friends' house?",
+        "can you send my kid swimming in a pool?",
+        "my son wants to go swimming in the neighbor's pool, can he?",
+        "it's hot, can you go jump in the guest pool?",
+        "can we go swimming at a friend's house?",
+        "can I swim at a friend's house within 2 meters?",
+        "can I swim in my cousin's pool?",
+        "can condo pools open?",
+        "can we go to a private pool at a friend's house?",
+        "can a child swim in a private pool with other children if they respect the distance?",
+        "can we open access to the private condo pool?",
+        "can we open indoor condo pools?",
+        "can we use indoor pools in a condo?",
+        "for a private outdoor swimming pool in a condo, can we install deck chairs?",
+        "what about the opening of the condo pools?",
+        "is it possible to open an outdoor swimming pool in a multi-unit building?",
+        "can hot tubs open?",
+        "what about public spas?",
+        "scandinavian spa"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Sports, loisirs et culture"
+    ]
+  }
+}

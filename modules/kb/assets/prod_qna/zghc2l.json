@@ -1,0 +1,80 @@
+{
+  "id": "zghc2l",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://hYcRY\nLes services de garde d'urgence = page://QmcNQ"
+      ],
+      "en": [
+        "section://hYcRY\nemergency childcare services = page://qmcnq"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu'il est sécuritaire ou permis de garder les enfants d'amis ou de proches afin de leur rendre service?",
+        "Est-ce que j'ai le droit de garder les enfants de mes amis ou de mes proches ?",
+        "C'est tu permis de garder les enfants de nos amis ou de nos proches ?",
+        "Est-ce qu'un voisin de travailleur essentiel peut garder leurs enfants?",
+        "C'est tu sécuritaire de garder les enfants d'amis ou de proches pour le rendre service ?",
+        "Est-ce que les voisins des travailleurs essentiels peuvent garder leurs enfants?",
+        "Nous gardons nos enfants entre amis chacun notre tour, est-ce une bonne idée ?",
+        "Mes amis doivent travailler. Est-ce que j'ai le droit de garder leurs enfants ?",
+        "On s'est organisé entre amis pour garder nos enfants en alternance pour pouvoir travailler, est-ce une bonne idée ?",
+        "Garder les enfants d'amis ou de proches.",
+        "Est-ce que c'est grave si je garde les enfants de mes amis ?",
+        "Est-ce que ça peut être dangereux de garder les enfants de nos amis ou de nos proches ?",
+        "Est-ce que c'est correct de rendre service en gardant les enfants de nos amis ?",
+        "est-ce que ma gardienne peut venir à la maison?",
+        "Est-ce que mes enfants peuvent dormir chez leurs grands-parents?",
+        "Je dois retourner au travail, puis-je demander à un ami ou un voisin de venir chez moi pour garder?",
+        "Est-ce qu'un ami ou un voisin peut garder mon enfant chez moi?",
+        "Est-ce que ma soeur peut garder mes enfants parce que je dois aller travailler?",
+        "Est-ce que les grands-parents peuvent garder leurs petits-enfants à leur domicile?",
+        "Est-ce que ma cousine peut venir garder mon bébé pendant mes courses?",
+        "Est-ce que je peux garder la fille d'une amie chez moi pour qu'elle puisse retourner travailler?",
+        "Puis-je faire garder mon enfant par sa grand-mère?",
+        "Des grands-parents de 78 ans peuvent-ils garder leurs petits enfants pendant 2 jours?",
+        "J'ai 72 ans, puis-je garder ma petite fille?",
+        "gardienne à domicile",
+        "J'ai besoin d'aide pour garder mes enfants à la maison.",
+        "Est-ce que ma famille ou mes amis peuvent garder mes enfants?"
+      ],
+      "en": [
+        "is it safe or allowed to babysit the children of friends or family as a service to them?",
+        "do I have the right to keep my friends' or relatives' children?",
+        "are you allowed to babysit the children of our friends or relatives?",
+        "can a neighbour of essential workers babysit their children?",
+        "is it safe for you to babysit the children of friends or relatives as a favor?",
+        "can neighbours of essential workers babysit their children?",
+        "we take turns babysitting our kids with friends, is that a good idea?",
+        "my friends have to work. Am I allowed to babysit their kids?",
+        "we've arranged with friends to take turns babysitting our kids so we can work, is that a good idea?",
+        "babysitting the children of friends or relatives.",
+        "is it okay if I babysit my friends' kids?",
+        "can it be dangerous to babysit the children of our friends or relatives?",
+        "is it okay to do a favor by babysitting our friends' kids?",
+        "can my babysitter come over to the house?",
+        "can my children sleep at their grandparents' house?",
+        "i have to go back to work, can I ask a friend or neighbour to come to my house for babysitting?",
+        "can a friend or neighbour watch my child at my house?",
+        "can my sister watch my kids because I have to go to work?",
+        "can grandparents keep their grandchildren at home?",
+        "can my cousin come watch my baby while I run errands?",
+        "can I keep a friend's daughter at home so she can go back to work?",
+        "can I have my child taken care of by his grandmother?",
+        "can 78-year-old grandparents babysit their grandchildren for two days?",
+        "i'm 72 years old, can I keep my little girl?",
+        "sitter",
+        "i need help keeping my kids at home.",
+        "can my family or friends watch my children?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services de garde"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "z25fbju__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Les commerces de vente au détail sont ouverts dans toutes les régions du Québec, pourvu que :\n*   ces commerces disposent d’une porte extérieure habituellement utilisée par la clientèle;\n*   l’accès à ces commerces par une aire commune intérieure soit interdit.\nLes entreprises de la chaîne d’approvisionnement de ces commerces peuvent également exercer leurs activités.\n**Depuis le 1er juin**, les centres commerciaux situés en dehors de la Communauté métropolitaine de Montréal et de la MRC de Joliette pourront reprendre leurs activités.\nLa réouverture des commerces = section://Z2tycKs"
+      ],
+      "en": [
+        "Retail businesses throughout Québec are open, provided that:\n*   the businesses have a door to the outside ordinarily used by the clientele;\n*   access to the businesses through an indoor common area be prohibited.\nCompanies in the supply chain of these businesses may also exercise their activities\n**Since June 1**, shopping centers located outside the Communauté métropolitaine de Montréal and the MRC de Joliette may resume their activities.\nthe reopening of shops = section://z2tycks"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "À quand l'ouverture des centres commerciaux?",
+        "Est-ce que les centres d'achat vont rouvrir?",
+        "Je peux tu aller au centre d'achat?",
+        "Quand est-ce que le mail va ouvrir?",
+        "À quand l'ouverture des centres d'achat?",
+        "Je peux tu aller magasiner en ville?",
+        "Est-ce que les centres commerciaux vont rester fermés?",
+        "C'est tu possible d'aller faire mes commissions dans le centre d'achat?",
+        "Peut-on aller aux centres commerciaux?",
+        "Centres commerciaux de Montréal: y'a-t-il une date de réouverture?",
+        "Quand est-ce que les centres d'achat pourront ouvrir?"
+      ],
+      "en": [
+        "when will the malls open?",
+        "are the malls going to reopen?",
+        "can you go to the mall?",
+        "when will the email open?",
+        "when will the shopping centres open?",
+        "can you go shopping in the city?",
+        "are the malls going to stay closed?",
+        "is it possible for you to go to the mall and do my errands?",
+        "can we go to the malls?",
+        "montreal shopping centres: is there a reopening date?",
+        "when will shopping centres be able to open?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

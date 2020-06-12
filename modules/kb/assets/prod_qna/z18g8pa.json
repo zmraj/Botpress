@@ -1,0 +1,50 @@
+{
+  "id": "z18g8pa",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://dwppK\nMesure de sécurité pour les travailleurs et les enfants dans les écoles primaires et services de garde = page://dwppK"
+      ],
+      "en": [
+        "page://dwppK\nsafety measures for workers and children in primary schools and childcare = page://dwppk"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment protégrer les enseignants en classe",
+        "Quelle méthode sera utilisé pour protéger nos enfants",
+        "Est-ce que les mesures de prévention dans les établissements scolaires ont été pensé?",
+        "Mesures de sécurité pour les écoles",
+        "Comportement sécuritaire à adopter dans les services de garde",
+        "Est-ce qu'il y aura des consignes sanitaires pour les établissements scolaires?",
+        "Comment est-ce qu'on va gérer les récréations?",
+        "Les locaux seront-ils réaménagé",
+        "Quel genre de mesure de salubrité seront mis en place à l'école?",
+        "On vient d'inscrire notre fils dans sa nouvelle école, est-ce qu'on peut aller visiter sa nouvelle école?",
+        "Combien d'enfants par classe?",
+        "Est-ce que les ventilateurs peuvent fonctionner dans l'école?"
+      ],
+      "en": [
+        "how to protect teachers in the classroom",
+        "what method will be used to protect our children",
+        "have preventive measures in schools been thought out?",
+        "safety measures for schools",
+        "safe child care behaviour",
+        "will there be health guidelines for schools?",
+        "how are we going to handle recess?",
+        "will the premises be refurbished",
+        "what kind of health measures will be implemented at the school?",
+        "we just enrolled our son in his new school, can we go visit his new school?",
+        "how many children per class?",
+        "can the fans work in the school?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Écoles et éducation"
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "z1uhg09",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Zeg0tx\nPermis & immatriculation (SAAQ) = section://Zeg0tx"
+      ],
+      "en": [
+        "section://Zeg0tx\nlicence & registration (saaq) = section://zeg0tx"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quand est-ce que je vais pouvoir passer mon permis de moto?",
+        "cours de moto",
+        "est-ce que la SAAQ est ouverte?",
+        "Est-ce que je peux passer mon examen de conduite à la SAAQ?",
+        "saaq",
+        "examen de conduite",
+        "Quand les cours de conduite pratique vont-ils réouvrir?",
+        "Avis de renouvellement de permis de conduire",
+        "J'aimerais savoir à quand l'ouverture des cours de conduite pratique?",
+        "À quand la réouverture des cours de conduite moto?",
+        "écoles de conduite",
+        "Quand vont ouvrir les écoles de moto?",
+        "Quand les cours de moto vont ré-ouvrir?",
+        "moto-école",
+        "Cours de conduite",
+        "Quand ouvrira la saaq?",
+        "Je voudrais savoir si les autos école ont une date de retour?"
+      ],
+      "en": [
+        "when do I get my motorcycle license?",
+        "motorcycle course",
+        "is the saaq open?",
+        "can i take my driver's test at the saaq?",
+        "driving exam",
+        "when will the practical driving courses reopen?",
+        "driver's licence renewal notice",
+        "i'd like to know when are the driving lessons starting?",
+        "when will motorcycle riding lessons reopen?",
+        "driving schools",
+        "when will motorcycle schools open?",
+        "when motorcycle classes reopen?",
+        "motorcycle school",
+        "driving course",
+        "when will the saaq open?",
+        "i would like to know if the school cars have a return date?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transports et déplacements"
+    ]
+  }
+}

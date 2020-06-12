@@ -1,0 +1,48 @@
+{
+  "id": "11nkef",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://20S4yL\nConsignes sur les interactions avec les animaux = section://20S4yL"
+      ],
+      "en": [
+        "section://20S4yL\nanimal interaction instructions = section://20s4yl"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Si je suis malade de la corona, qu'est-ce que je dois faire avec les animaux ?",
+        "Je suis atteinte du coronavirus. Puis-je caresser mon chien?",
+        "Est-il dangereux d'être en contact avec mon chien si j'ai la Covid-19?",
+        "J'ai le virus. Est-ce que je peux m'occuper de mon chat?",
+        "Mon oiseau peut-il voler sur mes épaules si je suis testé positif au virus?",
+        "Est-ce que ça peut que mon chien attrape la covid s'il dort avec moi qui en est atteint?",
+        "Je dois m'occuper de mon cheval, je dois prendre des précautions?",
+        "Comment s'occuper des animaux de compagnie pendant la quarantaine?",
+        "mon animal peut-il me transmettre la covid ?",
+        "Étant en isolement volontaire, je peux laisser mes chats aller dehors?",
+        "est-ce qu'un chat qui est infecté par la covid-19 peut infecter son maître qui le flatte?"
+      ],
+      "en": [
+        "if I get corona, what do I do with the animals?",
+        "i have coronavirus. Can I pet my dog?",
+        "is it dangerous to be in contact with my dog if I have covid-19?",
+        "i have the virus. Can I take care of my cat?",
+        "can my bird fly on my shoulders if I test positive for the virus?",
+        "can my dog get covid if he sleeps with me with covid?",
+        "i have to take care of my horse, do I have to take precautions?",
+        "how to care for pets during quarantine?",
+        "can my pet give me the covid?",
+        "being in voluntary isolation, can I let my cats go outside?",
+        "can a cat infected with covid-19 infect its owner who is flattering it?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

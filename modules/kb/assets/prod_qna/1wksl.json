@@ -1,0 +1,80 @@
+{
+  "id": "1wksl",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://KRq0s\nSymptômes et traitements = section://KRq0s"
+      ],
+      "en": [
+        "section://KRq0s\nsymptoms and treatments = section://krq0s"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je crois avoir attrappé le coronavirus. Que dois-je faire ?",
+        "J'ai peut-être la COVID-19, je fais quoi?",
+        "Dois-je me rendre à l'urgence si je pense avoir la covid?",
+        "C'est quoi les symptômes de la COVID-19, je feel pas bien.",
+        "Je crois avoir la covid, qu'est-ce que je dois surveiller?",
+        "J'ai peut-être le coronavirus,  je dois me soigner comment?",
+        "Comment me soigner si j'ai attraper le coronavirus",
+        "Quelles sont les complications à surveiller maintenant que j'ai été testé positif au virus ?",
+        "Je me soigne comment maintenant que je suis atteind du corona ?",
+        "Soins à faire si je suis malade?",
+        "Quels sont les symptômes de la maladie?",
+        "J'ai la gorge serrée et légèrement sèche",
+        "Toux",
+        "Fièvre",
+        "J'ai un peu mal à la gorge",
+        "J'ai des étourdissements",
+        "J'ai mal à la gorge, de la misère à avaler et je suis très fatiguée, est-ce que j'ai le covid?",
+        "J'ai un petit rhume, est-ce que je peux continuer le travail?",
+        "Est-ce que le nez congestionné est un symptôme?",
+        "Est-ce que ce serait une bonne idée d’attraper le virus afin d’en être immunisé par la suite, c’est-à-dire pour développer une résistance au virus?",
+        "Est-ce que je devrais contracter la COVID-19 pour en être ensuite protégé?",
+        "Est-ce que je peux attrapper la COVID-19 en faisant par exprès pour qu'après je sois immunisé?",
+        "Devrais-je attraper la COVID-19 afin d'être immunisé?",
+        "Puis-je faire exprès d'attraper la covid dans le but d'être immunisé contre ce virus?",
+        "Pour être protéger à l'avenir, serait-ce une bonne idée d'aller attraper la covid?",
+        "Comme je suis jeune et en bonne ssanté, pensez-vous qu'attraper la covid pour être ensuite immunisé serait une bonne idée?",
+        "J'ai pensé attraper la covid pour être ensuite immunisé. Qu'en pensez-vous?"
+      ],
+      "en": [
+        "i think I've got the coronavirus. What should I do?",
+        "i may have covid-19, what do I do?",
+        "should I go to the emergency room if I think I have the covid?",
+        "what are the symptoms of covid-19, I don't feel well.",
+        "i think I have the covid, what should I watch for?",
+        "i might have coronavirus, how do I treat it?",
+        "how to treat me if I have coronavirus",
+        "what are the complications to watch out for now that I've tested positive for the virus?",
+        "how do I treat myself now that I have corona?",
+        "care if I'm sick?",
+        "what are the symptoms of the disease?",
+        "my throat is tight and slightly dry..",
+        "cough",
+        "fever",
+        "my throat's a little sore",
+        "i get dizzy",
+        "i have a sore throat, difficulty swallowing and I'm very tired, do I have the covid?",
+        "i have a little cold, can I go on with my work?",
+        "is a stuffy nose a symptom?",
+        "would it be a good idea to catch the virus in order to become immune to it later, that is, to develop resistance to the virus?",
+        "should I get covid-19 and then be protected from it?",
+        "can i get covid-19 by deliberately making me immune?",
+        "...should I get covid-19 in order to be immune?",
+        "can i get covid on purpose in order to be immune to this virus?",
+        "to be protected in the future, would it be a good idea to go catch the covid?",
+        "since i'm young and healthy,do you think catching covid and then getting immunized would be a good idea?",
+        "i thought I'd catch the covid and then be immune. What do you think?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

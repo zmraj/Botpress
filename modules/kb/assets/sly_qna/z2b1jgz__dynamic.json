@@ -1,0 +1,42 @@
+{
+  "id": "z2b1jgz__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Le gouvernement du Québec autorise l’ouverture estivale des camps de jour offerts sur l’ensemble du territoire, et ce, dès le 22 juin.\nLes municipalités et les organismes responsables de la tenue des camps de jour devront toutefois prévoir des activités favorisant le respect de la règle de distanciation et permettant d’assurer l’application de mesures d’hygiène accrues.\nPour ce qui est des camps de vacances, puisque ceux-ci demandent l'application de mesures supplémentaires qui s'avéreraient difficiles à respecter, l'ouverture de ce type de camps est remise à l'été 2021\\. Toutefois, afin d'offrir un répit aux familles et aux proches aidants, des évaluations sont en cours concernant la possibilité que les camps spécialisés pour les personnes handicapées avec hébergement puissent opérer pendant la période estivale 2020.\nPour connaître les mesures sanitaires qui devront être mises en place dans les camps de jour, consultez les outils suivants :\n*   [Guide de relance des camps en contexte de COVID-19 - Association des camps du Québec](https://campsquebec.com/mesures-covid19) \n*   [Trousse d’outils pour le secteur des camps de jour - CNESST](https://www.cnesst.gouv.qc.ca/salle-de-presse/covid-19/Pages/outils-secteur-camps-jour.aspx)\nOuverture des camps de jour = section://1s3V9o"
+      ],
+      "en": [
+        "The Gouvernement du Québec authorizes the day camps available throughout the territory to open for the summer, starting from June 22.\nHowever, the municipalities and organizations responsible for holding the day camps will have to arrange for activities that foster compliance with the distancing rule, and that enable the enforcement of stricter hygiene measures.\nFor summer camps, since they require additional measures to be applied that will be difficult to respect, the opening of camps of this type is postponed until the summer of 2021\\. However, in order to provide some respite for families and natural caregivers, assessments are under way to examine the possibility of allowing specialized residential camps for persons with disabilities to operate during the summer of 2020.\nFor information about the health measures that will have to be implemented at day camps, please consult the following sources (French only):\n*   [Guide de relance des camps en contexte de COVID-19](https://campsquebec.com/mesures-covid19)  [\\-](https://campsquebec.com/mesures-covid19)  [Association des camps du Québec](https://campsquebec.com/mesures-covid19) \n*   [Trousse d’outils pour le secteur des camps de jour](https://www.cnesst.gouv.qc.ca/salle-de-presse/covid-19/Pages/outils-secteur-camps-jour.aspx)  [\\-](https://www.cnesst.gouv.qc.ca/salle-de-presse/covid-19/Pages/outils-secteur-camps-jour.aspx)  [CNESST](https://www.cnesst.gouv.qc.ca/salle-de-presse/covid-19/Pages/outils-secteur-camps-jour.aspx)\nopening of day camps = section://1s3v9o"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les camps de jour seront-ils permis cet été?",
+        "Ouverture des camps de jour?",
+        "Qu'en est-il des camps de jour?",
+        "Je vais tu pouvoir envoyer mon enfant au camp de jour cet été?",
+        "C'est tu dangereux pour les enfants d'aller au camp de jour malgré le virus?",
+        "Camps de jour",
+        "C'est quand qu'on va ouvrir les camps de jour?",
+        "On va tu ouvrir les camps de jour?"
+      ],
+      "en": [
+        "will day camps be allowed this summer?",
+        "opening day camps?",
+        "what about day camps?",
+        "can you send my kid to day camp this summer?",
+        "is it dangerous for kids to go to day camp despite the virus?",
+        "day camps",
+        "when are we opening day camps?",
+        "are we gonna open the day camps?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

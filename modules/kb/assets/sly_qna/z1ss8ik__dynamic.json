@@ -1,0 +1,60 @@
+{
+  "id": "z1ss8ik__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "*   [Soutenir le réseau de la santé](https://jecontribuecovid19.gouv.qc.ca/) \n*   [Participer à une étude clinique pour le traitement des personnes testées positives à la COVID-19](https://www.colcorona.org/) \n*   [Soutenir le réseau des services de garde éducatifs à l'enfance](https://www.quebec.ca/famille-et-soutien-aux-personnes/servicesgardeeducatifsenfance-covid19/#c58397)\n*   [Donnez du sang](https://www.hema-quebec.qc.ca/index.fr.html) \n*   [Devenir bénévole](https://www.jebenevole.ca/)\nSoutenir le réseau de la santé = section://Z1BxPLa"
+      ],
+      "en": [
+        "*   [Support the health network](https://jecontribuecovid19.gouv.qc.ca/)  (French only)\n*   [Participate in this clinical study for individuals who tested positive for COVID-19](https://www.colcorona.org/index.php?lang=en) \n*   [Support the educational childcare network](https://www.quebec.ca/en/family-and-support-for-individuals/services-de-garde-educatifs-a-lenfance-dans-le-contexte-de-la-covid-19/#c58398)\n*   [Give blood](https://www.hema-quebec.qc.ca/index.en.html) \n*   [Become a volunteer](https://www.jebenevole.ca/)  (French only)\nsupporting the health network = section://z1bxpla"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Offrir son aide",
+        "Où puis-je offrir mon aide pour faciliter le travail du milieu de la santé?",
+        "J'aimerais aider en participant à des essais cliniques pour le traitement des personnes testées positives à la COVID-19, comment faire?",
+        "J'aimerais donner mon nom pour être bénévole et offrir mon aide.",
+        "Peut-on offrir son aide en donnant du sang?",
+        "Comment puis-je aider pendant la COVID-19?",
+        "Donner du sang pendant la pandémie.",
+        "Participer à des tests cliniques sur le COVID-19",
+        "Y'a-t-il une étude clinique pour les personnes testées positives à la COVID-19 ?",
+        "Devenir bénévole pour aider pendant la crise du coronavirus.",
+        "Puis-je être utile pour lutter contre le COVID-19?",
+        "En quoi puis-je aider pendant le confinement?",
+        "Est-ce que je peux donner du sang pour aider contre le virus?",
+        "Je voudrais faire un don de sang, qu'est-ce que je fais?",
+        "J'aimerais avoir des infos pour participer à une étude clinique se rapportant à la COVID-19, où prendre les infos?",
+        "Où s'inscrire pour être bénévole pour aider les personnes dans le besoin?",
+        "Est-ce que je peux m'inscrire à Je contribue ?"
+      ],
+      "en": [
+        "help out",
+        "where can I offer my help to make the work of the health care community easier?",
+        "i would like to help by participating in clinical trials for the treatment of people who test positive for covid-19, how do i do this?",
+        "i'd like to give my name to volunteer and offer my help.",
+        "can we help by donating blood?",
+        "how can I help during covid-19?",
+        "give blood during the pandemic.",
+        "participate in clinical trials of covid-19",
+        "is there a clinical study for people who test positive for covid-19?",
+        "volunteering to help during the coronavirus crisis.",
+        "can i be of help in the fight against covid-19?",
+        "how can I help during containment?",
+        "can I donate blood to help with the virus?",
+        "i'd like to donate blood, what do I do?",
+        "i'd like information on how to participate in a clinical study related to covid-19, where do I get the information?",
+        "where to register to volunteer to help those in need?",
+        "can I sign up to contribute?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Offrir son aide"
+    ]
+  }
+}

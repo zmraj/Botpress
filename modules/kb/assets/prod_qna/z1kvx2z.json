@@ -1,0 +1,94 @@
+{
+  "id": "z1kvx2z",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Ipotq\nLes CHSLD = section://TnMWl"
+      ],
+      "en": [
+        "section://Ipotq\nthe chsld = section://tnmwl"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu’une personne peut, par exemple, se rendre à l’hôpital pour visiter un proche qui est mourant?",
+        "Ma mère se meure à l'hopital, je peux aller la voir ?",
+        "Mon père a pris du pire, je peux aller le voir aux soins palliatifs?",
+        "Ma soeur est en phase terminale, j'aimerais aller la voir avant sont décès. Est-ce possible ?",
+        "Ma mère de 90 ans veut aller voir sa dernière soeur qui est mourante ?",
+        "Est-ce que les visites aux soins paliatifs sont possibles ?",
+        "Puis-je aller voir ma grand-mère mourrante ?",
+        "Est-ce que je peux aller visiter quelqu'un en phase terminale à l'hôpital ?",
+        "Est-il possible de visiter quelqu'un en train de mourir ?",
+        "Ma mère a la COVID et va mourir je peux tu aller la voir à l'hopital",
+        "Est-ce que j'ai le droit d'aller voir mon père en phase terminale ?",
+        "Mon père a la COVID et va mourir je peux tu aller le voir ?",
+        "Est-ce que j'ai le droit d'aller voir ma mère en phase terminale ?",
+        "Mon père va bientôt mourir je peux-tu aller le voir ?",
+        "J'ai tu le droit d'aller dire au revoir à quelqu'un sur son lit de mort ?",
+        "Je connais quelqu'un qui va mourir je peux-tu aller le voir à l'hôpital ?",
+        "Mon père est à veille de mourir il vient de rentrer à l'hôpital j'ai tu le droit d'aller le voir ?",
+        "Ma mère est à veille de mourir elle vient de rentrer à l'hôpital j'ai tu le droit d'aller le voir ?",
+        "C'est tu correct d'aller à l'hôpital pour voir une personne qui va mourir dans peu de temps?",
+        "C'est tu possible que j'aille voir quelqu'un qui va mourir à l'hôpital ?",
+        "Quelqu'un dans ma famille est à l'hopital et il va mourrir. est-ce que je peux aller le voir ?",
+        "Ma grand-mère va mourrir seule si je ne peux pas aller la voir",
+        "Mon père vas mourrir seul si on ne va pas le voir au CHSLD",
+        "Est-ce que je peux aller voir un parent mourrant à l'hôpital alors que la région est fermée?",
+        "Est-ce que je peux aller voir un parent mourrant à l'hôpital alors que je ne suis pas de cette région?",
+        "Est-ce que je peux aller voir un parent en fin de vie à l'hôpital alors que je n'habite pas cette zone?",
+        "Je veux aller voir un parent en fin de vie mais il habite dans une région fermée, est-ce possible ?",
+        "C'est tu encore possible d'aller voir un parent mourrant même s'il habite dans une région actuellement fermée ?",
+        "J'ai un parent qui va mourir et qui habite dans une autre région que la mienne. Ils viennent de fermer sa région est-ce que je peux y aller quand même ?",
+        "J'ai tu le droit d'aller visiter un parent qui va mourir même s'il habite dans une région fermée ?",
+        "Mon père va mourir il est à l'hôpital dans une région à accès restreint. C'est tu possible d'aller le voir ?",
+        "Ma mère va mourir elle est à l'hôpital dans une région à accès restreint. C'est tu possible d'aller la voir ?",
+        "Allez-vous m'interdire aussi d'aller voir un parent mourrant parce qu'il est dans une région fermée ?",
+        "La visite dans les hôpitaux est-elle permise pour les proches aidants?"
+      ],
+      "en": [
+        "can a person, for example, go to the hospital to visit a dying relative?",
+        "my mom's dying in the hospital, can I go see her?",
+        "my dad's taken a turn for the worse, can I go see him in hospice?",
+        "my sister is terminal, I'd like to see her before she dies. Is that possible?",
+        "my 90-year-old mother wants to go see her last sister who's dying?",
+        "are palliative care visits possible?",
+        "can I go see my dying grandmother?",
+        "can I go visit someone who's terminally ill in the hospital?",
+        "is it possible to visit someone who's dying?",
+        "my mom has covid and is dying. Can you go see her at the hospital?",
+        "am I allowed to visit my terminally ill father?",
+        "my dad has the covid and is dying. Can you go see him?",
+        "am I allowed to visit my terminally ill mother?",
+        "my father's going to die soon. Can you go see him?",
+        "am I allowed to say goodbye to someone on their deathbed?",
+        "i know someone who's gonna die. Can you go see him at the hospital?",
+        "my father's about to die. He just got back to the hospital. Can I go see him?",
+        "my mom's on the verge of dying. She just got back to the hospital. Can I go see him?",
+        "is it okay to go to the hospital to see someone who's gonna die soon?",
+        "is it possible I'm going to see someone who's going to die in the hospital?",
+        "someone in my family is in the hospital and he's gonna die. Can I go see him?",
+        "my grandmother will die alone if I can't go to her",
+        "my father will die alone if we don't get to see him at the chsld",
+        "can I go see a relative dying in the hospital when the area is closed?",
+        "can I go see a relative dying in the hospital when I'm not from this area?",
+        "can I visit a dying relative in the hospital when I don't live in this area?",
+        "i want to visit a relative at the end of his life but he lives in a closed area, is that possible?",
+        "is it still possible for you to visit a dying relative even if they live in a currently closed area?",
+        "i have a relative who's going to die and who lives in a different region than mine. They just closed his region. Can I still go?",
+        "am I allowed to visit a relative who's going to die even if he lives in a closed area?",
+        "my dad's gonna die. He's in a hospital in a restricted area. Can you go see him?",
+        "my mom's gonna die. She's in a hospital in a restricted area. Can you go see her?",
+        "are you also going to forbid me to visit a dying relative because he's in a closed area?",
+        "is visiting hospitals permitted for family caregivers?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services de santé"
+    ]
+  }
+}

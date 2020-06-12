@@ -1,0 +1,32 @@
+{
+  "id": "6gc78",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://Z16DYrW\nTravailleurs offrant des services de soutien à domicile = page://Z16DYrW"
+      ],
+      "en": [
+        "page://Z16DYrW\nhome support workers = page://z16dyrw"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Qu'en est-il des travailleurs qui dispensent du service de soutien à domicile?",
+        "Quelles sont les directives pour les travailleurs du soutien à domicile?",
+        "Allocation directe chèque emploi-service pour soutien à domicile"
+      ],
+      "en": [
+        "what about workers who provide home support services?",
+        "what are the guidelines for home support workers?",
+        "direct allowance job-service cheque for home support"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": false,
+    "contexts": [
+      "Entreprises et main d'oeuvre"
+    ]
+  }
+}

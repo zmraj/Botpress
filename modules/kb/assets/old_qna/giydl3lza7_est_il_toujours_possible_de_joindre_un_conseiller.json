@@ -1,0 +1,40 @@
+{
+  "id": "giydl3lza7_est_il_toujours_possible_de_joindre_un_conseiller",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49082"
+      ],
+      "en": [
+        "source://quebec.ca/c49082"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il toujours possible de joindre un conseiller en développement touristique?",
+        "Est-ce que je peux parler à quelqu'un du Ministère pour des questions sur le tourisme ?",
+        "Les personnes du domaine touristique sont tu rejoignables pendant la crise ?",
+        "Les responsables touristiques sont-ils disponible pour aider.",
+        "J'ai besoin de conseils en développement touristique.",
+        "Est-ce que les responsables en développement touristique sont toujours en travail ?",
+        "Où puis-je obtenir des informations sur le tourisme et son développement ?"
+      ],
+      "en": [
+        "is it still possible to reach a tourism development consultant?",
+        "can I speak to someone at the department for questions about tourism?",
+        "are you reachable during the crisis?",
+        "are the tourism officials available to help.",
+        "i need tourism development advice.",
+        "are the tourism development managers still in work?",
+        "where can I get information on tourism and its development?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "z17h3um",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z2tycKs\nLes marchés publics, kiosques = section://Z2tycKs"
+      ],
+      "en": [
+        "section://Z2tycKs\npublic markets, kiosks = section://z2tycks"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les marchés publics peuvent-ils maintenir leurs activités?",
+        "marchés publics",
+        "les kiosques de ventes en libre-service sont-ils ouverts?",
+        "Je peux tu aller aux marchés publics?",
+        "Est-ce que je peux manger sur place dans les marchés publics?",
+        "Je peux tu goûter les aliments au marché public?",
+        "Y'a t-il des démonstrations culinaires dans les marchés publics?",
+        "Je peux tu goûter la bouffe dans les kiosques?"
+      ],
+      "en": [
+        "can public procurement markets continue to operate?",
+        "government procurement",
+        "are self-serve kiosks open?",
+        "can you go to the farmers' market?",
+        "can I eat at farmers' markets?",
+        "can you taste the food at the farmers' market?",
+        "are there cooking demonstrations in public markets?",
+        "can you taste the food at the newsstands?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

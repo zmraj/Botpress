@@ -1,0 +1,47 @@
+{
+  "id": "zxri0d",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://Z1j1ouN\nOuverture des services de garde = page://Z1j1ouN"
+      ],
+      "en": [
+        "page://Z1j1ouN\nchildcare opening = page://z1j1oun"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pour quand est-ce qu'on a prévu ouvrir les services de garde?",
+        "Jusqu'à quelle date le gouvernement du Québec a annoncé le prolongement de la fermeture des établissements scolaires (écoles primaires et secondaires, centres de formation, établissements d’enseignement privés) ?",
+        "C'est quoi la procédure de réouverture des services de garde",
+        "Est-ce que je vais devoir recommencer à payer la contribution parentale?",
+        "Quelle sera le nombre maximal d'enfant en service de garde?",
+        "Service de garde",
+        "Sous quelles conditions mon enfant pourra retourner au service de garde",
+        "À quelle moment mon enfant pourra retourner au service de garde?",
+        "sdg",
+        "quoi faire si le sdg (service de garde) est plein?",
+        "Où inscrire mon enfant pour le service de garde?"
+      ],
+      "en": [
+        "when are we planning to open daycare?",
+        "up to what date did the quebec government announce the extension of school closures (primary and secondary schools, training centres, private educational institutions)?",
+        "what's the procedure for reopening day care services",
+        "will I have to start paying parental contributions again?",
+        "what is the maximum number of children in child care?",
+        "day-care service",
+        "under what conditions can my child return to the child care centre?",
+        "when will my child be able to return to daycare?",
+        "what to do if the sdg (daycare) is full?",
+        "where do I register my child for child care?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Écoles et éducation"
+    ]
+  }
+}

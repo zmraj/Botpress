@@ -1,0 +1,40 @@
+{
+  "id": "myu8f5o2i4_est_qu_on_peut_aller_visiter_un_logement_d_une_per",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50715"
+      ],
+      "en": [
+        "source://quebec.ca/c50715"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-qu'on peut aller visiter un logement d'une personne en isolement?",
+        "Est-il possible de faire une demande rétroactive au PACME actions pour le maintien en emploi ?",
+        "S'inscrire au programme pour le maintien en emploi PACME.",
+        "Marche à suivre pour faire une demande pour le volet Entreprises au programme actions concertées pour le maintien en emploi (PACME–COVID-19).",
+        "Quelle est la marche à suivre pour s'insrire comme Entreprises au programme actions concertées pour le maintien en emploi (PACME–COVID-19) ?",
+        "Marche à suivre pour faire une demande pour le volet Promoteurs collectifs au programme actions concertées pour le maintien en emploi (PACME–COVID-19).",
+        "Que doit faire un groupe de promotteurs pour déposer une demande au programme actions concertées pour le maintien en emploi ?"
+      ],
+      "en": [
+        "can we go and visit a home of a person in isolation?",
+        "is it possible to make a retroactive application to the pacme actions for job maintenance?",
+        "enrol in the pacme job retention program.",
+        "procedure for applying for the enterprise strand of the concerted action programme for maintaining employment (pacme-covid-19).",
+        "what is the procedure for registering as a company in the concerted action programme for maintaining employment (pacme-covid-19)?",
+        "application procedure for the collective promoters strand of the concerted action programme for job maintenance (pacme-covid-19).",
+        "what does a group of promoters have to do to apply to the concerted action programme for job retention?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

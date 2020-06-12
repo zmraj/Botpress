@@ -1,0 +1,81 @@
+{
+  "id": "4qiycp38mv_quelles_sont_les_heures_d_ouverture_des_services_d",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50842"
+      ],
+      "en": [
+        "source://quebec.ca/c50842"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les heures d’ouverture des services de garde éducatifs à l’enfance durant la situation d'urgence?",
+        "Quand est-ce que les services de garde sont ouverts pendant la pandémie?",
+        "Horaire des services de garde pendant la crise du coronavirus.",
+        "Quel est l'horaire des services de garde d'urgence?",
+        "Est-ce que les services de garde d'urgence sont ouverts la fin de semaine ?",
+        "Quelles sont les plages horaires pour les services de garde d'urgence pendant la crise du COVID-19?",
+        "Est-ce que les services de garde d'urgence sont ouverts le soir ?",
+        "À quelle heure ferme le service de garde d'urgence ?",
+        "Est-ce que les heures d'ouverture des services de garde d’urgence seront prolongées ?",
+        "Est-ce qu'il existe des services de garde d'urgence si je dois travailler la fin de semaine ?",
+        "Quelle sont les heures d'ouverture des garderies autorisées à rester ouverte?",
+        "Est-ce qu'il y a des services de garde d’urgence ouvert le soir pendant la crise ?",
+        "Quelles sont sont les heures d'ouverture des garderies autorisées à rester ouvertes?",
+        "Est-ce qu'il y a des services de garde d’urgence ouverts la nuit pendant la crise?",
+        "C'est quand que les services de garde d'urgence sont ouverts en semaine?",
+        "Quelles sont les heures du service de garde d'urgence?",
+        "C'est ouvert de quelle heure à quelle heure les services de garde d'urgence?",
+        "Le service de garde d'urgence ouvre à quelle heure?",
+        "À quelle heure ça commence pis à quelle heure ça fini les services de garde d’urgence?",
+        "Quelles sont pour les garderies autorisées à rester ouvertes les heures d'ouverture ?",
+        "Le services de garde d’urgence esr-il ouvert le soir",
+        "Heures d'ouverture du service de garde d’urgence.",
+        "Plages horaires du services de garde d’urgence.",
+        "Les service de garde d’urgence des enfants marche tu la nuit?",
+        "Le service de garde d’urgence est tu ouvert la nuit ?",
+        "Quelle est la durée d'ouverture des garderies autorisées à rester ouverte?",
+        "Plage horaire du service de garde d’urgence pendant la pandémie.",
+        "Le service de garde d'urgence pour le personnel de la santé ouvre à quelle heure?"
+      ],
+      "en": [
+        "what are the hours of operation of early childhood education and care services during the emergency?",
+        "when are child care services open during the pandemic?",
+        "child care schedule during the coronavirus crisis.",
+        "what is the schedule for emergency childcare?",
+        "are emergency childcare services open on weekends?",
+        "what are the time slots for emergency child care during the covid-19 crisis?",
+        "are the emergency childcare services open at night?",
+        "what time does the emergency daycare closes?",
+        "will the hours of operation of emergency childcare services be extended?",
+        "is there emergency childcare if I have to work on weekends?",
+        "what are the hours of operation of the daycare centres that are allowed to remain open?",
+        "is there any emergency childcare open at night during the crisis?",
+        "are there emergency childcare facilities open at night during the crisis?",
+        "when is emergency childcare open on weekdays?",
+        "what are the hours of emergency childcare?",
+        "what time is emergency childcare open?",
+        "what time does the emergency daycare service open?",
+        "what time does it start and what time does emergency child care end?",
+        "what are the hours of operation for daycare centres that are allowed to remain open?",
+        "is the emergency childcare service open in the evenings?",
+        "hours of operation of the emergency childcare service.",
+        "time slots for emergency childcare.",
+        "does emergency child care work at night?",
+        "is the emergency day care service open at night?",
+        "how long are the day care centres authorized to remain open?",
+        "time slot for emergency childcare during the pandemic.",
+        "what time does the emergency daycare service for health care workers open?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

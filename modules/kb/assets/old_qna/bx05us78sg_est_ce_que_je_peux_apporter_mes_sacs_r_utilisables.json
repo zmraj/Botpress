@@ -1,0 +1,32 @@
+{
+  "id": "bx05us78sg_est_ce_que_je_peux_apporter_mes_sacs_r_utilisables",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49855"
+      ],
+      "en": [
+        "source://quebec.ca/c49855"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que je peux apporter mes sacs réutilisables à l'épicerie?",
+        "Si j'apporte mes sacs réutilisables chez les détaillants alimentaires, est-ce que c'est moi qui emballe mes achats?",
+        "Je n'apporte pas de sacs réutilisables, est-ce que l'épicerie va les fournir?"
+      ],
+      "en": [
+        "can I take my reusable bags to the grocery store?",
+        "if I take my reusable bags to food retailers, am I the one who packs my purchases?",
+        "i'm not bringing reusable bags, will the grocery store provide them?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces - lieux publics - services"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "66zir1mapl_est_il_permis_de_faire_de_la_moto",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53351"
+      ],
+      "en": [
+        "source://quebec.ca/c53351"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il permis de faire de la moto?",
+        "J'ai un side-car, est-ce que mon amie peut embarquer avec moi ?",
+        "Peut-on avoir un passager dans une moto à 3 places ?",
+        "Où appeler pour avoir plus d'informations pour les déplacements en moto",
+        "Est-ce dangereux d'acheter une moto de seconde main durant la pandémie ?",
+        "est-ce que je peux aller faire de la moto"
+      ],
+      "en": [
+        "is it allowed to ride a motorcycle?",
+        "i have a sidecar, can my friend come aboard with me?",
+        "can we have a passenger on a 3-seater motorcycle?",
+        "where to call for more information about motorcycle travel",
+        "is it dangerous to buy a second-hand motorcycle during the pandemic?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transport - déplacements"
+    ]
+  }
+}

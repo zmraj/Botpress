@@ -1,0 +1,80 @@
+{
+  "id": "1oaeaw",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z2wooYS\nLes consignes d’isolement = section://Z2wooYS"
+      ],
+      "en": [
+        "section://Z2wooYS\nisolation instructions = section://z2wooys"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les règles à suivre en isolement ?",
+        "Pourquoi je dois rester en isolement ?",
+        "Pendant combien de temps devrais-je rester en isolation ?",
+        "Comment faire pour être isolé avec les autres membres de ma famille ?",
+        "Je dois m'isoler mais j'ai deux colocs. Comment on arrange ça ?",
+        "Quelles sont les règles à respecter lorsqu'on se place en isolement volontaire ?",
+        "Si je dois me placer en isolement volontaire, quelles sont les règles à respecter?",
+        "Quelles sont les consignes à respecter lorsqu'on se place en isolement volontaire ?",
+        "Que dois-je faire si je dois me placer en isolement volontaire ?",
+        "Quelle sont les règles à suivre pour l'isolement volontaire?",
+        "Quelle est la marche à suivre pour respecter les normes d'isolement volontaire?",
+        "Que dois-je faire en cas d'isolement volontaire?",
+        "Quelle est la procédure à respecter en situation d'isolement volontaire?",
+        "Si je dois me placer en isolement volontaire, que dois-je faire?",
+        "Quelles sont les mesures à respecter pour l'isolement volontaire?",
+        "Je fais quoi pour me mettre en isolement",
+        "C'est quoi l'isolement volontaire?",
+        "Est-ce que l'isolement volontaire est la même chose que la quarantaine?",
+        "Je suis atteint de la covid, est-ce que je peux aller à l'école?",
+        "Dois-je envoyer mon enfant à l'école s'il est atteint de la covid?",
+        "Si j'ai côtoyé une personne atteinte de la covid, est-ce que je dois me mettre en quarantaine?",
+        "Une personne qui habite dans la même résidence qu'une personne testée positive doit-elle se placer en quarantaine?",
+        "isolement suite à une visite d'un cas covid",
+        "Si je suis en contact avec une personne qui revient de voyage asymptomatique, dois-je me placer en quarantaine aussi?",
+        "La quarantaine est-elle encore en vigueur?",
+        "Si je vais visiter ma mère qui a testé positive, dois-je m'isoler par la suite?",
+        "Je suis covid positive, est-ce que mon conjoint doit arrêter de travailler?"
+      ],
+      "en": [
+        "what are the rules in solitary?",
+        "why do I have to stay in solitary?",
+        "how long should I stay in isolation?",
+        "how can I be isolated with other members of my family?",
+        "i have to isolate myself, but I have two roommates. How do we fix this?",
+        "what are the rules to follow when you place yourself in voluntary isolation?",
+        "if I have to place myself in voluntary isolation, what are the rules?",
+        "what are the instructions to be followed when one is placed in voluntary isolation?",
+        "what should I do if I have to go to voluntary isolation?",
+        "what are the rules for voluntary isolation?",
+        "what is the process for meeting the standards for voluntary segregation?",
+        "what should i do if i am in voluntary isolation?",
+        "what is the procedure for voluntary isolation?",
+        "if I have to place myself in voluntary isolation, what should I do?",
+        "what are the measures for voluntary segregation?",
+        "what do I do to get myself into solitary",
+        "what's voluntary isolation?",
+        "is voluntary isolation the same as quarantine?",
+        "i have covid, can I go to school?",
+        "should i send my child to school if he has covid?",
+        "if I've been around someone with covid, do I have to quarantine myself?",
+        "does a person who lives in the same residence as a person who tests positive need to be quarantined?",
+        "isolation following a visit to a covid case",
+        "if I am in contact with someone who returns from an asymptomatic trip, do I have to quarantine myself as well?",
+        "is the quarantine still in effect?",
+        "if I go to visit my mother who has tested positive, do I have to isolate myself afterwards?",
+        "i am covid positive, does my spouse have to stop working?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "id": "1nci9k__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Le port du couvre-visage, aussi appelé masque artisanal, est **fortement** recommandé dans les lieux publics particulièrement lorsque la distanciation physique de 2 mètres n'est pas possible. Cela peut se produire, par exemple, à l’épicerie ou en prenant le transport en commun. Le port du masque ou du couvre-visage dans les lieux publics doit obligatoirement s’accompagner des autres mesures de protection, comme l’application des mesures d’hygiène. Pour en savoir plus, consultez la section [Consignes sanitaire pour tous](https://www.quebec.ca/sante/problemes-de-sante/a-z/informations-generales-sur-le-coronavirus/#c53182).\nSi vous êtes malade, restez à la maison. Si vous devez vous rendre à la clinique ou à l’hôpital, portez un masque de procédure ou, si vous n’en avez pas, un couvre-visage jusqu’à ce qu’on vous en donne un à votre arrivée.\nToute personne se présentant dans un milieu de soin, comme un hôpital, une clinique, un cabinet de médecin ou un groupe de médecine de famille, devrait porter un masque de procédure ou un couvre-visage. Cette recommandation s’adresse autant au patient qu’à la personne qui l’accompagne. À l'arrivée de la personne, il est possible que le personnel lui demande de porter un masque de procédure.\nLes enfants de moins de 2 ans, les personnes avec des difficultés respiratoires ou les personnes incapables de retirer leur masque ou leur couvre-visage sans l’aide d’une autre personne ne devraient pas en porter.\nAfin de permettre aux personnes malentendantes de lire sur les lèvres et de voir les expressions faciales, les personnes travaillant en service à la clientèle sont invitées, le cas échéant, à opter pour un modèle de couvre-visage avec fenêtre. Il existe différents modèles de couvre-visages commerciaux ainsi que des modèles de couvre-visages avec fenêtre.\nDes consignes sanitaires pour tous = section://IhGui"
+      ],
+      "en": [
+        "Wearing a face covering, also called a handcrafted mask, in public is **strongly** recommended especially when physical distancing (2 metres) is not possible, such as when you go to the grocery store or take public transit. When you wear a mask or a face covering in public, you must also follow other safety measures, such as hygiene. For more information, see the [Health recommendations for everyone](https://www.quebec.ca/en/health/health-issues/a-z/general-information-about-coronavirus/#c53183) section.\nIf you're sick, stay home. If you have to go to a clinic or a hospital, wear a procedure mask or, if you don't have one, your face covering until you are given one when you arrive.\nAnyone who goes to a health care facility, such as a hospital, a clinic, a doctor’s office or a family medicine group, should wear a procedure mask or a face covering. This recommendation applies to both the patient and the person who is with them. When the person arrives, the staff may ask them to wear a procedure mask.\nChildren under age 2, anyone who has trouble breathing or is unable to remove their mask or their face covering without assistance should not wear it.\nPeople who work in customer service are being asked, where applicable, to wear a face covering that has a clear window so that people who are hearing impaired can lip read and see facial expressions. Various models of store-bought and handcrafted masks with a clear window are available.\nhealth instructions for all = section://ihgui"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que le port d’un masque est efficace pour me protéger contre la COVID‑19?",
+        "Dois-je porter un masque pour me protéger du virus?",
+        "Est-ce nécessaire de porter un masque par prévention du corona?",
+        "Est-ce que le port du masque protège contre la COVID-19 ?",
+        "Que va-t-il se passer si on manque de masques de protection respiratoire N-95?​​​",
+        "Le port d'un masque va-t-il m'empêcher d'avoir la COVID-19 ?",
+        "Est-ce qu'un foulard est suffisant pour se protéger du coronavirus?",
+        "Est-ce que je devrais porter un masque par mesure de prévention pendant la pandémie?",
+        "Je veux protéger mon entourage contre le corona, je dois porter un masque?",
+        "Si je suis malade, dois-je porter un masque?",
+        "Ça donne quoi de porter un masque si je travaille pas dans la santé?",
+        "Porter un masque.",
+        "C'est quoi ça, N95 pour un masque?",
+        "Les masques sont-ils efficaces pour ne pas attraper le coronavirus ?",
+        "Est-ce qu'il est préférable de porter un masque pour éviter d'avoir le virus ?",
+        "Est-ce que je dois porter un masque pour aller à l'épicerie ?",
+        "Est-ce que le masque peut m'empêcher t'attraper le virus?",
+        "Est-ce que le masque est efficace pour se protéger de la COVID-19",
+        "Porter un masque, ça marche tu pour se protéger?",
+        "Pourquoi la population ne porte pas de masque contre le virus?",
+        "J'ai la trouille de manquer de masque",
+        "Est-ce correct de porter un masque plusieurs jours de suite?",
+        "Où puis-je me procurer un masque?",
+        "Comment fabriquer un masque maison?",
+        "Comment fabriquer un couvre-visage?",
+        "Pourquoi les professionnels de la santé ont des masques et pas moi?",
+        "Quel tissus utiliser pour fabriquer un masque artisanal?",
+        "Quand dois-je porter un couvre-visage?"
+      ],
+      "en": [
+        "is wearing a mask effective in protecting me from covid-19?",
+        "do i need to wear a mask to protect myself from the virus?",
+        "is it necessary to wear a mask for corona prevention?",
+        "does wearing the mask protect against covid-19?",
+        "what will happen if n-95 respirators are not available?",
+        "...is wearing a mask going to keep me from getting covid-19?",
+        "is a scarf enough to protect against coronavirus?",
+        "should I wear a mask as a preventative measure during the pandemic?",
+        "i want to protect those around me from corona, do I have to wear a mask?",
+        "if I'm sick, do I have to wear a mask?",
+        "What's the point of wearing a mask if I don't work in healthcare?",
+        "wear a mask.",
+        "what is this, n95 for a mask?",
+        "are the masks effective in preventing the coronavirus?",
+        "is it better to wear a mask to avoid getting the virus?",
+        "do I have to wear a mask when I go to the grocery store?",
+        "can the mask keep me from getting the virus from you?",
+        "is the mask effective in protecting against covid-19",
+        "wearing a mask, does that work as protection?",
+        "why aren't people wearing masks against the virus?",
+        "i'm afraid I'm running out of mask",
+        "is it okay to wear a mask several days in a row?",
+        "where can I get a mask?",
+        "how to make a homemade mask?",
+        "how do you make a face cover?",
+        "why do medical professionals have masks and I don't?",
+        "which fabric should be used to make an artisanal mask?",
+        "quand dois do i wear a face cover?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

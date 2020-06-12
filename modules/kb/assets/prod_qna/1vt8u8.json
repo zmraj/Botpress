@@ -1,0 +1,54 @@
+{
+  "id": "1vt8u8",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://Z2kNoDr\nEffectuer des déplacements entre les régions = page://Ze8dRW"
+      ],
+      "en": [
+        "page://Z2kNoDr\nmove between regions = page://ze8drw"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les consignes pour passer nos vacances au Québec?",
+        "Puis-je changer de régions pour passer mes vacances d'été?",
+        "Comment planifier mes vacances au Québec en contexte de pandémie?",
+        "Je peux tu prendre des vacances et changer de région?",
+        "Si on veut visiter le Lac-St-Jean est-ce qu'on peut y aller?",
+        "Est-ce que je peux visiter ma mère à Rimouski cet été?",
+        "Puis-je aller en vacances chez mon fils qui demeure dans une autre ville?",
+        "Peut-on aller en vacances dans le Bas-St-laurent?",
+        "Nous prévoyons passer 2 semaines de juillet en vacances à notre chalet dans le bas-st-laurent, avez-vous des consignes claires?",
+        "Pour aller en Gaspésie, est-ce que l'on peut séjourner en chemin?",
+        "Si je vais en vacances en Gaspésie et que je reviens chez moi à Québec, doit-on faire une quarantaine?",
+        "Devons-nous nous isoler à notre retour du Nouveau-Brunswick?",
+        "Si je vais en Gaspésie dois-je rester en confinement 14 jours?",
+        "Consignes pour des vacances aux Québec"
+      ],
+      "en": [
+        "what are the instructions for spending our vacation in quebec?",
+        "can i change regions to spend my summer holidays?",
+        "how do i plan my vacation in quebec in the context of a pandemic?",
+        "can you take a vacation and move to another region?",
+        "if we want to visit St. John's Lake, can we go there?",
+        "can I visit my mom in Rimouski this summer?",
+        "can i go on vacation to my son's house in another city?",
+        "can we go on vacation in the Lower St. Lawrence?",
+        "we plan to spend 2 weeks of July on vacation at our cottage in the bas-st-laurent, do you have clear instructions?",
+        "to go to the Gaspé Peninsula, can we stay on the way?",
+        "if i go on vacation to the gaspésie and come back home to quebec city, should i be quarantined?",
+        "do we need to isolate ourselves when we return from new brunswick?",
+        "if I go to the Gaspé Peninsula, do I have to stay in confinement for 14 days?",
+        "instructions for holidays in quebec"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transports et déplacements"
+    ]
+  }
+}

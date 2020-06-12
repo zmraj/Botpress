@@ -1,0 +1,36 @@
+{
+  "id": "3oaoqgeb49_est_il_exact_que_les__lections_partielles_pr_vues",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50868"
+      ],
+      "en": [
+        "source://quebec.ca/c50868"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il exact que les élections partielles prévues dans certaines municipalités sont annulées en raison de la pandémie de coronavirus?",
+        "Est-vrai que les élections partielles qui devaient avoir lieur dans certaines municipalités sont annulées à cause de la COVID-19 ?",
+        "Les élections partielles qui devaient avoir lieu dans certaines municipalités doivent-elles être annulées ?",
+        "Est-ce que c'es vrai que les élections partielles sont annulées dans certaines municipalités ?",
+        "Est-ce que les municipalités doivent annuler les élections partielles qui étaient prévues en raison de la pandémie ?"
+      ],
+      "en": [
+        "is it true that the by-elections planned in some municipalities are being cancelled because of the coronavirus pandemic?",
+        "is it true that the by-elections that were supposed to be binding in some municipalities are cancelled because of covid-19?",
+        "should the by-elections that were to be held in certain municipalities be cancelled?",
+        "is it true that by-elections are being cancelled in some municipalities?",
+        "should municipalities cancel the by-elections that were planned because of the pandemic?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

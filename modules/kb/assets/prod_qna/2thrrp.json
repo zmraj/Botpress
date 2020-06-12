@@ -1,0 +1,50 @@
+{
+  "id": "2thrrp",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z1brdUQ\nLes déménagements = section://Z1brdUQ"
+      ],
+      "en": [
+        "section://Z1brdUQ\nmoves = section://z1brduq"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les bonnes pratiques sanitaires à mettre en place lors d’un déménagement?",
+        "Les déménagements sont-ils annulés?",
+        "C'est quoi qui va se passer avec les déménagements",
+        "J'ai tu le droit de faire appel à des déménageurs",
+        "Est-ce qu’un déménagement prévu dans l’une des régions fermées est toujours possible?",
+        "On va faire quoi la saison des déménagements",
+        "Je dois vider le logement de ma fille, est-ce permis?",
+        "Je dois changer d'appartement en juillet",
+        "Est-ce que je peux déménager le 1er juillet?",
+        "Je déménage dans une autre région, dois-je m'isoler 14 jours?",
+        "J'enménage dans une nouvelle maison, c'est permis?",
+        "Est-ce que je peux déménager?"
+      ],
+      "en": [
+        "what are the good sanitary practices to be put in place during a move?",
+        "are the moves cancelled?",
+        "what's going to happen with the moves",
+        "i don't have the right to use movers",
+        "is a planned move to one of the closed areas still possible?",
+        "what are we gonna do moving season",
+        "i have to empty my daughter's apartment, is that allowed?",
+        "i have to change apartments in July",
+        "can I move on July 1st?",
+        "i'm moving to another region, do I have to be isolated for 14 days?",
+        "i'm moving into a new house, is that allowed?",
+        "can I move out?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

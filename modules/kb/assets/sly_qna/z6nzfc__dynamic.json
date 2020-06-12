@@ -1,0 +1,38 @@
+{
+  "id": "z6nzfc__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Généralement, les écoles primaires sont de plus petits milieux que les écoles secondaires. Les élèves du secondaire sont aussi plus autonomes et plus aptes à terminer l’année scolaire à distance.\nLe soutien pédagogique sera assuré par les enseignants et complété par des outils comme le site [ecoleouverte.ca ](https://ecoleouverte.ca/fr/?) et les trousses pédagogiques mises à la disposition des élèves du primaire, notamment ceux dont les parents feront le choix de ne pas les retourner en classe.\nSéquence d'ouverture des établissements scolaires = page://Z2pFQl5"
+      ],
+      "en": [
+        "In general, elementary schools tend to be smaller than secondary schools. Secondary school students are more independent and are in a better position to finish their school year through distance learning.\nTeachers will provide pedagogical support, and sites such as [ecoleouverte.ca](https://ecoleouverte.ca/en/) , and educational activities kits will continue to be made available to elementary students, particularly those whose parents choose not to send them back to school.\nschool opening sequence = page://z2pfql5"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pourquoi ouvrir les écoles primaires et non les écoles secondaires?",
+        "Est-ce que c'est juste les primaires qui ouvrent?",
+        "pourquoi les écoles secondaires restent fermées",
+        "Quelle est la raison pour garder les secondaires fermées?",
+        "C'est quoi l'idée d'ouvrir seulement le primaire?",
+        "pourquoi réouvrir l'école primaire maintenant"
+      ],
+      "en": [
+        "why open primary schools and not secondary schools?",
+        "is it just the primaries opening?",
+        "why high schools remain closed",
+        "what's the reason for keeping the high schools closed?",
+        "what's the idea of only opening the primary?",
+        "why reopen primary school now"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Écoles et éducation"
+    ]
+  }
+}

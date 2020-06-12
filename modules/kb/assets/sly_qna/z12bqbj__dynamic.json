@@ -1,0 +1,40 @@
+{
+  "id": "z12bqbj__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Oui, tous les commerces autorisés à ouvrir, qu’ils soient ou non dans un centre commercial, reprennent maintenant leurs activités selon les heures d’ouverture habituelles, conformément à la [Loi sur les heures et les jours d’admission dans les établissements commerciaux ](https://www.economie.gouv.qc.ca/bibliotheques/conformite/loi-sur-les-heures-et-les-jours-dadmission-dans-les-etablissements-commerciaux/etablissements-commerciaux-sauf-les-etablissements-dalimentation-et-les-pharmacies/) (RLRQ, chapitre H-2.1).\nLa réouverture des commerces = section://Z2tycKs"
+      ],
+      "en": [
+        "Yes, all commercial enterprises, whether they are in a shopping centre, are now resuming their operations according to the usual business hours, in accordance with the [Act respecting hours and days of admission to commercial establishments ](https://www.economie.gouv.qc.ca/ministere/english/act-respecting-hours-and-days-of-admission-to-commercial-etablishments/) (CQLR, chapter H-2.1).\nthe reopening of shops = section://z2tycks"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que la relance des activités signifie le retour aux heures d'ouvertures habituelles des commerces?",
+        "Est-ce que les épiceries sont ouvertes le dimanche?",
+        "Est-ce que mon commerce peut ouvrir aux mêmes heures qu'avant la pandémie?",
+        "Ouverture des commerces le dimanche",
+        "heures d'ouverture des commerces",
+        "Quelles sont les heures d'ouvertures des magasins?",
+        "Est-ce qu'on retourne aux heures d'ouverture habituelles des commerces?"
+      ],
+      "en": [
+        "does the resumption of operations mean a return to normal business hours?",
+        "are grocery stores open on Sundays?",
+        "can my business open the same hours as before the pandemic?",
+        "shops open on Sundays",
+        "business hours",
+        "what are the store hours?",
+        "are we going back to the usual business hours?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

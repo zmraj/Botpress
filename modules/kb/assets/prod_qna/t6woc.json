@@ -1,0 +1,40 @@
+{
+  "id": "t6woc",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://YlBjs\nInformations générales sur la COVID-19 = section://1VstJt"
+      ],
+      "en": [
+        "section://YlBjs\ngeneral information on covid-19 = section://1vstjt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Je vais tu mourir du coronavirus",
+        "Est-ce que le virus est mortel?",
+        "C'est quoi les probabilités de mourir du COVID-19?",
+        "mourir du covid-19",
+        "À quel point c'est dangereux cette maladie-là?",
+        "Quel est le pire qui peut m'arriver avec le covid-19",
+        "Quel âge ont les gens qui décèdent de la covid?"
+      ],
+      "en": [
+        "i'm gonna kill you with the coronavirus",
+        "is the virus lethal?",
+        "what are the odds of dying from covid-19?",
+        "die of covid-19",
+        "how dangerous is this disease?",
+        "what's the worst that can happen to me with covid-19?",
+        "how old are the people who die from the covid?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

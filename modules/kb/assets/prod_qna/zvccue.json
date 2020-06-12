@@ -1,0 +1,44 @@
+{
+  "id": "zvccue",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://19mWkv\nLes activités de loisirs et de sports extérieurs = section://Z1KR0Uh"
+      ],
+      "en": [
+        "section://19mWkv\noutdoor recreation and sports activities = section://z1kr0uh"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quand les terrains de camping pourront-ils ouvrir?",
+        "Camping",
+        "Ouverture camping saisonnier",
+        "Est-ce que les campings sont considérés comme un service indispendable ?",
+        "Puis-je aller au camping pour entretien de roulotte?",
+        "Peut-on aller dans les camping récupérer certains objets?",
+        "je peux tu aller à ma roulotte?",
+        "Je peux tu aller à ma fifthweel au camping?",
+        "À quel moment les terrains de camping pourront-ils ouvrir?"
+      ],
+      "en": [
+        "when can campgrounds open?",
+        "camping",
+        "seasonal camping opening",
+        "are campsites considered an indispensible service?",
+        "can i go to the campground for trailer maintenance?",
+        "can we go to the campsites to pick up certain items?",
+        "can you go to my trailer?",
+        "can you go to my fifthweel at the trailer park?",
+        "when will the campgrounds open?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": false,
+    "contexts": [
+      "Sports, loisirs et culture"
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "5z6rmbmf3p_les_enseignants_peuvent_ils_continuer_de_demander",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50685"
+      ],
+      "en": [
+        "source://quebec.ca/c50685"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les enseignants peuvent-ils continuer de demander des remises de travaux requérant l’accès à des laboratoires ou à du matériel sur les campus?",
+        "J'ai une matière au collège qui demande la remise de travaux de laboratoires.  Est-ce que je dois les remettre pour passer mon diplôme?",
+        "Je n'ai pas accès à du matériel sur le campus du collège pour terminer mes travaux.",
+        "Je n'ai pas accès au laboratoire du collège pour faire mes travaux.",
+        "Je ne peux  réaliser ce qui est attendu pour réussir mon cours. Vais-je être pénalisé?",
+        "On a changé  les objectifs prédagogiques du cours."
+      ],
+      "en": [
+        "can faculty members continue to request deferrals for work that requires access to on-campus labs or equipment?",
+        "i have a subject in college that requires lab work. Do I have to submit it in order to graduate?",
+        "i don't have access to equipment on the college campus to complete my work.",
+        "i don't have access to the college lab to do my work.",
+        "i can't achieve what is expected of me in order to pass my course. Am I going to be penalized?",
+        "we've changed the pre-teaching objectives of the course."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

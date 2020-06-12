@@ -1,0 +1,62 @@
+{
+  "id": "z2utudx__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Des médicaments en vente libre peuvent être utilisés pour soulager les symptômes de la maladie à coronavirus (COVID‑19). Avant d’en faire usage, lisez attentivement les étiquettes et respectez les doses recommandées. **Il est fortement recommandé de demander conseil à votre pharmacien** avant d’utiliser des médicaments en vente libre en présence de symptômes. Évitez de prendre en même temps des produits qui contiennent les mêmes ingrédients comme du Tylenol MD et du Tylenol sinus MD. Si vous souffrez de certains problèmes de santé, consultez votre pharmacien ou Info‑Santé 811 avant de prendre des médicaments en vente libre.\nLa prise d’anti-inflammatoires pourrait aggraver l’infection au coronavirus (COVID‑19), mais cette information est basée sur des observations cliniques et n’est pas confirmée ou infirmée. Certaines recommandations demandent d’éviter l’utilisation de l’ibuprofène pour soulager la fièvre lors d’une infection au coronavirus. L’Advil MD et le Motrin MD font partie de cette classe de médicaments. Si vous prenez déjà des anti-inflammatoires et que vous êtes positif au test du coronavirus, **parlez-en à votre pharmacien**, médecin ou infirmière praticienne spécialisée.\nGuide autosoins - COVID-19 = page://ZnRbVt"
+      ],
+      "en": [
+        "Over-the-counter medications can be used to relieve the symptoms of coronavirus disease (COVID-19). Before using, read the labels carefully and do not take more than the recommended dose. **You are strongly advised to ask your pharmacist for advice** before using over-the-counter medications if you have symptoms. Do not take products that contain the same ingredients at the same time, such as Tylenol® and Tylenol® Sinus. If you have health problems, ask your pharmacist for advice or call Info-Santé 811 before taking over-the-counter medications.\nTaking anti-inflammatories may make coronavirus disease (COVID-19) worse, but this information is based on clinical observations and has not been confirmed or disproven. According to some recommendations, ibuprofen should not be taken by people who have COVID-19 to relieve fever. Advil® and Motrin® belong to this drug class. If you are already taking anti-inflammatories and you test positive for COVID-19, **speak to your pharmacist**, doctor or specialized nurse practitioner.\nself-care guide - covid-19 = page://znrbvt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment soulager les maux de gorge?",
+        "Comment faire pour atténuer le mal à la gorge?",
+        "Comment diminuer les douleurs reliées au maux de gorge?",
+        "Quelle est la quantité de sel à mettre dans l'eau pour se gargariser?",
+        "Est-ce que les bonbons durs ou les pastilles peuvent soulager le mal de gorge?",
+        "J'ai full mal à la gorge, comment me soulager?",
+        "Je fais quoi avec mon gros mal de gorge?",
+        "Qu'est-ce que je dois faire pour soulager mes maux de gorge?",
+        "Comment soulager la fièvre?",
+        "Comment diminuer la fièvre?",
+        "Quels médicaments prendre contre la fièvre?",
+        "Pourquoi je fais de la fièvre?",
+        "Je fais beaucoup de fièvre, comment me soulager?",
+        "Je suis fièvreux, quoi faire?",
+        "À combien fait-on de la fièvre chez l'adulte?",
+        "Je donne quoi à mon enfant qui fait de la fièvre?",
+        "Que dois-je faire si mon enfant a fait un peu de fièvre cette nuit?",
+        "Comment soulager les symptômes?"
+      ],
+      "en": [
+        "how to relieve a sore throat?",
+        "how do you alleviate a sore throat?",
+        "how to reduce the pain associated with sore throats?",
+        "how much salt do you have to put in the water to gargle?",
+        "can hard candy or lozenges relieve a sore throat?",
+        "i've got a sore throat, how can I relieve it?",
+        "what do I do with my sore throat?",
+        "what should I do to relieve my sore throat?",
+        "how to relieve the fever?",
+        "how to lower the fever?",
+        "what medications to take for fever?",
+        "why am I running a fever?",
+        "i'm running a high fever, how can I relieve it?",
+        "i'm feverish, what should I do?",
+        "How high is the fever in adults?",
+        "what should I give my child who has a fever?",
+        "what should I do if my child has had a slight fever last night?",
+        "how to relieve the symptoms?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

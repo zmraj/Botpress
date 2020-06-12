@@ -1,0 +1,34 @@
+{
+  "id": "z49m0384ke_dois_je_fermer_mon_commerce_si_j_offre_uniquement",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50235"
+      ],
+      "en": [
+        "source://quebec.ca/c50235"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Dois-je fermer mon commerce si j’offre uniquement des aliments en vrac?",
+        "J'ai un commerce d'aliments en vrac, est-ce que je dois fermer mon commerce?",
+        "Quelles sont les protections additionnelles à ajouter si je vends des aliments en vrac?",
+        "C'est nécessaire de renforcer les mesures d'hygiène où il y a des aliments en vrac"
+      ],
+      "en": [
+        "do i have to close my business if i only offer bulk food?",
+        "i have a bulk food business, do I have to close my business?",
+        "what additional protections should I add if I sell bulk food?",
+        "there is a need to strengthen hygiene measures where bulk food is involved"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Secteur bioalimentaire"
+    ]
+  }
+}

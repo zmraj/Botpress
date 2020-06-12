@@ -1,0 +1,66 @@
+{
+  "id": "b5s45mrz84_quelles_pr_cautions_dois_je_prendre_en_tant_que_ma",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50228\nPort de gants = source://quebec.ca/c50227"
+      ],
+      "en": [
+        "source://quebec.ca/c50228\nwearing gloves = source://quebec.ca/c50227"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles précautions dois-je prendre en tant que manipulateur d'aliments?",
+        "consignes d'hygiène pour un cuisiner",
+        "règles pour les employés d'un restaurant",
+        "Où je peux trouver la fiche à consulter pour les livreurs à domicile?",
+        "Pour la protection des livreurs d'aliments, est-ce que les masques sont une mesure nécessaire?",
+        "Pour les manipulateurs d'aliments qui présentent des symptômes de maladie respiratoire devraient-ils informer leur employeur ?",
+        "Je travaille dans la charcuterie et j'ai des symptômes de maladie respiratoire, est-ce que je reste à la maison?",
+        "Quels produits nettoyants sont efficaces contre le coronavirus?",
+        "Est-ce que les méthodes actuelles de nettoyage doivent être maintenus?",
+        "Dois-je nettoyer plus souvent?",
+        "Est-ce nécessaire que les entreprises du secteur alimentaire travaille sur un plan de continuité des services?",
+        "Les livreurs d'épicerie doivent-ils laisser les boîtes à l'entrée des résidences?",
+        "Je manipule des aliments, quelles précautions dois-je prendre?",
+        "mesures pour ceux qui manipulent la nourriture",
+        "Est-ce qu'il existe des documents indiquant quoi faire lorsqu'un préparateur d'aliments est diagnostiqué positif?",
+        "J'aimerais avoir de l'information sur quoi faire si un préparateur d'aliments est testé positif à la COVID.",
+        "Existe-il un guide si un manipulateur d'aliments est testés positif au coronavirus?",
+        "Que dois-je faire en tant que manipulateur d'aliments pour me protéger et protéger les autres?",
+        "À quel moment dois-je me laver les mains si je suis un manipulateur d'aliments?",
+        "J'aimerais avoir des informations sur les précautions à prendre en tant que personne qui manipule des aliments."
+      ],
+      "en": [
+        "what precautions should I take as a food handler?",
+        "hygiene instructions for a kitchen",
+        "rules for restaurant employees",
+        "where can I find the information sheet for home delivery people?",
+        "for the protection of food handlers, are masks a necessary measure?",
+        "for food handlers with symptoms of respiratory illness should they inform their employer?",
+        "i work in the deli and I have symptoms of respiratory illness, do I stay home?",
+        "which cleaning products are effective against coronavirus?",
+        "should current cleaning methods be maintained?",
+        "do I need to clean more often?",
+        "is it necessary for food businesses to work on a continuity of service plan?",
+        "should grocery delivery people leave boxes at the entrance to the residences?",
+        "what precautions should I take when handling food?",
+        "measures for food handlers",
+        "is there documentation on what to do when a food processor tests positive?",
+        "i would like information on what to do if a food processor tests positive for covid.",
+        "is there a guide if a food handler tests positive for coronavirus?",
+        "what should I do as a food handler to protect myself and others?",
+        "when should i wash my hands if i am a food handler?",
+        "i would like to have information on precautions to take as a food handler."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Secteur bioalimentaire"
+    ]
+  }
+}

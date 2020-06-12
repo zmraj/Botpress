@@ -1,0 +1,70 @@
+{
+  "id": "oyhy9adgdq_quelles_sont_les_mesures_que_le_gouvernement_du_qu",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49100"
+      ],
+      "en": [
+        "source://quebec.ca/c49100"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les mesures que le gouvernement du Québec met en place dans le but de venir en aide à l’industrie touristique ?",
+        "Quels moyens sont mis en place par le gouvernement du Québec pour aider l'industrie touristique durant la pandémie ?",
+        "Est-ce qu'il y a des mesures pour soutenir les entreprises tourisques dans le contexte du COVID-19 ?",
+        "En raison du coronavirus, quels sont les moyens mis en place pour aider l'industrie touristique ?",
+        "Est-ce qu'il y a de l'aide financière offerte pour aider l'industrie touristique ?",
+        "Pour le tourisme, quelles sont les aides gouvernementales disponibles ?",
+        "Quels sont les programmes offerts pour les entreprises touristiques ?",
+        "Pour le domaine touristique, est-ce que je peux savoir quelles mesures le gouvernement offrent ?",
+        "Est-ce qu'il existe des mesures d'assouplissement pour le tourisme en raison de la période de crise ?",
+        "Je peux obtenir quelles aides du gouvernement compte tenu que je travaille dans le domaine touristique ?",
+        "Comment le gouvernement aide l'industrie du tourisme dans la période du coronavirus ?",
+        "Quelles sont les aides spécifiques à l'industrie du tourisme ?",
+        "Y-a-t-il des mesures d'assouplissement pour l'industrie touristique?",
+        "Est-ce qu'il y aura de l'aide pour les établissements de \nl'industrie du tourisme ?",
+        "Pour le domaine du tourisme, est-ce que de l'aide financière disponible ?",
+        "Les entreprises touristiques ont-elles droit à de l'aide finacière pendant et après la crise du COVID-19 ?",
+        "Quelle est l'aide disponible pour aider les établissements de tourisme pendant la pandémie ?",
+        "Comment je peux obtenir de l'aide financière pour mon entreprise liée au tourisme ?",
+        "Les mesures qui visent l'industrie touristique sont lesquelles ?",
+        "Qu'est-ce que le ministère du Tourisme a mis en place pour aider financièrement les établissements ?",
+        "Pour le secteur du tourisme, quelles mesures gouvernementales sont disponibles pour aider les entreprises ?",
+        "Je veux connaître les mesures gouvernementales pour l'industrie touristique, pouvez-vous m'aider ?"
+      ],
+      "en": [
+        "what measures is the quebec government putting in place to help the tourism industry?",
+        "what means are being put in place by the quebec government to help the tourism industry during the pandemic?",
+        "are there any measures to support tourism companies in the context of covid-19?",
+        "because of the coronavirus, what means are being put in place to help the tourism industry?",
+        "is there financial assistance available to help the tourism industry?",
+        "for tourism, what government assistance is available?",
+        "what programs are available for tourism businesses?",
+        "for the tourism sector, can I know what measures the government is offering?",
+        "are there any relaxation measures for tourism due to the crisis period?",
+        "what kind of government assistance can I get given that I work in the tourism industry?",
+        "how is the government helping the tourism industry in the coronavirus era?",
+        "what are the specific aids for the tourism industry?",
+        "are there any measures to make the tourism industry more flexible?",
+        "will there be assistance for tourism industry establishments?",
+        "for tourism, is financial assistance available?",
+        "are tourism companies entitled to financial aid during and after the covid-19 crisis?",
+        "what assistance is available to help tourist establishments during the pandemic?",
+        "how can i get financial assistance for my tourism-related business?",
+        "which measures are aimed at the tourism industry?",
+        "what has the Ministry of Tourism put in place to help the establishments financially?",
+        "for the tourism sector, what government measures are available to assist businesses?",
+        "i want to know what the government is doing for the tourism industry, can you help me?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}

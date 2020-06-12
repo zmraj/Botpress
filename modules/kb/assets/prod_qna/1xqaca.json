@@ -1,0 +1,46 @@
+{
+  "id": "1xqaca",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://19VCmI\nChangements aux horaires des services prioritaires = section://19VCmI"
+      ],
+      "en": [
+        "section://19VCmI\nchanges to priority service schedules = section://19vcmi"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu'on va retourner aux heures normales d'ouvertures?",
+        "Pour quand prévoit-on le retour aux horaires habituelles des services prioritaires?",
+        "Changement d'heures d'ouvertures des services prioritaires",
+        "Comment est-ce que la réouverture va affecter les horaires actuels des entreprises?",
+        "Les services prioritaires sont-ils appelés à modifier les heures d'ouvertures",
+        "La relance des activités signifie-t-elle le retour aux heures habituelles d’ouverture des commerces?",
+        "Les heures habituelles de l'épicerie c'est pour quand?",
+        "Combien de temps encore les épiceries vont opérer sur une horaire réduite",
+        "Quels types de commerces de détail peuvent rouvrir et à partir de quand?",
+        "Le changement des horaires se fera-t-il bientôt"
+      ],
+      "en": [
+        "are we going back to normal business hours?",
+        "when is a return to normal priority service schedules expected?",
+        "change of opening hours for priority services",
+        "how will the reopening affect the companies' current schedules?",
+        "are priority services called upon to change hours of operation?",
+        "does the resumption of activities mean a return to normal business hours?",
+        "when are regular grocery store hours?",
+        "how much longer grocery stores will be operating on a reduced schedule",
+        "what types of retail businesses can reopen and when?",
+        "will the schedule change soon"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": false,
+    "contexts": [
+      "Entreprises et main d'oeuvre"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "zl3zua",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://ZiCh50\nAide financière aux études (AFE) = page://ZiCh50"
+      ],
+      "en": [
+        "page://ZiCh50\neducational financial assistance (efa) = page://zich50"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quel est l’impact du prolongement de la fermeture des établissements d'enseignement sur l’aide financière aux études (AFE)?",
+        "Des ajustements seront-ils apportés au programme de l’Aide financière aux études en raison de la crise actuelle?",
+        "Considérant la perte de revenu due au contexte économique actuel, est-ce que des ajustements rapides peuvent être apportés à l’aide financière aux études?",
+        "Est-ce qu'un soutien financier sera adapté dans le but de soutenir les étudiants dont la situation financière a changé (ex. : charge d'un enfant ou perte d'emploi)?",
+        "Concernant la bonification des bourses en 2020-2021 annoncée par le gouvernement fédéral, étant donné que le Québec possède son propre système d’Aide financière aux études, est-ce que des sommes seront réinvesties dans le programme?",
+        "Dois-je continuer à rembourser mon prêt étudiant?",
+        "Dois-je continuer à payer les intérêts sur mon prêt pendant cette période?",
+        "Puis-je quand même faire des versements pour rembourser mon prêt?",
+        "Faut-il faire une demande pour bénéficier de la suspension du remboursement?",
+        "Est-ce que mes paiements mensuels vont changer après la période de suspension de six mois?",
+        "Je rembourse actuellement mon prêt directement au ministère de l'Éducation et de l'Enseignement supérieur. Est-ce que cette annonce s’applique à moi?",
+        "Je bénéficie actuellement du Programme de remboursement différé. Comment cela va-t-il changer ma situation?",
+        "Est-ce que ces six mois vont compter dans la limite d’admissibilité au Programme de remboursement différé?",
+        "Est-ce que cette mesure touche l’ensemble de mes prêts d’études?"
+      ],
+      "en": [
+        "what is the impact of the extended closure of educational institutions on student financial assistance (efa)?",
+        "will adjustments be made to the student financial assistance program as a result of the current crisis?",
+        "considering the loss of income due to the current economic context, can rapid adjustments be made to student financial assistance?",
+        "will financial support be adapted to support students whose financial situation has changed (e.g., child care or job loss)?",
+        "regarding the federal government's announcement to improve scholarships in 2020-2021, given that Quebec has its own student financial assistance system, will any money be reinvested in the program?",
+        "do i still have to pay off my student loan?",
+        "do i still have to pay interest on my loan during this period?",
+        "can i still make payments on my loan?",
+        "do you have to apply for the suspension of the rebate?",
+        "will my monthly payments change after the six-month suspension period?",
+        "i am currently repaying my loan directly to the Ministry of Education and Higher Education. Does this announcement apply to me?",
+        "i am currently on the deferred payment program. How will this change my situation?",
+        "will these six months count towards the deferred repayment program eligibility limit?",
+        "does this affect all of my student loans?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Écoles et éducation"
+    ]
+  }
+}

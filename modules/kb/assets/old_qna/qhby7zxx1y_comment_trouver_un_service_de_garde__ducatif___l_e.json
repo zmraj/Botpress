@@ -1,0 +1,34 @@
+{
+  "id": "qhby7zxx1y_comment_trouver_un_service_de_garde__ducatif___l_e",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50775"
+      ],
+      "en": [
+        "source://quebec.ca/c50775"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment trouver un service de garde éducatif à l’enfance durant la situation d'urgence?",
+        "Comment je fais pour trouver un service de garde?",
+        "Outils pour trouver les services de garde.",
+        "Est-ce que je peux appeler un ministère de la famille pour avoir la liste des service de garde"
+      ],
+      "en": [
+        "how do i find educational child care during an emergency?",
+        "how do I find child care?",
+        "tools for finding child care.",
+        "can I call a family department to get a list of child care facilities"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

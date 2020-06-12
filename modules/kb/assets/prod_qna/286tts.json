@@ -1,0 +1,72 @@
+{
+  "id": "286tts",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://1JBKur\nL'aide d’urgence aux petites et moyennes entreprises = page://1JBKur"
+      ],
+      "en": [
+        "page://1JBKur\nemergency aid for small and medium-sized enterprises = page://1jbkur"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "C'est quoi l'aide disponible pour les PME?",
+        "Est-ce que les PME ont droit à un prêt ou une subvention?",
+        "Je vais faire faillite si mon entreprise ne reçoit pas de liquidité",
+        "Combien est-ce que je peux avoir avec l'aide d'urgence au PME?",
+        "Mon entreprise ne vas pas passer à travers la crise.",
+        "Aide financière pour les entreprises",
+        "prêt entreprise",
+        "aide pour entreprise",
+        "J'aimerais avoir de l'aide pour ma business",
+        "Mon commerce a besoin d'argent",
+        "Quelles sont les dépenses couvertes dans le cadre de l'aide d’urgence aux petites et moyennes entreprises?",
+        "Détails sur l'aide d’urgence aux PME.",
+        "Quel est le montant maximal du prêt consenti aux PME par le gouvernement?",
+        "Quels sont les conditions pour obtenir du financement pour mon entreprise?",
+        "Je suis patron d'entreprise et j'ai des problèmes de liquidités.",
+        "Mon entreprise n'a plus la capacité de livrer des produits, biens ou services, ou ses marchandises.",
+        "Ma PME manque de liquidités.",
+        "En tant quwe dirigeant d'entreprise peut-on avoir des prêts ou des garanties pour nous aider?",
+        "J'ai une entreprise qui éprouve des problèmes d’approvisionnement en matières premières, est-ce que je vais obtenir du financement?",
+        "Mon entreprise peut-elle avoir de l'aide avec les problèmes d’approvisionnement en matières premières ou en produits (biens ou services)?",
+        "Quelle forme prendra l'aide accordée aux entreprises?",
+        "Le prêt accordé comme financement aux entreprises est de combien?",
+        "Le manque de liquidités est causé par quoi?"
+      ],
+      "en": [
+        "what help is available for smes?",
+        "are smes entitled to a loan or a grant?",
+        "i will go bankrupt if my company doesn't receive liquidity..",
+        "how much can I get with the sme emergency aid?",
+        "my company's not gonna make it through this crisis.",
+        "business funding",
+        "enterprise loan",
+        "business support",
+        "i'd like some help with my business",
+        "my business needs money",
+        "what expenditure is covered under emergency aid for small and medium-sized enterprises?",
+        "details on emergency assistance to smes.",
+        "what is the maximum amount of the loan granted to smes by the government?",
+        "what are the conditions for obtaining financing for my business?",
+        "i'm a business owner and I'm having cash flow problems.",
+        "my business no longer has the capacity to deliver products, goods or services, or its merchandise.",
+        "my mom's running out of cash.",
+        "as a business leader can we get loans or guarantees to help us?",
+        "i have a company that's having problems sourcing raw materials, am I going to get financing?",
+        "can my business get help with problems with the supply of raw materials or products (goods or services)?",
+        "what form will the aid to companies take?",
+        "how much is the loan provided as business financing?",
+        "the cash shortfall is caused by what?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": false,
+    "contexts": [
+      "Programmes d'aide et revenues"
+    ]
+  }
+}

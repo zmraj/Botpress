@@ -1,0 +1,56 @@
+{
+  "id": "z1jugat",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z2w0jKu\nLes activités de loisirs et de sports extérieurs = section://Z2fa5vo"
+      ],
+      "en": [
+        "section://Z2w0jKu\noutdoor recreation and sports activities = section://z2fa5vo"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que je peux aller courir dans un parc de la sépaq?",
+        "Est-ce que je peux fréquenter les parcs et sentiers publics ?",
+        "Quelles sont les règles sur l'accès aux parcs nationaux?",
+        "Les attraits touristiques tel que l'aquarium du Québec sont-ils accesibles?",
+        "Ouverture des pourvoiries chasse et pêche",
+        "Ouverture des zec",
+        "L'hébergement en pourvoirie est-il permis pour une cellule familiale?",
+        "Règlements pourvoirie",
+        "Est-ce qu'on peut camper en tente dans une sepaq?",
+        "pourvoiries",
+        "Est-ce que je peux louer un chalet dans une pourvoirie en juin?",
+        "La pratique du vélo de montagne est-elle toujours autorisée dans les centres de plein air?",
+        "Les centres de plein air sont-ils ouvert?",
+        "Est-ce que je peux aller dans des attraits touristiques en visite libre?",
+        "Quelles sont les directives d'accés aux parcs de la SEPAQ et les centres de plein air?"
+      ],
+      "en": [
+        "can I go for a run in a sepaq park?",
+        "can I use public parks and trails?",
+        "what are the rules on access to national parks?",
+        "are tourist attractions such as the aquarium du québec accessible?",
+        "opening of hunting and fishing outfitters",
+        "zec opening",
+        "is accommodation in an outfitter permitted for a family unit?",
+        "outfitting regulations",
+        "can we camp in a tent in a sepaq?",
+        "outfitters",
+        "can I rent a cottage at an outfitter in June?",
+        "is mountain biking still allowed in outdoor centres?",
+        "are the outdoor centres open?",
+        "can I go to open-air tourist attractions?",
+        "what are the access guidelines for sepaq parks and outdoor centres?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Sports, loisirs et culture"
+    ]
+  }
+}

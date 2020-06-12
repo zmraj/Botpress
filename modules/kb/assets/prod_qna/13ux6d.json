@@ -1,0 +1,70 @@
+{
+  "id": "13ux6d",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z1264d4\nLa rénovation résidentiel & la construction = section://Z1264d4"
+      ],
+      "en": [
+        "section://Z1264d4\nresidential renovation & construction = section://z1264d4"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Secteur de la construction",
+        "Quels entreprises de la construction offrent des services essentiels?",
+        "Est-ce que les firmes du secteur de la construction sont des services essentiels?",
+        "J'ai besoin de louer de la machinerie.",
+        "Quels sont les services essentiels du secteur de la construction ?",
+        "Le secteur de la construction est-il touché ?",
+        "Les chantiers de construction sont-ils fermés?",
+        "Les électriciens, plombiers et services d’urgence sont-ils des services essentiels ?",
+        "J'ai besoin d'un électricien.",
+        "Est-ce que je peux faire venir le plombier?",
+        "Puis-je faire venir une firme de construction?",
+        "Si j'ai une panne d'électricité, est-ce que les électriciens travaillent toujours?",
+        "Entreprises d'équipements de location.",
+        "Les plombiers assurent toujours du service?",
+        "En cas de sinistre, quels services me sont offerts?",
+        "Pour les réparations en cas d'urgence, comment ca marche?",
+        "J'ai besoin de louer de l'équipement pour réparer un bris, est-ce ouvert?",
+        "Puis-je avoir recours aux services de personnes ou de proches pour divers types de travaux à domicile?",
+        "Est-ce que je peux engager, chez moi,  une personne qui offre un service essentiel et dont le soutien est requis?",
+        "Est-ce que je peux engager un travailleur, une compagnie pour venir faire une réparation qui ne peut pas attendre?",
+        "Dans quelle mesure est-ce que je peux engager quelqu'un pour venir faire des réparations?",
+        "Quelles sont les consignes que doivent respecter les travailleurs qui viennet à domicile?"
+      ],
+      "en": [
+        "building industry",
+        "which construction companies provide essential services?",
+        "are firms in the construction sector essential services?",
+        "i need to rent some machinery.",
+        "what are the essential services of the construction sector?",
+        "is the construction sector affected?",
+        "are the construction sites closed?",
+        "are electricians, plumbers and emergency services essential services?",
+        "i need an electrician.",
+        "can I get the plumber in here?",
+        "can I bring in a construction firm?",
+        "if I have a power outage, do the electricians still work?",
+        "rental equipment companies.",
+        "plumbers always provide service?",
+        "what services are available to me in the event of a claim?",
+        "for emergency repairs, how does it work?",
+        "i need to rent some equipment to fix a problem, is it open?",
+        "can i use the services of people or relatives for various types of work at home?",
+        "can I hire someone in my home to provide an essential service and support?",
+        "can I hire a worker, a company to come and do a repair that can't wait?",
+        "how far can I hire someone to come and do repairs?",
+        "what are the instructions for workers who come to the home?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

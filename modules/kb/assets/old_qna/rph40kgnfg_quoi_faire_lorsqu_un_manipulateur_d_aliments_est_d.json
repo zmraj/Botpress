@@ -1,0 +1,38 @@
+{
+  "id": "rph40kgnfg_quoi_faire_lorsqu_un_manipulateur_d_aliments_est_d",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49167"
+      ],
+      "en": [
+        "source://quebec.ca/c49167"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quoi faire lorsqu’un manipulateur d’aliments est diagnostiqué au coronavirus?",
+        "Quoi faire si un employé atteint de la COVID-19 touche à des aliments ?",
+        "Quelles sont les recommandations pour un travailleur du secteur de l'alimentation atteint du coronavirus?",
+        "Un travailleur de mon épicerie à été testé positif avec le COVID, que dois-je faire?",
+        "Déclaration d’un cas positif à la COVID-19 dans un établissement alimentaire.",
+        "Bonnes pratiques pour protéger la clientèle et les employés d'un établissements alimentaires."
+      ],
+      "en": [
+        "what to do when a food handler is diagnosed with coronavirus?",
+        "what to do if an employee with covid-19 touches food?",
+        "what are the recommendations for a food worker with coronavirus?",
+        "a worker in my grocery store tested positive for covid, what should I do?",
+        "reporting a positive case of covid-19 in a food establishment.",
+        "good practices to protect the customers and employees of a food establishment."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

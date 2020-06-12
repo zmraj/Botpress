@@ -1,0 +1,34 @@
+{
+  "id": "plaqdlyfzi_que_peuvent_faire_les_snowbirds_qui_reviennent_de",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c51897"
+      ],
+      "en": [
+        "source://quebec.ca/c51897"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Que peuvent faire les snowbirds qui reviennent de voyage et qui n’ont pas d’autre résidence que leur roulotte ou leur motorisé en été?",
+        "Est-ce qu'il y a des terrains désignés pour recevoir les snowbirds qui voyagent avec leur motorisé?",
+        "Afin de respecter l'isolement obligatoire, le camping doit-il fermer les accès aux espaces communs?",
+        "Je suis un snowbird qui revient de voyage en motorisé, qu'est-ce que je fais?"
+      ],
+      "en": [
+        "what can snowbirds who return from a trip and have no other residence than their trailer or motor home do in the summer?",
+        "are there designated sites for snowbirds travelling with their motorhomes?",
+        "in order to respect the compulsory isolation, does the campsite have to close the accesses to the common areas?",
+        "i'm a snowbird coming back from a motorcycle trip, what do I do?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

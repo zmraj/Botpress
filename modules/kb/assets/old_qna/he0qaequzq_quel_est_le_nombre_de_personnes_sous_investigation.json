@@ -1,0 +1,34 @@
+{
+  "id": "he0qaequzq_quel_est_le_nombre_de_personnes_sous_investigation",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50212"
+      ],
+      "en": [
+        "source://quebec.ca/c50212"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quel est le nombre de personnes sous investigation, de cas négatifs et confirmés lié au COVID-19 au Québec ?",
+        "Liste du nombre de personnes sous investigation, de cas négatifs et confirmés au Québec à cause du coronavirus.",
+        "Puis-je connaître le nombre de personnes sous investigation, de cas négatifs et confirmés au COVID au Québec ?",
+        "Je veux le détail du nombre de personnes sous investigation, de cas négatifs et confirmés au Québec lié au corona."
+      ],
+      "en": [
+        "what is the number of people under investigation, negative and confirmed cases related to covid-19 in quebec?",
+        "list of the number of people under investigation, negative and confirmed cases in quebec due to coronavirus.",
+        "can i know the number of people under investigation, negative and confirmed cases at covid in quebec?",
+        "i want details on the number of people under investigation, negative and confirmed cases in quebec related to corona."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Autres questions"
+    ]
+  }
+}

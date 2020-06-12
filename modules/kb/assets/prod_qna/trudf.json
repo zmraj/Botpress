@@ -1,0 +1,54 @@
+{
+  "id": "trudf",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://1epcET\nInformations générales sur la COVID-19 = section://1VstJt"
+      ],
+      "en": [
+        "section://1epcET\ngeneral information on covid-19 = section://1vstjt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Où puis-je m’informer sur la situation?",
+        "Que est le site du gouvernement pour trouver les avis et consignes de l'état d'urgence?",
+        "Quels sont les médias le plus fiables pour m'informer de la situation de la COVID-19?",
+        "Comment reconnaître une bonne référence en matière de santé?",
+        "Est-ce utile d'écouter la radio ou la télévision et lisez les journaux pour avoir des informations officielles ?",
+        "Règle du gouvernement à suivre",
+        "Où puis-je avoir les avis et consignes du gouvernement du QUébec?",
+        "Quels sont les sources d'information crédibles sur la COVID-19?",
+        "écouter le point de presse",
+        "En quoi consiste l'urgence sanitaire décrété par le gouvernement?",
+        "je veux me tenir au courant des nouvelles",
+        "être à l'affût des mises à jours",
+        "Que-ce qui va déterminer que la pandémie est maintenant sous contrôle ou terminée?",
+        "Comment écouter le point de presse du gouvernement?"
+      ],
+      "en": [
+        "where can I find out about the situation?",
+        "what is the government's site for emergency notices and instructions?",
+        "what are the most reliable media outlets to inform me of the covid-19 situation?",
+        "how to recognize a good health reference?",
+        "is it useful to listen to the radio or television and read the newspapers for official information?",
+        "government rule to follow",
+        "where can i get advice and instructions from the quebec government?",
+        "what are credible sources of information on covid-19?",
+        "listen to the press briefing",
+        "what is the government-mandated health emergency?",
+        "i want to keep up with the news",
+        "keep up to date",
+        "what will determine whether the pandemic is now under control or over?",
+        "how can I listen to the government press briefing?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

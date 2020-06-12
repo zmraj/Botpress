@@ -1,0 +1,36 @@
+{
+  "id": "rahvv6q074_est_il_possible_d_accompagner_ou_d_aider_une_perso",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53277"
+      ],
+      "en": [
+        "source://quebec.ca/c53277"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-il possible d’accompagner ou d’aider une personne qui déménage dans une résidence privée pour aînés?",
+        "Est-ce que je peux déménager ma mère, moi-même sans déménageur ?",
+        "Liste des déménageurs durant la pandémie.",
+        "Les déménageurs font-ils partie des services essentiels ?",
+        "Est-ce qu'un un déménageur peut refuser un déménagement dans les CHSLD ?"
+      ],
+      "en": [
+        "is it possible to accompany or assist a person moving to a private seniors' residence?",
+        "can I move my mother, myself without a mover?",
+        "list of movers during the pandemic.",
+        "are movers part of essential services?",
+        "can a mover refuse a move in the chsld?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Habitation et logement"
+    ]
+  }
+}

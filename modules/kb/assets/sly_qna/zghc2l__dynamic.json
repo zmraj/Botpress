@@ -1,0 +1,80 @@
+{
+  "id": "zghc2l__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Il est recommandé de restreindre ses déplacements le plus possible et, à toutes les personnes qui n’offrent pas de services essentiels, de rester à la maison. Toutefois, il est possible de garder les enfants d'une personne qui n’a pas accès aux services de garde ou pour qui l’enfant ne peut retourner à l’école si cela est nécessaire et que les conditions suivantes sont respectées :\n*   vous êtes en bonne santé;\n*   aucune des personnes ne présente des symptômes de fièvre, d’apparition ou d’aggravation d’une toux, de difficultés respiratoires ou de perte soudaine de l’odorat sans congestion nasale, avec ou sans perte de goût;\n*   personne n’a reçu de consigne d’isolement;\n*   il n’y a pas d’enfants qui vont à l’école dans la famille;\n*   il n’y a pas de personne à risques (ex. : malade chronique ou personne de 70 ans ou plus) dans la maison.\nDans la mesure du possible, il faudra limiter les contacts physiques des enfants les uns avec les autres et maintenir une distance physique de 2 mètres. Si vous devez être en contact à moins de 2 mètres avec l’enfant (ex. : nourrissons), portez un couvre-visage et lavez vos mains avant et après avoir pris l’enfant. Nettoyez et désinfectez régulièrement les surfaces et les objets qui sont fréquemment touchés, comme les poignées de porte, les interrupteurs d'éclairage, les poignées d'évier, etc. Augmentez la fréquence de nettoyage des toilettes. Nettoyez fréquemment les jouets, particulièrement ceux pouvant être portés à la bouche. Si vous avez été en contact étroit avec l’enfant, changez de vêtements lors du retour à votre domicile ou au départ de l’enfant. Il faut en tout temps suivre les [consignes sanitaires pour tous](https://www.quebec.ca/sante/problemes-de-sante/a-z/informations-generales-sur-le-coronavirus/#c53182).\nLes services de garde d'urgence = page://QmcNQ"
+      ],
+      "en": [
+        "You are advised to limit your movements as much as possible and anyone who is not providing an essential service should stay at home. However, if someone needs a babysitter for their children and does not have access to day care or for whom the children cannot return to school, you may do so. The following conditions apply:\n*   you are in good health,\n*   no one has symptoms of fever, cough, difficulty breathing or sudden loss of smell without a stuffy nose, with or without loss of taste,\n*   no one has been told to self-isolate,\n*   no children in the family is going to school,\n*   no one in the home is at risk (e.g., chronically ill or 70 years of age or older).\nAs far as possible, physical contact between children must be limited and they must be kept 2 metres apart. Regularly clean and disinfect high-touch surfaces and items, such as door handles, light switches, faucet handles, etc. If you must be in contact with children within 2 metres (e.g. infants), wear a face covering and wash your hands before and after taking the children. Clean bathrooms more frequently. Clean toys frequently, especially toys that children might put in their mouth. If you have been in close contact with children, change your clothes when you return home or when children leaves. Follow the [health recommendations for everyone](https://www.quebec.ca/en/health/health-issues/a-z/general-information-about-coronavirus/#c53183).\nemergency childcare services = page://qmcnq"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu'il est sécuritaire ou permis de garder les enfants d'amis ou de proches afin de leur rendre service?",
+        "Est-ce que j'ai le droit de garder les enfants de mes amis ou de mes proches ?",
+        "C'est tu permis de garder les enfants de nos amis ou de nos proches ?",
+        "Est-ce qu'un voisin de travailleur essentiel peut garder leurs enfants?",
+        "C'est tu sécuritaire de garder les enfants d'amis ou de proches pour le rendre service ?",
+        "Est-ce que les voisins des travailleurs essentiels peuvent garder leurs enfants?",
+        "Nous gardons nos enfants entre amis chacun notre tour, est-ce une bonne idée ?",
+        "Mes amis doivent travailler. Est-ce que j'ai le droit de garder leurs enfants ?",
+        "On s'est organisé entre amis pour garder nos enfants en alternance pour pouvoir travailler, est-ce une bonne idée ?",
+        "Garder les enfants d'amis ou de proches.",
+        "Est-ce que c'est grave si je garde les enfants de mes amis ?",
+        "Est-ce que ça peut être dangereux de garder les enfants de nos amis ou de nos proches ?",
+        "Est-ce que c'est correct de rendre service en gardant les enfants de nos amis ?",
+        "est-ce que ma gardienne peut venir à la maison?",
+        "Est-ce que mes enfants peuvent dormir chez leurs grands-parents?",
+        "Je dois retourner au travail, puis-je demander à un ami ou un voisin de venir chez moi pour garder?",
+        "Est-ce qu'un ami ou un voisin peut garder mon enfant chez moi?",
+        "Est-ce que ma soeur peut garder mes enfants parce que je dois aller travailler?",
+        "Est-ce que les grands-parents peuvent garder leurs petits-enfants à leur domicile?",
+        "Est-ce que ma cousine peut venir garder mon bébé pendant mes courses?",
+        "Est-ce que je peux garder la fille d'une amie chez moi pour qu'elle puisse retourner travailler?",
+        "Puis-je faire garder mon enfant par sa grand-mère?",
+        "Des grands-parents de 78 ans peuvent-ils garder leurs petits enfants pendant 2 jours?",
+        "J'ai 72 ans, puis-je garder ma petite fille?",
+        "gardienne à domicile",
+        "J'ai besoin d'aide pour garder mes enfants à la maison.",
+        "Est-ce que ma famille ou mes amis peuvent garder mes enfants?"
+      ],
+      "en": [
+        "is it safe or allowed to babysit the children of friends or family as a service to them?",
+        "do I have the right to keep my friends' or relatives' children?",
+        "are you allowed to babysit the children of our friends or relatives?",
+        "can a neighbour of essential workers babysit their children?",
+        "is it safe for you to babysit the children of friends or relatives as a favor?",
+        "can neighbours of essential workers babysit their children?",
+        "we take turns babysitting our kids with friends, is that a good idea?",
+        "my friends have to work. Am I allowed to babysit their kids?",
+        "we've arranged with friends to take turns babysitting our kids so we can work, is that a good idea?",
+        "babysitting the children of friends or relatives.",
+        "is it okay if I babysit my friends' kids?",
+        "can it be dangerous to babysit the children of our friends or relatives?",
+        "is it okay to do a favor by babysitting our friends' kids?",
+        "can my babysitter come over to the house?",
+        "can my children sleep at their grandparents' house?",
+        "i have to go back to work, can I ask a friend or neighbour to come to my house for babysitting?",
+        "can a friend or neighbour watch my child at my house?",
+        "can my sister watch my kids because I have to go to work?",
+        "can grandparents keep their grandchildren at home?",
+        "can my cousin come watch my baby while I run errands?",
+        "can I keep a friend's daughter at home so she can go back to work?",
+        "can I have my child taken care of by his grandmother?",
+        "can 78-year-old grandparents babysit their grandchildren for two days?",
+        "i'm 72 years old, can I keep my little girl?",
+        "sitter",
+        "i need help keeping my kids at home.",
+        "can my family or friends watch my children?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Services de garde"
+    ]
+  }
+}

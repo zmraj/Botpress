@@ -1,0 +1,60 @@
+{
+  "id": "o5s3bxr50u_quels_sont_les__tablissements_ferm_s_ou_ouverts",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49950"
+      ],
+      "en": [
+        "source://quebec.ca/c49950"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les établissements fermés ou ouverts?",
+        "Jusqu'à quand les établissements d'éducation supérieure sont fermés?",
+        "Je travaille dans une université, dois-je faire du télétravail ?",
+        "Mon Cegep est fermé mais on me demande de faire du télétravail.",
+        "Je travaille au département du Services aux étudiant. \nQui décident si cela est un service nécessaire ou essentiel sur le campus?",
+        "Est-ce que les activités d'enseignements sont suspendues dans les lieux physiques des cégeps et des universités?",
+        "Est-ce que toutes les CEGEPS et universitées sont fermées ?",
+        "Fermeture des CEGEPS.",
+        "Que va-t-il se passer avec les diplômations des CEGEP et Universités?",
+        "Fermeture des universités.",
+        "Quand pourra-t-on compléter la session d'hiver du CEGEP?",
+        "Fermeture des Centre d'études professionnelles.",
+        "Quand est-ce que finira la session d'hiver à l'université?",
+        "Est-ce que les élèves vont rattraper le temps perdu par les fermetures des établissements scolaires?",
+        "Compléter la session d'hiver.",
+        "Est-ce que les collèges sont fermés ?",
+        "Est-ce que les CEGEP sont fermés ?"
+      ],
+      "en": [
+        "which establishments are closed or open?",
+        "until when are institutions of higher education closed?",
+        "i work at a university, do I have to telecommute?",
+        "my cegep is closed, but I'm being asked to work from home.",
+        "i work in the student services department. Who decides if this is a necessary or essential service on campus?",
+        "are teaching activities suspended in the physical locations of CEGEPs and universities?",
+        "are all the cegeps and universities closed?",
+        "cegeps closing.",
+        "what's going to happen with the cegep and university degrees?",
+        "university closures.",
+        "when can the cegep's winter session be completed?",
+        "closure of the vocational training centres.",
+        "when will the winter semester at the university end?",
+        "will students make up for the time lost due to school closures?",
+        "complete the winter session.",
+        "are the colleges closed?",
+        "are the cegep's closed?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

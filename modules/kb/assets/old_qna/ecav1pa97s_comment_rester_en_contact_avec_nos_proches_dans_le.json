@@ -1,0 +1,38 @@
+{
+  "id": "ecav1pa97s_comment_rester_en_contact_avec_nos_proches_dans_le",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c50173"
+      ],
+      "en": [
+        "source://quebec.ca/c50173"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment rester en contact avec nos proches dans le contexte d’interdiction des visites dans les centres d’hébergement et de soins de longue durée (CHSLD)?",
+        "Quels sont les moyens de rester en contact avec nos proches dans le contexte d’interdiction des visites dans les centres d’hébergement et de soins de longue durée (CHSLD)?",
+        "Quels sont les moyens utilisés pour rester en contact avec nos proches dans le contexte d’interdiction des visites dans les centres d’hébergement et de soins de longue durée (CHSLD)?",
+        "Les CHLSD ont-ils des moyens afin  rester en contact avec nos proches dans le contexte d’interdiction des visites dans les centres d’hébergement et de soins de longue durée (CHSLD)?",
+        "Est-ce que le CHSLD où un de mes proches est hébergé va me contacter compte tenu de l'interdiction des visites dans les CHSLD?",
+        "Puis-je entrer en contact avec un proche hébergé en CHSLD?"
+      ],
+      "en": [
+        "how do we stay in touch with our loved ones in the context of the ban on visits to residential and long-term care centres (chsld)?",
+        "what are the means of staying in touch with our loved ones in the context of the ban on visits to residential and long-term care centres (chsld)?",
+        "what are the means used to stay in touch with our loved ones in the context of the ban on visits to residential and long-term care centres (chsld)?",
+        "do the chlsd have the means to keep in touch with our loved ones in the context of the ban on visits to residential and long-term care centres (chsld)?",
+        "will the chsld where one of my relatives is staying contact me in view of the chsld's no visitation policy?",
+        "can i get in touch with a relative hosted at chsld?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Personnes à risque"
+    ]
+  }
+}

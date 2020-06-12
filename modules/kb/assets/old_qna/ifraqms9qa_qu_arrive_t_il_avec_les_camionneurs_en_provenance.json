@@ -1,0 +1,52 @@
+{
+  "id": "ifraqms9qa_qu_arrive_t_il_avec_les_camionneurs_en_provenance",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46815"
+      ],
+      "en": [
+        "source://quebec.ca/c46815"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Qu’arrive-t-il avec les camionneurs en provenance de l’extérieur des frontières?",
+        "Est-ce que les camionneurs qui proviennent de l'extérieur du pays doivent se mettre en isolement à leur arrivée ?",
+        "Que doivent faire les camionneurs lorsqu'ils reviennent au pays ?",
+        "Lorsqu'un camionneur revient de l'extérieur des frontières, doit-il s'isoler de façon volontaire ?",
+        "Je suis camionneur et je reviens des États-Unis. Est-ce que je dois me placer en isolement volontaire ?",
+        "En tant que camionneur, est-ce que je dois me mettre en isolement volontaire ?",
+        "Qu'est-ce que je fais si je reviens de l'extérieur des frontières et que je suis camionneur ?",
+        "Si je suis camionneur qui revient de l'extérieur des frontières, est-ce que je dois me placer en quarantaine ?",
+        "Que se passera-t-il avec les camionneurs qui reviennent de l'extérieur des frontières ?",
+        "Est-ce que les camionneurs pourront traverser les frontières",
+        "Dois-je m'isoler si je suis camionneur?",
+        "Je chauffe des camions à l'étranger, je fais quoi?",
+        "Je peux tu traverser la frontière avec mon truck?"
+      ],
+      "en": [
+        "what happens with truckers coming in from outside the borders?",
+        "do truckers coming from outside the country have to put themselves in isolation when they arrive?",
+        "what do truckers have to do when they come home?",
+        "when a trucker comes back from outside the borders, does he have to isolate himself voluntarily?",
+        "i'm a truck driver and I just got back from the States. Do I have to put myself in voluntary isolation?",
+        "as a trucker, do I have to put myself in voluntary isolation?",
+        "what do I do if I come back from across the border and I'm a trucker?",
+        "if I'm a trucker coming back from overseas, do I have to quarantine myself?",
+        "what will happen to the truckers coming back from across the border?",
+        "will truckers be able to cross borders",
+        "do i need to isolate myself if i'm a trucker?",
+        "...I drive trucks abroad, what do I do?",
+        "can you get my truck across the border?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transport - déplacements"
+    ]
+  }
+}

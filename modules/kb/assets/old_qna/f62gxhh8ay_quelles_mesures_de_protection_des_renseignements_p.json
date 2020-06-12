@@ -1,0 +1,34 @@
+{
+  "id": "f62gxhh8ay_quelles_mesures_de_protection_des_renseignements_p",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c51035"
+      ],
+      "en": [
+        "source://quebec.ca/c51035"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles mesures de protection des renseignements personnels contenus dans une liste électorale une municipalité doit-elle prévoir?",
+        "Dans une liste électorale, une municipalité doit prévoir quelles mesures de protection des renseignements personnels",
+        "Afin d'assurer la confidentialité des renseignements personnels, les personnes autorisées à utiliser la liste électorale devraient s'engager par écrit à quoi?",
+        "Une municipalité doit-elle prévoir des mesures de protection des renseignements personnels?"
+      ],
+      "en": [
+        "what safeguards are required to protect the privacy of the personal information contained in a list of electors in a municipality?",
+        "in a list of electors, a municipality must set out what safeguards are in place to protect the privacy of personal information",
+        "to ensure the confidentiality of personal information, those authorized to use the list of electors should make a written commitment to what?",
+        "does a municipality need to have privacy safeguards in place?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités - Élections"
+    ]
+  }
+}

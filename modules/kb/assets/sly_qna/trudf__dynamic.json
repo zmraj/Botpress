@@ -1,0 +1,54 @@
+{
+  "id": "trudf__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Pour des informations à jour, consultez souvent le site officiel du gouvernement du Québec [Québec.ca/coronavirus](https://www.quebec.ca/sante/problemes-de-sante/a-z/coronavirus-2019/).\nÉcoutez la radio ou la télévision et lisez les journaux, puisque le ministère de la Santé et des Services sociaux donnera les indications à suivre par la population pour les questions sur la santé et pour obtenir des soins.\nDans tous les cas, respectez les avis et consignes donnés par le gouvernement. Ces avis et consignes peuvent changer en fonction de l’évolution de la situation.\nPour savoir comment reconnaître une source d’information crédible, consultez la page [Comment reconnaître une bonne source d'information en matière de santé](https://www.quebec.ca/sante/conseils-et-prevention/prevention-des-accidents-des-lesions-et-des-maladies/comment-reconnaitre-une-bonne-source-d-information-en-matiere-de-sante/).\nInformations générales sur la COVID-19 = section://1VstJt"
+      ],
+      "en": [
+        "For up-to-date information, consult the Government of Quebec’s official website often [Québec.ca/coronavirus](https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/).\nListen to the radio or watch television and read newspapers. The Ministère de la Santé et des Services sociaux will be providing health guidelines for the public to follow and information about where to get treatment.\nAlways follow government advisories and instructions. Advisories and instructions may change as the situation unfolds.\nTo learn how to recognize a credible source of information, go to the page [How to recognize a reliable source of information on health](https://www.quebec.ca/en/health/advice-and-prevention/accidents-injuries-and-diseases-prevention/how-to-recognize-a-reliable-source-of-information-on-health/).\ngeneral information on covid-19 = section://1vstjt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Où puis-je m’informer sur la situation?",
+        "Que est le site du gouvernement pour trouver les avis et consignes de l'état d'urgence?",
+        "Quels sont les médias le plus fiables pour m'informer de la situation de la COVID-19?",
+        "Comment reconnaître une bonne référence en matière de santé?",
+        "Est-ce utile d'écouter la radio ou la télévision et lisez les journaux pour avoir des informations officielles ?",
+        "Règle du gouvernement à suivre",
+        "Où puis-je avoir les avis et consignes du gouvernement du QUébec?",
+        "Quels sont les sources d'information crédibles sur la COVID-19?",
+        "écouter le point de presse",
+        "En quoi consiste l'urgence sanitaire décrété par le gouvernement?",
+        "je veux me tenir au courant des nouvelles",
+        "être à l'affût des mises à jours",
+        "Que-ce qui va déterminer que la pandémie est maintenant sous contrôle ou terminée?",
+        "Comment écouter le point de presse du gouvernement?"
+      ],
+      "en": [
+        "where can I find out about the situation?",
+        "what is the government's site for emergency notices and instructions?",
+        "what are the most reliable media outlets to inform me of the covid-19 situation?",
+        "how to recognize a good health reference?",
+        "is it useful to listen to the radio or television and read the newspapers for official information?",
+        "government rule to follow",
+        "where can i get advice and instructions from the quebec government?",
+        "what are credible sources of information on covid-19?",
+        "listen to the press briefing",
+        "what is the government-mandated health emergency?",
+        "i want to keep up with the news",
+        "keep up to date",
+        "what will determine whether the pandemic is now under control or over?",
+        "how can I listen to the government press briefing?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "zshgak",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://1wDtK4\nLa réouverture des commerces = section://Z2tycKs"
+      ],
+      "en": [
+        "section://1wDtK4\nthe reopening of shops = section://z2tycks"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les photographes professionnels peuvent ouvrir?",
+        "Quand est-ce que les photographes professionnels pourront recommencer à travailler?",
+        "Je suis photographe, est-ce que je peux recommencer à prendre des photos de mes clients?",
+        "Je peux tu me faire prendre en photo par un photographe à l'extérieur?",
+        "Qu'en est-il de la photographie?"
+      ],
+      "en": [
+        "can professional photographers open?",
+        "when can professional photographers start working again?",
+        "i'm a photographer, can I start taking pictures of my clients again?",
+        "can you get me a picture taken by a photographer outside?",
+        "what about photography?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

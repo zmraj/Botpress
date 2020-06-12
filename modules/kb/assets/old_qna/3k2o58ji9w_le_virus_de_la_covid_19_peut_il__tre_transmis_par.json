@@ -1,0 +1,32 @@
+{
+  "id": "3k2o58ji9w_le_virus_de_la_covid_19_peut_il__tre_transmis_par",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49847"
+      ],
+      "en": [
+        "source://quebec.ca/c49847"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Le virus de la COVID-19 peut-il être transmis par la nourriture?",
+        "Le coronavirus est-il transmis par la nourriture?",
+        "Peut-on écarter l'ingestion des aliments dans la transmission du virus?"
+      ],
+      "en": [
+        "can the covid-19 virus be transmitted through food?",
+        "is coronavirus transmitted through food?",
+        "can food intake be ruled out in the transmission of the virus?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consommateurs - Nourriture - Animaux"
+    ]
+  }
+}

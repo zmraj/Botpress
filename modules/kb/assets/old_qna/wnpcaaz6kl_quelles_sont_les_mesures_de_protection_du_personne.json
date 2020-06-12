@@ -1,0 +1,36 @@
+{
+  "id": "wnpcaaz6kl_quelles_sont_les_mesures_de_protection_du_personne",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c53413"
+      ],
+      "en": [
+        "source://quebec.ca/c53413"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les mesures de protection du personnel d’inspection et des médecins vétérinaires qui se déplacent sur les lieux?",
+        "En tant que vétérinaire, quelles mesures de protection dois-je respecter?",
+        "Est-ce qu'il y a des mesures de protections spécifiques à suivre pour les vétérinaires?",
+        "Je dois faire des inspections chez des clients, comment me protéger?",
+        "Où puis-je trouver de l'information sur les mesures de protection pour les inspecteur?"
+      ],
+      "en": [
+        "what are the protective measures for inspection staff and veterinarians travelling to the site?",
+        "as a veterinarian, what safeguards do I need to follow?",
+        "are there any specific safeguards for veterinarians to follow?",
+        "i have to inspect clients, how can I protect myself?",
+        "where can i find information on safeguards for inspectors?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consommateurs - Nourriture - Animaux"
+    ]
+  }
+}

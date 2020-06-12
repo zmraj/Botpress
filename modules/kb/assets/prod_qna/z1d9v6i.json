@@ -1,0 +1,78 @@
+{
+  "id": "z1d9v6i",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z215gEf\nProtéger nos personnes âgées = section://ZyOPJq"
+      ],
+      "en": [
+        "section://Z215gEf\nprotecting our seniors = section://zyopjq"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce qu’un employé âgé de 70 ans devrait continuer de travailler ?",
+        "Les travailleurs de plus de 70 ans doivent-ils entrer au travail ?",
+        "Si j'ai plus de 70 ans, est-ce que je devrais travailler ?",
+        "Les employés de 70 ans et plus peuvent-ils aller travailler?",
+        "Est-ce que tous les employés de plus de 70 ans doivent arrêter de travailler ?",
+        "Est-ce sécuritaire de travailler si on a plus de 70 ans ?",
+        "Est-ce qu'un employé agé devrait continuer de travailler ?",
+        "Est-ce qu'un ainé peut continuer à travailler en période de pandémie?",
+        "Est-ce qu'un travailleur essentiel de plus de 70 ans doit s'arrêter de travailler?",
+        "Employé âgé de plus de 70 ans à l'emploi.",
+        "Un ainé peut-il rester à l'emploi dans l'entreprise?",
+        "Pourquoi les personnes agées de plus de 70 ans ne peuvent plus travailler?",
+        "Quand les personnes de plus de 60 ans peuvent-ils retourner au travail?",
+        "J'ai un employé qui a 72 ans pis il veut savoir s'il peut revenir au travail?",
+        "Mon entreprise peut-elle empêcher mon retour au travail si j'ai entre 60 et 69 ans?",
+        "J'ai 78 ans est-ce que je peux travailler?",
+        "J'ai déjà fait une crise de coeur j'ai 64 ans, est-ce que je dois retourner au travail?",
+        "Est-ce qu'une personne de 73 ans peut travailler comme travailleur autonome même s'il n'est pas service essentiel?",
+        "J'ai 73 ans, puis-je retourner travailler ou je suis encore en confinement?",
+        "J'ai un employé qui a plus que 70 ans, peut-il revenir travailler?",
+        "Un travailleur de 73 ans avec diabète et problème de coeur peut-il revenir au travail?",
+        "Je veux savoir si je peux retourner au travail ayant 73 ans?",
+        "est-ce que mon employeur peut me faire recommencer à travailler j'ai 80 ans?",
+        "Est-ce qu'une personne de plus de 70 ans peut travailler dans un restaurant?",
+        "Est-ce que les 70 ans et plus peuvent retourner au travail?",
+        "Est-ce que les personnes agées de 70 ans et plus peuvent travailler?"
+      ],
+      "en": [
+        "should a 70-year-old employee continue to work?",
+        "should workers over 70 enter the workforce?",
+        "if I'm over 70, should I be working?",
+        "can employees aged 70 and over go to work?",
+        "do all employees over 70 have to stop working?",
+        "is it safe to work if you're over 70?",
+        "should an older employee continue to work?",
+        "can an Elder continue to work during a pandemic?",
+        "does a key worker over 70 have to stop working?",
+        "employee over 70 years of age in employment.",
+        "can an older person remain employed in the company?",
+        "why can't people over the age of 70 work?",
+        "when can people over 60 return to work?",
+        "i have an employee who's 72 years old and wants to know if he can come back to work?",
+        "can my company prevent me from returning to work if I am between 60 and 69 years of age?",
+        "i'm 78 years old. Can I work?",
+        "i've already had a heart attack. I'm 64 years old. Do I have to go back to work?",
+        "can a 73-year-old person work as a self-employed worker even if it is not an essential service?",
+        "i'm 73 years old, can I go back to work or am I still in confinement?",
+        "i have an employee who is over 70, can he come back to work?",
+        "can a 73-year-old worker with diabetes and heart problems return to work?",
+        "i want to know if I can go back to work at 73?",
+        "can my employer make me go back to work when I'm 80 years old?",
+        "can a person over 70 work in a restaurant?",
+        "can those 70 years of age and older return to work?",
+        "can people aged 70 and over work?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Soutien aux personnes"
+    ]
+  }
+}

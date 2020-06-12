@@ -1,0 +1,42 @@
+{
+  "id": "z2b1jgz",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://1s3V9o\nOuverture des camps de jour = section://1s3V9o"
+      ],
+      "en": [
+        "section://1s3V9o\nopening of day camps = section://1s3v9o"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Les camps de jour seront-ils permis cet été?",
+        "Ouverture des camps de jour?",
+        "Qu'en est-il des camps de jour?",
+        "Je vais tu pouvoir envoyer mon enfant au camp de jour cet été?",
+        "C'est tu dangereux pour les enfants d'aller au camp de jour malgré le virus?",
+        "Camps de jour",
+        "C'est quand qu'on va ouvrir les camps de jour?",
+        "On va tu ouvrir les camps de jour?"
+      ],
+      "en": [
+        "will day camps be allowed this summer?",
+        "opening day camps?",
+        "what about day camps?",
+        "can you send my kid to day camp this summer?",
+        "is it dangerous for kids to go to day camp despite the virus?",
+        "day camps",
+        "when are we opening day camps?",
+        "are we gonna open the day camps?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

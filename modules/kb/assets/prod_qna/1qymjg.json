@@ -1,0 +1,81 @@
+{
+  "id": "1qymjg",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://7HaAB\nSymptômes et traitements = section://KRq0s"
+      ],
+      "en": [
+        "section://7HaAB\nsymptoms and treatments = section://krq0s"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pourquoi on ne teste pas tout le monde?",
+        "Qui doit être testé prioritairement pour la COVID-19?",
+        "À qui sont offert les tests de dépistage en priorité?",
+        "Pourquoi j'ai été refusé pour passer un test pour le coronavirus?",
+        "Comme je suis asthmatique et que j'ai des symptômes, est-ce que je pourrai passer le test de dépistage de la covid-19?",
+        "Pourquoi on ne teste pas tout le monde au Québec?",
+        "dépistage du coronavirus au Québec.",
+        "test de dépistage du COVID-19",
+        "Où peut-on se faire tester?",
+        "Qui est prioritaire pour le dépistage du corona?",
+        "Priorité pour le dépistage du COVID-19.",
+        "J'ai été en contact avec une personne infectée, est-ce que je dois me faire dépister?",
+        "quels sont les critères pour passer un test à la COVID?",
+        "Où sont les centres de prélèvements pour les tests de dépistage?",
+        "tests de dépistage",
+        "Combien de temps pour recevoir mes résultats de test de dépistage?",
+        "Je n'ai pas de symptômes mais j'aimerais me faire tester",
+        "résultat test covid",
+        "Où je vais pour être testée pour la covid-19?",
+        "résultat prélèvement",
+        "je voudrais me faire tester par précaution",
+        "Est-ce normal de ne pas avoir reçu le résultat de mon test de dépistage plusieurs jours plus tard?",
+        "Où est-ce que je peux aller me faire tester pour la covid?",
+        "Quand recevrai-je mon diagnostic?",
+        "Où puis-je passer un test pour la covid-19?",
+        "Je veux un dépistage du covid-19 et je n'ai pas de symptômes",
+        "Comment passer un test de dépistage?",
+        "Comment me faire tester?"
+      ],
+      "en": [
+        "why don't we test everyone?",
+        "...that needs to be prioritized for testing on covid-19?",
+        "who is offered testing in priority?",
+        "why was I refused to take a test for coronavirus?",
+        "since i have asthma and symptoms, will i be able to be tested for covid-19?",
+        "why don't we test everyone in quebec?",
+        "coronavirus screening in quebec.",
+        "covid-19 screening test",
+        "where can you get tested?",
+        "who's a priority for corona testing?",
+        "priority for covid-19 testing.",
+        "i've been in contact with an infected person, should I get tested?",
+        "what are the criteria for taking a covid test?",
+        "where are the collection centres for the screening tests?",
+        "diagnostic tests",
+        "how long does it take to receive my test results?",
+        "i don't have any symptoms, but I'd like to get tested",
+        "covid test result",
+        "where am I going to be tested for covid-19?",
+        "sample result",
+        "i'd like to be tested as a precaution",
+        "is it normal not to receive my test result several days later?",
+        "where can I go to get tested for covid?",
+        "when will I be diagnosed?",
+        "where can I take a test for covid-19?",
+        "i want a covid-19 screen, and I'm symptom-free",
+        "how do I get tested?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

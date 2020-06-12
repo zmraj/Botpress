@@ -1,0 +1,62 @@
+{
+  "id": "pmdvjze8x1_est_ce_que_les_parents_qui_devront_prendre_cong__e",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c46767"
+      ],
+      "en": [
+        "source://quebec.ca/c46767"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que les parents qui devront prendre congé en raison de la fermeture des écoles et des services de garde vont continuer d’être payés?",
+        "Les parents qui doivent s'occuper de leurs enfants à cause de la fermeture des écoles et des services de garde recevront-ils leur salaire ?",
+        "Les employés qui dovient prendre congés en raison de la fermeture des écoles et des services de garde seront-ils dédommagés ?",
+        "Est-ce que les parents qui sont en congé pendant deux semaines en lien avec la fermeture des écoles recevront leur paie ?",
+        "Congés en raison de la fermeture du service de garde.",
+        "Congés forcé en raison de la fermeture des écoles.",
+        "Je garde mon fils à ma maison car la garderie est fermée, est-ce que je vais recevoir un dédommagement?",
+        "Je dois m'occuper de ma fille, est-ce que mon employeur va me payer quand même?",
+        "Est-il prévu des mesures compensatoires pour les parents qui doivent prendre congé en raison de la fermeture des services de garde ?",
+        "Kid à la maison j'peux plus travailler, payé pareil?",
+        "Qu'est-ce qui est prévu financièrement pour venir en aide aux parents qui ne peuvent travailler pour prendre soin de leurs enfants à cause de la fermeture des garderies ?",
+        "Les parents recevront-ils leur salaire malgré qu'ils doivent rester à la maison pour s'occuper de leurs enfants ?",
+        "Si je dois rester à la maison parce que les enfants ont pas d'école, est-ce que je suis obligé de prendre des vacances",
+        "Est-ce que des mesures sont prévues pour venir en aide financièrement aux parents qui doivent s'absenter de leur travail en raison de la fermeture des écoles et services de garde scolaire ?",
+        "Est-ce qu'un parent qui doit s'absenter pour prendre soin de ses enfants doit piger dans ses journées de vacances ?",
+        "Est-ce que les parents qui prennent congé pour garder leurs enfants doivent se faire couper leur paie ?",
+        "Je dois m'occuper de mon fils et ma fille car les écoles sont fermées, est-ce que je serai payé?",
+        "Si je dois m'absenter pour prendre soin de mes enfants car il n'y a plus d'école, est-ce que je serai payé?"
+      ],
+      "en": [
+        "will parents who have to take time off work because of school and child care closures continue to be paid?",
+        "will parents who have to care for their children because of school and child care closures receive their wages?",
+        "will employees who had to take time off work due to school and daycare closures be compensated?",
+        "will parents who are on a two-week leave in connection with school closures receive their pay?",
+        "leave due to the closure of the daycare centre.",
+        "forced leave due to school closures.",
+        "i'm keeping my son at home because the daycare is closed, will I get compensation?",
+        "i have to take care of my daughter, will my employer still pay me?",
+        "are there compensatory measures for parents who have to take time off work because of the closure of childcare facilities?",
+        "kid at home I can't work anymore, paid the same?",
+        "what is being planned financially to help parents who cannot work to care for their children because of the closure of daycare centres?",
+        "will parents receive their salary even though they have to stay home to care for their children?",
+        "if I have to stay home because the kids don't have school, do I have to take holidays",
+        "are measures planned to provide financial assistance to parents who have to take time off work due to school and daycare closures?",
+        "does a parent who has to take time off to care for his or her children have to draw from his or her vacation days?",
+        "do parents who take time off to babysit have to have their pay cut?",
+        "i have to take care of my son and daughter because the schools are closed, will I get paid?",
+        "if I have to take time off to take care of my children because there is no school, will I get paid?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Éducation"
+    ]
+  }
+}

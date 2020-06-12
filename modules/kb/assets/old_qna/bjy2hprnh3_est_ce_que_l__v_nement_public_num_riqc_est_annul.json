@@ -1,0 +1,36 @@
+{
+  "id": "bjy2hprnh3_est_ce_que_l__v_nement_public_num_riqc_est_annul",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c36888"
+      ],
+      "en": [
+        "source://quebec.ca/c36888"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que l’événement public numériQc est annulé à cause de la COVID-19 ?",
+        "Annulation de numériQc.",
+        "Est-ce que l’événement public numériQc est annulé ?",
+        "L'événement qui était prévu le 16 avril au Terminal de croisière est-il annulé?",
+        "L'Événement public numériQc a annulé est-ce parce que c'est une organisation responsable?"
+      ],
+      "en": [
+        "is the digital public event cancelled because of covid-19?",
+        "digit cancellation",
+        "is the digital public event cancelled?",
+        "is the event that was scheduled for April 16 at the cruise terminal cancelled?",
+        "did the digital public event cancel because it is a responsible organization?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Autres questions"
+    ]
+  }
+}

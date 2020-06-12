@@ -1,0 +1,39 @@
+{
+  "id": "wmfj4n3j3p_quels_sont_les_r_gions_et_les_territoires_sociosan",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49119"
+      ],
+      "en": [
+        "source://quebec.ca/c49119"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quels sont les régions et les territoires sociosanitaires du Québec où les policiers limitent les entrées et les sorties et autorisent seulement les déplacements essentiels?",
+        "C'est où les endroits où je ne peux pas aller quand j'habite Montréal, Québec, Gatineau ou Sherbrooke?",
+        "Quelles sont les régions fermées dont les accés sont contrôlés?",
+        "Quelles sont les régions à accès réduit?",
+        "Liste des régions à accés restreints.",
+        "Quelles sont les régions où les policiers limitent les entrées et les sorties?",
+        "qu'advient-il de la région de québec, sherbrooke et de magog ?"
+      ],
+      "en": [
+        "in which regions and health regions of quebec do the police restrict entry and exit and authorize only essential travel?",
+        "where are the places i can't go when i live in montreal, quebec, gatineau or sherbrooke?",
+        "what are the closed areas with controlled access?",
+        "what are the regions with reduced access?",
+        "list of restricted areas.",
+        "where do police officers restrict entry and exit?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transport - déplacements"
+    ]
+  }
+}

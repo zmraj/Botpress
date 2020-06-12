@@ -1,0 +1,38 @@
+{
+  "id": "lsyrb",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z1BuWe2\nFaire des visites de logement durant la COVID-19 = section://Z1BuWe2"
+      ],
+      "en": [
+        "section://Z1BuWe2\nmaking housing visits during covid-19 = section://z1buwe2"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "La fin des baux approche et les propriétaires veulent tout de même faire visiter les logements. Doit-on limiter les visites?",
+        "Quelles sont les précautions à prendre avant d'aller visiter un logement",
+        "Est-ce qu'on peut aller visiter le logement d'une personne en isolement?",
+        "Est-ce que la visite des logements est suspendue?",
+        "Quelle mesure de sécurité je dois prendre si je dois aller visiter un appartement à louer?",
+        "Est-ce que les visites de logement sont permises?"
+      ],
+      "en": [
+        "the end of the leases is approaching and the landlords still want to show the units. Should there be a limit on the number of visits?",
+        "what precautions should be taken before visiting an accommodation",
+        "can we go and visit the home of a person in isolation?",
+        "is the tour of the units suspended?",
+        "what safety precautions should I take if I need to visit an apartment for rent?",
+        "are home visits permitted?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "23g1gm__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Oui, sauf si vous avez reçu la consigne de vous isoler pendant 14 jours. Dans ce cas, vous devez rester confiné à la maison, ce qui inclut aussi que vous ne pouvez pas aller marcher jusqu’à la fin de votre isolement.\nSi vous n’avez pas reçu la consigne de vous isoler :\n*   Pour les personnes qui vivent dans un CHSLD ou une résidence privée pour aînés ou celles qui sont confiées en ressources intermédiaires et en ressources de type familial (RI‑RTF), les sorties à l’extérieur sont tolérées, mais elles doivent être faites sous supervision.\n*   Toutes les autres personnes peuvent sortir à l’extérieur pour prendre l’air et marcher. L’important est de garder une distance minimale de 2 mètres (environ 6 pieds) entre vous et les autres personnes qui ne vivent pas sous votre toit.\nLes activités de loisirs et de sports extérieurs = section://Z2fa5vo"
+      ],
+      "en": [
+        "Yes, unless you have been told to self-isolate for 14 days. If so, you must stay at home. This means that you cannot go out for a walk until the 14 days are up.\nIf you have not been told to self-isolate:\n*   People who live in a residential and long-term care centre (CHSLD), a private seniors’ residence or in intermediate resources and family-type resources (IR-FTR) are allowed to go outside but they must be supervised.\n*   Anyone else can go outside to get some fresh air and take a walk. It is important to keep at least 2 metres (around 6 feet) away from people who do not live in your household.\noutdoor recreation and sports activities = section://z2fa5vo"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Puis-je aller prendre une marche?",
+        "Je reste à la maison, mais est-ce que je peux prendre une marche pendant la pandémie?",
+        "J'aimerais sortir prendre une marche",
+        "Marcher dans mon quartier",
+        "Les bien faits de prendre des marches",
+        "Si je prend une marche à l'extérieur est-ce que je dois garder une distance de 2 mètres ?",
+        "est-ce que je peux marcher dehors avec ma famille",
+        "c'est OK d'aller prendre l'air avec mes enfants et mon mari dehors?",
+        "Je ne suis pas en isolement est-ce que je peux quand même aller marcher?",
+        "Est-ce que je peux prendre l'air si je n'ai pas de symptômes?",
+        "Est-que je peux prendre une marche si je suis en isolement?",
+        "Est-ce que je peux aller prendre une marche?"
+      ],
+      "en": [
+        "can I go for a walk?",
+        "i'm staying home, but can I take a walk during the pandemic?",
+        "i'd like to go for a walk",
+        "walk in my neighborhood",
+        "the good of taking steps",
+        "if I take a step outside do I have to keep a distance of 2 meters?",
+        "can I walk outside with my family",
+        "is it okay to go outside to get some air with my kids and my husband?",
+        "i'm not in solitary. Can I still go for a walk?",
+        "can I get some fresh air if I don't have any symptoms?",
+        "can I take a walk if I'm in solitary?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Sports, loisirs et culture"
+    ]
+  }
+}

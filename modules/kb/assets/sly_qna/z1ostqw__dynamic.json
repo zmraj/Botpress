@@ -1,0 +1,85 @@
+{
+  "id": "z1ostqw__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Le gouvernement du Québec a annoncé la fermeture des établissements d'hébergement touristique jusqu'à nouvel ordre.\nCependant, deux types d'hébergement font exception, soit certains terrains de camping faisant l'accueil de voyageurs n'ayant pas d'autre option de logement et disposant d’installations sanitaires suffisantes, ainsi que les hôtels. Les autres types d'hébergement touristique, tel que les chalets, les résidences secondaires en location, les « Bed & Breakfast » et les auberges doivent être fermés.\nInformation sur les hôtels = section://1oNKJr"
+      ],
+      "en": [
+        "The Québec government has announced the closing until further notice of tourist accommodation establishments.\nHowever, there are two exceptions to the rule: certain campgrounds that host travellers who do not have any other housing option and that provide adequate sanitary facilities, and hotels. The other types of tourist accommodation, such as cottages, rented second homes, bed and breakfast accommodation and inns must stay closed.\nhotel information = section://1onkjr"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pourquoi les hôtels non essentiels doivent fermer ?",
+        "Pourquoi le gouvernement m'a obligé à fermer mon établissement d'hébergement touristique ?",
+        "Risques liés à la fréquentation d’établissements d’hébergement touristique.",
+        "Pourquoi mon hôtel doit être fermé jusqu'au 13 avril ?",
+        "Quels sont les causes de la fermeture des établissements d’hébergement touristique par le gouvernement du Québec?",
+        "Est-ce que la fermeture des établissements d’hébergement touristique par le gouvernement québécois est justifiée ?",
+        "Fermeture des établissements d’hébergement touristique par le gouvernemetn du Québec.",
+        "Pour quelle raison mon hôtel doit être fermé ?",
+        "Pourquoi je ne peux plus louer un chalet dans une autre région?",
+        "Pourquoi les établissements touristiques doivent fermés?",
+        "Est-ce que les établissements d'hébergement touristique sont ouverts?",
+        "Fermeture des établissements d'hébergement touristique, hôtels, chalets, bed & breakfast, auberges.",
+        "Est-ce que je peux aller à l'hôtel si je n'ai pas de logement?",
+        "Exceptions à  la fermeture des établissements d'hébergement touristique",
+        "Est-ce que je vais pouvoir louer un chalet cet été pour mes vacances?",
+        "Je suis un snowbird qui revient de l'état de la Floride. Où est-ce que je peux aller ?",
+        "Est-ce que les Bed & Breakfast sont fermés?",
+        "Je peux tu louer un hotel pour mes vacances?",
+        "Est-ce qu'il y existe une liste d'hôtels ouverts?",
+        "Les hotels sont-ils fermés ?",
+        "Les motels au Québec sont-ils ouverts?",
+        "Réserver un chalet.",
+        "Peut-on dormir à l'hôtel si on change de région?",
+        "est-ce possible d'aller dormir à l'hôtel?",
+        "Les bed-and-breakfast sont-ils ouverts?",
+        "Est-ce que je peux aller dans un bed and breakfast?",
+        "Ouverture bed and breakfasts",
+        "bed and breakfast",
+        "J'aimerais savoir si les bed and breakfast ont eu le droit d'ouvrir?",
+        "Je possède un b&b au québec et je voudrais savoir quand je peux ouvrir"
+      ],
+      "en": [
+        "why do non-essential hotels have to close?",
+        "why did the government force me to close my tourist accommodation establishment?",
+        "risks related to the use of tourist accommodation establishments.",
+        "why does my hotel have to be closed until April 13th?",
+        "what are the causes of the quebec government's closure of tourist accommodation establishments?",
+        "is the closure of tourist accommodation establishments by the Quebec government justified?",
+        "closure of tourist accommodation establishments by the quebec government.",
+        "why does my hotel have to be closed?",
+        "why can't I rent a cottage in another region anymore?",
+        "why do tourist establishments have to close?",
+        "are tourist accommodation establishments open?",
+        "closure of tourist accommodation establishments, hotels, cottages, bed & breakfast, inns.",
+        "can I go to a hotel if I don't have accommodation?",
+        "exceptions to the closure of tourist accommodation establishments",
+        "will I be able to rent a cottage this summer for my vacation?",
+        "i'm a snowbird back from the state of florida. Where can I go?",
+        "are the bed and breakfasts closed?",
+        "can you rent a hotel for my vacation?",
+        "is there a list of open hotels?",
+        "are the hotels closed?",
+        "are the motels in quebec open?",
+        "reserve a cottage.",
+        "can we stay in a hotel if we change regions?",
+        "is it possible to sleep in a hotel?",
+        "are the bed-and-breakfast open?",
+        "can I go to a bed and breakfast?",
+        "opening bed and breakfasts",
+        "i'd like to know if the bed and breakfast was allowed to open?",
+        "i own a b&b in quebec and would like to know when i can open"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

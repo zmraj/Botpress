@@ -1,0 +1,42 @@
+{
+  "id": "hip7c__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Oui, en cas de nécessité. Cependant, dans la mesure du possible, il est préférable d’éviter de les amener à l’intérieur des commerces.\nLes activités et services commerciaux prioritaires = section://ZKQueG"
+      ],
+      "en": [
+        "Yes, in case of need. However, as much as possible it is preferable to avoiding taking them inside stores.\npriority business activities and services = section://zkqueg"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que je peux amener les enfants avec moi pour faire les courses?",
+        "Mes enfants peuvent-ils m'accompagner pour faire les commissions ?",
+        "Ma fille peut-elle venir choisir ses céréales à l'épicerie avec son père ?",
+        "Puis-je aller à la pharmacie avec mon bébé ?",
+        "Est-ce qu'un enfant accompagné de son frère adulte peut aller magasiner ensemble ?",
+        "Est-ce que les enfants peuvent accompagner leurs parents dans les épiceries, les pharmacies et autres lieux publics ?",
+        "Est-ce que mon fils peux venir à la pharmacie avec moi?",
+        "Est-ce qu'un commerce peut interdire l'entrée à un enfant?"
+      ],
+      "en": [
+        "can I take the kids with me to go shopping?",
+        "can my children come with me to run errands?",
+        "can my daughter come to the grocery store and pick out cereal with her dad?",
+        "can I go to the drugstore with my baby?",
+        "can a child accompanied by an adult brother go shopping together?",
+        "can children accompany their parents to grocery stores, pharmacies and other public places?",
+        "can my son come to the pharmacy with me?",
+        "can a business prohibit a child from entering?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Commerces, lieux publics et services prioritaires"
+    ]
+  }
+}

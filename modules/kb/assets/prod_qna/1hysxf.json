@@ -1,0 +1,50 @@
+{
+  "id": "1hysxf",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://23UGQp\nInformations générales sur la COVID-19 = section://1VstJt"
+      ],
+      "en": [
+        "section://23UGQp\ngeneral information on covid-19 = section://1vstjt"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Comment se transmet la COVID‑19?",
+        "Quels est le principal mode d'infection du coronavirus?",
+        "Infection au coronavirus par le nez, la gorge ou les poumons.",
+        "Quels sont les modes d'infections du coronavirus?",
+        "Par où passe le virus pour infecter un humain?",
+        "Est-ce que la covid est reliée au 5G?",
+        "La COVID-19 passe-t-elle par le nez, la gorge et les poumons?",
+        "Est-ce que les moustiques peuvent transmettre le coronavirus?",
+        "Si une personne a déjà eu le covid, est-elle contagieuse?",
+        "Je voudrais savoir si une personne qui a eu la covid, est-elle contagieuse pour quelqu'un qui ne l'a pas eu?",
+        "Est-ce que je peux pogner le covid-19 par une blessure sur la main?",
+        "Comment le virus est-il transmis?"
+      ],
+      "en": [
+        "...how is covid-19 transmitted?",
+        "what is the main mode of coronavirus infection?",
+        "coronavirus infection through the nose, throat, or lungs.",
+        "what are the modes of coronavirus infection?",
+        "where does the virus go to infect a human?",
+        "is the covid connected to the 5g?",
+        "does covid-19 pass through the nose, throat and lungs?",
+        "can mosquitoes transmit coronavirus?",
+        "if a person's already had the covid, is it contagious?",
+        "i'd like to know if someone who had the covid is contagious to someone who didn't?",
+        "can I poach covid-19 through a hand injury?",
+        "how is the virus transmitted?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "À propos de la COVID-19"
+    ]
+  }
+}

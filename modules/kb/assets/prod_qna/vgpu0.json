@@ -1,0 +1,62 @@
+{
+  "id": "vgpu0",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z1lOnIs\nInformation sur l'accès aux installations des municipalités = section://Z1lOnIs"
+      ],
+      "en": [
+        "section://Z1lOnIs\ninformation on access to municipal facilities = section://z1lonis"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Accès aux équipements collectifs d’une municipalité",
+        "La municipalité doit-elle fermer la bibliothèque, l’aréna ou la piscine municipale?",
+        "La municipalité doit-elle annuler les événements sportifs ou culturels tenus sur son territoire?",
+        "Les municipalités doivent-elles interdire l’accès aux modules et aux aires de jeu dans les parcs?",
+        "Les bibliothèques, arénas et piscines municipales doivent-elle être fermées par la municipalité?",
+        "Fermeture des bibliothèques, arénas et piscines municipales par la Ville.",
+        "La ville est-elle tenue de fermer la bibliothèque, l’aréna ou la piscine municipale?",
+        "Est-ce que je peux aller patiner à l'aréna?",
+        "Est-ce que les municipalités doivent interdire l'accès aux équipements sportifs ou culturel?",
+        "Les piscines munipales vont-elles être ouvertes cet été?",
+        "Les événements culturels municipaux sont-il annulés tant que la crise du coronavirus n'est pas finie?",
+        "Est-ce que les événements de sport de la ville vont être maintenus?",
+        "Les toilettes publiques sont-elles ouvertes?",
+        "Les activités sportives sont annulés?",
+        "Peut-on ouvrir l'hôtel de ville au public?",
+        "Les activités culturelles sont annulées?",
+        "Est-ce que les villes peuvent ouvrir leur skate park?",
+        "Peut-on ouvrir les blocs sanitaires des parcs?"
+      ],
+      "en": [
+        "access to a municipality's public facilities",
+        "should the municipality close the library, arena or public swimming pool?",
+        "does the municipality have to cancel sports or cultural events held on its territory?",
+        "should municipalities prohibit access to modules and playgrounds in parks?",
+        "are libraries, arenas and municipal swimming pools to be closed by the municipality?",
+        "closure of libraries, arenas and municipal swimming pools by the city.",
+        "is the city required to close the library, arena or public swimming pool?",
+        "can I go skating at the arena?",
+        "should municipalities prohibit access to sports or cultural facilities?",
+        "will the municipal swimming pools be open this summer?",
+        "are municipal cultural events cancelled until the coronavirus crisis is over?",
+        "will the city's sports events be maintained?",
+        "are the public restrooms open?",
+        "the sports activities are cancelled?",
+        "can we open City Hall to the public?",
+        "cultural activities are cancelled?",
+        "can cities open their skate parks?",
+        "can we open the park washrooms?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Municipalités"
+    ]
+  }
+}

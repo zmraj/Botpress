@@ -1,0 +1,60 @@
+{
+  "id": "1x3lgb__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Pour l’instant, il n’y a pas de programme prévu pour le remboursement des programmes de voyage à l’étranger. Chacun doit voir avec son agence de voyages ou son assurance voyage.\nLes voyages à l'ère de la pandémie = section://Z2ica0w"
+      ],
+      "en": [
+        "There is currently no program to refund the cost of trips abroad. Travellers should contact their travel agent or travel insurer.\ntravel in the pandemic era = section://z2ica0w"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Si je cancelle mon voyage, est-ce que je vais être remboursé ?",
+        "Est-ce que je peux me faire rembourser le voyage que j'ai acheté puisque je dois canceller ?",
+        "Est-ce que je vais me faire rembourser mon voyage en cas d'annulation ?",
+        "Y a-t-il un programme prévu pour rembourser mes dépenses pour un voyage que je dois annuler ?",
+        "Si je décide d'annuler le voyage à l'étranger que j'avais prévu, est-ce que je recevrai un remboursement ?",
+        "Est-ce que j'ai droit à un dédommagement en cas d'annulation de la croisière que j'avais prévu ?",
+        "Si je dois annuler mon voyage, est-ce qu'un remboursement est prévu ?",
+        "Quels sont mes recours en tant que consommateur quand une compagnie refuse de rembourser mes billets d'avion?",
+        "Si je suis obligé d'annuler mon voyage, est-ce qu'un dédommagement est prévu ?",
+        "Je veux me faire rembourser mes dépenses pour mon voyage annulé, est-ce que c'est possible?",
+        "J'aimerais être remboursé pour mon voyage à l'étranger?",
+        "Je n'ai pas pu partir en voyage aux USA et je veux être remboursé?",
+        "J'ai entendu parler d'un programme d'un remboursement pour les voyages annulés?",
+        "J'ai dû annuler ma croisière vais-je ravoir mon argent?",
+        "Je n'ai pas pu partir pour mes vacances 5 étoiles, est-ce que je vais ravoir mon argent?",
+        "Est-ce que les voyages seront remboursés aux consommateurs?",
+        "Est-ce que mon billet d'avion sera remboursé?"
+      ],
+      "en": [
+        "if I cancel my trip, will I get my money back?",
+        "can I get a refund for the trip I bought since I have to cancel?",
+        "will I get my trip refunded if I cancel?",
+        "is there a plan to reimburse my expenses for a trip that I have to cancel?",
+        "if I decide to cancel the trip abroad that I had planned, will I receive a refund?",
+        "am I entitled to compensation if I cancel the cruise I had planned?",
+        "if I have to cancel my trip, is there a refund?",
+        "what recourse do I have as a consumer when a company refuses to refund my airline tickets?",
+        "if I am forced to cancel my trip, is there any compensation?",
+        "i want to be reimbursed for my expenses for my cancelled trip, is that possible?",
+        "i would like to be reimbursed for my trip abroad?",
+        "i couldn't go on a trip to the U.S. and I want my money back?",
+        "i heard about a refund program for cancelled trips?",
+        "i had to cancel my cruise. Will I get my money back?",
+        "i couldn't go on my five-star vacation, will I get my money back?",
+        "will travel be refunded to consumers?",
+        "will my plane ticket be refunded?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transports et déplacements"
+    ]
+  }
+}

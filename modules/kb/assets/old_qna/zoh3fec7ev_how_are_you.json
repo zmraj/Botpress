@@ -1,0 +1,46 @@
+{
+  "id": "zoh3fec7ev_how_are_you",
+  "data": {
+    "questions": {
+      "en": [
+        "How are you?",
+        "How's it going?",
+        "what's up?",
+        "how things?",
+        "how are you doing?",
+        "how are you buddy?",
+        "how are you feeling?",
+        "How is your mood today?",
+        "are you well?",
+        "How was your day?"
+      ],
+      "fr": [
+        "Comment ça va?",
+        "Tu vas bien?",
+        "Vous vous portez bien?",
+        "ca va",
+        "Comment se passe ta journée",
+        "Ta journée se passe bien pour toi?",
+        "De quel humeur es-tu?",
+        "Yo, ça va?",
+        "ça roule?",
+        "ca se passe bien?"
+      ]
+    },
+    "answers": {
+      "en": [
+        "Sorry, I'm not an entertainment bot. I've been created to provide answers about COVID-19 to the best of my ability."
+      ],
+      "fr": [
+        "Désolé. Je ne suis pas un robot de conversation. Mon rôle est de répondre le plus efficacement possible à vos questions sur la COVID-19."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Smalltalk"
+    ]
+  }
+}

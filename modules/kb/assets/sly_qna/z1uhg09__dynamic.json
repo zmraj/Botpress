@@ -1,0 +1,49 @@
+{
+  "id": "z1uhg09__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "*   [Société de l'assurance automobile du Québec (SAAQ)](https://saaq.gouv.qc.ca/salle-de-presse/covid-19-foire-aux-questions/)\nPermis & immatriculation (SAAQ) = section://Zeg0tx"
+      ],
+      "en": [
+        "*   [Société de l'assurance automobile du Québec (SAAQ)](https://saaq.gouv.qc.ca/en/newsroom/covid-19-frequently-asked-questions/)\nlicence & registration (saaq) = section://zeg0tx"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quand est-ce que je vais pouvoir passer mon permis de moto?",
+        "cours de moto",
+        "est-ce que la SAAQ est ouverte?",
+        "Est-ce que je peux passer mon examen de conduite à la SAAQ?",
+        "saaq",
+        "examen de conduite",
+        "Quand les cours de conduite pratique vont-ils réouvrir?",
+        "Avis de renouvellement de permis de conduire",
+        "J'aimerais savoir à quand l'ouverture des cours de conduite pratique?",
+        "À quand la réouverture des cours de conduite moto?",
+        "écoles de conduite",
+        "Cours de conduite"
+      ],
+      "en": [
+        "when do I get my motorcycle license?",
+        "motorcycle course",
+        "is the saaq open?",
+        "can i take my driver's test at the saaq?",
+        "driving exam",
+        "when will the practical driving courses reopen?",
+        "driver's licence renewal notice",
+        "i'd like to know when are the driving lessons starting?",
+        "when will motorcycle riding lessons reopen?",
+        "driving schools",
+        "driving course"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transports et déplacements"
+    ]
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "id": "z1ivn8h",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://Z2fa5vo\nLes activités de loisirs et de sports extérieurs = section://Z2fa5vo"
+      ],
+      "en": [
+        "section://Z2fa5vo\noutdoor recreation and sports activities = section://z2fa5vo"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "En ce qui concerne la fermeture des lieux publics où se tiennent des activités de loisirs et de sports, qu’en est-il?",
+        "est-ce que je peux aller à une Station de ski",
+        "Centres d’escalade intérieurs",
+        "Centres de plein air avec bâtiments de services",
+        "reprise des sports collectifs",
+        "Quand puis-je recommencer à jouer au soccer?",
+        "est-ce que le football sera permis?",
+        "je suis un joueur de balle molle, pourrons-nous recommencer les matchs?",
+        "Installations récréatives intérieures",
+        "Puis-je recommencer à jouer au baseball?",
+        "Centres d’amusement",
+        "Centres aquatiques intérieurs",
+        "Est-il préférable d’éviter tous les lieux publics?",
+        "Centres de glissade",
+        "Est-ce que le volleyball de plage recommence?",
+        "volleyball",
+        "Est-ce que le tennis est permis?",
+        "Est-ce que les promenades en bateau est permises?",
+        "Est-ce que je peux jouer au tennis en double si les deux joueurs du même côté habitent à la même adresse?",
+        "Je voudrais savoir s'il y a une limitation dans le nombre de personnes dans le cadre d'entraînement extérieur, yoga, thaï chi",
+        "est-ce que je peux faire une randonnée de vélo?",
+        "bicyclette",
+        "Vélo",
+        "yoga",
+        "Cours de yoga",
+        "Nombre de personnes permises dans un entraînement extérieur?",
+        "la pétanque",
+        "est-ce que je peux jouer au golf?",
+        "Est-ce que l'accès aux piscines des hotels au Québec est permise?",
+        "Est-ce qu'on peut jouer en double au tennis?",
+        "Quel sport est permis?",
+        "On peut jouer au soccer?",
+        "activités extérieures",
+        "Combien de personnes avons-nous le droit pour les activités de plein air?",
+        "Quels sports sont acceptés?",
+        "Je donne des cours de conditionnement physique à l'extérieur, combien de personnes maximum peuvent y assister?",
+        "Pour une pratique de tai chi extérieur un groupe d'ainés est-ce possible?",
+        "Terrain de golf"
+      ],
+      "en": [
+        "with respect to the closure of public places where recreation and sports activities are held, what is the situation?",
+        "can I go to a ski resort",
+        "indoor climbing centers",
+        "outdoor centres with service buildings",
+        "resumption of team sports",
+        "when can I start playing soccer again?",
+        "will football be allowed?",
+        "i'm a softball player, can we start the games again?",
+        "indoor recreation facilities",
+        "can I start playing baseball again?",
+        "amusement parks",
+        "indoor aquatic centres",
+        "is it best to avoid all public places?",
+        "sliding centres",
+        "is beach volleyball starting up again?",
+        "is tennis allowed?",
+        "are boat rides allowed?",
+        "can I play doubles tennis if both players on the same side live at the same address?",
+        "i would like to know if there is a limitation in the number of people for outdoor training, yoga, thai chi",
+        "can I take a bike ride?",
+        "bicycle",
+        "bike",
+        "yoga class",
+        "number of people allowed in an outdoor training session?",
+        "can I play golf?",
+        "is access to hotel pools in quebec permitted?",
+        "can we play doubles tennis?",
+        "what sport is allowed?",
+        "can we play soccer?",
+        "outdoor activities",
+        "how many people are allowed to participate in outdoor activities?",
+        "which sports are accepted?",
+        "if I am giving fitness classes outdoors, what is the maximum number of people that can attend?",
+        "for an outdoor tai chi practice with a group of elders is it possible?",
+        "golf area"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Sports, loisirs et culture"
+    ]
+  }
+}

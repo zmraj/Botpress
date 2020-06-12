@@ -1,0 +1,44 @@
+{
+  "id": "zrvgb9",
+  "data": {
+    "answers": {
+      "fr": [
+        "page://Z29jhn1\nEntreprises : trouver une aide financière = page://Z29jhn1"
+      ],
+      "en": [
+        "page://Z29jhn1\nbusinesses: finding financial assistance = page://z29jhn1"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Existe-t-il de l’aide financière pour appuyer les entreprises qui doivent fournir des soins aux animaux de compagnie ou de loisir qu’ils possèdent ou gardent?",
+        "Je suis propriétaire d'un pet shop, est-ce que je suis admissible au PCU ?",
+        "Je suis un vendeur de fleurs ambulatoire, puis-je avoir de l'aide financière ?",
+        "J'ai un commerce dans mon sous-sol, y a-til de l'aide financière pour ça ?",
+        "Y a-t-il des subventions pour les organisateurs d'événement ?",
+        "Aide financière",
+        "Quel est le détail de l'aide financière offerte par le  PACME afin de maintenir les emplois?",
+        "Est-ce que le programme PACME peut-être jumelé avec d'autres aides ?",
+        "Jumeler le programme actions concertées pour le maintien au travail avec d'autres aides financières."
+      ],
+      "en": [
+        "is there financial assistance available to support businesses that need to provide care for pets or recreational animals they own or keep?",
+        "i own a pet shop, do I qualify for the pcu?",
+        "i'm an ambulatory flower salesman, can I get financial help?",
+        "i have a business in my basement, is there any financial help for that?",
+        "are there subsidies for event organizers?",
+        "financial help",
+        "what are the details of the financial assistance offered by the pacme to maintain jobs?",
+        "can the pacme program be combined with other aids?",
+        "twinning the concerted action programme for job retention with other financial assistance."
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": false,
+    "contexts": [
+      "Programmes d'aide et revenues"
+    ]
+  }
+}

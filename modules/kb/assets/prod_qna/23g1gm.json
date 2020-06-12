@@ -1,0 +1,49 @@
+{
+  "id": "23g1gm",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://9LKe8\nLes activités de loisirs et de sports extérieurs = section://Z2fa5vo"
+      ],
+      "en": [
+        "section://9LKe8\noutdoor recreation and sports activities = section://z2fa5vo"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Puis-je aller prendre une marche?",
+        "Je reste à la maison, mais est-ce que je peux prendre une marche pendant la pandémie?",
+        "J'aimerais sortir prendre une marche",
+        "Marcher dans mon quartier",
+        "Les bien faits de prendre des marches",
+        "Si je prend une marche à l'extérieur est-ce que je dois garder une distance de 2 mètres ?",
+        "est-ce que je peux marcher dehors avec ma famille",
+        "c'est OK d'aller prendre l'air avec mes enfants et mon mari dehors?",
+        "Je ne suis pas en isolement est-ce que je peux quand même aller marcher?",
+        "Est-ce que je peux prendre l'air si je n'ai pas de symptômes?",
+        "Est-que je peux prendre une marche si je suis en isolement?",
+        "Est-ce que je peux aller prendre une marche?"
+      ],
+      "en": [
+        "can I go for a walk?",
+        "i'm staying home, but can I take a walk during the pandemic?",
+        "i'd like to go for a walk",
+        "walk in my neighborhood",
+        "the good of taking steps",
+        "if I take a step outside do I have to keep a distance of 2 meters?",
+        "can I walk outside with my family",
+        "is it okay to go outside to get some air with my kids and my husband?",
+        "i'm not in solitary. Can I still go for a walk?",
+        "can I get some fresh air if I don't have any symptoms?",
+        "can I take a walk if I'm in solitary?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Sports, loisirs et culture"
+    ]
+  }
+}

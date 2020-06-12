@@ -1,0 +1,60 @@
+{
+  "id": "z21fsi4__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Oui, car les livraisons de colis sont considérées comme des services prioritaires. Les livreurs ne doivent cependant pas présenter de symptômes de la COVID-19.\nLes colis & livraisons = section://1Gpusi"
+      ],
+      "en": [
+        "Yes, parcel delivery is considered a priority service. However, delivery persons must not have symptoms of COVID-19.\nparcels & deliveries = section://1gpusi"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Services prioritaires de transport et logistique",
+        "Quels sont les services prioritaires de transport et logistique?",
+        "Quels sont les services de transport qui sont prioritaires ?",
+        "Est-ce qu'il y a des services prioritaires de transport ?",
+        "Les services postaux sont toujours actifs?",
+        "Les livraisons de paquets sont toujours en cours?",
+        "Les aéroports sont toujours ouvertes?",
+        "Les commandes livrées par colis sont encore assurées par un bon service?",
+        "Est-ce que les livraisons de colis sont autorisées dans les régions fermées?",
+        "J'habite dans une région à accès limité, est-ce que je peux  avoir une livraison de colis?",
+        "Est ce que je peux recevoir ma commande dans une région restreinte?",
+        "J'ai fait des commandes sur internet et là ma région est fermée, est-ce que je vais recevoir quand même mes colis ?",
+        "Est-ce que je vais pouvoir recevoir mes colis même si ma \nrégion est fermée ?",
+        "Est-ce que la livraison de colis est considérée comme un service essentiel ?",
+        "Ma région est en isolement, est-ce que la livraison des colis fonctionne encore ?",
+        "Pour les livraisons de colis, est-ce que la signature est toujours demandée?",
+        "Est-ce que poste canada peut encore faire la livraison de colis même si la région est fermée ?"
+      ],
+      "en": [
+        "priority transport and logistics services",
+        "what are the priority transport and logistics services?",
+        "which transportation services have priority?",
+        "are there priority transportation services?",
+        "are the postal services still active?",
+        "are the package deliveries still in progress?",
+        "are the airports still open?",
+        "orders delivered by parcel are still assured by a good service?",
+        "are parcel deliveries allowed in closed areas?",
+        "i live in a limited access area, can I get a package delivery?",
+        "can I receive my order in a restricted area?",
+        "i made orders on the internet and now my area is closed, will I still receive my packages?",
+        "will I be able to receive my parcels even if my area is closed?",
+        "is parcel delivery considered an essential service?",
+        "my area is in isolation, does parcel delivery still work?",
+        "for parcel deliveries, is the signature still required?",
+        "can canada post still deliver parcels even if the area is closed?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Transports et déplacements"
+    ]
+  }
+}

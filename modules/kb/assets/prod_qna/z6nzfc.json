@@ -1,0 +1,38 @@
+{
+  "id": "z6nzfc",
+  "data": {
+    "answers": {
+      "fr": [
+        "section://y2cj4\nSéquence d'ouverture des établissements scolaires = page://Z2pFQl5"
+      ],
+      "en": [
+        "section://y2cj4\nschool opening sequence = page://z2pfql5"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Pourquoi ouvrir les écoles primaires et non les écoles secondaires?",
+        "Est-ce que c'est juste les primaires qui ouvrent?",
+        "pourquoi les écoles secondaires restent fermées",
+        "Quelle est la raison pour garder les secondaires fermées?",
+        "C'est quoi l'idée d'ouvrir seulement le primaire?",
+        "pourquoi réouvrir l'école primaire maintenant"
+      ],
+      "en": [
+        "why open primary schools and not secondary schools?",
+        "is it just the primaries opening?",
+        "why high schools remain closed",
+        "what's the reason for keeping the high schools closed?",
+        "what's the idea of only opening the primary?",
+        "why reopen primary school now"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Écoles et éducation"
+    ]
+  }
+}

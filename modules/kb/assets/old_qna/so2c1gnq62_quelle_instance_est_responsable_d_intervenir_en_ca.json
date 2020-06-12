@@ -1,0 +1,34 @@
+{
+  "id": "so2c1gnq62_quelle_instance_est_responsable_d_intervenir_en_ca",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c51889"
+      ],
+      "en": [
+        "source://quebec.ca/c51889"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelle instance est responsable d’intervenir en cas de non-respect des différentes mesures sanitaires imposées par le gouvernement du Québec?",
+        "Qui peut intervenir en cas de non-respect des différentes mesures sanitaires imposées par le gouvernement du Québec?",
+        "Est-ce que les policiers ont l'autorité de délivrer des constats pour les infractions à la Loi sur la santé publique?",
+        "S'il y a non-respect des différentes mesures sanitaires, qui est responsable d'intervenir?"
+      ],
+      "en": [
+        "which authority is responsible for intervening in the event of non-compliance with the various health measures imposed by the quebec government?",
+        "who can intervene in the event of non-compliance with the various health measures imposed by the government of quebec?",
+        "do the police have the authority to issue tickets for violations of the public health act?",
+        "if there is non-compliance with the various health measures, who is responsible for taking action?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Tourisme - loisir - culture - sport"
+    ]
+  }
+}

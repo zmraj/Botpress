@@ -1,0 +1,82 @@
+{
+  "id": "28ubfm__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Quelqu’un peut recevoir chez lui une personne ou un proche qui offre un service essentiel ou prioritaire ou dont le soutien est requis. Toutefois, il convient de faire preuve de prudence et de s’assurer que le service requis ne peut attendre.\nPar exemple, faire venir un plombier pour une réparation urgente est permis. En contrepartie, il est déconseillé, dans le contexte actuel, de faire appel à un plombier pour des tâches qui peuvent attendre, comme le remplacement d’un évier fonctionnel. Cette recommandation s’applique également aux personnes ou aux proches qui viendraient, par exemple, faire du ménage à domicile.\nSi le service ou le soutien requis ne peut attendre, les personnes doivent maintenir, dans la mesure du possible, une distance minimale de deux mètres et appliquer les [consignes sanitaires](https://www.quebec.ca/sante/problemes-de-sante/a-z/informations-generales-sur-le-coronavirus/#c53182) de base.\nEnfin, dans les situations où le service est offert par une personne à des fins commerciales, il convient également de s’assurer qu’il fait partie des [services et activités prioritaires autorisées](https://www.quebec.ca/sante/problemes-de-sante/a-z/coronavirus-2019/reouverture-maintien-activites-economiques-covid-19/).\nEngager pour travaux à domicile = section://1QT8m4"
+      ],
+      "en": [
+        "Tradespeople or loved ones who offer an essential or priority service or whose support is necessary can be admitted to the home. However, it is advisable to display caution and ensure that the service required cannot wait.\nFor example, calling a plumber to make an urgent repair is permitted. On the other hand, it is not recommended in the current context to call a plumber for work that can wait, such as the replacement of a working sink. This recommendation also applies to individuals or loved ones who come to do housekeeping.\nIf the service or support cannot wait, the individuals must maintain, as far as possible, a minimum distance of 2 metres from each other and apply the basic [health recommendations](https://www.quebec.ca/en/health/health-issues/a-z/general-information-about-coronavirus/#c53183).\nLastly, in situations where a service is offered for commercial purposes, it is also advisable to ensure that the service is included in the [authorized priority services and activities](https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/reopening-maintaining-economic-activities-covid-19/).\nhired for work at home = section://1qt8m4"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que je peux engager pour certains travaux à l'intérieur de mon domicile?",
+        "femme de ménage",
+        "Est-ce que ma femme de ménage peut venir chez moi faire l'entretien ménager?",
+        "Je suis femme de ménage, est-ce que je peux recommencer à faire de l'entretien ménager à domicile?",
+        "Femme de ménage à domicile",
+        "Ma femme de ménage peut tu venir faire mon ménage?",
+        "Est-ce qu'une femme de ménage a le droit de travailler dans une maison privée?",
+        "est-ce que je peux engager un laveur de vitres chez moi?",
+        "Est-ce qu'un plombier peut venir à la maison?",
+        "Est-ce que je peux engager un peintre?",
+        "Est-ce qu'un électricien peut venir à mon domicile pour travailler?",
+        "Puis-je avoir un ami à la maison pour aide d'installation?",
+        "Est-ce que les entretiens ménagers peuvent reprendre dans les maisons privées?",
+        "Est-ce que je peux aller installer un air climatisée chez mes parents?",
+        "À quand le retour au travail pour les personnes qui font le ménage dans les maisons privées?",
+        "Est-ce que les services d'entretien ménager résidentiel comme les femmes de ménage sont autorisées à reprendre du service?",
+        "Est-ce que je peux aller faire le ménage chez ma fille une fois aux deux semaines?",
+        "Je fais généralement de l'entretien ménager résidentiel, est-ce que je peux recommencer?",
+        "Les femmes de ménage peuvent-elles recommencer leur ménage si le client n'est pas là?",
+        "Est-il possible d'aller faire le ménage chez ma soeur agée de 71 ans?",
+        "Ai-je le droit de faire le ménage dans les résidences privées si la personne n'est pas là?",
+        "Est-ce que la femme de ménage peut venir à la maison même si elle doit toucher à tout?",
+        "Femme de ménage autonome puis-je recommencer à travailler?",
+        "Je fais du ménage à domicile, est-ce qu'il est possible pour moi de reprendre mes activités?",
+        "Moi et ma mère on fait du ménage 1 fois aux 2 semaines dans une autre maison, on a tu le droit?",
+        "Est-il possible d'aller aider un grand-parent dans sa maison privée qui a reçu un diagnostic de fin de vie?",
+        "Est-ce que je peux rentrer dans une résidence privée je suis une femme de ménage?",
+        "Est-ce que l'entretien ménager résidentiel est permis?"
+      ],
+      "en": [
+        "can I hire for some work inside my home?",
+        "house maid",
+        "can my cleaning lady come to my house to do the housework?",
+        "i'm a housekeeper, can I start doing housework at home again?",
+        "housekeeper",
+        "can you get my cleaning lady to come and do my cleaning?",
+        "is a cleaning lady allowed to work in a private home?",
+        "can I hire a window cleaner in my house?",
+        "can a plumber come to the house?",
+        "can I hire a painter?",
+        "can an electrician come to my home to work?",
+        "can I have a friend over to help me set up?",
+        "can housekeeping be resumed in private homes?",
+        "can I go install an air conditioner at my parents' house?",
+        "when will people who clean private homes be able to return to work?",
+        "are residential housekeeping services such as housekeepers allowed to resume service?",
+        "can I clean my daughter's house once every two weeks?",
+        "i usually do residential housekeeping, can I do it again?",
+        "can the cleaning ladies start their housework again if the client is not there?",
+        "is it possible to clean my 71-year-old sister's house?",
+        "am I allowed to clean private residences if the person is not there?",
+        "can the cleaning lady come to the house even if she has to touch everything?",
+        "can I go back to work as an independent cleaner?",
+        "i'm a home-cleaner, is it possible for me to resume my activities?",
+        "me and my mom clean another house once every two weeks. Can we?",
+        "is it possible to go to a grandparent's private home to help a grandparent who has been diagnosed with an end-of-life diagnosis?",
+        "can I go into a private residence I'm a cleaning lady?",
+        "is residential housekeeping permitted?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Famille et habitation"
+    ]
+  }
+}

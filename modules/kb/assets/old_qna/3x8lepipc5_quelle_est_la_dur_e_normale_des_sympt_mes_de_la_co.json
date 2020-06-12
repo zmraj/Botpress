@@ -1,0 +1,38 @@
+{
+  "id": "3x8lepipc5_quelle_est_la_dur_e_normale_des_sympt_mes_de_la_co",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c52237"
+      ],
+      "en": [
+        "source://quebec.ca/c52237"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelle est la durée normale des symptômes de la COVID-19?",
+        "Combien de temps dure les symptômes de la COVID-19?",
+        "Durée des symptômes de la COVID-19.",
+        "Est-ce que la durée des symptômes du corona varient selon la sévérité de la maladie?",
+        "En général combien de temps peuvent durer les symptômes du COVID-19?",
+        "Les symptômes de la COVID peuvent durer combien de temps?"
+      ],
+      "en": [
+        "what is the normal duration of covid-19 symptoms?",
+        "how long do the symptoms of covid-19 last?",
+        "duration of covid-19 symptoms.",
+        "does the duration of corona symptoms vary according to the severity of the disease?",
+        "how long do the symptoms of covid-19 usually last?",
+        "how long can covid symptoms last?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Prévention - Symptômes - traitements"
+    ]
+  }
+}

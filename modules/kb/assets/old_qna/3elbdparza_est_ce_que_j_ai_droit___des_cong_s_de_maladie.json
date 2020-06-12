@@ -1,0 +1,74 @@
+{
+  "id": "3elbdparza_est_ce_que_j_ai_droit___des_cong_s_de_maladie",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c47133"
+      ],
+      "en": [
+        "source://quebec.ca/c47133"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce que j'ai droit à des congés de maladie?",
+        "Est-ce que je dois prendre des congés pour maladie ?",
+        "Est-ce que je dois mettre mon temps en maladie ?",
+        "Suite à un arrêt maladie, mon boss doit-il me redonner mon travail ?",
+        "Va-t-on avoir des congés maladie ?",
+        "Est-ce que le gouvernement donnera des congés maladie ?",
+        "Est-ce que je peux manquer du travail pour maladie ?",
+        "Si ne travaille pas, dois-je prendre des congés maladie ?",
+        "Est-ce qu'on va me donner des congés maladie ?",
+        "Combien de congé maladie je vais recevoir ?",
+        "Combien de temps puis-je être en congé maladie?",
+        "En cas d'accident ai-je droit aux congés maladie ?",
+        "Quel est la durée maximal d'une absence pour congés maladie?",
+        "Je peux tu prendre congé si je suis malade ?",
+        "Est-ce que mon poste est protégé pendant un congé maladie?",
+        "Je peux tu avoir des congés de maladie ?",
+        "Si je suis malade je peux tu m'absenter ?",
+        "Est-ce qu'on peut avoir des congés de maladie ?",
+        "Faut que tu mon boss me laisse prendre des journées de maladie ?",
+        "Mon boss doit tu me donner des congés de maladie ?",
+        "J'ai le droit à combien de jours de congé ?",
+        "À combien de jours de maladie j'ai le droit ?",
+        "Si je suis malade est-ce que je peux avoir un congé ?",
+        "si j'attrape le virus est-ce que le peux avoir un jour de maladie ?"
+      ],
+      "en": [
+        "am I entitled to sick leave?",
+        "do I have to take sick days?",
+        "do I have to put my time into illness?",
+        "after a sick day, does my boss have to give me my job back?",
+        "are we gonna get sick days?",
+        "will the government give sick leave?",
+        "can I miss work due to illness?",
+        "if I don't work, do I have to take sick days?",
+        "am I gonna get sick days?",
+        "how much sick leave am I gonna get?",
+        "how long can I be on sick leave?",
+        "in the event of an accident am I entitled to sick leave?",
+        "what is the maximum duration of a sick leave absence?",
+        "can I take time off if I'm sick?",
+        "is my position protected during a sick leave?",
+        "can I get you sick days?",
+        "if I'm sick can you take me away?",
+        "can we get sick days?",
+        "do you have to let my boss let me take sick days?",
+        "my boss has to give me sick days?",
+        "how many days off do I get?",
+        "how many sick days am I allowed?",
+        "if I'm sick can I get time off?",
+        "if I get the virus can I get sick one day?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Employeurs - travailleurs - normes du travail"
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "1oaeaw__dynamic",
+  "data": {
+    "answers": {
+      "fr": [
+        "Les personnes qui sont en isolement doivent rester à la maison, surveiller leurs symptômes et appeler au [1 877 644‑4545](tel:+1-877-644-4545) si elles présentent l’un des symptômes suivants :\n*   apparition ou aggravation d’une toux;\n*   [fièvre](https://www.quebec.ca/sante/problemes-de-sante/a-z/informations-generales-sur-le-coronavirus/#c46469);\n*   difficultés respiratoires;\n*   perte soudaine de l’odorat sans congestion nasale, avec ou sans perte de goût.\nCertaines pratiques sont recommandées si elles habitent avec d’autres personnes qui n’ont pas voyagé. Pour plus de détails sur les consignes à suivre, se référer à la section [Consignes d'isolement](https://www.quebec.ca/sante/problemes-de-sante/a-z/informations-generales-sur-le-coronavirus/#c53638).\nLes consignes d’isolement = section://Z2wooYS"
+      ],
+      "en": [
+        "Individuals in voluntary self-isolation must stay at home, monitor their symptoms and call [1‑877‑644‑4545](tel:+1-877-644-4545) if they develop any of the following symptoms:\n*   new or worse cough;\n*   [fever](https://www.quebec.ca/en/health/health-issues/a-z/general-information-about-coronavirus/#c46539);\n*   difficulty breathing;\n*   sudden loss of sense of smell without a stuffy nose, with or without loss of sense of taste.\nCertain practices are recommended if they live with other people who have not travelled. To obtain additional information on the procedures to follow, please refer to the [Self-isolating instructions](https://www.quebec.ca/en/health/health-issues/a-z/general-information-about-coronavirus/#c53639) section.\nisolation instructions = section://z2wooys"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Quelles sont les règles à suivre en isolement ?",
+        "Pourquoi je dois rester en isolement ?",
+        "Pendant combien de temps devrais-je rester en isolation ?",
+        "Comment faire pour être isolé avec les autres membres de ma famille ?",
+        "Je dois m'isoler mais j'ai deux colocs. Comment on arrange ça ?",
+        "Quelles sont les règles à respecter lorsqu'on se place en isolement volontaire ?",
+        "Si je dois me placer en isolement volontaire, quelles sont les règles à respecter?",
+        "Quelles sont les consignes à respecter lorsqu'on se place en isolement volontaire ?",
+        "Que dois-je faire si je dois me placer en isolement volontaire ?",
+        "Quelle sont les règles à suivre pour l'isolement volontaire?",
+        "Quelle est la marche à suivre pour respecter les normes d'isolement volontaire?",
+        "Que dois-je faire en cas d'isolement volontaire?",
+        "Quelle est la procédure à respecter en situation d'isolement volontaire?",
+        "Si je dois me placer en isolement volontaire, que dois-je faire?",
+        "Quelles sont les mesures à respecter pour l'isolement volontaire?",
+        "Je fais quoi pour me mettre en isolement",
+        "C'est quoi l'isolement volontaire?",
+        "Est-ce que l'isolement volontaire est la même chose que la quarantaine?",
+        "Je suis atteint de la covid, est-ce que je peux aller à l'école?",
+        "Dois-je envoyer mon enfant à l'école s'il est atteint de la covid?",
+        "Si j'ai côtoyé une personne atteinte de la covid, est-ce que je dois me mettre en quarantaine?",
+        "Si je suis en contact avec une personne qui revient de voyage asymptomatique, dois-je me placer en quarantaine aussi?",
+        "Je suis covid positive, est-ce que mon conjoint doit arrêter de travailler?"
+      ],
+      "en": [
+        "what are the rules in solitary?",
+        "why do I have to stay in solitary?",
+        "how long should I stay in isolation?",
+        "how can I be isolated with other members of my family?",
+        "i have to isolate myself, but I have two roommates. How do we fix this?",
+        "what are the rules to follow when you place yourself in voluntary isolation?",
+        "if I have to place myself in voluntary isolation, what are the rules?",
+        "what are the instructions to be followed when one is placed in voluntary isolation?",
+        "what should I do if I have to go to voluntary isolation?",
+        "what are the rules for voluntary isolation?",
+        "what is the process for meeting the standards for voluntary segregation?",
+        "what should i do if i am in voluntary isolation?",
+        "what is the procedure for voluntary isolation?",
+        "if I have to place myself in voluntary isolation, what should I do?",
+        "what are the measures for voluntary segregation?",
+        "what do I do to get myself into solitary",
+        "what's voluntary isolation?",
+        "is voluntary isolation the same as quarantine?",
+        "i have covid, can I go to school?",
+        "should i send my child to school if he has covid?",
+        "if I've been around someone with covid, do I have to quarantine myself?",
+        "if I am in contact with someone who returns from an asymptomatic trip, do I have to quarantine myself as well?",
+        "i am covid positive, does my spouse have to stop working?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Consignes d’isolement, symptômes et traitements"
+    ]
+  }
+}

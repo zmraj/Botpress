@@ -1,0 +1,36 @@
+{
+  "id": "phfc9fcqhp_est_ce_normal_que_je_n_ai_pas_re_u_le_formulaire_d",
+  "data": {
+    "answers": {
+      "fr": [
+        "source://quebec.ca/c49295"
+      ],
+      "en": [
+        "source://quebec.ca/c49295"
+      ]
+    },
+    "questions": {
+      "fr": [
+        "Est-ce normal que je n'ai pas reçu le formulaire du Programme d’aide temporaire aux travailleurs, je suis inscrit?",
+        "Ça prend combien de temps pour avoir le formulaire du Programme d’aide temporaire aux travailleurs?",
+        "Ça va prendre combien temps avant de recevoir le courriel pour le PATT COVID-19?",
+        "Je n'ai pas reçu de formulaire, malgré mon inscription au Programme d’aide temporaire aux travailleurs, est-ce normal?",
+        "Est-ce que le formulaire PATT COVID-19 est disponible en ligne ?"
+      ],
+      "en": [
+        "is it normal that I did not receive the Temporary Help Worker Program form, am I registered?",
+        "How long does it take to get the form for the temporary help worker program?",
+        "how long will it take to get the e-mail for patt covid-19?",
+        "i didn't receive a form, even though I was registered in the Temporary Help Worker Program, is this normal?",
+        "is the patt covid-19 form available online?"
+      ]
+    },
+    "redirectFlow": "",
+    "redirectNode": "",
+    "action": "text",
+    "enabled": true,
+    "contexts": [
+      "Programmes d'aide"
+    ]
+  }
+}
