@@ -19,7 +19,11 @@ class OnnxConverterArgumentParser(ArgumentParser):
         self.add_argument("--model",
                           type=str,
                           required=True,
-                          help="Model's id or path (ex: bert-base-cased)")
+                          help="Model's id or path (ex: bert-base-cased)"),
+        self.add_argument("--tokenizer_path",
+                          type=str,
+                          required=True,
+                          help="Tokenizer path to save")
         self.add_argument("--tokenizer",
                           type=str,
                           help="Tokenizer's id or path (ex: bert-base-cased)")
@@ -53,8 +57,8 @@ def ensure_valid_input(model, tokens, input_names):
 
     ordered_input_names = []
     model_args = []
-    for arg_name in model_args_name[
-            1:]:  # start at index 1 to skip "self" argument
+    # start at index 1 to skip "self" argument
+    for arg_name in model_args_name[1:]:
         if arg_name in input_names:
             ordered_input_names.append(arg_name)
             model_args.append(tokens[arg_name])
@@ -97,6 +101,13 @@ def infer_shapes(
 
     tokens = nlp.tokenizer.encode_plus("This is a sample output",
                                        return_tensors=framework)
+    tokens.pop("head_mask", None)
+    tokens.pop("inputs_embeds", None)
+    tokens.pop("output_attentions", None)
+    tokens.pop("token_type_ids", None)
+    tokens.pop("position_ids", None)
+    tokens.pop("encoder_hidden_states", None)
+    tokens.pop("encoder_attention_mask", None)
     seq_len = tokens.input_ids.shape[-1]
     outputs = nlp.model(**tokens) if framework == "pt" else nlp.model(tokens)
 
@@ -214,14 +225,17 @@ def convert(
     model: str,
     output: str,
     opset: int,
-    tokenizer: Optional[str] = None,
+    tokenizer_path: str,
+    tok: Optional[str] = None,
     use_external_format: bool = False,
 ):
     print("ONNX opset version set to: {}".format(opset))
 
     # Load the pipeline
-    nlp = load_graph_from_args(framework, model, tokenizer)
-
+    nlp = load_graph_from_args(framework, model, tok)
+    if not exists(tokenizer_path):
+        makedirs(tokenizer_path)
+    nlp.tokenizer.save_pretrained(tokenizer_path)
     parent = dirname(output)
     if not exists(parent):
         print("Creating folder {}".format(parent))
@@ -262,7 +276,7 @@ if __name__ == "__main__":
     try:
         # Convert
         convert(args.framework, args.model, args.output, args.opset,
-                args.tokenizer, args.use_external_format)
+                args.tokenizer_path, args.tokenizer, args.use_external_format)
 
         # And verify
         if args.check_loading:

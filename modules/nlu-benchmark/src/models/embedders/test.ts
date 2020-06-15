@@ -1,5 +1,4 @@
 const ort = require('onnxruntime')
-import { getAppDataPath } from 'common/utils'
 import fs from 'fs'
 import { mean, reshape } from 'mathjs'
 import path from 'path'
@@ -19,8 +18,10 @@ export class DeepEmbedder {
   embedder
   constructor(model_name: string) {
     console.log(model_name)
-    const model_folder = path.join(getAppDataPath(), 'cache', 'deep_models', 'embedders', 'onnx', model_name)
-    const tokenizer_folder = path.join(getAppDataPath(), 'cache', 'deep_models', 'tokenizers', model_name)
+    const model_folder = '/home/pedro/botpress/cache/deep_models/embedders/onnx/distilbert-base-multilingual-cased'
+    const tokenizer_folder = path.join(
+      '/home/pedro/botpress/cache/deep_models/tokenizers/onnx/distilbert-base-multilingual-cased'
+    )
     this.embedder_onnx_file = path.join(model_folder, `${model_name}.onnx`)
     this.tokenizer_vocab_file = path.join(tokenizer_folder, 'vocab.txt')
   }

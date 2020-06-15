@@ -789,21 +789,37 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var style_scss_1 = __importDefault(__webpack_require__(/*! ./style.scss */ "./src/views/full/style.scss"));
 var Modeltable = function (props) {
     var _a = react_1.useState([]), models = _a[0], setModels = _a[1];
-    var _b = react_1.useState(''), new_model_input = _b[0], setNewModelInput = _b[1];
-    var _c = react_1.useState({ embeddings: [], qa: [], intents: [] }), checked = _c[0], setChecked = _c[1];
+    var _b = react_1.useState({ embeddings: [], qa: [], intents: [] }), datasets = _b[0], setDatasets = _b[1];
+    var _c = react_1.useState(''), new_model_input = _c[0], setNewModelInput = _c[1];
+    var _d = react_1.useState(''), importReturn = _d[0], setimportReturn = _d[1];
+    var _e = react_1.useState({}), res = _e[0], setRes = _e[1];
+    var _f = react_1.useState({ embeddings: [], qa: [], intents: [] }), checked = _f[0], setChecked = _f[1];
     var runTests = function () { return __awaiter(void 0, void 0, void 0, function () {
+        var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    console.log(checked);
-                    return [4 /*yield*/, props.bp.axios.post('/mod/nlu-benchmark/runTests', { checked: checked })];
+                case 0: return [4 /*yield*/, props.bp.axios.post('/mod/nlu-benchmark/runTests', { checked: checked })];
                 case 1:
-                    _a.sent();
+                    data = (_a.sent()).data;
+                    console.log(data);
+                    setRes(data);
                     return [2 /*return*/];
             }
         });
     }); };
-    var fetchModel = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var fetchDatasets = function () { return __awaiter(void 0, void 0, void 0, function () {
+        var data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, props.bp.axios.get('/mod/nlu-benchmark/datasetsName')];
+                case 1:
+                    data = (_a.sent()).data;
+                    setDatasets(data);
+                    return [2 /*return*/];
+            }
+        });
+    }); };
+    var fetchModels = function () { return __awaiter(void 0, void 0, void 0, function () {
         var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -819,9 +835,10 @@ var Modeltable = function (props) {
         var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, props.bp.axios.get('/mod/nlu-benchmark/importOnnxModels', { new_model_input: new_model_input })];
+                case 0: return [4 /*yield*/, props.bp.axios.post('/mod/nlu-benchmark/importTfModels', { new_model_input: new_model_input })];
                 case 1:
                     data = (_a.sent()).data;
+                    setimportReturn(data);
                     return [2 /*return*/];
             }
         });
@@ -830,15 +847,18 @@ var Modeltable = function (props) {
         var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, props.bp.axios.get('/mod/nlu-benchmark/importTfSavedmodel', { new_model_input: new_model_input })];
+                case 0: return [4 /*yield*/, props.bp.axios.post('/mod/nlu-benchmark/importOnnxModels', { new_model_input: new_model_input })];
                 case 1:
                     data = (_a.sent()).data;
+                    console.log(data);
+                    setimportReturn(data);
                     return [2 /*return*/];
             }
         });
     }); };
     react_1.useEffect(function () {
-        fetchModel().catch(function (e) { return console.log(e); });
+        fetchModels().catch(function (e) { return console.log(e); });
+        fetchDatasets().catch(function (e) { return console.log(e); });
     }, []);
     var changeCheckedState = function (event) {
         var updatedChecked = __assign({}, checked);
@@ -887,8 +907,38 @@ var Modeltable = function (props) {
                         setNewModelInput(event.target.value);
                     } }),
                 react_1.default.createElement("button", { onClick: importNewOnnxModel }, "Import new Onnx model"),
-                react_1.default.createElement("button", { onClick: importNewTfModel }, "Import new TF model")))));
+                react_1.default.createElement("button", { onClick: importNewTfModel }, "Import new TF model")),
+            react_1.default.createElement("div", null, importReturn),
+            react_1.default.createElement("div", null, Object.entries(res).map(function (_a, idx) {
+                var type = _a[0], data = _a[1];
+                return (react_1.default.createElement("div", { key: idx },
+                    react_1.default.createElement("h1", { key: type }, type),
+                    react_1.default.createElement("table", null,
+                        react_1.default.createElement("tbody", null,
+                            react_1.default.createElement("tr", null,
+                                react_1.default.createElement("td", null, "Models"),
+                                data.models.map(function (model_name) {
+                                    return react_1.default.createElement("td", { key: model_name }, model_name);
+                                })),
+                            Object.entries(data.data).map(function (_a, index) {
+                                var mot = _a[0], values = _a[1];
+                                return (react_1.default.createElement("tr", null,
+                                    react_1.default.createElement("td", null, mot),
+                                    values.map(function (e) {
+                                        return react_1.default.createElement("td", null, e);
+                                    })));
+                            })))));
+            })))));
 };
+// {for(){}}
+// {data.map((d, i) => {
+//   return (
+//     <p key={d}>
+//       {d[0]}&nbsp;&nbsp;&nbsp;&nbsp;
+//       {d[1]}
+//     </p>
+//   )
+// })}
 // export default Modeltable
 // class Modeltable extends React.Component {
 //   state = { model: [] }

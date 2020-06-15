@@ -8,7 +8,14 @@ import style from './style.scss'
 
 const Modeltable = props => {
   const [models, setModels] = useState([])
+  const [datasets, setDatasets] = useState({ embeddings: [], qa: [], intents: [] } as {
+    embeddings: string[]
+    qa: string[]
+    intents: string[]
+  })
   const [new_model_input, setNewModelInput] = useState('')
+  const [importReturn, setimportReturn] = useState('')
+  const [res, setRes] = useState({})
   const [checked, setChecked] = useState({ embeddings: [], qa: [], intents: [] } as {
     embeddings: string[]
     qa: string[]
@@ -16,24 +23,33 @@ const Modeltable = props => {
   })
 
   const runTests = async () => {
-    console.log(checked)
-    await props.bp.axios.post('/mod/nlu-benchmark/runTests', { checked })
+    const { data } = await props.bp.axios.post('/mod/nlu-benchmark/runTests', { checked })
+    console.log(data)
+    setRes(data)
   }
 
-  const fetchModel = async () => {
+  const fetchDatasets = async () => {
+    const { data } = await props.bp.axios.get('/mod/nlu-benchmark/datasetsName')
+    setDatasets(data)
+  }
+  const fetchModels = async () => {
     const { data } = await props.bp.axios.get('/mod/nlu-benchmark/modelsName')
     setModels(data)
   }
 
   const importNewTfModel = async () => {
-    const { data } = await props.bp.axios.get('/mod/nlu-benchmark/importOnnxModels', { new_model_input })
+    const { data } = await props.bp.axios.post('/mod/nlu-benchmark/importTfModels', { new_model_input })
+    setimportReturn(data)
   }
   const importNewOnnxModel = async () => {
-    const { data } = await props.bp.axios.get('/mod/nlu-benchmark/importTfSavedmodel', { new_model_input })
+    const { data } = await props.bp.axios.post('/mod/nlu-benchmark/importOnnxModels', { new_model_input })
+    console.log(data)
+    setimportReturn(data)
   }
 
   useEffect(() => {
-    fetchModel().catch(e => console.log(e))
+    fetchModels().catch(e => console.log(e))
+    fetchDatasets().catch(e => console.log(e))
   }, [])
 
   const changeCheckedState = (event: React.FormEvent<HTMLInputElement>) => {
@@ -129,10 +145,49 @@ const Modeltable = props => {
           <button onClick={importNewOnnxModel}>Import new Onnx model</button>
           <button onClick={importNewTfModel}>Import new TF model</button>
         </div>
+        <div>{importReturn}</div>
+        <div>
+          {Object.entries(res).map(([type, data]: [string, { models: string[]; data: { string: string[] } }], idx) => {
+            return (
+              <div key={idx}>
+                <h1 key={type}>{type}</h1>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Models</td>
+                      {data.models.map(model_name => {
+                        return <td key={model_name}>{model_name}</td>
+                      })}
+                    </tr>
+                    {Object.entries(data.data).map(([mot, values], index) => {
+                      return (
+                        <tr>
+                          <td>{mot}</td>
+                          {values.map(e => {
+                            return <td>{e}</td>
+                          })}
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </Container>
   )
 }
+// {for(){}}
+// {data.map((d, i) => {
+//   return (
+//     <p key={d}>
+//       {d[0]}&nbsp;&nbsp;&nbsp;&nbsp;
+//       {d[1]}
+//     </p>
+//   )
+// })}
 
 // export default Modeltable
 
@@ -169,5 +224,4 @@ const Modeltable = props => {
 //     )
 //   }
 // }
-
 export default Modeltable
