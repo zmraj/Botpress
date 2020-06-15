@@ -12,9 +12,15 @@ for entry in feedback_list:
     if ((entry["bot_message"][:32] != "Vous trouverez de l'information ") and
         (entry["bot_message"] !=
          "Désolé. Je ne suis pas un robot de conversation. Mon rôle est de répondre le plus efficacement possible à vos questions sur la COVID-19."
+         ) and
+        (entry["bot_message"] !=
+         "Bonjour. Je suis votre assistant virtuel. Bien que je ne sois pas humain, je peux répondre à certaines de vos questions sur la COVID-19. Je suis présentement en apprentissage. Je n’ai pas encore de réponses à toutes les questions. Je suis meilleur si on me pose une seule question à la fois et que la question est courte. Merci de votre compréhension. [Plus d'information sur l'assistant virtuel](https://www.quebec.ca/a-propos/intelligence-artificielle/)."
          ) and (entry["bot_message"] != "De rien")
+            and (entry["bot_message"] != "Au revoir")
+            and (entry["bot_message"] != "Goodbye")
+            and (entry["bot_message"] != "Merci")
+            and (entry["bot_message"] != "Thanks")
             and (entry["bot_message"][0] != "#")
-            and (len(entry["nlu_name"].split("_")) == 5)
             and (entry["bot_message"] != "N/A")):
         clean_feedback.append(entry)
 
@@ -71,5 +77,5 @@ for entry in clean_feedback:
                         False
                     })
 
-with open("./datas/latest-clean_feedback_fr.json", "w+") as file:
+with open("./datas/latest_clean_feedback_fr.json", "w+") as file:
     json.dump(kb_content, file, indent=2, ensure_ascii=False)

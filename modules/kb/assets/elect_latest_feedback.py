@@ -25,21 +25,23 @@ for entry in feedback:
             minus_ones.append(dic)
         if fb["polarity"] == 0:
             neutrals.append(dic)
-
-choosen_minus_ones = np.random.choice(minus_ones,
-                                      len(plus_ones),
+print(len(plus_ones))
+choosen_plus_ones = np.random.choice(plus_ones, 500 // 3,
+                                     replace=False).tolist()
+choosen_minus_ones = np.random.choice(minus_ones, 500 // 3,
                                       replace=False).tolist()
 
 choosen_neutral_ones = np.random.choice(
-    neutrals, 500 - (len(plus_ones) + len(choosen_minus_ones)),
+    neutrals,
+    500 - (len(choosen_plus_ones) + len(choosen_minus_ones)),
     replace=False).tolist()
 
-questions_feedback = plus_ones + choosen_minus_ones + choosen_neutral_ones
+questions_feedback = choosen_plus_ones + choosen_minus_ones + choosen_neutral_ones
 with open("./datas/latest_feedback_500.csv", "w") as file:
     writer = csv.writer(file)
     writer.writerow(["Question", "Bot"])
     for entry in questions_feedback:
-        print(entry["bot_message"])
+        # print(entry["bot_message"])
         writer.writerow([
             entry["polarity"], entry["utterance"].replace("\n", " "),
             entry["bot_message"].replace("\n", " ")
