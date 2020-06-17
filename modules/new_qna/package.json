@@ -1,0 +1,29 @@
+{
+  "name": "new_qna",
+  "fullName": "Qna content based",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "Allow to search in content to find the good answer associated to a question",
+  "private": true,
+  "main": "dist/backend/index.js",
+  "scripts": {
+    "build": "node ../../build/module-builder/bin/entry build",
+    "watch": "node ../../build/module-builder/bin/entry watch",
+    "package": "node ../../build/module-builder/bin/entry package",
+    "postinstall": "./node_modules/.bin/rimraf **/bmp-stuff.png"
+  },
+  "author": "Botpress, Inc.",
+  "license": "AGPL-3.0-only",
+  "devDependencies": {},
+  "dependencies": {
+    "@blueprintjs/core": "^3.28.2",
+    "@tensorflow/tfjs-node": "^2.0.1",
+    "@types/node": "^14.0.13",
+    "mathjs": "^7.0.1",
+    "natural": "^2.1.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "tokenizers": "^0.6.2"
+  },
+  "resolutions": {}
+}

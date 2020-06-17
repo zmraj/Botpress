@@ -4,16 +4,19 @@
     {
       "type": "node",
       "runtimeVersion": "10.11.0",
+      // "port": 9229,
       "request": "launch",
       "name": "Debug App",
       "program": "${workspaceFolder}/out/bp/index.js",
-      "cwd": "${workspaceFolder}",
-      "args": ["start"],
-      "protocol": "auto",
+      "autoAttachChildProcesses": true,
+      // "cwd": "${workspaceFolder}",
+      // "args": ["--no-lazy", "--inspect-brk=9229", "start"],
+      // "args": ["--no-lazy", "--inspect-brk=9229", "start"],
+      // "protocol": "inspector",
       "env": {
         "BP_MODULES_PATH": "${workspaceFolder}/modules:${workspaceFolder}/internal-modules",
         "NODE_PATH": "${workspaceFolder}/out/bp",
-        "DEBUG": "*",
+        "DEBUG": "bp:none",
         "BLUEBIRD_DEBUG": "1"
       },
       "smartStep": true,
@@ -23,10 +26,15 @@
         "${workspaceFolder}/private-modules/*/dist",
         "!${workspaceFolder}/**/node_modules"
       ],
-      "console": "integratedTerminal",
-      "sourceMaps": true,
-      "autoAttachChildProcesses": true
+      // "console": "integratedTerminal",
+      "sourceMaps": true
     },
+    // {
+    //   "name": "Attach to Process",
+    //   "type": "node",
+    //   "request": "attach",
+    //   "processId": "${command:PickProcess}"
+    // },
     {
       "type": "node",
       "request": "launch",
