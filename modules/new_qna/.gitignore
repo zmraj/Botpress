@@ -1,0 +1,10 @@
+/bin
+/node_modules
+/node_production_modules
+/dist
+/assets/web/
+/assets/config.schema.json
+botpress.d.ts
+global.d.ts
+onnx_models/embedders
+onnx_models/tokenizers
