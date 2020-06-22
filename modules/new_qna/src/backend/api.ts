@@ -5,10 +5,9 @@ import path from 'path'
 import rimraf from 'rimraf'
 
 import { rerank } from './reranker'
-import { electClosestQuestions, inferQuestion } from './retriever'
-import { runTests } from './tests'
+import { electClosestQuestions, inferQuestion, runTests } from './retriever'
 
-export default async (bp: typeof sdk, embedder, content) => {
+export default async (bp: typeof sdk, state) => {
   const router = bp.http.createRouterForBot('new_qna')
   const importOnnxModels = async (model_name: string) => {
     console.log('Loading model', model_name)
@@ -33,7 +32,7 @@ export default async (bp: typeof sdk, embedder, content) => {
   }
 
   router.post('/inferQuestion', async (req, res) => {
-    res.send(await inferQuestion(req.body.question, content, embedder))
+    res.send(await inferQuestion(req.body.question, state))
   })
 
   router.post('/importOnnxModels', async (req, res) => {
@@ -41,10 +40,10 @@ export default async (bp: typeof sdk, embedder, content) => {
   })
 
   router.get('/runTests', async (req, res) => {
-    res.send(await runTests(content, embedder))
+    res.send(await runTests(state))
   })
 
   router.post('/electClosestQuestions', async (req, res) => {
-    res.send(await electClosestQuestions(req.body.question, content, embedder))
+    res.send(await electClosestQuestions(req.body.question, state))
   })
 }

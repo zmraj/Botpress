@@ -4,7 +4,9 @@ import fs from 'fs'
 import _ from 'lodash'
 import path from 'path'
 
-import { DeepEmbedder } from './embedder'
+import { qnas } from '../../datas/raw/qna.json'
+
+import { DeepEmbedder, PythonEmbedder } from './embedder'
 import { rerank } from './reranker'
 import { feedback, kb_entry } from './typings'
 
@@ -13,17 +15,18 @@ export const regex_url_covid: RegExp = /\[[A-zÀ-ú\!\?\s\’]+\]\([A-zÀ-ú\!\?
 export const regex_url: RegExp = /(((http|ftp|https):\/\/)|(www\.))([\wàâçéèêëîïôûùüÿñæœ.,@?^=%&:\\\/~+#-]*[\w@?^=%&\/~+#-])?/g
 export const regex_section_covid: RegExp = /section:\/\/[a-zA-z0-9][^\\"\'\n]+/g
 export function hash_str(str: string): string {
+  // console.log(str)
   return crypto
     .createHash('md5')
     .update(str)
     .digest('hex')
 }
 
-export async function preprocess_qna(embedder: DeepEmbedder, kb_content) {
+export async function preprocess_qna(embedder: DeepEmbedder | PythonEmbedder) {
   // TODO : Change loading covid files by getting Q&A files from bp ghost
   const qna = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'datas', 'raw', 'qna.json'), 'utf-8'))
   const content = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'datas', 'raw', 'content.json'), 'utf-8'))
-
+  const kb_content = []
   for (const entry of qna.qnas) {
     if (entry.id.includes('_')) {
       continue
@@ -51,7 +54,7 @@ export async function preprocess_qna(embedder: DeepEmbedder, kb_content) {
                 orig: hash_str(content[source]['content_fr']),
                 content: chunked_content[i],
                 embedding: contents_embed[i],
-                contexts: entry['contexts'],
+                contexts: entry.data.contexts,
                 feedbacks: feedback
               })
             }
@@ -65,6 +68,7 @@ export async function preprocess_qna(embedder: DeepEmbedder, kb_content) {
     fs.mkdirSync(path.join(__dirname, '..', '..', 'datas', 'embedded', embedder.model_name), { recursive: true })
   }
   fs.writeFileSync(path.join(__dirname, '..', '..', 'datas', 'embedded', embedder.model_name, 'qna.json'), data)
+  return kb_content
 }
 
 function chunk_content(entry: string): string[] {
@@ -95,3 +99,20 @@ function chunk_content(entry: string): string[] {
   }
   return chunked_content
 }
+
+export function extract_question_context() {
+  const question_context: [string, string][] = []
+  for (const entry of qnas) {
+    if (entry.id.includes('_')) {
+      continue
+    }
+    const ctx = entry.data.contexts[0]
+    for (const q of entry.data.questions.fr) {
+      question_context.push([q, ctx])
+    }
+  }
+  const data = JSON.stringify(question_context)
+  fs.writeFileSync(path.join(__dirname, '..', '..', 'datas', 'questions_context.json'), data)
+}
+
+export async function extract_question_result_gouv() {}

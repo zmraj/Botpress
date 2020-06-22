@@ -2,11 +2,12 @@ import fs from 'fs'
 import { add, divide, multiply, norm, subtract } from 'mathjs'
 import path from 'path'
 
-import { DeepEmbedder } from './embedder'
+import { DeepEmbedder, PythonEmbedder } from './embedder'
 import { hash_str } from './tools'
 import { kb_entry } from './typings'
-export async function rerank(content: kb_entry[], embedder: DeepEmbedder) {
-  for (const entry of content) {
+export async function rerank(content: kb_entry[], embedder: DeepEmbedder | PythonEmbedder) {
+  const reranked = [...content]
+  for (const entry of reranked) {
     for (const question of entry.feedbacks.filter(x => x.polarity)) {
       if (!question.reranked) {
         const question_emb = await embedder.embed(question.utterance)
@@ -24,4 +25,5 @@ export async function rerank(content: kb_entry[], embedder: DeepEmbedder) {
     path.join(__dirname, '..', '..', 'datas', 'embedded', embedder.model_name, 'qna_reranked.json'),
     data
   )
+  return reranked
 }

@@ -8,9 +8,10 @@ import en from '../translations/en.json'
 import fr from '../translations/fr.json'
 
 import api from './api'
-import { DeepEmbedder } from './embedder'
+import { Contextizer } from './contextizers'
+import { DeepEmbedder, PythonEmbedder } from './embedder'
 import { rerank } from './reranker'
-import { preprocess_qna } from './tools'
+import { extract_question_context, preprocess_qna } from './tools'
 import { kb_entry } from './typings'
 
 const embedder_name = 'DeepPavlov_bert-base-multilingual-cased-sentence'
@@ -18,8 +19,14 @@ const embedder_name = 'DeepPavlov_bert-base-multilingual-cased-sentence'
 // const embedder_name = 'fmikaelian_flaubert-base-uncased-squad'
 
 // const embedder_name = 'distilbert-base-multilingual-cased'
-let kb_content: kb_entry[] = []
-const embedder = new DeepEmbedder(embedder_name)
+const embedder = new PythonEmbedder()
+const state: {
+  content: kb_entry[]
+  reranked_content: kb_entry[]
+  embedder: DeepEmbedder | PythonEmbedder
+  contextizer: Contextizer
+} = { content: [], reranked_content: [], embedder, contextizer: undefined }
+// const embedder = new DeepEmbedder(embedder_name)
 // const qa_pipeline = new QaPipeline('')
 
 const onServerStarted = async (bp_sdk: typeof sdk) => {
@@ -29,33 +36,39 @@ const onServerStarted = async (bp_sdk: typeof sdk) => {
 }
 
 const onServerReady = async (bp_sdk: typeof sdk) => {
-  await api(bp_sdk, embedder, kb_content)
+  await api(bp_sdk, state)
 }
 
 const onBotMount = async (bp_sdk: typeof sdk) => {
-  await embedder.load()
+  await state.embedder.load()
   const qna_rerank_path = path.join(
     __dirname,
     '..',
     '..',
     'datas',
     'embedded',
-    embedder.model_name,
+    state.embedder.model_name,
     'qna_reranked.json'
   )
-  const qna_path = path.join(__dirname, '..', '..', 'datas', 'embedded', embedder.model_name, 'qna.json')
+  const qna_path = path.join(__dirname, '..', '..', 'datas', 'embedded', state.embedder.model_name, 'qna.json')
+  if (!(await fse.pathExists(path.join(__dirname, '..', '..', 'datas', 'questions_context.json')))) {
+    console.log('Extracting question / context')
+    extract_question_context()
+  }
+  state.contextizer = new Contextizer(state.embedder, bp_sdk)
+  await state.contextizer.load()
   if (await fse.pathExists(qna_rerank_path)) {
     console.log('Rerank found')
-    kb_content = await fse.readJSON(qna_rerank_path)
+    state.reranked_content = await fse.readJSON(qna_rerank_path)
   } else if (await fse.pathExists(qna_path)) {
     console.log('No rerank')
-    kb_content = await fse.readJSON(qna_path)
-    await rerank(kb_content, embedder)
+    state.content = await fse.readJSON(qna_path)
+    state.reranked_content = await rerank(state.content, state.embedder)
   } else {
     console.log('No data')
-    await preprocess_qna(embedder, kb_content)
+    state.content = await preprocess_qna(state.embedder)
     console.log('PREprocessed datas !')
-    await rerank(kb_content, embedder)
+    state.reranked_content = await rerank(state.content, state.embedder)
     console.log('reranked datas')
   }
 }

@@ -1,4 +1,5 @@
 const ort = require('onnxruntime')
+import axios from 'axios'
 import { getAppDataPath } from 'common/utils'
 import fs from 'fs'
 import fse from 'fs-extra'
@@ -111,6 +112,65 @@ export class DeepEmbedder {
       }
       this.cache.set(cache_key, sentence_embed)
       return sentence_embed
+    }
+  }
+}
+
+export class PythonEmbedder {
+  cache_path: string
+  cache: lru<string, Float32Array>
+  model_name: string
+  embedder: typeof ort.InferenceSession
+
+  constructor() {
+    this.model_name = 'PythonEmbedder'
+    this.cache_path = path.join(
+      __dirname,
+      '..',
+      '..',
+      'onnx_models',
+      'embedders',
+      this.model_name,
+      'embedder_cache.json'
+    )
+  }
+
+  async load() {
+    if (await fse.pathExists(this.cache_path)) {
+      const dump = await fse.readJSON(this.cache_path)
+      if (dump) {
+        const kve = dump.map(x => ({ e: x.e, k: x.k, v: Float32Array.from(Object.values(x.v)) }))
+        this.cache.load(kve)
+      }
+    } else {
+      this.cache = new lru<string, Float32Array>({
+        length: (arr: Float32Array) => {
+          if (arr && arr.BYTES_PER_ELEMENT) {
+            return arr.length * arr.BYTES_PER_ELEMENT
+          } else {
+            return 768 /* dim */ * Float32Array.BYTES_PER_ELEMENT
+          }
+        },
+        max: 768 /* dim */ * Float32Array.BYTES_PER_ELEMENT /* bytes */ * 10000000 /* 10M sentences */
+      })
+    }
+  }
+
+  async save() {
+    await fse.ensureFile(this.cache_path)
+    await fse.writeJSON(this.cache_path, this.cache.dump())
+  }
+
+  async embed(sentence: string): Promise<number[]> {
+    // console.log('FLKSDFLK : ', sentence)
+    const cache_key = hash_str(sentence)
+    if (this.cache.has(cache_key)) {
+      return Array.from(this.cache.get(cache_key).values())
+    } else {
+      const { data } = await axios.post('http://localhost:8000/embeddings', { documents: [sentence] })
+      const embedding: number[] = data.data[0]
+      this.cache.set(cache_key, Float32Array.from(embedding))
+      return embedding
     }
   }
 }

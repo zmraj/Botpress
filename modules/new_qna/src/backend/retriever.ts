@@ -3,6 +3,7 @@ import { func } from 'joi'
 import { similarity } from 'ml-distance'
 import path from 'path'
 
+import { questions } from './questions'
 import { feedback, kb_entry } from './typings'
 
 async function compute_confidence(chunk: kb_entry, question_emb: number[], embedder) {
@@ -18,38 +19,48 @@ async function compute_confidence(chunk: kb_entry, question_emb: number[], embed
   return score_chunk + score_questions
 }
 
-export async function inferQuestion(question, content, embedder) {
-  if (!content.length) {
+export async function inferQuestion(question, state) {
+  if (!state.content.length) {
     console.log('Content not found : Loading content')
-    content = await fse.readJSON(path.join(__dirname, '..', '..', 'datas', 'embedded', embedder.model_name, 'qna.json'))
+    state.content = await fse.readJSON(
+      path.join(__dirname, '..', '..', 'datas', 'embedded', state.embedder.model_name, 'qna.json')
+    )
   }
-  const question_emb = await embedder.embed(question)
+  const question_emb = await state.embedder.embed(question)
+  const ctx = await state.contextizer.predict(question_emb)
   const scored_content = []
-  for (const c of content) {
-    const confidence = await compute_confidence(c, question_emb, embedder)
+  for (const c of state.content) {
+    // if (c.contexts.includes(ctx)) {
+    const confidence = await compute_confidence(c, question_emb, state.embedder)
     scored_content.push(Object.assign(c, { confidence }))
+    // }
   }
   const top = scored_content
     .sort(function(a, b) {
       return a.confidence - b.confidence
     })
     .slice(-3)
+  if (!top.length) {
+    console.log(top, ctx, question)
+  }
   return top
 }
 
-export async function electClosestQuestions(question, content, embedder) {
-  if (!content.length) {
-    console.log('Content not found : Loading content')
-    content = await fse.readJSON(path.join(__dirname, '..', '..', 'datas', 'embedded', embedder.model_name, 'qna.json'))
-  }
+export async function electClosestQuestions(question, state) {
+  // if (!state.content.length) {
+  //   console.log('Content not found : Loading content')
+  //   state.content = await fse.readJSON(
+  //     path.join(__dirname, '..', '..', 'datas', 'embedded', state.embedder.model_name, 'qna.json')
+  //   )
+  // }
   console.log(question)
-  const question_emb = await embedder.embed(question)
+  const question_emb = await state.embedder.embed(question)
   const scored_questions = []
   const q_done = []
-  for (const c of content) {
+  for (const c of state.content) {
     for (const q of c.feedbacks) {
       if (!q_done.includes(q.utterance)) {
-        const q_emb = await embedder.embed(q.utterance)
+        const q_emb = await state.embedder.embed(q.utterance)
         scored_questions.push({ utterance: q.utterance, confidence: similarity.cosine(question_emb, q_emb) })
         q_done.push(q.utterance)
       }
@@ -63,4 +74,26 @@ export async function electClosestQuestions(question, content, embedder) {
   console.log(scored_questions.slice(0, 10))
   console.log(scored_questions.slice(-10))
   return top
+}
+
+export async function runTests(state) {
+  const results = []
+  // if (!state.content.length) {
+  //   console.log('Content not found : Loading content')
+  //   state.content = await fse.readJSON(
+  //     path.join(__dirname, '..', '..', 'datas', 'embedded', state.embedder.model_name, 'qna.json')
+  //   )
+  // }
+  for (const q of questions) {
+    const top_3 = await inferQuestion(q[0], state)
+    // console.log('TOP 3 ', top_3)
+    results.push({
+      question: q[0],
+      bp_bot: q[1],
+      deep_bot: top_3[0].content,
+      bp_right: false,
+      deep_right: false
+    })
+  }
+  return results
 }
