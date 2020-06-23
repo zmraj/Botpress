@@ -28,6 +28,8 @@ export async function preprocess_qna(embedder: DeepEmbedder | PythonEmbedder, bm
   const qna = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'datas', 'raw', 'qna.json'), 'utf-8'))
   const content = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'datas', 'raw', 'content.json'), 'utf-8'))
   const kb_content = []
+  console.log('lpo')
+
   for (const entry of qna.qnas) {
     if (entry.id.includes('_')) {
       continue
@@ -75,8 +77,10 @@ export async function preprocess_qna(embedder: DeepEmbedder | PythonEmbedder, bm
   if (!fs.existsSync(path.join(__dirname, '..', '..', 'datas', 'index', embedder.model_name))) {
     fs.mkdirSync(path.join(__dirname, '..', '..', 'datas', 'index', embedder.model_name), { recursive: true })
   }
+  console.log('sdf')
+
   // Encode to JSON, MsgPack or other format.
-  const index_data = JSON.stringify(toSerializable(bm25_index))
+  const index_data = JSON.stringify(toSerializable(bm25_index.index))
   fs.writeFileSync(path.join(__dirname, '..', '..', 'datas', 'index', embedder.model_name, 'index.json'), index_data)
   fs.writeFileSync(path.join(__dirname, '..', '..', 'datas', 'embedded', embedder.model_name, 'qna.json'), data)
   return [kb_content, bm25_index]

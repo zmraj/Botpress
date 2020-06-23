@@ -9,7 +9,7 @@ import en from '../translations/en.json'
 import fr from '../translations/fr.json'
 
 import api from './api'
-import { createDocumentIndex } from './bm25'
+import { Bm25Index } from './bm25'
 import { Contextizer } from './contextizers'
 import { DeepEmbedder, PythonEmbedder } from './embedder'
 import { rerank } from './reranker'
@@ -62,14 +62,17 @@ const onBotMount = async (bp_sdk: typeof sdk) => {
   state.contextizer = new Contextizer(state.embedder, bp_sdk)
   await state.contextizer.load()
 
-  const index_path = path.join(__dirname, '..', '..', 'datas', 'index', embedder.model_name, 'index.json')
+  state.bm25_index = undefined
+  const index_path = path.join(__dirname, '..', '..', 'datas', 'index', state.embedder.model_name, 'index.json')
   if (await fse.pathExists(index_path)) {
     console.log('Loading Index !')
     const data = await fse.readJSON(index_path)
-    state.bm25_index = fromSerializable(JSON.parse(data))
+    state.bm25_index = new Bm25Index([{ name: 'content' }])
+    const index = fromSerializable(data)
+    state.bm25_index.index = index
   } else {
     console.log('No index')
-    state.bm25_index = createDocumentIndex([{ name: 'content' }])
+    state.bm25_index = new Bm25Index([{ name: 'content' }])
   }
 
   if (await fse.pathExists(qna_rerank_path)) {
