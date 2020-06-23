@@ -2,6 +2,7 @@ import * as sdk from 'botpress/sdk'
 import crypto from 'crypto'
 import fs from 'fs'
 import _ from 'lodash'
+import { toSerializable } from 'ndx-serializable'
 import path from 'path'
 
 import { qnas } from '../../datas/raw/qna.json'
@@ -22,7 +23,7 @@ export function hash_str(str: string): string {
     .digest('hex')
 }
 
-export async function preprocess_qna(embedder: DeepEmbedder | PythonEmbedder) {
+export async function preprocess_qna(embedder: DeepEmbedder | PythonEmbedder, bm25_index) {
   // TODO : Change loading covid files by getting Q&A files from bp ghost
   const qna = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'datas', 'raw', 'qna.json'), 'utf-8'))
   const content = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'datas', 'raw', 'content.json'), 'utf-8'))
@@ -33,6 +34,7 @@ export async function preprocess_qna(embedder: DeepEmbedder | PythonEmbedder) {
     }
     // For each entry of qnas, get the source and go fetch the associated content
     const sources = entry.data.answers.fr[0].match(regex_section_covid) || []
+    let n = 0
     for (const source of sources) {
       if (content.hasOwnProperty(source)) {
         if (content[source].hasOwnProperty('content_fr')) {
@@ -50,7 +52,10 @@ export async function preprocess_qna(embedder: DeepEmbedder | PythonEmbedder) {
           const contents_embed = await Promise.map(chunked_content, c => embedder.embed(c))
           for (let i = 0; i < chunked_content.length; i++) {
             if (chunked_content[i].length) {
+              n += 1
+              bm25_index.add({ id: n.toString(), content: chunked_content[i] })
               kb_content.push({
+                key: n.toString(),
                 orig: hash_str(content[source]['content_fr']),
                 content: chunked_content[i],
                 embedding: contents_embed[i],
@@ -67,8 +72,14 @@ export async function preprocess_qna(embedder: DeepEmbedder | PythonEmbedder) {
   if (!fs.existsSync(path.join(__dirname, '..', '..', 'datas', 'embedded', embedder.model_name))) {
     fs.mkdirSync(path.join(__dirname, '..', '..', 'datas', 'embedded', embedder.model_name), { recursive: true })
   }
+  if (!fs.existsSync(path.join(__dirname, '..', '..', 'datas', 'index', embedder.model_name))) {
+    fs.mkdirSync(path.join(__dirname, '..', '..', 'datas', 'index', embedder.model_name), { recursive: true })
+  }
+  // Encode to JSON, MsgPack or other format.
+  const index_data = JSON.stringify(toSerializable(bm25_index))
+  fs.writeFileSync(path.join(__dirname, '..', '..', 'datas', 'index', embedder.model_name, 'index.json'), index_data)
   fs.writeFileSync(path.join(__dirname, '..', '..', 'datas', 'embedded', embedder.model_name, 'qna.json'), data)
-  return kb_content
+  return [kb_content, bm25_index]
 }
 
 function chunk_content(entry: string): string[] {

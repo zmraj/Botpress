@@ -1,5 +1,6 @@
 import fse from 'fs-extra'
 import { func } from 'joi'
+import _ from 'lodash'
 import { similarity } from 'ml-distance'
 import path from 'path'
 
@@ -9,14 +10,20 @@ import { feedback, kb_entry } from './typings'
 async function compute_confidence(chunk: kb_entry, question_emb: number[], embedder) {
   const score_chunk: number = similarity.cosine(chunk.embedding, question_emb)
   let score_questions: number = 0
+  let max_score_questions: number = 0
   const positives_questions = chunk.feedbacks.filter(e => e.polarity > 0)
   for (const q of positives_questions) {
     const q_emb = await embedder.embed(q.utterance)
-    score_questions += similarity.cosine(q_emb, question_emb)
+    const sim = similarity.cosine(q_emb, question_emb)
+    score_questions += sim
+    if (sim > max_score_questions) {
+      max_score_questions = sim
+    }
   }
   score_questions /= positives_questions.length
   // console.log(score_questions, score_chunk)
-  return score_chunk + score_questions
+  // return score_chunk + score_questions
+  return score_chunk + max_score_questions
 }
 
 export async function inferQuestion(question, state) {
@@ -28,13 +35,24 @@ export async function inferQuestion(question, state) {
   }
   const question_emb = await state.embedder.embed(question)
   const ctx = await state.contextizer.predict(question_emb)
+  const scored_bm25 = state.bm25_index.search(question)
+  const max_score_mb25 = Math.max.apply(
+    Math,
+    scored_bm25.map(o => {
+      return o.score
+    })
+  )
+  // console.log('BM25', scored_bm25)
   const scored_content = []
   for (const c of state.content) {
-    // if (c.contexts.includes(ctx)) {
-    const confidence = await compute_confidence(c, question_emb, state.embedder)
-    scored_content.push(Object.assign(c, { confidence }))
-    // }
+    if (c.contexts.includes(ctx)) {
+      let confidence = await compute_confidence(c, question_emb, state.embedder)
+      // console.log(scored_bm25.filter(obj => obj.key === c.key))
+      confidence += scored_bm25.filter(obj => obj.key === c.key)[0].score / max_score_mb25
+      scored_content.push(Object.assign(c, { confidence }))
+    }
   }
+
   const top = scored_content
     .sort(function(a, b) {
       return a.confidence - b.confidence
@@ -53,7 +71,7 @@ export async function electClosestQuestions(question, state) {
   //     path.join(__dirname, '..', '..', 'datas', 'embedded', state.embedder.model_name, 'qna.json')
   //   )
   // }
-  console.log(question)
+  // console.log(question)
   const question_emb = await state.embedder.embed(question)
   const scored_questions = []
   const q_done = []
@@ -66,13 +84,14 @@ export async function electClosestQuestions(question, state) {
       }
     }
   }
+
   const top = scored_questions
     .sort(function(a, b) {
       return a.confidence - b.confidence
     })
     .slice(-10)
-  console.log(scored_questions.slice(0, 10))
-  console.log(scored_questions.slice(-10))
+  // console.log(scored_questions.slice(0, 10))
+  // console.log(scored_questions.slice(-10))
   return top
 }
 
@@ -84,13 +103,14 @@ export async function runTests(state) {
   //     path.join(__dirname, '..', '..', 'datas', 'embedded', state.embedder.model_name, 'qna.json')
   //   )
   // }
+
   for (const q of questions) {
-    const top_3 = await inferQuestion(q[0], state)
+    const top_k = await inferQuestion(q[0], state)
     // console.log('TOP 3 ', top_3)
     results.push({
       question: q[0],
       bp_bot: q[1],
-      deep_bot: top_3[0].content,
+      deep_bot: top_k[top_k.length - 1].content,
       bp_right: false,
       deep_right: false
     })

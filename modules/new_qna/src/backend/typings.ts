@@ -1,3 +1,5 @@
+import { id } from 'inversify'
+
 export type Answer = {
   context: string
   answer: string
@@ -11,6 +13,7 @@ export type feedback = {
 }
 
 export type kb_entry = {
+  key: string
   orig: string
   content: string
   embedding: number[]

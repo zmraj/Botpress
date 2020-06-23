@@ -2143,6 +2143,23 @@ natural@^2.1.5:
     webpack "^4.29.0"
     wordnet-db "^3.1.11"
 
+ndx-query@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ndx-query/-/ndx-query-1.0.1.tgz#d79910d6e3b0cda4cd2edd89fab72e1bccdeb834"
+  integrity sha512-ybm/bt2WDwDzoUDXKrqW+oHKPV9qF9E8ICqZUWZDYgPvogMZ49eaXnCJ1jP9V+bkgR98EebS7ylE1DIjwqvl4g==
+  dependencies:
+    ndx "^1.0.2"
+
+ndx-serializable@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ndx-serializable/-/ndx-serializable-1.0.0.tgz#92557c5fc5b7fbf4e55024bbae43b7d060a7d37c"
+  integrity sha512-CViD3O8GRcWrQ2IPubwGnlmuxB81kEihjLH6SZLxUCxxL9pM6IH7RZah0SmrTuUCNx4kjiaM2S49ReaA5wiNtA==
+
+ndx@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/ndx/-/ndx-1.0.2.tgz#d0b5332a0121a27b4c0af4d3cf451b0bc81612b8"
+  integrity sha512-/TbqqemJ80lGKRoRuXsz7VgA0erkIxilCUbkMfRL1h2VBGBLGvQnI+FdHvWDqJnUhgOP/T9+SYeWS84wbXGBFA==
+
 needle@^2.2.1:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/needle/-/needle-2.5.0.tgz#e6fc4b3cc6c25caed7554bd613a5cf0bac8c31c0"
