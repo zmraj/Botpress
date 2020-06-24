@@ -28,15 +28,14 @@ export async function preprocess_qna(embedder: DeepEmbedder | PythonEmbedder, bm
   const qna = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'datas', 'raw', 'qna.json'), 'utf-8'))
   const content = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'datas', 'raw', 'content.json'), 'utf-8'))
   const kb_content = []
-  console.log('lpo')
 
+  let n = 0
   for (const entry of qna.qnas) {
     if (entry.id.includes('_')) {
       continue
     }
     // For each entry of qnas, get the source and go fetch the associated content
     const sources = entry.data.answers.fr[0].match(regex_section_covid) || []
-    let n = 0
     for (const source of sources) {
       if (content.hasOwnProperty(source)) {
         if (content[source].hasOwnProperty('content_fr')) {
@@ -77,7 +76,6 @@ export async function preprocess_qna(embedder: DeepEmbedder | PythonEmbedder, bm
   if (!fs.existsSync(path.join(__dirname, '..', '..', 'datas', 'index', embedder.model_name))) {
     fs.mkdirSync(path.join(__dirname, '..', '..', 'datas', 'index', embedder.model_name), { recursive: true })
   }
-  console.log('sdf')
 
   // Encode to JSON, MsgPack or other format.
   const index_data = JSON.stringify(toSerializable(bm25_index.index))

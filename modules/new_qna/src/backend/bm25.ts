@@ -36,7 +36,7 @@ export class Bm25Index {
   }
   // `search()` function will be used to perform queries.
   search(q) {
-    query(
+    return query(
       this.index,
       this.fieldBoostFactors,
       // BM25 ranking function constants:

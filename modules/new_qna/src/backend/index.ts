@@ -30,7 +30,7 @@ const state: {
   reranked_content: kb_entry[]
   embedder: DeepEmbedder | PythonEmbedder
   contextizer: Contextizer
-  bm25_index
+  bm25_index: Bm25Index
 } = { content: [], reranked_content: [], embedder, contextizer: undefined, bm25_index: undefined }
 
 const onServerStarted = async (bp_sdk: typeof sdk) => {
@@ -68,8 +68,7 @@ const onBotMount = async (bp_sdk: typeof sdk) => {
     console.log('Loading Index !')
     const data = await fse.readJSON(index_path)
     state.bm25_index = new Bm25Index([{ name: 'content' }])
-    const index = fromSerializable(data)
-    state.bm25_index.index = index
+    state.bm25_index.index = fromSerializable(data)
   } else {
     console.log('No index')
     state.bm25_index = new Bm25Index([{ name: 'content' }])

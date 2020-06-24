@@ -9,18 +9,18 @@ import { feedback, kb_entry } from './typings'
 
 async function compute_confidence(chunk: kb_entry, question_emb: number[], embedder) {
   const score_chunk: number = similarity.cosine(chunk.embedding, question_emb)
-  let score_questions: number = 0
-  let max_score_questions: number = 0
-  const positives_questions = chunk.feedbacks.filter(e => e.polarity > 0)
-  for (const q of positives_questions) {
-    const q_emb = await embedder.embed(q.utterance)
-    const sim = similarity.cosine(q_emb, question_emb)
-    score_questions += sim
-    if (sim > max_score_questions) {
-      max_score_questions = sim
-    }
-  }
-  score_questions /= positives_questions.length
+  // let score_questions: number = 0
+  const max_score_questions: number = 0
+  // const positives_questions = chunk.feedbacks.filter(e => e.polarity > 0)
+  // for (const q of positives_questions) {
+  //   const q_emb = await embedder.embed(q.utterance)
+  //   const sim = similarity.cosine(q_emb, question_emb)
+  //   score_questions += sim
+  //   if (sim > max_score_questions) {
+  //     max_score_questions = sim
+  //   }
+  // }
+  // score_questions /= positives_questions.length
   // console.log(score_questions, score_chunk)
   // return score_chunk + score_questions
   return score_chunk + max_score_questions
@@ -44,11 +44,16 @@ export async function inferQuestion(question, state) {
   )
   // console.log('BM25', scored_bm25)
   const scored_content = []
-  for (const c of state.content) {
+  for (const c of state.reranked_content) {
     if (c.contexts.includes(ctx)) {
       let confidence = await compute_confidence(c, question_emb, state.embedder)
-      // console.log(scored_bm25.filter(obj => obj.key === c.key))
-      confidence += scored_bm25.filter(obj => obj.key === c.key)[0].score / max_score_mb25
+      const boostBM25 = scored_bm25.filter(obj => obj.key === c.key)
+      if (boostBM25.length) {
+        // console.log('BOOST :', boostBM25[0].score / max_score_mb25)
+        confidence += boostBM25[0].score / max_score_mb25
+      } else {
+        // console.log('No Boost', question)
+      }
       scored_content.push(Object.assign(c, { confidence }))
     }
   }
