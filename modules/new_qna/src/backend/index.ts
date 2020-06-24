@@ -77,6 +77,7 @@ const onBotMount = async (bp_sdk: typeof sdk) => {
   if (await fse.pathExists(qna_rerank_path)) {
     console.log('Rerank found')
     state.reranked_content = await fse.readJSON(qna_rerank_path)
+    state.content = await fse.readJSON(qna_path)
   } else if (await fse.pathExists(qna_path)) {
     console.log('No rerank')
     state.content = await fse.readJSON(qna_path)
