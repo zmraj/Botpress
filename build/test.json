@@ -1,0 +1,37 @@
+{
+  "tag": "dap.receive",
+  "timestamp": 1593712234763,
+  "metadata": {
+    "connectionId": 2,
+    "message": {
+      "command": "setBreakpoints",
+      "arguments": {
+        "source": {
+          "name": "retriever.ts",
+          "path": "/mnt/Documents/Projets/BotPress/botpress/modules/new_qna/src/backend/retriever.ts"
+        },
+        "lines": [],
+        "breakpoints": [],
+        "sourceModified": false
+      },
+      "type": "request",
+      "seq": 124
+    }
+  },
+  "level": 0
+}
+  {
+  "tag": "cdp.send",
+  "timestamp": 1593712234764,
+  "metadata": {
+    "connectionId": 1,
+    "message": {
+      "id": 38,
+      "method": "Debugger.removeBreakpoint",
+      "params": {
+        "breakpointId": "2:70:0:file:\\/\\/\\/mnt\\/Documents\\/Projets\\/BotPress\\/botpress\\/modules\\/new_qna\\/src\\/backend\\/retriever\\.ts|\\/mnt\\/Documents\\/Projets\\/BotPress\\/botpress\\/modules\\/new_qna\\/src\\/backend\\/retriever\\.ts"
+      }
+    }
+  },
+  "level": 0
+}

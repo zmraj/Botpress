@@ -6,6 +6,7 @@ import rimraf from 'rimraf'
 
 import { rerank } from './reranker'
 import { electClosestQuestions, inferQuestion, runTests } from './retriever'
+import { getSvmProb } from './svmProbas'
 
 export default async (bp: typeof sdk, state) => {
   const router = bp.http.createRouterForBot('new_qna')
@@ -32,15 +33,22 @@ export default async (bp: typeof sdk, state) => {
   }
 
   router.post('/inferQuestion', async (req, res) => {
-    res.send(await inferQuestion(req.body.question, state))
+    const axiosConfig = await bp.http.getAxiosConfigForBot(req.params.botId, { localUrl: true })
+    res.send(await inferQuestion(req.body.question, state, axiosConfig))
   })
 
   router.post('/importOnnxModels', async (req, res) => {
     res.send(await importOnnxModels(req.body.new_model_name))
   })
 
+  router.get('/getSvmProb', async (req, res) => {
+    const axiosConfig = await bp.http.getAxiosConfigForBot(req.params.botId, { localUrl: true })
+    res.send(await getSvmProb(state, axiosConfig))
+  })
+
   router.get('/runTests', async (req, res) => {
-    res.send(await runTests(state))
+    const axiosConfig = await bp.http.getAxiosConfigForBot(req.params.botId, { localUrl: true })
+    res.send(await runTests(state, axiosConfig))
   })
 
   router.post('/electClosestQuestions', async (req, res) => {

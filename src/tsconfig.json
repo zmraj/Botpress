@@ -7,15 +7,24 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "target": "es6",
-    "lib": ["es7"],
+    "lib": [
+      "es7"
+    ],
     "noImplicitAny": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "baseUrl": "./bp",
     "outDir": "../out",
-    "typeRoots": ["./typings", "../node_modules/@types", "./bp/common"],
-    "types": ["reflect-metadata", "jest"]
+    "typeRoots": [
+      "./typings",
+      "../node_modules/@types",
+      "./bp/common"
+    ],
+    "types": [
+      "reflect-metadata",
+      "jest"
+    ]
   },
   "exclude": [
     "e2e/**",

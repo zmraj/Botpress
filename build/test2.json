@@ -1,0 +1,38 @@
+{
+  "tag": "dap.receive",
+  "timestamp": 1593712634767,
+  "metadata": {
+    "connectionId": 2,
+    "message": {
+      "command": "setBreakpoints",
+      "arguments": {
+        "source": {
+          "name": "src/bp/core/module-loader.ts",
+          "path": "/mnt/Documents/Projets/BotPress/botpress/src/bp/core/module-loader.ts",
+          "sourceReference": 0
+        },
+        "lines": [],
+        "breakpoints": [],
+        "sourceModified": false
+      },
+      "type": "request",
+      "seq": 43
+    }
+  },
+  "level": 0
+}
+  {
+  "tag": "cdp.send",
+  "timestamp": 1593712634767,
+  "metadata": {
+    "connectionId": 1,
+    "message": {
+      "id": 46,
+      "method": "Debugger.removeBreakpoint",
+      "params": {
+        "breakpointId": "2:133:8:file:\\/\\/\\/mnt\\/Documents\\/Projets\\/BotPress\\/botpress\\/out\\/bp\\/core\\/module-loader\\.js|\\/mnt\\/Documents\\/Projets\\/BotPress\\/botpress\\/out\\/bp\\/core\\/module-loader\\.js"
+      }
+    }
+  },
+  "level": 0
+}

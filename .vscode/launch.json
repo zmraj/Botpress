@@ -4,15 +4,14 @@
     {
       "type": "node",
       "runtimeVersion": "10.11.0",
-      // "port": 9229,
       "request": "launch",
       "name": "Debug App",
       "program": "${workspaceFolder}/out/bp/index.js",
-      "autoAttachChildProcesses": true,
-      // "cwd": "${workspaceFolder}",
-      // "args": ["--no-lazy", "--inspect-brk=9229", "start"],
-      // "args": ["--no-lazy", "--inspect-brk=9229", "start"],
-      // "protocol": "inspector",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "start"
+      ],
+      "protocol": "auto",
       "env": {
         "BP_MODULES_PATH": "${workspaceFolder}/modules:${workspaceFolder}/internal-modules",
         "NODE_PATH": "${workspaceFolder}/out/bp",
@@ -20,27 +19,33 @@
         "BLUEBIRD_DEBUG": "1"
       },
       "smartStep": true,
+      "trace": true,
+      // "outFiles": [
+      //   "${workspaceFolder}/out/**",
+      //   "${workspaceFolder}/modules/**",
+      //   "${workspaceFolder}/private-modules/*/dist/**",
+      //   "!${workspaceFolder}/**/node_modules"
+      // ],
       "outFiles": [
-        "${workspaceFolder}/out",
-        "${workspaceFolder}/modules/*/dist",
+        "${workspaceFolder}/out/**/*.js",
+        "${workspaceFolder}/modules/*/dist/**/*.js",
         "${workspaceFolder}/private-modules/*/dist",
-        "!${workspaceFolder}/**/node_modules"
+        "!${workspaceFolder}/out/bp/data/**",
+        "!**/node_modules/**",
+        "!**/ui-*/**"
       ],
-      // "console": "integratedTerminal",
-      "sourceMaps": true
+      "console": "integratedTerminal",
+      "sourceMaps": true,
+      "autoAttachChildProcesses": true
     },
-    // {
-    //   "name": "Attach to Process",
-    //   "type": "node",
-    //   "request": "attach",
-    //   "processId": "${command:PickProcess}"
-    // },
     {
       "type": "node",
       "request": "launch",
       "name": "Debug Jest Tests",
       "cwd": "${workspaceFolder}",
-      "env": { "NATIVE_EXTENSIONS_DIR": "./build/native-extensions" },
+      "env": {
+        "NATIVE_EXTENSIONS_DIR": "./build/native-extensions"
+      },
       "args": [
         "--inspect-brk",
         "${workspaceFolder}/node_modules/.bin/jest",
@@ -57,7 +62,9 @@
           "-c=${workspaceFolder}/jest.config.js"
         ]
       },
-      "outFiles": ["${workspaceFolder}/out/"],
+      "outFiles": [
+        "${workspaceFolder}/out/"
+      ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "sourceMaps": true,
@@ -68,7 +75,10 @@
       "request": "launch",
       "name": "Debug Jest Integration Tests",
       "cwd": "${workspaceFolder}",
-      "env": { "NATIVE_EXTENSIONS_DIR": "./build/native-extensions", "JEST_TIMEOUT": "30000" },
+      "env": {
+        "NATIVE_EXTENSIONS_DIR": "./build/native-extensions",
+        "JEST_TIMEOUT": "30000"
+      },
       "args": [
         "--inspect-brk",
         "${workspaceFolder}/node_modules/.bin/jest",
@@ -79,9 +89,15 @@
         "all"
       ],
       "windows": {
-        "args": ["--inspect-brk", "${workspaceRoot}/node_modules/jest/bin/jest.js", "--runInBand"]
+        "args": [
+          "--inspect-brk",
+          "${workspaceRoot}/node_modules/jest/bin/jest.js",
+          "--runInBand"
+        ]
       },
-      "outFiles": ["${workspaceFolder}/out/"],
+      "outFiles": [
+        "${workspaceFolder}/out/"
+      ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "sourceMaps": true,
@@ -92,7 +108,9 @@
       "type": "lldb",
       "request": "launch",
       "program": "node",
-      "args": ["test/start.js"],
+      "args": [
+        "test/start.js"
+      ],
       "env": {
         "BP_MODULES_PATH": "../../modules",
         "NODE_PATH": "./"
@@ -104,7 +122,9 @@
       "type": "lldb",
       "request": "launch",
       "program": "node",
-      "args": ["test/start.js"],
+      "args": [
+        "test/start.js"
+      ],
       "cwd": "${workspaceFolder}/src/bp/ml/crfsuite"
     },
     {
@@ -112,7 +132,9 @@
       "type": "lldb",
       "request": "launch",
       "program": "node",
-      "args": ["test/start.js"],
+      "args": [
+        "test/start.js"
+      ],
       "cwd": "${workspaceFolder}/src/bp/ml/fasttext"
     }
   ]

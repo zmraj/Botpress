@@ -12,13 +12,28 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es6",
-    "lib": ["es7"],
-    "types": ["reflect-metadata", "bluebird-global"],
+    "lib": [
+      "es7"
+    ],
+    "types": [
+      "reflect-metadata",
+      "bluebird-global"
+    ],
     "paths": {
-      "common/*": ["../../src/bp/common/*"],
-      "botpress/sdk": ["../../src/bp/sdk/botpress.d.ts"]
+      "common/*": [
+        "../../src/bp/common/*"
+      ],
+      "botpress/sdk": [
+        "../../src/bp/sdk/botpress.d.ts"
+      ]
     }
   },
-  "exclude": ["**/*.test.ts", "**/views/**"],
-  "include": ["../src/typings/*.d.ts", "**/*.ts"]
+  "exclude": [
+    "**/*.test.ts",
+    "**/views/**"
+  ],
+  "include": [
+    "../src/typings/*.d.ts",
+    "**/*.ts"
+  ]
 }

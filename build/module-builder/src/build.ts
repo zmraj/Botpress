@@ -40,7 +40,7 @@ export async function buildBackend(modulePath: string) {
       '@babel/preset-react'
     ],
 
-    sourceMaps: true,
+    sourceMaps: "inline",
     sourceRoot: path.join(modulePath, 'src/backend'),
     parserOpts: {
       allowReturnOutsideFunction: true
@@ -124,12 +124,8 @@ const compileBackend = (modulePath: string, babelConfig) => {
     try {
       const dBefore = Date.now()
       const result = babel.transformFileSync(file, babelConfig)
-      const destMap = dest + '.map'
 
-      fs.writeFileSync(dest, result.code + os.EOL + `//# sourceMappingURL=${path.basename(destMap)}`)
-      result.map.sources = [path.relative(babelConfig.sourceRoot, file)]
-      fs.writeFileSync(destMap, JSON.stringify(result.map))
-
+      fs.writeFileSync(dest, result.code)
       const totalTime = Date.now() - dBefore
 
       debug(`Generated "${dest}" (${totalTime} ms)`)
@@ -184,11 +180,15 @@ const getTsConfig = (rootFolder: string): ts.ParsedCommandLine => {
     ...config,
     compilerOptions: {
       ...config.compilerOptions,
+      declaration: true,
+      sourceMap: true,
       typeRoots: ['./node_modules/@types', './node_modules', './src/typings']
     },
     exclude: ['**/*.test.ts', './src/views/**', '**/node_modules/**'],
     include: ['../../src/typings/*.d.ts', '**/*.ts']
   }
+
+  console.log(fixedModuleConfig)
 
   return ts.parseJsonConfigFileContent(fixedModuleConfig, parseConfigHost, rootFolder)
 }

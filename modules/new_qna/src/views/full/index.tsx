@@ -3,7 +3,7 @@ import { Container } from 'botpress/ui'
 import React, { useEffect, useState } from 'react'
 
 import { feedback, kb_entry } from '../../backend/typings'
-
+import _ from 'lodash'
 import style from './style.scss'
 
 const NewQnA = props => {
@@ -11,13 +11,28 @@ const NewQnA = props => {
   const [new_model_name, setNewModelName] = useState('')
   const [pythonImportLogs, setPythonImportLogs] = useState('')
   const [closestQuestions, setClosestQuestions] = useState([])
+  const [svmProb, setSvmProb] = useState({ exemples: [], min: 0, max: 0, mean: 0 } as {
+    exemples:
+    {
+      confidence: number,
+      utterance: string,
+      answer: string,
+      eval: number,
+    }[],
+    min: number,
+    max: number,
+    mean: number
+  })
   const [results, setResults] = useState([
     {
       question: '',
       bp_bot: '',
       deep_bot: '',
       bp_right: false,
-      deep_right: false
+      deep_right: false,
+      winner: '',
+      confidence: 0,
+      deep_confidence: 0
     }
   ])
   const [answer, setAnswer] = useState([
@@ -27,7 +42,8 @@ const NewQnA = props => {
       embedding: [],
       contexts: [],
       confidence: 0,
-      feedbacks: [{ utterance: '', polarity: 0, reranked: false } as feedback]
+      feedbacks: [{ utterance: '', polarity: 0, reranked: false } as feedback],
+      winner: "botpress" || "deep"
     }
   ])
 
@@ -50,7 +66,13 @@ const NewQnA = props => {
     const { data } = await props.bp.axios.post('/mod/new_qna/electClosestQuestions', { question })
     setClosestQuestions(data)
   }
-  useEffect(() => {}, [])
+
+  const getSvmProb = async () => {
+    const { data } = await props.bp.axios.get('/mod/new_qna/getSvmProb')
+    console.log(data)
+    setSvmProb(data)
+  }
+  useEffect(() => { }, [])
 
   return (
     <Container sidePanelHidden>
@@ -76,6 +98,34 @@ const NewQnA = props => {
         <button onClick={inferQuestion}>Ask Question</button>
         <button onClick={runTests}>Run Tests</button>
         <button onClick={electClosestQuestions}>Elect Closests questions</button>
+        <button onClick={getSvmProb}>Get Svm probs on bad utterances</button>
+        <h2>Svm Probs</h2>
+        <div>
+          <p> Mean {svmProb.mean}</p>
+          <p> Max {svmProb.max} </p>
+          <p> Min {svmProb.min}</p>
+          <p> Exemples </p>
+
+          <table>
+            <tbody>
+              <tr>
+                <td>Question</td>
+                <td>Confidence</td>
+                <td>Answer</td>
+                <td>Incorrect</td>
+              </tr>
+              {svmProb.exemples.sort((a, b) => (a.eval > b.eval) ? -1 : 1).slice(0, 200).map(o => {
+                return (
+                  <tr>
+                    <td>{o.utterance}</td>
+                    <td>{o.confidence}</td>
+                    <td>{o.answer}</td>
+                    <td>{o.eval}</td>
+                  </tr>)
+              })}
+            </tbody>
+          </table>
+        </div>
         <h2>Top 3 Answers</h2>
         <div>
           <ul>
@@ -99,6 +149,8 @@ const NewQnA = props => {
                 <p>{e.content} </p>
                 <h5>Contexts</h5>
                 <p>{e.contexts} </p>
+                <h5> Winner </h5>
+                <p> {e.winner} </p>
 
                 {e.feedbacks.map((e, i) => {
                   return (
@@ -126,6 +178,9 @@ const NewQnA = props => {
                 <td>Deep</td>
                 <td>RBp</td>
                 <td>RDeep</td>
+                <td>Conf</td>
+                <td>DConf</td>
+                <td>Winner</td>
               </tr>
               {results.map((r, i) => {
                 return (
@@ -151,6 +206,9 @@ const NewQnA = props => {
                         }}
                       ></Checkbox>
                     </td>
+                    <td>{_.round(r.confidence, 2)}</td>
+                    <td>{_.round(r.deep_confidence, 2)}</td>
+                    <td>{r.winner}</td>
                   </tr>
                 )
               })}
@@ -167,6 +225,12 @@ const NewQnA = props => {
           </p>
           <p>
             Deep Better : {results.filter(e => e.deep_right && !e.bp_right).length} / {results.length}
+          </p>
+          <p>
+            Repartition BP : {results.filter(e => e.winner == "botpress").length} / {results.length}
+          </p>
+          <p>
+            Repartition Deep : {results.filter(e => e.winner == "deep").length} / {results.length}
           </p>
         </div>
       </div>

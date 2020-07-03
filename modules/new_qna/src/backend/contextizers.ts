@@ -11,6 +11,7 @@ export class Contextizer {
     this.embedder = embedder
     this.model_path = path.join(__dirname, '..', '..', 'onnx_models', 'contextizers', 'model.json')
   }
+
   async load() {
     if (fs.existsSync(this.model_path)) {
       this.model = fs.readFileSync(this.model_path, 'utf-8')
@@ -20,6 +21,7 @@ export class Contextizer {
       this.svm_predictor = new this.bp_sdk.MLToolkit.SVM.Predictor(this.model)
     }
   }
+
   async train() {
     const string_datas = JSON.parse(
       fs.readFileSync(path.join(__dirname, '..', '..', 'datas', 'questions_context.json'), 'utf-8')

@@ -360,7 +360,9 @@ export class RemoteLanguageProvider implements LanguageProvider {
       }
 
       const fetched = await this.queryProvider<number[][]>(lang, '/vectorize', { tokens: query }, 'vectors')
-
+      // const { data } = await axios.post('http://localhost:8000/embeddings', { documents: query })
+      // console.log(data)
+      // const fetched: number[][] = data
       if (fetched.length !== query.length) {
         throw new Error(
           `Language Provider didn't receive as many vectors as we asked for (asked ${query.length} and received ${fetched.length})`
