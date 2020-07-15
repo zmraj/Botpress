@@ -1,6 +1,7 @@
 import LicensingService from 'common/licensing-service'
 import { getSchema } from 'common/telemetry'
 import Database from 'core/database'
+import { calculateHash } from 'core/misc/utils'
 import { TelemetryRepository } from 'core/repositories/telemetry_payload'
 import { TYPES } from 'core/types'
 import { inject, injectable } from 'inversify'
@@ -74,12 +75,6 @@ export class HooksLifecycleStats extends TelemetryStats {
   }
 
   protected async getStats() {
-    const temp = {
-      ...getSchema(await this.getServerStats(), 'server'),
-      event_type: 'hooks_lifecycle',
-      event_data: { schema: '1.0.0', lifeCycles: await this.getHooksLifecycle() }
-    }
-    console.log(temp)
     return {
       ...getSchema(await this.getServerStats(), 'server'),
       event_type: 'hooks_lifecycle',
@@ -87,17 +82,18 @@ export class HooksLifecycleStats extends TelemetryStats {
     }
   }
 
-  private async getHooksLifecycle() {
+  private async getHooksLifecycle(): Promise<hookPayload> {
     const botIds = await this.botService.getBotsIds()
-    const forBots = await Promise.map(botIds, async botId => {
-      const botHooksPaths = await this.ghostService.forBot(botId).directoryListing('/hooks', '*.js')
+    const perBots = await Promise.map(botIds, async ID => {
+      const botHooksPaths = await this.ghostService.forBot(ID).directoryListing('/hooks', '*.js')
       const lifecycles = this.countLifecycles(botHooksPaths)
+      const botId = calculateHash(ID)
       return { botId, ...lifecycles }
     })
     const globalHooksPaths = await this.ghostService.global().directoryListing('/hooks', '*.js')
     const global = this.countLifecycles(globalHooksPaths)
 
-    return { global, forBots }
+    return { global, perBots }
   }
 
   private countLifecycles(paths: string[]) {

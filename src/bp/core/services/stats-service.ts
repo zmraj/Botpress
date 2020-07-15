@@ -5,6 +5,7 @@ import ms from 'ms'
 
 import { JobService } from './job-service'
 import { ActionsStats } from './telemetry/actions'
+import { BotLanguageStats } from './telemetry/bot-language'
 import { HooksLifecycleStats } from './telemetry/hooks'
 import { LegacyStats } from './telemetry/legacy-stats'
 
@@ -18,13 +19,15 @@ export class StatsService {
     @inject(TYPES.TelemetryRepository) private telemetryRepo: TelemetryRepository,
     @inject(TYPES.ActionStats) private actionStats: ActionsStats,
     @inject(TYPES.LegacyStats) private legacyStats: LegacyStats,
-    @inject(TYPES.HooksLifecycleStats) private hooksStats: HooksLifecycleStats
+    @inject(TYPES.HooksLifecycleStats) private hooksStats: HooksLifecycleStats,
+    @inject(TYPES.BotLanguageStats) private botLanguageStats: BotLanguageStats
   ) {}
 
   public async start() {
     await this.actionStats.start()
     await this.legacyStats.start()
     await this.hooksStats.start()
+    await this.botLanguageStats.start()
 
     await this.refreshDB(DB_REFRESH_INTERVAL)
     setInterval(this.refreshDB.bind(this, DB_REFRESH_INTERVAL), DB_REFRESH_INTERVAL)
