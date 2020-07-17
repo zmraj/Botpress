@@ -1,12 +1,10 @@
 import LicensingService from 'common/licensing-service'
-import { getSchema } from 'common/telemetry'
-import { Bot } from 'common/typings'
+import { buildSchema } from 'common/telemetry'
 import Database from 'core/database'
 import { calculateHash } from 'core/misc/utils'
-import { TelemetryRepository } from 'core/repositories/telemetry_payload'
+import { TelemetryRepository } from 'core/repositories/telemetry'
 import { TYPES } from 'core/types'
 import { inject, injectable } from 'inversify'
-import ms from 'ms'
 
 import { GhostService } from '..'
 import { BotService } from '../bot-service'
@@ -23,7 +21,6 @@ interface BotLanguage {
 export class BotLanguageStats extends TelemetryStats {
   protected url: string
   protected lock: string
-  protected interval: number
 
   constructor(
     @inject(TYPES.GhostService) ghostService: GhostService,
@@ -36,17 +33,16 @@ export class BotLanguageStats extends TelemetryStats {
     super(ghostService, database, licenseService, jobService, telemetryRepo)
     this.url = process.TELEMETRY_URL
     this.lock = 'botpress:telemetry-bot-language'
-    this.interval = ms('1d')
   }
 
   protected async getStats() {
     console.log({
-      ...getSchema(await this.getServerStats(), 'server'),
+      ...buildSchema(await this.getServerStats(), 'server'),
       event_type: 'builtin_actions',
       event_data: { schema: '1.0.0', languages: await this.getBotsLanguage() }
     })
     return {
-      ...getSchema(await this.getServerStats(), 'server'),
+      ...buildSchema(await this.getServerStats(), 'server'),
       event_type: 'builtin_actions',
       event_data: { schema: '1.0.0', languages: await this.getBotsLanguage() }
     }

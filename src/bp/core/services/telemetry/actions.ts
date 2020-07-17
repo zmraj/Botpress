@@ -1,14 +1,13 @@
 import { parseActionInstruction } from 'common/action'
 import { BUILTIN_MODULES } from 'common/defaults'
 import LicensingService from 'common/licensing-service'
-import { getSchema, TelemetryEvent } from 'common/telemetry'
+import { buildSchema, TelemetryEvent } from 'common/telemetry'
 import Database from 'core/database'
 import { calculateHash } from 'core/misc/utils'
-import { TelemetryRepository } from 'core/repositories/telemetry_payload'
+import { TelemetryRepository } from 'core/repositories/telemetry'
 import { TYPES } from 'core/types'
 import { inject, injectable } from 'inversify'
 import _ from 'lodash'
-import ms from 'ms'
 
 import { GhostService } from '..'
 import { BotService } from '../bot-service'
@@ -17,17 +16,25 @@ import { JobService } from '../job-service'
 
 import { TelemetryStats } from './telemetry-stats'
 
-interface Flow {
+interface RawFlow {
   flowName: string
   botID: string
   actions: string[]
+}
+
+interface ParsedFlow {
+  flowName: string
+  botID: string
+  actions: {
+    actionName: string
+    params: any
+  }[]
 }
 
 @injectable()
 export class ActionsStats extends TelemetryStats {
   protected url: string
   protected lock: string
-  protected interval: number
 
   constructor(
     @inject(TYPES.GhostService) ghostService: GhostService,
@@ -41,18 +48,17 @@ export class ActionsStats extends TelemetryStats {
     super(ghostService, database, licenseService, jobService, telemetryRepo)
     this.url = process.TELEMETRY_URL
     this.lock = 'botpress:telemetry-actions'
-    this.interval = ms('1d')
   }
 
   protected async getStats(): Promise<TelemetryEvent> {
     return {
-      ...getSchema(await this.getServerStats(), 'server'),
+      ...buildSchema(await this.getServerStats(), 'server'),
       event_type: 'builtin_actions',
-      event_data: { schema: '1.0.0', flows: this.getFlowsWithActions() }
+      event_data: { schema: '1.0.0', flows: await this.getFlowsWithActions() }
     }
   }
 
-  private async getFlowsWithActions() {
+  private async getFlowsWithActions(): Promise<ParsedFlow[]> {
     const botIds = await this.botService.getBotsIds()
     const flows = _.flatten(
       await Promise.map(botIds, async botID => {
@@ -67,15 +73,17 @@ export class ActionsStats extends TelemetryStats {
         })
       })
     )
-    return flows.filter(flow => flow.actions.length > 0).map(flow => this.parseFlow(flow))
+    return flows.map(flow => this.parseFlow(flow)).filter(flow => flow.actions.length > 0)
   }
 
-  private parseFlow(flow: Flow) {
+  private parseFlow(flow: RawFlow): ParsedFlow {
     const actions = flow.actions
       .map(action => parseActionInstruction(action))
       .filter(action => BUILTIN_MODULES.includes(action.actionName.split('/')[0]))
 
     return {
+      flowName: calculateHash(flow.flowName),
+      botID: calculateHash(flow.botID),
       actions: actions.map(action => {
         const actionName = action.actionName.split('/')[1]
         try {
@@ -87,9 +95,7 @@ export class ActionsStats extends TelemetryStats {
         } catch (error) {
           return { actionName, params: {} }
         }
-      }),
-      flowName: calculateHash(flow.flowName),
-      botID: calculateHash(flow.botID)
+      })
     }
   }
 }

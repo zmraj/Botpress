@@ -1,11 +1,12 @@
 import axios from 'axios'
-import { Logger } from 'botpress/sdk'
+import { Logger, logger } from 'botpress/sdk'
 import { checkRule } from 'common/auth'
 import LicensingService from 'common/licensing-service'
+import { TelemetryEntry, TelemetryEvent } from 'common/telemetry'
 import { ConfigProvider } from 'core/config/config-loader'
 import { ModuleLoader } from 'core/module-loader'
 import { LogsRepository } from 'core/repositories/logs'
-import { TelemetryRepository } from 'core/repositories/telemetry_payload'
+import { TelemetryRepository } from 'core/repositories/telemetry'
 import { GhostService } from 'core/services'
 import { AlertingService } from 'core/services/alerting-service'
 import AuthService, { TOKEN_AUDIENCE } from 'core/services/auth/auth-service'
@@ -135,11 +136,8 @@ export class AdminRouter extends CustomRouter {
       this.asyncMiddleware(async (req, res) => {
         const { status, events } = req.body
 
-        if (status === 'ok') {
-          await this.telemetryRepo.removeMany(events)
-        } else if (status === 'fail') {
-          await this.telemetryRepo.updateAvailability(events, true)
-        }
+        status ? await this.telemetryRepo.removeMany(events) : await this.telemetryRepo.updateAvailability(events, true)
+
         return sendSuccess(res, 'Updated events')
       })
     )
@@ -148,7 +146,12 @@ export class AdminRouter extends CustomRouter {
       '/telemetry-payloads',
       this.checkTokenHeader,
       this.asyncMiddleware(async (req, res) => {
-        res.send(await this.telemetryRepo.getEntries())
+        try {
+          res.send(await this.telemetryRepo.getEntries())
+        } catch (error) {
+          logger.warn('Error extracting entries from Telemetry database')
+          res.send([])
+        }
       })
     )
 

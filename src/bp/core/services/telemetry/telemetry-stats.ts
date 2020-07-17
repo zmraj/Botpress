@@ -3,24 +3,22 @@ import LicensingService from 'common/licensing-service'
 import { machineUUID } from 'common/stats'
 import { ServerStats } from 'common/telemetry'
 import Database from 'core/database'
-import { TelemetryRepository } from 'core/repositories/telemetry_payload'
+import { TelemetryRepository } from 'core/repositories/telemetry'
 import { TYPES } from 'core/types'
 import { inject, injectable } from 'inversify'
 import ms from 'ms'
 import yn from 'yn'
 
 import { GhostService } from '..'
-import { BotService } from '../bot-service'
 import { JobService } from '../job-service'
 
 const debug = DEBUG('stats')
-const TELEMETRY_URL = process.TELEMETRY_URL
 
 @injectable()
 export abstract class TelemetryStats {
   protected abstract url: string
   protected abstract lock: string
-  protected abstract interval: number
+  private interval: number
 
   constructor(
     @inject(TYPES.GhostService) protected ghostService: GhostService,
@@ -28,10 +26,13 @@ export abstract class TelemetryStats {
     @inject(TYPES.LicensingService) protected licenseService: LicensingService,
     @inject(TYPES.JobService) private jobService: JobService,
     @inject(TYPES.TelemetryRepository) private telemetryRepo: TelemetryRepository
-  ) {}
+  ) {
+    this.interval = ms('1d')
+  }
 
   public async start() {
-    await this.run(this.lock, this.interval, this.url)
+    // tslint:disable-next-line: no-floating-promises
+    this.run(this.lock, this.interval, this.url)
 
     setInterval(this.run.bind(this, this.lock, this.interval, this.url), this.interval)
   }
@@ -52,7 +53,7 @@ export abstract class TelemetryStats {
     try {
       await axios.post(url, stats)
     } catch (err) {
-      if (url === TELEMETRY_URL) {
+      if (url === process.TELEMETRY_URL) {
         await this.telemetryRepo.insertPayload(stats.uuid, stats)
       }
     }
@@ -79,8 +80,7 @@ export abstract class TelemetryStats {
     try {
       return this.licenseService.getFingerprint('cluster_url')
     } catch (err) {
-      // tslint:disable-next-line: no-null-keyword
-      return null
+      return eval('null')
     }
   }
 

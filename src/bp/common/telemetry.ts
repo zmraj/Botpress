@@ -9,6 +9,14 @@ export type TelemetryEventData = Dic<any> & {
   schema: string
 }
 
+export interface TelemetryEntry {
+  uuid: string
+  payload: any
+  available: boolean
+  lastChanged: Date
+  creationDate: Date
+}
+
 export interface ServerStats {
   externalUrl: string
   botpressVersion: string
@@ -32,7 +40,7 @@ export interface Schema {
   server: ServerStats
 }
 
-export const getSchema = (server: ServerStats, source: string): Schema => {
+export const buildSchema = (server: ServerStats, source: string): Schema => {
   return {
     timestamp: new Date(),
     uuid: uuid.v4(),
