@@ -43,8 +43,16 @@ export class ConfigStats extends TelemetryStats {
     return {
       ...buildSchema(await this.getServerStats(), 'server'),
       event_type: 'configs',
-      event_data: { schema: '1.0.0', botConfigs: await this.getBotsConfigs() }
+      event_data: {
+        schema: '1.0.0',
+        botConfigs: await this.getBotsConfigs(),
+        modulesConfigs: await this.getModulesConfigs()
+      }
     }
+  }
+
+  private async getModulesConfigs() {
+    return {}
   }
 
   private async getBotsConfigs() {
