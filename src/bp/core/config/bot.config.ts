@@ -51,6 +51,8 @@ export interface BotDetails {
   termsConditions?: string
   privacyPolicy?: string
   emailAddress?: string
+  avatarUrl?: string
+  coverPictureUrl?: string
 }
 
 export interface LogsConfig {

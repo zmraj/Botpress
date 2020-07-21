@@ -17,7 +17,7 @@ import { DataRetentionJanitor } from './services/retention/janitor'
 import { DataRetentionService } from './services/retention/service'
 import { ServicesContainerModules } from './services/services.inversify'
 import { ActionsStats } from './services/telemetry/actions'
-import { BotLanguageStats } from './services/telemetry/bot-language'
+import { ConfigStats } from './services/telemetry/configs'
 import { HooksLifecycleStats } from './services/telemetry/hooks'
 import { LegacyStats } from './services/telemetry/legacy-stats'
 import { WorkspaceService } from './services/workspace-service'
@@ -140,8 +140,8 @@ container
   .inSingletonScope()
 
 container
-  .bind<BotLanguageStats>(TYPES.BotLanguageStats)
-  .to(BotLanguageStats)
+  .bind<ConfigStats>(TYPES.ConfigStats)
+  .to(ConfigStats)
   .inSingletonScope()
 
 const isPackaged = !!eval('process.pkg')

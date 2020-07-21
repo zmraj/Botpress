@@ -84,7 +84,7 @@ const TYPES = {
   ActionStats: Symbol.for('ActionStats'),
   LegacyStats: Symbol.for('LegacyStats'),
   HooksLifecycleStats: Symbol.for('HooksLifecycleStats'),
-  BotLanguageStats: Symbol.for('BotLanguageStats')
+  ConfigStats: Symbol.for('ConfigStats')
 }
 
 export { TYPES }

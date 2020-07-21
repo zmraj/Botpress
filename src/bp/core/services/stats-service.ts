@@ -5,7 +5,7 @@ import ms from 'ms'
 
 import { JobService } from './job-service'
 import { ActionsStats } from './telemetry/actions'
-import { BotLanguageStats } from './telemetry/bot-language'
+import { ConfigStats } from './telemetry/configs'
 import { HooksLifecycleStats } from './telemetry/hooks'
 import { LegacyStats } from './telemetry/legacy-stats'
 
@@ -20,7 +20,7 @@ export class StatsService {
     @inject(TYPES.ActionStats) private actionStats: ActionsStats,
     @inject(TYPES.LegacyStats) private legacyStats: LegacyStats,
     @inject(TYPES.HooksLifecycleStats) private hooksStats: HooksLifecycleStats,
-    @inject(TYPES.BotLanguageStats) private botLanguageStats: BotLanguageStats
+    @inject(TYPES.ConfigStats) private botLanguageStats: ConfigStats
   ) {}
 
   public async start() {
