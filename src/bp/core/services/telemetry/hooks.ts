@@ -83,17 +83,17 @@ export class HooksLifecycleStats extends TelemetryStats {
     const botIds = await this.botService.getBotsIds()
     const perBots = await Promise.map(botIds, async ID => {
       const botHooksPaths = await this.ghostService.forBot(ID).directoryListing('/hooks', '*.js')
-      const lifecycles = this.countLifecycles(botHooksPaths)
+      const lifecycles = this.countLifecycles(botHooksPaths, BOT_HOOKS)
       const botId = calculateHash(ID)
       return { botId, ...lifecycles }
     })
     const globalHooksPaths = await this.ghostService.global().directoryListing('/hooks', '*.js')
-    const global = this.countLifecycles(globalHooksPaths)
+    const global = this.countLifecycles(globalHooksPaths, GLOBAL_HOOKS)
 
     return { global, perBots }
   }
 
-  private countLifecycles(paths: string[]) {
-    return _.countBy(paths.map(path => path.split('/')[0]).filter(lifecycle => BOT_HOOKS.includes(lifecycle)))
+  private countLifecycles(paths: string[], hooksFilter: string[]) {
+    return _.countBy(paths.map(path => path.split('/')[0]).filter(lifecycle => hooksFilter.includes(lifecycle)))
   }
 }
