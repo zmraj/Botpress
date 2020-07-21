@@ -36,11 +36,6 @@ export class BotLanguageStats extends TelemetryStats {
   }
 
   protected async getStats() {
-    console.log({
-      ...buildSchema(await this.getServerStats(), 'server'),
-      event_type: 'builtin_actions',
-      event_data: { schema: '1.0.0', languages: await this.getBotsLanguage() }
-    })
     return {
       ...buildSchema(await this.getServerStats(), 'server'),
       event_type: 'builtin_actions',
