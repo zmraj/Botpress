@@ -108,9 +108,9 @@ export class EventCollector {
       createdOn: this.knex.date.now()
     }
 
-    const exists = this.batch.findIndex(x => x.id === id)
-    if (exists !== -1) {
-      this.batch.splice(exists, 1, entry)
+    const existingIndex = this.batch.findIndex(x => x.id === id)
+    if (existingIndex !== -1) {
+      this.batch.splice(existingIndex, 1, entry)
     } else {
       this.batch.push(entry)
     }
@@ -132,7 +132,6 @@ export class EventCollector {
   private buildQuery = (elements: BatchEvent[]) => {
     const values = elements
       .map(entry => {
-        // tslint:disable-next-line: no-null-keyword
         const mappedValues = eventsFields.map(x => (x === 'event' ? JSON.stringify(entry[x]) : entry[x]) ?? null)
         return this.knex.raw(`(${eventsFields.map(() => '?').join(',')})`, mappedValues).toQuery()
       })

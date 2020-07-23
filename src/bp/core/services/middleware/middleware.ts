@@ -17,7 +17,7 @@ export class MiddlewareChain {
     this.options = { ...defaultOptions, ...options }
   }
 
-  use({ handler, name }) {
+  use({ handler, name }: sdk.IO.MiddlewareDefinition) {
     this.stack.push({ mw: handler, name })
   }
 
@@ -39,9 +39,7 @@ export class MiddlewareChain {
         if (swallow) {
           event.addStep(`mw:${name}:swallowed`)
           break
-        }
-
-        if (skipped) {
+        } else if (skipped) {
           event.addStep(`mw:${name}:skipped`)
         } else {
           event.addStep(`mw:${name}:completed`)
