@@ -10,6 +10,7 @@ import {
   closeFlowNodeProps,
   copyFlowNode,
   copyFlowNodeElement,
+  editAction,
   errorSaveFlows,
   handleFlowEditorRedo,
   handleFlowEditorUndo,
@@ -57,6 +58,7 @@ export interface FlowReducer {
   flowsByName: _.Dictionary<FlowView>
   currentDiagramAction: string
   nodeInBuffer?: FlowNode
+  currentAction?: any
   currentHashes: { [flowName: string]: string }
   /** The element currently being edited on the right inspector form */
   activeFormItem?: ActiveFormItem
@@ -483,7 +485,16 @@ let reducer = handleActions(
       return {
         ...state,
         currentFlowNode: null,
-        currentFlow: payload
+        currentFlow: payload,
+        currentAction: undefined
+      }
+    },
+
+    [editAction as any]: (state, { payload }) => {
+      return {
+        ...state,
+        currentAction: payload,
+        currentFlow: undefined
       }
     },
 

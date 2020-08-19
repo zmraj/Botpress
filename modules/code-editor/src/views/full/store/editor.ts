@@ -41,6 +41,8 @@ class EditorStore {
     this.rootStore = rootStore
   }
 
+  public hello
+
   @computed
   get isDirty() {
     return this.fileContentWrapped && this._originalHash !== calculateHash(this.fileContentWrapped)
@@ -78,6 +80,10 @@ class EditorStore {
   updateContent(newContent: string) {
     this.fileContentWrapped = newContent
     this.fileContent = wrapper.remove(newContent, this.currentFile.type)
+
+    if (this.hello) {
+      this.hello(newContent)
+    }
   }
 
   @action.bound
@@ -143,6 +149,11 @@ class EditorStore {
   @action.bound
   setMonacoEditor(editor: monaco.editor.IStandaloneCodeEditor) {
     this._editorRef = editor
+  }
+
+  @action.bound
+  resizeLayout() {
+    this._editorRef.layout()
   }
 }
 

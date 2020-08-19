@@ -76,6 +76,8 @@ import style from '~/views/FlowBuilder/diagram/style.scss'
 import { BlockModel, BlockWidgetFactory } from './nodes/Block'
 import menuStyle from './style.scss'
 import ActionForm from './ActionForm'
+import ActionPreviewForm from './ActionPreviewForm'
+import CodeEditorToolbar from './CodeEditorToolbar'
 import ConditionForm from './ConditionForm'
 import ContentForm from './ContentForm'
 import ExecuteForm from './ExecuteForm'
@@ -97,6 +99,7 @@ interface OwnProps {
   selectedWorkflow: string
   flowPreview: boolean
   highlightFilter: string
+  varTypes: any
   handleFilterChanged: (event: any) => void
 }
 
@@ -152,7 +155,8 @@ class Diagram extends Component<Props> {
     editingNodeItem: null,
     currentLang: '',
     currentTab: 'workflow',
-    expandedNodes: []
+    expandedNodes: [],
+    varTypes: []
   }
 
   constructor(props) {
@@ -986,6 +990,8 @@ class Diagram extends Component<Props> {
     }
 
     const isQnA = this.props.selectedWorkflow === 'qna'
+    const isWorkflow = this.props.currentFlow !== undefined
+    const isAction = this.props.currentAction !== undefined
     const { currentTab } = this.state
 
     return (
@@ -1011,22 +1017,64 @@ class Diagram extends Component<Props> {
             }}
           />
         )}
+
         <MainContent.Wrapper className={cx({ [style.hidden]: isQnA })}>
-          <WorkflowToolbar
-            currentLang={this.state.currentLang}
-            languages={this.props.languages}
-            currentTab={this.state.currentTab}
-            setCurrentLang={lang => this.setState({ currentLang: lang })}
-            addVariable={this.addVariable}
-            tabChange={this.handleTabChanged}
-          />
+          {isWorkflow && !isAction && (
+            <WorkflowToolbar
+              currentLang={this.state.currentLang}
+              languages={this.props.languages}
+              currentTab={this.state.currentTab}
+              setCurrentLang={lang => this.setState({ currentLang: lang })}
+              addVariable={this.addVariable}
+              tabChange={this.handleTabChanged}
+            />
+          )}
+
+          {isAction && (
+            <Fragment>
+              <CodeEditorToolbar></CodeEditorToolbar>
+              <InjectedModuleView
+                moduleName="code-editor"
+                componentName="LiteEditor"
+                extraProps={{
+                  fileName: this.props.currentAction,
+                  onChange: text => {
+                    console.log('change', text)
+                    const extractInterface = text => {
+                      const match = /interface Args \{(.*?)\}/s.exec(text)
+                      if (!match) {
+                        return
+                      }
+
+                      const elements = match[1]
+                        .trim()
+                        .split('\n')
+                        .map(x => x.trim())
+                        .filter(x => !x.startsWith('/*') && !x.startsWith('//'))
+                        .map(x => {
+                          const [variable, type] = x.split(': ')
+                          return { variable, type }
+                        })
+
+                      return elements
+                    }
+
+                    this.setState({ varTypes: extractInterface(text) })
+                  }
+                }}
+              />
+            </Fragment>
+          )}
+
           {currentTab === 'variables' && <VariablesEditor editVariable={this.editVariable} />}
           <Fragment>
             <div
               id="diagramContainer"
               ref={ref => (this.diagramContainer = ref)}
               tabIndex={1}
-              className={cx(style.diagramContainer, { [style.hidden]: currentTab !== 'workflow' })}
+              className={cx(style.diagramContainer, {
+                [style.hidden]: (currentTab !== 'workflow' && !isWorkflow) || isAction
+              })}
               onContextMenu={this.handleContextMenu}
               onDrop={this.handleToolDropped}
               onDragOver={event => event.preventDefault()}
@@ -1041,7 +1089,7 @@ class Diagram extends Component<Props> {
               />
             </div>
 
-            {currentTab === 'workflow' && <Toolbar />}
+            {currentTab === 'workflow' && !isAction && <Toolbar />}
           </Fragment>
 
           {formType === 'say_something' && (
@@ -1126,6 +1174,7 @@ class Diagram extends Component<Props> {
               }}
             />
           )}
+          {isAction && <ActionPreviewForm varTypes={this.state.varTypes} />}
           {formType === 'sub-workflow' && (
             <SubWorkflowForm
               variables={this.props.variables}
@@ -1186,6 +1235,7 @@ const mapStateToProps = (state: RootReducer) => ({
   outcomeUsage: getCallerFlowsOutcomeUsage(state),
   currentFlowNode: getCurrentFlowNode(state),
   currentDiagramAction: state.flows.currentDiagramAction,
+  currentAction: state.flows.currentAction,
   canPasteNode: Boolean(state.flows.nodeInBuffer),
   skills: state.skills.installed,
   library: state.content.library,

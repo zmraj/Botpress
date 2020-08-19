@@ -7,8 +7,15 @@ const END_COMMENT = '/** Your code ends here */'
 const ACTION_HTTP_SIGNATURE =
   'function action(event: sdk.IO.IncomingEvent, args: any, { user, temp, session } = event.state)'
 
-const ACTION_LEGACY_SIGNATURE =
-  'function action(bp: typeof sdk, event: sdk.IO.IncomingEvent, args: any, { user, temp, session } = event.state)'
+const ACTION_LEGACY_SIGNATURE = `
+  // Your interface declaration
+  interface Args {
+
+
+  }
+
+  // Your code is below
+  function action(bp: typeof sdk, event: sdk.IO.IncomingEvent, args: any, { user, temp, session } = event.state)`
 
 const wrapper = {
   add: (file: EditableFile, content: string) => {

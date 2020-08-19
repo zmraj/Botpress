@@ -543,3 +543,5 @@ export const fetchVariables = () => dispatch => {
     dispatch(variablesReceived(data))
   })
 }
+
+export const editAction = createAction('ACTION/EDIT')

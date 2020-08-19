@@ -13,6 +13,7 @@ import {
   deleteEntity,
   deleteFlow,
   duplicateFlow,
+  editAction,
   refreshEntities,
   renameFlow,
   setActiveFormItem,
@@ -111,6 +112,19 @@ const Library: FC<Props> = props => {
     const items = [
       // { id: 'block', type: 'block' as NodeType, label: lang.tr('studio.library.savedBlocks'), children: [] },
       {
+        id: 'action',
+        type: 'action' as NodeType,
+        label: lang.tr('Actions'),
+        children: [
+          {
+            id: 'aa',
+            type: 'action',
+            label: 'action.js',
+            payload: { name: 'empty.js', type: 'action_legacy', location: 'empty.js', botId: 'main' }
+          }
+        ]
+      },
+      {
         id: 'workflow',
         type: 'workflow' as NodeType,
         label: lang.tr('studio.library.savedWorkflows'),
@@ -136,6 +150,9 @@ const Library: FC<Props> = props => {
       props.setActiveFormItem({ type: 'variableType', data: props.entities.find(x => x.id === item.id) })
     } else if (item.type === 'workflow') {
       props.goToFlow(item.id)
+    } else if (item.type === 'action') {
+      props.goToFlow('')
+      props.editAction(item.payload)
     }
   }
 
@@ -333,7 +350,8 @@ const mapDispatchToProps = {
   deleteEntity,
   deleteFlow,
   updateFlow,
-  renameFlow
+  renameFlow,
+  editAction
 }
 
 export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(Library)
