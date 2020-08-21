@@ -17,6 +17,7 @@ export default class Engine implements NLU.Engine {
   }
 
   public static async initialize(config: NLU.Config, logger: NLU.Logger): Promise<void> {
+    // Load good model for lang
   }
 
   public hasModel(language: string, hash: string) {
