@@ -8,6 +8,7 @@
     "resolveJsonModule": true,
     "target": "es6",
     "lib": ["es7"],
+    "skipLibCheck": true,
     "noImplicitAny": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,

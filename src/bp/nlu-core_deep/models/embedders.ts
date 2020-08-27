@@ -1,131 +1,150 @@
-const ort = require("onnxruntime");
-import axios from "axios";
-import fs from "fs";
-import fse from "fs-extra";
-import { has } from "lodash";
-import lru from "lru-cache";
-import { mean, reshape } from "mathjs";
-import path from "path";
+const ort = require('onnxruntime')
+import axios from 'axios'
+import crypto from 'crypto'
+import fs from 'fs'
+import fse from 'fs-extra'
+import { has } from 'lodash'
+import lru from 'lru-cache'
+import { mean, reshape } from 'mathjs'
+import path from 'path'
 import {
   BertWordPieceTokenizer,
   BPETokenizer,
   ByteLevelBPETokenizer,
   SentencePieceBPETokenizer,
-} from "tokenizers";
+} from 'tokenizers'
 
-export class Embedder {
-  private _embedder: typeof ort.InferenceSession;
-  private _tokenizer: BertWordPieceTokenizer | BPETokenizer | ByteLevelBPETokenizer;
-  private _cache: lru<string, Float32Array>;
-  private _embedSize: number;
+export const regex_sentence: RegExp = /(?<=\s+|^)[\"\'\'\"\'\"\[\(\{\⟨](.*?[.?!])(\s[.?!])*[\"\'\'\"\'\"\]\)\}\⟩](?=\s+|$)|(?<=\s+|^)\S(.*?[.?!])(\s[.?!])*(?=\s+|$)/g
+
+const hash_str = str =>
+  crypto
+    .createHash('md5')
+    .update(str)
+    .digest('hex')
+
+
+export default class Embedder {
+  private _embedder: typeof ort.InferenceSession
+  private _tokenizer!: BertWordPieceTokenizer | BPETokenizer | ByteLevelBPETokenizer
+  private _cache!: lru<string, Float32Array>
+  private _cachePath!: string
+  private _tokenizerPath: string
+  private _embedderPath: string
+  public embedSize!: number
 
   constructor(public lang: string) {
-    this._embedSize = 768;
+    this._tokenizerPath = path.join(process.APP_DATA_PATH, 'tokenizers', lang)
+    this._embedderPath = path.join(process.APP_DATA_PATH, 'embedders', lang)
+    this._embedderPath = path.join(process.APP_DATA_PATH, 'cache', lang)
   }
 
+  async _getEmbedSize(): Promise<number> {
+    const sentence = 'Dummy sentence to get embed size'
+    const tokens = await this._tokenizer.encode(sentence)
+    const id_array = BigInt64Array.from(tokens.ids, (x) => BigInt(x))
+    const attention_array = BigInt64Array.from(tokens.attentionMask, (x) => BigInt(x))
+    const ids = new ort.Tensor('int64', id_array, [1, tokens.length])
+    const attention = new ort.Tensor('int64', attention_array, [1, tokens.length])
+
+    const results = await this._embedder.run({
+      input_ids: ids,
+      attention_mask: attention,
+    })
+
+    const embedding = reshape(
+      Array.from(results.output_0.data),
+      results.output_0.dims
+    )
+    return embedding[0].length
+  }
+
+
   async load() {
-    // Preloading if embedder exists
-    // vocab.txt => Load an existing bert embedder
-    if (fs.existsSync(path.join(process.APP_DATA_PATH, "tokenizers", "vocab.txt"))) {
+    if (fs.existsSync(path.join(this._tokenizerPath, 'vocab.txt'))) {
+
       this._tokenizer = await BertWordPieceTokenizer.fromOptions({
-        vocabFile: path.join(process.APP_DATA_PATH, "tokenizers", "vocab.txt"),
-      });
-      console.log("Bert tokenizer Loaded");
-      // vocab.json => Load an existing BPE embedder
-    } else if (
-      fs.existsSync(path.join(this.tokenizer_vocab_folder, "vocab.json"))
-    ) {
-      console.log("Loading BPE Tokenizer");
-      this.tokenizer = await BPETokenizer.fromOptions({
-        vocabFile: path.join(this.tokenizer_vocab_folder, "vocab.json"),
-        mergesFile: path.join(this.tokenizer_vocab_folder, "merges.txt"),
-      });
-      console.log("Loaded BPE Tokenizer");
+        vocabFile: path.join(this._tokenizerPath, 'vocab.txt'),
+      })
+
+    } else if (fs.existsSync(path.join(this._tokenizerPath, 'vocab.json'))) {
+
+      this._tokenizer = await BPETokenizer.fromOptions({
+        vocabFile: path.join(this._tokenizerPath, 'vocab.json'),
+        mergesFile: path.join(this._tokenizerPath, 'merges.txt'),
+      })
+
     } else {
-      console.log("Cannot load Embedder, check the files path");
+      console.log('Cannot load Embedder, check the files path')
     }
 
-    // Create the ONNX Graph (inference only for now)
-    this.embedder = await ort.InferenceSession.create(this.embedder_onnx_file);
+    this._embedder = await ort.InferenceSession.create(path.join(this._embedderPath, 'embedder.onnx'))
+    this.embedSize = await this._getEmbedSize()
 
-    // Predict one element to get this.embeddings size
-    // this.embed_size = (
-    //   await this.embed("Dummy sentence to get embedding size", true)
-    // ).length;
-    // console.log("embed size laoded", this.embed_size);
+    this._cache = new lru<string, Float32Array>({
+      length: (arr: Float32Array) => {
+        if (arr && arr.BYTES_PER_ELEMENT) {
+          return arr.length * arr.BYTES_PER_ELEMENT
+        } else {
+          return this.embedSize /* dim */ * Float32Array.BYTES_PER_ELEMENT
+        }
+      },
+      max:
+        this.embedSize /* dim */ *
+        Float32Array.BYTES_PER_ELEMENT /* bytes */ *
+        10000000 /* 10M sentences */,
+    })
 
-    // Get the existing cache or create a new one
-    if (await fse.pathExists(this.cache_path)) {
-      const dump = await fse.readJSON(this.cache_path);
+    if (await fse.pathExists(path.join(this._cachePath, 'embed_cache.json'))) {
+      const dump = await fse.readJSON(this._cachePath)
       if (dump) {
         const kve = dump.map((x) => ({
           e: x.e,
           k: x.k,
           v: Float32Array.from(Object.values(x.v)),
-        }));
-        this.cache.load(kve);
+        }))
+        this._cache.load(kve)
       }
-    } else {
-      this.cache = new lru<string, Float32Array>({
-        length: (arr: Float32Array) => {
-          if (arr && arr.BYTES_PER_ELEMENT) {
-            return arr.length * arr.BYTES_PER_ELEMENT;
-          } else {
-            return 768 /* dim */ * Float32Array.BYTES_PER_ELEMENT;
-          }
-        },
-        max:
-          768 /* dim */ *
-          Float32Array.BYTES_PER_ELEMENT /* bytes */ *
-          10000000 /* 10M sentences */,
-      });
     }
   }
 
   async save() {
-    await fse.ensureFile(this.cache_path);
-    await fse.writeJSON(this.cache_path, this.cache.dump());
+    await fse.ensureFile(this._cachePath)
+    await fse.writeJSON(this._cachePath, this._cache.dump())
   }
 
   async embed(sentence: string): Promise<number[]> {
-    const cache_key = hash_str(sentence);
+    const cache_key = hash_str(sentence)
 
-    if (this.cache.has(cache_key)) {
-      return Array.from(this.cache.get(cache_key).values());
+    if (this._cache.has(cache_key)) {
+      return Array.from(this._cache.get(cache_key)!.values())
     } else {
-      const sentence_embeddings: number[] = [];
+      const sentence_embeddings: number[] = []
 
       for (const s of sentence.match(regex_sentence) || [sentence]) {
-        const tokens = await this.tokenizer.encode(s);
-        const id_array = BigInt64Array.from(tokens.ids, (x) => BigInt(x));
-        const attention_array = BigInt64Array.from(tokens.attentionMask, (x) =>
-          BigInt(x)
-        );
+        const tokens = await this._tokenizer.encode(s)
+        const id_array = BigInt64Array.from(tokens.ids, (x) => BigInt(x))
+        const attention_array = BigInt64Array.from(tokens.attentionMask, (x) => BigInt(x))
+        const ids = new ort.Tensor('int64', id_array, [1, tokens.length])
+        const attention = new ort.Tensor('int64', attention_array, [1, tokens.length])
 
-        const ids = new ort.Tensor("int64", id_array, [1, tokens.length]);
-        const attention = new ort.Tensor("int64", attention_array, [
-          1,
-          tokens.length,
-        ]);
-
-        const results = await this.embedder.run({
+        const results = await this._embedder.run({
           input_ids: ids,
           attention_mask: attention,
-        });
+        })
 
         const embedding = reshape(
           Array.from(results.output_0.data),
           results.output_0.dims
-        );
+        )
 
-        const mean_embed = mean(embedding[0], 0);
-        sentence_embeddings.push(mean_embed);
+        const mean_embed = mean(embedding[0], 0)
+        sentence_embeddings.push(mean_embed)
       }
 
-      const sentence_embed = mean(sentence_embeddings, 0);
+      const sentence_embed = mean(sentence_embeddings, 0)
 
-      this.cache.set(cache_key, sentence_embed);
-      return sentence_embed;
+      this._cache.set(cache_key, sentence_embed)
+      return sentence_embed
     }
   }
 }

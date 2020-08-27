@@ -5,9 +5,26 @@ import _ from 'lodash'
 
 import * as CacheManager from '../core/services/nlu/cache-manager'
 
-const trainDebug = DEBUG('nlu').sub('training')
+import { Net } from './models/deepnet'
 
+const trainDebug = DEBUG('nlu').sub('training')
+interface Model {
+  hash: string
+  languageCode: string
+  startedAt: Date
+  finishedAt: Date
+  data: {
+    input: string
+    output: string
+  }
+  model: Net
+  trained: boolean
+  saved: boolean
+  loaded: boolean
+}
 export default class Engine implements NLU.Engine {
+  private modelsByLang: _.Dictionary<Model> = {}
+
   constructor(private defaultLanguage: string, private botId: string, private logger: NLU.Logger) { }
 
   public static getHealth() {
@@ -17,7 +34,6 @@ export default class Engine implements NLU.Engine {
   }
 
   public static async initialize(config: NLU.Config, logger: NLU.Logger): Promise<void> {
-    // Load good model for lang
   }
 
   public hasModel(language: string, hash: string) {
@@ -35,8 +51,21 @@ export default class Engine implements NLU.Engine {
     trainingSession?: NLU.TrainingSession,
     options?: NLU.TrainingOptions
   ): Promise<NLU.Model | undefined> {
+
     trainDebug.forBot(this.botId, `Started ${languageCode} training`)
-    return undefined
+    if (!this.modelsByLang[languageCode]) {
+      new Net(languageCode, intentDefs.length)
+      this.modelsByLang[languageCode].loaded = true
+    }
+    if (!this.modelsByLang[languageCode].trained) {
+      this.modelsByLang[languageCode].startedAt = new Date()
+      await this.modelsByLang[languageCode].model.loadOrTrain(intentDefs, entityDefs)
+      this.modelsByLang[languageCode].finishedAt = new Date()
+      this.modelsByLang[languageCode].loaded = true
+      this.modelsByLang[languageCode].trained = true
+      this.modelsByLang[languageCode].saved = true
+    }
+    return _.omit(this.modelsByLang[languageCode], 'model', 'trained', 'saved', 'loaded') as NLU.Model
   }
 
   async loadModel(serialized: NLU.Model | undefined) {
