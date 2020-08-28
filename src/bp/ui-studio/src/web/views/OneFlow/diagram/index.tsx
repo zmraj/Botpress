@@ -952,6 +952,15 @@ class Diagram extends Component<Props> {
     this.props.updateFlowNode({ subflow: data })
   }
 
+  updateExecute = data => {
+    const { node, index } = this.state.editingNodeItem
+
+    this.props.switchFlowNode(node.id)
+    this.setState({ editingNodeItem: { node: { ...node, execute: { ...node.execute, ...data } }, index } })
+
+    this.props.updateFlowNode({ execute: { ...node.execute, ...data } })
+  }
+
   renderSearch = () => {
     return (
       this.props.showSearch && (
@@ -987,6 +996,8 @@ class Diagram extends Component<Props> {
       currentItem = data
     } else if (formType === 'variable') {
       currentItem = node?.variable
+    } else if (formType === 'execute') {
+      currentItem = node?.execute
     }
 
     const isQnA = this.props.selectedWorkflow === 'qna'
@@ -1153,8 +1164,14 @@ class Diagram extends Component<Props> {
           {formType === 'execute' && (
             <ExecuteForm
               node={this.props.currentFlowNode}
+              customKey={`${node?.id}`}
               deleteNode={this.deleteSelectedElements.bind(this)}
-              diagramEngine={this.diagramEngine}
+              contentLang={this.state.currentLang}
+              formData={currentItem}
+              events={this.props.hints}
+              variables={this.props.variables}
+              onUpdate={this.updateExecute.bind(this)}
+              onUpdateVariables={this.addVariable}
               close={() => {
                 this.timeout = setTimeout(() => {
                   this.setState({ editingNodeItem: null })
@@ -1174,7 +1191,17 @@ class Diagram extends Component<Props> {
               }}
             />
           )}
-          {isAction && <ActionPreviewForm varTypes={this.state.varTypes} />}
+          {isAction && (
+            <ActionPreviewForm
+              varTypes={this.state.varTypes}
+              contentLang={this.state.currentLang}
+              formData={node?.prompt}
+              events={this.props.hints}
+              variables={this.props.variables}
+              onUpdate={this.updateNodeCondition.bind(this)}
+              onUpdateVariables={this.addVariable}
+            />
+          )}
           {formType === 'sub-workflow' && (
             <SubWorkflowForm
               variables={this.props.variables}

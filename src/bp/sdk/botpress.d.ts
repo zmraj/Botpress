@@ -660,7 +660,15 @@ declare module 'botpress/sdk' {
     }
 
     export interface Actions {
-      action: 'send' | 'startWorkflow' | 'redirect' | 'continue' | 'goToNode' | 'prompt.repeat' | 'prompt.inform' | 'prompt.cancel'
+      action:
+        | 'send'
+        | 'startWorkflow'
+        | 'redirect'
+        | 'continue'
+        | 'goToNode'
+        | 'prompt.repeat'
+        | 'prompt.inform'
+        | 'prompt.cancel'
       data?: SendContent | FlowRedirect
     }
 
@@ -1459,10 +1467,16 @@ declare module 'botpress/sdk' {
     flow?: string
     prompt?: PromptNode
     subflow?: SubWorkflowNode
+    execute?: ExecuteNode
     isNew?: boolean
     /** Used internally by the flow editor */
     readonly lastModified?: Date
   } & NodeActions
+
+  export interface ExecuteNode {
+    variables: string[]
+    code: string
+  }
 
   export interface SubWorkflowNode {
     in: { [variable: string]: SubWorkflowInput }

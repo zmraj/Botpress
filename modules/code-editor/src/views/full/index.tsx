@@ -5,6 +5,7 @@ import React from 'react'
 
 import { RootStore } from './store'
 import Editor from './Editor'
+import MinimalEditor from './FormEditor/Editor'
 import LiteEditor from './LiteEditor'
 import SidePanel from './SidePanel'
 
@@ -38,4 +39,4 @@ export default class CodeEditor extends React.Component<{ bp: any }> {
   }
 }
 
-export { LiteEditor }
+export { LiteEditor, MinimalEditor }

@@ -1,4 +1,4 @@
-import { BoxedVariable, PrimitiveVarType } from 'botpress/sdk'
+import sdk from 'botpress/sdk'
 import { BaseVariable } from 'common/variables'
 import moment from 'moment'
 
@@ -10,7 +10,14 @@ interface DateConfig {
   format: string
 }
 
-class BoxedDate extends BaseVariable<BoxedDateType, DateConfig> {
+interface VariableDate extends sdk.BoxedVariable<BoxedDateType, DateConfig> {
+  equals: (otherDate: Date) => boolean
+  isBefore: (otherDate: Date) => boolean
+  /** Return true if the provided date is after the current one */
+  isAfter: (otherDate: Date) => boolean
+}
+
+class BoxedDate extends BaseVariable<BoxedDateType, DateConfig> implements VariableDate {
   constructor(args) {
     super(args)
   }
@@ -24,7 +31,7 @@ class BoxedDate extends BaseVariable<BoxedDateType, DateConfig> {
     }
   }
 
-  compare(compareTo: BoxedVariable<BoxedDateType, DateConfig>) {
+  compare(compareTo: sdk.BoxedVariable<BoxedDateType, DateConfig>) {
     const dateA = this.value
     const dateB = moment(compareTo.value)
 
@@ -37,12 +44,24 @@ class BoxedDate extends BaseVariable<BoxedDateType, DateConfig> {
     return 0
   }
 
+  isBefore(value) {
+    return true
+  }
+
+  isAfter(value) {
+    return true
+  }
+
+  equals(value) {
+    return true
+  }
+
   toString(customFormat?: string) {
     return moment(this._value).format(customFormat ?? this._config?.format ?? 'YYYY-MM-DD')
   }
 }
 
-const DateVariableType: PrimitiveVarType = {
+const definition: sdk.PrimitiveVarType = {
   id: 'date',
   config: {
     label: 'date',
@@ -60,4 +79,4 @@ const DateVariableType: PrimitiveVarType = {
   box: BoxedDate
 }
 
-export default DateVariableType
+export default definition

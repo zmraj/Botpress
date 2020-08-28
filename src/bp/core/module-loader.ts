@@ -201,6 +201,21 @@ export class ModuleLoader {
     }
   }
 
+  public async getVariableDefinitions() {
+    const definitions: any = []
+    const modules = this.getLoadedModules()
+
+    for (const module of modules) {
+      const resourceLoader = new ModuleResourceLoader(this.logger, module.name, this.ghost)
+      const def = await resourceLoader.getModuleDefinitions()
+      if (def) {
+        definitions.push(def)
+      }
+    }
+
+    return definitions.join('\n')
+  }
+
   private async _loadModule(module: ModuleEntryPoint, name: string) {
     try {
       ModuleLoader.processModuleEntryPoint(module, name)
@@ -213,6 +228,7 @@ export class ModuleLoader {
       await resourceLoader.enableResources()
       await resourceLoader.runMigrations()
       await resourceLoader.importResources()
+      await resourceLoader.getModuleDefinitions()
     } catch (err) {
       this.logger.attachError(err).error(`Error in module "${name}" onServerStarted`)
       return false

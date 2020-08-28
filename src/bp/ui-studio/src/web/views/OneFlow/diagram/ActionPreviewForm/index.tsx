@@ -17,10 +17,18 @@ interface RawField {
   code: string
 }
 
-const ActionPreviewForm: FC<any> = ({ varTypes }) => {
+const ActionPreviewForm: FC<any> = ({
+  varTypes,
+  onUpdate,
+  variables,
+  events,
+  formData,
+  contentLang,
+  onUpdateVariables
+}) => {
   const [showModal, setShowModal] = useState(false)
   const [showOptions, setShowOptions] = useState(false)
-  const [fields, setFields] = useState([])
+  // const [fields, setFields] = useState([])
   const [rawFields, setRawFields] = useState<RawField[]>([])
 
   const moreOptionsItems: MoreOptionsItems[] = [
@@ -41,10 +49,43 @@ const ActionPreviewForm: FC<any> = ({ varTypes }) => {
         label: 'My variable'
       }))
 
-      setFields(mapped)
+      // setFields(mapped)
       setRawFields(mapped.map(x => ({ key: x.key, code: JSON.stringify(x, undefined, 2) })))
     }
   }, [varTypes])
+
+  const fields: any = [
+    {
+      group: {
+        addLabel: 'Add Parameter',
+        minimum: 1,
+        contextMenu: [
+          {
+            type: 'delete',
+            label: 'Delete parameter'
+          }
+        ]
+      },
+      type: 'group',
+      key: 'items',
+      label: 'fields::name',
+      fields: [
+        {
+          type: 'text',
+          key: 'name',
+          placeholder: 'module.builtin.variable.namePlaceholder',
+          label: 'Parameter Name'
+        },
+        {
+          type: 'select',
+          key: 'variableType',
+          required: true,
+          label: 'Variable Type',
+          options: variables.display.map(x => ({ label: lang.tr(x.label), icon: x.icon, value: x }))
+        }
+      ]
+    }
+  ]
 
   return (
     <RightSidebar className={style.wrapper} canOutsideClickClose={!showModal} close={() => close()}>
@@ -81,7 +122,7 @@ const ActionPreviewForm: FC<any> = ({ varTypes }) => {
                     ])
 
                     try {
-                      setFields([...fields.slice(0, index), JSON.parse(val), ...fields.slice(index + 1)])
+                      // setFields([...fields.slice(0, index), JSON.parse(val), ...fields.slice(index + 1)])
                     } catch (err) {}
                   }}
                   value={field.code}
@@ -90,14 +131,30 @@ const ActionPreviewForm: FC<any> = ({ varTypes }) => {
             )
           })}
 
-          <SafeForm>
+          <Contents.Form
+            currentLang={contentLang}
+            variables={variables}
+            events={events}
+            fields={fields}
+            advancedSettings={[]}
+            formData={{
+              items: [
+                { name: 'myDate', variableType: { type: 'date' } },
+                { name: 'someBool', variableType: { type: 'boolean' } }
+              ]
+            }}
+            onUpdate={data => console.log(data)}
+            onUpdateVariables={onUpdateVariables}
+          />
+
+          {/* <SafeForm>
             <Contents.Form
               currentLang={'en'}
               fields={fields || []}
               formData={{}}
               onUpdate={data => console.log(data)}
             />
-          </SafeForm>
+          </SafeForm> */}
         </div>
       </Fragment>
     </RightSidebar>

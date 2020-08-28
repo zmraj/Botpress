@@ -85,3 +85,9 @@ Authorization: Bearer {{authToken}}
 #       "baseUrl": "https://botpress.com",
 #     }
 #   }
+
+
+
+### Get all variables
+GET http://localhost:3001/api/v1/modules/definitions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwic3RyYXRlZ3kiOiJkZWZhdWx0IiwiaXNTdXBlckFkbWluIjp0cnVlLCJpYXQiOjE1OTg1MzM3MjIsImV4cCI6MTU5ODU1NTMyMiwiYXVkIjoiY29sbGFib3JhdG9ycyJ9.SoLJRcFPPsYM4xFe5OG79-Wf9WJEyyY-iCeVgf9SdtE

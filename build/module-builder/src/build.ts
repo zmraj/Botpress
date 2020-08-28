@@ -7,6 +7,7 @@ import mkdirp from 'mkdirp'
 import os from 'os'
 import path from 'path'
 import rimraf from 'rimraf'
+import { Project } from 'ts-morph'
 import * as ts from 'typescript'
 import { generateSchema, getProgramFromFiles } from 'typescript-json-schema'
 
@@ -19,8 +20,71 @@ export default async (argv: any) => {
   await buildBackend(modulePath)
   await webpackBuild(modulePath)
   await buildConfigSchema(modulePath)
+  await extractTypings(modulePath)
 
   normal('Build completed')
+}
+
+export const extractTypings = async (modulePath: string) => {
+  const basePath = `${modulePath}/src/backend`
+
+  const project = new Project({})
+
+  project.addSourceFilesAtPaths(`${basePath}/**/*.ts`)
+
+  const consolidated = ''
+  const variables = []
+
+  for (const file of project.getSourceFiles()) {
+    const hasVariable = file.getInterfaces().find(x => x.getName().startsWith('Variable'))
+    // for (const interfaceDef of file.getInterfaces()) {
+    //   if (interfaceDef.getName().startsWith('Variable')) {
+    //     consolidated += interfaceDef.getFullText() + '\r\n'
+    //     console.log(interfaceDef.getName())
+    //   }
+    // }
+    if (hasVariable) {
+      const varType = hasVariable.getName().replace('Variable', '')
+      const namespace = `BPVariable.${varType}`
+      // console.log(hasVariable.getFullText())
+      const contents: string[] = []
+
+      contents.push(...file.getInterfaces().map(x => x.getFullText()))
+      contents.push(...file.getTypeAliases().map(x => x.getFullText()))
+
+      // for (const def of file.getInterfaces()) {
+      //   // interfaceDef.insertText
+      //   def.rename(def.getName())
+      // }
+
+      variables.push(`declare namespace ${namespace} {\n${contents.join('\n')}\n}`)
+
+      /// console.log('FINAL', allContent)
+      //       consolidated += `
+      // declare namespace BPVariable.Date {`
+      //       for (const interfaceDef of file.getInterfaces()) {
+      //         consolidated += `    ${interfaceDef.getFullText()}\n`
+      //       }
+
+      //       for (const type of file.getTypeAliases()) {
+      //         consolidated += `    ${type.getFullText()}\n`
+      //       }
+
+      //       consolidated += `
+      // }`
+    }
+
+    // for (const interfaceDef of file.getClasses()) {
+    //   // console.log(interfaceDef.getName())
+    //   if (interfaceDef.getName().startsWith('Boxed')) {
+    //     consolidated += interfaceDef.getFullText() + '\r\n\r\n'
+    //     console.log(interfaceDef.getName())
+    //   }
+    // }
+  }
+  /// console.log(consolidated)
+
+  fse.writeFileSync(path.join(modulePath, 'dist/variables.txt'), variables.join('\n'))
 }
 
 export async function buildBackend(modulePath: string) {
