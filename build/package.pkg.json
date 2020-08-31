@@ -13,6 +13,7 @@
       "./common/**/*.js",
       "./ml/**/*.js",
       "./nlu-core/**/*.js",
+      "./nlu-core-deep/**/*.js",
       "./migrations/**/*.js"
     ],
     "assets": [
