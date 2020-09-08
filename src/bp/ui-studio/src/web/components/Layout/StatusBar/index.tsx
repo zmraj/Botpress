@@ -5,12 +5,11 @@ import { connect } from 'react-redux'
 import style from './style.scss'
 import ConfigStatus from './ConfigStatus'
 import LangSwitcher from './LangSwitcher'
-import { TrainingStatusComponent } from './TrainingStatus'
+import TrainingStatusComponent from './TrainingStatus'
 
 interface Props {
   langSwitcherOpen: boolean
   user: any
-  botInfo: any
   contentLang: string
   toggleLangSwitcher: (e: any) => void
 }
@@ -21,11 +20,13 @@ const StatusBar: FC<Props> = props => {
       <div className={style.item}>
         <span>{window.APP_VERSION}</span>
         <span className={style.botName}>{window.BOT_NAME}</span>
-        <LangSwitcher toggleLangSwitcher={props.toggleLangSwitcher} langSwitcherOpen={props.langSwitcherOpen} />
+        {!window.USE_ONEFLOW && (
+          <LangSwitcher toggleLangSwitcher={props.toggleLangSwitcher} langSwitcherOpen={props.langSwitcherOpen} />
+        )}
       </div>
       <div className={style.item}>
+        <TrainingStatusComponent />
         {props.user && props.user.isSuperAdmin && <ConfigStatus />}
-        <TrainingStatusComponent currentLanguage={props.contentLang} />
       </div>
     </footer>
   )
@@ -33,7 +34,6 @@ const StatusBar: FC<Props> = props => {
 
 const mapStateToProps = state => ({
   user: state.user,
-  botInfo: state.bot,
   contentLang: state.language.contentLang
 })
 

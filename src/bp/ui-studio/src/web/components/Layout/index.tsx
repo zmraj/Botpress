@@ -1,3 +1,4 @@
+import { NLU } from 'botpress/sdk'
 import { lang, utils } from 'botpress/shared'
 import React, { FC, Fragment, useEffect, useRef, useState } from 'react'
 import { HotKeys } from 'react-hotkeys'
@@ -5,10 +6,12 @@ import { connect } from 'react-redux'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import SplitPane from 'react-split-pane'
 import { bindActionCreators } from 'redux'
-import { toggleBottomPanel, viewModeChanged } from '~/actions'
+import { setEmulatorOpen, toggleBottomPanel, trainSessionReceived, viewModeChanged } from '~/actions'
 import SelectContentManager from '~/components/Content/Select/Manager'
 import PluginInjectionSite from '~/components/PluginInjectionSite'
 import BackendToast from '~/components/Util/BackendToast'
+import { RootReducer } from '~/reducers'
+import storage from '~/util/storage'
 import Config from '~/views/Config'
 import Content from '~/views/Content'
 import FlowBuilder from '~/views/FlowBuilder'
@@ -16,17 +19,21 @@ import Logs from '~/views/Logs'
 import Module from '~/views/Module'
 import OneFlow from '~/views/OneFlow'
 
+import { TrainingStatusService } from './training-status-service'
 import BotUmountedWarning from './BotUnmountedWarning'
 import CommandPalette from './CommandPalette'
 import GuidedTour from './GuidedTour'
 import LanguageServerHealth from './LangServerHealthWarning'
 import layout from './Layout.scss'
+import NotTrainedWarningComponent from './NotTrainedWarning'
 import Sidebar from './Sidebar'
 import StatusBar from './StatusBar'
 import Toolbar from './Toolbar'
 import BottomPanel from './Toolbar/BottomPanel'
+import WarningMessage from './WarningMessage'
 
 const { isInputFocused } = utils
+const WEBCHAT_PANEL_STATUS = 'bp::webchatOpened'
 
 interface ILayoutProps {
   viewModeChanged: any
@@ -38,16 +45,9 @@ interface ILayoutProps {
   history: any
   bottomPanel: boolean
   translations: any
-}
-
-const handleWebChatPanel = message => {
-  if (message.data.name === 'webchatOpened') {
-    document.getElementById('main-content-wrapper').classList.toggle('emulator-open', true)
-  }
-
-  if (message.data.name === 'webchatClosed') {
-    document.getElementById('main-content-wrapper').classList.toggle('emulator-open', false)
-  }
+  contentLang: string
+  trainSessionReceived: (ts: NLU.TrainingSession) => void
+  setEmulatorOpen: (state: boolean) => void
 }
 
 const Layout: FC<ILayoutProps> = props => {
@@ -64,11 +64,40 @@ const Layout: FC<ILayoutProps> = props => {
 
     setTimeout(() => BotUmountedWarning(), 500)
 
+    const handleWebChatPanel = message => {
+      if (message.data.name === 'webchatLoaded' && storage.get(WEBCHAT_PANEL_STATUS) === 'opened') {
+        toggleEmulator()
+      }
+
+      if (message.data.name === 'webchatOpened') {
+        storage.set(WEBCHAT_PANEL_STATUS, 'opened')
+        props.setEmulatorOpen(true)
+        document.getElementById('main-content-wrapper').classList.toggle('emulator-open', true)
+        document.getElementById('mainLayout').classList.toggle('layout-emulator-open', true)
+      }
+
+      if (message.data.name === 'webchatClosed') {
+        storage.set(WEBCHAT_PANEL_STATUS, 'closed')
+        props.setEmulatorOpen(false)
+        document.getElementById('main-content-wrapper').classList.toggle('emulator-open', false)
+        document.getElementById('mainLayout').classList.toggle('layout-emulator-open', false)
+      }
+    }
     window.addEventListener('message', handleWebChatPanel)
+
     return () => {
       window.removeEventListener('message', handleWebChatPanel)
     }
   }, [])
+
+  useEffect(() => {
+    const trainStatusService = new TrainingStatusService(props.contentLang, props.trainSessionReceived)
+    // tslint:disable-next-line: no-floating-promises
+    trainStatusService.fetchTrainingStatus()
+    trainStatusService.startPolling()
+
+    return () => trainStatusService.stopPolling()
+  }, [props.contentLang])
 
   useEffect(() => {
     if (props.translations) {
@@ -80,6 +109,7 @@ const Layout: FC<ILayoutProps> = props => {
   const toggleEmulator = () => {
     window.botpressWebChat.sendEvent({ type: 'toggle' })
     document.getElementById('main-content-wrapper').classList.toggle('emulator-open')
+    document.getElementById('mainLayout').classList.toggle('layout-emulator-open')
   }
 
   const toggleGuidedTour = () => {
@@ -216,8 +246,8 @@ const Layout: FC<ILayoutProps> = props => {
           <LanguageServerHealth />
         </div>
       </HotKeys>
+      <NotTrainedWarningComponent />
       <StatusBar
-        onToggleEmulator={toggleEmulator}
         langSwitcherOpen={langSwitcherOpen}
         toggleLangSwitcher={toggleLangSwitcher}
         onToggleGuidedTour={toggleGuidedTour}
@@ -228,13 +258,15 @@ const Layout: FC<ILayoutProps> = props => {
   )
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: RootReducer) => ({
   viewMode: state.ui.viewMode,
   docHints: state.ui.docHints,
   bottomPanel: state.ui.bottomPanel,
-  translations: state.language.translations
+  translations: state.language.translations,
+  contentLang: state.language.contentLang
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ viewModeChanged, toggleBottomPanel }, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ viewModeChanged, toggleBottomPanel, trainSessionReceived, setEmulatorOpen }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout)

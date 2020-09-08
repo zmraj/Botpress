@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import {
+  changeContentLanguage,
   clearErrorSaveFlows,
   closeFlowNodeProps,
   flowEditorRedo,
@@ -15,12 +16,12 @@ import {
   setDiagramAction,
   switchFlow
 } from '~/actions'
-import { Container } from '~/components/Shared/Interface'
 import { Timeout, toastFailure, toastInfo } from '~/components/Shared/Utils'
 import { isOperationAllowed } from '~/components/Shared/Utils/AccessControl'
 import DocumentationProvider from '~/components/Util/DocumentationProvider'
 import { RootReducer } from '~/reducers'
 
+import withLanguage from '../../components/Util/withLanguage'
 import { PanelPermissions } from '../FlowBuilder/sidePanel'
 import SkillsBuilder from '../FlowBuilder/skills'
 import style from '../FlowBuilder/style.scss'
@@ -28,16 +29,24 @@ import style from '../FlowBuilder/style.scss'
 import Diagram from './diagram'
 import SidePanel from './sidePanel'
 
+const CMS_LANG_KEY = `bp::${window.BOT_ID}::cmsLanguage`
+
 interface OwnProps {
   currentMutex: any
 }
 
+interface LangProps {
+  contentLang: string
+  languages: string[]
+  defaultLanguage: string
+}
+
 type StateProps = ReturnType<typeof mapStateToProps>
 type DispatchProps = typeof mapDispatchToProps
-type Props = DispatchProps & StateProps & OwnProps & RouteComponentProps
+type Props = DispatchProps & StateProps & OwnProps & LangProps & RouteComponentProps
 
 const allActions: PanelPermissions[] = ['create', 'rename', 'delete']
-const searchTag = '#search:'
+const SEARCH_TAG = '#search:'
 
 const FlowBuilder = (props: Props) => {
   const { flow } = props.match.params as any
@@ -46,6 +55,7 @@ const FlowBuilder = (props: Props) => {
   const [showSearch, setShowSearch] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [flowPreview, setFlowPreview] = useState(true)
+  const [currentLang, setCurrentLang] = useState(localStorage.getItem(CMS_LANG_KEY) || props.contentLang)
   const [mutex, setMutex] = useState(null)
   const [actions, setActions] = useState(allActions)
   const [highlightFilter, setHighlightFilter] = useState('')
@@ -62,7 +72,7 @@ const FlowBuilder = (props: Props) => {
     }
 
     const { hash } = props.location
-    setHighlightFilter(hash.startsWith(searchTag) ? hash.replace(searchTag, '') : '')
+    setHighlightFilter(hash.startsWith(SEARCH_TAG) ? hash.replace(SEARCH_TAG, '') : '')
   }, [])
 
   useEffect(() => {
@@ -79,7 +89,7 @@ const FlowBuilder = (props: Props) => {
   useEffect(() => {
     if (props.errorSavingFlows) {
       const { status } = props.errorSavingFlows
-      const message = status === 403 ? lang.tr('studio.unauthUpdate') : lang.tr('studio.errorWhileSaving')
+      const message = status === 403 ? lang.tr('studio.flow.unauthUpdate') : lang.tr('studio.flow.errorWhileSaving')
       toastFailure(message, Timeout.LONG, props.clearErrorSaveFlows, { delayed: true })
     }
   }, [props.errorSavingFlows])
@@ -139,7 +149,7 @@ const FlowBuilder = (props: Props) => {
     },
     find: e => {
       e.preventDefault()
-      setShowSearch(!showSearch)
+      setShowSearch(true)
     },
     'preview-flow': e => {
       e.preventDefault()
@@ -147,7 +157,7 @@ const FlowBuilder = (props: Props) => {
     },
     save: e => {
       e.preventDefault()
-      toastInfo(lang.tr('studio.nowSaveAuto'), Timeout.LONG)
+      toastInfo(lang.tr('studio.flow.nowSaveAuto'), Timeout.LONG)
     },
     delete: e => {
       if (!utils.isInputFocused()) {
@@ -158,14 +168,14 @@ const FlowBuilder = (props: Props) => {
     cancel: e => {
       e.preventDefault()
       props.closeFlowNodeProps()
-      setShowSearch(false)
     }
   }
 
-  const handleFilterChanged = ({ target: { value: highlightFilter } }) => {
-    const newUrl = props.location.pathname + searchTag + highlightFilter
-    setHighlightFilter(highlightFilter)
-    props.history.replace(newUrl)
+  const handleFilterChanged = (filter: string) => {
+    setHighlightFilter(filter)
+
+    const query = filter ? `${SEARCH_TAG}${filter}` : ''
+    props.history.replace(`${props.location.pathname}${query}`)
   }
 
   const createFlow = name => {
@@ -178,6 +188,8 @@ const FlowBuilder = (props: Props) => {
       <SidePanel
         onDeleteSelectedElements={() => diagram.current?.deleteSelectedElements()}
         readOnly={readOnly}
+        defaultLang={props.defaultLanguage}
+        currentLang={currentLang}
         mutexInfo={mutex}
         permissions={actions}
         flowPreview={flowPreview}
@@ -191,6 +203,14 @@ const FlowBuilder = (props: Props) => {
           flowPreview={flowPreview}
           showSearch={showSearch}
           topicQnA={topicQnA}
+          setCurrentLang={lang => {
+            setCurrentLang(lang)
+            props.changeContentLanguage(lang)
+            localStorage.setItem(CMS_LANG_KEY, lang)
+          }}
+          languages={props.languages}
+          defaultLang={props.defaultLanguage}
+          currentLang={currentLang}
           hideSearch={() => setShowSearch(false)}
           handleFilterChanged={handleFilterChanged}
           highlightFilter={highlightFilter}
@@ -218,6 +238,7 @@ const mapStateToProps = (state: RootReducer) => ({
 })
 
 const mapDispatchToProps = {
+  changeContentLanguage,
   switchFlow,
   setDiagramAction,
   flowEditorUndo,
@@ -232,4 +253,4 @@ const mapDispatchToProps = {
 export default connect<StateProps, DispatchProps, OwnProps>(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(FlowBuilder))
+)(withRouter(withLanguage(FlowBuilder)))
