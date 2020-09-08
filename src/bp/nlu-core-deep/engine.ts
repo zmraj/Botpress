@@ -60,28 +60,32 @@ export default class Engine implements NLU.Engine {
     trainingSession?: NLU.TrainingSession,
     options?: NLU.TrainingOptions
   ): Promise<NLU.Model | undefined> {
+    if (!intentDefs.length) {
+      return
+    }
     trainDebug.forBot(this.botId, `Started ${languageCode} training`)
-    if (!this.modelsByLang[languageCode]) {
-      this.modelsByLang[languageCode] = {} as NLU.Model
-      this.modelsByLang[languageCode].model = new Net(languageCode, intentDefs.length)
-      this.modelsByLang[languageCode].loaded = true
+    const model: Model = this.modelsByLang[languageCode] ?? {}
+    if (!model.model) {
+      model.model = new Net(languageCode, intentDefs.length)
+      model.loaded = true
     }
-    if (!this.modelsByLang[languageCode].trained) {
-      this.modelsByLang[languageCode].startedAt = new Date()
-      await this.modelsByLang[languageCode].model!.train(intentDefs, entityDefs)
-      this.modelsByLang[languageCode].finishedAt = new Date()
-      this.modelsByLang[languageCode].loaded = true
-      this.modelsByLang[languageCode].trained = true
-      this.modelsByLang[languageCode].saved = true
+    if (!model.trained) {
+      model.startedAt = new Date()
+      await model.model!.train(intentDefs, entityDefs)
+      model.finishedAt = new Date()
+      model.loaded = true
+      model.trained = true
+      model.saved = true
     }
+    this.modelsByLang[languageCode] = model
     return {
       hash: this.computeModelHash(intentDefs, entityDefs, languageCode),
       languageCode: languageCode,
-      startedAt: this.modelsByLang[languageCode].startedAt,
-      finishedAt: this.modelsByLang[languageCode].finishedAt,
+      startedAt: model.startedAt,
+      finishedAt: model.finishedAt,
       data: {
         input: intentDefs.toString(),
-        output: this.modelsByLang[languageCode].model!.netPath
+        output: model.model!.netPath
       }
     } as NLU.Model
   }
@@ -100,7 +104,7 @@ export default class Engine implements NLU.Engine {
       await this.modelsByLang[serialized.languageCode].model!.load(serialized.languageCode, serialized.data.output)
       this.modelsByLang[serialized.languageCode].loaded = true
     } catch (e) {
-      console.log(e)
+      console.log('ERROR LOADING MODEL : ', e)
       return undefined
     }
   }
