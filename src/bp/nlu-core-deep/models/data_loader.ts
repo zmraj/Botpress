@@ -6,7 +6,7 @@ export async function preprocessDatas(
   intents: NLU.IntentDefinition[],
   entities: NLU.EntityDefinition[],
   embedder: Embedder
-): Promise<Datas> {
+): Promise<{ datas: Datas; intToLabel }> {
   const labelToInt = {}
   const intToLabel = {}
   let embed: number[][] = []
@@ -17,7 +17,7 @@ export async function preprocessDatas(
     embed = embed.concat(await Promise.all(intents[i].utterances[embedder.lang].map(async utt => embedder.embed(utt))))
     labels = labels.concat(Array(intents[i].utterances[embedder.lang].length).fill(i))
   }
-  return { embed, labels }
+  return { datas: { embed, labels }, intToLabel }
 }
 
 export interface Datas {

@@ -11,22 +11,20 @@ import { Net } from './models/deepnet'
 const trainDebug = DEBUG('nlu').sub('training')
 interface Model {
   hash?: string
+  id?: string
   languageCode?: string
   startedAt?: Date
   finishedAt?: Date
   data?: {
-    input: string
+    input: NLU.IntentDefinition[]
     output: string
   }
-  model?: Net
-  trained?: boolean
-  saved?: boolean
-  loaded?: boolean
+  net?: Net
 }
 export default class Engine implements NLU.Engine {
   private modelsByLang: _.Dictionary<Model> = {}
 
-  constructor(private defaultLanguage: string, private botId: string, private logger: NLU.Logger) {}
+  public static async initialize(config: NLU.Config, logger: NLU.Logger): Promise<void> {}
 
   public static getHealth() {
     return {
@@ -40,54 +38,13 @@ export default class Engine implements NLU.Engine {
     return ['en']
   }
 
-  public static async initialize(config: NLU.Config, logger: NLU.Logger): Promise<void> {}
-
-  public hasModel(language: string, hash: string) {
-    return false
-  }
+  constructor(private botId: string, private logger: NLU.Logger) {}
 
   public computeModelHash(intents: NLU.IntentDefinition[], entities: NLU.EntityDefinition[], lang: string): string {
     return crypto
       .createHash('sha256')
-      .update(this.botId)
+      .update(JSON.stringify({ intents, entities, lang, botId: this.botId }))
       .digest('hex')
-  }
-
-  async train(
-    intentDefs: NLU.IntentDefinition[],
-    entityDefs: NLU.EntityDefinition[],
-    languageCode: string,
-    trainingSession?: NLU.TrainingSession,
-    options?: NLU.TrainingOptions
-  ): Promise<NLU.Model | undefined> {
-    if (!intentDefs.length) {
-      return
-    }
-    trainDebug.forBot(this.botId, `Started ${languageCode} training`)
-    const model: Model = this.modelsByLang[languageCode] ?? {}
-    if (!model.model) {
-      model.model = new Net(languageCode, intentDefs.length)
-      model.loaded = true
-    }
-    if (!model.trained) {
-      model.startedAt = new Date()
-      await model.model!.train(intentDefs, entityDefs)
-      model.finishedAt = new Date()
-      model.loaded = true
-      model.trained = true
-      model.saved = true
-    }
-    this.modelsByLang[languageCode] = model
-    return {
-      hash: this.computeModelHash(intentDefs, entityDefs, languageCode),
-      languageCode: languageCode,
-      startedAt: model.startedAt,
-      finishedAt: model.finishedAt,
-      data: {
-        input: intentDefs.toString(),
-        output: model.model!.netPath
-      }
-    } as NLU.Model
   }
 
   async loadModel(serialized: NLU.Model | undefined) {
@@ -95,143 +52,95 @@ export default class Engine implements NLU.Engine {
       return
     }
     try {
-      if (!this.modelsByLang[serialized.languageCode].loaded) {
-        this.modelsByLang[serialized.languageCode].model = new Net(
-          serialized.languageCode,
-          serialized.data.input.length
-        )
+      let model = this.modelsByLang[serialized.languageCode]
+      if (!model) {
+        model = {} as Model
+        model.net = new Net(serialized.languageCode, model.data!.input.length)
       }
-      await this.modelsByLang[serialized.languageCode].model!.load(serialized.languageCode, serialized.data.output)
-      this.modelsByLang[serialized.languageCode].loaded = true
+      model.data = {
+        input: JSON.parse(serialized.data.input),
+        output: serialized.data.output
+      }
+      await model.net!.load(serialized.languageCode, serialized.data.output)
+      this.modelsByLang[serialized.languageCode] = model
     } catch (e) {
       console.log('ERROR LOADING MODEL : ', e)
       return undefined
     }
   }
 
-  async predict(sentence: string, includedContexts: string[]): Promise<sdk.IO.EventUnderstanding> {
-    // TODO Detect language
-    await this.modelsByLang[this.defaultLanguage].model!.predict(sentence)
+  public hasModel(language: string, hash: string): boolean {
+    if (!this.modelsByLang[language]) {
+      return false
+    }
+    return this.modelsByLang[language].hash === hash
+  }
+
+  public hasModelForLang(language: string): boolean {
+    return !!this.modelsByLang[language]
+  }
+
+  async train(
+    trainSessionId: string,
+    intentDefs: NLU.IntentDefinition[],
+    entityDefs: NLU.EntityDefinition[],
+    languageCode: string,
+    options?: NLU.TrainingOptions
+  ): Promise<NLU.Model | undefined> {
+    if (!intentDefs.length) {
+      return
+    }
+    trainDebug.forBot(this.botId, `Started ${languageCode} training`)
+    const model: Model = this.modelsByLang[languageCode] ?? {}
+    if (!model.net || _.uniqBy(model.data?.input, 'name') !== _.uniqBy(intentDefs, 'name')) {
+      model.net = new Net(languageCode, intentDefs.length)
+      model.data = { input: intentDefs, output: model.net.netPath }
+    }
+    model.id = trainSessionId
+
+    model.startedAt = new Date()
+    await model.net!.train(intentDefs, entityDefs)
+    model.finishedAt = new Date()
+    model.hash = this.computeModelHash(intentDefs, entityDefs, languageCode)
+    this.modelsByLang[languageCode] = model
     return {
-      language: this.defaultLanguage,
-      detectedLanguage: this.defaultLanguage,
+      hash: model.hash,
+      languageCode: languageCode,
+      startedAt: model.startedAt,
+      finishedAt: model.finishedAt,
+      data: {
+        input: JSON.stringify(intentDefs),
+        output: model.data.output
+      }
+    } as NLU.Model
+  }
+
+  async cancelTraining(trainSessionId: string) {
+    const modelToCancel = Object.values(this.modelsByLang).find(m => m.id === trainSessionId)
+    if (modelToCancel) {
+      modelToCancel!.net!.cancel()
+    }
+  }
+
+  async detectLanguage(sentence: string): Promise<string> {
+    return 'en'
+  }
+
+  async predict(sentence: string, contexts: string[], language: string): Promise<sdk.IO.EventUnderstanding> {
+    const pred = await this.modelsByLang[language].net!.predict(sentence)
+    console.log(pred)
+    const predictions = {} as NLU.Predictions
+    for (const ctx of contexts) {
+      predictions[ctx] = { confidence: 0.5, oos: 0, intents: pred[2] }
+    }
+    return {
+      language: language,
+      detectedLanguage: language,
       ms: Date.now(),
       errored: false,
       entities: [],
-      includedContexts
-      //     intent: {
-      //       name: 'string',
-      //       confidence: 123,
-      //       context: 'string',
-      //       matches: (intentPattern: string) => false
-      //     },
-      //     /** Predicted intents needs disambiguation */
-      //     ambiguous: false,
-      //     intents: [
-      //       {
-      //         name: 'string',
-      //         confidence: 123,
-      //         context: 'string',
-      //         matches: (intentPattern: string) => false
-      //       }
-      //     ],
-      //     /** The language used for prediction. Will be equal to detected language when its part of supported languages, falls back to default language otherwise */
-      //     language: 'string',
-      //     /** Language detected from users input. */
-      //     detectedLanguage: 'string',
-      //     entities: [
-      //       {
-      //         name: 'string',
-      //         type: 'string',
-      //         meta: {
-      //           sensitive: false,
-      //           confidence: 123,
-      //           provider: 'string',
-      //           source: 'string',
-      //           start: 123,
-      //           end: 1234,
-      //           raw: 'any'
-      //         },
-      //         data: {
-      //           extras: 'any',
-      //           value: 'any',
-      //           unit: 'string'
-      //         }
-      //       }
-      //     ],
-      //     slots: {
-      //       String: {
-      //         name: 'string',
-      //         value: 'any',
-      //         source: 'any',
-      //         entity: {
-      //           name: 'string',
-      //           type: 'string',
-      //           meta: {
-      //             sensitive: false,
-      //             confidence: 123,
-      //             provider: 'string',
-      //             source: 'string',
-      //             start: 123,
-      //             end: 1234,
-      //             raw: 'any'
-      //           },
-      //           data: {
-      //             extras: 'any',
-      //             value: 'any',
-      //             unit: 'string'
-      //           }
-      //         },
-      //         confidence: 123,
-      //         start: 1324,
-      //         end: 2134
-      //       }
-      //     },
-      //     errored: false,
-      //     includedContexts: ['string'],
-      //     predictions: {
-      //       '[context: string]': {
-      //         confidence: 123,
-      //         oos: 132,
-      //         intents: [
-      //           {
-      //             label: 'string',
-      //             confidence: 456,
-      //             slots: {
-      //               Plop: {
-      //                 name: 'string',
-      //                 value: 'any',
-      //                 source: 'any',
-      //                 entity: {
-      //                   name: 'string',
-      //                   type: 'string',
-      //                   meta: {
-      //                     sensitive: false,
-      //                     confidence: 456,
-      //                     provider: 'string',
-      //                     source: 'string',
-      //                     start: 564163,
-      //                     end: 564,
-      //                     raw: 'any'
-      //                   },
-      //                   data: {
-      //                     extras: 'any',
-      //                     value: 'any',
-      //                     unit: 'string'
-      //                   }
-      //                 },
-      //                 confidence: 123,
-      //                 start: 132,
-      //                 end: 654
-      //               }
-      //             },
-      //             extractor: 'classifier'
-      //           }
-      //         ]
-      //       }
-      //     },
-      //     ms: 123,
-      //     suggestedLanguage: 'string'
+      includedContexts: contexts,
+      predictions
     }
   }
 }
