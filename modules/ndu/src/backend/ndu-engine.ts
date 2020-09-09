@@ -117,6 +117,16 @@ export class UnderstandingEngine {
 
     debug('Processing %o', { currentFlow, currentNode, isInMiddleOfFlow })
 
+    const contextualTriggers = event.state.session?.nduContext?.triggers
+    if (contextualTriggers) {
+      event.state.session.nduContext.triggers = contextualTriggers
+        .map(trigger => ({
+          ...trigger,
+          turn: trigger.turn - 1
+        }))
+        .filter(x => x.turn >= 0)
+    }
+
     // Then process triggers on what the NDU decided
     await this._processTriggers(event)
 
@@ -177,7 +187,8 @@ export class UnderstandingEngine {
       }
     })
 
-    const fType = (type: sdk.NDU.Trigger['type']) => (t: typeof triggers) => t.filter(x => x.trigger.type === type)
+    const fType = (...types: sdk.NDU.Trigger['type'][]) => (t: typeof triggers) =>
+      t.filter(x => types.includes(x.trigger.type))
     const fInTopic = (t: typeof triggers) =>
       t.filter(x => (x.topic === currentTopic && currentTopic !== 'n/a') || x.topic === 'skills')
     const fOutTopic = (t: typeof triggers) => t.filter(x => x.topic !== currentTopic || currentTopic === 'n/a')
@@ -194,7 +205,8 @@ export class UnderstandingEngine {
       conf_wf_trigger_inside_topic: fMax(fInTopic(fType('workflow')(fMinConf(triggers)))),
       conf_wf_trigger_outside_topic: fMax(fOutTopic(fType('workflow')(fMinConf(triggers)))),
       conf_wf_trigger_inside_wf: 0, // TODO: doesn't exist yet
-      conf_node_trigger_inside_wf: fMax(fInTopic(fType('node')(fInWf(fOnNode(fMinConf(triggers))))))
+      conf_node_trigger_inside_wf: fMax(fInTopic(fType('node', 'contextual')(fInWf(fOnNode(fMinConf(triggers)))))),
+      conf_contextual_trigger: fMax(fType('contextual')(fMinConf(triggers)))
     }
 
     const features: Features = {
@@ -212,6 +224,7 @@ export class UnderstandingEngine {
       conf_wf_trigger_outside_topic: actionFeatures.conf_wf_trigger_outside_topic.confidence,
       conf_wf_trigger_inside_wf: 0, // TODO: doesn't exist yet
       conf_node_trigger_inside_wf: actionFeatures.conf_node_trigger_inside_wf.confidence,
+      conf_contextual_trigger: actionFeatures.conf_contextual_trigger.confidence,
       ///////////
       // Over-time features
       last_turn_since: Date.now() - metadata.last_turn_ts,
@@ -245,7 +258,8 @@ export class UnderstandingEngine {
       node_trigger_inside_wf: actionFeatures.conf_node_trigger_inside_wf.id,
       wf_trigger_inside_topic: actionFeatures.conf_wf_trigger_inside_topic.id,
       wf_trigger_inside_wf: '',
-      wf_trigger_outside_topic: actionFeatures.conf_wf_trigger_outside_topic.id
+      wf_trigger_outside_topic: actionFeatures.conf_wf_trigger_outside_topic.id,
+      contextual_trigger: actionFeatures.conf_contextual_trigger.id
     }
 
     event.ndu.predictions = ActionTypes.reduce((obj, action) => {
@@ -261,31 +275,34 @@ export class UnderstandingEngine {
     if (electedTrigger) {
       const { trigger } = electedTrigger
 
-      switch (trigger.type) {
-        case 'workflow':
+      switch (trigger.effect) {
+        case 'jump.node':
+          const gotoNodeId = (trigger as sdk.NDU.ContextualTrigger).gotoNodeId ?? trigger.nodeId
           const sameWorkflow = trigger.workflowId === currentFlow?.replace('.flow.json', '')
-          const sameNode = trigger.nodeId === currentNode
+          const sameNode = gotoNodeId === currentNode
 
           event.ndu.actions = [{ action: 'continue' }]
 
           if (sameWorkflow && !sameNode) {
             event.ndu.actions.unshift({
               action: 'goToNode',
-              data: { flow: trigger.workflowId, node: trigger.nodeId }
+              data: { flow: trigger.workflowId, node: gotoNodeId }
             })
           } else if (!sameWorkflow && !sameNode) {
             event.ndu.actions.unshift({
               action: 'startWorkflow',
-              data: { flow: trigger.workflowId, node: trigger.nodeId }
+              data: { flow: trigger.workflowId, node: gotoNodeId }
             })
           }
 
           break
-        case 'faq':
-          const qnaActions = await this.queryQna(trigger.topicName, trigger.faqId, event)
+        case 'say':
+          const t = trigger as sdk.NDU.FaqTrigger
+          const qnaActions = await this.queryQna(t.topicName, t.faqId, event)
           event.ndu.actions = [...qnaActions]
           break
-        case 'node':
+        case 'prompt.cancel':
+        case 'prompt.inform':
           event.ndu.actions = [{ action: trigger.effect }]
           break
       }
@@ -313,6 +330,13 @@ export class UnderstandingEngine {
       await this._loadBotWorkflows()
     }
 
+    const contextualTriggers =
+      (event.state &&
+        event.state.session &&
+        event.state.session.nduContext &&
+        event.state.session.nduContext.triggers) ??
+      []
+
     event.ndu.triggers = {}
 
     const { currentFlow, currentNode } = event.state.context
@@ -331,6 +355,14 @@ export class UnderstandingEngine {
           (trigger.activeTopic && event.state?.session.nduContext?.last_topic !== trigger.topicName))
       ) {
         continue
+      }
+
+      if (trigger.type === 'contextual') {
+        const t = contextualTriggers.find(x => x.workflowId === trigger.workflowId && x.nodeId === trigger.nodeId)
+
+        if (!t) {
+          continue
+        }
       }
 
       if (!trigger.conditions.length) {
@@ -407,6 +439,7 @@ export class UnderstandingEngine {
                 params: { ...x.params, topicName, wfName: flowName, nodeName: tn.name, conditionIndex: idx }
               })),
             type: 'workflow',
+            effect: 'jump.node',
             workflowId: flowName,
             topicName,
             activeWorkflow: tn.activeWorkflow,
@@ -420,16 +453,19 @@ export class UnderstandingEngine {
             // TODO: Add triggers on the node itself instead of hardcoded here
             ln.triggers = [
               {
+                type: 'node',
                 name: 'prompt_yes',
                 effect: 'prompt.inform',
                 conditions: [{ id: 'prompt_listening' }, { id: 'user_intent_yes' }]
               },
               {
+                type: 'node',
                 name: 'prompt_no',
                 effect: 'prompt.inform',
                 conditions: [{ id: 'prompt_listening' }, { id: 'user_intent_no' }]
               },
               {
+                type: 'node',
                 name: 'prompt_inform',
                 effect: 'prompt.inform',
                 conditions: [
@@ -439,6 +475,7 @@ export class UnderstandingEngine {
                 ]
               },
               {
+                type: 'node',
                 name: 'prompt_cancel',
                 effect: 'prompt.cancel',
                 conditions: [
@@ -448,25 +485,36 @@ export class UnderstandingEngine {
                 ]
               }
             ]
+
             // TODO: Add temporal listeners that check if the user changes his mind (next version)
           }
 
-          triggers.push(
-            ...ln.triggers.map(
-              (trigger, idx) =>
-                <sdk.NDU.NodeTrigger>{
-                  nodeId: ln.name,
-                  name: trigger.name,
-                  effect: trigger.effect,
-                  conditions: trigger.conditions.map(x => ({
-                    ...x,
-                    params: { topicName, wfName: flowName, nodeName: ln.name, conditionIndex: idx, ...x.params }
-                  })),
-                  type: 'node',
-                  workflowId: flowName
-                }
-            )
-          )
+          for (const [idx, trigger] of ln.triggers.entries()) {
+            if (trigger.type === 'node' || trigger.type === 'contextual') {
+              const contextualArgs =
+                trigger.type === 'contextual' ? { contextName: `explicit:${flowName}/${ln.name}` } : {}
+              const nodeTrigger: sdk.NDU.NodeTrigger | sdk.NDU.ContextualTrigger = {
+                nodeId: ln.name,
+                name: trigger.name,
+                effect: trigger.effect,
+                conditions: trigger.conditions.map(x => ({
+                  ...x,
+                  params: {
+                    topicName,
+                    wfName: flowName,
+                    nodeName: ln.name,
+                    conditionIndex: idx,
+                    ...contextualArgs,
+                    ...x.params
+                  }
+                })),
+                type: trigger.type,
+                gotoNodeId: (trigger as any).gotoNodeId,
+                workflowId: flowName
+              }
+              triggers.push(nodeTrigger)
+            }
+          }
         }
       }
     }
@@ -485,7 +533,8 @@ export class UnderstandingEngine {
             }
           ],
           faqId: faq.name,
-          type: 'faq'
+          type: 'faq',
+          effect: 'say'
         })
       }
     }
