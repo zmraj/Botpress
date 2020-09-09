@@ -5,7 +5,6 @@ import _ from 'lodash'
 import { createApi } from '../api'
 
 import recommendations from './intents/recommendations'
-import legacyElectionPipeline from './legacy-election'
 import { getTrainingSession } from './train-session-service'
 import { NLUState } from './typings'
 
@@ -67,9 +66,10 @@ export default async (bp: typeof sdk, state: NLUState) => {
 
     try {
       // TODO: language should be a path param of route
-      let nlu = await botNLU.engine.predict(value.text, value.contexts, botNLU.defaultLanguage)
-      nlu = legacyElectionPipeline(nlu)
-      res.send({ nlu })
+      // TODO: should use the new pipeline
+      // let nlu = await botNLU.engine.predict(value.text, value.contexts, botNLU.defaultLanguage)
+      // nlu = legacyElectionPipeline(nlu)
+      res.send({ nlu: {} })
     } catch (err) {
       res.status(500).send('Could not extract nlu data')
     }

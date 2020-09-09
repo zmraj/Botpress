@@ -32,7 +32,10 @@ const getQnaIdFromIntentName = (intentName: string): string => {
 }
 
 const getIntentName = (event: IO.IncomingEvent): string => {
-  return event.nlu?.intent?.name || ''
+  return 'n/a' // TODO: this does not work anymore in Albert
+  // the way we store events, metadata and NLU has changed format
+  // plus we probably want to get the data from the NDU instead
+  // return event.nlu?.intent?.name || ''
 }
 
 const getQnaItemFromEvent = (event: IO.IncomingEvent, qnaItems: QnAItem[]): QnAItem => {

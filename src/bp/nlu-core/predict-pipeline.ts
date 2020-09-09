@@ -374,7 +374,6 @@ function MapStepToOutput(step: SlotStep, startTime: number): PredictOutput {
       .orderBy(x => x[1].confidence, 'desc')
       .fromPairs()
       .value(),
-    includedContexts: step.includedContexts, // legacy pre-ndu
     language: step.languageCode,
     ms: Date.now() - startTime
   }

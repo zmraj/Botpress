@@ -30,15 +30,12 @@ export const registerMiddleware = async (bp: typeof sdk) => {
       }
 
       try {
-        const result = await predict(config.dialogflow, event.preview, event.nlu.language, event.nlu.includedContexts)
+        const result = await predict(config.dialogflow, event.preview, event.nlu.language, [])
 
         if (config.primary === 'dialogflow-nlu') {
           event.nlu['engine'] = 'dialogflow'
           event.nlu['botpress-nlu'] = _.cloneDeep(event.nlu)
-          event.nlu.intent.name = result.intent
-          event.nlu.intent.confidence = result.confidence
-          Object.assign(event.nlu, { intents: [event.nlu.intent] })
-          Object.assign(event.nlu.slots, result.slots)
+          event.nlu['dialogflow-nlu'] = result
         } else {
           event.nlu['engine'] = 'botpress'
           event.nlu['dialogflow-nlu'] = { ...result, engine: 'dialogflow' }

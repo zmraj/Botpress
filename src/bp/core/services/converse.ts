@@ -102,9 +102,7 @@ export class ConverseService {
       target: userId,
       botId,
       credentials,
-      nlu: {
-        includedContexts
-      }
+      nlu: {}
     })
 
     const timeoutPromise = this._createTimeoutPromise(botId, userId)

@@ -22,9 +22,7 @@ const onServerReady = async (bp: typeof sdk) => {
     const data: FlaggedEvent = {
       eventId: event.id,
       botId,
-      language: [event.nlu.language, event.nlu.detectedLanguage, event.state.user.language].filter(
-        l => l && l !== 'n/a'
-      )[0],
+      language: [event.nlu.language, event.state.user.language].filter(l => l && l !== 'n/a')[0],
       preview: event.preview,
       reason: 'auto_hook' as FLAG_REASON
     }

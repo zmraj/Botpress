@@ -1,20 +1,31 @@
-import { Condition } from 'botpress/sdk'
+import { Condition, IO } from 'botpress/sdk'
 import _ from 'lodash'
+
+const extractContext = (event: IO.IncomingEvent, params: any) => {
+  const { topicName } = params
+  const intentName = params.intentName ?? `${params.wfName}/${params.nodeName}/${params.conditionIndex}`
+
+  const topic = _.get(event, `nlu.predictions.${topicName}`, {
+    intents: [],
+    confidence: 0,
+    oos: 0,
+    name: topicName
+  })
+
+  const intent = topic.intents.find((x: any) => x.label.toLowerCase() === intentName.toLowerCase()) || {
+    label: intentName,
+    confidence: 0
+  }
+
+  return { topic, intent }
+}
 
 export default {
   id: 'user_intent_is',
   label: 'module.nlu.conditions.userWantsTo',
   description: "The user's intention is {intentName}",
-  callback: '/mod/nlu/condition/intentChanged', // TODO: change this for a more obvious name
   displayOrder: 0,
-  advancedSettings: [
-    {
-      defaultValue: true,
-      key: 'activeWorkflowOnly',
-      type: 'checkbox',
-      label: 'module.nlu.conditions.fields.label.activeWorkflowOnly'
-    }
-  ],
+  advancedSettings: [],
   fields: [
     {
       key: 'utterances',
@@ -29,18 +40,14 @@ export default {
       }
     }
   ],
-  evaluate: (event, params) => {
-    const { topicName } = params
-    const intentName = params.intentName ?? `${params.wfName}/${params.nodeName}/${params.conditionIndex}`
-    const topicConf = _.get(event, `nlu.predictions.${topicName}.confidence`, 0)
-    const oosConfidence = _.get(event, `nlu.predictions.${topicName}.oos`, 0)
-    const topicIntents = _.get(event, `nlu.predictions.${topicName}.intents`, [])
-    const intentConf = _.get(
-      topicIntents.find((x: any) => x.label.toLowerCase() === intentName.toLowerCase()),
-      'confidence',
-      0
-    )
-    return topicConf * intentConf * (1 - oosConfidence)
+  evaluate: (event: IO.IncomingEvent, params: any) => {
+    const { topic, intent } = extractContext(event, params)
+    return (1 - topic.oos) * topic.confidence * intent.confidence
   },
-  onEnter: () => ['nlu/elect-intent {"topic":"$thisTopic","intent":"book-flight"}']
+  onElectedSideEffect: (event, params) => {
+    const { topic, intent } = extractContext(event, params)
+    const slots = intent.slots || {}
+    Object.assign(event.nlu, { slots })
+    // TODO: put the elected intent's slots in the session
+  }
 } as Condition

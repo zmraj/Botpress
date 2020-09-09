@@ -1,7 +1,6 @@
 import * as sdk from 'botpress/sdk'
 import _ from 'lodash'
 
-import legacyElectionPipeline from '../legacy-election'
 import { getLatestModel } from '../model-service'
 import { PredictionHandler } from '../prediction-handler'
 import { setTrainingSession } from '../train-session-service'
@@ -61,7 +60,7 @@ const registerMiddleware = async (bp: typeof sdk, state: NLUState) => {
 
         const anticipatedLanguage = event.state.user?.language || defaultLanguage
         const predictionHandler = new PredictionHandler(modelProvider, engine, anticipatedLanguage, defaultLanguage)
-        const nluResults = await predictionHandler.predict(preview, nlu?.includedContexts)
+        const nluResults = await predictionHandler.predict(preview, [])
 
         _.merge(event, { nlu: nluResults ?? {} })
         removeSensitiveText(event)
@@ -88,28 +87,6 @@ const registerMiddleware = async (bp: typeof sdk, state: NLUState) => {
       bp.logger.warn(`Error removing sensitive information: ${err.message}`)
     }
   }
-
-  bp.events.registerMiddleware({
-    name: 'nlu-elect.incoming',
-    direction: 'incoming',
-    order: 120,
-    description: 'Perform intent election for the outputed NLU.',
-    handler: async (event: sdk.IO.IncomingEvent, next: sdk.IO.MiddlewareNextCallback) => {
-      if (ignoreEvent(bp, state, event) || !event.nlu) {
-        return next()
-      }
-
-      try {
-        // TODO: use the 'intent-is' condition logic when bot uses NDU
-        const nlu = legacyElectionPipeline(event.nlu)
-        _.merge(event, { nlu })
-      } catch (err) {
-        bp.logger.warn(`Error making nlu election for incoming text: ${err.message}`)
-      } finally {
-        next()
-      }
-    }
-  })
 }
 
 export function getOnSeverStarted(state: NLUState) {

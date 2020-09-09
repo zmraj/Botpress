@@ -317,8 +317,8 @@ declare module 'botpress/sdk' {
       }
 
       export interface ModelConstructor {
-        new(): Model
-        new(lazy: boolean, keepInMemory: boolean, queryOnly: boolean): Model
+        new (): Model
+        new (lazy: boolean, keepInMemory: boolean, queryOnly: boolean): Model
       }
 
       export const Model: ModelConstructor
@@ -663,14 +663,14 @@ declare module 'botpress/sdk' {
 
     export interface Actions {
       action:
-      | 'send'
-      | 'startWorkflow'
-      | 'redirect'
-      | 'continue'
-      | 'goToNode'
-      | 'prompt.repeat'
-      | 'prompt.inform'
-      | 'prompt.cancel'
+        | 'send'
+        | 'startWorkflow'
+        | 'redirect'
+        | 'continue'
+        | 'goToNode'
+        | 'prompt.repeat'
+        | 'prompt.inform'
+        | 'prompt.cancel'
       data?: SendContent | FlowRedirect
     }
 
@@ -779,18 +779,12 @@ declare module 'botpress/sdk' {
     }
 
     export interface EventUnderstanding {
-      intent?: NLU.Intent
       /** Predicted intents needs disambiguation */
       readonly ambiguous?: boolean
-      intents?: NLU.Intent[]
       /** The language used for prediction. Will be equal to detected language when its part of supported languages, falls back to default language otherwise */
       readonly language: string
-      /** Language detected from users input. */
-      readonly detectedLanguage?: string
       readonly entities: NLU.Entity[]
-      readonly slots?: NLU.SlotCollection
       readonly errored: boolean
-      readonly includedContexts: string[]
       readonly predictions?: NLU.Predictions
       readonly ms: number
     }
@@ -1385,8 +1379,8 @@ declare module 'botpress/sdk' {
       component: string
     }
     evaluate: (event: IO.IncomingEvent, params: any) => number
-    /** The onEnter actions that come with this condition when the Trigger node is executed */
-    addOnEnter?: (params: any) => string[]
+    /** Code that will be executed when this condition's Trigger is elected */
+    onElectedSideEffect?: (event: IO.IncomingEvent, params: any) => void
   }
 
   export interface ConditionParam {
@@ -1822,11 +1816,11 @@ declare module 'botpress/sdk' {
   }
 
   export interface PromptConstructable {
-    new(ctor: any): Prompt
+    new (ctor: any): Prompt
   }
 
   export interface BoxedVarConstructable<T, V = any> {
-    new(ctor: BoxedVarContructor<T, V>): BoxedVariable<T, V>
+    new (ctor: BoxedVarContructor<T, V>): BoxedVariable<T, V>
   }
 
   export interface BoxedVariable<T, V = any> {

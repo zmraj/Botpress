@@ -247,9 +247,20 @@ async function runTest(test: Test, axiosConfig: AxiosRequestConfig): Promise<Tes
 }
 
 function conditionMatch(nlu: sdk.IO.EventUnderstanding, [key, matcher, expected], ctx: string): TestResultDetails {
+  const [topContextName, topContext] = _.chain(nlu.predictions)
+    .toPairs()
+    .maxBy('1.confidence')
+    .value()
+
+  const [topIntentName, topIntent] = _.chain(nlu.predictions[topContextName].intents)
+    .toPairs()
+    .maxBy('1.confidence')
+    .value()
+
   if (key === 'intent') {
     expected = expected.endsWith(NONE) ? NONE : expected
-    const received = nlu.intent.name
+
+    const received = topIntentName
     let success = expected === received
     if (expected.endsWith('disambiguation')) {
       success = !!nlu.ambiguous
@@ -260,27 +271,21 @@ function conditionMatch(nlu: sdk.IO.EventUnderstanding, [key, matcher, expected]
       reason: success
         ? ''
         : `Intent doesn't match. \nexpected: ${expected} \nreceived: ${received} \nconfidence: ${_.round(
-            nlu.intent.confidence,
+            topIntent.confidence,
             2
           )}`,
       received,
       expected
     }
   } else if (key === 'context') {
-    // tslint:disable-next-line
-    let [received, ctxPred] = _.chain(nlu.predictions)
-      .toPairs()
-      .maxBy('1.confidence')
-      .value()
-
-    received = received !== 'oos' ? received : NONE
+    const received = topContextName !== 'oos' ? topContextName : NONE
     const success = expected === received
     return {
       success,
       reason: success
         ? ''
         : `Context doesn't match. \nexpected: ${expected} \nreceived: ${received} \nconfidence ${_.round(
-            ctxPred.confidence,
+            topContext.confidence,
             2
           )}`,
       received,
@@ -365,8 +370,18 @@ function checkSlotMatch(nlu, slotName, expected) {
 }
 
 function checkSlotsCount(nlu: sdk.IO.EventUnderstanding, conditions: Condition[]): TestResultDetails {
+  const [topContextName] = _.chain(nlu.predictions)
+    .toPairs()
+    .maxBy('1.confidence')
+    .value()
+
+  const [, topIntent] = _.chain(nlu.predictions[topContextName].intents)
+    .toPairs()
+    .maxBy('1.confidence')
+    .value()
+
   const expectedCount = conditions.filter(c => c[0].includes('slot')).length
-  const receivedCount = Object.keys(nlu.slots ?? {}).length
+  const receivedCount = Object.keys(topIntent?.slots ?? {}).length
   const success = expectedCount === receivedCount
 
   const expected = `${expectedCount}`

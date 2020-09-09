@@ -80,15 +80,18 @@ export default async (bp: typeof sdk, db: Database, interactionsToTrack: string[
     db.incrementMetric(event.botId, event.channel, 'msg_received_count')
 
     // misunderstood messages
-    const intentName = event?.nlu?.intent?.name
-    if (intentName === 'none' || event?.nlu?.ambiguous) {
-      if (!event?.state?.session?.lastMessages?.length) {
-        db.incrementMetric(event.botId, event.channel, 'sessions_start_nlu_none')
-      }
-    }
-    if (!!intentName?.length) {
-      db.incrementMetric(event.botId, event.channel, 'msg_nlu_intent', event.nlu?.intent?.name)
-    }
+    // TODO: this logic is no longer working in Albert
+    // we need to base the analytics on the triggers instead (NDU)
+
+    // const intentName = event?.nlu?.intent?.name
+    // if (intentName === 'none' || event?.nlu?.ambiguous) {
+    //   if (!event?.state?.session?.lastMessages?.length) {
+    //     db.incrementMetric(event.botId, event.channel, 'sessions_start_nlu_none')
+    //   }
+    // }
+    // if (!!intentName?.length) {
+    //   db.incrementMetric(event.botId, event.channel, 'msg_nlu_intent', event.nlu?.intent?.name)
+    // }
 
     next()
   }
