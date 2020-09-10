@@ -1,7 +1,6 @@
 import * as tf from '@tensorflow/tfjs-node'
 import { NLU } from 'botpress/sdk'
 import fse from 'fs-extra'
-import { meta } from 'joi'
 import path from 'path'
 
 import { Datas, preprocessDatas } from './data_loader'
@@ -34,9 +33,9 @@ export class Net {
   private _cancelCb = new CancelCallback()
   private _intToLabel: { [key: number]: string }
 
-  constructor(public lang: string, private _nbIntents: number) {
+  constructor(public lang: string, private _nbIntents: number, private botId: string) {
     this._embedder = new Embedder(lang)
-    this.netPath = path.join(process.APP_DATA_PATH, lang, 'model')
+    this.netPath = path.join(process.APP_DATA_PATH, lang, botId, 'model')
     this._intToLabel = {}
   }
 
@@ -51,15 +50,15 @@ export class Net {
 
     await this._clf.fit(tf.tensor2d(datas.embed), tf.oneHot(tf.tensor1d(datas.labels, 'int32'), this._nbIntents), {
       batchSize: 512,
-      epochs: 200,
+      epochs: 2000,
       // validationSplit: 0.1,
       verbose: 0,
       shuffle: true,
       callbacks: [
         tf.callbacks.earlyStopping({
           monitor: 'loss',
-          patience: 5,
-          minDelta: 0.001
+          patience: 50,
+          minDelta: 0.0001
         }),
         this._cancelCb,
         new tf.CustomCallback({ onEpochEnd: (epoch, logs) => console.log('coucou', logs!.loss) })
@@ -102,6 +101,7 @@ export class Net {
     this.netPath = modelPath
     this._embedder = new Embedder(language)
     await this._embedder.load()
+    await fse.ensureDir(this.netPath)
     if (fse.existsSync(path.join(this.netPath, 'model.json'))) {
       this._clf = await tf.loadLayersModel(`file://${this.netPath}/model.json`)
       // Note : Possible to load from file(node) LocalStorage, indexdDB, httpRequest https://www.tensorflow.org/js/guide/save_load

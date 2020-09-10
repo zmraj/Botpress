@@ -101,14 +101,15 @@ export default class Embedder {
   }
 
   async embed(sentence: string): Promise<number[]> {
-    const cache_key = hash_str(sentence)
+    const lowSentence = sentence.toLowerCase()
+    const cache_key = hash_str(lowSentence)
 
     if (this._cache.has(cache_key)) {
       return Array.from(this._cache.get(cache_key)!.values())
     } else {
       const sentence_embeddings: number[] = []
 
-      for (const s of sentence.match(regex_sentence) || [sentence]) {
+      for (const s of lowSentence.match(regex_sentence) || [lowSentence]) {
         const tokens = await this._tokenizer.encode(s)
         const id_array = BigInt64Array.from(tokens.ids, x => BigInt(x))
         const attention_array = BigInt64Array.from(tokens.attentionMask, x => BigInt(x))
