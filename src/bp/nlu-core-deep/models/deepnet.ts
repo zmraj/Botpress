@@ -20,6 +20,21 @@ class CancelCallback extends tf.Callback {
   }
 }
 
+class LRSheduler extends tf.Callback {
+  constructor(private decay: number) {
+    super()
+  }
+
+  async onEpochEnd(epoch, logs) {
+    if (epoch > 5) {
+      // @ts-ignore
+      this.model.optimizer_.learningRate *= this.decay
+    }
+    // @ts-ignore
+    console.log('LR  ', this.model.optimizer_.learningRate, 'Loss : ', logs.loss)
+  }
+}
+
 interface Intents {
   label: string
   confidence: number
@@ -49,19 +64,19 @@ export class Net {
     this._intToLabel = intToLabel
 
     await this._clf.fit(tf.tensor2d(datas.embed), tf.oneHot(tf.tensor1d(datas.labels, 'int32'), this._nbIntents), {
-      batchSize: 512,
-      epochs: 2000,
+      batchSize: 64,
+      epochs: 200,
       // validationSplit: 0.1,
       verbose: 0,
       shuffle: true,
       callbacks: [
         tf.callbacks.earlyStopping({
           monitor: 'loss',
-          patience: 50,
+          patience: 6,
           minDelta: 0.0001
         }),
         this._cancelCb,
-        new tf.CustomCallback({ onEpochEnd: (epoch, logs) => console.log('coucou', logs!.loss) })
+        new LRSheduler(0.9999)
       ]
     })
     console.log('done')
@@ -77,7 +92,7 @@ export class Net {
   async predict(sentence: string): Promise<[string, number, Intents[]]> {
     const embed: number[] = await this._embedder.embed(sentence)
     const tens: tf.Tensor = tf.tensor1d(embed).reshape([1, this._embedder.embedSize])
-    const probs: tf.Tensor = tf.sigmoid(this._clf.predict(tens).reshape([this._nbIntents]))
+    const probs: tf.Tensor = tf.softmax(this._clf.predict(tens).reshape([this._nbIntents]))
     const { values, indices } = tf.topk(probs, 3, true)
     const top_k_values: number[] = Array.from(values.dataSync())
     const top_k_indices: number[] = Array.from(indices.dataSync())
@@ -119,11 +134,12 @@ export class Net {
       this._clf.add(tf.layers.batchNormalization())
       this._clf.add(tf.layers.leakyReLU())
       this._clf.add(tf.layers.dense({ units: this._nbIntents, useBias: true }))
+      this._clf.add(tf.layers.softmax())
     }
     this._clf.summary()
     await this._clf.compile({
-      optimizer: tf.train.adam(0.0001),
-      loss: tf.losses.sigmoidCrossEntropy
+      optimizer: tf.train.adam(0.01),
+      loss: tf.losses.meanSquaredError
     })
   }
 }
