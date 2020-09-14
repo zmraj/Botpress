@@ -60,8 +60,8 @@ export default class Embedder {
     }
 
     try {
-      if (fs.existsSync(path.join(path.join(this._modelPath, 'embedder.onnx')))) {
-        this._embedder = await ort.InferenceSession.create(path.join(this._modelPath, 'embedder.onnx'))
+      if (fs.existsSync(path.join(path.join(this._modelPath, 'model.onnx')))) {
+        this._embedder = await ort.InferenceSession.create(path.join(this._modelPath, 'model.onnx'))
         this.embedSize = await this._getEmbedSize()
       } else {
         throw new Error('bad file format')

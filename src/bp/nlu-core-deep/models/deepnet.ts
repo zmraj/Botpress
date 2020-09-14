@@ -72,11 +72,11 @@ export class Net {
       callbacks: [
         tf.callbacks.earlyStopping({
           monitor: 'loss',
-          patience: 6,
+          patience: 10,
           minDelta: 0.0001
         }),
         this._cancelCb,
-        new LRSheduler(0.9999)
+        new LRSheduler(0.999)
       ]
     })
     console.log('done')
@@ -138,7 +138,7 @@ export class Net {
     }
     this._clf.summary()
     await this._clf.compile({
-      optimizer: tf.train.adam(0.01),
+      optimizer: tf.train.adam(0.1),
       loss: tf.losses.meanSquaredError
     })
   }
