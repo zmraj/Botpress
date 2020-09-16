@@ -34,6 +34,16 @@ const botTemplates: sdk.BotTemplate[] = [
     name: 'BPDS - NLU slot extraction testing ',
     desc:
       'BPDS are handcrafted datasets. There is exactly one intent per context. Slots of each intents are built with a specific distribution in mind, making slot extraction hard to achieve.'
+  },
+  {
+    id: 'bp-nlu-clinc150',
+    name: 'CLINC150 ',
+    desc: 'CLINC150'
+  },
+  {
+    id: 'bp-nlu-snips',
+    name: 'SNIPS',
+    desc: 'SNIPS'
   }
 ]
 

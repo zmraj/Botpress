@@ -22,10 +22,12 @@ export default class Embedder {
   private _tokenizer!: BertWordPieceTokenizer | BPETokenizer | ByteLevelBPETokenizer
   private _cache!: lru<string, Float32Array>
   private _modelPath!: string
+  private _tokenizerPath!: string
   public embedSize!: number
 
   constructor(public lang: string) {
-    this._modelPath = path.join(process.APP_DATA_PATH, lang)
+    this._modelPath = path.join(process.APP_DATA_PATH, 'embedders', lang)
+    this._tokenizerPath = path.join(process.APP_DATA_PATH, 'tokenizers', lang)
   }
 
   async _getEmbedSize(): Promise<number> {
@@ -46,22 +48,22 @@ export default class Embedder {
   }
 
   async load() {
-    if (fs.existsSync(path.join(this._modelPath, 'vocab.txt'))) {
+    if (fs.existsSync(path.join(this._tokenizerPath, 'vocab.txt'))) {
       this._tokenizer = await BertWordPieceTokenizer.fromOptions({
-        vocabFile: path.join(this._modelPath, 'vocab.txt')
+        vocabFile: path.join(this._tokenizerPath, 'vocab.txt')
       })
-    } else if (fs.existsSync(path.join(this._modelPath, 'vocab.json'))) {
+    } else if (fs.existsSync(path.join(this._tokenizerPath, 'vocab.json'))) {
       this._tokenizer = await BPETokenizer.fromOptions({
-        vocabFile: path.join(this._modelPath, 'vocab.json'),
-        mergesFile: path.join(this._modelPath, 'merges.txt')
+        vocabFile: path.join(this._tokenizerPath, 'vocab.json'),
+        mergesFile: path.join(this._tokenizerPath, 'merges.txt')
       })
     } else {
       throw new Error('Cannot load tokenizer, check the files path')
     }
 
     try {
-      if (fs.existsSync(path.join(path.join(this._modelPath, 'model.onnx')))) {
-        this._embedder = await ort.InferenceSession.create(path.join(this._modelPath, 'model.onnx'))
+      if (fs.existsSync(path.join(path.join(this._modelPath, 'model-optimized-quantized.onnx')))) {
+        this._embedder = await ort.InferenceSession.create(path.join(this._modelPath, 'model-optimized-quantized.onnx'))
         this.embedSize = await this._getEmbedSize()
       } else {
         throw new Error('bad file format')

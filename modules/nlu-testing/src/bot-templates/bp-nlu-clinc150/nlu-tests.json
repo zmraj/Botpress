@@ -1,0 +1,3602 @@
+[
+  {
+    "id": "cee6980424218de70411d6eddff135cb",
+    "utterance": "i want to know what the purpose of life is",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "meaning_of_life"
+      ]
+    ]
+  },
+  {
+    "id": "c59c3ca66729c8a88ac1d19058fd78a2",
+    "utterance": "i want to hear what you think life's purpose is about",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "meaning_of_life"
+      ]
+    ]
+  },
+  {
+    "id": "216d61167acece1eda4ae83891e83a58",
+    "utterance": "what do you think the purpose of life is",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "meaning_of_life"
+      ]
+    ]
+  },
+  {
+    "id": "bebfa85a55dbae1ca367834e596ca80e",
+    "utterance": "what is the purpose of existence",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "meaning_of_life"
+      ]
+    ]
+  },
+  {
+    "id": "94fb08ec710a3f34b5b113db7b6ace33",
+    "utterance": "what do you think our purpose is in life",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "meaning_of_life"
+      ]
+    ]
+  },
+  {
+    "id": "dfe4ad2b9b6555862bc30a1f2860a779",
+    "utterance": "i'd like to know the meaning of life",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "meaning_of_life"
+      ]
+    ]
+  },
+  {
+    "id": "ee43c2acaf32b5bdd94f71a9e8038aa9",
+    "utterance": "what's your opinion on the meaning of life",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "meaning_of_life"
+      ]
+    ]
+  },
+  {
+    "id": "88f00dac0b7b3e92461e2e2596341118",
+    "utterance": "what is life's purpose",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "meaning_of_life"
+      ]
+    ]
+  },
+  {
+    "id": "99c1d74e9e8bef769ed3233a24b1f0f4",
+    "utterance": "tell me all about the meaning of life",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "meaning_of_life"
+      ]
+    ]
+  },
+  {
+    "id": "7eed223c237e57d781fff53b7abed15f",
+    "utterance": "tell me your thoughts about the meaning of life",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "meaning_of_life"
+      ]
+    ]
+  },
+  {
+    "id": "711d50d422f6fcef002e60d5bff64246",
+    "utterance": "i need new language",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_language"
+      ]
+    ]
+  },
+  {
+    "id": "7cfa4506deda9d9f82601efe45689bec",
+    "utterance": "switch language for me",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_language"
+      ]
+    ]
+  },
+  {
+    "id": "ca5825c771530182fcb6ebbc868f8229",
+    "utterance": "please change your language setting to russian",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_language"
+      ]
+    ]
+  },
+  {
+    "id": "78c7fcdabcce3940fc3bd88a040251c9",
+    "utterance": "you must change your language setting to russian",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_language"
+      ]
+    ]
+  },
+  {
+    "id": "0c736e2f21fbc010c5bdd4a4354bc892",
+    "utterance": "you need to change your language setting to russian please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_language"
+      ]
+    ]
+  },
+  {
+    "id": "527de010c5c28fd6384df9a20669c2ac",
+    "utterance": "change language please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_language"
+      ]
+    ]
+  },
+  {
+    "id": "2c623812a7782c42a9ac5ea7d051deef",
+    "utterance": "please change your language setting to spanish now",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_language"
+      ]
+    ]
+  },
+  {
+    "id": "4323942fa4cb60866e26fe51563ee12c",
+    "utterance": "change your language setting to spanish",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_language"
+      ]
+    ]
+  },
+  {
+    "id": "f09e6f9131d1f7f1017b8d7696e963f6",
+    "utterance": "i want new language",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_language"
+      ]
+    ]
+  },
+  {
+    "id": "72ca44f6f9d98da78b74d349ff911043",
+    "utterance": "please change the language",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_language"
+      ]
+    ]
+  },
+  {
+    "id": "366e1363ef0a7afe354c8fa4e3281daa",
+    "utterance": "what is the present status of my credit card application",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "application_status"
+      ]
+    ]
+  },
+  {
+    "id": "0703f0d1a019b49ea7c48ed54a7a5a9a",
+    "utterance": "what is the current status of my credit card application",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "application_status"
+      ]
+    ]
+  },
+  {
+    "id": "ea5c4fd5abe0d69357b79c1a02c10617",
+    "utterance": "in what status is my credit card application currently in",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "application_status"
+      ]
+    ]
+  },
+  {
+    "id": "cc2484e54e1dd04bf064a0a80da7b4d1",
+    "utterance": "how far along is my credit card application",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "application_status"
+      ]
+    ]
+  },
+  {
+    "id": "e23fc2f78c2cc880be0ea914cfffd6be",
+    "utterance": "what is the status of my credit card application looking like",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "application_status"
+      ]
+    ]
+  },
+  {
+    "id": "cc3577d9268bfd7aa587885b3e1ad41f",
+    "utterance": "pull up my credit card application's current status",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "application_status"
+      ]
+    ]
+  },
+  {
+    "id": "bf67c86b2082dc643a656ab2524747ee",
+    "utterance": "has my credit card application processed yet",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "application_status"
+      ]
+    ]
+  },
+  {
+    "id": "23cc88cc7fcf3145fe50d2d9a4d88c95",
+    "utterance": "check the status of my credit card application please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "application_status"
+      ]
+    ]
+  },
+  {
+    "id": "689fc283b4116b758aeb4b19999e65ae",
+    "utterance": "has my card application successfully gone through",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "application_status"
+      ]
+    ]
+  },
+  {
+    "id": "3961dc072a8597a5e086501492dcf420",
+    "utterance": "go to the credit card site and check if my application has gone through",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "application_status"
+      ]
+    ]
+  },
+  {
+    "id": "1753f404ca2fec87bdcbe8cd5422efe2",
+    "utterance": "procedure to change oil in car",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "oil_change_how"
+      ]
+    ]
+  },
+  {
+    "id": "f14a6e0e3c5b883b4704896970237b86",
+    "utterance": "way to change car oil",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "oil_change_how"
+      ]
+    ]
+  },
+  {
+    "id": "7048965732f24726585d730b92912670",
+    "utterance": "how to change oil of a car",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "oil_change_how"
+      ]
+    ]
+  },
+  {
+    "id": "8fd94c8a124053a0bf6609b5d7d4c28a",
+    "utterance": "how can i change car oil",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "oil_change_how"
+      ]
+    ]
+  },
+  {
+    "id": "5f1705aa21cfd050559484956b1dff4c",
+    "utterance": "i want to know how to change oil, tell me the steps one at a time while i work through it",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "oil_change_how"
+      ]
+    ]
+  },
+  {
+    "id": "107a332d2269bf547cb4f9034f9cc499",
+    "utterance": "find step by step instructions on how to change my oil",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "oil_change_how"
+      ]
+    ]
+  },
+  {
+    "id": "f8a7342b69d25dad546bb79f5133f484",
+    "utterance": "how do i change oil on a car",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "oil_change_how"
+      ]
+    ]
+  },
+  {
+    "id": "fb5f961c4d950de90f03ff049070fc68",
+    "utterance": "where can i find a page showing my how to change my oil",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "oil_change_how"
+      ]
+    ]
+  },
+  {
+    "id": "7d2ab34d150cc2f7c4cc218633a99a88",
+    "utterance": "what weight oil do i need and how do i change the oil for my chevy truck",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "oil_change_how"
+      ]
+    ]
+  },
+  {
+    "id": "8d4a781cd290b53765ed73dec2bfd1d2",
+    "utterance": "what kind of oil do i need for my ford truck and how can i change it",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "oil_change_how"
+      ]
+    ]
+  },
+  {
+    "id": "9626b77e98985912afb2a7932f644c7e",
+    "utterance": "please double check my reservations for six at mani",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "confirm_reservation"
+      ]
+    ]
+  },
+  {
+    "id": "3a162030c54f09bebe99a120d6ac21ed",
+    "utterance": "confirm my johnny rockets reservation for this evening",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "confirm_reservation"
+      ]
+    ]
+  },
+  {
+    "id": "4c51f88c562c4d34a5220e63130a47f1",
+    "utterance": "confirm four for my reservation at fiji",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "confirm_reservation"
+      ]
+    ]
+  },
+  {
+    "id": "2f52e33e84c720f2fbd70ed716f0a046",
+    "utterance": "make sure my flower bar reservation is scheduled for tomorrow",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "confirm_reservation"
+      ]
+    ]
+  },
+  {
+    "id": "398bf40ce694514fa1eb86c82f5bd84e",
+    "utterance": "please double check on my reservations for buffalo wild wings at five for the game",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "confirm_reservation"
+      ]
+    ]
+  },
+  {
+    "id": "ea1821b4cb4e6fa01ee86a7167cca980",
+    "utterance": "i would like to try and confirm that i have a reservation at applebee's for kristen",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "confirm_reservation"
+      ]
+    ]
+  },
+  {
+    "id": "22d7997caed2e8be90e98c9a65b9af8a",
+    "utterance": "i would like to try and confirm that i have a reservation at chili's for bart",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "confirm_reservation"
+      ]
+    ]
+  },
+  {
+    "id": "6272a0998415a38aedd69f5ad0f3a481",
+    "utterance": "i would like to try and confirm that i have a reservation at longhorn for justin",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "confirm_reservation"
+      ]
+    ]
+  },
+  {
+    "id": "bcbbae13daa7e44a44000479e1f53966",
+    "utterance": "i would like to try and confirm that i have a reservation at outback for josh",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "confirm_reservation"
+      ]
+    ]
+  },
+  {
+    "id": "5ee82819e051425754c2c4fa3dd306a5",
+    "utterance": "i would like to try and confirm that i have a reservation at carrabbas for heather",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "confirm_reservation"
+      ]
+    ]
+  },
+  {
+    "id": "feff5d76c4d5ed1a2cd577ba8a094c5e",
+    "utterance": "may you stop a paymet on my account",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "freeze_account"
+      ]
+    ]
+  },
+  {
+    "id": "d84687761ca8f5ac615be3b90ac93b1d",
+    "utterance": "how we stop my account",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "freeze_account"
+      ]
+    ]
+  },
+  {
+    "id": "9c69699afb9d0dd911fb87ff50d19beb",
+    "utterance": "can you place a stop on my account",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "freeze_account"
+      ]
+    ]
+  },
+  {
+    "id": "ca2edf0e8307d4a70eb6447f1926c815",
+    "utterance": "can we stop my bank account",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "freeze_account"
+      ]
+    ]
+  },
+  {
+    "id": "721b1a5d5d3999669ce3b32c78d396cd",
+    "utterance": "please put a block on my capital one account immediately",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "freeze_account"
+      ]
+    ]
+  },
+  {
+    "id": "6af190bc3720c3dc24c1867ca7e37740",
+    "utterance": "please put a block on my discover account immediately",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "freeze_account"
+      ]
+    ]
+  },
+  {
+    "id": "b5af1e9cc468e19500f9e2135790c734",
+    "utterance": "please put a block on my regions account immediately",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "freeze_account"
+      ]
+    ]
+  },
+  {
+    "id": "4171bdca93430e88954b82423ea4fc0e",
+    "utterance": "please put a block on my wells fargo account immediately",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "freeze_account"
+      ]
+    ]
+  },
+  {
+    "id": "fe5a69bfabc8f6095d4e21f1ca589a42",
+    "utterance": "please put a block on my us bank account immediately",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "freeze_account"
+      ]
+    ]
+  },
+  {
+    "id": "1e3210e20b4aca4003f76b4ff468b650",
+    "utterance": "i need you to act swiftly and freeze all activity on my capital one checking",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "freeze_account"
+      ]
+    ]
+  },
+  {
+    "id": "57c0530f2991f858f543c2348c06cb3b",
+    "utterance": "what is the timezone of saigon",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "timezone"
+      ]
+    ]
+  },
+  {
+    "id": "af418ee8227ca9a89a5b8bfae1b85d54",
+    "utterance": "what timezone is hanoi in",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "timezone"
+      ]
+    ]
+  },
+  {
+    "id": "bbb96a781393788def851123e786cd64",
+    "utterance": "what timezone do ho chi minh use",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "timezone"
+      ]
+    ]
+  },
+  {
+    "id": "3470fa1eeb2cb734c90fbec67746024a",
+    "utterance": "what timezone is honolulu in",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "timezone"
+      ]
+    ]
+  },
+  {
+    "id": "6cabb9170d91ce81e41a06c47aaeb447",
+    "utterance": "what timezone is paris in",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "timezone"
+      ]
+    ]
+  },
+  {
+    "id": "185d96948f81191b662b508c17a35dc6",
+    "utterance": "which time zone is germany is in",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "timezone"
+      ]
+    ]
+  },
+  {
+    "id": "b42b71b7b1be46b158fc62c455045645",
+    "utterance": "what are the time zones of russia",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "timezone"
+      ]
+    ]
+  },
+  {
+    "id": "911b772a8053d21058709712b808c355",
+    "utterance": "which time zones does european countries use",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "timezone"
+      ]
+    ]
+  },
+  {
+    "id": "5291ef74729fbb5a9b51c12fa51d6c15",
+    "utterance": "what is the time zone of china",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "timezone"
+      ]
+    ]
+  },
+  {
+    "id": "a71f28a3f5dbffc2f9370dc060e6ae92",
+    "utterance": "tell me the timezone for hong kong",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "timezone"
+      ]
+    ]
+  },
+  {
+    "id": "481e9c439027d26a86a921e472535753",
+    "utterance": "where do you want to eat tonight",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "restaurant_suggestion"
+      ]
+    ]
+  },
+  {
+    "id": "220afc8b736510f6c3f10589b0ffe890",
+    "utterance": "where is your favorite restaurant to eat",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "restaurant_suggestion"
+      ]
+    ]
+  },
+  {
+    "id": "6393a5818aa4d5e1f75290ffebb4b87a",
+    "utterance": "do you have any restaurant recommendations",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "restaurant_suggestion"
+      ]
+    ]
+  },
+  {
+    "id": "33935a3b720be6901492cd3d490a740d",
+    "utterance": "where should we eat tonight",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "restaurant_suggestion"
+      ]
+    ]
+  },
+  {
+    "id": "3d7c38b6e8ed35082b863f40c32ad57d",
+    "utterance": "where are the best places to eat",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "restaurant_suggestion"
+      ]
+    ]
+  },
+  {
+    "id": "486d5d8e29619a1e99add94135c690bd",
+    "utterance": "are there any vegan restaurants in my town",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "restaurant_suggestion"
+      ]
+    ]
+  },
+  {
+    "id": "21ac040607f350c29918c1ec6f7f857e",
+    "utterance": "list a few pizza places that have seating near my current location",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "restaurant_suggestion"
+      ]
+    ]
+  },
+  {
+    "id": "dbdb751e394c4905922bbe64ed53f8c9",
+    "utterance": "are there decent seafood restaurants in portland",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "restaurant_suggestion"
+      ]
+    ]
+  },
+  {
+    "id": "20d100d969f6940f56858a3de182cabc",
+    "utterance": "name a few good steakhouses in chicago",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "restaurant_suggestion"
+      ]
+    ]
+  },
+  {
+    "id": "7549f51defdd12b8cec3c4f82522caa7",
+    "utterance": "does brooklyn have good italian restaurants",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "restaurant_suggestion"
+      ]
+    ]
+  },
+  {
+    "id": "5c619a79155601b89a8cc6f720451aa7",
+    "utterance": "whats the reward balance for my visa",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "rewards_balance"
+      ]
+    ]
+  },
+  {
+    "id": "cbd614e44379a7ce537c16b43eb2a071",
+    "utterance": "for my visa what's my reward balance",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "rewards_balance"
+      ]
+    ]
+  },
+  {
+    "id": "fe972d567d5a159ebf1996c357c4c8bc",
+    "utterance": "i need know know the reward balance for my visa",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "rewards_balance"
+      ]
+    ]
+  },
+  {
+    "id": "ba33035a802fb32e2bb2c47f87322d22",
+    "utterance": "can you tell me my visa's reward balance",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "rewards_balance"
+      ]
+    ]
+  },
+  {
+    "id": "f4b40e3dd51ae36df5a9a795996949c0",
+    "utterance": "what's my visa cards balance for rewards",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "rewards_balance"
+      ]
+    ]
+  },
+  {
+    "id": "db6dffbb017b4c78c6701c6c1dc3013c",
+    "utterance": "how many points do i have with my american express",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "rewards_balance"
+      ]
+    ]
+  },
+  {
+    "id": "f6d74a509a157a43aac01f07b19a684a",
+    "utterance": "tell me the points on my delta rewards card",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "rewards_balance"
+      ]
+    ]
+  },
+  {
+    "id": "2e994e4499d7eb03d9b91d561b031ef2",
+    "utterance": "how many points on my chase unlimited card",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "rewards_balance"
+      ]
+    ]
+  },
+  {
+    "id": "838c2073aa3fa5f9d4161f4594756d8d",
+    "utterance": "what is my kohls card's rewards balance",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "rewards_balance"
+      ]
+    ]
+  },
+  {
+    "id": "99176394ec1ee7bcb12b16f61ed85fde",
+    "utterance": "what is my gymboree card's rewards balance",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "rewards_balance"
+      ]
+    ]
+  },
+  {
+    "id": "f7764843fbc67b8c8a90441c3e1bfe6f",
+    "utterance": "could you tell me what kind of money i've recently spent",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "spending_history"
+      ]
+    ]
+  },
+  {
+    "id": "4ee18114a6aac29d9362896e7fad80db",
+    "utterance": "how much have i spent lately",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "spending_history"
+      ]
+    ]
+  },
+  {
+    "id": "189fc7610f4dc4ca903e45bdefba1d2f",
+    "utterance": "how much have i recently spent",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "spending_history"
+      ]
+    ]
+  },
+  {
+    "id": "a7daff96cdc66404bee2462d73640e50",
+    "utterance": "how much money have i recently spent on stuff",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "spending_history"
+      ]
+    ]
+  },
+  {
+    "id": "975f17fc72af6637dc79898c0217e4c8",
+    "utterance": "how much did i spend on shcool due last year",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "spending_history"
+      ]
+    ]
+  },
+  {
+    "id": "530620bc4c88d9d5d211a6c03a08c018",
+    "utterance": "how much did i spend on bills last month",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "spending_history"
+      ]
+    ]
+  },
+  {
+    "id": "7e9674f03390ae3458deb64289763d7f",
+    "utterance": "did i buy too many donuts recently, like last week",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "spending_history"
+      ]
+    ]
+  },
+  {
+    "id": "679ebd3eeed23cbb5e651a21473f978d",
+    "utterance": "did i spend too much dough on donuts last week",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "spending_history"
+      ]
+    ]
+  },
+  {
+    "id": "7a9a9c66db36420dd584455e778698a1",
+    "utterance": "have i been spending excessively on donuts recently",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "spending_history"
+      ]
+    ]
+  },
+  {
+    "id": "6cb27334f6c14111d6ab7b6df1ef7e96",
+    "utterance": "was i spending too much money on doughnuts last week",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "spending_history"
+      ]
+    ]
+  },
+  {
+    "id": "df4a4215786aab06ebe01920be2d1529",
+    "utterance": "will i be permitted to take my vacation",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_request_status"
+      ]
+    ]
+  },
+  {
+    "id": "8a17ba89e203a3f262be8107724750a0",
+    "utterance": "what's the status of my vacation days",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_request_status"
+      ]
+    ]
+  },
+  {
+    "id": "4f56420fce5fe8a60a07b029e7b5557f",
+    "utterance": "did i get approval yet to take off next week",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_request_status"
+      ]
+    ]
+  },
+  {
+    "id": "c710aa91f3702496d24b8e772317fcc8",
+    "utterance": "has my vacation been okayed yet",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_request_status"
+      ]
+    ]
+  },
+  {
+    "id": "1370d36a38e4e2b286b3d44599e955fe",
+    "utterance": "has my maternity leave been approved",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_request_status"
+      ]
+    ]
+  },
+  {
+    "id": "550d43f42394ae1d0703f4e5688e4605",
+    "utterance": "did my vacation get approved yet",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_request_status"
+      ]
+    ]
+  },
+  {
+    "id": "31a1ff5e2246fa40c4477bb9d738a9e2",
+    "utterance": "what's the status of my medical leave",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_request_status"
+      ]
+    ]
+  },
+  {
+    "id": "923bee7468ba779622fedce63e1cbc0b",
+    "utterance": "what's the status on my vacation approval",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_request_status"
+      ]
+    ]
+  },
+  {
+    "id": "dfa9a0b0b3eb074a48dc6781e41276fd",
+    "utterance": "when will my vacation get okayed",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_request_status"
+      ]
+    ]
+  },
+  {
+    "id": "9f24b328c910d6ae17558348846b39e9",
+    "utterance": "am i cleared to miss work for vacation",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_request_status"
+      ]
+    ]
+  },
+  {
+    "id": "aec2aa9a9f915137cc91a0c3e0d5fb47",
+    "utterance": "can you cancel my todo list please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "todo_list_update"
+      ]
+    ]
+  },
+  {
+    "id": "2befe7dcd3b2e891ffae3f8a6d0285bc",
+    "utterance": "wipe my todo list please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "todo_list_update"
+      ]
+    ]
+  },
+  {
+    "id": "e51024e310f4c94a01f23aef6dba9c99",
+    "utterance": "can you delete my todo list please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "todo_list_update"
+      ]
+    ]
+  },
+  {
+    "id": "008e1c99d7c7fc6f59b74701643c73ba",
+    "utterance": "remove my todo list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "todo_list_update"
+      ]
+    ]
+  },
+  {
+    "id": "8048efa95265c5668abc3931670aa284",
+    "utterance": "please delete my todo list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "todo_list_update"
+      ]
+    ]
+  },
+  {
+    "id": "bbd3f603619b3ab56332ee1820b94e91",
+    "utterance": "can you add laundry to my to do list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "todo_list_update"
+      ]
+    ]
+  },
+  {
+    "id": "407bdcfd4551a8f8fee342740b925f11",
+    "utterance": "put laundry on my chore list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "todo_list_update"
+      ]
+    ]
+  },
+  {
+    "id": "6dbb9f6a0c380c8cf4e7dee9bc47ad17",
+    "utterance": "erase my to do list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "todo_list_update"
+      ]
+    ]
+  },
+  {
+    "id": "a41136b769b755aa05ecdd23f02017fa",
+    "utterance": "i need to do laundry later today",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "todo_list_update"
+      ]
+    ]
+  },
+  {
+    "id": "3f4a6c20d333cca84bc1c69671b059e7",
+    "utterance": "put laundry on my list of things to do",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "todo_list_update"
+      ]
+    ]
+  },
+  {
+    "id": "115ebe3956202b79834e1080d57dc035",
+    "utterance": "i'd like an appointment at your earliest availability for an oil change",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "schedule_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "f126eb23ddf864b1d35737aeb4861927",
+    "utterance": "could you book me an appointment for an oil change",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "schedule_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "c36324a35246d8ad81b89818605df604",
+    "utterance": "i'd like to make an appointment to get my oil changed",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "schedule_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "364f10f30c895e0551b9bdc785f8f2aa",
+    "utterance": "i'd like to book the next availability for an oil change",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "schedule_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "d6bb71281980a27ab998208a0306d41b",
+    "utterance": "can i make an appointment for an oil change",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "schedule_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "3b8483aaa320336b0f3456bbb9a8e38f",
+    "utterance": "schedule an appointment for a tire check for me",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "schedule_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "6fa4a50b40a0e62a6c347042582aca5b",
+    "utterance": "make me an appointment for a tire check",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "schedule_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "0783ee7ffa52472b7e6feeb3a286f5ba",
+    "utterance": "can i make an appointment to get my tires checked",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "schedule_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "5c8eb883df39d56dfc621917197a9404",
+    "utterance": "can you please make an appointment for me to get my tires checked out",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "schedule_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "75882fe8540f4c0bfaa4f74254e61ca1",
+    "utterance": "schedule me an appointment to get my tires checked out",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "schedule_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "eb1ec57d88bede604be70db1367f2246",
+    "utterance": "how long do i need to cook pot au feu for",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cook_time"
+      ]
+    ]
+  },
+  {
+    "id": "2c6215d39cbbf660515e7e9e513d73e4",
+    "utterance": "how long do i need to cook chili for",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cook_time"
+      ]
+    ]
+  },
+  {
+    "id": "fcf9d078eea6fe57f1240e12f3d81ba7",
+    "utterance": "how long do i need to cook lasagne for",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cook_time"
+      ]
+    ]
+  },
+  {
+    "id": "6783d3aea46418a747bf549f1e7190c9",
+    "utterance": "how long do i need to cook tuna casserole for",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cook_time"
+      ]
+    ]
+  },
+  {
+    "id": "f8485e01b43508d9b2eadb67d2370eaa",
+    "utterance": "how long do i need to cook beef stew for",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cook_time"
+      ]
+    ]
+  },
+  {
+    "id": "b60f4ae603407fde3e3c82c8f54c31fb",
+    "utterance": "how long should i cook country fried potatoes for",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cook_time"
+      ]
+    ]
+  },
+  {
+    "id": "fa366dd9bd2f2106bb8822812d4935e8",
+    "utterance": "how long should i cook pho for",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cook_time"
+      ]
+    ]
+  },
+  {
+    "id": "b3886722903a19e93a0f6d544946cdc3",
+    "utterance": "how long should i cook steak for",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cook_time"
+      ]
+    ]
+  },
+  {
+    "id": "46759c201cc6b928a7a3fd4efe861efc",
+    "utterance": "how long should i cook roast for",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cook_time"
+      ]
+    ]
+  },
+  {
+    "id": "fb2a64bb1fe59c4adc7ddeac3fa210ad",
+    "utterance": "i need to know how long to cook chicken for",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cook_time"
+      ]
+    ]
+  },
+  {
+    "id": "aa7d9c08b89d5103e2985c03cb2f16fe",
+    "utterance": "remind me to call my mom",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "reminder_update"
+      ]
+    ]
+  },
+  {
+    "id": "f30b0be8ff827235a694d69fd1d3974d",
+    "utterance": "set a reminder for me to request time off work around the holidays",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "reminder_update"
+      ]
+    ]
+  },
+  {
+    "id": "672a8102c645cd41f5b45f3fd7414dc0",
+    "utterance": "remind me to get an oil change",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "reminder_update"
+      ]
+    ]
+  },
+  {
+    "id": "28654d434a1fa758b920408cd785d253",
+    "utterance": "i need a reminder to order cookies",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "reminder_update"
+      ]
+    ]
+  },
+  {
+    "id": "ed98ac595a7e0d39ccebed9632c03985",
+    "utterance": "remind me to write that letter",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "reminder_update"
+      ]
+    ]
+  },
+  {
+    "id": "78badf29712e41bd537ead7e4cb30e3c",
+    "utterance": "set a reminder to pay my taxes",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "reminder_update"
+      ]
+    ]
+  },
+  {
+    "id": "2c98372bd0b27a833be85e5273945df6",
+    "utterance": "remind me to do something",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "reminder_update"
+      ]
+    ]
+  },
+  {
+    "id": "0cbac7e28a0589caa46820b814f1a019",
+    "utterance": "you need to remind me to do something",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "reminder_update"
+      ]
+    ]
+  },
+  {
+    "id": "b1edb7cb15dc36b5fb9c0619ad47de8b",
+    "utterance": "i need to be reminded",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "reminder_update"
+      ]
+    ]
+  },
+  {
+    "id": "81dead8f1c9d2fc21fe5749e065df512",
+    "utterance": "i need to make a reminder",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "reminder_update"
+      ]
+    ]
+  },
+  {
+    "id": "7c861b613bb53e6c3ea27ac679a6971e",
+    "utterance": "i need a w2 form, how do i get one",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "w2"
+      ]
+    ]
+  },
+  {
+    "id": "9459df7382384cd5d3a52b25ed76584a",
+    "utterance": "who do i contact for a w2 form",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "w2"
+      ]
+    ]
+  },
+  {
+    "id": "fb7cde607990c751e5b9b13af16bd3b2",
+    "utterance": "how do i get a w2 form",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "w2"
+      ]
+    ]
+  },
+  {
+    "id": "52acd966699765618851caa1befea5ce",
+    "utterance": "who should i call for a w2",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "w2"
+      ]
+    ]
+  },
+  {
+    "id": "4949c5b13531665b013530d7c5596a5f",
+    "utterance": "where do i go to get a form for w2s",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "w2"
+      ]
+    ]
+  },
+  {
+    "id": "9938acbd7b8742637ce831fc79fca4be",
+    "utterance": "where do i get w2 form",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "w2"
+      ]
+    ]
+  },
+  {
+    "id": "47b15db940a543c270ca4bea8eddd824",
+    "utterance": "i need to know where to get w2",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "w2"
+      ]
+    ]
+  },
+  {
+    "id": "18ec397c572b7ad20950f499fc7f33f7",
+    "utterance": "tell me where i should get the w2",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "w2"
+      ]
+    ]
+  },
+  {
+    "id": "c9c7bc64b5adee63ea4c76a42ea4f9db",
+    "utterance": "so where do i get the w2 form",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "w2"
+      ]
+    ]
+  },
+  {
+    "id": "1663fc9eb3a81a33fae11ed2c27ff515",
+    "utterance": "please tell me where to get the w2",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "w2"
+      ]
+    ]
+  },
+  {
+    "id": "f9b6af0a208a39d778782184c82a1fcc",
+    "utterance": "make your volume quieter please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_volume"
+      ]
+    ]
+  },
+  {
+    "id": "11b29b0aed76e4654968363ead65d132",
+    "utterance": "adjust the volume to level 4",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_volume"
+      ]
+    ]
+  },
+  {
+    "id": "182909ad2b15e0387f42316799811c76",
+    "utterance": "i want your volume decreased please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_volume"
+      ]
+    ]
+  },
+  {
+    "id": "868d8ee6b8425661868e3994d47165d1",
+    "utterance": "could you please raise your volume",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_volume"
+      ]
+    ]
+  },
+  {
+    "id": "3bd1870fb549469f8bc1779b7fb84549",
+    "utterance": "i want your volume lowered",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_volume"
+      ]
+    ]
+  },
+  {
+    "id": "8a42943f587de319cc0c95af9f239642",
+    "utterance": "i want your volume louder",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_volume"
+      ]
+    ]
+  },
+  {
+    "id": "36f4f46e6e56a78c2bd19f4f82b9dc86",
+    "utterance": "i want the volume at 4 please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_volume"
+      ]
+    ]
+  },
+  {
+    "id": "28953839d32dc84cc3a05e95bbee606b",
+    "utterance": "i want the volume at level 4",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_volume"
+      ]
+    ]
+  },
+  {
+    "id": "593b07309effb6a545df9f92c35e1bc9",
+    "utterance": "a volume of 4 is ideal please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_volume"
+      ]
+    ]
+  },
+  {
+    "id": "256695b1f6e33ffba99703c8facebd0c",
+    "utterance": "i need your volume increased",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "change_volume"
+      ]
+    ]
+  },
+  {
+    "id": "cad97b0b7c97e5a317f0619226a5c0d3",
+    "utterance": "what is the limit on my victoria's secret card",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "credit_limit"
+      ]
+    ]
+  },
+  {
+    "id": "5ea2e5ed716151316e6ce1740bac0e15",
+    "utterance": "could you tell me the limit on my chase credit card",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "credit_limit"
+      ]
+    ]
+  },
+  {
+    "id": "1df1a177233bcfdf619986165279ab8f",
+    "utterance": "i need to know what my limit is on my american express card",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "credit_limit"
+      ]
+    ]
+  },
+  {
+    "id": "c4fa80dfcbe6fa42530d7966d95041ac",
+    "utterance": "how high is my spending limit on my wells fargo card",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "credit_limit"
+      ]
+    ]
+  },
+  {
+    "id": "352977192861a5abba37db886d995226",
+    "utterance": "can you tell me what the limit is on my capital one card",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "credit_limit"
+      ]
+    ]
+  },
+  {
+    "id": "a0f4e6657d208355cda01206319129fa",
+    "utterance": "i have to know the credit limit",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "credit_limit"
+      ]
+    ]
+  },
+  {
+    "id": "1bcb096335d3682213b63050ae439a5e",
+    "utterance": "what exactly is my credit limit",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "credit_limit"
+      ]
+    ]
+  },
+  {
+    "id": "40aba1e4b69c90e73674bf08d149c73e",
+    "utterance": "explain what my credit limit is",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "credit_limit"
+      ]
+    ]
+  },
+  {
+    "id": "64d9a5010a4d99dbf96ea6bafb1f3a3f",
+    "utterance": "give me my credit limit",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "credit_limit"
+      ]
+    ]
+  },
+  {
+    "id": "875947dc9b556c57366b0bbbbaa11d95",
+    "utterance": "i need to know the credit limit",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "credit_limit"
+      ]
+    ]
+  },
+  {
+    "id": "6c58e6872373799ec03d3868fed4e082",
+    "utterance": "see ya!",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "goodbye"
+      ]
+    ]
+  },
+  {
+    "id": "2a1e433c8d95f7e7a5d516bdc806e39b",
+    "utterance": "this was fun, see you around bye",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "goodbye"
+      ]
+    ]
+  },
+  {
+    "id": "4d4b2c94df04b62bad0db7ac1d2fa651",
+    "utterance": "until next time",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "goodbye"
+      ]
+    ]
+  },
+  {
+    "id": "09ac4db24d3624bf665c02d52a5607da",
+    "utterance": "i enjoyed our talk, bye",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "goodbye"
+      ]
+    ]
+  },
+  {
+    "id": "8d31d9353213dd9ed620f2cc5306d31f",
+    "utterance": "this was a nice chat",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "goodbye"
+      ]
+    ]
+  },
+  {
+    "id": "2d0142666faee5bf0e7f63b8313429c1",
+    "utterance": "i enjoyed speaking with you",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "goodbye"
+      ]
+    ]
+  },
+  {
+    "id": "c1de7f68536cb985b0c37c3b32644b72",
+    "utterance": "peace out!",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "goodbye"
+      ]
+    ]
+  },
+  {
+    "id": "1b9df6b949854b5c531bb80c84cb1e78",
+    "utterance": "this was a nice chat, goodbye",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "goodbye"
+      ]
+    ]
+  },
+  {
+    "id": "56b285b5d61df4b3f93c52a2a7aad416",
+    "utterance": "this was a nice conversation",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "goodbye"
+      ]
+    ]
+  },
+  {
+    "id": "84d1185dabe42b4d6a0250944cb29471",
+    "utterance": "good talk, see you later",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "goodbye"
+      ]
+    ]
+  },
+  {
+    "id": "29c9e756057a6b77e5b5cdfc3befd374",
+    "utterance": "on what day, month and year did i get new tires",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "last_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "c1147ef94484fede85f08cdc1221d637",
+    "utterance": "when was the last time my car was worked on",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "last_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "2cca0ad7122726b67d2d9b040bbc1978",
+    "utterance": "when did i last get my car serviced",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "last_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "3531148e974c7f1e703ff0f1a86f7249",
+    "utterance": "what was the date when my car was in the shop",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "last_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "a61338c1ef0bcf41cf0fc60b0334a81c",
+    "utterance": "how long since my car was in the shop",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "last_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "d2c99a9fb6bd813cd80e6897f487395e",
+    "utterance": "when was my last oil change",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "last_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "8673a5d367acc6b77645af45e11df079",
+    "utterance": "what was the date of my last car service",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "last_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "c73111a38bf10550e56af5d368bffb84",
+    "utterance": "when was the last time i took my car in",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "last_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "dee28fb0802f35c6c7aeaa9cad07faaf",
+    "utterance": "when was the last time my car was serviced",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "last_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "96e9c4897f788332f944c1d21b78cb7d",
+    "utterance": "do you remember when i last got my car looked at",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "last_maintenance"
+      ]
+    ]
+  },
+  {
+    "id": "679e8a8c51e9cf97481b553b905713ea",
+    "utterance": "what is the total number of pints in two quarts",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "measurement_conversion"
+      ]
+    ]
+  },
+  {
+    "id": "38b7faa87760d7101c85bddb2598bf1a",
+    "utterance": "can you tell me the number of ounces in a quart",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "measurement_conversion"
+      ]
+    ]
+  },
+  {
+    "id": "bb50b03d2f86f398edc3f563fcef9e5a",
+    "utterance": "what is the correct amount of ounces in a pound",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "measurement_conversion"
+      ]
+    ]
+  },
+  {
+    "id": "3e0d32cf100e1ec5fc86538f4ba1f9f0",
+    "utterance": "how many tablespoons are there in half of a cup",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "measurement_conversion"
+      ]
+    ]
+  },
+  {
+    "id": "2826cd6934e5ac39ad56bf77370d83cf",
+    "utterance": "i need to know how many teaspoons are equivalent to two tablesppons",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "measurement_conversion"
+      ]
+    ]
+  },
+  {
+    "id": "fbf5d691c3a390aa4611c59665f5c709",
+    "utterance": "give me celcius to fahrenheit",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "measurement_conversion"
+      ]
+    ]
+  },
+  {
+    "id": "06b16359b4cf74ec8598a42908bda2e3",
+    "utterance": "what's the equivalent of 1 cup to pounds",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "measurement_conversion"
+      ]
+    ]
+  },
+  {
+    "id": "52cb51330bac626d7d16e0c27ec35d5b",
+    "utterance": "i need kilograms to milligrams",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "measurement_conversion"
+      ]
+    ]
+  },
+  {
+    "id": "4066e0865407d956edaf7ed6804769af",
+    "utterance": "how do i convert a cup to ml",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "measurement_conversion"
+      ]
+    ]
+  },
+  {
+    "id": "3c1d2908e02d6b5a6efb111c135e0cf4",
+    "utterance": "give me kilograms to pounds",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "measurement_conversion"
+      ]
+    ]
+  },
+  {
+    "id": "ce324aa9f18f85723055204a37dae76c",
+    "utterance": "could you tell me the temperature of the ac",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "smart_home"
+      ]
+    ]
+  },
+  {
+    "id": "e855e1d4a340f8b408ed2fe62416f892",
+    "utterance": "the temperature of the ac, what is it at",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "smart_home"
+      ]
+    ]
+  },
+  {
+    "id": "10042a962a4649d23793f7ef44c3b900",
+    "utterance": "the ac, could you tell me the temperature",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "smart_home"
+      ]
+    ]
+  },
+  {
+    "id": "dc6bed642d7edd9ec751a7d7f4dcd738",
+    "utterance": "do you know the temperature of the ac",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "smart_home"
+      ]
+    ]
+  },
+  {
+    "id": "7e4a7d0ad14dba688826b482ae41bd1e",
+    "utterance": "what is it at, the ac temperature",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "smart_home"
+      ]
+    ]
+  },
+  {
+    "id": "2e309c170e504d37e62202d6de62eb75",
+    "utterance": "i want you to turn the tv on",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "smart_home"
+      ]
+    ]
+  },
+  {
+    "id": "72b1ac3fc40b8e001f881a429578695c",
+    "utterance": "i need you to turn the tv on now",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "smart_home"
+      ]
+    ]
+  },
+  {
+    "id": "0f0585ed9a1933ef75199e9d7af789ee",
+    "utterance": "will you please turn the tv on",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "smart_home"
+      ]
+    ]
+  },
+  {
+    "id": "6eae111a6021e0096b1cdb50fbebe3d9",
+    "utterance": "turn on the tv please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "smart_home"
+      ]
+    ]
+  },
+  {
+    "id": "4b540b6cf9ed1da72c0c42eaf3541a5b",
+    "utterance": "please turn the tv on",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "smart_home"
+      ]
+    ]
+  },
+  {
+    "id": "e2c008a57fa3633a290ddc577e6c0db8",
+    "utterance": "what's is the current weather forecast",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "1405b7ef31e31f9e86523c1c29c30313",
+    "utterance": "tell me the forecast",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "889351da290c6e70a53ea72583867bae",
+    "utterance": "what's the weather like",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "3076864b2660f3361be3d087f60c7947",
+    "utterance": "what's the forecast for the day",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "86dba29768e604e273770bdf3b15e2e9",
+    "utterance": "i need to know the weather",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "e2b0891a367aa2cb802383d368aeff83",
+    "utterance": "weather forecast please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "f6e982553e5313c131342efad633f287",
+    "utterance": "what's today's weather",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "d0fd99b30bea19b9f682eee58664e7ec",
+    "utterance": "i need to know today's forecast",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "8a34fb4cc2c8c2c8b76009e790154738",
+    "utterance": "is it going to rain tomorrow",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "758a952a13ad00fd16df1aa632b8c2b9",
+    "utterance": "what is the weather outside",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "weather"
+      ]
+    ]
+  },
+  {
+    "id": "759fe4e4283b803359221c7b22248eb8",
+    "utterance": "quit talking",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cancel"
+      ]
+    ]
+  },
+  {
+    "id": "007197904104f74d553c4c234e399b37",
+    "utterance": "stop please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cancel"
+      ]
+    ]
+  },
+  {
+    "id": "442166d81beab515ea7e6a9f6ddc2691",
+    "utterance": "scrap",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cancel"
+      ]
+    ]
+  },
+  {
+    "id": "c319dbffa62f298007a15d34c09e5f5e",
+    "utterance": "whats the procedure to cancel it",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cancel"
+      ]
+    ]
+  },
+  {
+    "id": "2a72d065ed127ee08598c6e674c0daa2",
+    "utterance": "stop it",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cancel"
+      ]
+    ]
+  },
+  {
+    "id": "3f18244a5d851e8595488d2b5edb4dad",
+    "utterance": "please abort the current process",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cancel"
+      ]
+    ]
+  },
+  {
+    "id": "1ce061c7e08499de130744b27d8fd56a",
+    "utterance": "cancel it",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cancel"
+      ]
+    ]
+  },
+  {
+    "id": "fff7730f770ddc74e2fccb1d0516e23a",
+    "utterance": "can you cancel it",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cancel"
+      ]
+    ]
+  },
+  {
+    "id": "c9add214c9c1dca31ec92ad8a1fa92f6",
+    "utterance": "hey ai cancel it now",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cancel"
+      ]
+    ]
+  },
+  {
+    "id": "10aec35353f9c4096a71c38654c3d402",
+    "utterance": "cancel",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "cancel"
+      ]
+    ]
+  },
+  {
+    "id": "25d4440975950ec953b50264837f88b4",
+    "utterance": "is it necessary to get a shot for travel to india",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "vaccines"
+      ]
+    ]
+  },
+  {
+    "id": "68919a5f9cbcd5808f449a170de3beb4",
+    "utterance": "are there any necessary shots required before travel to thailand",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "vaccines"
+      ]
+    ]
+  },
+  {
+    "id": "d7adf895814917f27d33545342e218a8",
+    "utterance": "do i have to get a shot for travel to taiwan",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "vaccines"
+      ]
+    ]
+  },
+  {
+    "id": "97d016a0121f70d4186ede03e6b80205",
+    "utterance": "are shots required before traveling to brazil",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "vaccines"
+      ]
+    ]
+  },
+  {
+    "id": "2c5b4366e253a9fc365433f7b68248bc",
+    "utterance": "can i travel to south africa without getting a shot",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "vaccines"
+      ]
+    ]
+  },
+  {
+    "id": "4a7aa51b55715468acab2519e137f802",
+    "utterance": "what shots are required to visit australia",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "vaccines"
+      ]
+    ]
+  },
+  {
+    "id": "f0b93c5038f715a3ba43e483a717d2fc",
+    "utterance": "do i need any vaccines before traveling to brazil",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "vaccines"
+      ]
+    ]
+  },
+  {
+    "id": "58617a0b3204d4b20bb77387ffb60de3",
+    "utterance": "what shots do i need before going to africa",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "vaccines"
+      ]
+    ]
+  },
+  {
+    "id": "fd099c66a3d5d448c2957ee1bf83d8e1",
+    "utterance": "do i need to get any shots before volunteering in the congo",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "vaccines"
+      ]
+    ]
+  },
+  {
+    "id": "3b99bf46f2470a3a9668e760287ec3a9",
+    "utterance": "must i have shots before i take a trip to canada",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "vaccines"
+      ]
+    ]
+  },
+  {
+    "id": "d4a830e715aeb8f4332b3c59234868fe",
+    "utterance": "how many vacation days have i saved up",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_balance"
+      ]
+    ]
+  },
+  {
+    "id": "2160587a9be9a0e8f8b956a1cb320d4f",
+    "utterance": "how many vacation days do i have at my disposal",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_balance"
+      ]
+    ]
+  },
+  {
+    "id": "aa77e59b88e7ec5e90eca4b7dbff0590",
+    "utterance": "how many hours of vacation have i saved up",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_balance"
+      ]
+    ]
+  },
+  {
+    "id": "860e4e900390432784b763b2fb8ae64d",
+    "utterance": "how many vacation days have i accumulated",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_balance"
+      ]
+    ]
+  },
+  {
+    "id": "0a0795d279dc0b051c30d0ed961d3180",
+    "utterance": "how many pto days are available",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_balance"
+      ]
+    ]
+  },
+  {
+    "id": "8f051edabea3fe4b74c4e11889a4d89a",
+    "utterance": "how much vacation do i have saved",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_balance"
+      ]
+    ]
+  },
+  {
+    "id": "0d3a53e20d5960f6eb8ac69eb9ecd29a",
+    "utterance": "how much vacation have i earned",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_balance"
+      ]
+    ]
+  },
+  {
+    "id": "97acbd1a5c6b2cf65c0ef860e2c0be20",
+    "utterance": "what number of pto days do i have left",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_balance"
+      ]
+    ]
+  },
+  {
+    "id": "10c37e025fc34b3d26669048fb40cc69",
+    "utterance": "how many weeks of vacation do i have",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_balance"
+      ]
+    ]
+  },
+  {
+    "id": "5f90b2e660c887890d090dc1549308ae",
+    "utterance": "how many days of vacation do i have saved",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "pto_balance"
+      ]
+    ]
+  },
+  {
+    "id": "06a3339b2107b1e1311cd8ad27f3a3a6",
+    "utterance": "will you please read the things on my shopping list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "shopping_list"
+      ]
+    ]
+  },
+  {
+    "id": "d8b8dfaa816aba6066b05e28f27709d0",
+    "utterance": "what is on my shopping list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "shopping_list"
+      ]
+    ]
+  },
+  {
+    "id": "38110689394558ed91ddede23a56570a",
+    "utterance": "can you read the things to me that are on my shopping list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "shopping_list"
+      ]
+    ]
+  },
+  {
+    "id": "9ee83a69be15e777171f89655d7581a5",
+    "utterance": "can you read the things on my shopping list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "shopping_list"
+      ]
+    ]
+  },
+  {
+    "id": "41ba6e9689f92f780dc1349d55311d82",
+    "utterance": "is it possible for you to read the things on my shopping list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "shopping_list"
+      ]
+    ]
+  },
+  {
+    "id": "89ac0884e6f1ee00ac81dd798c8e0381",
+    "utterance": "did i add salt to my shopping list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "shopping_list"
+      ]
+    ]
+  },
+  {
+    "id": "7b8da98c3c04c90e500cf73ce3dc1eaf",
+    "utterance": "do i have toothpaste on my shopping list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "shopping_list"
+      ]
+    ]
+  },
+  {
+    "id": "11c4e9a5526a442801b7728275abc009",
+    "utterance": "is there lettuce on my shopping list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "shopping_list"
+      ]
+    ]
+  },
+  {
+    "id": "a914e2f8cab368f560ce6b485cfcf40f",
+    "utterance": "did i include butter in my shopping list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "shopping_list"
+      ]
+    ]
+  },
+  {
+    "id": "9d88b9f7bd65d3e4e5bde9df5c71b0e1",
+    "utterance": "did i put elbow noodles on the shopping list",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "shopping_list"
+      ]
+    ]
+  },
+  {
+    "id": "a660d236ae200a5b06ddf560067f907f",
+    "utterance": "how can i jump start my car if my battery is dead",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "jump_start"
+      ]
+    ]
+  },
+  {
+    "id": "233c3a0e564c13460dcf96609e6d4087",
+    "utterance": "will a jump start work if my batter is dead",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "jump_start"
+      ]
+    ]
+  },
+  {
+    "id": "fae7e3fe85f41911aadd61be62c488c0",
+    "utterance": "how to jump start a car",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "jump_start"
+      ]
+    ]
+  },
+  {
+    "id": "73b3495566000b10504ff34c9c8b58e0",
+    "utterance": "what do i need to jump start a battery",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "jump_start"
+      ]
+    ]
+  },
+  {
+    "id": "7eb8bf687832c1be1c9b0cfa629b6754",
+    "utterance": "how do i jump start a bad battery",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "jump_start"
+      ]
+    ]
+  },
+  {
+    "id": "24c826a013c2c2a7ea00a9f6964dc2cc",
+    "utterance": "what steps do i need to take to jump start my car",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "jump_start"
+      ]
+    ]
+  },
+  {
+    "id": "ba0878f428d52125219ca8d9f41de228",
+    "utterance": "i'm not sure how to jump start a car; can you help me",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "jump_start"
+      ]
+    ]
+  },
+  {
+    "id": "badb57cd812c404f15ff8bc5b0aa8214",
+    "utterance": "how do i do a jump start on my car",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "jump_start"
+      ]
+    ]
+  },
+  {
+    "id": "88fd8a7454fadf5ccd3a9ded1fa4d5e7",
+    "utterance": "how might i go about jump starting a car",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "jump_start"
+      ]
+    ]
+  },
+  {
+    "id": "0802a82ce7716c91c445050cd0af6c13",
+    "utterance": "how can i jump start a car",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "jump_start"
+      ]
+    ]
+  },
+  {
+    "id": "bcaa40a59515adab03751c223e560b0b",
+    "utterance": "order more bread please",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order"
+      ]
+    ]
+  },
+  {
+    "id": "bbf77c7bb3eebfc5fce56eaa0af6da06",
+    "utterance": "i ran out of bread, order more",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order"
+      ]
+    ]
+  },
+  {
+    "id": "3dc232752c14f599d1b0aa31ce974783",
+    "utterance": "since i ran out , order more bread",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order"
+      ]
+    ]
+  },
+  {
+    "id": "8f0f22641920dd373d50e3d9e92c11d1",
+    "utterance": "place an order for bread",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order"
+      ]
+    ]
+  },
+  {
+    "id": "d9fc70d7714079b3d468a580652694a0",
+    "utterance": "make an order of bread because i am out",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order"
+      ]
+    ]
+  },
+  {
+    "id": "d07568eb201f698ceafacda9666d9992",
+    "utterance": "order an amazon gift card from amazon in the amount of twenty dollars",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order"
+      ]
+    ]
+  },
+  {
+    "id": "cd702a0a3005c4f4d4c6e27b46dba7d0",
+    "utterance": "order a case of coke from amazon",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order"
+      ]
+    ]
+  },
+  {
+    "id": "c7b6fcdffed87598da6a9ee6eac71185",
+    "utterance": "order dog food from walmart",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order"
+      ]
+    ]
+  },
+  {
+    "id": "4b9a7ae7e7e3f8bcd42c8ebe37bf8c97",
+    "utterance": "order more paper towels from amazon",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order"
+      ]
+    ]
+  },
+  {
+    "id": "290c3a0bd9cca59010733a5811aa544f",
+    "utterance": "order a disney gift card in the amount of five hundred dollars from costco",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order"
+      ]
+    ]
+  },
+  {
+    "id": "983647cf1cd519e6fa6f3b282cff7ff0",
+    "utterance": "i need more checks because i am out",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order_checks"
+      ]
+    ]
+  },
+  {
+    "id": "931fe801797078f32604933d3112d529",
+    "utterance": "can i order new checks since i am out",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order_checks"
+      ]
+    ]
+  },
+  {
+    "id": "97c6bc9d2c5be1af2250292067ee4b05",
+    "utterance": "i am now out of checks, how do i order new ones",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order_checks"
+      ]
+    ]
+  },
+  {
+    "id": "f478da879e391a83178094ebdf1f9edc",
+    "utterance": "i need to order new checks because i am all out",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order_checks"
+      ]
+    ]
+  },
+  {
+    "id": "80d4771ab39833b3643c49a98ab25b2b",
+    "utterance": "i have no checks and need to order new checks",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order_checks"
+      ]
+    ]
+  },
+  {
+    "id": "09fd8010691ce0e5b34f3993f040a74f",
+    "utterance": "put in an order for more checks",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order_checks"
+      ]
+    ]
+  },
+  {
+    "id": "5fc71147f45a00087d652ed5a22dbffa",
+    "utterance": "how do i order more free checkbooks",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order_checks"
+      ]
+    ]
+  },
+  {
+    "id": "2ff18b1a4c0c42b90004fdd90290b539",
+    "utterance": "i ran out of checks and need more ordered",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order_checks"
+      ]
+    ]
+  },
+  {
+    "id": "90434005654b54869014f755868ab77e",
+    "utterance": "please order more checks i just used the last one",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order_checks"
+      ]
+    ]
+  },
+  {
+    "id": "1f8c94c679c9697d3802ce572d2dd890",
+    "utterance": "i just used my last check and need more now",
+    "context": "*",
+    "conditions": [
+      [
+        "intent",
+        "is",
+        "order_checks"
+      ]
+    ]
+  }
+]

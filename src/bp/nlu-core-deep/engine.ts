@@ -62,7 +62,7 @@ export default class Engine implements NLU.Engine {
         input: inputs,
         output: serialized.data.output
       }
-      await model.net!.load(serialized.languageCode, serialized.data.output)
+      await model.net!.load(serialized.languageCode, this.botId)
       this.modelsByLang[serialized.languageCode] = model
     } catch (e) {
       console.log('ERROR LOADING MODEL : ', e)
@@ -95,12 +95,13 @@ export default class Engine implements NLU.Engine {
     const model: Model = this.modelsByLang[languageCode] ?? {}
     if (!model.net || _.uniqBy(model.data?.input, 'name') !== _.uniqBy(intentDefs, 'name')) {
       model.net = new Net(languageCode, intentDefs.length, this.botId)
-      model.data = { input: intentDefs, output: model.net.netPath }
+      await model.net.load(languageCode, undefined)
+      model.data = { input: intentDefs, output: '' }
     }
     model.id = trainSessionId
 
     model.startedAt = new Date()
-    await model.net!.train(intentDefs, entityDefs)
+    const metadata = await model.net!.train(intentDefs, entityDefs, this.botId)
     model.finishedAt = new Date()
     model.hash = this.computeModelHash(intentDefs, entityDefs, languageCode)
     this.modelsByLang[languageCode] = model
@@ -111,7 +112,7 @@ export default class Engine implements NLU.Engine {
       finishedAt: model.finishedAt,
       data: {
         input: JSON.stringify(intentDefs),
-        output: model.net.netPath
+        output: JSON.stringify(metadata)
       }
     } as NLU.Model
   }
@@ -129,7 +130,7 @@ export default class Engine implements NLU.Engine {
 
   async predict(sentence: string, contexts: string[], language: string): Promise<sdk.IO.EventUnderstanding> {
     const pred = await this.modelsByLang[language].net!.predict(sentence)
-    // console.log(pred)
+    console.log(pred[0], pred[1])
     const predictions = {} as NLU.Predictions
     for (const ctx of contexts) {
       predictions[ctx] = { confidence: 0.5, oos: 0, intents: pred[2] }

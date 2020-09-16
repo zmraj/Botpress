@@ -1,7 +1,7 @@
 import { NLU } from 'botpress/sdk'
 
 import Embedder from './embedders'
-
+import { spellCheck } from './utils'
 export async function preprocessDatas(
   intents: NLU.IntentDefinition[],
   entities: NLU.EntityDefinition[],
@@ -14,12 +14,12 @@ export async function preprocessDatas(
   for (let i = 0; i < intents.length; i++) {
     labelToInt[intents[i].name] = i
     intToLabel[i] = intents[i].name
-    embed = embed.concat(await Promise.all(intents[i].utterances[embedder.lang].map(async utt => embedder.embed(utt))))
-    labels = labels.concat(Array(intents[i].utterances[embedder.lang].length).fill(i))
+    const spellCheckedUtt = await spellCheck(intents[i].utterances[embedder.lang], embedder.lang)
+    embed = embed.concat(await Promise.all(spellCheckedUtt.map(async utt => embedder.embed(utt))))
+    labels = labels.concat(Array(spellCheckedUtt.length).fill(i))
   }
   return { datas: { embed, labels }, intToLabel }
 }
-
 export interface Datas {
   embed: number[][]
   labels: number[]
