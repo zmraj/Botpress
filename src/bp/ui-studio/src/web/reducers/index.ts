@@ -1,14 +1,16 @@
-import { BotConfig, ModuleDefinition } from 'botpress/sdk'
+import { BotConfig, BotEvent, ModuleDefinition } from 'botpress/sdk'
 import { combineReducers } from 'redux'
 
 import bot from './bot'
 import bots, { BotsReducer } from './bots'
 import content, { ContentReducer } from './content'
+import core, { CoreReducer } from './core'
 import flows, { FlowReducer } from './flows'
 import hints from './hints'
-import language from './language'
+import language, { LanguageReducer } from './language'
 import modules from './modules'
 import ndu, { NduReducer } from './ndu'
+import nlu, { NLUReducer } from './nlu'
 import notifications from './notifications'
 import skills, { SkillsReducer } from './skills'
 import ui, { UiReducer } from './ui'
@@ -18,6 +20,7 @@ export * from './selectors'
 const bpApp = combineReducers({
   bots,
   content,
+  core,
   flows,
   ui,
   user,
@@ -27,18 +30,23 @@ const bpApp = combineReducers({
   skills,
   language,
   hints,
-  ndu
+  ndu,
+  nlu
 })
 export default bpApp
 
 export interface RootReducer {
   flows: FlowReducer
   user: UserReducer
+  core: CoreReducer
   content: ContentReducer
   skills: SkillsReducer
+  language: LanguageReducer
   ndu: NduReducer
   modules: ModuleDefinition[]
   ui: UiReducer
   bot: BotConfig
   bots: BotsReducer
+  nlu: NLUReducer
+  hints: { inputs: BotEvent[] }
 }

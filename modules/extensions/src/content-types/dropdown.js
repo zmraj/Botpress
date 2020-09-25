@@ -18,51 +18,35 @@ function render(data) {
       component: 'Dropdown',
       message: data.message,
       buttonText: data.buttonText,
-      displayInKeyboard: data.displayInKeyboard,
+      displayInKeyboard: data.displayInKeyboard, // do we really want to give that flexibility ?
       options: data.options,
-      allowCreation: data.allowCreation,
-      allowMultiple: data.allowMultiple,
+      allowCreation: data.allowCreation, // do we still want that ? what's the use case ?
+      allowMultiple: data.allowMultiple, // do we still want that ?  what's the use case ?
       width: data.width,
       collectFeedback: data.collectFeedback
     }
   ]
 }
 
-function renderSlack(data) {
-  return [
-    {
-      type: 'actions',
-      elements: [
-        {
-          type: 'static_select',
-          action_id: 'option_selected',
-          placeholder: {
-            type: 'plain_text',
-            text: data.message
-          },
-          options: data.options.map(q => ({
-            text: {
-              type: 'plain_text',
-              text: q.label
-            },
-            value: q.value
-          }))
-        }
-      ]
+function renderer(data) {
+  const payload = base.renderer(data, 'text')
+  return {
+    ...payload,
+    metadata: {
+      ...payload.metadata,
+      __dropdown: data.options
     }
-  ]
+  }
 }
 
 function renderElement(data, channel) {
-  if (channel === 'web' || channel === 'api') {
+  if (['web', 'slack', 'teams', 'messenger', 'telegram', 'twilio'].includes(channel)) {
+    return renderer(data)
+  } else if (channel === 'api') {
     return render(data)
-  } else if (channel === 'slack') {
-    return renderSlack(data)
-  } else if (channel === 'smooch') {
+  } else {
     return [data]
   }
-
-  return []
 }
 
 module.exports = {
@@ -138,6 +122,11 @@ module.exports = {
     options: {
       'ui:field': 'i18n_array'
     }
+  },
+  newSchema: {
+    displayedIn: [],
+    advancedSettings: [],
+    fields: []
   },
   computePreviewText: formData => formData.message && 'Dropdown: ' + formData.message,
   renderElement

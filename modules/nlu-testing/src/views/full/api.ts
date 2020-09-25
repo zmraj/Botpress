@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios'
 import _ from 'lodash'
 
-import { Test, TestResult, XValidationResults } from '../../shared/typings'
+import { Test, TestResult } from '../../shared/typings'
 
 export interface TestingAPI {
   fetchTests: () => Promise<Test[]>
@@ -10,7 +10,6 @@ export interface TestingAPI {
   deleteTest: (x: Test) => Promise<void>
   runTest: (x: Test) => Promise<TestResult>
   runAllTests: () => Promise<_.Dictionary<TestResult>>
-  computeCrossValidation: (lang: string) => Promise<XValidationResults>
   exportResults: (results: _.Dictionary<TestResult>) => Promise<void>
 }
 
@@ -22,7 +21,7 @@ export const makeApi = (bp: { axios: AxiosInstance }): TestingAPI => {
     },
 
     fetchIntents: async () => {
-      const { data } = await bp.axios.get('/mod/nlu/intents')
+      const { data } = await bp.axios.get('/nlu/intents')
       return data
     },
 
@@ -41,11 +40,6 @@ export const makeApi = (bp: { axios: AxiosInstance }): TestingAPI => {
 
     runAllTests: async (): Promise<_.Dictionary<TestResult>> => {
       const { data } = await bp.axios.post(`/mod/nlu-testing/runAll`)
-      return data
-    },
-
-    computeCrossValidation: async (lang: string) => {
-      const { data } = await bp.axios.post(`/mod/nlu/cross-validation/${lang}`)
       return data
     },
 

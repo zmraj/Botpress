@@ -1,6 +1,7 @@
 {
   "composer.dropdownPlaceholder": "Select a choice",
   "composer.placeholder": "Reply to {name}",
+  "composer.quickReplyLabel": "Select one of these options",
   "composer.message": "Message to send",
   "composer.send": "Send",
   "footer.poweredBy": "We're {icon} by {link}",
@@ -12,7 +13,7 @@
   "botInfo.privacyPolicy": "View Privacy Policy",
   "botInfo.termsAndConditions": "View Terms of Service",
   "botInfo.preferredLanguage": "Preferred Language",
-  "store.resetSessionMessage": "Reset the conversation",
+  "store.resetSessionMessage": "Conversation Reset",
   "loginForm.userName": "Username",
   "loginForm.password": "Password",
   "loginForm.submit": "Submit",

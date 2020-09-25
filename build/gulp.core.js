@@ -96,8 +96,18 @@ const copyBinaries = () => {
   return gulp.src('src/bp/ml/bin/*.*').pipe(gulp.dest('./out/bp/ml/bin'))
 }
 
-const copyJs = () => {
-  return gulp.src('src/bp/ml/svm-js/**/*.*').pipe(gulp.dest('./out/bp/ml/svm-js'))
+const copyPreTrained = () => {
+  return gulp.src('src/bp/nlu-core/language/pre-trained/*').pipe(gulp.dest('./out/bp/nlu-core/language/pre-trained'))
+}
+
+const copyStopWords = () => {
+  return gulp.src('src/bp/nlu-core/language/stop-words/*').pipe(gulp.dest('./out/bp/nlu-core/language/stop-words'))
+}
+
+const copySystemExamples = () => {
+  return gulp
+    .src('src/bp/nlu-core/language/system-examples/*')
+    .pipe(gulp.dest('./out/bp/nlu-core/language/system-examples'))
 }
 
 const checkTranslations = cb => {
@@ -115,8 +125,10 @@ const build = () => {
     compileTypescript,
     buildSchemas,
     createOutputDirs,
-    copyJs,
-    copyBinaries
+    copyBinaries,
+    copyPreTrained,
+    copyStopWords,
+    copySystemExamples
   ])
 }
 

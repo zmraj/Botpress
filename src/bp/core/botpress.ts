@@ -1,4 +1,5 @@
 import * as sdk from 'botpress/sdk'
+import lang from 'common/lang'
 import { copyDir } from 'core/misc/pkg-fs'
 import { WrapErrorsWith } from 'errors'
 import fse from 'fs-extra'
@@ -34,13 +35,12 @@ import { CMSService } from './services/cms'
 import { converseApiEvents } from './services/converse'
 import { DecisionEngine } from './services/dialog/decision-engine'
 import { DialogEngine } from './services/dialog/dialog-engine'
-import { ProcessingError } from './services/dialog/errors'
 import { DialogJanitor } from './services/dialog/janitor'
 import { SessionIdFactory } from './services/dialog/session/id-factory'
 import { HintsService } from './services/hints'
 import { Hooks, HookService } from './services/hook/hook-service'
 import { LogsJanitor } from './services/logs/janitor'
-import { EventCollector } from './services/middleware/event-collector'
+import { addStepToEvent, EventCollector, LAST_EVENT_STEP } from './services/middleware/event-collector'
 import { EventEngine } from './services/middleware/event-engine'
 import { StateManager } from './services/middleware/state-manager'
 import { MigrationService } from './services/migration'
@@ -147,7 +147,7 @@ export class Botpress {
     await this.maybeStartLocalActionServer()
 
     if (this.config.sendUsageStats) {
-      this.statsService.start()
+      await this.statsService.start()
     }
 
     AppLifecycle.setDone(AppLifecycleEvents.BOTPRESS_READY)
@@ -268,6 +268,10 @@ export class Botpress {
 
   async deployAssets() {
     try {
+      for (const dir of ['./pre-trained', './stop-words', './system-examples']) {
+        await copyDir(path.resolve(__dirname, '../nlu-core/language', dir), path.resolve(process.APP_DATA_PATH, dir))
+      }
+
       const assets = path.resolve(process.PROJECT_LOCATION, 'data/assets')
       await copyDir(path.join(__dirname, '../ui-admin'), `${assets}/ui-admin`)
 
@@ -349,6 +353,7 @@ export class Botpress {
 
     this.eventEngine.onBeforeIncomingMiddleware = async (event: sdk.IO.IncomingEvent) => {
       await this.stateManager.restore(event)
+      addStepToEvent('stateLoaded', event)
       await this.hookService.executeHook(new Hooks.BeforeIncomingMiddleware(this.api, event))
     }
 
@@ -369,7 +374,14 @@ export class Botpress {
 
       await this.hookService.executeHook(new Hooks.AfterIncomingMiddleware(this.api, event))
       const sessionId = SessionIdFactory.createIdFromEvent(event)
+
+      addStepToEvent('dialog:start', event)
+      this.eventCollector.storeEvent(event)
+
       await this.decisionEngine.processEvent(sessionId, event)
+      addStepToEvent(LAST_EVENT_STEP, event)
+      this.eventCollector.storeEvent(event)
+
       await converseApiEvents.emitAsync(`done.${event.target}`, event)
     }
 
@@ -405,9 +417,7 @@ export class Botpress {
         const metric = wf.success ? 'bp_core_workflow_completed' : 'bp_core_workflow_failed'
         BOTPRESS_CORE_EVENT(metric, { botId: event.botId, channel: event.channel, wfName: workflow })
 
-        delete event.state.session.workflows[workflow]
-
-        if (!activeWorkflow && !wf.parent) {
+        if (!activeWorkflow && !wf.parent && event.type !== 'workflow_ended') {
           await this.eventEngine.sendEvent(
             Event({
               ..._.pick(event, ['botId', 'channel', 'target', 'threadId']),
@@ -420,24 +430,14 @@ export class Botpress {
       })
     }
 
+    // Avoids circular reference when Redis is enabled
+    this.eventEngine.translatePayload = this.cmsService.translatePayload.bind(this.cmsService)
+
     this.botMonitor.onBotError = async (botId: string, events: sdk.LoggerEntry[]) => {
       await this.hookService.executeHook(new Hooks.OnBotError(this.api, botId, events))
     }
 
     await this.dataRetentionService.initialize()
-
-    const dialogEngineLogger = await this.loggerProvider('DialogEngine')
-    this.dialogEngine.onProcessingError = (err, hideStack?) => {
-      const message = this.formatProcessingError(err)
-      if (!hideStack) {
-        dialogEngineLogger
-          .forBot(err.botId)
-          .attachError(err)
-          .warn(message)
-      } else {
-        dialogEngineLogger.forBot(err.botId).warn(message)
-      }
-    }
 
     this.notificationService.onNotification = notification => {
       const payload: sdk.RealTimePayload = {
@@ -447,7 +447,7 @@ export class Botpress {
       this.realtimeService.sendToSocket(payload)
     }
 
-    this.stateManager.initialize()
+    await this.stateManager.initialize()
     await this.logJanitor.start()
     await this.dialogJanitor.start()
     await this.monitoringService.start()
@@ -458,6 +458,8 @@ export class Botpress {
     if (this.config!.dataRetention) {
       await this.dataRetentionJanitor.start()
     }
+
+    lang.init(await this.moduleLoader.getTranslations())
 
     // tslint:disable-next-line: no-floating-promises
     this.hintsService.refreshAll()
@@ -484,14 +486,6 @@ export class Botpress {
 
   private async startRealtime() {
     await this.realtimeService.installOnHttpServer(this.httpServer.httpServer)
-  }
-
-  private formatProcessingError(err: ProcessingError) {
-    return `Error processing '${err.instruction}'
-Err: ${err.message}
-BotId: ${err.botId}
-Flow: ${err.flowName}
-Node: ${err.nodeName}`
   }
 
   private trackStart() {

@@ -6,7 +6,6 @@ import { CommanderProps, QuickShortcut } from './Commander/typings'
 import { DropdownProps, Option } from './Dropdown/typings'
 import { MainContainerProps } from './MainContainer/typings'
 import { MarkdownContentProps } from './MarkdownContent/typings'
-import { MoreOptionsProps } from './MoreOptions/typings'
 import { TreeViewProps } from './TreeView/typings'
 
 import { ToastOptions } from './Toaster'
@@ -15,6 +14,21 @@ import { HeaderProps, HeaderButtonProps } from './MainContent/Header/typings'
 import { WrapperProps } from './MainContent/Wrapper/typings'
 import { EmptyStateProps } from './EmptyState/typings'
 import { TextareaProps } from './Textarea/typings'
+import { RightSidebarProps } from './MainContent/RightSidebar/typings'
+import { FormProps } from './Contents/Components/Form/typings'
+import { ItemProps } from './Contents/Components/Item/typings'
+import { AddButtonProps } from './Contents/Components/typings'
+import { SelectProps } from './FormFields/Select'
+import { TextFieldsArrayProps } from './FormFields/TextFieldsArray/typings'
+import { SuperInputArrayProps } from './FormFields/SuperInputArray/typings'
+import { OverlayProps } from './Overlay/typings'
+import { FormField, MultiLangText } from 'botpress/sdk'
+import { MoreOptionsProps } from '../../ui-shared-lite/MoreOptions/typings'
+import { OverlayProps } from '../../ui-shared-lite/Overlay/typings'
+import { ToolTipProps } from '../../ui-shared-lite/ToolTip/typings'
+import { VariablePickerProps } from './FormFields/VariablePicker/typings'
+import { MultiLevelDropdownProps } from './MultiLevelDropdown/typings'
+import { FieldWrapperProps } from './FormFields/FieldWrapper/typings'
 
 declare module 'botpress/shared' {
   export function Commander(props: CommanderProps): JSX.Element
@@ -27,19 +41,36 @@ declare module 'botpress/shared' {
     Header(props: HeaderProps): JSX.Element
     Wrapper(props: WrapperProps): JSX.Element
   }
+  export const Contents: {
+    Form(props: FormProps): JSX.Element
+    Item(props: ItemProps): JSX.Element
+    createEmptyDataFromSchema: (fields: FormField[], lang?: string) => any
+  }
+  export const FormFields: {
+    AddButton(props: AddButtonProps): JSX.Element
+    FieldWrapper(props: FieldWrapperProps): JSX.Element
+    Select(props: SelectProps): JSX.Element
+    TextFieldsArray(props: TextFieldsArrayProps): JSX.Element
+    SuperInputArray(props: SuperInputArrayProps): JSX.Element
+    VariablePicker(props: VariablePickerProps): JSX.Element
+  }
   export function Dropdown(props: DropdownProps): JSX.Element
   export function EmptyState(props: EmptyStateProps): JSX.Element
   export function MainContainer(props: MainContainerProps): JSX.Element
   export function MarkdownContent(props: MarkdownContentProps): JSX.Element
   export function MoreOptions(props: MoreOptionsProps): JSX.Element
-  export function RightSidebar(props: { children: any }): JSX.Element
+  export function MultiLevelDropdown(props: MultiLevelDropdownProps): JSX.Element
+  export function RightSidebar(props: RightSidebarProps): JSX.Element
+  export function Overlay(props: OverlayProps): JSX.Element
   export function ShortcutLabel(props: ShortcutLabelProps): JSX.Element
   export function Textarea<T>(props: TextareaProps<T>): JSX.Element
+  export function ToolTip<T>(props: ToolTipProps<T>): JSX.Element
   export function TreeView<T>(props: TreeViewProps<T>): JSX.Element
 
+  export function contextMenu(event: SyntheticEvent, content: JSX.Element, onClose?: () => void): void
   export function confirmDialog(message: string | JSX.Element, options: ConfirmDialogOptions): Promise<boolean>
   export const lang: {
-    tr(id: string | { [lang: string]: string }, values?: { [variable: string]: any }): string
+    tr(id: string | MultiLangText, values?: { [variable: string]: any }): string
     init()
     extend(langs)
     getLocale(): string
@@ -47,7 +78,20 @@ declare module 'botpress/shared' {
     defaultLocale: string
   }
 
+  export const telemetry: {
+    startFallback(api: AxiosInstance): Promise<void>
+    sendTelemetry(events: TelemetryEvent[]): boolean
+  }
+
+  export const Icons: {
+    Brackets(): JSX.Element
+    Minimize(): JSX.Element
+    Say(): JSX.Element
+    Search(): JSX.Element
+  }
+
   export const toast: {
+    dismiss: (key: string) => void
     success: (message: string | React.ReactElement, details?: string, options?: ToastOptions) => void
     failure: (message: string | React.ReactElement, details?: string, options?: ToastOptions) => void
     warning: (message: string | React.ReactElement, details?: string, options?: ToastOptions) => void
@@ -60,5 +104,15 @@ declare module 'botpress/shared' {
     isInputFocused(): boolean
   }
 
+  export const sharedStyle: CssExports
+
   export { Option, MoreOptionsItems, HeaderButtonProps, QuickShortcut }
+}
+
+declare global {
+  interface Window {
+    BOT_API_PATH: string
+    API_PATH: string
+    TELEMETRY_URL: string
+  }
 }

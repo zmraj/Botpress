@@ -54,7 +54,7 @@ export default async (bp: typeof sdk, db: Database, interactionsToTrack: string[
     name: 'analytics.incoming',
     direction: 'incoming',
     handler: incomingMiddleware,
-    order: 12, // after nlu and qna
+    order: 140, // after nlu election and qna
     description: 'Tracks incoming messages for Analytics purposes'
   })
 
@@ -62,7 +62,7 @@ export default async (bp: typeof sdk, db: Database, interactionsToTrack: string[
     name: 'analytics.outgoing',
     direction: 'outgoing',
     handler: outgoingMiddleware,
-    order: 5,
+    order: 45,
     description: 'Tracks outgoing messages for Analytics purposes'
   })
 

@@ -1,4 +1,9 @@
+import { IO } from 'botpress/sdk'
 import _ from 'lodash'
+
+import { EventCommonArgs, OutgoingEventCommonArgs } from './typings'
+
+export const CUSTOM_ACTION = '__customAction'
 
 export interface ActionInstruction {
   actionName: string
@@ -6,6 +11,7 @@ export interface ActionInstruction {
   actionServerId?: string
 }
 
+// TODO refactor & clean
 export const parseActionInstruction = (actionInstruction: string): ActionInstruction => {
   const chunks = actionInstruction.split(' ')
   const serverAndAction = _.head(chunks)!
@@ -30,3 +36,34 @@ export const parseActionInstruction = (actionInstruction: string): ActionInstruc
     actionServerId
   }
 }
+
+export const extractEventCommonArgs = (
+  event: IO.Event | IO.IncomingEvent,
+  args?: { [property: string]: any }
+): EventCommonArgs | OutgoingEventCommonArgs => {
+  if (event.direction === 'outgoing') {
+    return {
+      ...(args ?? {}),
+      event
+    }
+  }
+  const incomingEvent = event as IO.IncomingEvent
+
+  return {
+    ...(args ?? {}),
+    event: incomingEvent,
+    user: incomingEvent.state.user ?? {},
+    session: incomingEvent.state.session ?? ({} as IO.CurrentSession),
+    temp: incomingEvent.state.temp ?? {},
+    bot: incomingEvent.state.bot ?? {},
+    workflow: incomingEvent.state.workflow ?? ({} as IO.WorkflowHistory)
+  }
+}
+
+export const snakeToCamel = (text: string) =>
+  text.replace(/([-_][a-z0-9])/g, group =>
+    group
+      .toUpperCase()
+      .replace('-', '')
+      .replace('_', '')
+  )

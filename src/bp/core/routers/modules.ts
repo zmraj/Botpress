@@ -157,6 +157,30 @@ export class ModulesRouter extends CustomRouter {
         res.send(await this.moduleLoader.getTranslations())
       })
     )
+
+    this.router.get(
+      '/prompts',
+      this.checkTokenHeader,
+      this.asyncMiddleware(async (req, res) => {
+        res.send(await this.moduleLoader.getPrompts())
+      })
+    )
+
+    this.router.get(
+      '/variables',
+      this.checkTokenHeader,
+      this.asyncMiddleware(async (_req, res, _next) => {
+        res.send(await this.moduleLoader.getVariables())
+      })
+    )
+
+    this.router.get(
+      '/variables/definitions',
+      this.checkTokenHeader,
+      this.asyncMiddleware(async (req, res) => {
+        res.send(await this.moduleLoader.getVariableDefinitions())
+      })
+    )
   }
 
   private async _findModule(moduleName: string): Promise<ModuleInfo> {

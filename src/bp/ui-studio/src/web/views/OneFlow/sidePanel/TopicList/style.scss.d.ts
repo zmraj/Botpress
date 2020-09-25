@@ -3,13 +3,17 @@
 interface CssExports {
   'active': string;
   'addBtn': string;
+  'confirmBody': string;
   'contextMenu': string;
+  'draggable': string;
+  'ellipsisText': string;
   'emptyState': string;
   'importInput': string;
   'inlineEditing': string;
   'inputLabel': string;
   'isTopic': string;
-  'searchBar': string;
+  'larger': string;
+  'largerSelected': string;
   'tag': string;
   'topicName': string;
   'tree': string;

@@ -1,5 +1,5 @@
 import { Button, ContextMenu, Icon, Menu } from '@blueprintjs/core'
-import { lang } from 'botpress/shared'
+import { contextMenu, lang } from 'botpress/shared'
 import cx from 'classnames'
 import React, { FC, useEffect, useState } from 'react'
 import { sanitizeName } from '~/util'
@@ -38,14 +38,7 @@ const TreeItem: FC<Props> = ({
 
   const onContextMenu = e => {
     e.preventDefault()
-    if (item.type === 'qna') {
-      return
-    }
-
-    ContextMenu.show(<Menu className={style.contextMenu}>{contextMenuContent}</Menu>, {
-      left: e.clientX,
-      top: e.clientY
-    })
+    contextMenu(e, <Menu className={style.contextMenu}>{contextMenuContent}</Menu>)
   }
 
   useEffect(() => {
@@ -61,7 +54,7 @@ const TreeItem: FC<Props> = ({
       event.target.select()
     }
 
-    if (event.key === 'Enter') {
+    if (event.key === 'Escape' || event.key === 'Enter') {
       event.target.blur()
     }
   }
@@ -78,7 +71,7 @@ const TreeItem: FC<Props> = ({
 
   if (isEditing) {
     return (
-      <div style={{ paddingLeft: `${level * 23}px` }} className={cx(className, style.inlineEditing)}>
+      <div className={cx(className, style.inlineEditing)}>
         {hasChildren && <Icon icon={chevron} iconSize={16} />}
         <input
           type="text"
@@ -96,7 +89,6 @@ const TreeItem: FC<Props> = ({
 
   return (
     <Button
-      style={{ paddingLeft: `${level * 23}px` }}
       minimal
       className={className}
       onContextMenu={onContextMenu}
@@ -105,7 +97,7 @@ const TreeItem: FC<Props> = ({
       icon={hasChildren ? chevron : null}
     >
       <span className={style.topicName}>
-        {item.label || item.id}
+        <span className={style.ellipsisText}>{item.label || item.id}</span>
         {isTopic && item.type !== 'default' && (
           <span className={style.tag}>
             {qnaCount} Q&A · {wfCount} WF

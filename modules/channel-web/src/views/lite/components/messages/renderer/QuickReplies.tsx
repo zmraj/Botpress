@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { Renderer } from '../../../typings'
 import * as Keyboard from '../../Keyboard'
@@ -15,6 +16,17 @@ import { Button } from './Button'
  * @return onSendData is called with the reply
  */
 export class QuickReplies extends Component<Renderer.QuickReply> {
+  state = {
+    display: false
+  }
+
+  componentDidMount() {
+    // Required otherwise the component mounts too fast (before the keyboard)
+    setTimeout(() => {
+      this.setState({ display: true })
+    }, 100)
+  }
+
   handleButtonClicked = (title, payload) => {
     // tslint:disable-next-line: no-floating-promises
     this.props.onSendData?.({
@@ -25,30 +37,54 @@ export class QuickReplies extends Component<Renderer.QuickReply> {
   }
 
   renderKeyboard(buttons: Renderer.QuickReplyButton[]) {
-    return buttons.map((btn, idx) => {
-      if (Array.isArray(btn)) {
-        return <div>{this.renderKeyboard(btn)}</div>
-      } else {
-        return (
-          <Button
-            key={idx}
-            label={btn.label || btn.title}
-            payload={btn.payload}
-            preventDoubleClick={!btn.allowMultipleClick}
-            onButtonClick={this.handleButtonClicked}
-            onFileUpload={this.props.onFileUpload}
-          />
-        )
-      }
-    })
+    return (
+      <div className="bpw-quick_reply-buttons-container">
+        {buttons.map((btn, idx) => {
+          if (Array.isArray(btn)) {
+            return this.renderKeyboard(btn)
+          } else {
+            return (
+              <Button
+                key={idx}
+                label={(btn.label || btn.title)?.toString()}
+                payload={btn.payload}
+                preventDoubleClick={!btn.allowMultipleClick}
+                onButtonClick={this.handleButtonClicked}
+                onFileUpload={this.props.onFileUpload}
+              />
+            )
+          }
+        })}
+      </div>
+    )
   }
 
   render() {
     const buttons = this.props.buttons || this.props.quick_replies
-    const kbd = <div className={'bpw-keyboard-quick_reply'}>{buttons && this.renderKeyboard(buttons)}</div>
+    if (!buttons?.length || !this.state.display) {
+      return null
+    }
 
+    if (this.props.position === 'conversation') {
+      return this.renderKeyboard(buttons)
+    }
+
+    const kbd = (
+      <div className={'bpw-keyboard-quick_reply'}>
+        {buttons && (
+          <Fragment>
+            <span className="bpw-keyboard-label">
+              <FormattedMessage id={'composer.quickReplyLabel'} />
+            </span>
+            {this.renderKeyboard(buttons)}
+          </Fragment>
+        )}
+      </div>
+    )
+
+    const shouldDisplay = (this.props.isLastGroup && this.props.isLastOfGroup) || this.props.position === 'static'
     return (
-      <Keyboard.Prepend keyboard={kbd} visible={this.props.isLastGroup && this.props.isLastOfGroup}>
+      <Keyboard.Prepend keyboard={kbd} visible={shouldDisplay}>
         {this.props.children}
       </Keyboard.Prepend>
     )

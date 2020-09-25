@@ -33,6 +33,7 @@ import {
   ToolbarProps
 } from './typings'
 import { buildMenu, showContextMenu } from './utils'
+import { sharedStyle } from 'botpress/shared'
 
 export const Container = (props: ContainerProps) => {
   const [sidePanelVisible, setSidePanelVisible] = useState(!props.sidePanelHidden)
@@ -90,21 +91,27 @@ export const SidePanelSection = (props: SidePanelSectionProps) => {
   )
 }
 
-export const SearchBar = (props: SearchBarProps) => {
+export const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>((props, ref) => {
   const [text, setText] = useState('')
+
   const handleTextChanged = e => {
-    setText(e.target.value)
+    props.value === undefined && setText(e.target.value)
     props.onChange && props.onChange(e.target.value)
   }
 
+  const onBlur = e => props.onBlur && props.onBlur(e)
+
   return (
-    <div className={cx(style.searchBar, props.className)}>
+    <div className={cx(sharedStyle.searchBar, props.className)}>
       <ControlGroup fill={true}>
         <InputGroup
+          // @ts-ignore: inputRef expects a callback ref but types won't match with forwarRef signature
+          inputRef={ref}
+          onBlur={onBlur}
           id={props.id}
           leftIcon={props.icon}
           placeholder={props.placeholder || 'Search'}
-          value={text}
+          value={props.value !== undefined ? props.value : text}
           onChange={handleTextChanged}
         />
         {props.showButton && (
@@ -118,7 +125,7 @@ export const SearchBar = (props: SearchBarProps) => {
       </ControlGroup>
     </div>
   )
-}
+})
 
 export const ItemList = (props: ItemListProps) => {
   return (

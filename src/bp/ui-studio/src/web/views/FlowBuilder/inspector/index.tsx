@@ -7,6 +7,7 @@ import {
   closeFlowNodeProps,
   copyFlowNodeElement,
   pasteFlowNodeElement,
+  refreshCallerFlows,
   refreshFlowsLinks,
   requestEditSkill,
   updateFlow,
@@ -14,7 +15,6 @@ import {
 } from '~/actions'
 import { getCurrentFlow, getCurrentFlowNode } from '~/reducers'
 
-import SaySomethingForm from '../../OneFlow/sidePanel/form/SaySomethingForm'
 import { nodeTypes } from '../diagram/manager'
 import FlowInformation from '../nodeProps/FlowInformation'
 import SkillCallNode from '../nodeProps/SkillCallNode'
@@ -106,19 +106,6 @@ class Inspector extends Component<Props> {
       )
     }
 
-    if (nodeType === 'say_something') {
-      return (
-        <SaySomethingForm
-          onDeleteSelectedElements={onDeleteSelectedElements}
-          contentType={currentFlowNode.content?.contentType}
-          formData={currentFlowNode.content?.formData}
-          updateNode={updateNodeAndRefresh}
-          readOnly={readOnly}
-          subflows={subflows}
-        />
-      )
-    }
-
     if (nodeTypes.includes(nodeType)) {
       return (
         <StandardNode
@@ -155,7 +142,8 @@ const mapDispatchToProps = {
   pasteFlowNodeElement,
   closeFlowNodeProps,
   updateFlowNode,
-  refreshFlowsLinks
+  refreshFlowsLinks,
+  refreshCallerFlows
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inspector)

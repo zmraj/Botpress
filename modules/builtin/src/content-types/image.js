@@ -24,106 +24,9 @@ function render(data) {
   ]
 }
 
-function renderMessenger(data) {
-  const events = []
-
-  if (data.typing) {
-    events.push({
-      type: 'typing',
-      value: data.typing
-    })
-  }
-
-  return [
-    ...events,
-    {
-      attachment: {
-        type: 'image',
-        payload: {
-          is_reusable: true,
-          url: `${data.BOT_URL}${data.image}`
-        }
-      }
-    }
-  ]
-}
-
-function renderTelegram(data) {
-  const events = []
-
-  if (data.typing) {
-    events.push({
-      type: 'typing',
-      value: data.typing
-    })
-  }
-
-  return [
-    ...events,
-    {
-      type: 'image',
-      url: `${data.BOT_URL}${data.image}`
-    }
-  ]
-}
-
-function renderSlack(data) {
-  const events = []
-
-  if (data.typing) {
-    events.push({
-      type: 'typing',
-      value: data.typing
-    })
-  }
-
-  return [
-    ...events,
-    {
-      type: 'image',
-      title: data.title && {
-        type: 'plain_text',
-        text: data.title
-      },
-      image_url: `${data.BOT_URL}${data.image}`,
-      alt_text: 'image'
-    }
-  ]
-}
-
-function renderTeams(data) {
-  const events = []
-
-  if (data.typing) {
-    events.push({
-      type: 'typing'
-    })
-  }
-
-  return [
-    ...events,
-    {
-      type: 'message',
-      attachments: [
-        {
-          name: data.title,
-          contentType: 'image/png',
-          contentUrl: `${data.BOT_URL}${data.image}`
-        }
-      ]
-    }
-  ]
-}
-
 function renderElement(data, channel) {
-  if (channel === 'messenger') {
-    return renderMessenger(data)
-  } else if (channel === 'telegram') {
-    return renderTelegram(data)
-  } else if (channel === 'slack') {
-    return renderSlack(data)
-  } else if (channel === 'teams') {
-    return renderTeams(data)
+  if (['web', 'slack', 'teams', 'messenger', 'telegram', 'twilio'].includes(channel)) {
+    return base.renderer(data, 'image')
   } else {
     return render(data)
   }
@@ -158,6 +61,26 @@ module.exports = {
     title: {
       'ui:field': 'i18n_field'
     }
+  },
+
+  newSchema: {
+    displayedIn: ['qna', 'sayNode'],
+    order: 1,
+    fields: [
+      {
+        type: 'upload',
+        key: 'image',
+        label: 'module.builtin.types.image.uploadImage'
+      },
+      {
+        type: 'text',
+        key: 'title',
+        translated: true,
+        label: 'title',
+        superInput: true,
+        placeholder: 'module.builtin.optional'
+      }
+    ]
   },
 
   computePreviewText: formData => {

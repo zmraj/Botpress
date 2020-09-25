@@ -30,7 +30,7 @@ import 'expose-loader?BotpressUtils!~/components/Shared/Utils'
 import 'expose-loader?DocumentationProvider!~/components/Util/DocumentationProvider'
 import { initializeTranslations } from './translations'
 /* eslint-enable */
-import { utils } from 'botpress/shared'
+import { utils, telemetry } from 'botpress/shared'
 
 import 'ui-shared/dist/theme.css'
 require('bootstrap/dist/css/bootstrap.css')
@@ -60,4 +60,11 @@ if (!window.BOT_ID) {
     </Provider>,
     document.getElementById('app')
   )
+}
+
+if (window.SEND_USAGE_STATS) {
+  telemetry
+    .startFallback(axios.create({ baseURL: window.API_PATH }))
+    .then(res => {})
+    .catch(err => {})
 }

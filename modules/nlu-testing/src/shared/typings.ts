@@ -15,6 +15,7 @@ export interface CSVTest {
 }
 
 export interface TestResultDetails {
+  type: 'slot' | 'slotCount' | 'intent' | 'context'
   success: boolean
   reason: string
   expected: string
@@ -28,13 +29,14 @@ export interface TestResult {
   nlu: IO.EventUnderstanding
 }
 
-export interface F1 {
-  precision: number
-  recall: number
-  f1: number
+export interface VisData {
+  expected: string
+  predicted: string
 }
 
-export type XValidationResults = {
-  intents: _.Dictionary<F1>
-  slots: F1
+export interface DataResult {
+  intent: VisData[]
+  slot: VisData[]
+  context: VisData[]
+  slotCount: VisData[]
 }

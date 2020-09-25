@@ -1,19 +1,19 @@
-import { Icon, Tab, Tabs } from '@blueprintjs/core'
+import { Checkbox } from '@blueprintjs/core'
 import 'bluebird-global'
 import * as sdk from 'botpress/sdk'
 import _ from 'lodash'
 import ms from 'ms'
 import nanoid from 'nanoid'
 import React from 'react'
-import { MdBugReport } from 'react-icons/md'
 import 'ui-shared/dist/theme.css'
+
+import lang from '../../../lang'
 
 import Settings from './settings'
 import style from './style.scss'
 import { loadSettings } from './utils'
-import { Error } from './views/Error'
 import { Inspector } from './views/Inspector'
-import { NDU } from './views/NDU'
+import { Processing } from './views/Processing'
 import Summary from './views/Summary'
 import EventNotFound from './EventNotFound'
 import FetchingEvent from './FetchingEvent'
@@ -23,8 +23,8 @@ import Unauthorized from './Unauthorized'
 
 export const updater = { callback: undefined }
 
-const WEBCHAT_WIDTH = 400
-const DEV_TOOLS_WIDTH = 450
+const WEBCHAT_WIDTH = 240
+const DEV_TOOLS_WIDTH = 240
 const RETRY_PERIOD = 500 // Delay (ms) between each call to the backend to fetch a desired event
 const RETRY_SECURITY_FACTOR = 3
 const DEBOUNCE_DELAY = 100
@@ -34,24 +34,37 @@ interface Props {
 }
 
 interface State {
-  event: any
+  event: sdk.IO.IncomingEvent
+  prevEvent: sdk.IO.IncomingEvent
   selectedTabId: string
   visible: boolean
   showSettings: boolean
   showEventNotFound: boolean
+  showInspector: boolean
   fetching: boolean
   unauthorized: boolean
+  updateDiagram: boolean
+  tab: string
+  eventsCache: sdk.IO.IncomingEvent[]
 }
+const DEBUGGER_TAB_KEY = 'debuggerTab'
 
 export class Debugger extends React.Component<Props, State> {
-  state = {
+  private showEventOnDiagram: (event: sdk.IO.IncomingEvent) => void
+
+  state: State = {
     event: undefined,
+    prevEvent: undefined,
     showEventNotFound: false,
     visible: false,
     selectedTabId: 'basic',
     showSettings: false,
     fetching: false,
-    unauthorized: false
+    unauthorized: false,
+    showInspector: false,
+    eventsCache: [],
+    updateDiagram: true,
+    tab: window['BP_STORAGE'].get(DEBUGGER_TAB_KEY) || 'content'
   }
   allowedRetryCount = 0
   currentRetryCount = 0
@@ -59,20 +72,18 @@ export class Debugger extends React.Component<Props, State> {
   lastMessage = undefined
 
   async componentDidMount() {
+    // @ts-ignore
+    this.showEventOnDiagram = window.parent.showEventOnDiagram()
+
+    lang.init()
     updater.callback = this.loadEvent
 
     this.props.store.view.setLayoutWidth(WEBCHAT_WIDTH)
     this.props.store.view.setContainerWidth(WEBCHAT_WIDTH)
-    this.props.store.view.addHeaderButton({
-      id: 'toggleDev',
-      label: 'Show Debugger',
-      icon: <MdBugReport size={18} />,
-      onClick: this.toggleDebugger
-    })
 
     this.props.store.view.addCustomAction({
       id: 'actionDebug',
-      label: 'Inspect in Debugger',
+      label: lang.tr('module.extensions.inspectIn'),
       onClick: this.handleSelect
     })
 
@@ -107,6 +118,7 @@ export class Debugger extends React.Component<Props, State> {
     this.props.store.view.removeCustomAction('actionDebug')
     window.removeEventListener('keydown', this.hotkeyListener)
     this.resetWebchat()
+    this.showEventOnDiagram(undefined)
   }
 
   componentDidUpdate(_prevProps, prevState) {
@@ -118,7 +130,7 @@ export class Debugger extends React.Component<Props, State> {
   }
 
   handleNewMessage = async (m: Partial<sdk.IO.IncomingEvent>) => {
-    if (m.payload.type !== 'session_reset') {
+    if (!['session_reset', 'visit'].includes(m.payload.type)) {
       // @ts-ignore
       await this.updateLastMessage(m.incomingEventId)
     }
@@ -150,6 +162,9 @@ export class Debugger extends React.Component<Props, State> {
     if (e.ctrlKey && e.key === 'd') {
       e.preventDefault()
       this.toggleDebugger()
+    } else if (e.ctrlKey && e.key === 'i') {
+      e.preventDefault()
+      this.setState({ showInspector: !this.state.showInspector })
     }
   }
 
@@ -158,16 +173,39 @@ export class Debugger extends React.Component<Props, State> {
       return
     }
 
+    let keepRetrying = false
     this.setState({ fetching: true })
 
     try {
-      const { data: event } = await this.props.store.bp.axios.get('/mod/extensions/events/' + eventId)
+      const event = await this.getEvent(eventId)
 
-      this.setState({ event, showEventNotFound: !event, fetching: false })
+      const lastMessages: any[] = this.props.store.currentConversation.messages
+      const prevMessage = _.last(_.takeWhile(lastMessages, x => x.incomingEventId !== eventId).filter(x => x.userId))
+      let prevEvent: sdk.IO.IncomingEvent = undefined
 
+      if (prevMessage) {
+        prevEvent = await this.getEvent(prevMessage.incomingEventId)
+      }
+
+      this.setState({ event, prevEvent, showEventNotFound: !event })
       this.props.store.view.setHighlightedMessages(eventId)
-      this.currentRetryCount = 0
+
+      if (this.state.updateDiagram) {
+        try {
+          this.showEventOnDiagram(event)
+        } catch (err) {
+          console.error("Couldn't load event on workflow", err)
+        }
+      }
+
+      if (!event.processing?.['completed']) {
+        keepRetrying = true
+      }
     } catch (err) {
+      keepRetrying = true
+    }
+
+    if (keepRetrying) {
       if (this.currentRetryCount < this.allowedRetryCount) {
         this.currentRetryCount++
 
@@ -177,7 +215,28 @@ export class Debugger extends React.Component<Props, State> {
         this.currentRetryCount = 0
         this.setState({ fetching: false })
       }
+    } else {
+      this.setState({ fetching: false })
+      this.currentRetryCount = 0
     }
+  }
+
+  getEvent = async (eventId: string): Promise<sdk.IO.IncomingEvent> => {
+    const eventsCache = this.state.eventsCache
+
+    const existing = eventsCache.find(x => x.id === eventId)
+    if (existing) {
+      return existing
+    }
+
+    const { data: event } = await this.props.store.bp.axios.get('/mod/extensions/events/' + eventId)
+    if (!event.processing?.['completed']) {
+      return event
+    }
+
+    this.setState({ eventsCache: [event, ...eventsCache].slice(0, 10) })
+
+    return event
   }
 
   handleNewSession = () => {
@@ -209,42 +268,58 @@ export class Debugger extends React.Component<Props, State> {
   }
 
   renderEvent() {
-    const eventError = _.get(this.state, 'event.state.__error')
-    const ndu = _.get(this.state, 'event.ndu')
+    const { tab, event, prevEvent } = this.state
+
+    if (this.state.showInspector) {
+      return (
+        <div className={style.content}>
+          <Inspector data={event} />
+        </div>
+      )
+    }
 
     return (
       <div className={style.content}>
-        <Tabs id="tabs" onChange={this.handleTabChange} selectedTabId={this.state.selectedTabId}>
-          <Tab id="basic" title="Summary" panel={<Summary event={this.state.event} />} />
-          {ndu && <Tab id="ndu" title="NDU" panel={<NDU ndu={ndu} />} />}
-          <Tab id="advanced" title="Raw JSON" panel={<Inspector data={this.state.event} />} />
-          {eventError && (
-            <Tab
-              id="errors"
-              title={
-                <span>
-                  <Icon icon="error" color="red" /> Error
-                </span>
-              }
-              panel={<Error error={eventError} />}
-            />
-          )}
-        </Tabs>
+        {tab === 'content' && <Summary event={event} prevEvent={prevEvent} />}
+        {tab === 'processing' && <Processing processing={event?.processing} />}
+        <Checkbox
+          checked={this.state.updateDiagram}
+          className={style.debugCheckbox}
+          label={lang.tr('module.extensions.displayDebugging')}
+          onChange={e => {
+            const newState = e.currentTarget.checked
+
+            this.showEventOnDiagram(newState && this.state.event ? this.state.event : undefined)
+            this.setState({ updateDiagram: newState })
+          }}
+        />
       </div>
     )
+  }
+
+  updateTab(tab) {
+    window['BP_STORAGE'].set(DEBUGGER_TAB_KEY, tab)
+    this.setState({ tab })
   }
 
   render() {
     if (!this.state.visible) {
       return null
     }
+    const { tab, event, showSettings } = this.state
 
     return (
       <div className={style.container2}>
-        <Settings store={this.props.store} isOpen={this.state.showSettings} toggle={this.toggleSettings} />
-        <Header newSession={this.handleNewSession} toggleSettings={this.toggleSettings} />
-        {!this.state.event && this.renderWhenNoEvent()}
-        {this.state.event && this.renderEvent()}
+        <Settings store={this.props.store} isOpen={showSettings} toggle={this.toggleSettings} />
+        <Header
+          updateCurrentTab={this.updateTab.bind(this)}
+          selectedTab={tab}
+          newSession={this.handleNewSession}
+          toggleSettings={this.toggleSettings}
+          hasProcessing={!!event?.processing}
+        />
+        {!event && this.renderWhenNoEvent()}
+        {event && this.renderEvent()}
       </div>
     )
   }

@@ -1,6 +1,39 @@
 {
   "autoTrain": "Auto Training",
   "cancelTraining": "Cancel Training",
+  "conditions": {
+    "ambiguousIntentInTopic": "Intent is ambiguous within topic",
+    "ambiguousTopics": "Detected topics are ambiguous",
+    "fields": {
+      "label": {
+        "activeWorkflowOnly": "Enable action in active workflow only",
+        "ambiguityThreshold": "Ambiguity Threshold",
+        "biggerThan": "Bigger Than",
+        "comparisonMethod": "Comparison Method",
+        "equal": "Equal",
+        "expectedValue": "Expected value",
+        "lessThan": "Less Than",
+        "maxConfidence": "Maximum reachable confidence (%)",
+        "none": "None",
+        "notEqual": "Not Equal",
+        "variableType": "Variable Type"
+      },
+      "placeholder": {
+        "pickComparisonMethod": "Pick a comparison method",
+        "pickVariableType": "Pick an variable type",
+        "intents": {
+          "empty": "Write at least 3 sentences that your users could write to invoke their intent",
+          "one": "Write at least 2 more sentences that your users could write to invoke their intent",
+          "two": "Write at least 1 more sentence that your users could write to invoke their intent",
+          "morePlural": "Write at least {count} other sentences to make your chatbot more resilient",
+          "moreSingular": "Write at least 1 other sentence to make your chatbot more resilient"
+        }
+      }
+    },
+    "saySomethingMisunderstood": "Users says something misunderstood (intent)",
+    "userWantsTo": "User wants to {firstSentence}",
+    "variableExtractedFromMessage": "A variable was extracted from the user’s message"
+  },
   "description": "Use Botpress native Natural Language Understanding engine to make your bot smarter.",
   "entities": {
     "deleteMessage": "Are you sure you want to delete the entity \"{entityName}\" ?",
@@ -38,6 +71,7 @@
   "fullName": "NLU",
   "intents": {
     "actionErrorMessage": "Could not {action} intent",
+    "addBtn": "Add Intent Alternatives",
     "chooseContainerLabel": "Choose a different intent for the condition",
     "contextSelectorCreateMissing": "Create \"{query}\"",
     "contextSelectorPlaceholder": "Select context...",
@@ -49,6 +83,7 @@
     "hintExactMatch": "This intent will use {exactOnly}. To enable machine learning, add at least {nb} more utterances.",
     "hintIgnored": "This intent will be ignored, start adding utterances to make it trainable.",
     "hintResilient": "Add {nb} more utterances to make NLU more resilient.",
+    "label": "How will the users express what they want?",
     "nameDupe": "An intent with that name already exists. Please choose another one.",
     "nameLabel": "Intent Name",
     "namePlaceholder": "Choose a name for your intent",
@@ -74,5 +109,6 @@
     "tagSelectionMessage": "Click on a slot or use numbers as keyboard shortcuts"
   },
   "title": "Language Understanding",
-  "trainNow": "Train now"
+  "trainNow": "Train now",
+  "retrainAll": "Force train"
 }

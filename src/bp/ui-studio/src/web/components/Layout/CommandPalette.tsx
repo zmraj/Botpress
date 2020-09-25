@@ -35,7 +35,7 @@ const CommandPalette: FC<Props> = props => {
         label: lang.tr('flows'),
         type: 'goto',
         category: 'studio',
-        url: `/${window.USE_ONEFLOW ? 'oneflow' : 'flows'}/main`
+        url: `/${window.USE_ONEFLOW ? 'oneflow' : 'flows'}`
       },
       { label: lang.tr('content'), type: 'goto', category: 'studio', url: '/content' },
       {
@@ -78,7 +78,7 @@ const CommandPalette: FC<Props> = props => {
         url: window.location.origin + '/studio/' + bot.id
       })),
       ...props.modules
-        .filter(module => !module.noInterface)
+        .filter(module => !module.noInterface || module.name === 'nlu' || module.name === 'qna')
         .map(module => ({
           label: `${lang.tr(`module.${module.name}.fullName`)}`,
           type: 'goto',

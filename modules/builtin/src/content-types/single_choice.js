@@ -24,64 +24,20 @@ function render(data) {
   ]
 }
 
-function renderMessenger(data) {
-  const events = []
+function renderer(data) {
+  const payload = base.renderer(data, 'text')
 
-  if (data.typing) {
-    events.push({
-      type: 'typing',
-      value: data.typing
-    })
-  }
-
-  return [
-    ...events,
-    {
-      text: data.text,
-      quick_replies: data.choices.map(c => ({
-        content_type: 'text',
-        title: c.title,
-        payload: c.value.toUpperCase()
-      }))
+  return {
+    ...payload,
+    metadata: {
+      ...payload.metadata
     }
-  ]
-}
-
-function renderSlack(data) {
-  const events = []
-
-  if (data.typing) {
-    events.push({
-      type: 'typing',
-      value: data.typing
-    })
   }
-
-  return [
-    ...events,
-    {
-      text: data.text,
-      quick_replies: {
-        type: 'actions',
-        elements: data.choices.map((q, idx) => ({
-          type: 'button',
-          action_id: 'replace_buttons' + idx,
-          text: {
-            type: 'plain_text',
-            text: q.title
-          },
-          value: q.value.toUpperCase()
-        }))
-      }
-    }
-  ]
 }
 
 function renderElement(data, channel) {
-  if (channel === 'messenger') {
-    return renderMessenger(data)
-  } else if (channel === 'slack') {
-    return renderSlack(data)
+  if (['web', 'slack', 'teams', 'messenger', 'telegram', 'twilio'].includes(channel)) {
+    return renderer(data)
   } else {
     return render(data)
   }
@@ -90,7 +46,7 @@ function renderElement(data, channel) {
 module.exports = {
   id: 'builtin_single-choice',
   group: 'Built-in Messages',
-  title: 'module.builtin.types.singleChoice.title',
+  title: 'suggestions',
 
   jsonSchema: {
     description: 'module.builtin.types.singleChoice.description',
@@ -139,6 +95,60 @@ module.exports = {
     choices: {
       'ui:field': 'i18n_array'
     }
+  },
+
+  newSchema: {
+    displayedIn: ['qna', 'sayNode'],
+    order: 4,
+    advancedSettings: [
+      {
+        key: 'position',
+        label: 'module.builtin.types.suggestions.position',
+        type: 'select',
+        defaultValue: 'static',
+        options: [
+          { label: 'module.builtin.types.suggestions.staticMenu', value: 'static' },
+          { label: 'module.builtin.types.suggestions.inConversation', value: 'conversation' }
+        ]
+      },
+      {
+        key: 'expiryPolicy',
+        label: 'module.builtin.types.suggestions.expiryPolicy',
+        type: 'select',
+        defaultValue: 'turn',
+        options: [
+          {
+            label: 'module.builtin.types.suggestions.numberOfTurns',
+            value: 'turn',
+            related: {
+              key: 'turnCount',
+              defaultValue: 0,
+              type: 'number',
+              label: 'module.builtin.types.suggestions.numberOfTurnsExpire'
+            }
+          },
+          { label: 'module.builtin.types.suggestions.endOfWorkflow', value: 'workflow' }
+        ]
+      }
+    ],
+    fields: [
+      {
+        key: 'text',
+        type: 'text',
+        label: 'message'
+      },
+      {
+        key: 'suggestions',
+        type: 'tag-input',
+        translated: true,
+        label: 'suggestions',
+        placeholder: 'studio.library.quickAddAlternative',
+        group: {
+          addLabel: 'studio.flow.node.addSuggestion',
+          addLabelTooltip: 'studio.flow.node.addSuggestionTooltip'
+        }
+      }
+    ]
   },
   computePreviewText: formData =>
     formData.choices && formData.text && `Choices (${formData.choices.length}) ${formData.text}`,

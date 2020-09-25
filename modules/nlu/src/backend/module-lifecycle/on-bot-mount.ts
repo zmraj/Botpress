@@ -3,12 +3,10 @@ import _ from 'lodash'
 import ms from 'ms'
 import yn from 'yn'
 
-import { isOn as isAutoTrainOn } from '../autoTrain'
-import Engine from '../engine'
-import EntityService from '../entities/entities-service'
-import { getIntents } from '../intents/intent-service'
+import { createApi } from '../../api'
+import { makeLoggerWrapper } from '../logger'
 import * as ModelService from '../model-service'
-import { makeTrainingSession, makeTrainSessionKey } from '../train-session-service'
+import { makeTrainingSession, makeTrainSessionKey, setTrainingSession } from '../train-session-service'
 import { NLUState } from '../typings'
 
 const missingLangMsg = botId =>
@@ -20,14 +18,13 @@ export function getOnBotMount(state: NLUState) {
   return async (bp: typeof sdk, botId: string) => {
     const bot = await bp.bots.getBotById(botId)
     const ghost = bp.ghost.forBot(botId)
-    const entityService = new EntityService(ghost, botId)
 
-    const languages = _.intersection(bot.languages, state.languageProvider.languages)
+    const languages = _.intersection(bot.languages, bp.NLU.Engine.getLanguages())
     if (bot.languages.length !== languages.length) {
       bp.logger.warn(missingLangMsg(botId), { notSupported: _.difference(bot.languages, languages) })
     }
 
-    const engine = new Engine(bot.defaultLanguage, bot.id)
+    const engine = new bp.NLU.Engine(bot.id, makeLoggerWrapper(bp, botId))
     const trainOrLoad = _.debounce(
       async (forceTrain: boolean = false) => {
         // bot got deleted
@@ -35,9 +32,9 @@ export function getOnBotMount(state: NLUState) {
           return
         }
 
-        const intentDefs = await getIntents(ghost)
-        const entityDefs = await entityService.getCustomEntities()
-        const hash = ModelService.computeModelHash(intentDefs, entityDefs)
+        const api = await createApi(bp, botId)
+        const intentDefs = await api.fetchIntentsWithQNAs()
+        const entityDefs = await api.fetchEntities()
 
         const kvs = bp.kvs.forBot(botId)
         await kvs.set(KVS_TRAINING_STATUS_KEY, 'training')
@@ -49,21 +46,42 @@ export function getOnBotMount(state: NLUState) {
             if (!lock) {
               return
             }
+
+            const hash = engine.computeModelHash(intentDefs, entityDefs, languageCode)
             await ModelService.pruneModels(ghost, languageCode)
             let model = await ModelService.getModel(ghost, hash, languageCode)
-            const isSingleOOS = typeof (model?.data?.artefacts?.oos_model ?? {}) === 'string' // temporary until we include nlu version in model hash
-            if ((forceTrain || !model || isSingleOOS) && !yn(process.env.BP_NLU_DISABLE_TRAINING)) {
-              const trainSession = makeTrainingSession(languageCode, lock)
-              state.nluByBot[botId].trainSessions[languageCode] = trainSession
 
-              model = await engine.train(intentDefs, entityDefs, languageCode, trainSession)
-              if (model.success) {
+            const trainSession = makeTrainingSession(botId, languageCode, lock)
+            state.nluByBot[botId].trainSessions[languageCode] = trainSession
+            if ((forceTrain || !model) && !yn(process.env.BP_NLU_DISABLE_TRAINING)) {
+              await setTrainingSession(bp, botId, trainSession)
+
+              const progressCallback = async (progress: number) => {
+                trainSession.progress = progress
+                await state.sendNLUStatusEvent(botId, trainSession)
+              }
+
+              const rand = () => Math.round(Math.random() * 10000)
+              const nluSeed = parseInt(process.env.NLU_SEED) || rand()
+
+              const options: sdk.NLU.TrainingOptions = { forceTrain, nluSeed, progressCallback }
+              model = await engine.train(trainSession.key, intentDefs, entityDefs, languageCode, options)
+              if (model) {
+                trainSession.status = 'done'
+                await state.sendNLUStatusEvent(botId, trainSession)
                 await engine.loadModel(model)
                 await ModelService.saveModel(ghost, model, hash)
+              } else {
+                trainSession.status = 'needs-training'
+                await state.sendNLUStatusEvent(botId, trainSession)
               }
+            } else {
+              trainSession.progress = 1
+              trainSession.status = 'done'
+              await state.sendNLUStatusEvent(botId, trainSession)
             }
             try {
-              if (model?.success) {
+              if (model) {
                 await state.broadcastLoadModel(botId, hash, languageCode)
               }
             } finally {
@@ -77,17 +95,6 @@ export function getOnBotMount(state: NLUState) {
       10000,
       { leading: true }
     )
-    // register trainOrLoad with ghost file watcher
-    // we use local events so training occurs on the same node where the request for changes enters
-    const trainWatcher = bp.ghost.forBot(botId).onFileChanged(async f => {
-      if (f.includes('intents') || f.includes('entities')) {
-        if (await isAutoTrainOn(bp, botId)) {
-          // eventually cancel & restart training only for given language
-          await cancelTraining()
-          trainOrLoad()
-        }
-      }
-    })
 
     const cancelTraining = async () => {
       await Promise.map(languages, async lang => {
@@ -97,19 +104,14 @@ export function getOnBotMount(state: NLUState) {
       })
     }
 
-    const isTraining = async (): Promise<boolean> => {
-      return bp.kvs.forBot(botId).exists(KVS_TRAINING_STATUS_KEY)
-    }
-
+    const { defaultLanguage } = bot
     state.nluByBot[botId] = {
       botId,
       engine,
-      trainWatcher,
+      defaultLanguage,
       trainOrLoad,
       trainSessions: {},
-      cancelTraining,
-      isTraining,
-      entityService
+      cancelTraining
     }
 
     trainOrLoad(yn(process.env.FORCE_TRAIN_ON_MOUNT)) // floating promise on purpose

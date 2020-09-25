@@ -17,13 +17,7 @@ type Props = StateProps & RouteComponentProps
 
 const BASIC_MENU_ITEMS = [
   {
-    name: lang.tr('content'),
-    path: '/content',
-    rule: { res: 'bot.content', op: 'read' },
-    icon: 'description'
-  },
-  {
-    name: lang.tr('flows'),
+    name: lang.tr('studio.sideBar.flowBuilder'),
     path: window.USE_ONEFLOW ? '/oneflow' : '/flows',
     rule: { res: 'bot.flows', op: 'read' },
     icon: 'page-layout'
@@ -96,13 +90,9 @@ const Sidebar: FC<Props> = props => {
           <Fragment>
             {BASIC_MENU_ITEMS.map(renderBasicItem)}
             {props.modules.filter(m => !m.noInterface).map(renderModuleItem)}
-            {renderBasicItem(configItem)}
           </Fragment>
         ) : (
-          <Fragment>
-            {props.modules.filter(m => m.name === 'code-editor').map(renderModuleItem)}
-            {renderBasicItem(configItem)}
-          </Fragment>
+          <Fragment>{props.modules.filter(m => m.name === 'code-editor').map(renderModuleItem)}</Fragment>
         )}
       </ul>
     </aside>

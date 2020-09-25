@@ -1,26 +1,21 @@
 import { Intent as BpIntent, Tag } from '@blueprintjs/core'
 import React, { Fragment } from 'react'
 
+import style from '../style.scss'
 import { formatConfidence } from '../utils'
 
 const QNA_IDENTIFIER = '__qna__'
 
-export const Intent = (props: { name: string; confidence?: number; elected?: boolean }) => {
-  const { name, elected, confidence } = props
+export const Intent = (props: { topicName: string; name: string; confidence?: number; elected?: boolean }) => {
+  const { topicName, name, confidence, elected } = props
   const isQnA = isQnaItem(name)
 
   const displayName = isQnA ? formatQnaName(name) : name
 
-  const textContent: string = confidence ? `${displayName}: ${formatConfidence(confidence)} %` : displayName
-  const content = elected ? <strong>{textContent}</strong> : <span>{textContent}</span>
-
   return (
     <Fragment>
-      <Tag intent={isQnA ? BpIntent.SUCCESS : BpIntent.PRIMARY} minimal>
-        {isQnA ? 'Q&A' : 'NLU'}
-      </Tag>
-      &nbsp;
-      <a onClick={navigateToIntentDefinition(name, isQnA)}>{content}</a>
+      <a onClick={navigateToIntentDefinition(topicName, name, isQnA)}>{displayName}</a>
+      {confidence && <span className={style.confidence}>{formatConfidence(confidence)}%</span>}
     </Fragment>
   )
 }
@@ -34,13 +29,12 @@ function formatQnaName(name: string): string {
   return name.substr(name.indexOf('_') + 1)
 }
 
-const navigateToIntentDefinition = (intent: string, isQna: boolean) => () => {
-  intent = isQna ? intent.replace(QNA_IDENTIFIER, '') : intent
+const navigateToIntentDefinition = (topicName: string, intent: string, isQna: boolean) => () => {
   let url
   if (isQna) {
-    url = `/modules/qna?id=${intent}`
+    url = `/oneflow/${topicName}/qna?id=${intent}`
   } else {
-    url = intent === 'none' ? '/modules/nlu' : `/modules/nlu?type=intent&id=${intent}`
+    url = intent === 'none' ? '/modules/nlu' : `/modules/nlu?type=intent&id=${intent}` // TODO point to studio in intent (trigger)
   }
   window.parent.postMessage({ action: 'navigate-url', payload: url }, '*')
 }

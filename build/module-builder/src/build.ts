@@ -7,6 +7,7 @@ import mkdirp from 'mkdirp'
 import os from 'os'
 import path from 'path'
 import rimraf from 'rimraf'
+import { Project } from 'ts-morph'
 import * as ts from 'typescript'
 import { generateSchema, getProgramFromFiles } from 'typescript-json-schema'
 
@@ -19,8 +20,48 @@ export default async (argv: any) => {
   await buildBackend(modulePath)
   await webpackBuild(modulePath)
   await buildConfigSchema(modulePath)
+  await extractTypings(modulePath)
 
   normal('Build completed')
+}
+
+export const extractTypings = async (modulePath: string) => {
+  const basePath = `${modulePath}/src/backend`
+  const project = new Project({})
+  const idRegex = /id\: '(.*)'/gm
+
+  project.addSourceFilesAtPaths(`${basePath}/**/*.ts`)
+
+  const variables = []
+  for (const file of project.getSourceFiles()) {
+    let variableType
+    const hasVariable = file.getInterfaces().find(x => x.getName().startsWith('Variable'))
+
+    if (!hasVariable) {
+      continue
+    }
+
+    for (const statement of file.getVariableStatements()) {
+      try {
+        const constCode = statement.getStructure().declarations?.[0].initializer as string
+        if (constCode?.match(idRegex)) {
+          variableType = idRegex.exec(constCode)[1]
+        }
+      } catch (err) {}
+    }
+
+    const namespace = `BP.${variableType}`
+
+    const contents: string[] = [
+      ...file.getTypeAliases().map(x => x.getFullText()),
+      ...file.getInterfaces().map(x => x.getFullText())
+    ]
+
+    variables.push(`declare namespace ${namespace} {\n${contents.join('\n')}\n}`)
+  }
+
+  // Must be exported as such so we are sure ts/webpack do not process it
+  fse.writeFileSync(path.join(modulePath, 'dist/variables.txt'), variables.join('\n'))
 }
 
 export async function buildBackend(modulePath: string) {
@@ -60,6 +101,9 @@ export async function buildBackend(modulePath: string) {
   const tsConfigFile = ts.findConfigFile(modulePath, ts.sys.fileExists, 'tsconfig.json')
   const skipCheck = process.argv.find(x => x.toLowerCase() === '--skip-check')
 
+  // By default you don't want it to fail when watching, hence the flag
+  const failOnError = process.argv.find(x => x.toLowerCase() === '--fail-on-error')
+
   let validCode = true
   if (!skipCheck && tsConfigFile) {
     validCode = runTypeChecker(modulePath)
@@ -72,6 +116,8 @@ export async function buildBackend(modulePath: string) {
     compileBackend(modulePath, babelConfig)
 
     normal(`Generated backend (${Date.now() - start} ms)`, path.basename(modulePath))
+  } else if (failOnError) {
+    process.exit(1)
   }
 }
 

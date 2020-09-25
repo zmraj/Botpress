@@ -42,6 +42,7 @@ declare namespace NodeJS {
     CLUSTER_ENABLED: boolean
     ASSERT_LICENSED: Function
     BOTPRESS_VERSION: string
+    TELEMETRY_URL: string
     core_env: BotpressEnvironmentVariables
     distro: OSDistribution
     BOTPRESS_EVENTS: EventEmitter
@@ -53,7 +54,7 @@ declare namespace NodeJS {
     DISABLE_BOT_SANDBOX: boolean
     DISABLE_TRANSITION_SANDBOX: boolean
     WEB_WORKER: number
-    ML_WORKERS: number[]
+    TRAINING_WORKERS: number[]
   }
 }
 
@@ -225,7 +226,7 @@ declare type BotpressEnvironmentVariables = {
    * Defaults to 4 if supported by CPU
    * @default 4
    */
-  readonly BP_NUM_ML_WORKERS?: number
+  readonly BP_NUM_ML_THREADS?: number
 
   /**
    * Overrides the maximum file size allowed for the BPFS
@@ -244,6 +245,13 @@ declare type BotpressEnvironmentVariables = {
    * @default false
    */
   readonly BP_CODE_EDITOR_DISABLE_ADVANCED?: boolean
+
+  /**
+   * Overwrites the modules that are enabled by default.
+   * Has to be formatted as JSON,
+   * ex: ['nlu', 'nlu-testing']
+   */
+  readonly BP_ENABLED_MODULES?: string
 }
 
 interface IDebug {
@@ -286,8 +294,8 @@ declare type BOTPRESS_CORE_EVENTS = {
   bp_core_workflow_completed: { botId: string; channel: string; wfName: string }
   bp_core_workflow_failed: { botId: string; channel: string; wfName: string }
   bp_core_enter_flow: { botId: string; channel: string; flowName: string }
-  bp_core_feedback_positive: { botId: string; channel: string; type: string; eventId?: number }
-  bp_core_feedback_negative: { botId: string; channel: string; type: string; eventId?: number }
+  bp_core_feedback_positive: { botId: string; channel: string; type: string; eventId?: string }
+  bp_core_feedback_negative: { botId: string; channel: string; type: string; eventId?: string }
 }
 
 interface IEmitCoreEvent {

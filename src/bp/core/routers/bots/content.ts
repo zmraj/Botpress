@@ -2,15 +2,11 @@ import { ContentElement, Logger } from 'botpress/sdk'
 import { LibraryElement } from 'common/typings'
 import { GhostService } from 'core/services'
 import AuthService, { TOKEN_AUDIENCE } from 'core/services/auth/auth-service'
-import { InvalidOperationError } from 'core/services/auth/errors'
 import { CMSService } from 'core/services/cms'
-import { CmsImportSchema, DefaultSearchParams } from 'core/services/cms'
+import { DefaultSearchParams } from 'core/services/cms'
 import { WorkspaceService } from 'core/services/workspace-service'
 import { RequestHandler, Router } from 'express'
-import { validate } from 'joi'
 import _ from 'lodash'
-import moment from 'moment'
-import multer from 'multer'
 
 import { CustomRouter } from '../customRouter'
 import { checkTokenHeader, needPermissions } from '../util'
@@ -53,6 +49,7 @@ export class ContentRouter extends CustomRouter {
             hidden: type.hidden,
             schema: {
               json: type.jsonSchema,
+              newJson: type.newSchema,
               ui: type.uiSchema,
               title: type.title,
               renderer: type.id
@@ -301,6 +298,7 @@ export class ContentRouter extends CustomRouter {
       ...element,
       schema: {
         json: contentType.jsonSchema,
+        newJson: contentType.newSchema,
         ui: contentType.uiSchema,
         title: contentType.title,
         renderer: contentType.id

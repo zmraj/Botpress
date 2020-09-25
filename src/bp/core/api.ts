@@ -6,6 +6,7 @@ import Knex from 'knex'
 import _ from 'lodash'
 import { Memoize } from 'lodash-decorators'
 import MLToolkit from 'ml/toolkit'
+import Engine from 'nlu-core/engine'
 
 import { container } from './app.inversify'
 import { ConfigProvider } from './config/config-loader'
@@ -65,7 +66,8 @@ const event = (eventEngine: EventEngine, eventRepo: EventRepository): typeof sdk
     isIncomingQueueEmpty: eventEngine.isIncomingQueueEmpty.bind(eventEngine),
     findEvents: eventRepo.findEvents.bind(eventRepo),
     updateEvent: eventRepo.updateEvent.bind(eventRepo),
-    saveUserFeedback: eventRepo.saveUserFeedback.bind(eventRepo)
+    saveUserFeedback: eventRepo.saveUserFeedback.bind(eventRepo),
+    replyContentToEvent: eventEngine.replyContentToEvent.bind(eventEngine)
   }
 }
 
@@ -79,7 +81,9 @@ const dialog = (
     processEvent: dialogEngine.processEvent.bind(dialogEngine),
     deleteSession: stateManager.deleteDialogSession.bind(stateManager),
     jumpTo: dialogEngine.jumpTo.bind(dialogEngine),
-    getConditions: moduleLoader.getDialogConditions.bind(moduleLoader)
+    getConditions: moduleLoader.getDialogConditions.bind(moduleLoader),
+    getVariables: moduleLoader.getVariables.bind(moduleLoader),
+    createVariable: dialogEngine.createVariable.bind(dialogEngine)
   }
 }
 
@@ -310,7 +314,10 @@ export class BotpressAPIProvider {
       security: this.security,
       experimental: this.experimental,
       workspaces: this.workspaces,
-      distributed: this.distributed
+      distributed: this.distributed,
+      NLU: {
+        Engine // TODO: expose only instance of engine instead of class
+      }
     }
   }
 }
