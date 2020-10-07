@@ -2,7 +2,7 @@ import { Button, Checkbox, FormGroup, InputGroup } from '@blueprintjs/core'
 // @ts-ignore
 import ContentPickerWidget from 'botpress/content-picker'
 import { InfoTooltip } from 'botpress/ui'
-import { toastInfo } from 'botpress/utils'
+import { toast } from 'botpress/shared'
 import cx from 'classnames'
 import React, { FC, useEffect, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -75,7 +75,7 @@ export const AuthGate: FC<SkillProps<AuthGateData>> = props => {
               <code>[Login Link]({`{{temp.login_url}}`}) </code>
               <CopyToClipboard
                 text={`[Login Link]({{temp.login_url}})`}
-                onCopy={() => toastInfo('Copied to clipboard')}
+                onCopy={() => toast.info('Copied to clipboard')}
               >
                 <Button icon="clipboard" minimal={true} />
               </CopyToClipboard>
