@@ -193,10 +193,10 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ "../../build/module-builder/node_modules/css-modules-typescript-loader/index.js!../../build/module-builder/node_modules/css-loader/index.js?!../../build/module-builder/node_modules/sass-loader/lib/loader.js!./src/views/full/style.scss":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** /mnt/Documents/Projets/BotPress/botpress/build/module-builder/node_modules/css-modules-typescript-loader!/mnt/Documents/Projets/BotPress/botpress/build/module-builder/node_modules/css-loader??ref--6-2!/mnt/Documents/Projets/BotPress/botpress/build/module-builder/node_modules/sass-loader/lib/loader.js!./src/views/full/style.scss ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "../../build/module-builder/node_modules/css-modules-typescript-loader/index.js!../../build/module-builder/node_modules/css-loader/index.js?!../../build/module-builder/node_modules/sass-loader/dist/cjs.js!./src/views/full/style.scss":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** /mnt/Documents/Projets/BotPress/botpress/build/module-builder/node_modules/css-modules-typescript-loader!/mnt/Documents/Projets/BotPress/botpress/build/module-builder/node_modules/css-loader??ref--6-2!/mnt/Documents/Projets/BotPress/botpress/build/module-builder/node_modules/sass-loader/dist/cjs.js!./src/views/full/style.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -493,7 +493,9 @@ function addStyle (obj, options) {
 
 	// If a transform function was defined, run it on the css
 	if (options.transform && obj.css) {
-	    result = options.transform(obj.css);
+	    result = typeof options.transform === 'function'
+		 ? options.transform(obj.css) 
+		 : options.transform.default(obj.css);
 
 	    if (result) {
 	    	// If transform returns a value, use that instead of the original css.
@@ -755,7 +757,7 @@ g = (function() {
 
 try {
 	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
+	g = g || new Function("return this")();
 } catch (e) {
 	// This works if the window reference is available
 	if (typeof window === "object") g = window;
@@ -4569,7 +4571,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 		return classes.join(' ');
 	}
 
-	if (typeof module !== 'undefined' && module.exports) {
+	if ( true && module.exports) {
 		classNames.default = classNames;
 		module.exports = classNames;
 	} else if (true) {
@@ -4594,7 +4596,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright JS Foundation and other contributors <https://js.foundation/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -4605,7 +4607,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.11';
+  var VERSION = '4.17.19';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -5015,7 +5017,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   var root = freeGlobal || freeSelf || Function('return this')();
 
   /** Detect free variable `exports`. */
-  var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+  var freeExports =  true && exports && !exports.nodeType && exports;
 
   /** Detect free variable `module`. */
   var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
@@ -7264,16 +7266,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-
-        return result;
-      }
-
-      if (isMap(value)) {
+      } else if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
-
-        return result;
       }
 
       var keysFunc = isFull
@@ -8197,8 +8193,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
         return;
       }
       baseFor(source, function(srcValue, key) {
+        stack || (stack = new Stack);
         if (isObject(srcValue)) {
-          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -8318,8 +8314,21 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      * @returns {Array} Returns the new sorted array.
      */
     function baseOrderBy(collection, iteratees, orders) {
+      if (iteratees.length) {
+        iteratees = arrayMap(iteratees, function(iteratee) {
+          if (isArray(iteratee)) {
+            return function(value) {
+              return baseGet(value, iteratee.length === 1 ? iteratee[0] : iteratee);
+            }
+          }
+          return iteratee;
+        });
+      } else {
+        iteratees = [identity];
+      }
+
       var index = -1;
-      iteratees = arrayMap(iteratees.length ? iteratees : [identity], baseUnary(getIteratee()));
+      iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
 
       var result = baseMap(collection, function(value, key, collection) {
         var criteria = arrayMap(iteratees, function(iteratee) {
@@ -8576,6 +8585,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
         var key = toKey(path[index]),
             newValue = value;
 
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+          return object;
+        }
+
         if (index != lastIndex) {
           var objValue = nested[key];
           newValue = customizer ? customizer(objValue, key, nested) : undefined;
@@ -8728,11 +8741,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      *  into `array`.
      */
     function baseSortedIndexBy(array, value, iteratee, retHighest) {
-      value = iteratee(value);
-
       var low = 0,
-          high = array == null ? 0 : array.length,
-          valIsNaN = value !== value,
+          high = array == null ? 0 : array.length;
+      if (high === 0) {
+        return 0;
+      }
+
+      value = iteratee(value);
+      var valIsNaN = value !== value,
           valIsNull = value === null,
           valIsSymbol = isSymbol(value),
           valIsUndefined = value === undefined;
@@ -10015,7 +10031,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision) {
+        if (precision && nativeIsFinite(number)) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -10217,10 +10233,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
       if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
         return false;
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(array);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var arrStacked = stack.get(array);
+      var othStacked = stack.get(other);
+      if (arrStacked && othStacked) {
+        return arrStacked == other && othStacked == array;
       }
       var index = -1,
           result = true,
@@ -10382,10 +10399,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
           return false;
         }
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(object);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var objStacked = stack.get(object);
+      var othStacked = stack.get(other);
+      if (objStacked && othStacked) {
+        return objStacked == other && othStacked == object;
       }
       var result = true;
       stack.set(object, other);
@@ -11198,7 +11216,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__".
+     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
      *
      * @private
      * @param {Object} object The object to query.
@@ -11206,6 +11224,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
+      if (key === 'constructor' && typeof object[key] === 'function') {
+        return;
+      }
+
       if (key == '__proto__') {
         return;
       }
@@ -13762,6 +13784,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      * // The `_.property` iteratee shorthand.
      * _.filter(users, 'active');
      * // => objects for ['barney']
+     *
+     * // Combining several predicates using `_.overEvery` or `_.overSome`.
+     * _.filter(users, _.overSome([{ 'age': 36 }, ['age', 40]]));
+     * // => objects for ['fred', 'barney']
      */
     function filter(collection, predicate) {
       var func = isArray(collection) ? arrayFilter : baseFilter;
@@ -14511,15 +14537,15 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      * var users = [
      *   { 'user': 'fred',   'age': 48 },
      *   { 'user': 'barney', 'age': 36 },
-     *   { 'user': 'fred',   'age': 40 },
+     *   { 'user': 'fred',   'age': 30 },
      *   { 'user': 'barney', 'age': 34 }
      * ];
      *
      * _.sortBy(users, [function(o) { return o.user; }]);
-     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
+     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 30]]
      *
      * _.sortBy(users, ['user', 'age']);
-     * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
+     * // => objects for [['barney', 34], ['barney', 36], ['fred', 30], ['fred', 48]]
      */
     var sortBy = baseRest(function(collection, iteratees) {
       if (collection == null) {
@@ -15006,6 +15032,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
           }
           if (maxing) {
             // Handle invocations in a tight loop.
+            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -19392,9 +19419,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
       , 'g');
 
       // Use a sourceURL for easier debugging.
+      // The sourceURL gets injected into the source that's eval-ed, so be careful
+      // to normalize all kinds of whitespace, so e.g. newlines (and unicode versions of it) can't sneak in
+      // and escape the comment, thus injecting code that gets evaled.
       var sourceURL = '//# sourceURL=' +
-        ('sourceURL' in options
-          ? options.sourceURL
+        (hasOwnProperty.call(options, 'sourceURL')
+          ? (options.sourceURL + '').replace(/\s/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -19427,7 +19457,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      var variable = options.variable;
+      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -20133,6 +20163,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      * values against any array or object value, respectively. See `_.isEqual`
      * for a list of supported value comparisons.
      *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
+     *
      * @static
      * @memberOf _
      * @since 3.0.0
@@ -20148,6 +20181,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      *
      * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
      * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
+     *
+     * // Checking for several possible values
+     * _.filter(users, _.overSome([_.matches({ 'a': 1 }), _.matches({ 'a': 4 })]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matches(source) {
       return baseMatches(baseClone(source, CLONE_DEEP_FLAG));
@@ -20161,6 +20198,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      * **Note:** Partial comparisons will match empty array and empty object
      * `srcValue` values against any array or object value, respectively. See
      * `_.isEqual` for a list of supported value comparisons.
+     *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
      *
      * @static
      * @memberOf _
@@ -20178,6 +20218,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      *
      * _.find(objects, _.matchesProperty('a', 4));
      * // => { 'a': 4, 'b': 5, 'c': 6 }
+     *
+     * // Checking for several possible values
+     * _.filter(users, _.overSome([_.matchesProperty('a', 1), _.matchesProperty('a', 4)]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, CLONE_DEEP_FLAG));
@@ -20401,6 +20445,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      * Creates a function that checks if **all** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -20427,6 +20475,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      * Creates a function that checks if **any** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -20446,6 +20498,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      *
      * func(NaN);
      * // => false
+     *
+     * var matchesFunc = _.overSome([{ 'a': 1 }, { 'a': 2 }])
+     * var matchesPropertyFunc = _.overSome([['a', 1], ['a', 2]])
      */
     var overSome = createOver(arraySome);
 
@@ -21632,10 +21687,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = (lodashFunc.name + ''),
-            names = realNames[key] || (realNames[key] = []);
-
-        names.push({ 'name': methodName, 'func': lodashFunc });
+        var key = lodashFunc.name + '';
+        if (!hasOwnProperty.call(realNames, key)) {
+          realNames[key] = [];
+        }
+        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -21957,13 +22013,12 @@ function webpackContext(req) {
 	return __webpack_require__(id);
 }
 function webpackContextResolve(req) {
-	var id = map[req];
-	if(!(id + 1)) { // check for number or string
+	if(!__webpack_require__.o(map, req)) {
 		var e = new Error("Cannot find module '" + req + "'");
 		e.code = 'MODULE_NOT_FOUND';
 		throw e;
 	}
-	return id;
+	return map[req];
 }
 webpackContext.keys = function webpackContextKeys() {
 	return Object.keys(map);
@@ -39225,7 +39280,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
           );
           err.name = 'Invariant Violation';
           throw err;
-        } else if ("development" !== 'production' && typeof console !== 'undefined') {
+        } else if ( true && typeof console !== 'undefined') {
           // Old behavior for people using React.PropTypes
           var cacheKey = componentName + ':' + propName;
           if (
@@ -42474,30 +42529,32 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
 
 
 
-var DismissableAlert =
-/*#__PURE__*/
-function (_React$Component) {
+
+var DismissableAlert = /*#__PURE__*/function (_React$Component) {
   _inherits(DismissableAlert, _React$Component);
 
-  function DismissableAlert() {
-    var _getPrototypeOf2;
+  var _super = _createSuper(DismissableAlert);
 
+  function DismissableAlert() {
     var _this;
 
     _classCallCheck(this, DismissableAlert);
@@ -42506,7 +42563,7 @@ function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(DismissableAlert)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _super.call.apply(_super, [this].concat(args));
     _this.state = {
       alertVisible: true
     };
@@ -42525,12 +42582,12 @@ function (_React$Component) {
       };
 
       if (this.state.alertVisible) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_1__["Callout"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_1__["Callout"], {
           className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_style_scss__WEBPACK_IMPORTED_MODULE_3___default.a.error, 'bp3-elevation-1'),
           title: botpress_shared__WEBPACK_IMPORTED_MODULE_4__["lang"].tr('module.broadcast.alert.title'),
           intent: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_1__["Intent"].DANGER,
           onDismiss: dismiss
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, botpress_shared__WEBPACK_IMPORTED_MODULE_4__["lang"].tr('module.broadcast.alert.message')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, botpress_shared__WEBPACK_IMPORTED_MODULE_4__["lang"].tr('module.broadcast.alert.message')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
           intent: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_1__["Intent"].DANGER,
           onClick: dismiss,
           text: botpress_shared__WEBPACK_IMPORTED_MODULE_4__["lang"].tr('module.broadcast.alert.hide')
@@ -42558,28 +42615,26 @@ function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BroadcastModule; });
-/* harmony import */ var botpress_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! botpress/utils */ "botpress/utils");
-/* harmony import */ var botpress_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(botpress_utils__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "react-dom");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _blueprintjs_datetime_lib_css_blueprint_datetime_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @blueprintjs/datetime/lib/css/blueprint-datetime.css */ "./node_modules/@blueprintjs/datetime/lib/css/blueprint-datetime.css");
-/* harmony import */ var _blueprintjs_datetime_lib_css_blueprint_datetime_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blueprintjs_datetime_lib_css_blueprint_datetime_css__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @blueprintjs/core */ "@blueprintjs/core");
-/* harmony import */ var _blueprintjs_core__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _blueprintjs_datetime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @blueprintjs/datetime */ "./node_modules/@blueprintjs/datetime/lib/esm/index.js");
-/* harmony import */ var botpress_shared__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! botpress/shared */ "botpress/shared");
-/* harmony import */ var botpress_shared__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(botpress_shared__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _alert__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./alert */ "./src/views/full/alert.jsx");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./style.scss */ "./src/views/full/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _blueprintjs_datetime_lib_css_blueprint_datetime_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @blueprintjs/datetime/lib/css/blueprint-datetime.css */ "./node_modules/@blueprintjs/datetime/lib/css/blueprint-datetime.css");
+/* harmony import */ var _blueprintjs_datetime_lib_css_blueprint_datetime_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_blueprintjs_datetime_lib_css_blueprint_datetime_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @blueprintjs/core */ "@blueprintjs/core");
+/* harmony import */ var _blueprintjs_core__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _blueprintjs_datetime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @blueprintjs/datetime */ "./node_modules/@blueprintjs/datetime/lib/esm/index.js");
+/* harmony import */ var botpress_shared__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! botpress/shared */ "botpress/shared");
+/* harmony import */ var botpress_shared__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(botpress_shared__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _alert__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./alert */ "./src/views/full/alert.jsx");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./style.scss */ "./src/views/full/style.scss");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_10__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -42594,16 +42649,19 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
@@ -42623,17 +42681,17 @@ var convertHHmmToDate = function convertHHmmToDate(time) {
   return new Date().setHours(HH, mm, 0);
 };
 
-var BroadcastModule =
-/*#__PURE__*/
-function (_React$Component) {
+var BroadcastModule = /*#__PURE__*/function (_React$Component) {
   _inherits(BroadcastModule, _React$Component);
+
+  var _super = _createSuper(BroadcastModule);
 
   function BroadcastModule(props) {
     var _this;
 
     _classCallCheck(this, BroadcastModule);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(BroadcastModule).call(this, props)); // window.location = '#'
+    _this = _super.call(this, props); // window.location = '#'
 
     _this.state = {
       showModalForm: false,
@@ -42643,11 +42701,11 @@ function (_React$Component) {
     _this.fetchAllBroadcasts = function () {
       return _this.getAxios().get('/mod/broadcast/').then(function (res) {
         _this.setState({
-          broadcasts: lodash__WEBPACK_IMPORTED_MODULE_9___default.a.orderBy(res.data, ['date', 'time'])
+          broadcasts: lodash__WEBPACK_IMPORTED_MODULE_8___default.a.orderBy(res.data, ['date', 'time'])
         });
       })["catch"](function (err) {
         console.error(err);
-        Object(botpress_utils__WEBPACK_IMPORTED_MODULE_0__["toastFailure"])(botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.cantFetchFromServer'));
+        botpress_shared__WEBPACK_IMPORTED_MODULE_5__["toast"].failure(botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.cantFetchFromServer'));
       });
     };
 
@@ -42668,7 +42726,7 @@ function (_React$Component) {
       }
 
       _this.setState({
-        error: err ? err.message : botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.unknownErrorOccurred')
+        error: err ? err.message : botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.unknownErrorOccurred')
       });
     };
 
@@ -42730,8 +42788,8 @@ function (_React$Component) {
         broadcast: {
           content: broadcast.content,
           userTimezone: broadcast.userTimezone,
-          date: moment__WEBPACK_IMPORTED_MODULE_8___default()(broadcast.date).toDate(),
-          time: lodash__WEBPACK_IMPORTED_MODULE_9___default.a.isString(broadcast.time) ? convertHHmmToDate(broadcast.time) : broadcast.time,
+          date: moment__WEBPACK_IMPORTED_MODULE_7___default()(broadcast.date).toDate(),
+          time: lodash__WEBPACK_IMPORTED_MODULE_8___default.a.isString(broadcast.time) ? convertHHmmToDate(broadcast.time) : broadcast.time,
           filteringConditions: broadcast.filteringConditions,
           progress: broadcast.progress
         }
@@ -42775,11 +42833,11 @@ function (_React$Component) {
     };
 
     _this.handleAddToFilteringConditions = function () {
-      var input = react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.findDOMNode(_this.filterInput);
+      var input = react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.findDOMNode(_this.filterInput);
 
       if (input && input.value !== '') {
         var newBroadcast = _this.state.broadcast;
-        newBroadcast.filteringConditions = lodash__WEBPACK_IMPORTED_MODULE_9___default.a.concat(newBroadcast.filteringConditions, input.value);
+        newBroadcast.filteringConditions = lodash__WEBPACK_IMPORTED_MODULE_8___default.a.concat(newBroadcast.filteringConditions, input.value);
 
         _this.setState({
           broadcast: newBroadcast
@@ -42791,7 +42849,7 @@ function (_React$Component) {
 
     _this.handleRemoveFromFilteringConditions = function (filter) {
       var newBroadcast = _this.state.broadcast;
-      newBroadcast.filteringConditions = lodash__WEBPACK_IMPORTED_MODULE_9___default.a.without(newBroadcast.filteringConditions, filter);
+      newBroadcast.filteringConditions = lodash__WEBPACK_IMPORTED_MODULE_8___default.a.without(newBroadcast.filteringConditions, filter);
 
       _this.setState({
         broadcast: newBroadcast
@@ -42803,11 +42861,11 @@ function (_React$Component) {
         return _this.handleRemoveFromFilteringConditions(filter);
       };
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["ControlGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["InputGroup"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["ControlGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], {
         fill: true,
         defaultValue: filter,
         readOnly: true
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
         icon: "remove",
         onClick: removeHandler
       }));
@@ -42843,22 +42901,22 @@ function (_React$Component) {
           filteringConditions = _this$state$broadcast.filteringConditions;
 
       if (!content) {
-        Object(botpress_utils__WEBPACK_IMPORTED_MODULE_0__["toastFailure"])(botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.contentFieldRequired'));
+        botpress_shared__WEBPACK_IMPORTED_MODULE_5__["toast"].failure(botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.contentFieldRequired'));
         return;
       }
 
       return {
-        date: moment__WEBPACK_IMPORTED_MODULE_8___default()(date).format('YYYY-MM-DD'),
-        time: moment__WEBPACK_IMPORTED_MODULE_8___default()(time).format('HH:mm'),
+        date: moment__WEBPACK_IMPORTED_MODULE_7___default()(date).format('YYYY-MM-DD'),
+        time: moment__WEBPACK_IMPORTED_MODULE_7___default()(time).format('HH:mm'),
         content: content,
-        timezone: userTimezone ? null : moment__WEBPACK_IMPORTED_MODULE_8___default()().format('Z'),
+        timezone: userTimezone ? null : moment__WEBPACK_IMPORTED_MODULE_7___default()().format('Z'),
         filters: filteringConditions
       };
     }
   }, {
     key: "renderTableHeader",
     value: function renderTableHeader() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "#"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.table.date')), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.table.content')), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.table.filters')), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.table.progress')), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.table.action'))));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "#"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.table.date')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.table.content')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.table.filters')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.table.progress')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.table.action'))));
     }
   }, {
     key: "renderBroadcasts",
@@ -42866,8 +42924,8 @@ function (_React$Component) {
       var _this2 = this;
 
       var getDateFormatted = function getDateFormatted(time, date, userTimezone) {
-        var calendar = moment__WEBPACK_IMPORTED_MODULE_8___default()(date + ' ' + time, 'YYYY-MM-DD HH:mm').calendar();
-        return calendar + " (".concat(userTimezone ? botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.usersTime') : botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.yourTime'), ")");
+        var calendar = moment__WEBPACK_IMPORTED_MODULE_7___default()(date + ' ' + time, 'YYYY-MM-DD HH:mm').calendar();
+        return calendar + " (".concat(userTimezone ? botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.usersTime') : botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.yourTime'), ")");
       };
 
       var formatProgress = function formatProgress(progress, outboxed, errored) {
@@ -42875,22 +42933,22 @@ function (_React$Component) {
         var text = (progress * 100).toFixed(2) + '%';
 
         if (progress === 0) {
-          text = outboxed ? botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.processing') : botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.notStarted');
+          text = outboxed ? botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.processing') : botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.notStarted');
           color = outboxed ? '#90a9f4' : '#e4e4e4';
         }
 
         if (progress === 1) {
-          text = botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.done');
+          text = botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.done');
           color = '#6ee681';
         }
 
         if (errored) {
-          text = botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('error');
+          text = botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('error');
           color = '#eb6f6f';
         }
 
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.dot,
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.dot,
           style: {
             backgroundColor: color
           }
@@ -42898,69 +42956,69 @@ function (_React$Component) {
       };
 
       var renderFilteringCondition = function renderFilteringCondition(filters) {
-        if (lodash__WEBPACK_IMPORTED_MODULE_9___default.a.isEmpty(filters)) {
-          return botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.noFilter');
+        if (lodash__WEBPACK_IMPORTED_MODULE_8___default.a.isEmpty(filters)) {
+          return botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.noFilter');
         }
 
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Tag"], null, filters.length + ' ' + botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.filters'));
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Tag"], null, filters.length + ' ' + botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.selectionFilters'));
       };
 
-      return lodash__WEBPACK_IMPORTED_MODULE_9___default.a.mapValues(broadcasts, function (value) {
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+      return lodash__WEBPACK_IMPORTED_MODULE_8___default.a.mapValues(broadcasts, function (value) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: value.id
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           style: {
             width: '5%'
           }
-        }, value.id), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+        }, value.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           style: {
             width: '22%'
           },
-          className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.scheduledDate
-        }, getDateFormatted(value.time, value.date, value.userTimezone)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+          className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.scheduledDate
+        }, getDateFormatted(value.time, value.date, value.userTimezone)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           style: {
             maxWidth: '38%'
           }
-        }, value.content), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+        }, value.content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           style: {
             width: '7%'
           }
-        }, renderFilteringCondition(value.filteringConditions)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+        }, renderFilteringCondition(value.filteringConditions)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           style: {
             width: '12%'
           },
-          className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.progress
-        }, formatProgress(value.progress, value.outboxed, value.errored)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+          className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.progress
+        }, formatProgress(value.progress, value.outboxed, value.errored)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           style: {
             width: '12%'
           }
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.actions
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Tooltip"], {
-          content: botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('edit'),
-          position: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Position"].BOTTOM
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["AnchorButton"], {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.actions
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Tooltip"], {
+          content: botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('edit'),
+          position: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Position"].BOTTOM
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["AnchorButton"], {
           icon: "edit",
           disabled: value.outboxed,
-          className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.smallButton,
+          className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.smallButton,
           onClick: function onClick() {
             return _this2.handleOpenModalForm(value, value.id);
           }
-        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Tooltip"], {
-          content: botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('duplicate'),
-          position: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Position"].BOTTOM
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["AnchorButton"], {
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Tooltip"], {
+          content: botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('duplicate'),
+          position: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Position"].BOTTOM
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["AnchorButton"], {
           icon: "duplicate",
-          className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.smallButton,
+          className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.smallButton,
           onClick: function onClick() {
             return _this2.handleOpenModalForm(value);
           }
-        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Tooltip"], {
-          content: botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('delete'),
-          position: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Position"].BOTTOM
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["AnchorButton"], {
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Tooltip"], {
+          content: botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('delete'),
+          position: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Position"].BOTTOM
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["AnchorButton"], {
           icon: "trash",
-          className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.smallButton,
+          className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.smallButton,
           onClick: function onClick() {
             return _this2.handleRemoveBroadcast(value.id);
           }
@@ -42970,24 +43028,24 @@ function (_React$Component) {
   }, {
     key: "renderTable",
     value: function renderTable(broadcasts) {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
-        className: classnames__WEBPACK_IMPORTED_MODULE_7___default()(_style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.table, 'bp3-html-table bp3-html-table-striped bp3-html-table-bordered')
-      }, this.renderTableHeader(), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, lodash__WEBPACK_IMPORTED_MODULE_9___default.a.values(this.renderBroadcasts(broadcasts))));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(_style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.table, 'bp3-html-table bp3-html-table-striped bp3-html-table-bordered')
+      }, this.renderTableHeader(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, lodash__WEBPACK_IMPORTED_MODULE_8___default.a.values(this.renderBroadcasts(broadcasts))));
     }
   }, {
     key: "renderEmptyMessage",
     value: function renderEmptyMessage() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.emptyMessage
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.youHaveNoBroadcasts')));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.emptyMessage
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.youHaveNoBroadcasts')));
     }
   }, {
     key: "renderBroadcastsPanel",
     value: function renderBroadcastsPanel(title, broadcasts) {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Card"], {
-        className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.card,
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Card"], {
+        className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.card,
         elevation: 1
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, title), lodash__WEBPACK_IMPORTED_MODULE_9___default.a.isEmpty(broadcasts) ? this.renderEmptyMessage() : this.renderTable(broadcasts));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, title), lodash__WEBPACK_IMPORTED_MODULE_8___default.a.isEmpty(broadcasts) ? this.renderEmptyMessage() : this.renderTable(broadcasts));
     }
   }, {
     key: "renderFormContent",
@@ -42998,12 +43056,12 @@ function (_React$Component) {
         return window.botpress.pickContent({}, _this3.handleContentChange);
       };
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["FormGroup"], {
-        label: botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.form.content')
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["ControlGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        label: botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.form.content')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["ControlGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
         onClick: pickContent,
-        text: botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.form.pickContent')
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["InputGroup"], {
+        text: botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.form.pickContent')
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], {
         fill: true,
         id: "input-content",
         readOnly: true,
@@ -43013,17 +43071,17 @@ function (_React$Component) {
   }, {
     key: "renderFormDate",
     value: function renderFormDate() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["FormGroup"], {
-        label: botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.form.date'),
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        label: botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.form.date'),
         fill: true
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_datetime__WEBPACK_IMPORTED_MODULE_5__["DateInput"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_datetime__WEBPACK_IMPORTED_MODULE_4__["DateInput"], {
         onChange: this.handleDateChange,
         parseDate: function parseDate(str) {
           return new Date(str);
         },
         placeholder: 'YYYY-MM-DD',
         formatDate: function formatDate(d) {
-          return moment__WEBPACK_IMPORTED_MODULE_8___default()(d).format('YYYY-MM-DD');
+          return moment__WEBPACK_IMPORTED_MODULE_7___default()(d).format('YYYY-MM-DD');
         },
         minDate: new Date(),
         value: this.state.broadcast.date
@@ -43032,10 +43090,10 @@ function (_React$Component) {
   }, {
     key: "renderFormTime",
     value: function renderFormTime() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["FormGroup"], {
-        className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.formTime,
-        label: botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.form.time')
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_datetime__WEBPACK_IMPORTED_MODULE_5__["TimePicker"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.formTime,
+        label: botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.form.time')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_datetime__WEBPACK_IMPORTED_MODULE_4__["TimePicker"], {
         onChange: this.handleTimeChange,
         value: new Date(this.state.broadcast.time)
       }));
@@ -43043,59 +43101,59 @@ function (_React$Component) {
   }, {
     key: "renderFormUserTimezone",
     value: function renderFormUserTimezone() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Checkbox"], {
-        className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.formUserTimezone,
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Checkbox"], {
+        className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.formUserTimezone,
         checked: this.state.broadcast.userTimezone,
         onChange: this.handleUserTimezoneChange
-      }, botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.form.userTimeZone'));
+      }, botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.form.userTimeZone'));
     }
   }, {
     key: "renderFiltering",
     value: function renderFiltering() {
       var _this4 = this;
 
-      var filteringConditionElements = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null);
+      var filteringConditionElements = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
       var filters = this.state.broadcast.filteringConditions;
 
-      if (filters && !lodash__WEBPACK_IMPORTED_MODULE_9___default.a.isEmpty(filters)) {
+      if (filters && !lodash__WEBPACK_IMPORTED_MODULE_8___default.a.isEmpty(filters)) {
         filteringConditionElements = this.state.broadcast.filteringConditions.map(this.renderFilteringConditionElement);
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["FormGroup"], {
-        className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.addFilters,
-        label: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.form.filters'), ' ', react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["FormGroup"], {
+        className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.addFilters,
+        label: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.form.filters'), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           target: "_blank",
           rel: "noopener noreferrer",
           href: "https://github.com/botpress/botpress/blob/master/modules/broadcast/README.md#filtering"
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Icon"], {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
           icon: "help"
         })))
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["ControlGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["InputGroup"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["ControlGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], {
         fill: true,
         inputRef: function inputRef(input) {
           return _this4.filterInput = input;
         }
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
-        text: botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('add'),
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+        text: botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('add'),
         onClick: function onClick() {
           return _this4.handleAddToFilteringConditions();
         }
-      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.filters
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.filters
       }, filteringConditionElements));
     }
   }, {
     key: "renderForm",
     value: function renderForm() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", null, this.renderFormContent(), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["ControlGroup"], null, this.renderFormDate(), this.renderFormTime()), this.renderFiltering());
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, this.renderFormContent(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["ControlGroup"], null, this.renderFormDate(), this.renderFormTime()), this.renderFiltering());
     }
   }, {
     key: "renderActionButton",
     value: function renderActionButton() {
       var onClickAction = this.state.modifyBroadcast ? this.handleModifyBroadcast : this.handleAddBroadcast;
-      var buttonName = this.state.modifyBroadcast ? botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.form.modify') : botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.form.create');
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
-        intent: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Intent"].PRIMARY,
+      var buttonName = this.state.modifyBroadcast ? botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.form.modify') : botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.form.create');
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+        intent: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Intent"].PRIMARY,
         text: buttonName,
         onClick: onClickAction
       });
@@ -43103,15 +43161,15 @@ function (_React$Component) {
   }, {
     key: "renderModalForm",
     value: function renderModalForm() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.modal
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(botpress_shared__WEBPACK_IMPORTED_MODULE_6__["Dialog"].Wrapper, {
-        title: this.state.modifyBroadcast ? botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.form.modifyBroadcast') : botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.form.createBroadcast'),
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.modal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(botpress_shared__WEBPACK_IMPORTED_MODULE_5__["Dialog"].Wrapper, {
+        title: this.state.modifyBroadcast ? botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.form.modifyBroadcast') : botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.form.createBroadcast'),
         usePortal: false,
         isOpen: this.state.showModalForm,
         onClose: this.closeModal
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(botpress_shared__WEBPACK_IMPORTED_MODULE_6__["Dialog"].Body, null, this.renderForm()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(botpress_shared__WEBPACK_IMPORTED_MODULE_6__["Dialog"].Footer, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
-        text: botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('cancel'),
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(botpress_shared__WEBPACK_IMPORTED_MODULE_5__["Dialog"].Body, null, this.renderForm()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(botpress_shared__WEBPACK_IMPORTED_MODULE_5__["Dialog"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+        text: botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('cancel'),
         onClick: this.handleCloseModalForm
       }), this.renderActionButton())));
     }
@@ -43120,12 +43178,12 @@ function (_React$Component) {
     value: function renderNewButton() {
       var _this5 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.newButton
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
-        text: botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.newBroadcast'),
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.newButton
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+        text: botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.newBroadcast'),
         icon: "plus",
-        intent: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_4__["Intent"].PRIMARY,
+        intent: _blueprintjs_core__WEBPACK_IMPORTED_MODULE_3__["Intent"].PRIMARY,
         onClick: function onClick() {
           return _this5.handleOpenModalForm();
         }
@@ -43134,35 +43192,35 @@ function (_React$Component) {
   }, {
     key: "renderErrorBox",
     value: function renderErrorBox() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_alert__WEBPACK_IMPORTED_MODULE_10__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_alert__WEBPACK_IMPORTED_MODULE_9__["default"], null);
     }
   }, {
     key: "render",
     value: function render() {
-      var allBroadcasts = lodash__WEBPACK_IMPORTED_MODULE_9___default.a.assign([], this.state.broadcasts);
+      var allBroadcasts = lodash__WEBPACK_IMPORTED_MODULE_8___default.a.assign([], this.state.broadcasts);
 
-      var hasSomeError = lodash__WEBPACK_IMPORTED_MODULE_9___default.a.some(allBroadcasts, ['errored', true]);
+      var hasSomeError = lodash__WEBPACK_IMPORTED_MODULE_8___default.a.some(allBroadcasts, ['errored', true]);
 
-      var upcomingBroadcasts = lodash__WEBPACK_IMPORTED_MODULE_9___default.a.remove(allBroadcasts, function (value) {
-        var datetime = moment__WEBPACK_IMPORTED_MODULE_8___default()(value.date + ' ' + value.time, 'YYYY-MM-DD HH:mm');
-        return datetime.isBefore(moment__WEBPACK_IMPORTED_MODULE_8___default()().add(3, 'days')) && datetime.isAfter(moment__WEBPACK_IMPORTED_MODULE_8___default()());
+      var upcomingBroadcasts = lodash__WEBPACK_IMPORTED_MODULE_8___default.a.remove(allBroadcasts, function (value) {
+        var datetime = moment__WEBPACK_IMPORTED_MODULE_7___default()(value.date + ' ' + value.time, 'YYYY-MM-DD HH:mm');
+        return datetime.isBefore(moment__WEBPACK_IMPORTED_MODULE_7___default()().add(3, 'days')) && datetime.isAfter(moment__WEBPACK_IMPORTED_MODULE_7___default()());
       });
 
-      var pastBroadcasts = lodash__WEBPACK_IMPORTED_MODULE_9___default.a.remove(allBroadcasts, function (value) {
-        var datetime = moment__WEBPACK_IMPORTED_MODULE_8___default()(value.date + ' ' + value.time, 'YYYY-MM-DD HH:mm');
-        return datetime.isBefore(moment__WEBPACK_IMPORTED_MODULE_8___default()()) && datetime.isAfter(moment__WEBPACK_IMPORTED_MODULE_8___default()().subtract(3, 'days'));
+      var pastBroadcasts = lodash__WEBPACK_IMPORTED_MODULE_8___default.a.remove(allBroadcasts, function (value) {
+        var datetime = moment__WEBPACK_IMPORTED_MODULE_7___default()(value.date + ' ' + value.time, 'YYYY-MM-DD HH:mm');
+        return datetime.isBefore(moment__WEBPACK_IMPORTED_MODULE_7___default()()) && datetime.isAfter(moment__WEBPACK_IMPORTED_MODULE_7___default()().subtract(3, 'days'));
       });
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
-        className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.title
-      }, botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.title')), this.renderNewButton(), hasSomeError ? this.renderErrorBox() : null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: _style_scss__WEBPACK_IMPORTED_MODULE_11___default.a.mainPanel
-      }, this.renderBroadcastsPanel(botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.section.upcoming'), upcomingBroadcasts), this.renderBroadcastsPanel(botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.section.past'), pastBroadcasts), this.renderBroadcastsPanel(botpress_shared__WEBPACK_IMPORTED_MODULE_6__["lang"].tr('module.broadcast.section.other'), allBroadcasts)), this.renderModalForm());
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.title
+      }, botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.title')), this.renderNewButton(), hasSomeError ? this.renderErrorBox() : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _style_scss__WEBPACK_IMPORTED_MODULE_10___default.a.mainPanel
+      }, this.renderBroadcastsPanel(botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.section.upcoming'), upcomingBroadcasts), this.renderBroadcastsPanel(botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.section.past'), pastBroadcasts), this.renderBroadcastsPanel(botpress_shared__WEBPACK_IMPORTED_MODULE_5__["lang"].tr('module.broadcast.section.other'), allBroadcasts)), this.renderModalForm());
     }
   }]);
 
   return BroadcastModule;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
 
@@ -43176,7 +43234,7 @@ function (_React$Component) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../../build/module-builder/node_modules/css-modules-typescript-loader!../../../../../build/module-builder/node_modules/css-loader??ref--6-2!../../../../../build/module-builder/node_modules/sass-loader/lib/loader.js!./style.scss */ "../../build/module-builder/node_modules/css-modules-typescript-loader/index.js!../../build/module-builder/node_modules/css-loader/index.js?!../../build/module-builder/node_modules/sass-loader/lib/loader.js!./src/views/full/style.scss");
+var content = __webpack_require__(/*! !../../../../../build/module-builder/node_modules/css-modules-typescript-loader!../../../../../build/module-builder/node_modules/css-loader??ref--6-2!../../../../../build/module-builder/node_modules/sass-loader/dist/cjs.js!./style.scss */ "../../build/module-builder/node_modules/css-modules-typescript-loader/index.js!../../build/module-builder/node_modules/css-loader/index.js?!../../build/module-builder/node_modules/sass-loader/dist/cjs.js!./src/views/full/style.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -43229,17 +43287,6 @@ module.exports = BlueprintJsCore;
 /***/ (function(module, exports) {
 
 module.exports = BotpressShared;
-
-/***/ }),
-
-/***/ "botpress/utils":
-/*!********************************!*\
-  !*** external "BotpressUtils" ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = BotpressUtils;
 
 /***/ }),
 
