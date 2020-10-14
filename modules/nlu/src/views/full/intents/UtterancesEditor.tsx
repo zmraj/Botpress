@@ -1,7 +1,7 @@
 import { Tag } from '@blueprintjs/core'
 import { NLU } from 'botpress/sdk'
 import { lang } from 'botpress/shared'
-import classnames from 'classnames'
+import cx from 'classnames'
 import _ from 'lodash'
 import React from 'react'
 import { Document, Editor as CoreEditor, MarkJSON, Node, Range, Selection, Value } from 'slate'
@@ -26,6 +26,7 @@ const plugins = [
 interface Props {
   intentName: string
   utterances: string[]
+  liteEditor: boolean
   slots: NLU.SlotDefinition[]
   onChange: (x: string[]) => void
 }
@@ -138,7 +139,7 @@ export class UtterancesEditor extends React.Component<Props> {
           show={this.state.showSlotMenu}
           onSlotClicked={this.tag.bind(this, editor)}
         />
-        <div className={style.utterances}>{children}</div>
+        <div className={cx(style.utterances, { [style.liteEditor]: this.props.liteEditor })}>{children}</div>
       </div>
     )
   }
@@ -201,8 +202,8 @@ export class UtterancesEditor extends React.Component<Props> {
     switch (props.mark.type) {
       case 'slot':
         const slotMark = props.mark.data.toJS()
-        const color = this.props.slots.find(s => s.name === slotMark.slotName).color
-        const cn = classnames(style.slotMark, style[`label-colors-${color}`])
+        const color = (this.props.slots.find(s => s.name === slotMark.slotName) as any).color // changed typings but since we get rid of this GUI I didn't update the code
+        const cn = cx(style.slotMark, style[`label-colors-${color}`])
         const remove = () => editor.moveToRangeOfNode(props.node).removeMark(props.mark)
 
         return (
@@ -222,7 +223,7 @@ export class UtterancesEditor extends React.Component<Props> {
     const isEmpty = node.text.trim().length <= 0
     const isWrong = utteranceIdx < this.utteranceKeys.length - 1 && isEmpty
 
-    const elementCx = classnames(style.utterance, {
+    const elementCx = cx(style.utterance, {
       [style.title]: node.type === 'title' && utteranceIdx === 0,
       [style.active]: props.isFocused,
       [style.wrong]: isWrong
@@ -291,7 +292,7 @@ export class UtterancesEditor extends React.Component<Props> {
           // need the setTimeout for tagging with click
           setTimeout(this.hideSlotPopover, 200)
         }
-      } else if (from == to && this.state.showSlotMenu) {
+      } else if (from === to && this.state.showSlotMenu) {
         this.hideSlotPopover()
       }
     } else {

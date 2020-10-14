@@ -1,8 +1,9 @@
-import { Colors, H5, HTMLTable, Icon } from '@blueprintjs/core'
+import { Icon } from '@blueprintjs/core'
 import * as sdk from 'botpress/sdk'
 import _ from 'lodash'
-import React, { FC } from 'react'
+import React, { FC, Fragment } from 'react'
 
+import lang from '../../../../lang'
 import style from '../style.scss'
 
 interface Props {
@@ -13,45 +14,45 @@ export const Actions: FC<Props> = props => {
   const { actions } = props.ndu
 
   return (
-    <div className={style.subSection}>
-      <div style={{ display: 'flex' }}>
-        <div>
-          {actions.map(({ action, data }) => {
+    <Fragment>
+      <ul>
+        <li>
+          {actions.map(({ action, data }, index) => {
             switch (action) {
               case 'send':
                 return (
-                  <div className={style.truncate}>
-                    <Icon icon="chat" /> Say {(data as sdk.NDU.SendContent).sourceDetails}
-                  </div>
+                  <span key={index} className={style.truncate}>
+                    {lang.tr('module.extensions.actions.say', { x: (data as sdk.NDU.SendContent).sourceDetails })}
+                  </span>
                 )
               case 'startWorkflow':
                 return (
-                  <div className={style.truncate}>
-                    <Icon icon="flow-linear" /> Start Workflow {(data as sdk.NDU.FlowRedirect).flow}
-                  </div>
+                  <span key={index} className={style.truncate}>
+                    {lang.tr('module.extensions.actions.startWorkflow', { x: (data as sdk.NDU.FlowRedirect).flow })}
+                  </span>
                 )
               case 'goToNode':
                 return (
-                  <div className={style.truncate}>
-                    <Icon icon="flow-linear" /> Go to node {(data as sdk.NDU.FlowRedirect).node}
-                  </div>
+                  <span key={index} className={style.truncate}>
+                    {lang.tr('module.extensions.actions.goToNode', { x: (data as sdk.NDU.FlowRedirect).node })}
+                  </span>
                 )
               case 'redirect':
                 return (
-                  <div className={style.truncate}>
-                    <Icon icon="pivot" /> Redirect to {(data as sdk.NDU.FlowRedirect).flow}
-                  </div>
+                  <span key={index} className={style.truncate}>
+                    {lang.tr('module.extensions.actions.redirectTo', { x: (data as sdk.NDU.FlowRedirect).flow })}
+                  </span>
                 )
               case 'continue':
-                return (
-                  <div>
-                    <Icon icon="play" /> Continue
-                  </div>
-                )
+                return <span key={index}>{lang.tr('module.extensions.actions.continue')}</span>
+              case 'prompt.cancel':
+                return <span key={index}>{lang.tr('module.extensions.actions.cancelPrompt')}</span>
+              case 'prompt.inform':
+                return <span key={index}>{lang.tr('module.extensions.actions.informPrompt')}</span>
             }
           })}
-        </div>
-      </div>
-    </div>
+        </li>
+      </ul>
+    </Fragment>
   )
 }

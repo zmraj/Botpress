@@ -1,321 +1,455 @@
-import { Button, Intent } from '@blueprintjs/core'
-import { confirmDialog, lang } from 'botpress/shared'
-import { Container } from 'botpress/ui'
-import { AccessControl, getFlowLabel, reorderFlows } from 'botpress/utils'
+import { Icon, IconName, Spinner } from '@blueprintjs/core'
+import {
+  Checkbox,
+  confirmDialog,
+  EmptyState,
+  HeaderButtonProps,
+  Icons,
+  lang,
+  MainContent,
+  sharedStyle,
+  toast
+} from 'botpress/shared'
+import { AccessControl, Downloader, reorderFlows } from 'botpress/utils'
 import cx from 'classnames'
-import React, { Component, Fragment } from 'react'
-import { FormControl, FormGroup, Pagination, Panel } from 'react-bootstrap'
+import { debounce } from 'lodash'
+import React, { FC, useCallback, useEffect, useReducer, useRef, useState } from 'react'
 
-import './button.css'
+import { isQnaComplete } from '../../backend/utils'
+
 import style from './style.scss'
-import { ContextSelector } from './ContextSelector'
-import EditorModal from './Editor/EditorModal'
-import { ExportButton } from './ExportButton'
-import { ImportModal } from './ImportModal'
-import Item from './Item'
+import { dispatchMiddleware, fetchReducer, itemHasError, ITEMS_PER_PAGE, Props } from './utils/qnaList.utils'
+import QnA from './Components/QnA'
+import EmptyStateIcon from './Icons/EmptyStateIcon'
 
-export { LiteEditor } from './LiteEditor'
+const QNA_FILTER_KEY = `bp::${window['BOT_ID']}::qnaFilter`
 
-const ITEMS_PER_PAGE = 20
-const QNA_PARAM_NAME = 'id'
-
-interface Props {
-  contentLang: string
-  bp: any
-}
-
-export default class QnaAdmin extends Component<Props> {
-  state = {
+const QnAList: FC<Props> = ({
+  bp,
+  languages,
+  defaultLang,
+  topicName,
+  contentLang,
+  updateLocalLang,
+  isLite,
+  licensing,
+  emulatorOpen,
+  events,
+  refreshQnaCount
+}) => {
+  let filters
+  try {
+    filters = JSON.parse(localStorage.getItem(QNA_FILTER_KEY))
+  } catch (error) {
+    filters = {}
+  }
+  const [flows, setFlows] = useState([])
+  const [questionSearch, setQuestionSearch] = useState('')
+  const [currentTab, setCurrentTab] = useState('qna')
+  const [currentLang, setCurrentLang] = useState(contentLang)
+  const [url, setUrl] = useState('')
+  const [filterOptions, setFilterOptions] = useState(filters || {})
+  const [sortOption, setSortOption] = useState('mostRecent')
+  const debounceDispatchMiddleware = useCallback(debounce(dispatchMiddleware, 300), [])
+  const wrapperRef = useRef<HTMLDivElement>()
+  const [state, dispatch] = useReducer(fetchReducer, {
+    count: 0,
     items: [],
-    currentItemId: undefined,
-    flows: [],
-    flowsList: [],
-    filter: '',
-    showBulkImport: undefined,
+    highlighted: undefined,
+    loading: true,
+    firstUpdate: true,
     page: 1,
-    overallItemsCount: 0,
-    showQnAModal: false,
-    isEditing: false,
-    importDialogOpen: false,
-    filterQuestion: '',
-    selectedQuestion: [],
-    filterContexts: []
-  }
+    fetchMore: false,
+    expandedItems: {}
+  })
+  const { items, loading, firstUpdate, page, fetchMore, count, expandedItems, highlighted } = state
+  const queryParams = new URLSearchParams(window.location.search)
 
-  fetchFlows() {
-    this.props.bp.axios.get('/flows').then(({ data }) => {
-      const flows = data.filter(flow => !flow.name.startsWith('skills/'))
-      const flowsList = reorderFlows(flows).map(({ name }) => ({ label: getFlowLabel(name), value: name }))
+  useEffect(() => {
+    wrapperRef.current.addEventListener('scroll', handleScroll)
+    fetchData()
+      .then(() => {})
+      .catch(() => {})
 
-      this.setState({ flows: data, flowsList })
-    })
-  }
+    fetchFlows()
 
-  fetchData = async (page = 1) => {
-    const params = { limit: ITEMS_PER_PAGE, offset: (page - 1) * ITEMS_PER_PAGE }
-    const { data } = await this.props.bp.axios.get('/mod/qna/questions', { params })
-
-    this.setState({
-      items: data.items,
-      overallItemsCount: data.count,
-      page
-    })
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.contentLang !== this.props.contentLang) {
-      this.filterOrFetch()
+    return () => {
+      wrapperRef.current.removeEventListener('scroll', handleScroll)
+      dispatch({ type: 'resetData' })
+      setQuestionSearch('')
     }
-    this.editQnaFromPath()
-  }
+  }, [])
 
-  componentDidMount() {
-    this.filterOrFetch()
-    this.fetchFlows()
-    this.editQnaFromPath()
-  }
-
-  editQnaFromPath() {
-    const id = this.getQnaFromPath()
-    const updateModal = !this.state.showQnAModal || id !== this.state.currentItemId
-    if (id && updateModal) {
-      this.editItem(id)()
-    }
-  }
-
-  getQnaFromPath() {
-    const url = new URL(window.location.href)
-    return url.searchParams.get(QNA_PARAM_NAME)
-  }
-
-  filterOrFetch() {
-    const { hash } = window.location
-    const searchCmd = '#search:'
-
-    if (hash && hash.includes(searchCmd)) {
-      this.setState({ filterQuestion: hash.replace(searchCmd, '') }, this.filterQuestions)
+  useEffect(() => {
+    if (queryParams.get('id')) {
+      fetchHighlightedQna(queryParams.get('id'))
+        .then(() => {})
+        .catch(() => {})
     } else {
-      // tslint:disable-next-line: no-floating-promises
-      this.fetchData()
+      dispatch({ type: 'resetHighlighted' })
     }
-  }
+  }, [queryParams.get('id')])
 
-  onQuestionsFilter = event => this.setState({ filterQuestion: event.target.value }, this.filterQuestions)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!firstUpdate) {
+        fetchData()
+          .then(() => {})
+          .catch(() => {})
+      }
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [questionSearch])
 
-  filterQuestions = (page = 1) => {
-    this.props.bp.axios
-      .get('/mod/qna/questions', { params: this.getQueryParams(page) })
-      .then(({ data: { items, count } }) => this.setState({ items, overallItemsCount: count, page }))
-  }
-
-  renderPagination = () => {
-    const pagesCount = Math.ceil(this.state.overallItemsCount / ITEMS_PER_PAGE)
-    const { filterQuestion, filterContexts } = this.state
-    const isFilter = filterQuestion || filterContexts.length
-
-    if (pagesCount <= 1) {
-      return null
+  useEffect(() => {
+    if (!loading && fetchMore && items.length < count) {
+      fetchData(page + 1)
+        .then(() => {})
+        .catch(() => {})
     }
+  }, [fetchMore])
 
-    const fetchPage = page => () => (isFilter ? this.filterQuestions(page) : this.fetchData(page))
-    const renderPageBtn = page => (
-      <Pagination.Item key={'page' + page} onClick={fetchPage(page)} active={this.state.page === page}>
-        {page}
-      </Pagination.Item>
-    )
-
-    const firstPage = () => (isFilter ? this.filterQuestions(1) : this.fetchData(1))
-    const prevPage = () =>
-      this.state.page > 1 &&
-      (isFilter ? this.filterQuestions(this.state.page - 1) : this.fetchData(this.state.page - 1))
-    const nextPage = () =>
-      this.state.page < pagesCount &&
-      (isFilter ? this.filterQuestions(this.state.page + 1) : this.fetchData(this.state.page + 1))
-    const lastPage = () => (isFilter ? this.filterQuestions(pagesCount) : this.fetchData(pagesCount))
-
-    return (
-      <Pagination>
-        <Pagination.First onClick={firstPage} />
-        <Pagination.Prev onClick={prevPage} disabled={this.state.page === 1} />
-        {new Array(pagesCount).fill(pagesCount).map((_x, i) => {
-          const page = i + 1
-          if (Math.abs(this.state.page - page) === 5) {
-            return <Pagination.Ellipsis />
-          }
-          if (Math.abs(this.state.page - page) > 5) {
-            return null
-          }
-          return renderPageBtn(page)
-        })}
-        <Pagination.Next onClick={nextPage} disabled={this.state.page >= pagesCount} />
-        <Pagination.Last onClick={lastPage} />
-      </Pagination>
-    )
-  }
-
-  renderQnAHeader = () => (
-    <Fragment>
-      <FormGroup className={style.qnaHeader}>
-        <div className={style.searchBar}>{this.renderSearch()}</div>
-        <div className={style.headerBtns}>
-          <AccessControl resource="module.qna" operation="write">
-            <Button
-              text={lang.tr('module.qna.importJson')}
-              icon="download"
-              id="btn-importJson"
-              onClick={() => this.setState({ importDialogOpen: true })}
-            />
-          </AccessControl>
-          <ExportButton />
-
-          <AccessControl resource="module.qna" operation="write">
-            <Button
-              id="btn-create-qna"
-              text={lang.tr('module.qna.addNew')}
-              icon="add"
-              intent={Intent.PRIMARY}
-              onClick={() => this.setState({ isEditing: false, currentItemId: null, showQnAModal: true })}
-            />
-          </AccessControl>
-        </div>
-      </FormGroup>
-      <ImportModal
-        axios={this.props.bp.axios}
-        onImportCompleted={this.fetchData}
-        isOpen={this.state.importDialogOpen}
-        toggle={() => this.setState({ importDialogOpen: !this.state.importDialogOpen })}
-      />
-    </Fragment>
-  )
-
-  renderSearch = () => (
-    <Fragment>
-      <FormControl
-        id="input-search"
-        value={this.state.filterQuestion}
-        onChange={this.onQuestionsFilter}
-        placeholder={lang.tr('module.qna.search')}
-        className={style.searchField}
-      />
-
-      <ContextSelector
-        className={style.categoryFilter}
-        contexts={this.state.filterContexts}
-        saveContexts={contexts => this.setState({ filterContexts: contexts }, this.filterQuestions)}
-        bp={this.props.bp}
-        isSearch
-      />
-    </Fragment>
-  )
-
-  getQueryParams = (overridePage?: number) => {
-    const { filterQuestion, filterContexts, page } = this.state
-    return {
-      question: filterQuestion,
-      filteredContexts: filterContexts,
-      limit: ITEMS_PER_PAGE,
-      offset: ((overridePage || page) - 1) * ITEMS_PER_PAGE
+  useEffect(() => {
+    try {
+      localStorage.setItem(QNA_FILTER_KEY, JSON.stringify(filterOptions))
+    } catch (error) {
+      localStorage.setItem(QNA_FILTER_KEY, '{}')
     }
-  }
+  }, [filterOptions])
 
-  deleteItem = (id: string) => async () => {
-    const needDelete = await confirmDialog(lang.tr('module.qna.confirmDelete'), {
-      acceptLabel: lang.tr('delete')
+  const fetchFlows = () => {
+    bp.axios.get('/flows').then(({ data }) => {
+      setFlows(reorderFlows(data.filter(flow => !flow.name.startsWith('skills/'))))
     })
-    const params = this.getQueryParams()
+  }
 
-    if (needDelete) {
-      this.props.bp.axios
-        .post(`/mod/qna/questions/${id}/delete`, { params })
-        .then(({ data }) => this.setState({ ...data }))
+  const startDownload = () => {
+    setUrl(`${window['BOT_API_PATH']}/mod/qna/${topicName}/export`)
+  }
+
+  const handleScroll = () => {
+    if (wrapperRef.current.scrollHeight - wrapperRef.current.scrollTop !== wrapperRef.current.offsetHeight) {
+      return
     }
+    dispatch({ type: 'fetchMore' })
   }
 
-  editItem = (id: string) => () => {
-    const url = new URL(window.location.href)
-    url.searchParams.set(QNA_PARAM_NAME, id)
-    window.history.pushState(window.history.state, '', url.toString())
+  const tabs = [{ id: 'qna', title: lang.tr('module.qna.fullName') }]
 
-    this.setState({ isEditing: true, currentItemId: id, showQnAModal: true })
+  const allExpanded = Object.keys(expandedItems).filter(itemId => expandedItems[itemId]).length === items.length
+
+  let noItemsTooltip
+  let languesTooltip = lang.tr('module.qna.form.translate')
+
+  if (!items.length) {
+    noItemsTooltip = lang.tr('module.qna.form.addOneItemTooltip')
   }
 
-  toggleEnableItem = (item: any, id: string, isChecked: boolean) => {
-    const params = this.getQueryParams()
-
-    item.enabled = isChecked
-    this.props.bp.axios
-      .post(`/mod/qna/questions/${id}`, item, { params })
-      .then(({ data: { items } }) => this.setState({ items }))
+  if (!licensing?.isPro) {
+    languesTooltip = lang.tr('toolbar.contactSalesForMultilingual')
+  } else if (languages?.length <= 1) {
+    languesTooltip = lang.tr('toolbar.configureAnotherLanguage')
   }
 
-  closeQnAModal = () => {
-    const location = window.location
-    const newUrl = location.origin + location.pathname
-    window.history.pushState(window.history.state, '', newUrl)
-
-    this.setState({ showQnAModal: false, currentItemId: null })
-  }
-
-  questionsList = () => {
-    if (!this.state.items.length) {
-      return <h3>{lang.tr('module.qna.noQuestionsYet')}</h3>
-    }
-
-    return (
-      <div className={style.questionTable}>
-        <div className={cx(style.questionTableRow, style.header)}>
-          <div className={cx(style.questionTableCell, style.question)}>{lang.tr('module.qna.question')}</div>
-          <div className={style.questionTableCell}>{lang.tr('module.qna.answer')}</div>
-          <div className={style.questionTableCell}>{lang.tr('module.qna.contexts')}</div>
-          <div className={cx(style.questionTableCell, style.actions)}></div>
-        </div>
-        {this.state.items.map(({ id, data }, index) => (
-          <Item
-            key={id}
-            id={id}
-            item={data}
-            last={!this.state.items[index + 1]}
-            flows={this.state.flows}
-            contentLang={this.props.contentLang}
-            onEditItem={this.editItem(id)}
-            onToggleItem={this.toggleEnableItem.bind(this)}
-            onDeleteItem={this.deleteItem(id)}
-          />
-        ))}
-      </div>
-    )
-  }
-
-  updateQuestion = ({ items }) => this.setState({ items })
-
-  render() {
-    return (
-      <Container sidePanelHidden>
-        <div />
-        <Panel className={cx(style.qnaContainer, 'qnaContainer')}>
-          <Panel.Body>
-            {this.renderQnAHeader()}
-            {this.renderPagination()}
-            {this.questionsList()}
-            {this.renderPagination()}
-            <EditorModal
-              contentLang={this.props.contentLang}
-              flows={this.state.flows}
-              flowsList={this.state.flowsList}
-              bp={this.props.bp}
-              showQnAModal={this.state.showQnAModal}
-              closeQnAModal={this.closeQnAModal}
-              fetchData={this.fetchData}
-              id={this.state.currentItemId}
-              isEditing={this.state.isEditing}
-              defaultContext="global"
-              page={{ offset: (this.state.page - 1) * ITEMS_PER_PAGE, limit: ITEMS_PER_PAGE }}
-              updateQuestion={this.updateQuestion}
-              filters={{ question: this.state.filterQuestion, contexts: this.state.filterContexts }}
+  const buttons: HeaderButtonProps[] = [
+    {
+      icon: 'translate',
+      optionsItems: languages?.map(language => ({
+        label: lang.tr(`isoLangs.${language}.name`),
+        selected: currentLang === language,
+        action: () => {
+          setCurrentLang(language)
+          updateLocalLang(language)
+        }
+      })),
+      disabled: !items.length || languages?.length <= 1,
+      tooltip: languesTooltip
+    },
+    {
+      icon: 'filter',
+      disabled: !items.length,
+      optionsWrapperClassName: style.filterWrapper,
+      optionsItems: [
+        {
+          content: (
+            <Checkbox
+              checked={filterOptions.active}
+              label={lang.tr('active')}
+              onChange={() => setFilterOptions({ ...filterOptions, active: !filterOptions.active })}
             />
-          </Panel.Body>
-        </Panel>
-      </Container>
+          )
+        },
+        {
+          content: (
+            <Checkbox
+              checked={filterOptions.incomplete}
+              className={style.checkboxSpacing}
+              label={lang.tr('incomplete')}
+              onChange={() => setFilterOptions({ ...filterOptions, incomplete: !filterOptions.incomplete })}
+            />
+          )
+        },
+        {
+          content: (
+            <Checkbox
+              checked={filterOptions.disabled}
+              className={style.checkboxSpacing}
+              label={lang.tr('disabled')}
+              onChange={() => setFilterOptions({ ...filterOptions, disabled: !filterOptions.disabled })}
+            />
+          )
+        }
+      ],
+      tooltip: lang.tr('module.qna.filterBy')
+    },
+    {
+      icon: 'sort',
+      disabled: items.length < 2,
+      optionsItems: [
+        {
+          label: lang.tr('module.qna.mostRecentlyEdited'),
+          selected: sortOption === 'mostRecent',
+          action: () => {
+            setSortOption('mostRecent')
+          }
+        },
+        {
+          label: lang.tr('module.qna.leastRecentlyEdited'),
+          selected: sortOption === 'leastRecent',
+          action: () => {
+            setSortOption('leastRecent')
+          }
+        }
+      ],
+      tooltip: lang.tr('module.qna.sortBy')
+    },
+    {
+      icon: allExpanded ? 'collapse-all' : 'expand-all',
+      disabled: !items.length,
+      onClick: () => dispatch({ type: allExpanded ? 'collapseAll' : 'expandAll' }),
+      tooltip: lang.tr(allExpanded ? 'collapseAll' : 'expandAll')
+    },
+    {
+      icon: 'export',
+      disabled: !items.length,
+      onClick: startDownload,
+      tooltip: lang.tr('module.qna.import.exportQnAs')
+    }
+  ]
+
+  if (!defaultLang || defaultLang === contentLang) {
+    buttons.push(
+      {
+        content: (
+          <span className={style.customBtn}>
+            <Icon icon={'import' as IconName} />
+            <input
+              type="file"
+              onChange={async e => {
+                if ((e.target as HTMLInputElement).files) {
+                  await askUploadOptions((e.target as HTMLInputElement).files[0])
+                }
+              }}
+            />
+          </span>
+        ),
+        tooltip: lang.tr('module.qna.import.importQnAs')
+      },
+      {
+        icon: 'plus',
+        onClick: () => {
+          dispatch({ type: 'addQnA', data: { languages, topicName: topicName || 'global' } })
+        },
+        tooltip: lang.tr('module.qna.form.addQuestion')
+      }
     )
   }
+
+  const askUploadOptions = async uploadFile => {
+    if (
+      await confirmDialog(`${uploadFile.name} : ${lang.tr('module.qna.import.insertNewQuestions')} ?`, {
+        acceptLabel: lang.tr('ok'),
+        declineLabel: lang.tr('cancel')
+      })
+    ) {
+      await importArchive(uploadFile)
+    }
+  }
+
+  const importArchive = async file => {
+    const extension = file.name.split('.').slice(-1)[0]
+    if (extension !== 'gz') {
+      toast.failure(lang.tr('module.qna.import.badImportFormat'))
+      return
+    }
+    let intervalHandle: number
+    try {
+      const form = new FormData()
+      form.append('file', file)
+      const { data } = await bp.axios.post(`/mod/qna/${topicName}/import`, form, bp.axiosConfig)
+      const uploadStatusId = data
+
+      intervalHandle = window.setInterval(async () => {
+        const { data } = await bp.axios.get(`/mod/qna/json-upload-status/${uploadStatusId}`)
+        if (data === 'module.qna.import.uploadSuccessful') {
+          clearInterval(intervalHandle)
+          toast.success(lang.tr(data))
+          await fetchData()
+        } else if (data.split('.')[0] !== 'module') {
+          toast.failure(data)
+          clearInterval(intervalHandle)
+        }
+      }, 500)
+    } catch (err) {
+      clearInterval(intervalHandle)
+      toast.failure(err.message)
+    }
+  }
+
+  const fetchData = async (page = 1) => {
+    dispatch({ type: 'loading' })
+    const params = !isLite ? { limit: ITEMS_PER_PAGE, offset: (page - 1) * ITEMS_PER_PAGE } : {}
+    const { data } = await bp.axios.get(`/mod/qna/${topicName}/questions`, {
+      params: { ...params, question: questionSearch }
+    })
+
+    dispatch({
+      type: 'dataSuccess',
+      data: { ...data, items: data.items.map(x => ({ id: x.id, data: { ...x, topicName } })), page }
+    })
+  }
+
+  const fetchHighlightedQna = async id => {
+    const { data } = await bp.axios.get(`/mod/qna/${topicName}/questions/${id}`)
+    dispatch({ type: 'highlightedSuccess', data: { ...data, topicName } })
+  }
+
+  const filterQnAs = item => {
+    const isNotHighlighted = highlighted?.id !== item.id
+    const weKeepNothing = !filterOptions.active && !filterOptions.disabled && !filterOptions.incomplete
+    const isDisabledAndWeKeepDisabled = !item.data.enabled && filterOptions.disabled
+    const isIncompleteAndWeKeepIncomplete = !isQnaComplete(item.data as any, defaultLang) && filterOptions.incomplete
+    const isActiveAndWeKeepActive =
+      item.data.enabled && isQnaComplete(item.data as any, defaultLang) && filterOptions.active
+    if (weKeepNothing) {
+      return isNotHighlighted
+    } else {
+      return (
+        isNotHighlighted && (isDisabledAndWeKeepDisabled || isIncompleteAndWeKeepIncomplete || isActiveAndWeKeepActive)
+      )
+    }
+  }
+
+  return (
+    <AccessControl resource="module.qna" operation="write">
+      <MainContent.Wrapper
+        className={cx(style.embeddedInFlow, { 'emulator-open': emulatorOpen })}
+        childRef={ref => (wrapperRef.current = ref)}
+      >
+        <MainContent.Toolbar className={style.header} tabChange={setCurrentTab} tabs={tabs} buttons={buttons} />
+        {!!((items.length && !loading) || questionSearch.length) && (
+          <div className={cx(sharedStyle.searchBar, style.searchBar)}>
+            <input
+              type="text"
+              value={questionSearch}
+              onChange={e => setQuestionSearch(e.currentTarget.value)}
+              placeholder={lang.tr('module.qna.search')}
+            />
+          </div>
+        )}
+        <div className={cx(style.content, { [style.empty]: !items.length && !highlighted })}>
+          {highlighted && (
+            <div className={style.highlightedQna}>
+              <QnA
+                updateQnA={data =>
+                  debounceDispatchMiddleware(dispatch, {
+                    type: 'updateQnA',
+                    data: { qnaItem: data, index: 'highlighted', bp, currentLang, refreshQnaCount }
+                  })
+                }
+                bp={bp}
+                isLite={isLite}
+                key={highlighted.id}
+                flows={flows}
+                events={events}
+                defaultLang={defaultLang}
+                deleteQnA={data => {
+                  dispatch({ type: 'deleteQnA', data: { qnaItem: data, index: 'highlighted', bp, refreshQnaCount } })
+
+                  window.history.pushState(
+                    window.history.state,
+                    '',
+                    window.location.href.replace(window.location.search, '')
+                  )
+                }}
+                toggleEnabledQnA={() =>
+                  dispatchMiddleware(dispatch, {
+                    type: 'toggleEnabledQnA',
+                    data: { qnaItem: highlighted, bp }
+                  })
+                }
+                contentLang={currentLang}
+                errorMessages={itemHasError(highlighted, currentLang)}
+                setExpanded={isExpanded => dispatch({ type: 'toggleExpandOne', data: { highlighted: isExpanded } })}
+                expanded={expandedItems['highlighted']}
+                qnaItem={highlighted}
+              />
+            </div>
+          )}
+          {items
+            .filter(item => filterQnAs(item))
+            .sort(
+              (a, b) => (sortOption === 'mostRecent' ? +1 : -1) * (+(a.data.lastModified < b.data.lastModified) * 2 - 1)
+            )
+            .map((item, index) => (
+              <QnA
+                updateQnA={data =>
+                  debounceDispatchMiddleware(dispatch, {
+                    type: 'updateQnA',
+                    data: { qnaItem: data, index, bp, currentLang, refreshQnaCount }
+                  })
+                }
+                key={item.key || item.id}
+                bp={bp}
+                isLite={isLite}
+                flows={flows}
+                events={events}
+                defaultLang={defaultLang}
+                deleteQnA={data => dispatch({ type: 'deleteQnA', data: { qnaItem: data, index, bp, refreshQnaCount } })}
+                toggleEnabledQnA={() =>
+                  dispatchMiddleware(dispatch, { type: 'toggleEnabledQnA', data: { qnaItem: item, bp } })
+                }
+                contentLang={currentLang}
+                errorMessages={itemHasError(item, currentLang)}
+                setExpanded={isExpanded =>
+                  dispatch({ type: 'toggleExpandOne', data: { [item.key || item.id]: isExpanded } })
+                }
+                expanded={expandedItems[item.key || item.id]}
+                qnaItem={item}
+              />
+            ))}
+          {!items.length && !loading && (
+            <EmptyState
+              icon={questionSearch.length ? <Icons.Search /> : <EmptyStateIcon />}
+              text={
+                questionSearch.length
+                  ? lang.tr('studio.flow.sidePanel.noSearchMatch')
+                  : lang.tr('module.qna.form.emptyState')
+              }
+            />
+          )}
+          {loading && (
+            <Spinner
+              className={cx({ [style.initialLoading]: !fetchMore, [style.loading]: fetchMore })}
+              size={fetchMore ? 20 : 50}
+            />
+          )}
+        </div>
+
+        <Downloader url={url} />
+      </MainContent.Wrapper>
+    </AccessControl>
+  )
 }
+
+export default QnAList

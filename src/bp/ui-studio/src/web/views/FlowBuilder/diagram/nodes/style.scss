@@ -1,9 +1,26 @@
-:global(.srd-diagram .node) {
-  opacity: 0.9;
+:global(.srd-diagram .srd-default-link--path-selected) {
+  stroke: var(--gray) !important;
+  animation: none;
+  stroke-dasharray: 6, 2;
+}
+:global(.srd-diagram .srd-default-link--path-dragging) {
+  stroke: var(--ocean) !important;
+  animation: none;
+  stroke-dasharray: none;
 }
 
 :global(.srd-diagram .node.selected) > .node-container {
   border-color: #028aee !important;
+}
+
+.removeLinkButton {
+  cursor: pointer;
+  rect {
+    fill: var(--hover-lighthouse-30);
+  }
+  .trash {
+    fill: var(--lighthouse) !important;
+  }
 }
 
 .node-container {
@@ -184,4 +201,8 @@
   font-size: 11px;
   right: -83px;
   top: -40px;
+}
+
+.hiddenPort {
+  display: none;
 }

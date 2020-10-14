@@ -12,13 +12,13 @@ const migration: sdk.ModuleMigration = {
       const intents = await bpfs.directoryListing('./intents', '*.json')
       for (const file of intents) {
         const content = (await bpfs.readFileAsObject('./intents', file)) as sdk.NLU.IntentDefinition
-        content.slots = content.slots.map(slot => {
+        content.slots = content.slots.map((slot: any) => {
           if (slot.entities && slot.entities.length) {
             slot.entities = slot.entities.map(entity => (entity === 'numeral' ? 'number' : entity))
           }
           return slot
         })
-        await bpfs.upsertFile('./intents', file, JSON.stringify(content, undefined, 2))
+        await bpfs.upsertFile('./intents', file, JSON.stringify(content, undefined, 2), { ignoreLock: true })
       }
     }
 

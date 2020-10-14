@@ -7,6 +7,8 @@ import {
   Logger,
   ModuleDefinition,
   ModuleEntryPoint,
+  PrimitiveVarType,
+  PromptDefinition,
   Skill
 } from 'botpress/sdk'
 import { ModuleInfo } from 'common/typings'
@@ -41,8 +43,10 @@ const MODULE_SCHEMA = joi.object().keys({
   onElementChanged: joi.func().optional(),
   skills: joi.array().optional(),
   translations: joi.object().optional(),
+  prompts: joi.array().optional(),
   botTemplates: joi.array().optional(),
   dialogConditions: joi.array().optional(),
+  variables: joi.array().optional(),
   definition: joi.object().keys({
     name: joi.string().required(),
     fullName: joi.string().optional(),
@@ -63,7 +67,8 @@ const MODULE_SCHEMA = joi.object().keys({
     menuIcon: joi.string().optional(),
     menuText: joi.string().optional(),
     homepage: joi.string().optional(),
-    experimental: joi.boolean().optional()
+    experimental: joi.boolean().optional(),
+    channelEffects: joi.array().optional()
   })
 })
 
@@ -133,7 +138,7 @@ export class ModuleLoader {
     const ret = MODULE_SCHEMA.validate(module, { abortEarly: false })
 
     if (ret.error) {
-      const message = (name.length ? `Module "${name}" has` : '') + 'invalid configuration'
+      const message = `${name.length ? `Module "${name}" has` : ''}invalid configuration`
       throw new ValidationError(ret.error, message)
     }
 
@@ -194,6 +199,21 @@ export class ModuleLoader {
         await Promise.mapSeries(BotService.getMountedBots(), x => entryPoint.onBotMount!(api, x))
       }
     }
+  }
+
+  public async getVariableDefinitions() {
+    const definitions: string[] = []
+    const modules = this.getLoadedModules()
+
+    for (const module of modules) {
+      const resourceLoader = new ModuleResourceLoader(this.logger, module.name, this.ghost)
+      const def = await resourceLoader.getModuleVariableDefs()
+      if (def) {
+        definitions.push(def)
+      }
+    }
+
+    return definitions.join('\n')
   }
 
   private async _loadModule(module: ModuleEntryPoint, name: string) {
@@ -307,6 +327,8 @@ export class ModuleLoader {
         this.logger.warn(`Error in module "${name}" 'onServerReady'. Module will still be loaded. Err: ${err.message}`)
       }
     }
+
+    AppLifecycle.setDone(AppLifecycleEvents.MODULES_READY)
   }
 
   public async loadModulesForBot(botId: string) {
@@ -335,14 +357,23 @@ export class ModuleLoader {
     return _.flatten(templates)
   }
 
-  public getDialogConditions(): Condition[] {
+  private _getModuleElements<T>(type: 'dialogConditions' | 'variables' | 'prompts') {
     const modules = Array.from(this.entryPoints.values())
-    const conditions = _.flatMap(
-      modules.filter(module => module.dialogConditions),
-      x => x.dialogConditions
-    ) as Condition[]
+    const filtered = modules.filter(module => module[type])
 
-    return _.orderBy(conditions, x => x?.displayOrder)
+    return _.flatMap(filtered, mod => <any>mod[type]) as T[]
+  }
+
+  public getDialogConditions(): Condition[] {
+    return _.orderBy(this._getModuleElements('dialogConditions'), x => x?.displayOrder)
+  }
+
+  public getPrompts(): PromptDefinition[] {
+    return this._getModuleElements('prompts')
+  }
+
+  public getVariables(): PrimitiveVarType[] {
+    return this._getModuleElements('variables')
   }
 
   public getLoadedModules(): ModuleDefinition[] {
@@ -425,7 +456,7 @@ export class ModuleLoader {
       const resolver = new ModuleResolver(this.logger)
       return await extractModuleInfo({ location: tmpFolder, enabled: false }, resolver)
     } catch (err) {
-      this.logger.attachError(err).warn(`Invalid module archive`)
+      this.logger.attachError(err).warn('Invalid module archive')
     } finally {
       tmpDir.removeCallback()
     }

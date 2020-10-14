@@ -1,6 +1,6 @@
 import { Tooltip } from '@blueprintjs/core'
 import * as sdk from 'botpress/sdk'
-import classnames from 'classnames'
+import cx from 'classnames'
 import _ from 'lodash'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -45,32 +45,32 @@ type Props = {
   name: string
   node: any
   next?: sdk.NodeTransition[]
-  flowsName: any
-} & RouteComponentProps
+  hidden?: boolean
+}
 
 export class StandardPortWidgetDisconnected extends React.PureComponent<Props> {
   renderSubflowNode() {
     const index = Number(this.props.name.replace('out', ''))
     const subflow = this.props.node.next[index].node.replace(/\.flow\.json$/i, '')
-    const isInvalid = !this.props.flowsName.find(x => x === this.props.node.next[index].node)
+    const isInvalid = false
 
     return (
-      <div className={classnames(style.label, { [style.invalidFlow]: isInvalid })}>
+      <div className={cx(style.label, 'label', { [style.invalidFlow]: isInvalid })}>
         {isInvalid ? (
           <Tooltip content="The destination for this transition is invalid">{subflow}</Tooltip>
         ) : (
-          <Link to={`/flows/${subflow}`}>{subflow}</Link>
+          <Link to={`/${window.USE_ONEFLOW ? 'oneflow' : 'flows'}/${subflow}`}>{subflow}</Link>
         )}
       </div>
     )
   }
 
   renderEndNode() {
-    return <div className={style.label}>End of flow</div>
+    return <div className={cx(style.label, 'label')}>End of flow</div>
   }
 
   renderStartNode() {
-    return <div className={style.label}>Start</div>
+    return <div className={cx(style.label, 'label')}>Start</div>
   }
 
   renderReturnNode() {
@@ -82,7 +82,7 @@ export class StandardPortWidgetDisconnected extends React.PureComponent<Props> {
       returnTo = '@calling'
     }
 
-    return <div className={style.label}>Return ({returnTo})</div>
+    return <div className={cx(style.label, 'label')}>Return ({returnTo})</div>
   }
 
   render() {
@@ -108,16 +108,18 @@ export class StandardPortWidgetDisconnected extends React.PureComponent<Props> {
       }
     }
 
-    const className = classnames(this.props.className, style.portContainer, {
+    const className = cx(this.props.className, style.portContainer, 'portContainer', {
       [style.startPort]: type === 'start',
       [style.subflowPort]: type === 'subflow',
       [style.endPort]: type === 'end',
       [style.returnPort]: type === 'return',
       [style.portLabel]: /end|subflow|start|return/i.test(type),
-      [style.missingConnection]: missingConnection
+      [style.missingConnection]: missingConnection,
+      [style.hiddenPort]: this.props.hidden
     })
 
     const isNewNodeType = newNodeTypes.includes(this.props.node.type)
+
     return (
       <div className={className}>
         <PortWidget {...this.props} />
@@ -130,6 +132,4 @@ export class StandardPortWidgetDisconnected extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = state => ({ flowsName: getFlowNames(state) })
-
-export const StandardPortWidget = connect(mapStateToProps)(withRouter(StandardPortWidgetDisconnected))
+export const StandardPortWidget = StandardPortWidgetDisconnected

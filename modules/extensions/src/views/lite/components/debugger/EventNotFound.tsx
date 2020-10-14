@@ -1,21 +1,23 @@
 import classnames from 'classnames'
 import React from 'react'
-import { MdBugReport } from 'react-icons/md'
+
+import lang from '../../../lang'
 
 import style from './style.scss'
+import DebuggerIcon from './DebuggerIcon'
 
 export default () => (
   <div className={classnames(style.splash, style.notFound)}>
     <div>
-      <MdBugReport />
-      <h2>Event not found</h2>
-      <p>
-        The requested event was not found. Possible reasons:
-        <ul>
-          <li>The Event Collector is not enabled in Botpress Config</li>
-          <li>The event was pruned from the database </li>
-        </ul>
-      </p>
+      <span className={style.debuggerIcon}>
+        <DebuggerIcon />
+      </span>
+      <h2>{lang.tr('module.extensions.eventNotFound.title')}</h2>
+      <p>{lang.tr('module.extensions.eventNotFound.message')}</p>
+      <ul>
+        <li>{lang.tr('module.extensions.eventNotFound.message2')}</li>
+        <li>{lang.tr('module.extensions.eventNotFound.message3')}</li>
+      </ul>
     </div>
   </div>
 )

@@ -142,7 +142,7 @@ export class ModulesRouter extends CustomRouter {
         }
 
         try {
-          const metadata: FlowGeneratorMetadata = { botId: req.query.botId }
+          const metadata: FlowGeneratorMetadata = { botId: req.query.botId, isOneFlow: yn(req.query.isOneFlow) }
           res.send(this.skillService.finalizeFlow(await flowGenerator(req.body, metadata)))
         } catch (err) {
           throw new UnexpectedError('Could not generate flow', err)
@@ -155,6 +155,30 @@ export class ModulesRouter extends CustomRouter {
       this.checkTokenHeader,
       this.asyncMiddleware(async (_req, res, _next) => {
         res.send(await this.moduleLoader.getTranslations())
+      })
+    )
+
+    this.router.get(
+      '/prompts',
+      this.checkTokenHeader,
+      this.asyncMiddleware(async (req, res) => {
+        res.send(await this.moduleLoader.getPrompts())
+      })
+    )
+
+    this.router.get(
+      '/variables',
+      this.checkTokenHeader,
+      this.asyncMiddleware(async (_req, res, _next) => {
+        res.send(await this.moduleLoader.getVariables())
+      })
+    )
+
+    this.router.get(
+      '/variables/definitions',
+      this.checkTokenHeader,
+      this.asyncMiddleware(async (req, res) => {
+        res.send(await this.moduleLoader.getVariableDefinitions())
       })
     )
   }

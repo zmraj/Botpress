@@ -1,27 +1,12 @@
-import { Colors, H5, HTMLTable, Position, Tooltip } from '@blueprintjs/core'
 import { NDU } from 'botpress/sdk'
 import _ from 'lodash'
-import React, { FC } from 'react'
+import React, { FC, Fragment } from 'react'
 
+import lang from '../../../../lang'
 import style from '../style.scss'
 
 interface Props {
   ndu: NDU.DialogUnderstanding
-}
-
-const PercentBar = props => {
-  return (
-    <div className={style.percentBar}>
-      <Tooltip content={`${props.desc || ''} ${props.percent}%`} position={Position.RIGHT}>
-        <div className={style.container}>
-          {props.label}
-          <div className={style.barContainer}>
-            <div className={style.bar} style={{ height: props.percent / 2 }}></div>
-          </div>
-        </div>
-      </Tooltip>
-    </div>
-  )
 }
 
 export const Triggers: FC<Props> = props => {
@@ -31,32 +16,69 @@ export const Triggers: FC<Props> = props => {
     return _.round(predictions[key]?.confidence * 100, 2)
   }
 
+  const totalQnA =
+    getConfidence('faq_trigger_inside_topic') +
+    getConfidence('faq_trigger_outside_topic') +
+    getConfidence('faq_trigger_inside_wf')
+  const totalWF =
+    getConfidence('wf_trigger_inside_topic') +
+    getConfidence('wf_trigger_outside_topic') +
+    getConfidence('wf_trigger_inside_wf')
+
   return (
-    <div className={style.subSection}>
-      <div className={style.triggersContainer}>
-        <div className={style.group}>
-          <div className={style.triggerGroup}>
-            <PercentBar label="in" desc="Inside Topic" percent={getConfidence('faq_trigger_inside_topic')} />
-            <PercentBar label="out" desc="Outside Topic" percent={getConfidence('faq_trigger_outside_topic')} />
-            <PercentBar label="in wf" desc="Inside workflow" percent={getConfidence('faq_trigger_inside_wf')} />
-          </div>
-          QnA
-        </div>
-        <div className={style.group}>
-          <div className={style.triggerGroup}>
-            <PercentBar label="in" desc="Inside Topic" percent={getConfidence('wf_trigger_inside_topic')} />
-            <PercentBar label="out" desc="Outside Topic" percent={getConfidence('wf_trigger_outside_topic')} />
-            <PercentBar label="in wf" desc="Inside workflow" percent={getConfidence('wf_trigger_inside_wf')} />
-          </div>
-          WF
-        </div>
-        <div className={style.group}>
-          <div className={style.triggerGroup}>
-            <PercentBar label="in" desc="Inside Workflow" percent={getConfidence('node_trigger_inside_wf')} />
-          </div>
-          Node
-        </div>
+    <Fragment>
+      <div className={style.subSection}>
+        <p>
+          {lang.tr('module.extensions.triggers.qna')}
+          <span className={style.confidence}>{totalQnA}%</span>
+        </p>
+        <ul>
+          <li>
+            {lang.tr('module.extensions.triggers.insideTopic')}
+            <span className={style.confidence}>{getConfidence('faq_trigger_inside_topic')}%</span>
+          </li>
+          <li>
+            {lang.tr('module.extensions.triggers.outsideTopic')}
+            <span className={style.confidence}>{getConfidence('faq_trigger_outside_topic')}%</span>
+          </li>
+          <li>
+            {lang.tr('module.extensions.triggers.insideWorkflow')}
+            <span className={style.confidence}>{getConfidence('faq_trigger_inside_wf')}%</span>
+          </li>
+        </ul>
       </div>
-    </div>
+      <div className={style.subSection}>
+        <p>
+          {lang.tr('module.extensions.triggers.wf')}
+          <span className={style.confidence}>{totalWF}%</span>
+        </p>
+        <ul>
+          <li>
+            {lang.tr('module.extensions.triggers.insideTopic')}
+            <span className={style.confidence}>{getConfidence('wf_trigger_inside_topic')}%</span>
+          </li>
+          <li>
+            {lang.tr('module.extensions.triggers.outsideTopic')}
+            <span className={style.confidence}>{getConfidence('wf_trigger_outside_topic')}%</span>
+          </li>
+          <li>
+            {lang.tr('module.extensions.triggers.insideWorkflow')}
+            <span className={style.confidence}>{getConfidence('wf_trigger_inside_wf')}%</span>
+          </li>
+        </ul>
+      </div>
+      <div className={style.subSection}>
+        <p>
+          {lang.tr('module.extensions.triggers.node')}
+          <span className={style.confidence}>{getConfidence('node_trigger_inside_wf')}%</span>
+        </p>
+        <ul>
+          <li>
+            {lang.tr('module.extensions.triggers.insideWorkflow')}
+            <span className={style.confidence}>{getConfidence('node_trigger_inside_wf')}%</span>
+          </li>
+        </ul>
+      </div>
+    </Fragment>
   )
 }

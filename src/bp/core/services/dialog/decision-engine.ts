@@ -8,10 +8,12 @@ import _ from 'lodash'
 import moment from 'moment'
 import ms from 'ms'
 
+import { addErrorToEvent, addStepToEvent } from '../middleware/event-collector'
 import { EventEngine } from '../middleware/event-engine'
 import { StateManager } from '../middleware/state-manager'
 
 import { DialogEngine } from './dialog-engine'
+import { PromptManager } from './prompt-manager'
 
 type SendSuggestionResult = { executeFlows: boolean }
 
@@ -29,7 +31,8 @@ export class DecisionEngine {
     @inject(TYPES.ConfigProvider) private configProvider: ConfigProvider,
     @inject(TYPES.DialogEngine) private dialogEngine: DialogEngine,
     @inject(TYPES.EventEngine) private eventEngine: EventEngine,
-    @inject(TYPES.StateManager) private stateManager: StateManager
+    @inject(TYPES.StateManager) private stateManager: StateManager,
+    @inject(TYPES.PromptManager) private promptManager: PromptManager
   ) {}
 
   private readonly MIN_CONFIDENCE = process.env.BP_DECISION_MIN_CONFIENCE || 0.5
@@ -69,33 +72,40 @@ export class DecisionEngine {
       } else if (action === 'redirect' || action === 'startWorkflow' || action === 'goToNode') {
         const { flow, node } = data as NDU.FlowRedirect
         const flowName = flow.endsWith('.flow.json') ? flow : `${flow}.flow.json`
-
         await this.dialogEngine.jumpTo(sessionId, event, flowName, node)
-
-        if (action === 'startWorkflow') {
-          event.state.session.lastWorkflows = [
-            {
-              workflow: flowName,
-              eventId: event.id,
-              active: true
-            },
-            ...(event.state.session.lastWorkflows || [])
-          ]
-
-          BOTPRESS_CORE_EVENT('bp_core_workflow_started', { botId: event.botId, channel: event.channel, wfName: flow })
-        }
       }
     }
 
     const hasContinue = event.ndu.actions.find(x => x.action === 'continue')
-    if (!event.hasFlag(WellKnownFlags.SKIP_DIALOG_ENGINE) && hasContinue) {
-      const processedEvent = await this.dialogEngine.processEvent(sessionId, event)
+    const hasPrompt = event.ndu.actions.find(x => x.action.startsWith('prompt.'))
+    if (!event.hasFlag(WellKnownFlags.SKIP_DIALOG_ENGINE) && (hasContinue || hasPrompt)) {
+      try {
+        const processedEvent = await this.dialogEngine.processEvent(sessionId, event)
+        addStepToEvent('dialog:completed', event)
 
-      // In case there are no unknown errors, remove skills/ flow from the stacktrace
-      processedEvent.state.__stacktrace = processedEvent.state.__stacktrace.filter(x => !x.flow.startsWith('skills/'))
-      await processEvent(processedEvent)
-      await this.stateManager.persist(processedEvent, false)
-      return
+        // In case there are no unknown errors, remove skills/ flow from the stacktrace
+        processedEvent.state.__stacktrace = processedEvent.state.__stacktrace.filter(x => !x.flow.startsWith('skills/'))
+        await processEvent(processedEvent)
+        await this.stateManager.persist(processedEvent, false)
+        return
+      } catch (err) {
+        this.logger
+          .forBot(event.botId)
+          .attachError(err)
+          .error('An unexpected error occurred.')
+
+        addErrorToEvent(
+          {
+            type: 'dialog-engine',
+            stacktrace: err.stacktrace || err.stack
+          },
+          event
+        )
+
+        addStepToEvent('dialog:error', event)
+
+        await this._processErrorFlow(sessionId, event)
+      }
     }
 
     if (event.hasFlag(WellKnownFlags.FORCE_PERSIST_STATE)) {
@@ -136,10 +146,11 @@ export class DecisionEngine {
 
     if (elected) {
       Object.assign(event, { decision: elected })
-      BOTPRESS_CORE_EVENT('bp_core_decision_elected', {
+      BOTPRESS_CORE_EVENT('bp_core_send_content', {
         botId: event.botId,
         channel: event.channel,
-        source: elected.source || 'none'
+        source: elected.source || 'none',
+        details: elected.sourceDetails!
       })
       sendSuggestionResult = await this._sendSuggestion(elected, sessionId, event)
     }
@@ -159,6 +170,8 @@ export class DecisionEngine {
           }
         })
         const processedEvent = await this.dialogEngine.processEvent(sessionId, event)
+        addStepToEvent('dialog:completed', event)
+
         // In case there are no unknown errors, remove skills/ flow from the stacktrace
         processedEvent.state.__stacktrace = processedEvent.state.__stacktrace.filter(x => !x.flow.startsWith('skills/'))
         this.onAfterEventProcessed && (await this.onAfterEventProcessed(processedEvent))
@@ -170,6 +183,8 @@ export class DecisionEngine {
           .forBot(event.botId)
           .attachError(err)
           .error('An unexpected error occurred.')
+
+        addStepToEvent('dialog:error', event)
 
         await this._processErrorFlow(sessionId, event)
       }

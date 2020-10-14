@@ -19,6 +19,7 @@ import 'expose-loader?Reactstrap!reactstrap' // TODO Remove me once we migrated 
 import 'expose-loader?BlueprintJsCore!@blueprintjs/core'
 import 'expose-loader?BlueprintJsSelect!@blueprintjs/select'
 import 'expose-loader?BotpressShared!ui-shared'
+import 'expose-loader?BotpressContentTypePicker!~/components/Content/Select'
 import 'expose-loader?BotpressContentPicker!~/components/Content/Select/Widget'
 import 'expose-loader?SmartInput!~/components/SmartInput'
 import 'expose-loader?ElementsList!~/components/Shared/ElementsList'
@@ -29,7 +30,7 @@ import 'expose-loader?BotpressUtils!~/components/Shared/Utils'
 import 'expose-loader?DocumentationProvider!~/components/Util/DocumentationProvider'
 import { initializeTranslations } from './translations'
 /* eslint-enable */
-import { utils } from 'botpress/shared'
+import { utils, telemetry } from 'botpress/shared'
 
 import 'ui-shared/dist/theme.css'
 require('bootstrap/dist/css/bootstrap.css')
@@ -59,4 +60,11 @@ if (!window.BOT_ID) {
     </Provider>,
     document.getElementById('app')
   )
+}
+
+if (window.SEND_USAGE_STATS) {
+  telemetry
+    .startFallback(axios.create({ baseURL: window.API_PATH }))
+    .then(res => {})
+    .catch(err => {})
 }

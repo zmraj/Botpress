@@ -17,6 +17,9 @@ import { SessionIdFactory } from '../dialog/session/id-factory'
 import { JobService } from '../job-service'
 import { KeyValueStore } from '../kvs'
 
+import { DialogStore } from './dialog-store'
+import { addLogToEvent } from './event-collector'
+
 const getRedisSessionKey = sessionId => `sessionstate_${sessionId}`
 const BATCH_SIZE = 100
 const MEMORY_PERSIST_INTERVAL = ms('5s')
@@ -39,13 +42,14 @@ export class StateManager {
     @inject(TYPES.SessionRepository) private sessionRepo: SessionRepository,
     @inject(TYPES.KeyValueStore) private kvs: KeyValueStore,
     @inject(TYPES.Database) private database: Database,
-    @inject(TYPES.JobService) private jobService: JobService
+    @inject(TYPES.JobService) private jobService: JobService,
+    @inject(TYPES.DialogStore) private dialogStore: DialogStore
   ) {
     // Temporarily opt-in until thoroughly tested
     this.useRedis = process.CLUSTER_ENABLED && yn(process.env.USE_REDIS_STATE)
   }
 
-  public initialize() {
+  public async initialize() {
     if (!this.useRedis) {
       return
     }
@@ -88,19 +92,57 @@ export class StateManager {
     const session = await this.sessionRepo.get(sessionId)
 
     state.context = (session && session.context) || {}
-    state.session = (session && session.session_data) || { lastMessages: [], lastWorkflows: [] }
+    state.session = (session && session.session_data) || { lastMessages: [], workflows: {} }
     state.temp = (session && session.temp_data) || {}
     state.bot = await this.kvs.forBot(event.botId).get(this.BOT_GLOBAL_KEY)
     state.__stacktrace = []
+
+    Object.defineProperty(state, 'workflow', {
+      get() {
+        return state.session.workflows?.[state.session.currentWorkflow!]
+      },
+      configurable: true
+    })
+
+    this.boxWorkflowVariables(state.session.workflows, event.botId)
+  }
+
+  private boxWorkflowVariables(workflows: { [name: string]: sdk.IO.WorkflowHistory }, botId: string) {
+    for (const wf in workflows) {
+      const variables = workflows[wf].variables
+
+      workflows[wf].variables = Object.keys(variables).reduce((acc, id) => {
+        const { type, subType, value, nbTurns } = (variables[id] as any) as sdk.UnboxedVariable<any>
+
+        const data = { type, subType, value, nbOfTurns: nbTurns - 1 }
+        acc[id] = this.dialogStore.getBoxedVar(data, botId, wf, id)
+
+        return acc
+      }, {})
+    }
   }
 
   public async persist(event: sdk.IO.IncomingEvent, ignoreContext: boolean) {
+    const { workflows, lastMessages } = event.state.session
+
+    for (const wf of Object.keys(workflows)) {
+      workflows[wf].variables = _.mapValues(workflows[wf].variables, (x: sdk.BoxedVariable<any>) => x.unbox()) as any
+    }
+
     const sessionId = SessionIdFactory.createIdFromEvent(event)
+
+    if (!lastMessages.find(x => x.eventId === event.id)) {
+      addLogToEvent(`No messages were sent by the bot`, event)
+
+      if (_.isEmpty(event.state.context)) {
+        addLogToEvent(`End of workflow`, event)
+      }
+    }
 
     if (this.useRedis) {
       await this._redisClient.set(
         getRedisSessionKey(sessionId),
-        JSON.stringify(_.omit(event.state, ['__stacktrace', '__error'])),
+        JSON.stringify(_.omit(event.state, ['__stacktrace', '__error', 'workflow'])),
         'PX',
         REDIS_MEMORY_DURATION
       )
@@ -130,17 +172,18 @@ export class StateManager {
       session.lastMessages = _.takeRight(session.lastMessages, this.LAST_MESSAGES_HISTORY_COUNT)
     }
 
-    if (session && session.lastWorkflows) {
-      session.lastWorkflows = _.take(session.lastWorkflows, this.LAST_MESSAGES_HISTORY_COUNT)
-    }
-
     const botConfig = await this.configProvider.getBotConfig(event.botId)
     const botpressConfig = await this.getBotpressConfig()
 
     const dialogSession = await this.sessionRepo.getOrCreateSession(sessionId, event.botId, trx)
     const expiry = createExpiry(botConfig, botpressConfig)
 
-    dialogSession.session_data = session || {}
+    if (context?.activePrompt?.turn === 0) {
+      dialogSession.prompt_expiry = expiry.prompt
+    }
+
+    dialogSession.session_data = session
+
     dialogSession.session_expiry = expiry.session
     dialogSession.context_expiry = expiry.context
 

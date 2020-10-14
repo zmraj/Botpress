@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'botpress/shared'
 import { StoredToken } from 'common/typings'
 import ms from 'ms'
 import { Component } from 'react'
@@ -58,6 +59,19 @@ class App extends Component<Props> {
     const appName = window.APP_NAME || 'Botpress Studio'
     const botName = window.BOT_NAME ? ` – ${window.BOT_NAME}` : ''
     window.document.title = `${appName}${botName}`
+
+    if (window.APP_FAVICON) {
+      const link = document.querySelector('link[rel="icon"]')
+      link.setAttribute('href', window.APP_FAVICON)
+    }
+
+    if (window.APP_CUSTOM_CSS) {
+      const sheet = document.createElement('link')
+      sheet.rel = 'stylesheet'
+      sheet.href = window.APP_CUSTOM_CSS
+      sheet.type = 'text/css'
+      document.head.appendChild(sheet)
+    }
 
     EventBus.default.setup()
 

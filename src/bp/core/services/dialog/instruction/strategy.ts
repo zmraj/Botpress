@@ -1,9 +1,10 @@
 import { IO, Logger } from 'botpress/sdk'
-import { parseActionInstruction } from 'common/action'
-import { ActionServer } from 'common/typings'
+import { extractEventCommonArgs, parseActionInstruction, snakeToCamel } from 'common/action'
+import { ActionServer, EventCommonArgs } from 'common/typings'
 import ActionServersService from 'core/services/action/action-servers-service'
 import ActionService from 'core/services/action/action-service'
 import { CMSService } from 'core/services/cms'
+import { DialogStore } from 'core/services/middleware/dialog-store'
 import { EventEngine } from 'core/services/middleware/event-engine'
 import { inject, injectable, tagged } from 'inversify'
 import _ from 'lodash'
@@ -21,6 +22,10 @@ export interface InstructionStrategy {
   processInstruction(botId: string, instruction: Instruction, event): Promise<ProcessingResult>
 }
 
+const argsToConst = (fields: string[]) => {
+  return (fields ?? []).map(snakeToCamel).join(', ')
+}
+
 @injectable()
 export class ActionStrategy implements InstructionStrategy {
   constructor(
@@ -30,19 +35,67 @@ export class ActionStrategy implements InstructionStrategy {
     @inject(TYPES.ActionService) private actionService: ActionService,
     @inject(TYPES.EventEngine) private eventEngine: EventEngine,
     @inject(TYPES.CMSService) private cms: CMSService,
-    @inject(TYPES.ActionServersService) private actionServersService: ActionServersService
+    @inject(TYPES.ActionServersService) private actionServersService: ActionServersService,
+    @inject(TYPES.DialogStore) private dialogStore: DialogStore
   ) {}
 
   public static isSayInstruction(instructionFn: string): boolean {
     return instructionFn.indexOf('say ') === 0
   }
 
+  public static isTriggerRegistration(instructionFn: string): boolean {
+    return instructionFn === 'register-trigger'
+  }
+
   async processInstruction(botId, instruction, event): Promise<ProcessingResult> {
     if (ActionStrategy.isSayInstruction(instruction.fn)) {
       return this.invokeOutputProcessor(botId, instruction, event)
+    } else if (ActionStrategy.isTriggerRegistration(instruction.fn)) {
+      return this.invokeTriggerRegistration(botId, instruction, event)
     } else {
       return this.invokeAction(botId, instruction, event)
     }
+  }
+
+  public async invokeSendMessage(args: any, contentType: string, event: IO.IncomingEvent) {
+    const eventDestination = _.pick(event, ['channel', 'target', 'botId', 'threadId'])
+    const commonArgs = extractEventCommonArgs(event, args)
+    const renderedElements = await this.cms.renderElement(contentType, commonArgs as EventCommonArgs, eventDestination)
+
+    await this.eventEngine.replyToEvent(eventDestination, renderedElements, event.id)
+  }
+
+  private async invokeTriggerRegistration(
+    botId: string,
+    instruction: Instruction,
+    event: IO.IncomingEvent
+  ): Promise<ProcessingResult> {
+    const { workflowId, nodeId, index, trigger } = instruction.args // TODO: make sure the trigger is valid
+    if (!event.state.session.nduContext) {
+      // TODO: possible if NDU module disabled?
+      return ProcessingResult.none()
+    }
+
+    let triggers = event.state.session.nduContext?.triggers ?? []
+    if (!event.state.session.nduContext?.triggers) {
+      event.state.session.nduContext!.triggers = []
+    } else {
+      triggers = triggers.filter(x => x.workflowId !== workflowId || x.nodeId !== nodeId || x.index !== index)
+    }
+
+    event.state.session.nduContext.triggers = [
+      ...triggers,
+      {
+        workflowId,
+        nodeId,
+        index,
+        suggestion: { ...trigger.suggestion, eventId: event.id },
+        expiryPolicy: trigger.expiryPolicy,
+        turn: trigger?.expiryPolicy?.turnCount ?? 3
+      }
+    ]
+
+    return ProcessingResult.none()
   }
 
   private async invokeOutputProcessor(botId, instruction, event: IO.IncomingEvent): Promise<ProcessingResult> {
@@ -85,23 +138,55 @@ export class ActionStrategy implements InstructionStrategy {
       event.state.session.lastMessages.push(message)
     }
 
-    args = {
-      ...args,
-      event,
-      user: _.get(event, 'state.user', {}),
-      session: _.get(event, 'state.session', {}),
-      temp: _.get(event, 'state.temp', {}),
-      bot: _.get(event, 'state.bot', {})
-    }
+    await this.invokeSendMessage(args, outputType, event)
 
-    const eventDestination = _.pick(event, ['channel', 'target', 'botId', 'threadId'])
-    const renderedElements = await this.cms.renderElement(outputType, args, eventDestination)
-    await this.eventEngine.replyToEvent(eventDestination, renderedElements, event.id)
+    return ProcessingResult.none()
+  }
+
+  private async executeAction(botId, instruction, event: IO.IncomingEvent): Promise<ProcessingResult> {
+    const { code, params, actionName } = instruction.args
+
+    const { currentWorkflow } = event.state.session
+
+    const variables = this.dialogStore.getWorkflowVariables(botId, currentWorkflow!)
+    variables.map(({ name, type, subType }) => {
+      const boxedVar = event.state.workflow.variables[name]
+      if (!boxedVar) {
+        const variable = { type, subType, value: undefined, nbOfTurns: 5 }
+        const box = this.dialogStore.getBoxedVar(variable, botId, currentWorkflow!, name)
+
+        if (box) {
+          event.state.workflow.variables[name] = box
+        }
+      }
+    })
+
+    try {
+      const actionArgs = extractEventCommonArgs(event)
+
+      const service = await this.actionService.forBot(botId)
+      await service.runAction({
+        actionName,
+        actionCode:
+          code && `const { ${argsToConst(variables.map(x => x.name))} } = event.state.workflow.variables\n${code}`,
+        incomingEvent: event,
+        actionArgs: _.mapValues(params, ({ value }) => renderTemplate(value, actionArgs))
+      })
+    } catch (err) {
+      const { onErrorFlowTo } = event.state.temp
+      const errorFlow = typeof onErrorFlowTo === 'string' && onErrorFlowTo.length ? onErrorFlowTo : 'error.flow.json'
+
+      return ProcessingResult.transition(errorFlow)
+    }
 
     return ProcessingResult.none()
   }
 
   private async invokeAction(botId, instruction, event: IO.IncomingEvent): Promise<ProcessingResult> {
+    if (instruction.fn === 'exec') {
+      return this.executeAction(botId, instruction, event)
+    }
+
     const { actionName, argsStr, actionServerId } = parseActionInstruction(instruction.fn)
 
     let args: { [key: string]: any } = {}
@@ -113,13 +198,7 @@ export class ActionStrategy implements InstructionStrategy {
       throw new Error(`Action "${actionName}" has invalid arguments (not a valid JSON string): ${argsStr}`)
     }
 
-    const actionArgs = {
-      event,
-      user: _.get(event, 'state.user', {}),
-      session: _.get(event, 'state.session', {}),
-      temp: _.get(event, 'state.temp', {}),
-      bot: _.get(event, 'state.bot', {})
-    }
+    const actionArgs = extractEventCommonArgs(event)
 
     args = _.mapValues(args, value => renderTemplate(value, actionArgs))
 
@@ -146,16 +225,8 @@ export class ActionStrategy implements InstructionStrategy {
 
       await service.runAction({ actionName, incomingEvent: event, actionArgs: args, actionServer })
     } catch (err) {
-      event.state.__error = {
-        type: 'action-execution',
-        stacktrace: err.stacktrace || err.stack,
-        actionName: actionName,
-        actionArgs: _.omit(args, ['event'])
-      }
-
       const { onErrorFlowTo } = event.state.temp
-      const errorFlowName = event.ndu ? 'Built-In/error.flow.json' : 'error.flow.json'
-      const errorFlow = typeof onErrorFlowTo === 'string' && onErrorFlowTo.length ? onErrorFlowTo : errorFlowName
+      const errorFlow = typeof onErrorFlowTo === 'string' && onErrorFlowTo.length ? onErrorFlowTo : 'error.flow.json'
 
       return ProcessingResult.transition(errorFlow)
     }
@@ -170,12 +241,7 @@ export class TransitionStrategy implements InstructionStrategy {
   private unsafeRegex = new RegExp(/[\(\)\`]/)
 
   async processInstruction(botId, instruction, event): Promise<ProcessingResult> {
-    const conditionSuccessful = await this.runCode(instruction, {
-      event,
-      user: event.state.user,
-      temp: event.state.temp || {},
-      session: event.state.session
-    })
+    const conditionSuccessful = await this.runCode(instruction, extractEventCommonArgs(event))
 
     if (conditionSuccessful) {
       debug.forBot(
@@ -193,18 +259,34 @@ export class TransitionStrategy implements InstructionStrategy {
   private async runCode(instruction: Instruction, sandbox): Promise<any> {
     if (instruction.fn === 'true') {
       return true
-    }
-
-    const code = `
-    try {
-      return ${instruction.fn};
-    } catch (err) {
-      if (err instanceof TypeError) {
-        console.log(err)
+    } else if (instruction.fn?.startsWith('lastNode')) {
+      // TODO: Fix this so that it's cleaner and more generic
+      const stack = sandbox.event.state.__stacktrace
+      if (!stack.length) {
         return false
       }
-      throw err
-    }`
+
+      const lastEntry = stack.length === 1 ? stack[0] : stack[stack.length - 2] // -2 because we want the previous node (not the current one)
+
+      return instruction.fn === `lastNode=${lastEntry.node}`
+    }
+
+    if (instruction.fn?.includes('thisNode')) {
+      // TODO: Fix this so that it's cleaner and more generic
+      const { currentFlow, currentNode } = sandbox.event.state.context
+      instruction.fn = instruction.fn.replace(
+        /thisNode/g,
+        `(event.state.temp['${currentFlow.replace('.flow.json', '')}/${currentNode}'] || {})`
+      )
+    }
+
+    const variables = instruction.fn?.match(/\$[a-zA-Z][a-zA-Z0-9_-]*/g) ?? []
+    for (const match of variables) {
+      const name = match.replace('$', '')
+      instruction.fn = instruction.fn!.replace(match, `event.state.workflow.variables['${name}']`)
+    }
+
+    const code = `return ${instruction.fn};`
 
     if (process.DISABLE_TRANSITION_SANDBOX || !this.unsafeRegex.test(instruction.fn!)) {
       const fn = new Function(...Object.keys(sandbox), code)

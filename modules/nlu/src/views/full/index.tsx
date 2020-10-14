@@ -5,12 +5,12 @@ import { Container, SidePanel, SplashScreen } from 'botpress/ui'
 import _ from 'lodash'
 import React, { FC, useEffect, useState } from 'react'
 
-import { makeApi } from '../api'
+import { makeApi } from '../../api'
 
-import TrainingControl from './common/TrainingControl'
-import EntityEditor from './entities/EntityEditor'
+import { EntityEditor } from './entities/EntityEditor'
 import { EntitySidePanelSection } from './entities/SidePanelSection'
 import { IntentEditor } from './intents/FullEditor'
+import { LiteEditor } from './intents/LiteEditor'
 import { IntentSidePanelSection } from './intents/SidePanelSection'
 import style from './style.scss'
 
@@ -33,7 +33,12 @@ const NLU: FC<Props> = props => {
   const [intents, setIntents] = useState([])
   const [entities, setEntities] = useState([])
 
-  const loadIntents = () => api.fetchIntents().then(setIntents)
+  const loadIntents = () =>
+    api
+      .fetchIntents()
+      .then(setIntents)
+      .then(x => setCurrentItem(undefined))
+      .then(x => setCurrentItem(currentItem)) // this is little hack to trigger update for IntentEditor->Slots->SlotModal
   const loadEntities = () => api.fetchEntities().then(setEntities)
 
   useEffect(() => {
@@ -110,6 +115,7 @@ const NLU: FC<Props> = props => {
       currentItem={currentItem}
       setCurrentItem={handleSelectItem}
       reloadEntities={loadEntities}
+      reloadIntents={loadIntents}
     />
   )
 
@@ -132,9 +138,6 @@ const NLU: FC<Props> = props => {
         </Tabs>
       </SidePanel>
       <div className={style.container}>
-        <div className={style.trainingControlContainer}>
-          <TrainingControl api={api} eventBus={props.bp.events} />
-        </div>
         {!currentItemExists() && (
           <SplashScreen
             icon={<Icon iconSize={80} icon="translate" style={{ marginBottom: '3em' }} />}
@@ -153,6 +156,7 @@ const NLU: FC<Props> = props => {
         )}
         {currentItem && currentItem.type === 'entity' && (
           <EntityEditor
+            entities={entities}
             entity={entities.find(ent => ent.name === currentItem.name)}
             updateEntity={_.debounce(updateEntity, 2500)}
           />
@@ -164,4 +168,4 @@ const NLU: FC<Props> = props => {
 
 export default NLU
 
-export { LiteEditor } from './intents/LiteEditor'
+export { LiteEditor, EntityEditor }

@@ -1,4 +1,5 @@
 import { RootStore } from './store'
+import sdk from 'botpress/sdk'
 
 declare global {
   interface Window {
@@ -35,6 +36,7 @@ export namespace Renderer {
     noBubble?: boolean
     keyboard?: any
     eventId?: string
+    position?: sdk.IO.SuggestionPosition
 
     isHighlighted?: boolean
     isLastGroup?: boolean
@@ -64,8 +66,9 @@ export namespace Renderer {
   } & Message
 
   export type QuickReply = {
-    buttons: any
-    quick_replies: any
+    buttons?: any
+    quick_replies?: any
+    position?: sdk.IO.SuggestionPosition
   } & Message
 
   export type QuickReplyButton = {
@@ -135,6 +138,7 @@ export type Config = {
   userIdScope?: string
   enableReset: boolean
   stylesheet: string
+  isEmulator?: boolean
   extraStylesheet: string
   showConversationsButton: boolean
   showUserName: boolean
@@ -249,6 +253,11 @@ export interface Message {
   sent_on: Date
   // The typing delay in ms
   timeInMs: number
+}
+
+export interface QueuedMessage {
+  message: Message
+  showAt: Date
 }
 
 export interface HTMLInputEvent extends Event {

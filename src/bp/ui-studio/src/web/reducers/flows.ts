@@ -1,5 +1,6 @@
 import { FlowNode } from 'botpress/sdk'
-import { FlowView } from 'common/typings'
+import { parseFlowName } from 'common/flow'
+import { FlowView, NodeView } from 'common/typings'
 import _ from 'lodash'
 import reduceReducers from 'reduce-reducers'
 import { handleActions } from 'redux-actions'
@@ -26,17 +27,29 @@ import {
   requestInsertNewSkillNode,
   requestPasteFlowNode,
   requestPasteFlowNodeElement,
+  requestRefreshCallerFlows,
   requestRemoveFlowNode,
   requestRenameFlow,
   requestUpdateFlow,
   requestUpdateFlowNode,
   requestUpdateSkill,
+  setActiveFormItem,
   setDiagramAction,
   switchFlow,
   switchFlowNode,
   updateFlowProblems
 } from '~/actions'
 import { hashCode, prettyId } from '~/util'
+
+export interface ActiveFormItem {
+  type: string
+  /** Used when editing nodes on the flow */
+  node?: any
+  /** Used to specify node item index to edit */
+  index?: number
+  /** Any other kind of item which requires the inspector */
+  data?: any
+}
 
 export interface FlowReducer {
   currentFlow?: string
@@ -46,6 +59,9 @@ export interface FlowReducer {
   flowsByName: _.Dictionary<FlowView>
   currentDiagramAction: string
   nodeInBuffer?: FlowNode
+  currentHashes: { [flowName: string]: string }
+  /** The element currently being edited on the right inspector form */
+  activeFormItem?: ActiveFormItem
 }
 
 const MAX_UNDO_STACK_SIZE = 25
@@ -162,11 +178,15 @@ const popHistory = stackName => state => {
     return state
   }
   const currentSnapshot = state[stackName][0]
+  // Going back to the QnA flow after ctrl + z will create weird behaviors since it's not a real flow
+  const currentFlow = currentSnapshot.currentFlow.endsWith('qna.flow.json')
+    ? state.currentFlow
+    : currentSnapshot.currentFlow
 
   const newState = {
     ...state,
     currentSnapshot,
-    currentFlow: currentSnapshot.currentFlow,
+    currentFlow,
     currentFlowNode: currentSnapshot.currentFlowNode,
     flowsByName: currentSnapshot.flowsByName,
     [stackName]: state[stackName].slice(1),
@@ -223,21 +243,46 @@ const doDeleteFlow = ({ name, flowsByName }) => {
 }
 
 const doCreateNewFlow = name => {
-  const nodes = [
-    {
-      id: prettyId(),
-      name: 'entry',
-      onEnter: [],
-      onReceive: null,
-      next: [],
-      type: 'standard',
-      x: 100,
-      y: 100
-    }
-  ]
+  const nodes: NodeView[] = window.USE_ONEFLOW
+    ? []
+    : [
+        {
+          id: prettyId(),
+          name: 'entry',
+          onEnter: [],
+          onReceive: null,
+          next: [],
+          type: 'standard',
+          x: 100,
+          y: 100
+        }
+      ]
 
-  if (window.USE_ONEFLOW) {
+  const isReusable = window.USE_ONEFLOW && name.startsWith('__reusable')
+  if (isReusable) {
     nodes.push(
+      {
+        id: prettyId(),
+        name: 'entry',
+        onEnter: [],
+        onReceive: null,
+        next: [
+          {
+            condition: 'true',
+            node: ''
+          }
+        ],
+        type: 'trigger',
+        isReadOnly: true,
+        conditions: [
+          {
+            id: 'workflow_called',
+            params: {}
+          }
+        ],
+        x: 100,
+        y: 100
+      },
       {
         id: prettyId(),
         name: 'success',
@@ -263,14 +308,14 @@ const doCreateNewFlow = name => {
 
   return {
     version: '0.1',
-    name: name,
+    type: isReusable ? 'reusable' : 'standard',
+    name,
     location: name,
     label: undefined,
     description: '',
     startNode: 'entry',
     catchAll: {},
     links: [],
-    triggers: [], // TODO: NDU Change to be a node instead
     nodes
   }
 }
@@ -291,6 +336,15 @@ function isActualDelete(state, modification): boolean {
 
 function isActualRename(state, modification): boolean {
   return modification.newName && !_.keys(state.flowsByName).includes(modification.newName)
+}
+
+const getNextNodeName = (type: string, nodes) => {
+  const filteredNodes = nodes
+    .filter(x => x.type === type && x.name.startsWith(`${type}-`))
+    .map(x => Number(x.name.replace(`${type}-`, '')))
+
+  const highest: number = _.max(filteredNodes) ?? 0
+  return `${type}-${highest + 1}`
 }
 
 // *****
@@ -367,16 +421,17 @@ let reducer = handleActions(
       fetchingFlows: true
     }),
 
-    [receiveFlows]: (state, { payload }) => {
-      const flows = _.keys(payload).filter(key => !payload[key].skillData)
-      const newFlow = _.keys(payload).includes('Built-In/welcome.flow.json') && 'Built-In/welcome.flow.json'
-      const defaultFlow = newFlow || (_.keys(payload).includes('main.flow.json') ? 'main.flow.json' : _.first(flows))
+    [setActiveFormItem]: (state, { payload }) => ({
+      ...state,
+      activeFormItem: payload
+    }),
 
+    [receiveFlows]: (state, { payload }) => {
       const newState = {
         ...state,
         fetchingFlows: false,
         flowsByName: payload,
-        currentFlow: state.currentFlow || defaultFlow
+        currentFlow: state.currentFlow
       }
       return {
         ...newState,
@@ -437,7 +492,7 @@ let reducer = handleActions(
         ...state.flowsByName,
         [state.currentFlow]: {
           ...state.flowsByName[state.currentFlow],
-          nodes: state.flowsByName[state.currentFlow].nodes.map(node => ({ ...node, lastModified: new Date() }))
+          nodes: state.flowsByName[state.currentFlow]?.nodes.map(node => ({ ...node, lastModified: new Date() })) || []
         }
       }
     })
@@ -460,7 +515,7 @@ reducer = reduceReducers(
       }),
 
       [requestUpdateFlow]: (state, { payload }) => {
-        const currentFlow = state.flowsByName[state.currentFlow]
+        const currentFlow = state.flowsByName[state.currentFlow] as FlowView
         const nodes = !payload.links
           ? currentFlow.nodes
           : currentFlow.nodes.map(node => {
@@ -477,7 +532,15 @@ reducer = reduceReducers(
                 return { ...value, node: (targetNode && targetNode.name) || remapNode }
               })
 
-              return { ...node, next, lastModified: new Date() }
+              let triggers = node.triggers
+              if (node.type === 'say_something' && node.triggers?.length) {
+                triggers = node.triggers.map(trigger => ({
+                  ...trigger,
+                  gotoNodeId: next.find(x => x.condition === trigger.name)?.node
+                }))
+              }
+
+              return { ...node, next, triggers, lastModified: new Date() }
             })
 
         const links = (payload.links || currentFlow.links).map(link => ({
@@ -511,13 +574,61 @@ reducer = reduceReducers(
         flowsByName: doDeleteFlow({ name, flowsByName: state.flowsByName })
       }),
 
+      [requestRefreshCallerFlows]: (state: FlowReducer, { payload }) => {
+        const activeFlow = payload || state.currentFlow
+        const currentFlow = state.flowsByName[activeFlow]
+
+        const outcomeNodes = currentFlow.nodes.filter(x => ['success', 'failure'].includes(x.type))
+        const outcomes = _.orderBy(outcomeNodes, 'type', 'desc').map(x => ({
+          condition: `lastNode=${x.name}`,
+          caption: x.name,
+          node: ''
+        }))
+
+        let updatedFlows = {}
+        for (const [name, flow] of Object.entries(state.flowsByName)) {
+          if (!flow.nodes.find(n => n.flow === activeFlow)) {
+            continue
+          }
+
+          updatedFlows = {
+            ...updatedFlows,
+            [name]: {
+              ...flow,
+              nodes: flow.nodes.map(node => {
+                if (node.flow !== activeFlow) {
+                  return node
+                }
+
+                return {
+                  ...node,
+                  next: outcomes.map(o => ({
+                    ...o,
+                    node: node.next.find(n => n.condition === o.condition)?.node || ''
+                  }))
+                }
+              })
+            }
+          }
+        }
+
+        return {
+          ...state,
+          flowsByName: {
+            ...state.flowsByName,
+            ...updatedFlows
+          }
+        }
+      },
+
       // Inserting a new skill essentially:
       // 1. creates a new flow
       // 2. creates a new "skill" node
       // 3. puts that new node in the "insert buffer", waiting for user to place it on the canvas
-      [requestInsertNewSkill]: (state, { payload }) => {
+      [requestInsertNewSkill]: (state: FlowReducer, { payload }) => {
         const skillId = payload.skillId
         const flowRandomId = prettyId(6)
+
         const flowName = `skills/${skillId}-${flowRandomId}.flow.json`
 
         const newFlow = Object.assign({}, payload.generatedFlow, {
@@ -527,7 +638,7 @@ reducer = reduceReducers(
         })
 
         const newNode = {
-          id: 'skill-' + flowRandomId,
+          id: `skill-${flowRandomId}`,
           type: 'skill-call',
           skill: skillId,
           name: `${skillId}-${flowRandomId}`,
@@ -591,7 +702,7 @@ reducer = reduceReducers(
             [payload.editFlowName]: modifiedFlow,
             [state.currentFlow]: {
               ...state.flowsByName[state.currentFlow],
-              nodes: nodes
+              nodes
             }
           }
         }
@@ -779,7 +890,7 @@ reducer = reduceReducers(
               _.merge(
                 {
                   id: prettyId(),
-                  name: `node-${prettyId(4)}`,
+                  name: getNextNodeName(payload.type, state.flowsByName[state.currentFlow].nodes),
                   x: 0,
                   y: 0,
                   next: [],

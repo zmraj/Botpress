@@ -3,7 +3,7 @@ import { DateRange, DateRangePicker } from '@blueprintjs/datetime'
 import '@blueprintjs/datetime/lib/css/blueprint-datetime.css'
 import { BotConfig } from 'botpress/sdk'
 import * as sdk from 'botpress/sdk'
-import { Dropdown, lang, Option } from 'botpress/shared'
+import { Dropdown, lang, Option, toast } from 'botpress/shared'
 import { UserProfile } from 'common/typings'
 import _ from 'lodash'
 import moment from 'moment'
@@ -11,7 +11,6 @@ import queryString from 'query-string'
 import React, { FC, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import ReactTable, { Column } from 'react-table'
-import { toastSuccess } from '~/utils/toaster'
 import PageContainer from '~/App/PageContainer'
 
 import api from '../../api'
@@ -44,7 +43,7 @@ const Logs: FC<Props> = props => {
   const [botFilter, setBotFilter] = useState<Option>(EVERYTHING[0])
   const [hostFilter, setHostFilter] = useState<Option>(EVERYTHING[0])
   const [dateRange, setDateRange] = useState<DateRange>()
-  const [filters, setFilters] = useState()
+  const [filters, setFilters] = useState<any>()
   const [hostNames, setHostNames] = useState<string[]>([])
 
   const [onlyWorkspace, setOnlyWorkspace] = useState(!props.profile.isSuperAdmin)
@@ -98,7 +97,7 @@ const Logs: FC<Props> = props => {
       setHostNames(_.uniq(logs.map(x => x.hostname).filter(Boolean)))
 
       if (isRefreshing) {
-        toastSuccess(lang.tr('admin.logs.refreshed'))
+        toast.success(lang.tr('admin.logs.refreshed'))
       }
     } catch (err) {
       console.error(err)

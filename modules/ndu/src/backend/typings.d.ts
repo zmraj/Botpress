@@ -1,9 +1,12 @@
 import * as sdk from 'botpress/sdk'
+
 import { UnderstandingEngine } from './ndu-engine'
 
-export type MountedBots = { [key: string]: UnderstandingEngine }
+export interface MountedBots {
+  [key: string]: UnderstandingEngine
+}
 
-export type Features = {
+export interface Features {
   current_workflow_id: string
   current_node_id: string
   current_highest_ranking_trigger_id: string
@@ -14,8 +17,22 @@ export type Features = {
   conf_wf_trigger_outside_topic: number
   conf_wf_trigger_inside_wf: number
   conf_node_trigger_inside_wf: number
+  conf_contextual_trigger: number
   last_turn_since: number
   last_turn_action_name: string
   last_turn_same_node: boolean
   last_turn_same_highest_ranking_trigger_id: boolean
+}
+
+export interface InputData {
+  label: string
+  coordinates: number[]
+}
+
+export interface Model {
+  hash: string
+  startedAt: Date
+  finishedAt: Date
+  success: boolean
+  data: any
 }

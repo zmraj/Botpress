@@ -1,8 +1,10 @@
 import { observe } from 'mobx'
 import { inject, observer } from 'mobx-react'
 import React from 'react'
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl'
+import { InjectedIntlProps, injectIntl } from 'react-intl'
 
+import ToolTip from '../../../../../../src/bp/ui-shared-lite/ToolTip'
+import Send from '../icons/Send'
 import { RootStore, StoreDef } from '../store'
 
 class Composer extends React.Component<ComposerProps> {
@@ -15,7 +17,7 @@ class Composer extends React.Component<ComposerProps> {
   componentDidMount() {
     setTimeout(() => {
       this.textInput.current.focus()
-    }, 0)
+    }, 50)
 
     observe(this.props.focusedArea, focus => {
       focus.newValue === 'input' && this.textInput.current.focus()
@@ -26,6 +28,7 @@ class Composer extends React.Component<ComposerProps> {
     if (this.props.enableResetSessionShortcut && e.ctrlKey && e.key === 'Enter') {
       e.preventDefault()
       await this.props.resetSession()
+      await new Promise(resolve => setTimeout(resolve, 500))
       await this.props.sendMessage()
       return
     }
@@ -81,18 +84,20 @@ class Composer extends React.Component<ComposerProps> {
             {placeholder}
           </label>
 
-          <button
-            className={'bpw-send-button'}
-            disabled={!this.props.message.length}
-            onClick={this.props.sendMessage.bind(this, undefined)}
-            aria-label={this.props.intl.formatMessage({
-              id: 'composer.send',
-              defaultMessage: 'Send'
-            })}
-            id="btn-send"
-          >
-            <FormattedMessage id={'composer.send'} />
-          </button>
+          <ToolTip content={this.props.isEmulator ? 'Interact with your chatbot' : 'Send Message'}>
+            <button
+              className={'bpw-send-button'}
+              disabled={!this.props.message.length}
+              onClick={this.props.sendMessage.bind(this, undefined)}
+              aria-label={this.props.intl.formatMessage({
+                id: 'composer.send',
+                defaultMessage: 'Send'
+              })}
+              id="btn-send"
+            >
+              <Send />
+            </button>
+          </ToolTip>
         </div>
       </div>
     )
@@ -113,7 +118,8 @@ export default inject(({ store }: { store: RootStore }) => ({
   focusNext: store.view.focusNext,
   enableArrowNavigation: store.config.enableArrowNavigation,
   enableResetSessionShortcut: store.config.enableResetSessionShortcut,
-  resetSession: store.resetSession
+  resetSession: store.resetSession,
+  isEmulator: store.isEmulator
 }))(injectIntl(observer(Composer)))
 
 type ComposerProps = {
@@ -130,6 +136,7 @@ type ComposerProps = {
     | 'focusPrevious'
     | 'focusNext'
     | 'recallHistory'
+    | 'isEmulator'
     | 'setFocus'
     | 'updateMessage'
     | 'message'

@@ -10,7 +10,11 @@ export const defaultRoles: AuthRole[] = [
     rules: [
       { res: '*', op: '+r+w' },
       {
-        res: 'module.code-editor.global.configs',
+        res: 'module.code-editor.global.main_config',
+        op: '-r-w'
+      },
+      {
+        res: 'module.code-editor.global.module_config',
         op: '-r-w'
       }
     ]
@@ -28,7 +32,11 @@ export const defaultRoles: AuthRole[] = [
         op: '+r-w'
       },
       {
-        res: 'module.code-editor.global.configs',
+        res: 'module.code-editor.global.main_config',
+        op: '-r-w'
+      },
+      {
+        res: 'module.code-editor.global.module_config',
         op: '-r-w'
       }
     ]
@@ -123,19 +131,27 @@ export const CHAT_USER_ROLE = {
 export const BUILTIN_MODULES = [
   'analytics',
   'basic-skills',
-  'builtin',
+  'bot-improvement',
+  'broadcast',
   'builtin',
   'channel-messenger',
   'channel-slack',
+  'channel-smooch',
   'channel-teams',
   'channel-telegram',
+  'channel-twilio',
   'channel-web',
   'code-editor',
   'examples',
   'extensions',
   'history',
   'hitl',
+  'misunderstood',
+  'ndu',
   'nlu',
+  'nlu-extras',
+  'nlu-testing',
   'qna',
-  'testing'
+  'testing',
+  'uipath'
 ]

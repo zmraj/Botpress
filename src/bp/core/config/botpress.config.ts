@@ -21,7 +21,7 @@ export interface DialogConfig {
    * Interval before a session's context expires.
    * e.g. when the conversation is stale and has not reach the END of the flow.
    * This will reset the position of the user in the flow.
-   * @default 2m
+   * @default 5m
    */
   timeoutInterval: string
   /**
@@ -30,6 +30,11 @@ export interface DialogConfig {
    * @default 30m
    */
   sessionTimeoutInterval: string
+  /**
+   * Interval before a prompt expires. It must be less than the timeout of the context
+   * @default 3m
+   */
+  promptTimeoutInterval: string
 }
 
 export interface LogsConfig {
@@ -182,6 +187,45 @@ export type BotpressConfig = {
      * will be available in `event.credentials`.
      */
     externalAuth?: ExternalAuthConfig
+    /**
+     * Configure the branding of the admin panel and the studio. A valid license is required
+     */
+    branding: {
+      admin: {
+        /**
+         * Change the name displayed in the title bar on the admin panel
+         * @example "Botpress Admin Panel"
+         */
+        title?: string
+        /**
+         * Replace the default favicon
+         * @example "assets/ui-studio/public/img/favicon.png"
+         */
+        favicon?: string
+        /**
+         * Path to your custom stylesheet
+         * @example "assets/custom/my-stylesheet.css"
+         */
+        customCss?: string
+      }
+      studio: {
+        /**
+         * Change the name displayed in the title bar on the studio
+         * @example "Botpress Studio"
+         */
+        title?: string
+        /**
+         * Replace the default favicon
+         * @example "assets/ui-studio/public/img/favicon.png"
+         */
+        favicon?: string
+        /**
+         * Path to your custom stylesheet
+         * @example "assets/my-stylesheet.css"
+         */
+        customCss: string
+      }
+    }
   }
   /**
    * An array of e-mails of users which will have root access to Botpress (manage users, server settings)
@@ -279,6 +323,14 @@ export type BotpressConfig = {
    * @default false
    */
   experimental: boolean
+
+  telemetry: {
+    /**
+     * The number of entries stored in the telemetry database
+     * @default 1000
+     */
+    entriesLimit: number
+  }
 }
 
 export interface ExternalAuthConfig {
@@ -607,7 +659,7 @@ export interface EventCollectorConfig {
   ignoredEventProperties: string[]
   /**
    * These properties are only stored with the event when the user is logged on the studio
-   * @default ["ndu.triggers","ndu.predictions","nlu.predictions"]
+   * @default ["ndu.triggers","ndu.predictions","nlu.predictions","state","processing"]
    */
   debuggerProperties: string[]
 }

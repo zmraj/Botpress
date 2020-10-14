@@ -12,7 +12,7 @@ import {
   Position,
   Tooltip
 } from '@blueprintjs/core'
-import classnames from 'classnames'
+import cx from 'classnames'
 import _ from 'lodash'
 import React, { FC, useState } from 'react'
 import { HotKeys } from 'react-hotkeys'
@@ -33,6 +33,7 @@ import {
   ToolbarProps
 } from './typings'
 import { buildMenu, showContextMenu } from './utils'
+import { sharedStyle } from 'botpress/shared'
 
 export const Container = (props: ContainerProps) => {
   const [sidePanelVisible, setSidePanelVisible] = useState(!props.sidePanelHidden)
@@ -50,7 +51,7 @@ export const Container = (props: ContainerProps) => {
 
   return (
     <HotKeys handlers={keyHandlers} keyMap={props.keyMap || {}} className={style.fullsize} focused>
-      <div className={classnames(style.container, { [style.sidePanel_hidden]: !sidePanelVisible })}>
+      <div className={cx(style.container, { [style.sidePanel_hidden]: !sidePanelVisible })}>
         <SplitPane
           split={'vertical'}
           defaultSize={width}
@@ -60,7 +61,7 @@ export const Container = (props: ContainerProps) => {
           }}
         >
           {children[0]}
-          <div className={classnames(style.fullsize, { [style.yOverflowScroll]: props.yOverflowScroll })}>
+          <div className={cx(style.fullsize, { [style.yOverflowScroll]: props.yOverflowScroll })}>
             {children.slice(1)}
           </div>
         </SplitPane>
@@ -90,21 +91,27 @@ export const SidePanelSection = (props: SidePanelSectionProps) => {
   )
 }
 
-export const SearchBar = (props: SearchBarProps) => {
+export const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>((props, ref) => {
   const [text, setText] = useState('')
+
   const handleTextChanged = e => {
-    setText(e.target.value)
+    props.value === undefined && setText(e.target.value)
     props.onChange && props.onChange(e.target.value)
   }
 
+  const onBlur = e => props.onBlur && props.onBlur(e)
+
   return (
-    <div className={style.searchBar}>
+    <div className={cx(sharedStyle.searchBar, props.className)}>
       <ControlGroup fill={true}>
         <InputGroup
+          // @ts-ignore: inputRef expects a callback ref but types won't match with forwarRef signature
+          inputRef={ref}
+          onBlur={onBlur}
           id={props.id}
           leftIcon={props.icon}
           placeholder={props.placeholder || 'Search'}
-          value={text}
+          value={props.value !== undefined ? props.value : text}
           onChange={handleTextChanged}
         />
         {props.showButton && (
@@ -118,7 +125,7 @@ export const SearchBar = (props: SearchBarProps) => {
       </ControlGroup>
     </div>
   )
-}
+})
 
 export const ItemList = (props: ItemListProps) => {
   return (
@@ -127,7 +134,7 @@ export const ItemList = (props: ItemListProps) => {
         props.items.map(item => {
           const key = item.key ? item.key : item.label
           return (
-            <div key={key} className={classnames(style.item, { [style.itemListSelected]: item.selected })}>
+            <div key={key} className={cx(style.item, { [style.itemListSelected]: item.selected })}>
               <div
                 id={item.id}
                 className={style.label}

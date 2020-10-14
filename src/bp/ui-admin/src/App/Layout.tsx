@@ -27,15 +27,11 @@ interface Props {
 }
 
 const App: FC<Props> = props => {
-  const [tokenInterval, setTokenInterval] = useState()
+  const [tokenInterval, setTokenInterval] = useState<any>()
 
   useEffect(() => {
     props.fetchLicensing()
     props.fetchProfile()
-
-    if (!props.version) {
-      props.fetchCurrentVersion()
-    }
 
     setTokenInterval(
       setInterval(async () => {
@@ -52,17 +48,17 @@ const App: FC<Props> = props => {
 
       const tokenData = getToken(false) as StoredToken
 
-      const { data } = await api.getSecured().get(`/auth/refresh`)
+      const { data } = await api.getSecured().get('/auth/refresh')
       const { newToken } = data.payload
 
       if (newToken !== tokenData.token) {
         setToken(newToken)
-        console.log(`Token refreshed successfully`)
+        console.info('Token refreshed successfully')
       } else {
         clearInterval(tokenInterval)
       }
     } catch (err) {
-      console.error(`Error validating & refreshing token`, err)
+      console.error('Error validating & refreshing token', err)
     }
   }
 
@@ -85,7 +81,7 @@ const App: FC<Props> = props => {
         </div>
       </div>
 
-      <Footer version={props.version} />
+      <Footer version={window.APP_VERSION} />
     </Fragment>
   )
 }
@@ -127,14 +123,12 @@ const Unlicensed = () => (
 
 const mapStateToProps = state => ({
   profile: state.user.profile,
-  licensing: state.license.licensing,
-  version: state.version.currentVersion
+  licensing: state.license.licensing
 })
 
 const mapDispatchToProps = {
   fetchLicensing,
-  fetchProfile,
-  fetchCurrentVersion
+  fetchProfile
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

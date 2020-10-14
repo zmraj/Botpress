@@ -21,48 +21,9 @@ function render(data) {
   ]
 }
 
-function renderMessenger(data) {
-  const events = []
-
-  if (data.typing) {
-    events.push({
-      type: 'typing',
-      value: data.typing
-    })
-  }
-
-  return [
-    ...events,
-    {
-      type: 'text',
-      text: data.text
-    }
-  ]
-}
-
-function renderTeams(data) {
-  const events = []
-
-  if (data.typing) {
-    events.push({
-      type: 'typing'
-    })
-  }
-
-  return [
-    ...events,
-    {
-      type: 'message',
-      text: data.text
-    }
-  ]
-}
-
 function renderElement(data, channel) {
-  if (channel === 'messenger') {
-    return renderMessenger(data)
-  } else if (channel === 'teams') {
-    return renderTeams(data)
+  if (['web', 'slack', 'teams', 'messenger', 'telegram', 'twilio'].includes(channel)) {
+    return base.renderer(data, 'text')
   } else {
     return render(data)
   }
@@ -84,7 +45,7 @@ module.exports = {
       },
       variations: {
         type: 'array',
-        title: 'module.builtin.types.text.alternatives',
+        title: 'module.builtin.types.text.alternative_plural',
         items: {
           type: 'string',
           default: ''
@@ -109,6 +70,36 @@ module.exports = {
         orderable: false
       }
     }
+  },
+  newSchema: {
+    displayedIn: ['sayNode'],
+    order: 0,
+    advancedSettings: [
+      {
+        key: 'markdown',
+        label: 'module.builtin.useMarkdown',
+        type: 'checkbox',
+        defaultValue: true,
+        moreInfo: {
+          label: 'learnMore',
+          url: 'https://daringfireball.net/projects/markdown/'
+        }
+      }
+    ],
+    fields: [
+      {
+        type: 'overridable',
+        overrideKey: 'textOverride',
+        key: 'text',
+        translated: true,
+        label: 'text'
+      },
+      {
+        type: 'hidden',
+        translated: true,
+        key: 'variations'
+      }
+    ]
   },
   computePreviewText: formData => formData.text,
 

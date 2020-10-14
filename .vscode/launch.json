@@ -3,7 +3,7 @@
   "configurations": [
     {
       "type": "node",
-      "runtimeVersion": "10.11.0",
+      "runtimeVersion": "12.13.0",
       "request": "launch",
       "name": "Debug App",
       "program": "${workspaceFolder}/out/bp/index.js",
@@ -11,6 +11,33 @@
       "args": [
         "start"
       ],
+      "protocol": "auto",
+      "env": {
+        "BP_MODULES_PATH": "${workspaceFolder}/modules:${workspaceFolder}/internal-modules",
+        "NODE_PATH": "${workspaceFolder}/out/bp",
+        "DEBUG": "bp:none",
+        "BLUEBIRD_DEBUG": "1",
+        "TELEMETRY_URL": "https://telemetry.botpress.dev/ingest"
+      },
+      "smartStep": true,
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js",
+        "${workspaceFolder}/modules/**/dist/**/*.js",
+        "${workspaceFolder}/private-modules/**/dist/**/*.js",
+        "!${workspaceFolder}/**/node_modules/**/*.js"
+      ],
+      "console": "integratedTerminal",
+      "sourceMaps": true,
+      "autoAttachChildProcesses": true
+    },
+    {
+      "type": "node",
+      "runtimeVersion": "12.13.0",
+      "request": "launch",
+      "name": "Debug NLU Server",
+      "program": "${workspaceFolder}/out/bp/index.js",
+      "cwd": "${workspaceFolder}",
+      "args": ["nlu", "--config=${workspaceFolder}/out/bp/data/global/config/nlu.json"],
       "protocol": "auto",
       "env": {
         "BP_MODULES_PATH": "${workspaceFolder}/modules:${workspaceFolder}/internal-modules",
@@ -28,11 +55,9 @@
       // ],
       "outFiles": [
         "${workspaceFolder}/out/**/*.js",
-        "${workspaceFolder}/modules/*/dist/**/*.js",
-        "${workspaceFolder}/private-modules/*/dist",
-        "!${workspaceFolder}/out/bp/data/**",
-        "!**/node_modules/**",
-        "!**/ui-*/**"
+        "${workspaceFolder}/modules/**/dist/**/*.js",
+        "${workspaceFolder}/private-modules/**/dist/**/*.js",
+        "!${workspaceFolder}/**/node_modules/**/*.js"
       ],
       "console": "integratedTerminal",
       "sourceMaps": true,
@@ -62,9 +87,6 @@
           "-c=${workspaceFolder}/jest.config.js"
         ]
       },
-      "outFiles": [
-        "${workspaceFolder}/out/"
-      ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "sourceMaps": true,
@@ -104,7 +126,7 @@
       "autoAttachChildProcesses": true
     },
     {
-      "name": "(lldb) Launch",
+      "name": "(lldb) ",
       "type": "lldb",
       "request": "launch",
       "program": "node",
@@ -118,7 +140,7 @@
       "cwd": "${workspaceFolder}/out/bp"
     },
     {
-      "name": "(lldb) CRFSuite Launch",
+      "name": "(lldb) CRFSuite ",
       "type": "lldb",
       "request": "launch",
       "program": "node",
@@ -128,7 +150,7 @@
       "cwd": "${workspaceFolder}/src/bp/ml/crfsuite"
     },
     {
-      "name": "(lldb) FastText Launch",
+      "name": "(lldb) FastText ",
       "type": "lldb",
       "request": "launch",
       "program": "node",

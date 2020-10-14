@@ -1,0 +1,181 @@
+{
+  "version": "0.0.1",
+  "catchAll": {},
+  "label": "Workflow Ended",
+  "description": "Users are redirected here at the end of a workflow when they need to provide feedback",
+  "variables": [
+    {
+      "params": {
+        "name": "isSatisfied",
+        "description": null,
+        "defaultValue": false
+      },
+      "type": "boolean"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "451f60deab",
+      "name": "node-049a",
+      "next": [],
+      "onEnter": [],
+      "onReceive": null,
+      "type": "success"
+    },
+    {
+      "id": "f69abffa5b",
+      "name": "node-1ff1",
+      "next": [
+        {
+          "condition": "true",
+          "node": "node-6721"
+        }
+      ],
+      "onEnter": [],
+      "onReceive": null,
+      "type": "trigger",
+      "conditions": [
+        {
+          "id": "workflow_ended",
+          "params": {
+            "outcome": "success",
+            "ignoredWorkflows": ["misunderstood", "workflow_ended", "error"]
+          }
+        }
+      ],
+      "activeWorkflow": false
+    },
+    {
+      "id": "9e942a28fb",
+      "name": "node-6721",
+      "next": [
+        {
+          "condition": "true",
+          "node": "prompt-1"
+        }
+      ],
+      "onEnter": [],
+      "onReceive": null,
+      "type": "execute",
+      "execute": {
+        "actionName": "builtin/setVariable",
+        "params": {
+          "type": {
+            "source": "hardcoded",
+            "value": "temp"
+          },
+          "name": {
+            "source": "hardcoded",
+            "value": "eventId"
+          },
+          "value": {
+            "source": "hardcoded",
+            "value": "{{event.payload.eventId}}"
+          }
+        }
+      }
+    },
+    {
+      "id": "53c079f447",
+      "name": "node-c127",
+      "next": [
+        {
+          "condition": "true",
+          "node": "node-049a"
+        }
+      ],
+      "onEnter": [],
+      "onReceive": null,
+      "type": "execute",
+      "execute": {
+        "actionName": "builtin/sendFeedback",
+        "params": {
+          "value": {
+            "source": "hardcoded",
+            "value": "1"
+          }
+        }
+      }
+    },
+    {
+      "id": "3cfb59a35f",
+      "name": "node-60f0",
+      "next": [
+        {
+          "condition": "true",
+          "node": "node-049a"
+        }
+      ],
+      "onEnter": [],
+      "onReceive": null,
+      "type": "execute",
+      "execute": {
+        "actionName": "builtin/sendFeedback",
+        "params": {
+          "value": {
+            "source": "hardcoded",
+            "value": "-1"
+          }
+        }
+      }
+    },
+    {
+      "id": "74a6e04117",
+      "name": "prompt-1",
+      "next": [
+        {
+          "caption": "User answers correctly",
+          "condition": "thisNode.extracted === true",
+          "node": "router-1"
+        },
+        {
+          "caption": "User does not answer",
+          "condition": "thisNode.timeout === true",
+          "node": "node-049a"
+        },
+        {
+          "caption": "User Cancels",
+          "condition": "thisNode.cancelled === true",
+          "node": "node-049a"
+        }
+      ],
+      "onEnter": [],
+      "onReceive": null,
+      "type": "prompt",
+      "prompt": {
+        "params": {
+          "question": {
+            "en": "Was this helpful?"
+          },
+          "confirm": {
+            "en": null
+          },
+          "duration": 5,
+          "searchBackCount": 0,
+          "cancellable": true,
+          "confirmCancellation": false,
+          "output": "isSatisfied"
+        },
+        "type": "confirm"
+      }
+    },
+    {
+      "id": "f8ff9caff4",
+      "name": "router-1",
+      "next": [
+        {
+          "condition": "$isSatisfied.isTrue()",
+          "caption": "If isSatisfied is true",
+          "node": "node-c127"
+        },
+        {
+          "condition": "true",
+          "node": "node-60f0"
+        }
+      ],
+      "onEnter": [],
+      "onReceive": null,
+      "type": "router"
+    }
+  ]
+}

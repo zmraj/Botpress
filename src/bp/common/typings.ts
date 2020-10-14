@@ -1,8 +1,19 @@
-import { BotDetails, Flow, FlowNode, RolloutStrategy, StageRequestApprovers } from 'botpress/sdk'
+import {
+  BotDetails,
+  Flow,
+  FlowNode,
+  FlowVariable,
+  FormField,
+  IO,
+  PrimitiveVarType,
+  PromptDefinition,
+  RolloutStrategy,
+  StageRequestApprovers,
+  StrategyUser
+} from 'botpress/sdk'
 import { Request } from 'express'
 
 import { BotpressConfig } from '../core/config/botpress.config'
-import { StrategyUser } from 'botpress/sdk'
 
 export interface IDisposeOnExit {
   disposeOnExit(): void
@@ -204,6 +215,23 @@ export interface LibraryElement {
   path: string
 }
 
+export interface OutgoingEventCommonArgs {
+  event: IO.Event
+  // Any other additional property
+  [property: string]: any
+}
+
+export interface EventCommonArgs {
+  event: IO.IncomingEvent
+  user: { [attribute: string]: any }
+  temp: { [property: string]: any }
+  bot: { [property: string]: any }
+  session: IO.CurrentSession
+  workflow: IO.WorkflowHistory
+  // Any other additional property
+  [property: string]: any
+}
+
 export interface ServerHealth {
   serverId: string
   hostname: string
@@ -249,4 +277,67 @@ export interface ActionParameterDefinition {
 
 export type ActionServerWithActions = ActionServer & {
   actions: ActionDefinition[] | undefined
+}
+
+export interface FormMoreInfo {
+  label: string
+  url?: string
+}
+
+export interface FormOption {
+  value: string
+  label: string
+  related: FormField
+}
+
+export interface FormContextMenu {
+  type: string
+  label: string
+}
+
+export interface FormDefinition {
+  advancedSettings: FormField[]
+  fields: FormField[]
+}
+
+export interface DisplayVariableType {
+  /** The base type of the variable  */
+  type: string
+  /** Represent the custom type when using a generic type */
+  subType?: string
+  icon?: any
+  label: string
+}
+
+export interface DisplayPromptType {
+  type: string
+  variableType: string
+  subType?: string
+  icon?: any
+  label: string
+}
+
+export interface Variables {
+  /** List of variables configured on the current flow */
+  currentFlow?: FlowVariable[]
+  /** Configuration for the primitive variable types */
+  primitive: PrimitiveVarType[]
+  /** The list of primitives & custom variables ready to be displayed */
+  display: DisplayVariableType[]
+}
+
+export interface Prompts {
+  primitive: PromptDefinition[]
+  display: DisplayPromptType[]
+}
+
+export interface Hint {
+  scope: 'inputs'
+  name: string
+  source: string
+  category: 'VARIABLES'
+  partial: boolean
+  description?: string
+  location?: string
+  parentObject?: string
 }

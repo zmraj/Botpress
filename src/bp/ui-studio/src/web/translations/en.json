@@ -8,20 +8,22 @@
     "chooseFile": "Choose file",
     "configUpdated": "Bot configuration updated successfully",
     "confirmChangeLanguage": "Are you sure you want to change the language of your bot from {currentName} to {newName}? All of your content elements will be copied, make sure you translate them.",
+    "confirm": "Confirm",
     "confirmUnmount": "Are you sure want to unmount this bot? All of the functionalities of this bot will become unavailable.",
-    "contactEmail": "Contact E-mail",
+    "contactEmail": "Contact Email",
     "coverPicture": "Cover Picture",
     "coverUploadSuccess": "The cover picture has been uploaded successfully. You need to save the form in order for the changes to take effect.",
     "defaultLanguage": "Default language",
     "description": "Description",
     "formContainsErrors": "The form contains errors",
     "language": "Language",
-    "linkToPolicy": "Link to Privacy Policy",
-    "linkToTerms": "Link to Terms & Conditions",
+    "linkToPolicy": "Privacy Policy URL",
+    "linkToTerms": "Terms & Conditions URL",
     "phoneNumber": "Phone Number",
     "requireImageFile": "{targetProp} requires an image file",
     "supportedLanguages": "Supported languages",
-    "website": "Website"
+    "website": "Website URL",
+    "whatIsYourChatbotName": "What is your chatbot name?"
   },
   "language": {
     "arabic": "Arabic",
@@ -40,15 +42,49 @@
   "status": {
     "disabled": "Unmounted",
     "private": "Collaborators Only",
-    "public": "Published"
+    "public": "Public"
   },
   "statusBar": {
+    "trainWarning": "You are testing a chatbot that needs to be trained.",
     "contentLanguage": "Content Language",
-    "switchLang": "Change the bot content language. Currently editing: {currentLang}"
+    "switchLang": "Change the bot content language. Currently editing: {currentLang}",
+    "trainChatbot": "Train Chatbot",
+    "trainChatbotTooltip": "Allow your chatbot to take in its new learnings",
+    "training": "Training",
+    "ready": "Ready",
+    "cancelTraining": "Cancel Training",
+    "canceling": "Canceling",
+    "trainingError": "Cannot train Chatbot",
+    "configChangedDialog": "Are you sure you want to apply configurations? Your server won’t be accessible for a few moments.",
+    "reboot": "Apply",
+    "rebooting": "Restarting",
+    "applyConfigs": "Apply Configurations ",
+    "applyConfigsTooltip": "Restarts server so configuration changes can take effect"
   },
   "studio": {
+    "betaNotice": {
+      "usingBeta": "You're using Botpress Albert - Beta",
+      "seeNotice": "See Notice",
+      "contribution": "By using this preview, you contribute to improve Botpress.",
+      "limitations": "It is not meant to be run in a production environment as breaking changes might still occur. Also, note that no documentation and no migration tool is offered yet.",
+      "thanks": "Thank you for your support!",
+      "accept": "Accept",
+      "dismiss": "Dismiss"
+    },
+    "router": {
+      "variable": "Variable",
+      "pickVariable": "Pick a variable",
+      "condition": "Condition",
+      "negate": "Make the condition negative"
+    },
+    "condition": {
+      "label": "Condition",
+      "pickCondition": "Pick a condition"
+    },
     "content": {
       "cloneElements": "Clone selected elements",
+      "confirmChangeAction": "Are you sure you want to change this action? All fields will be erased.",
+      "confirmChangeContentType": "Are you sure you want to change this content type? All fields will be erased.",
       "confirmDeleteItem": "Do you really want to delete {count, number} {count, plural, one {item} other {items}}?",
       "contentType": "Content Type",
       "createNew": "Create new {title}",
@@ -90,12 +126,54 @@
         "node": "Node"
       }
     },
+    "library": {
+      "setVarValueTo": "Set {varName} Value to",
+      "savedBlocks": "Saved Blocks",
+      "savedWorkflows": "Saved Workflows",
+      "variableTypes": "Variable Types",
+      "addEnum": "Add Enumeration",
+      "addPattern": "Add Pattern",
+      "addComplex": "Add Complex",
+      "addType": "Add Type",
+      "enterValue": "Enter a value",
+      "editingSubWorkflowWarning": "Editing this workflow will impact all its linked instances.",
+      "deleteVariableFromLibrary": "Remove Variable Type from Library",
+      "duplicateVariableType": "Duplicate Variable Type",
+      "renameVariableType": "Rename Variable Type",
+      "nameVariableType": "Name Variable Type",
+      "duplicateWorkflow": "Duplicate Workflow",
+      "filter": "Filter blocks, workflows and variable types",
+      "variableName": "What is the name of this variable",
+      "addSynonyms": "Add synonyms by separating values with commas",
+      "addValueAlternative": "Add Value Alternative",
+      "deleteEnumeration": "Delete Enumeration",
+      "confirmDeleteEntity": "Do you really want to delete this variable type ?",
+      "copyTags": "Copy Tags",
+      "mustMatchNumberOfTags": "Number of tags must match in all languages",
+      "complexityExamplePlaceholder": "Write as many example as possible that match this variable's complexity",
+      "examplePlaceholder": "Write examples that match this variable type pattern",
+      "regexPatternPlaceholder": "Write a regular expression pattern",
+      "addExample": "Add Example",
+      "addExampleTooltip": "Press Enter while inline to add new example quickly",
+      "deletePattern": "Delete Pattern",
+      "patternInvalid": "Pattern is invalid",
+      "possibleVarTypes": "Possible Variable Types",
+      "variableTypePlaceholder": "What is this variable type?",
+      "writeAsManyHintsAsPossible": "Write as many values as possible that your users could write to invoke this variable"
+    },
     "flow": {
       "addNode": "Add Node",
       "addToLibrary": "Add to library",
       "cantDeleteFailure": "You can't delete the failure node.",
       "cantDeleteStart": "You can't delete the start node.",
       "cantDeleteSuccess": "You can't delete the success node.",
+      "cantDeleteOutcome": "Cannot delete an outcome which is currently used in the parent flow",
+      "cantDeleteStartReusable": "You can't delete the start node of a reusable workflow",
+      "mustHaveOutcomes": "Workflows must have at least one success and one failure outcome",
+      "referenceCount": "{count} {count, plural, one {reference} other {references}}",
+      "noReferences": "Not used",
+      "cannotAddContent": "Adding new content is disabled when not in the default language",
+      "emptyWorkflow": "Right-click or drag and drop blocks to start designing your workflow.",
       "chips": "Chips",
       "condition": {
         "addCondition": "Add condition",
@@ -116,7 +194,10 @@
       "errorWhileSaving": "There was an error while saving, deleting or renaming a flow. Last modification might not have been saved on server. Please reload page before continuing flow edition",
       "flowWideOnReceives": "flow-wide on {count, plural, one {receive} other {receives}}",
       "flowWideTransitions": "flow-wide {count, plural, one {transition} other {transitions}}",
-      "highlightByName": "Highlight nodes by name",
+      "filterBlocks": "Filter Blocks",
+      "ignoredWorkflows": {
+        "addLabel": "Add Workflow"
+      },
       "logs": {
         "autoRefresh": "Auto-refresh",
         "downloadArchives": "Download log archive",
@@ -129,6 +210,7 @@
         "tryingToLoad": "It seems like you are trying to load a module that has not been registered. Please make sure the module is registered then restart the bot."
       },
       "node": {
+        "noActionSelected": "No action selected",
         "actionParameters": "Action Parameters",
         "actionServer": "Action Server",
         "actionServerTooltip": "This is the action server on which the action will be executed",
@@ -137,7 +219,14 @@
         "actionsRegisteredOnServer": "Actions are registered on the server-side. Read about how to register new actions by searching for `bp.registerActions()`.",
         "add": "add",
         "addAction": "Add new action",
+        "addCondition": "Add Condition",
+        "addMessage": "Add Message",
+        "addSuggestion": "Add a Suggestion",
+        "addSuggestionTooltip": "Press Enter + Shift while inline to add new suggestion quickly",
         "cantSeeActions": "Can't see your action?",
+        "chatbotExecutes": "Chatbot Executes",
+        "chatbotSays": "Chatbot Says",
+        "chatbotPromptsUser": "Chatbot Prompts User",
         "confirmOverwriteParameters": "Do you want to overwrite existing parameters?",
         "contentPaste": "content_paste",
         "couldNotRetrieveActionServer": "Could not retrieve action servers",
@@ -157,12 +246,16 @@
         "missingLink": "Missing Link",
         "noActionsFound": "No actions found on this action server",
         "noDescription": "No description",
+        "nameAlreadyExists": "This name already exists",
         "nodeName": "Node Name",
         "onEnter": "On Enter",
         "onReceive": "On Receive",
+        "pickAction": "Pick an action",
+        "renameBlock": "Rename Block",
         "return": "Return",
         "saySomething": "Say Something",
         "theBotWill": "The bot will",
+        "subworkflow": "Go to Sub Workflow",
         "transition": {
           "action": {
             "endFlow": "End flow",
@@ -191,9 +284,12 @@
           "whenMetDo": "When condition is met, do"
         },
         "transitions": "Transitions",
+        "triggeredBy": "Workflow is Triggered by",
         "unknownParameterType": "⚠️ Unknown parameter type ({type}). This parameter will be ignored.",
         "valuePlaceholder": "Value",
         "waitForUserMessage": "Wait for user message",
+        "workflowFails": "Workflow Fails",
+        "workflowSucceeds": "Workflow Succeeds",
         "youCanChangeActions": "You can change how the Action is executed by providing it parameters. Some parameters are required, some are optional."
       },
       "nodeType": {
@@ -201,7 +297,8 @@
         "execute": "Execute",
         "executeAction": "Execute Action",
         "listen": "Listen",
-        "router": "Router",
+        "prompt": "Prompt",
+        "router": "If Else",
         "say": "Say",
         "sendMessage": "Send Message",
         "split": "Split",
@@ -233,7 +330,19 @@
         "nameInUse": "Name already in use",
         "nameInUseMessage": "A flow with that name already exists. Please choose another one.",
         "node": "Node",
-        "renameFlow": "Rename Flow"
+        "noSearchMatch": "Sorry, no results match the search criteria.",
+        "renameFlow": "Rename Flow",
+        "importTopic": "Import Topic",
+        "addTopic": "Add Topic",
+        "addWorkflow": "Add Workflow",
+        "tapIconsToAdd": "Tap icons in the toolbar to import or add your first topic.",
+        "renameWorkflow": "Rename Workflow",
+        "duplicateWorkflow": "Duplicate Workflow",
+        "moveWorkflow": "Move Workflow to",
+        "renameTopic": "Rename Topic",
+        "nameWorkflow": "Name Workflow",
+        "nameTopic": "Name Topic",
+        "duplicateTopic": "Duplicate Topic"
       },
       "skills": {
         "couldNotLoad": "Could not load skills view",
@@ -275,19 +384,23 @@
       },
       "topicList": {
         "bigWarning": "WARNING:",
-        "confirmDeleteFlow": "Are you sure you want to delete the flow {name}?",
-        "confirmDeleteTopic": "Are you sure you want to delete the topic {name}?",
+        "confirmDeleteFlow": "Are you sure you want to delete this workflow?",
+        "confirmDeleteTopic": "Are you sure you want to delete this topic? Its Q&A and workflows will be deleted as well.",
         "createNewWorkflow": "Create new workflow",
+        "defaultWorkflows": "Default Workflows",
         "deleteTopic": "Delete Topic",
         "deleteWorkflow": "Delete Workflow",
         "editQna": "Edit Q&A",
+        "moveQna": "Move Q&As to",
+        "confirmMoveQna": "Are you sure you want to move all Q&As to another topic?",
         "editTopic": "Edit topic",
         "editWorkflow": "Edit Workflow",
-        "exportTopic": "Export topic",
+        "exportTopic": "Export Topic",
         "flowsAssociatedDelete": "{warning} {count} flows associated with the topic will be deleted",
         "importExisting": "Import existing workflow",
         "nbQuestionsInTopic": "Number of questions in that topic",
         "nbTriggersInWorkflow": "Number of NLU triggers on that workflow",
+        "beforeRemovingSubflow": "Before removing this saved workflow block from library, please delete all the following instances:",
         "workflowReceiving": "Workflows referencing this workflow:"
       },
       "transition": "Transition",
@@ -297,15 +410,36 @@
         "edit": "Edit Workflow - {name}",
         "labelHelp": "The label is a friendly name that can replace the name in the topic list",
         "name": "Workflow name"
-      }
+      },
+      "likelyTriggered": "{pct}% likely to be triggered",
+      "endOfWorkflow": "End of the workflow",
+      "currentStage": "Current Stage: {stage}",
+      "extractedVar": "{output} extracted is {value}",
+      "jumpOutOfWorkflow": "Jump out of workflow",
+      "jumpIntoWorkflow": "Jump into workflow",
+      "errorOccurred": "An error occurred here"
+    },
+    "prompt": {
+      "label": "Type",
+      "pickType": "Pick a type",
+      "userAnswersCorrectly": "User answers correctly",
+      "userCancels": "User Cancels",
+      "userDoesNotAnswer": "User does not answer",
+      "defaultQuestion": "Please provide value for __VARNAME"
     },
     "sideBar": {
+      "flowBuilder": "Workflow Builder",
       "config": "Config",
       "content": "Content",
       "flows": "Flows"
-    }
+    },
+    "zoomOut": "Zoom Out",
+    "zoomIn": "Zoom In"
   },
   "toolbar": {
+    "configuration": "Configuration",
+    "configureAnotherLanguage": "Configure another language to enable translation",
+    "contactSalesForMultilingual": "Contact sales to know more about multilingual chatbots",
     "emulator": "Emulator",
     "help": "Help",
     "logsPanel": "Logs Panel",
@@ -321,5 +455,21 @@
       "closePanel": "Close Panel",
       "endOfLogs": "End of logs"
     }
+  },
+  "issue": {
+    "stepsToReproduce": "Steps to reproduce",
+    "whatIsTheIssue": "What is the issue?",
+    "previewOnGithub": "Preview on Github",
+    "submitBug": "Submit a bug"
+  },
+  "variable": {
+    "emptyState": "Tap + in the toolbar to add your first variable",
+    "variableVisibility": "Variable Visibility",
+    "visibilityPlaceholder": "Pick a Visibility",
+    "textMatchingTolerance": "Text Matching Tolerance",
+    "pickType": "Pick a type",
+    "inputVariables": "Input Variables",
+    "outputVariables": "Output Variables",
+    "privateVariables": "Private Variables"
   }
 }

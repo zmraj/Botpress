@@ -100,7 +100,9 @@ export namespace FlowsAPI {
         'timeoutNode',
         'triggers', // TODO: NDU Remove
         'description',
-        'label'
+        'label',
+        'variables',
+        'type'
       ])
     }
   }

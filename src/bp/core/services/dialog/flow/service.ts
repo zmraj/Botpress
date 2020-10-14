@@ -1,4 +1,5 @@
 import { Flow, Logger } from 'botpress/sdk'
+import { parseFlowName } from 'common/flow'
 import { ObjectCache } from 'common/object-cache'
 import { FlowMutex, FlowView, NodeView } from 'common/typings'
 import { ModuleLoader } from 'core/module-loader'
@@ -89,8 +90,20 @@ export class FlowService {
         return this.parseFlow(botId, flowPath)
       })
 
-      this._allFlows.set(botId, flows)
-      return flows
+      const flowsWithParents = flows.map(flow => {
+        const flowName = flow.name.replace('.flow.json', '')
+        const parentFlow = flows.find(
+          x => x.name !== flow.name && flowName.startsWith(x.name.replace('.flow.json', ''))
+        )
+
+        return {
+          ...flow,
+          parent: parentFlow?.name.replace('.flow.json', '')
+        }
+      })
+
+      this._allFlows.set(botId, flowsWithParents)
+      return flowsWithParents
     } catch (err) {
       this.logger
         .forBot(botId)
@@ -138,7 +151,7 @@ export class FlowService {
       nodes: nodeViews,
       links: uiEq.links,
       currentMutex,
-      ..._.pick(flow, ['version', 'catchAll', 'startNode', 'skillData', 'label', 'description'])
+      ..._.pick(flow, ['version', 'catchAll', 'startNode', 'skillData', 'label', 'description', 'variables', 'type'])
     }
   }
 
@@ -344,8 +357,18 @@ export class FlowService {
 
     const flowContent = {
       // TODO: NDU Remove triggers
-      ..._.pick(flow, ['version', 'catchAll', 'startNode', 'skillData', 'triggers', 'label', 'description']),
-      nodes: flow.nodes.map(node => _.omit(node, 'x', 'y', 'lastModified'))
+      ..._.pick(flow, [
+        'version',
+        'catchAll',
+        'startNode',
+        'skillData',
+        'triggers',
+        'label',
+        'description',
+        'variables',
+        'type'
+      ]),
+      nodes: flow.nodes.map(node => _.omit(node, 'x', 'y', 'lastModified', 'isNew', 'nodeType'))
     }
 
     const flowPath = flow.location
@@ -369,6 +392,7 @@ export class FlowService {
     let topics = await this.getTopics(botId)
     topics = topics.filter(x => x.name !== topicName)
 
+    await this.ghost.forBot(botId).deleteFolder(`${FLOW_DIR}/${topicName}`)
     await this.ghost.forBot(botId).upsertFile('ndu', `topics.json`, JSON.stringify(topics, undefined, 2))
     await this.moduleLoader.onTopicChanged(botId, topicName, undefined)
   }

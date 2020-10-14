@@ -1,9 +1,8 @@
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from '@blueprintjs/core'
-import { lang } from 'botpress/shared'
+import { lang, toast } from 'botpress/shared'
 import { UserProfile } from 'common/typings'
 import React, { FC, useEffect, useState } from 'react'
 import api from '~/api'
-import { toastFailure, toastSuccess } from '~/utils/toaster'
 
 interface Props {
   isOpen: boolean
@@ -13,8 +12,8 @@ interface Props {
 }
 
 const UpdateUserProfile: FC<Props> = props => {
-  const [firstname, setFirstname] = useState()
-  const [lastname, setLastname] = useState()
+  const [firstname, setFirstname] = useState<string>()
+  const [lastname, setLastname] = useState<string>()
 
   useEffect(() => {
     setFirstname(props.profile.firstname)
@@ -30,9 +29,9 @@ const UpdateUserProfile: FC<Props> = props => {
       props.fetchProfile()
       props.toggle()
 
-      toastSuccess(lang.tr('admin.profileUpdatedSuccessfully'))
+      toast.success(lang.tr('admin.profileUpdatedSuccessfully'))
     } catch (err) {
-      toastFailure(lang.tr('admin.errorUpdatingProfile', { msg: err.message }))
+      toast.failure(lang.tr('admin.errorUpdatingProfile', { msg: err.message }))
     }
   }
 

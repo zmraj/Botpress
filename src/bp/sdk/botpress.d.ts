@@ -5,8 +5,8 @@
  * Please let us know in our official Github Repo!
  */
 declare module 'botpress/sdk' {
+  import { NextFunction, Request, Response, Router } from 'express'
   import Knex from 'knex'
-  import { Router, Request, Response, NextFunction } from 'express'
 
   export interface KnexExtension {
     isLite: boolean
@@ -32,6 +32,10 @@ declare module 'botpress/sdk' {
     startTime: Date
     endTime?: Date
     triggerValue: number
+  }
+
+  export interface BotEvent {
+    [key: string]: any
   }
 
   export type StrategyUser = {
@@ -99,6 +103,7 @@ declare module 'botpress/sdk' {
   export interface Logger {
     forBot(botId: string): this
     attachError(error: Error): this
+    attachEvent(event: IO.Event): this
     persist(shouldPersist: boolean): this
     level(level: LogLevel): this
     noEmit(): this
@@ -136,6 +141,8 @@ declare module 'botpress/sdk' {
     translations?: { [lang: string]: object }
     /** List of new conditions that the module can register */
     dialogConditions?: Condition[]
+    prompts?: PromptDefinition[]
+    variables?: PrimitiveVarType[]
     /** Called once the core is initialized. Usually for middlewares / database init */
     onServerStarted?: (bp: typeof import('botpress/sdk')) => Promise<void>
     /** This is called once all modules are initialized, usually for routing and logic */
@@ -214,6 +221,8 @@ declare module 'botpress/sdk' {
     homepage?: string
     /** Whether or not the module is likely to change */
     experimental?: boolean
+    /** IDs of supported effects for this channel */
+    channelEffects?: string[]
   }
 
   /**
@@ -241,6 +250,7 @@ declare module 'botpress/sdk' {
 
   export interface FlowGeneratorMetadata {
     botId: string
+    isOneFlow?: boolean
   }
 
   export interface ModulePluginEntry {
@@ -265,7 +275,7 @@ declare module 'botpress/sdk' {
       export type TrainCommand = 'supervised' | 'quantize' | 'skipgram' | 'cbow'
       export type Loss = 'hs' | 'softmax'
 
-      export type TrainArgs = {
+      export interface TrainArgs {
         lr: number
         dim: number
         ws: number
@@ -292,7 +302,7 @@ declare module 'botpress/sdk' {
         dsub: number
       }
 
-      export type PredictResult = {
+      export interface PredictResult {
         label: string
         value: number
       }
@@ -356,18 +366,19 @@ declare module 'botpress/sdk' {
       export interface SVMOptions {
         classifier: 'C_SVC' | 'NU_SVC' | 'ONE_CLASS' | 'EPSILON_SVR' | 'NU_SVR'
         kernel: 'LINEAR' | 'POLY' | 'RBF' | 'SIGMOID'
+        seed: number
         c?: number | number[]
         gamma?: number | number[]
         probability?: boolean
         reduce?: boolean
       }
 
-      export type DataPoint = {
+      export interface DataPoint {
         label: string
         coordinates: number[]
       }
 
-      export type Prediction = {
+      export interface Prediction {
         label: string
         confidence: number
       }
@@ -378,7 +389,7 @@ declare module 'botpress/sdk' {
 
       export class Trainer {
         constructor()
-        train(points: DataPoint[], options?: Partial<SVMOptions>, callback?: TrainProgressCallback): Promise<string>
+        train(points: DataPoint[], options?: SVMOptions, callback?: TrainProgressCallback): Promise<string>
         isTrained(): boolean
       }
 
@@ -408,7 +419,7 @@ declare module 'botpress/sdk' {
     }
 
     export namespace CRF {
-      export interface Tagger {
+      export class Tagger {
         tag(xseq: Array<string[]>): { probability: number; result: string[] }
         open(model_filename: string): boolean
         marginal(xseq: Array<string[]>): { [label: string]: number }[]
@@ -418,8 +429,8 @@ declare module 'botpress/sdk' {
         [key: string]: string
       }
 
-      export interface TrainerCallback {
-        (message: string): void
+      export interface TrainProgressCallback {
+        (iteration: number): void
       }
 
       interface DataPoint {
@@ -427,12 +438,9 @@ declare module 'botpress/sdk' {
         labels: string[]
       }
 
-      export interface Trainer {
-        train(elements: DataPoint[], options: TrainerOptions): Promise<string>
+      export class Trainer {
+        train(elements: DataPoint[], options: TrainerOptions, progressCallback?: TrainProgressCallback): Promise<string>
       }
-
-      export const createTrainer: () => Trainer
-      export const createTagger: () => Tagger
     }
 
     export namespace SentencePiece {
@@ -447,7 +455,79 @@ declare module 'botpress/sdk' {
   }
 
   export namespace NLU {
-    export type EntityType = 'system' | 'pattern' | 'list'
+    export class Engine {
+      static initialize: (config: Config, logger: NLU.Logger) => Promise<void>
+      static getHealth: () => Health
+      static getLanguages: () => string[]
+      static embed: (utterances: string[], lang: string) => Promise<number[][]>
+      constructor(botId: string, logger: Logger)
+      computeModelHash(intents: NLU.IntentDefinition[], entities: NLU.EntityDefinition[], lang: string): string
+      loadModel: (m: Model) => Promise<void>
+      hasModel: (lang: string, hash: string) => boolean
+      hasModelForLang: (lang: string) => boolean
+      train: (
+        trainSessionId: string,
+        intentDefs: NLU.IntentDefinition[],
+        entityDefs: NLU.EntityDefinition[],
+        languageCode: string,
+        options: TrainingOptions
+      ) => Promise<Model | undefined>
+      cancelTraining: (trainSessionId: string) => Promise<void>
+      detectLanguage: (sentence: string) => Promise<string>
+      predict: (t: string, ctx: string[], language: string) => Promise<IO.EventUnderstanding>
+    }
+
+    export interface Config {
+      ducklingURL: string
+      ducklingEnabled: boolean
+      languageSources: LanguageSource[]
+    }
+
+    export interface LanguageSource {
+      endpoint: string
+      authToken?: string
+    }
+
+    export interface Logger {
+      info: (msg: string) => void
+      warning: (msg: string, err?: Error) => void
+      error: (msg: string, err?: Error) => void
+    }
+
+    export interface TrainingOptions {
+      forceTrain: boolean
+      nluSeed: number
+      progressCallback: (x: number) => void
+    }
+
+    export interface Model {
+      hash: string
+      languageCode: string
+      startedAt: Date
+      finishedAt: Date
+      data: {
+        input: string
+        output: string
+      }
+    }
+
+    export interface Health {
+      isEnabled: boolean
+      validProvidersCount: number
+      validLanguages: string[]
+    }
+
+    export type TrainingStatus = 'idle' | 'done' | 'needs-training' | 'training' | 'canceled' | 'errored' | null
+
+    export interface TrainingSession {
+      key: string
+      status: TrainingStatus
+      language: string
+      progress: number
+      lock?: RedisLock
+    }
+
+    export type EntityType = 'system' | 'pattern' | 'list' | 'complex' // TODO: Add the notion of Utterance Placeholder instead of adding "Complex" as an entity type here (synonyms and variables)
 
     export interface EntityDefOccurrence {
       name: string
@@ -464,12 +544,13 @@ declare module 'botpress/sdk' {
       fuzzy?: number
       occurrences?: EntityDefOccurrence[]
       pattern?: string
+      list_entities: string[]
+      pattern_entities: string[]
     }
 
     export interface SlotDefinition {
       name: string
-      entities: string[]
-      color: number
+      entity: string
     }
 
     export interface IntentDefinition {
@@ -477,9 +558,10 @@ declare module 'botpress/sdk' {
       utterances: {
         [lang: string]: string[]
       }
-      filename: string
-      slots: SlotDefinition[]
-      contexts: string[]
+      filename: string // TODO: remove, not used anymore
+      slots: SlotDefinition[] // TODO: rename to "placeholders" when we introduce this concept (synonyms, variables)
+      contexts: string[] // TODO: remove contexts, now a single 'topic'
+      metadata?: any
     }
 
     export interface Intent {
@@ -497,18 +579,19 @@ declare module 'botpress/sdk' {
     }
 
     export interface EntityBody {
-      extras: any
+      extras?: any
       value: any
       unit: string
     }
 
     export interface EntityMeta {
+      sensitive: boolean
       confidence: number
-      provider: string
+      provider?: string
       source: string
       start: number
       end: number
-      raw: any
+      raw?: any
     }
 
     export interface Slot {
@@ -526,28 +609,43 @@ declare module 'botpress/sdk' {
     export interface Predictions {
       [context: string]: {
         confidence: number
-        intents: { label: string; confidence: number }[]
+        oos: number
+        intents: {
+          label: string
+          confidence: number
+          slots: SlotCollection
+          extractor: 'exact-matcher' | 'classifier'
+        }[]
       }
     }
   }
 
   export namespace NDU {
+    export type TriggerEffect = 'prompt.cancel' | 'prompt.inform' | 'jump.node' | 'say'
+
     interface GenericTrigger {
+      type: 'workflow' | 'faq' | 'node' | 'contextual'
+      effect: TriggerEffect
+      name?: string
       conditions: DecisionTriggerCondition[]
     }
 
     export interface WorkflowTrigger extends GenericTrigger {
       type: 'workflow'
       workflowId: string
+      topicName: string
       nodeId: string
       /** When true, the user must be inside the specified workflow for the trigger to be active */
       activeWorkflow?: boolean
+      activeTopic?: boolean
+      effect: 'jump.node'
     }
 
     export interface FaqTrigger extends GenericTrigger {
       type: 'faq'
       faqId: string
       topicName: string
+      effect: 'say'
     }
 
     export interface NodeTrigger extends GenericTrigger {
@@ -556,7 +654,14 @@ declare module 'botpress/sdk' {
       nodeId: string
     }
 
-    export type Trigger = NodeTrigger | FaqTrigger | WorkflowTrigger
+    export interface ContextualTrigger extends GenericTrigger {
+      type: 'contextual'
+      workflowId: string
+      nodeId: string
+      gotoNodeId: string
+    }
+
+    export type Trigger = NodeTrigger | FaqTrigger | WorkflowTrigger | ContextualTrigger
 
     export interface DialogUnderstanding {
       triggers: {
@@ -570,7 +675,15 @@ declare module 'botpress/sdk' {
     }
 
     export interface Actions {
-      action: 'send' | 'startWorkflow' | 'redirect' | 'continue' | 'goToNode'
+      action:
+        | 'send'
+        | 'startWorkflow'
+        | 'redirect'
+        | 'continue'
+        | 'goToNode'
+        | 'prompt.repeat'
+        | 'prompt.inform'
+        | 'prompt.cancel'
       data?: SendContent | FlowRedirect
     }
 
@@ -611,7 +724,9 @@ declare module 'botpress/sdk' {
       suggestions?: Suggestion[]
       credentials?: any
       nlu?: Partial<EventUnderstanding>
+      ndu?: NDU.DialogUnderstanding
       incomingEventId?: string
+      debugger?: boolean
     }
 
     /**
@@ -623,11 +738,11 @@ declare module 'botpress/sdk' {
       /** A sortable unique identifier for that event (time-based) */
       readonly id: string
       /** The type of the event, i.e. image, text, timeout, etc */
-      readonly type: string
+      type: string
       /** Is it (in)coming from the user to the bot or (out)going from the bot to the user? */
       readonly direction: EventDirection
       /** The channel-specific raw payload */
-      readonly payload: any
+      payload: any
       /** A textual representation of the event */
       readonly preview: string
       /** The date the event was created */
@@ -635,6 +750,11 @@ declare module 'botpress/sdk' {
       readonly credentials?: any
       /** When false, some properties used by the debugger are stripped from the event before storing */
       debugger?: boolean
+      activeProcessing?: ProcessingEntry
+      /** Track processing steps during the lifetime of the event  */
+      processing?: {
+        [activity: string]: ProcessingEntry
+      }
       /**
        * Check if the event has a specific flag
        * @param flag The flag symbol to verify. {@link IO.WellKnownFlags} to know more about existing flags
@@ -649,6 +769,12 @@ declare module 'botpress/sdk' {
        * @example event.setFlag(bp.IO.WellKnownFlags.SKIP_DIALOG_ENGINE, true)
        */
       setFlag(flag: symbol, value: boolean): void
+    }
+
+    interface ProcessingEntry {
+      logs?: string[]
+      errors?: EventError[]
+      date?: Date
     }
 
     /**
@@ -666,16 +792,17 @@ declare module 'botpress/sdk' {
     }
 
     export interface EventUnderstanding {
-      intent: NLU.Intent
+      intent?: NLU.Intent
       /** Predicted intents needs disambiguation */
-      readonly ambiguous: boolean
-      intents: NLU.Intent[]
+      readonly ambiguous?: boolean
+      intents?: NLU.Intent[]
       /** The language used for prediction. Will be equal to detected language when its part of supported languages, falls back to default language otherwise */
       readonly language: string
       /** Language detected from users input. */
-      readonly detectedLanguage: string
+      readonly detectedLanguage?: string
+      readonly spellChecked?: string
       readonly entities: NLU.Entity[]
-      readonly slots: NLU.SlotCollection
+      readonly slots?: NLU.SlotCollection
       readonly errored: boolean
       readonly includedContexts: string[]
       readonly predictions?: NLU.Predictions
@@ -736,21 +863,82 @@ declare module 'botpress/sdk' {
       bot: any
       /** Used internally by Botpress to keep the user's current location and upcoming instructions */
       context: DialogContext
+      /** This variable points to the currently active workflow */
+      workflow: WorkflowHistory
+
       /**
        * EXPERIMENTAL
        * This includes all the flow/nodes which were traversed for the current event
        */
       __stacktrace: JumpPoint[]
-      /** Contains details about an error that occurred while processing the event */
-      __error?: EventError
+    }
+
+    export interface PromptStatus {
+      turn: number
+      readonly config: Readonly<PromptConfiguration>
+      status: 'resolved' | 'rejected' | 'pending'
+      stage: 'new' | 'prompt' | 'confirm-candidate' | 'confirm-cancel' | 'confirm-jump' | 'disambiguate-candidates'
+      rejection?: 'cancelled' | 'timedout' | 'jumped'
+      questionAsked?: boolean
+      state: {
+        confirmCandidate?: PromptCandidate
+        disambiguateCandidates?: PromptCandidate[]
+        electedCandidate?: PromptCandidate
+        value?: any
+        nextDestination?: { flowName: string; node: string }
+      }
+    }
+
+    export interface ContextualTriggerState {
+      readonly workflowId: string
+      readonly nodeId: string
+      readonly index: number
+      readonly turn: number
+      readonly suggestion: SuggestChoice
+      readonly expiryPolicy: {
+        readonly strategy: 'turn' | 'workflow'
+        readonly turnCount: number
+      }
+    }
+
+    export interface SuggestChoice {
+      /** Should the suggestions be displayed next to the associated message, or persistent in the keyboard */
+      position?: SuggestionPosition
+      /** Required when position is conversation, to know where to attach the event */
+      eventId?: string
+      label: string
+      value: string
+    }
+
+    export type SuggestionPosition = 'conversation' | 'static'
+
+    export interface DialogAction {
+      type: 'say' | 'listen' | 'cancel'
+      message?: MultiLangText | string
+      payload?: any
+      eventType?: string
+    }
+
+    export type PromptConfiguration = { type: string; valueType?: string } & PromptNodeParams
+
+    export interface PromptCandidate {
+      source: 'slot' | 'prompt'
+      value_raw: any
+      value_string: string
+      turns_ago: number
+      confidence: number
     }
 
     export interface EventError {
-      type: 'action-execution' | 'dialog-transition'
+      type: 'action-execution' | 'dialog-transition' | 'dialog-engine' | 'hook-execution'
       stacktrace?: string
       actionName?: string
       actionArgs?: any
+      hookName?: string
       destination?: string
+      /** Represent the location where the error was triggered  */
+      flowName?: string
+      nodeName?: string
     }
 
     export interface JumpPoint {
@@ -782,27 +970,37 @@ declare module 'botpress/sdk' {
        * This is used to execute the target flow catchAll transitions.
        */
       hasJumped?: boolean
+      /** The status of the current active prompt */
+      activePrompt?: PromptStatus
+      /** The list of previously extracted candidates */
+      pastPromptCandidates?: PromptCandidate[]
+      inputs?: { [variable: string]: SubWorkflowInput }
     }
 
     export interface CurrentSession {
       lastMessages: DialogTurnHistory[]
       nluContexts?: NluContext[]
       nduContext?: NduContext
-      lastWorkflows: WorkflowHistory[]
+      workflows: {
+        [name: string]: WorkflowHistory
+      }
+      currentWorkflow?: string
       // Prevent warnings when using the code editor with custom properties
       [anyKey: string]: any
     }
 
     export interface WorkflowHistory {
-      workflow: string
       eventId: string
+      parent?: string
+      /** Only one workflow can be active at a time, when a child workflow is active, the parent will be pending */
+      status: 'active' | 'pending' | 'completed'
       success?: boolean
-      active?: boolean
+      variables: { [name: string]: BoxedVariable<any, any> }
     }
 
     export type StoredEvent = {
       /** This ID is automatically generated when inserted in the DB  */
-      readonly id?: number
+      readonly id: string
       direction: EventDirection
       /** Outgoing events will have the incoming event ID, if they were triggered by one */
       incomingEventId?: string
@@ -834,6 +1032,7 @@ declare module 'botpress/sdk' {
       last_turn_node_id: string
       last_turn_ts: number
       last_topic: string
+      triggers?: ContextualTriggerState[]
     }
 
     export interface DialogTurnHistory {
@@ -849,8 +1048,9 @@ declare module 'botpress/sdk' {
      * Call next with an error as first argument to throw an error
      * Call next with true as second argument to swallow the event (i.e. stop the processing chain)
      * Call next with no parameters or false as second argument to continue processing to next middleware
+     * Call next with the last parameter as true to mark the middleware as "skipped" in the event processing
      */
-    export type MiddlewareNextCallback = (error?: Error, swallow?: boolean) => void
+    export type MiddlewareNextCallback = (error?: Error, swallow?: boolean, skipped?: boolean) => void
 
     /**
      * The actual middleware function that gets executed. It receives an event and expects to call next()
@@ -865,7 +1065,7 @@ declare module 'botpress/sdk' {
      * Incoming chain is executed when the bot receives an event.
      * Outgoing chain is executed when an event is sent to a user
      */
-    export type MiddlewareDefinition = {
+    export interface MiddlewareDefinition {
       /** The internal name used to identify the middleware in configuration files */
       name: string
       description: string
@@ -884,7 +1084,7 @@ declare module 'botpress/sdk' {
     export const Event: EventConstructor
   }
 
-  export type User = {
+  export interface User {
     id: string
     channel: string
     createdOn: Date
@@ -900,7 +1100,7 @@ declare module 'botpress/sdk' {
    */
   export type EventDirection = 'incoming' | 'outgoing'
 
-  export type Notification = {
+  export interface Notification {
     botId: string
     message: string
     /** Can be info, error, success */
@@ -1012,7 +1212,7 @@ declare module 'botpress/sdk' {
   /**
    * The configuration definition of a bot.
    */
-  export type BotConfig = {
+  export interface BotConfig {
     $schema?: string
     id: string
     name: string
@@ -1091,12 +1291,13 @@ declare module 'botpress/sdk' {
     timeoutInterval: string
     /** The interval until a session expires */
     sessionTimeoutInterval: string
+    promptTimeoutInterval: string
   }
 
   /**
    * Configuration file definition for the Converse API
    */
-  export type ConverseConfig = {
+  export interface ConverseConfig {
     /**
      * The timeout of the converse API requests
      * @default 5s
@@ -1118,7 +1319,7 @@ declare module 'botpress/sdk' {
     /** The Id of the Content Type for which the Element belongs to. */
     contentType: string
     /** The raw form data that contains templating that needs to be interpreted. */
-    formData: object
+    formData: { [property: string]: any }
     /** The computed form data that contains the interpreted data. */
     computedData: object
     /** The textual representation of the Content Element, for each supported languages  */
@@ -1133,7 +1334,7 @@ declare module 'botpress/sdk' {
    * They can describe anything and everything – they most often are domain-specific to your bot. They also
    * tells botpress how to display the content on various channels
    */
-  export type ContentType = {
+  export interface ContentType {
     id: string
     title: string
     description: string
@@ -1147,6 +1348,7 @@ declare module 'botpress/sdk' {
      * The jsonSchema used to validate the form data of the Content Elements.
      */
     jsonSchema: object
+    newSchema?: object
     uiSchema?: object
 
     /**
@@ -1187,11 +1389,17 @@ declare module 'botpress/sdk' {
     timeoutNode?: string
     type?: string
     timeout?: { name: string; flow: string; node: string }[]
+    variables?: FlowVariable[]
+  }
+
+  export interface FlowVariable {
+    type: string
+    params?: any
   }
 
   export interface DecisionTriggerCondition {
     id: string
-    params?: { [key: string]: any }
+    params?: FormData
   }
 
   export interface Condition {
@@ -1201,9 +1409,12 @@ declare module 'botpress/sdk' {
     /** The description holds placeholders for param values so they can be displayed in the view */
     description?: string
     /** The definition of all parameters used by this condition */
-    params?: { [paramName: string]: ConditionParam }
+    fields?: FormField[]
+    advancedSettings?: FormField[]
     /** In which order the conditions will be displayed in the dropdown menu. 0 is the first item */
     displayOrder?: number
+    /** When true, it is not displayed in the dropdown menu on the studio */
+    hidden?: boolean
     /** This callback url is called when the condition is deleted or pasted in the flow */
     callback?: string
     /** The editor will use the custom component to provide the requested parameters */
@@ -1212,6 +1423,8 @@ declare module 'botpress/sdk' {
       component: string
     }
     evaluate: (event: IO.IncomingEvent, params: any) => number
+    /** The onEnter actions that come with this condition when the Trigger node is executed */
+    addOnEnter?: (params: any) => string[]
   }
 
   export interface ConditionParam {
@@ -1231,7 +1444,7 @@ declare module 'botpress/sdk' {
   export interface ConditionListOptions {
     /** List of options displayed in the dropdown menu */
     items?: Option[]
-    /**Alternatively, set an endpoint where the list will be queried (eg: intents) */
+    /** Alternatively, set an endpoint where the list will be queried (eg: intents) */
     endpoint?: string
     /** The path to the list of elements (eg: language.available) */
     path?: string
@@ -1283,33 +1496,67 @@ declare module 'botpress/sdk' {
     | 'skill-call'
     | 'listen'
     | 'say_something'
+    | 'sub-workflow'
     | 'success'
     | 'failure'
     | 'trigger'
     | 'execute'
     | 'router'
     | 'action'
+    | 'prompt'
 
   export type FlowNode = {
+    /** An auto-generated ID used internally for the flow builder */
     id?: string
+    /** The name used by the dialog engine to link to other nodes */
     name: string
     type?: FlowNodeType
     timeoutNode?: string
     flow?: string
+    prompt?: PromptNode
+    subflow?: SubWorkflowNode
+    execute?: ExecuteNode
+    isNew?: boolean
+    isReadOnly?: boolean
+    triggers?: NDU.GenericTrigger[]
     /** Used internally by the flow editor */
     readonly lastModified?: Date
   } & NodeActions
 
+  export interface ExecuteNode {
+    actionName?: string
+    /** List of possible parameters for the action */
+    params?: { [key: string]: ActionParameter }
+    code: string
+  }
+
+  export interface ActionParameter {
+    source: 'variable' | 'hardcoded'
+    /** Can be the name of the variable or any kind of value */
+    value: any
+  }
+
+  export interface SubWorkflowNode {
+    in: { [variable: string]: SubWorkflowInput }
+    out: { [variable: string]: string }
+  }
+
+  export interface SubWorkflowInput {
+    source: 'variable' | 'hardcoded'
+    value: any
+  }
+
   export type TriggerNode = FlowNode & {
     conditions: DecisionTriggerCondition[]
     activeWorkflow?: boolean
+    activeTopic?: boolean
   }
 
   export type ListenNode = FlowNode & {
-    triggers: { conditions: DecisionTriggerCondition[] }[]
+    triggers: { type?: string; name?: string; effect?: NDU.TriggerEffect; conditions: DecisionTriggerCondition[] }[]
   }
 
-  export type SkillFlowNode = Partial<ListenNode> & Pick<Required<ListenNode>, 'name'>
+  export type SkillFlowNode = Partial<ListenNode> & Pick<Required<ListenNode>, 'name'> & Partial<TriggerNode>
 
   /**
    * Node Transitions are all the possible outcomes when a user's interaction on a node is completed. The possible destinations
@@ -1324,12 +1571,115 @@ declare module 'botpress/sdk' {
   export interface NodeTransition {
     /** The text to display instead of the condition in the flow editor */
     caption?: string
+    /** Content it's linked to for the flow editor */
+    contentIndex?: number
     /** A JS expression that is evaluated to determine if it should send the user to the specified node */
     condition: string
     /** The destination node */
     node: string
   }
 
+  export type FormDataField = any
+
+  export interface FormData {
+    id?: string
+    contentType?: string
+    [key: string]: FormDataField
+  }
+
+  interface FormOption {
+    value: any
+    label: string
+    related?: FormField
+  }
+
+  interface FormContextMenu {
+    type: string
+    label: string
+  }
+
+  // TODO use namespace to group form related interfaces
+  export interface FormDynamicOptions {
+    /** An enpoint to call to get the options */
+    endpoint: string
+    /** Used with _.get() on the data returned by api to get to the list of items */
+    path?: string
+    /** Field from DB to map as the value of the options */
+    valueField: string
+    /** Field from DB to map as the label of the options */
+    labelField: string
+  }
+
+  export type FormFieldType =
+    | 'checkbox'
+    | 'group'
+    | 'number'
+    | 'overridable'
+    | 'select'
+    | 'multi-select'
+    | 'text'
+    | 'text_array'
+    | 'textarea'
+    | 'upload'
+    | 'url'
+    | 'hidden'
+    | 'tag-input'
+    | 'variable'
+
+  export interface FormField {
+    type: FormFieldType
+    key: string
+    label?: string
+    overrideKey?: string
+    placeholder?: string | string[]
+    emptyPlaceholder?: string
+    options?: FormOption[]
+    defaultValue?: FormDataField
+    required?: boolean
+    variableTypes?: string[]
+    defaultVariableType?: string
+    superInput?: boolean
+    customPlaceholder?: boolean
+    variablesOnly?: boolean
+    superInputOptions?: {
+      canPickEvents?: boolean
+      canPickVariables?: boolean
+    }
+    max?: number
+    min?: number
+    maxLength?: number
+    valueManipulation?: {
+      regex: string
+      modifier: string
+      replaceChar: string
+    }
+    translated?: boolean
+    dynamicOptions?: FormDynamicOptions
+    fields?: FormField[]
+    moreInfo?: FormMoreInfo
+    /** When specified, indicate if array elements match the provided pattern */
+    validation?: {
+      regex?: RegExp
+      list?: any[]
+      validator?: (items: any[], newItem: any) => boolean
+    }
+    group?: {
+      /** You have to specify the add button label */
+      addLabel?: string
+      addLabelTooltip?: string
+      /** You can specify a minimum so the delete button won't show if there isn't more than the minimum */
+      minimum?: number
+      /** You can specify that there's one item of the group by default even if no minimum */
+      defaultItem?: boolean
+      /** You can add a contextual menu to add extra options */
+      contextMenu?: FormContextMenu[]
+    }
+  }
+
+  export interface FormMoreInfo {
+    label: string
+    url?: string
+  }
   /**
    * A Node Action represent all the possible actions that will be executed when the user is on the node. When the user
    * enters the node, actions in the 'onEnter' are executed. If there are actions in 'onReceive', they will be called
@@ -1342,12 +1692,15 @@ declare module 'botpress/sdk' {
     onReceive?: ActionBuilderProps[] | string[]
     /** An array of possible transitions once everything is completed */
     next?: NodeTransition[]
+    /** For node of type triggers, this contains the element to render */
+    conditions?: {
+      id?: string
+      params: FormData
+    }[]
     /** For node of type say_something, this contains the element to render */
-    content?: {
-      contentType: string
-      /** Every properties required by the content type, including translations */
-      formData: object
-    }
+    contents?: {
+      [lang: string]: FormData
+    }[]
   }
 
   export interface ActionBuilderProps {
@@ -1449,6 +1802,179 @@ declare module 'botpress/sdk' {
     asChatUser?: boolean
   }
 
+  export interface PromptDefinition {
+    id: string
+    config: PromptConfig
+    prompt: PromptConstructable
+  }
+
+  /** The configuration of the prompt which is saved on the flow */
+  export interface PromptConfig {
+    /** An ID used internally to refer to this prompt */
+    type: string
+    /** The label displayed in the studio */
+    label?: string
+    icon?: string
+    /** The ID representing the type of value that is collected by this prompt */
+    valueType: string
+    /** Will never trigger a confirmation for a previous value */
+    noConfirmation?: boolean
+    /** Fields to configure the prompt on the studio */
+    fields: FormField[]
+    advancedSettings: FormField[]
+  }
+
+  export interface PromptNode {
+    type: string
+    /** The list of custom parameters of the prompt with their associated values */
+    params: PromptNodeParams
+  }
+
+  export interface PromptNodeParams {
+    cancellable?: boolean
+    confirmCancellation?: boolean
+    /** The name of the variable that will be filled with the value extracted */
+    output: string
+    /** The question to ask to the user for this prompt */
+    question: string | MultiLangText
+    /** Confirmation message to send to ask the user if the provided value is correct */
+    confirm?: MultiLangText
+    /** Additional param for prompts */
+    [paramName: string]: any
+  }
+
+  export interface MultiLangText {
+    [lang: string]: string
+  }
+
+  export interface Prompt {
+    /**
+     * This method will receive multiple
+     * @param event
+     */
+    extraction(event: IO.IncomingEvent): ExtractionResult[]
+    /**
+     * This method
+     * @param value
+     */
+    validate(value): ValidationResult
+    /**
+     * When the prompt is sent to the user, an event of type "prompt" is sent to the corresponding channel.
+     * You can customize the event that will be sent to the user
+     */
+    customPrompt?(
+      event: IO.OutgoingEvent,
+      incomingEvent: IO.IncomingEvent,
+      bp: typeof import('botpress/sdk')
+    ): Promise<boolean>
+  }
+
+  export interface ExtractionResult {
+    value: any
+    confidence: number
+  }
+
+  export interface ValidationResult {
+    valid: boolean
+    message?: MultiLangText
+  }
+
+  export interface PromptConstructable {
+    new (ctor: any): Prompt
+  }
+
+  export interface BoxedVarConstructable<T, V = any> {
+    new (ctor: BoxedVarContructor<T, V>): BoxedVariable<T, V>
+  }
+
+  export interface BoxedVariable<T, V = any> {
+    value?: T
+    /** Configuration option that are set directly on the variable (eg: format) */
+    config?: V
+    /** The level of confidence we have for the value */
+    readonly confidence: number
+    readonly type: string
+    readonly subType?: string
+    /** This method handles the logic to check if the value is valid and update the confidence  */
+    trySet(value: T | undefined, confidence?: number): void
+    /** Set the number of remaining turns before the variable is set to expire */
+    setRetentionPolicy(nbOfTurns: number): void
+    /** Convert the underlying value to a string. Different variables may have format options */
+    toString(...args: any): string
+    /**
+     * Returns 1 if this value is bigger than compareTo's value
+     * Returns -1 if this value is smaller than compareTo's value
+     * Returns 0 if both values are equal
+     */
+    compare(compareTo: BoxedVariable<T, V>): number
+    getValidationData: () => ValidationData | undefined
+    unbox(): UnboxedVariable<T>
+    parse(text: string): T
+  }
+
+  export interface ValidationData {
+    /** List of allowed patterns */
+    patterns?: RegExp[]
+    elements: NLU.EntityDefOccurrence[]
+  }
+
+  export interface UnboxedVariable<T> {
+    type: string
+    subType?: string
+    value: T | undefined
+    nbTurns: number
+    confidence: number
+  }
+
+  export interface BoxedVarContructor<T, V = any> {
+    type: string
+    /** Represent the user's variable type for generic types */
+    subType?: string
+    /** The number of turns left until this value is no longer valid */
+    nbOfTurns: number
+    /** The confidence percentage of the value currently stored */
+    confidence?: number
+    /** The current value stored in the db */
+    value: T | undefined
+    /** Configuration of the variable on the workflow (ex: date format) */
+    config?: V
+    /** Returns the list of allowed patterns and elements for the variable */
+    getValidationData: () => ValidationData | undefined
+  }
+
+  export interface PrimitiveVarType {
+    id: string
+    config?: FlowVariableConfig
+    box: BoxedVarConstructable<any, any>
+  }
+
+  export type FlowVariableConfig = {
+    label: string
+    icon?: any
+    operators?: FlowVariableOperator[]
+  } & FormDefinition
+
+  export type FlowVariableOperator = {
+    func: string
+    label: string
+    caption: string
+  } & FormDefinition
+
+  export interface FormMoreInfo {
+    label: string
+    url?: string
+  }
+
+  export interface FormContextMenu {
+    type: string
+    label: string
+  }
+
+  export interface FormDefinition {
+    advancedSettings: FormField[]
+    fields: FormField[]
+  }
+
   ////////////////
   //////// API
   ////////////////
@@ -1470,7 +1996,7 @@ declare module 'botpress/sdk' {
   /**
    * Those are possible options you may enable when creating new routers
    */
-  export type RouterOptions = {
+  export interface RouterOptions {
     /**
      * Check if user is authenticated before granting access
      * @default true
@@ -1500,7 +2026,7 @@ declare module 'botpress/sdk' {
   /**
    * Search parameters when querying content elements
    */
-  export type SearchParams = {
+  export interface SearchParams {
     /** Search in elements id and form data */
     searchTerm?: string
     /** Returns the amount of elements from the starting position  */
@@ -1514,7 +2040,7 @@ declare module 'botpress/sdk' {
     filters?: Filter[]
   }
 
-  export type EventSearchParams = {
+  export interface EventSearchParams {
     /** Returns the amount of elements from the starting position  */
     from?: number
     count?: number
@@ -1551,6 +2077,106 @@ declare module 'botpress/sdk' {
   export interface FileContent {
     name: string
     content: string | Buffer
+  }
+
+  export namespace Content {
+    export interface Base {
+      metadata?: Metadata
+      extraProps?: {
+        BOT_URL: string
+      }
+    }
+
+    export interface Metadata {
+      /** Set to true to display typing effect, or set a delay in ms */
+      __typing?: boolean | number
+      /** Use markdown for text fields when possible */
+      __markdown?: boolean
+      /** Display suggestions to the user, either using buttons or a dropdown if there are multiple elements */
+      __suggestions?: IO.SuggestChoice[]
+      /** If the channel supports it, it will trim the text to the specified length */
+      __trimText?: number
+      /** Force usage of a dropdown menu instead of buttons */
+      __useDropdown?: boolean
+      /** Any other user-defined properties */
+      [customProps: string]: any
+    }
+
+    export interface Text extends Base {
+      type: 'text'
+      text: string | MultiLangText
+      variations?: string[]
+    }
+
+    export interface Image extends Base {
+      type: 'image'
+      image: string
+      title?: string
+    }
+
+    export interface Card extends Base {
+      type: 'card'
+      title: string
+      subtitle?: string
+      image?: string
+      actions?: Actions[]
+    }
+
+    export interface ActionButton {
+      title: string
+    }
+
+    export interface ActionSaySomething extends ActionButton {
+      type: 'say_something'
+      // TODO cleanup legacy
+      action: 'Say something'
+      text: string
+    }
+
+    export interface ActionOpenURL extends ActionButton {
+      type: 'open_url'
+      // TODO cleanup legacy
+      action: 'Open URL'
+      url: string
+    }
+
+    export interface ActionPostback extends ActionButton {
+      type: 'postback'
+      // TODO cleanup legacy
+      action: 'Postback'
+      payload: string
+    }
+
+    export interface Carousel extends Base {
+      type: 'carousel'
+      items: Card[]
+    }
+
+    export interface Custom extends Base {
+      type: 'custom'
+      [prop: string]: any
+    }
+
+    export type All = Text | Image | Carousel | Card | Custom
+    export type Actions = ActionSaySomething | ActionOpenURL | ActionPostback
+
+    export interface Dropdown {
+      buttonText?: string
+      options: Option[]
+      /** Below options are for channel-web only */
+      width?: number
+      displayInKeyboard?: boolean
+      allowCreation?: boolean
+      allowMultiple?: boolean
+    }
+  }
+
+  export interface VariableParams {
+    name: string
+    value: any
+    type: string
+    subType?: string
+    options?: { nbOfTurns: number; specificWorkflow?: string; config?: any }
   }
 
   export namespace http {
@@ -1652,6 +2278,12 @@ declare module 'botpress/sdk' {
      */
     export function replyToEvent(eventDestination: IO.EventDestination, payloads: any[], incomingEventId?: string): void
 
+    export function replyContentToEvent(
+      payload: Content.All,
+      event: IO.Event,
+      options: { incomingEventId?: string; eventType?: string }
+    ): Promise<void>
+
     /**
      * Return the state of the incoming queue. True if there are any events(messages)
      * from the user waiting in the queue.
@@ -1678,7 +2310,7 @@ declare module 'botpress/sdk' {
      * @param id - The ID of the event to update
      * @param fields - Fields to update on the event
      */
-    export function updateEvent(id: number, fields: Partial<IO.StoredEvent>): Promise<void>
+    export function updateEvent(id: string, fields: Partial<IO.StoredEvent>): Promise<void>
 
     /**
      * Register the user feedback for a specific event. The type property is used to increment associated metrics
@@ -1766,6 +2398,10 @@ declare module 'botpress/sdk' {
      * Returns the list of conditions that can be used in an NLU Trigger node
      */
     export function getConditions(): Condition[]
+
+    export function getVariables(): any[]
+
+    export function createVariable(variable: VariableParams, event: IO.IncomingEvent)
   }
 
   export namespace config {

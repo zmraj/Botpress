@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { IO, Logger } from 'botpress/sdk'
+import { extractEventCommonArgs } from 'common/action'
 import { ObjectCache } from 'common/object-cache'
 import { ActionScope, ActionServer, LocalActionDefinition } from 'common/typings'
 import { UntrustedSandbox } from 'core/misc/code-sandbox'
@@ -23,6 +24,7 @@ import { clearRequireCache, requireFromString } from '../../modules/require'
 import { TYPES } from '../../types'
 import { BotService } from '../bot-service'
 import { ActionExecutionError } from '../dialog/errors'
+import { addErrorToEvent, addStepToEvent } from '../middleware/event-collector'
 import { WorkspaceService } from '../workspace-service'
 
 import { extractMetadata } from './metadata'
@@ -109,7 +111,8 @@ export default class ActionService {
 }
 
 export interface RunActionProps {
-  actionName: string
+  actionCode?: string
+  actionName?: string
   incomingEvent: IO.IncomingEvent
   actionArgs: any
 }
@@ -159,7 +162,7 @@ export class ScopedActionService {
   }
 
   async runAction(props: RunActionProps & { actionServer?: ActionServer }): Promise<void> {
-    const { actionName, actionArgs, actionServer, incomingEvent } = props
+    const { actionName, actionCode, actionArgs, actionServer, incomingEvent } = props
     process.ASSERT_LICENSED()
 
     debug.forBot(incomingEvent.botId, 'run action', { actionName, incomingEvent, actionArgs })
@@ -169,20 +172,34 @@ export class ScopedActionService {
         await this._runInActionServer({ ...props, actionServer })
       } else {
         await this.runLocalAction({
+          actionCode,
           actionName,
           actionArgs,
           incomingEvent,
-          runType: isTrustedAction(actionName) ? 'trusted' : 'legacy'
+          runType: actionName && isTrustedAction(actionName) ? 'trusted' : 'legacy'
         })
       }
 
       debug.forBot(incomingEvent.botId, 'done running', { actionName, actionArgs })
+      addStepToEvent(`action:${actionName}:completed`, incomingEvent)
     } catch (err) {
       this.logger
         .forBot(this.botId)
         .attachError(err)
         .error(`An error occurred while executing the action "${actionName}`)
-      throw new ActionExecutionError(err.message, actionName, err.stack)
+
+      addErrorToEvent(
+        {
+          type: 'action-execution',
+          stacktrace: err.stacktrace || err.stack,
+          actionName: actionName,
+          actionArgs: _.omit(actionArgs, ['event'])
+        },
+        incomingEvent
+      )
+      const name = actionName ?? incomingEvent.state.context?.currentNode ?? ''
+      addStepToEvent(`action:${name}:error`, incomingEvent)
+      throw new ActionExecutionError(err.message, name, err.stack)
     }
   }
 
@@ -283,19 +300,17 @@ export class ScopedActionService {
       runType: RunType
     }
   ) {
-    const { actionName, actionArgs, incomingEvent, runType } = props
+    const { actionName, actionCode, actionArgs, incomingEvent, runType } = props
 
-    const { code, _require, dirPath, action } = await this.loadLocalAction(actionName)
+    const { code, _require, dirPath, action } = actionCode
+      ? await this._getCodeActionDetails(actionCode)
+      : await this.loadLocalAction(actionName!)
 
-    const args = {
-      event: incomingEvent,
-      user: incomingEvent.state.user,
-      temp: incomingEvent.state.temp,
-      session: incomingEvent.state.session,
+    const args = extractEventCommonArgs(incomingEvent, {
       args: actionArgs,
       printObject,
       process: UntrustedSandbox.getSandboxProcessArgs()
-    }
+    })
 
     switch (runType) {
       case 'trusted': {
@@ -349,6 +364,15 @@ export class ScopedActionService {
     const lookups = getBaseLookupPaths(dirPath)
 
     return { code, dirPath, lookups, action }
+  }
+
+  private async _getCodeActionDetails(actionCode: string) {
+    const botFolder = 'bots/' + this.botId
+    const dirPath = path.resolve(path.join(process.PROJECT_LOCATION, `/data/${botFolder}/actions/__internal.js`))
+    const lookups = getBaseLookupPaths(dirPath)
+    const _require = prepareRequire(dirPath, lookups)
+
+    return { code: actionCode, dirPath, _require, action: { scope: botFolder as any } }
   }
 
   public async loadLocalAction(actionName: string) {

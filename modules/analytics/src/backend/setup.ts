@@ -8,12 +8,6 @@ export default async (bp: typeof sdk, db: Database, interactionsToTrack: string[
 
   const removeExt = (name: string) => name?.replace(/\.flow\.json$/i, '')
 
-  process.BOTPRESS_EVENTS.on('bp_core_decision_elected', ({ channel, botId, source }) => {
-    if (source === 'qna') {
-      db.incrementMetric(botId, channel, 'msg_sent_qna_count')
-    }
-  })
-
   process.BOTPRESS_EVENTS.on('bp_core_send_content', ({ channel, botId, source, details }) => {
     if (source === 'qna') {
       db.incrementMetric(botId, channel, 'msg_sent_qna_count', details)
@@ -60,7 +54,7 @@ export default async (bp: typeof sdk, db: Database, interactionsToTrack: string[
     name: 'analytics.incoming',
     direction: 'incoming',
     handler: incomingMiddleware,
-    order: 12, // after nlu and qna
+    order: 140, // after nlu election and qna
     description: 'Tracks incoming messages for Analytics purposes'
   })
 
@@ -68,7 +62,7 @@ export default async (bp: typeof sdk, db: Database, interactionsToTrack: string[
     name: 'analytics.outgoing',
     direction: 'outgoing',
     handler: outgoingMiddleware,
-    order: 5,
+    order: 45,
     description: 'Tracks outgoing messages for Analytics purposes'
   })
 

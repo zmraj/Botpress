@@ -1,14 +1,15 @@
-import { IButtonProps, ITabProps, IconName } from '@blueprintjs/core'
+import { SyntheticEvent } from 'react'
 
-export interface HeaderProps {
-  tabs?: ITabProps[]
-  tabChange?: (tab: string) => void
-  buttons?: HeaderButtonProps[]
+export interface HeaderButton {
+  icon: string
+  onClick: (e: SyntheticEvent) => void
+  tooltip?: JSX.Element | string
+  divider?: boolean
+  label?: string
 }
 
-export interface HeaderButtonProps {
-  onClick: () => void
-  icon: IconName
-  disabled?: boolean
-  tooltip?: string
+export interface HeaderProps {
+  rightButtons?: HeaderButton[]
+  leftButtons: HeaderButton[]
+  children?: JSX.Element | JSX.Element[]
 }

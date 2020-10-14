@@ -7,7 +7,7 @@ $theme-colors: (
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-family) !important;
+  font-family: Roboto !important;
 }
 
 .container > .navbar {
@@ -283,5 +283,11 @@ pre.code {
         width: 30px;
       }
     }
+  }
+}
+
+.bp-header {
+  :global(.bp3-navbar-group) {
+    height: 50px;
   }
 }

@@ -1,45 +1,116 @@
-import { IO } from 'botpress/sdk'
+import { BoxedVariable, Content, FlowNode, IO, Logger, VariableParams } from 'botpress/sdk'
+import { parseFlowName } from 'common/flow'
 import { FlowView } from 'common/typings'
 import { createForGlobalHooks } from 'core/api'
+import { EventRepository } from 'core/repositories'
 import { TYPES } from 'core/types'
-import { inject, injectable } from 'inversify'
+import { inject, injectable, tagged } from 'inversify'
 import _ from 'lodash'
 
 import { converseApiEvents } from '../converse'
 import { Hooks, HookService } from '../hook/hook-service'
+import { DialogStore } from '../middleware/dialog-store'
+import { addErrorToEvent } from '../middleware/event-collector'
+import { EventEngine } from '../middleware/event-engine'
 
-import { FlowError, ProcessingError, TimeoutNodeNotFound } from './errors'
+import { FlowError, TimeoutNodeNotFound } from './errors'
 import { FlowService } from './flow/service'
+import { Instruction } from './instruction'
 import { InstructionProcessor } from './instruction/processor'
 import { InstructionQueue } from './instruction/queue'
+import { PromptManager } from './prompt-manager'
 import { InstructionsQueueBuilder } from './queue-builder'
 
 const debug = DEBUG('dialog')
 
 @injectable()
 export class DialogEngine {
-  public onProcessingError: ((err: ProcessingError, hideStack: boolean) => void) | undefined
-
   private _flowsByBot: Map<string, FlowView[]> = new Map()
 
   constructor(
+    @inject(TYPES.Logger)
+    @tagged('name', 'DialogEngine')
+    private logger: Logger,
     @inject(TYPES.FlowService) private flowService: FlowService,
     @inject(TYPES.HookService) private hookService: HookService,
-    @inject(TYPES.InstructionProcessor) private instructionProcessor: InstructionProcessor
+    @inject(TYPES.EventRepository) private eventRepository: EventRepository,
+    @inject(TYPES.InstructionProcessor) private instructionProcessor: InstructionProcessor,
+    @inject(TYPES.PromptManager) private promptManager: PromptManager,
+    @inject(TYPES.EventEngine) private eventEngine: EventEngine,
+    @inject(TYPES.DialogStore) private dialogStore: DialogStore
   ) {}
 
   public async processEvent(sessionId: string, event: IO.IncomingEvent): Promise<IO.IncomingEvent> {
     const botId = event.botId
     await this._loadFlows(botId)
 
-    const context = _.isEmpty(event.state.context) ? this.initializeContext(event) : event.state.context
-    const currentFlow = this._findFlow(botId, context.currentFlow)
-    const currentNode = this._findNode(botId, currentFlow, context.currentNode)
+    const context: IO.DialogContext = _.isEmpty(event.state.context)
+      ? this.initializeContext(event)
+      : event.state.context
+
+    const currentFlow = this._findFlow(botId, context.currentFlow!)
+    const currentNode = this._findNode(botId, currentFlow, context.currentNode!)
+
+    if (event.ndu) {
+      const workflowName = currentFlow.name?.replace('.flow.json', '')
+
+      const { currentWorkflow } = event.state.session
+      const { workflow } = event.state
+
+      if (currentWorkflow !== workflowName || !event.state.session.workflows?.[workflowName]) {
+        this.changeWorkflow(event, workflowName)
+        event.state.session.currentWorkflow = workflowName
+      }
+
+      const workflowEnded = currentNode.type === 'success' || currentNode.type === 'failure'
+      if (workflowEnded && workflow) {
+        workflow.success = currentNode.type === 'success'
+        workflow.status = 'completed'
+      }
+
+      if (currentNode.type === 'prompt' && !context.activePrompt && !this._getCurrentNodeValue(event, 'processed')) {
+        this._appendActivePromptToContext(currentNode, context)
+      }
+
+      if (context.activePrompt && !event.state.__stacktrace.length) {
+        event.state.__stacktrace.push({ flow: currentFlow.name, node: currentNode.name })
+      }
+
+      if (context.activePrompt?.status === 'pending') {
+        const listenEvent = await this._processPendingPrompt(event, context)
+        if (listenEvent) {
+          return listenEvent
+        }
+      }
+
+      if (context.activePrompt?.status === 'resolved') {
+        this._processResolvedPrompt(event, context)
+      }
+
+      if (context.activePrompt?.status === 'rejected') {
+        const jumped = await this._processRejectedPrompt(event, context, sessionId, currentFlow.name)
+        if (jumped) {
+          return this.processEvent(sessionId, event)
+        }
+      }
+
+      if (context.activePrompt) {
+        this._setCurrentNodeValue(event, 'processed', true)
+        delete context.activePrompt
+      }
+    }
 
     // Property type skill-call means that the node points to a subflow.
     // We skip this step if we're exiting from a subflow, otherwise it will result in an infinite loop.
-    if (_.get(currentNode, 'type') === 'skill-call' && !this._exitingSubflow(event)) {
-      return this._goToSubflow(botId, event, sessionId, currentFlow, currentNode)
+    if (['skill-call', 'sub-workflow'].includes(currentNode.type!)) {
+      if (!this._exitingSubflow(event)) {
+        return this._goToSubflow(botId, event, sessionId, currentFlow, currentNode)
+      } else {
+        const subFlow = this._findFlow(botId, currentNode.flow!)
+        this.copyVarsToParent(subFlow, currentNode, event)
+        // TODO remove this hack
+        event.state.session.nduContext!.last_topic = parseFlowName(context.currentFlow!).topic!
+      }
     }
 
     const queueBuilder = new InstructionsQueueBuilder(currentNode, currentFlow)
@@ -52,19 +123,6 @@ export class DialogEngine {
       queue = InstructionsQueueBuilder.fromInstructions(context.queue.instructions)
     } else {
       queue = queueBuilder.build()
-    }
-
-    if (currentNode?.type === 'success') {
-      const wf = event.state.session.lastWorkflows.find(x => x.workflow === context.currentFlow)
-      wf && (wf.success = true)
-
-      queue.instructions = [
-        ...queue.instructions,
-        { type: 'transition', fn: 'true', node: 'Built-In/feedback.flow.json' }
-      ]
-    } else if (currentNode?.type === 'failure') {
-      const wf = event.state.session.lastWorkflows.find(x => x.workflow === context.currentFlow)
-      wf && (wf.success = false)
     }
 
     const instruction = queue.dequeue()
@@ -98,15 +156,18 @@ export class DialogEngine {
         context.queue = undefined
 
         return this._transition(sessionId, event, destination).catch(err => {
-          event.state.__error = {
-            type: 'dialog-transition',
-            stacktrace: err.stacktrace || err.stack,
-            destination: destination
-          }
+          addErrorToEvent(
+            {
+              type: 'dialog-transition',
+              stacktrace: err.stacktrace || err.stack,
+              destination: destination
+            },
+            event
+          )
 
           const { onErrorFlowTo } = event.state.temp
-          const errorFlowName = event.ndu ? 'Built-In/error.flow.json' : 'error.flow.json'
-          const errorFlow = typeof onErrorFlowTo === 'string' && onErrorFlowTo.length ? onErrorFlowTo : errorFlowName
+          const errorFlow =
+            typeof onErrorFlowTo === 'string' && onErrorFlowTo.length ? onErrorFlowTo : 'error.flow.json'
 
           return this._transition(sessionId, event, errorFlow)
         })
@@ -120,23 +181,190 @@ export class DialogEngine {
     return event
   }
 
-  public async jumpTo(sessionId: string, event: IO.IncomingEvent, targetFlowName: string, targetNodeName?: string) {
-    const botId = event.botId
-    await this._loadFlows(botId)
+  public changeWorkflow(event: IO.IncomingEvent, nextFlowName: string) {
+    const { currentWorkflow, workflows } = event.state.session
+    const { workflow } = event.state
 
-    const targetFlow = this._findFlow(botId, targetFlowName)
-    const targetNode = targetNodeName
-      ? this._findNode(botId, targetFlow, targetNodeName)
-      : this._findNode(botId, targetFlow, targetFlow.startNode)
+    const nextFlow = this._findFlow(event.botId, `${nextFlowName}.flow.json`)
+    const isSubFlow = nextFlow.type === 'reusable'
 
-    event.state.context.currentFlow = targetFlow.name
-    event.state.context.currentNode = targetNode.name
-    event.state.context.queue = undefined
-    event.state.context.hasJumped = true
+    event.state.session.workflows = _.omitBy(event.state.session.workflows, x => x.status === 'completed')
+
+    // This workflow doesn't already exist, so we add it
+    if (!workflow) {
+      BOTPRESS_CORE_EVENT('bp_core_workflow_started', {
+        botId: event.botId,
+        channel: event.channel,
+        wfName: nextFlowName
+      })
+
+      event.state.session.workflows = {
+        ...event.state.session.workflows,
+        [nextFlowName]: {
+          eventId: event.id,
+          status: 'active',
+          variables: {}
+        }
+      }
+      return
+    }
+
+    // We dive one level deeper (one more child)
+    if (isSubFlow) {
+      BOTPRESS_CORE_EVENT('bp_core_workflow_started', {
+        botId: event.botId,
+        channel: event.channel,
+        wfName: nextFlowName
+      })
+
+      // The parent flow is inactive for now
+      workflow.status = 'pending'
+
+      event.state.session.workflows = {
+        ...event.state.session.workflows,
+        [nextFlowName]: {
+          eventId: event.id,
+          status: 'active',
+          parent: currentWorkflow,
+          variables: {}
+        }
+      }
+
+      this.sendVarsToChild(nextFlow, event)
+    } else {
+      workflow.status = 'completed'
+
+      // If the current workflow has a parent, and we return there, we update its status
+      if (workflow.parent && workflows[nextFlowName]) {
+        workflows[nextFlowName].status = 'active'
+      }
+    }
   }
 
-  public async processTimeout(botId: string, sessionId: string, event: IO.IncomingEvent) {
+  private copyVarsToParent(childFlow: FlowView, callerNode: FlowNode, event: IO.IncomingEvent) {
+    const { workflows } = event.state.session
+
+    const outputs = callerNode.subflow?.out
+    const childOutputVars = childFlow.variables?.filter(x => x.params.isOutput)
+    const childBoxedVars = workflows[parseFlowName(childFlow.name).workflowPath!]?.variables
+
+    if (!outputs || !childOutputVars || !childBoxedVars) {
+      return
+    }
+
+    childOutputVars.forEach(v => {
+      const ouputVarName = outputs[v.params.name]
+      const childBoxedVar = childBoxedVars[v.params.name] as BoxedVariable<any>
+
+      if (ouputVarName && childBoxedVar) {
+        const { value, type, subType } = childBoxedVar
+        const params = { name: ouputVarName, value, type, subType }
+        this.createVariable(params, event)
+      }
+    })
+  }
+
+  private sendVarsToChild(childFlow: FlowView, event: IO.IncomingEvent) {
+    const { workflow } = event.state
+
+    const inputs = event.state.context.inputs
+    const childInputVars = childFlow.variables?.filter(x => x.params.isInput)
+    const currentBoxedVars = workflow.variables
+
+    if (!inputs || !childInputVars || !currentBoxedVars) {
+      return
+    }
+
+    childInputVars.forEach(v => {
+      const input = inputs[v.params.name]
+      if (!input) {
+        return
+      }
+
+      let value = input.value
+      if (input.source === 'variable') {
+        value = currentBoxedVars[input.value]?.value
+      }
+
+      if (value !== undefined) {
+        const flowName = parseFlowName(childFlow.name).workflowPath
+        const params = {
+          name: v.params.name,
+          value,
+          subType: v.params.subType,
+          type: v.type,
+          options: { nbOfTurns: 10, specificWorkflow: flowName }
+        }
+        try {
+          this.createVariable(params, event)
+        } catch (e) {
+          // TODO: handle error gracefully here
+        }
+      }
+    })
+  }
+
+  private _setCurrentNodeValue(event: IO.IncomingEvent, variable: string, value: any) {
+    const { currentFlow, currentNode } = event.state.context
+    _.set(event.state.temp, `[${currentFlow!.replace('.flow.json', '')}/${currentNode}].${variable}`, value)
+  }
+
+  private _getCurrentNodeValue(event: IO.IncomingEvent, variable: string): any {
+    const { currentFlow, currentNode } = event.state.context
+    return _.get(event.state.temp, `[${currentFlow!.replace('.flow.json', '')}/${currentNode}].${variable}`)
+  }
+
+  public async jumpTo(sessionId: string, event: IO.IncomingEvent, targetFlowName: string, targetNodeName?: string) {
+    const prompt = event.state.context?.activePrompt
+    if (prompt) {
+      if (!prompt.config.cancellable) {
+        return
+      }
+
+      if (prompt.config.confirmCancellation && prompt.stage !== 'confirm-jump') {
+        prompt.stage = 'confirm-jump'
+        prompt.state.nextDestination = { flowName: targetFlowName, node: targetNodeName! }
+
+        return
+      }
+
+      delete event.state.context.activePrompt
+    }
+
+    try {
+      const botId = event.botId
+      await this._loadFlows(botId)
+
+      const targetFlow = this._findFlow(botId, targetFlowName)
+      const targetNode = targetNodeName
+        ? this._findNode(botId, targetFlow, targetNodeName)
+        : this._findNode(botId, targetFlow, targetFlow.startNode)
+
+      event.state.__stacktrace.push({ flow: targetFlow.name, node: targetNode.name })
+      event.state.context.currentFlow = targetFlow.name
+      event.state.context.currentNode = targetNode.name
+      event.state.context.queue = undefined
+      event.state.context.hasJumped = true
+    } catch (err) {
+      addErrorToEvent(
+        {
+          type: 'dialog-engine',
+          stacktrace: err.stacktrace || err.stack
+        },
+        event
+      )
+      throw err
+    }
+  }
+
+  public async processTimeout(botId: string, sessionId: string, event: IO.IncomingEvent, isPrompt?: boolean) {
     this._debug(event.botId, event.target, 'processing timeout')
+
+    if (isPrompt) {
+      this._setCurrentNodeValue(event, 'timeout', true)
+      delete event.state.context.activePrompt
+      return this.processEvent(sessionId, event)
+    }
 
     const api = await createForGlobalHooks()
     await this.hookService.executeHook(new Hooks.BeforeSessionTimeout(api, event))
@@ -205,10 +433,14 @@ export class DialogEngine {
   private _endFlow(event: IO.IncomingEvent) {
     event.state.context = {}
     event.state.temp = {}
+
+    if (event.state.workflow) {
+      event.state.workflow.status = 'completed'
+    }
   }
 
   private initializeContext(event) {
-    const defaultFlow = this._findFlow(event.botId, event.ndu ? 'Built-In/welcome.flow.json' : 'main.flow.json')
+    const defaultFlow = this._findFlow(event.botId, event.ndu ? 'misunderstood.flow.json' : 'main.flow.json')
     const startNode = this._findNode(event.botId, defaultFlow, defaultFlow.startNode)
     event.state.__stacktrace.push({ flow: defaultFlow.name, node: startNode.name })
     event.state.context = {
@@ -222,7 +454,7 @@ export class DialogEngine {
 
   protected async _transition(sessionId: string, event: IO.IncomingEvent, transitionTo: string) {
     let context: IO.DialogContext = event.state.context
-    if (!event.state.__error) {
+    if (!event.activeProcessing?.errors?.length) {
       this._detectInfiniteLoop(event.state.__stacktrace, event.botId)
     }
 
@@ -312,9 +544,10 @@ export class DialogEngine {
       this._logTransition(event.botId, event.target, context.currentFlow, context.currentNode, transitionTo)
 
       event.state.__stacktrace.push({ flow: context.currentFlow!, node: transitionTo })
-      // When we're in a skill, we must remember the location of the main node for when we will exit
-      const isInSkill = context.currentFlow && context.currentFlow.startsWith('skills/')
-      if (isInSkill) {
+      // When we're in a sub flow, we must remember the location of the parent node for when we will exit
+      const flowInfo = this._findFlow(event.botId, context.currentFlow!)
+      const isInSubFlow = context.currentFlow?.startsWith('skills/') || flowInfo.type === 'reusable'
+      if (isInSubFlow) {
         context = { ...context, currentNode: transitionTo }
       } else {
         context = { ...context, previousNode: context.currentNode, currentNode: transitionTo }
@@ -325,12 +558,22 @@ export class DialogEngine {
     return this.processEvent(sessionId, event)
   }
 
-  private async _goToSubflow(botId: string, event: IO.IncomingEvent, sessionId: string, parentFlow, parentNode) {
-    const subflowName = parentNode.flow // Name of the subflow to transition to
+  private async _goToSubflow(
+    botId: string,
+    event: IO.IncomingEvent,
+    sessionId: string,
+    parentFlow,
+    parentNode: FlowNode
+  ) {
+    const subflowName = parentNode.flow!
     const subflow = this._findFlow(botId, subflowName)
     const subflowStartNode = this._findNode(botId, subflow, subflow.startNode)
 
+    // TODO remove this hack
+    event.state.session.nduContext!.last_topic = parseFlowName(subflowName).topic!
+
     event.state.context = {
+      inputs: parentNode.subflow?.in,
       currentFlow: subflow.name,
       currentNode: subflowStartNode.name,
       previousFlow: parentFlow.name,
@@ -388,7 +631,7 @@ export class DialogEngine {
 
     const flow = flows.find(x => x.name === flowName)
     if (!flow) {
-      throw new FlowError(`Flow not found."`, botId, flowName)
+      throw new FlowError(`Flow not found: ${flowName}`, botId, flowName)
     }
     return flow
   }
@@ -396,20 +639,33 @@ export class DialogEngine {
   private _findNode(botId: string, flow: FlowView, nodeName: string) {
     const node = flow.nodes && flow.nodes.find(x => x.name === nodeName)
     if (!node) {
-      throw new FlowError(`Node not found.`, botId, flow.name, nodeName)
+      throw new FlowError(`Node not found: ${nodeName}`, botId, flow.name, nodeName)
     }
     return node
   }
 
-  private _reportProcessingError(botId, error, event, instruction) {
+  private _reportProcessingError(botId: string, err, event: IO.IncomingEvent, instruction: Instruction) {
     const nodeName = _.get(event, 'state.context.currentNode', 'N/A')
     const flowName = _.get(event, 'state.context.currentFlow', 'N/A')
-    const instructionDetails = instruction.fn || instruction.type
-    this.onProcessingError &&
-      this.onProcessingError(
-        new ProcessingError(error.message, botId, nodeName, flowName, instructionDetails),
-        error.hideStack
-      )
+    const instr = instruction.fn || instruction.type
+    const message = `Error processing '${instr}'\nErr: ${err.message}\nBotId: ${botId}\nFlow: ${flowName}\nNode: ${nodeName}`
+
+    if (!err.hideStack) {
+      this.logger
+        .forBot(botId)
+        .attachError(err)
+        .warn(message)
+    } else {
+      this.logger.forBot(botId).warn(message)
+    }
+
+    addErrorToEvent(
+      {
+        type: 'dialog-engine',
+        stacktrace: err.stacktrace || err.stack
+      },
+      event
+    )
   }
 
   private _exitingSubflow(event: IO.IncomingEvent) {
@@ -442,5 +698,133 @@ export class DialogEngine {
 
   private _logTransition(botId, target, currentFlow, currentNode, transitionTo) {
     this._debug(botId, target, `transit (${currentFlow}) [${currentNode}] -> [${transitionTo}]`)
+  }
+
+  private _getPreviousEvents(target: string, searchBackCount: number) {
+    if (!searchBackCount) {
+      return []
+    }
+
+    return this.eventRepository
+      .findEvents(
+        { direction: 'incoming', target },
+        {
+          count: searchBackCount,
+          sortOrder: [{ column: 'createdOn', desc: true }]
+        }
+      )
+      .then(events => events.map(x => <IO.IncomingEvent>x.event))
+  }
+
+  private _appendActivePromptToContext(currentNode: FlowNode, context: IO.DialogContext) {
+    const { type, params } = currentNode.prompt!
+    context.activePrompt = {
+      stage: 'new',
+      status: 'pending',
+      state: {},
+      turn: 0,
+      config: {
+        type,
+        valueType: this.dialogStore.getPromptConfig(type)?.valueType,
+        ...params
+      }
+    }
+  }
+
+  private async _processPendingPrompt(
+    event: IO.IncomingEvent,
+    context: IO.DialogContext
+  ): Promise<IO.IncomingEvent | undefined> {
+    const { searchBackCount } = context.activePrompt!.config
+    const previousEvents =
+      context.activePrompt!.stage === 'new' && searchBackCount > 1
+        ? await this._getPreviousEvents(event.target, searchBackCount - 1)
+        : []
+
+    const { status: promptStatus, actions } = await this.promptManager.processPrompt(event, previousEvents)
+    context.activePrompt = promptStatus
+
+    for (const { type, payload, message, eventType } of actions) {
+      if (type === 'say') {
+        const incomingEventId = event.id
+
+        if (payload) {
+          await this.eventEngine.replyContentToEvent(payload, event, { incomingEventId, eventType })
+        } else if (message) {
+          const text: Content.Text = {
+            type: 'text',
+            text: message
+          }
+
+          await this.eventEngine.replyContentToEvent(text, event, { incomingEventId })
+        }
+      }
+
+      if (type === 'listen') {
+        return event
+      }
+
+      if (type === 'cancel') {
+        this._setCurrentNodeValue(event, 'cancelled', true)
+      }
+    }
+  }
+
+  private _processResolvedPrompt(event: IO.IncomingEvent, context: IO.DialogContext) {
+    const { config, state } = context.activePrompt!
+
+    if (state.electedCandidate) {
+      context.pastPromptCandidates = [...(context.pastPromptCandidates || []), state.electedCandidate]
+    }
+
+    this.createVariable(
+      {
+        name: config.output,
+        value: state.value,
+        type: config.valueType!,
+        subType: config.subType,
+        options: {
+          nbOfTurns: config.duration ?? 10
+        }
+      },
+      event
+    )
+
+    this._setCurrentNodeValue(event, 'extracted', true)
+  }
+
+  private async _processRejectedPrompt(
+    event: IO.IncomingEvent,
+    context: IO.DialogContext,
+    sessionId: string,
+    currentFlowName: string
+  ): Promise<boolean> {
+    this._setCurrentNodeValue(event, context.activePrompt!.rejection!, true)
+
+    if (context.activePrompt!.rejection === 'jumped') {
+      const { nextDestination } = context.activePrompt!.state
+      if (nextDestination) {
+        const { flowName, node } = nextDestination
+        await this.jumpTo(sessionId, event, flowName, node)
+
+        return true
+      } else {
+        throw new FlowError('No destination set for jump to instruction', event.botId, currentFlowName)
+      }
+    }
+    return false
+  }
+
+  public createVariable({ name, value, type, subType, options }: VariableParams, event: IO.IncomingEvent) {
+    const workflowName = options?.specificWorkflow ?? event.state.session.currentWorkflow!
+    const wf = event.state.session.workflows[workflowName]
+    if (!wf) {
+      return
+    }
+
+    const { nbOfTurns, config } = options ?? {}
+    const data = { type, subType, value, nbOfTurns: nbOfTurns ?? 10, config }
+
+    wf.variables[name] = this.dialogStore.getBoxedVar(data, event.botId, workflowName, name)!
   }
 }
