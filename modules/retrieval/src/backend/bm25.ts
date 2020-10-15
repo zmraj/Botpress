@@ -4,6 +4,7 @@ import { query } from 'ndx-query'
 
 function termFilter(term) {
   return term.toLowerCase()
+  // TODO add stemming or tokenization
 }
 
 export class Bm25Index {
@@ -47,7 +48,7 @@ export class Bm25Index {
       0.75, // BM25 b constant, controls to what degree document length normalizes tf values.
       words,
       termFilter,
-      // Set of removed documents, in this example we don't want to support removing documents from the index,
+      // Set of removed documents, here we don't want to support removing documents from the index,
       // so we can ignore it by specifying this set as `undefined` value.
       undefined,
       q

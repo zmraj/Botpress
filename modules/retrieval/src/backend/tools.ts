@@ -7,7 +7,7 @@ import path from 'path'
 
 import { qnas } from '../../datas/raw/qna.json'
 
-import { DeepEmbedder, PythonEmbedder } from './embedder'
+import { DeepEmbedder, PythonEmbedder } from '../../../../src/bp/ml/embedder/embedder'
 import { rerank } from './reranker'
 import { feedback, kb_entry } from './typings'
 
@@ -128,4 +128,4 @@ export function extract_question_context() {
   fs.writeFileSync(path.join(__dirname, '..', '..', 'datas', 'questions_context.json'), data)
 }
 
-export async function extract_question_result_gouv() {}
+export async function extract_question_result_gouv() { }
