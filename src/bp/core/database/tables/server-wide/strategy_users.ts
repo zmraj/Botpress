@@ -2,7 +2,7 @@ export class StrategyUserTable {
   async createStrategyTable(knex, tableName: string) {
     let created = false
     await knex.createTableIfNotExists(tableName, table => {
-      table.increments('id')
+      table.increments('id').primary()
       table.string('email').notNullable()
       table.string('password').nullable()
       table.string('salt').nullable()

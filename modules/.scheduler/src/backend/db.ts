@@ -24,7 +24,7 @@ export default class SchedulerDb {
       })
       .then(() => {
         return this.knex.createTableIfNotExists('scheduler_tasks', function(table) {
-          table.increments('id')
+          table.increments('id').primary()
           table
             .string('scheduleId')
             .references('scheduler_schedules.id')

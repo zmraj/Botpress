@@ -27,7 +27,7 @@ export default class Db {
 
   async initialize() {
     await this.knex.createTableIfNotExists(TABLE_NAME, table => {
-      table.increments('id')
+      table.increments('id').primary()
       table.string('eventId')
       table.string('botId')
       table.string('language')
