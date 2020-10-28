@@ -13,11 +13,11 @@ interface Props {
 }
 
 const ContextSelector: FC<Props> = props => {
-  const [availableContexts, setContexts] = useState([])
-  const contexts = props.contexts || []
+  const [availableContexts, setContexts] = useState(['global'])
+  const contexts = props.contexts || ['global']
 
   useEffect(() => {
-    props.bp.axios.get(`/nlu/contexts`).then(({ data }) => setContexts(data)) // TODO: remove this (deprecated, contexts are implicit to Topic name)
+    props.bp.axios.get('mod/nlu/contexts').then(({ data }) => setContexts(data)) // TODO: remove this (deprecated, contexts are implicit to Topic name)
   }, [])
 
   const removeCtx = (_, idx: number) => {
