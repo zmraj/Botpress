@@ -252,6 +252,7 @@ export class EventEngine {
 
   private async _infoMiddleware(event: sdk.IO.Event) {
     const sendText = async text => {
+      console.trace(`${new Date().toISOString()} core: calling replyToEvent from _infoMiddleware`)
       await this.replyToEvent(event, [{ text, markdown: true }])
       event.setFlag(WellKnownFlags.SKIP_DIALOG_ENGINE, true)
     }

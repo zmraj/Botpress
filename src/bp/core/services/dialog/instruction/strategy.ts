@@ -96,6 +96,7 @@ export class ActionStrategy implements InstructionStrategy {
 
     const eventDestination = _.pick(event, ['channel', 'target', 'botId', 'threadId'])
     const renderedElements = await this.cms.renderElement(outputType, args, eventDestination)
+    console.trace(`${new Date().toISOString()} core: calling replyToEvent from invokeOutputProcessor (${event.id})`)
     await this.eventEngine.replyToEvent(eventDestination, renderedElements, event.id)
 
     return ProcessingResult.none()
