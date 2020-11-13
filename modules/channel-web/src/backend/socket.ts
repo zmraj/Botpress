@@ -50,6 +50,7 @@ export default async (bp: typeof sdk, db: Database) => {
       const payload = bp.RealTimePayload.forVisitor(userId, 'webchat.data', event.payload)
       bp.realtime.sendPayload(payload)
     } else if (standardTypes.includes(messageType)) {
+      console.trace(`Sending event: ${event.id}`)
       const message = await db.appendBotMessage(
         (event.payload || {}).botName || botName,
         (event.payload || {}).botAvatarUrl || botAvatarUrl,
