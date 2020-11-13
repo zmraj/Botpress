@@ -190,6 +190,7 @@ export class EventEngine {
     } else {
       debugOutgoing.forBot(event.botId, 'send ', event)
       incrementMetric('eventsOut.count')
+      console.trace(`${new Date().toISOString()} Pushing outgoing event in queue: ${event.id}`)
       await this.outgoingQueue.enqueue(event, 1, false)
     }
   }

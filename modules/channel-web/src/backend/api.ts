@@ -161,6 +161,7 @@ export default async (bp: typeof sdk, db: Database) => {
         conversationId = await db.getOrCreateRecentConversation(botId, userId, { originatesFromUserMessage: true })
       }
 
+      console.trace(`${new Date().toISOString()} web: calling sendNewMessage from router.post('/messages/:userId`)
       await sendNewMessage(
         botId,
         userId,
@@ -207,6 +208,7 @@ export default async (bp: typeof sdk, db: Database) => {
         size: req.file.size
       }
 
+      console.trace(`${new Date().toISOString()} web: calling sendNewMessage from router.post('/messages/:userId/files`)
       await sendNewMessage(botId, userId, conversationId, payload, req.credentials)
 
       return res.sendStatus(200)
@@ -295,6 +297,7 @@ export default async (bp: typeof sdk, db: Database) => {
     const message = await db.appendUserMessage(botId, userId, conversationId, sanitizedPayload, event.id, user)
     bp.realtime.sendPayload(bp.RealTimePayload.forVisitor(userId, 'webchat.message', message))
 
+    console.trace(`${new Date().toISOString()} web: sendNewMessage`)
     await bp.events.sendEvent(event)
   }
 
@@ -322,6 +325,7 @@ export default async (bp: typeof sdk, db: Database) => {
         credentials: req.credentials
       })
 
+      console.trace(`${new Date().toISOString()} web: post /events/:userId`)
       await bp.events.sendEvent(event)
       res.sendStatus(200)
     })
@@ -372,6 +376,9 @@ export default async (bp: typeof sdk, db: Database) => {
         type: 'session_reset'
       }
 
+      console.trace(
+        `${new Date().toISOString()} web: calling sendNewMessage from router.post('/conversations/:userId/:conversationId/reset`
+      )
       await sendNewMessage(botId, userId, conversationId, payload, req.credentials)
 
       const sessionId = await bp.dialog.createId({ botId, target: userId, threadId: conversationId, channel: 'web' })
@@ -429,6 +436,7 @@ export default async (bp: typeof sdk, db: Database) => {
         credentials: req['credentials']
       })
 
+      console.trace(`${new Date().toISOString()} web: post /conversations/:userId/:conversationId/reference/:reference`)
       await bp.events.sendEvent(event)
       res.sendStatus(200)
     } catch (error) {
