@@ -95,6 +95,11 @@ export class ActionStrategy implements InstructionStrategy {
     }
 
     const eventDestination = _.pick(event, ['channel', 'target', 'botId', 'threadId'])
+    console.log(
+      `${new Date().toISOString()} core: renderElement args: ${outputType} ${JSON.stringify(
+        args
+      )} ${eventDestination} (${event.id})`
+    )
     const renderedElements = await this.cms.renderElement(outputType, args, eventDestination)
     console.trace(`${new Date().toISOString()} core: calling replyToEvent from invokeOutputProcessor (${event.id})`)
     console.trace(
