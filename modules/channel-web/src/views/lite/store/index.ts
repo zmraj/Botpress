@@ -218,7 +218,7 @@ class RootStore {
     }
 
     const conversation: CurrentConversation = await this.api.fetchConversation(convoId || this._getCurrentConvoId())
-    await this.extractFeedback(conversation && conversation.messages)
+    await this.extractFeedback(conversation?.messages || [])
 
     runInAction('-> setConversation', () => {
       this.currentConversation = conversation
@@ -316,7 +316,7 @@ class RootStore {
   @action.bound
   async sendData(data: any): Promise<void> {
     if (!constants.MESSAGE_TYPES.includes(data.type)) {
-      return await this.api.sendEvent(data)
+      return await this.api.sendEvent(data, this.currentConversationId)
     }
 
     await this.api.sendMessage(data, this.currentConversationId)

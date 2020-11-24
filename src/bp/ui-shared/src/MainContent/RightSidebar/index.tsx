@@ -1,3 +1,4 @@
+import cx from 'classnames'
 import { useEffect } from 'react'
 import React, { FC } from 'react'
 
@@ -7,7 +8,7 @@ import { RightSidebarProps } from './typings'
 const RightSidebar: FC<RightSidebarProps> = ({ className, canOutsideClickClose, close, children }) => {
   let container
   const contentWrapper = document.getElementById('main-content-wrapper')
-  const classList = [style.show, className || ''].filter(Boolean)
+  const classList = [style.show, ...(className?.split(' ') || [])].filter(Boolean)
 
   useEffect(() => {
     container = document.getElementById('sidebar-container')
@@ -35,7 +36,7 @@ const RightSidebar: FC<RightSidebarProps> = ({ className, canOutsideClickClose, 
   }
 
   return (
-    <div className={style.rightSidebar} id="sidebar-container">
+    <div className={cx(style.rightSidebar, 'right-sidebar')} id="sidebar-container">
       {children}
     </div>
   )

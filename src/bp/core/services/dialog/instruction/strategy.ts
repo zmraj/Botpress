@@ -23,7 +23,7 @@ export interface InstructionStrategy {
 }
 
 const argsToConst = (fields: string[]) => {
-  return (fields ?? []).map(snakeToCamel).join(', ')
+  return (fields ?? []).map(field => `'${field}': ${snakeToCamel(field)}`).join(', ')
 }
 
 @injectable()
@@ -43,9 +43,21 @@ export class ActionStrategy implements InstructionStrategy {
     return instructionFn.indexOf('say ') === 0
   }
 
+  public static isTriggerRegistration(instructionFn: string): boolean {
+    return instructionFn === 'register-trigger'
+  }
+
+  public static isExecuteAction(instructionFn: string): boolean {
+    return instructionFn === 'execute'
+  }
+
   async processInstruction(botId, instruction, event): Promise<ProcessingResult> {
     if (ActionStrategy.isSayInstruction(instruction.fn)) {
       return this.invokeOutputProcessor(botId, instruction, event)
+    } else if (ActionStrategy.isTriggerRegistration(instruction.fn)) {
+      return this.invokeTriggerRegistration(botId, instruction, event)
+    } else if (ActionStrategy.isExecuteAction(instruction.fn)) {
+      return this.executeAction(botId, instruction, event)
     } else {
       return this.invokeAction(botId, instruction, event)
     }
@@ -57,6 +69,39 @@ export class ActionStrategy implements InstructionStrategy {
     const renderedElements = await this.cms.renderElement(contentType, commonArgs as EventCommonArgs, eventDestination)
 
     await this.eventEngine.replyToEvent(eventDestination, renderedElements, event.id)
+  }
+
+  private async invokeTriggerRegistration(
+    botId: string,
+    instruction: Instruction,
+    event: IO.IncomingEvent
+  ): Promise<ProcessingResult> {
+    const { workflowId, nodeId, index, trigger } = instruction.args // TODO: make sure the trigger is valid
+    if (!event.state.session.nduContext) {
+      // TODO: possible if NDU module disabled?
+      return ProcessingResult.none()
+    }
+
+    let triggers = event.state.session.nduContext?.triggers ?? []
+    if (!event.state.session.nduContext?.triggers) {
+      event.state.session.nduContext!.triggers = []
+    } else {
+      triggers = triggers.filter(x => x.workflowId !== workflowId || x.nodeId !== nodeId || x.index !== index)
+    }
+
+    event.state.session.nduContext.triggers = [
+      ...triggers,
+      {
+        workflowId,
+        nodeId,
+        index,
+        suggestion: { ...trigger.suggestion, eventId: event.id },
+        expiryPolicy: trigger.expiryPolicy,
+        turn: trigger?.expiryPolicy?.turnCount ?? 3
+      }
+    ]
+
+    return ProcessingResult.none()
   }
 
   private async invokeOutputProcessor(botId, instruction, event: IO.IncomingEvent): Promise<ProcessingResult> {
@@ -128,8 +173,7 @@ export class ActionStrategy implements InstructionStrategy {
       const service = await this.actionService.forBot(botId)
       await service.runAction({
         actionName,
-        actionCode:
-          code && `const { ${argsToConst(variables.map(x => x.name))} } = event.state.workflow.variables\n${code}`,
+        actionCode: code && `const { ${argsToConst(variables.map(x => x.name))} } = workflow.variables\n${code}`,
         incomingEvent: event,
         actionArgs: _.mapValues(params, ({ value }) => renderTemplate(value, actionArgs))
       })
@@ -144,10 +188,6 @@ export class ActionStrategy implements InstructionStrategy {
   }
 
   private async invokeAction(botId, instruction, event: IO.IncomingEvent): Promise<ProcessingResult> {
-    if (instruction.fn === 'exec') {
-      return this.executeAction(botId, instruction, event)
-    }
-
     const { actionName, argsStr, actionServerId } = parseActionInstruction(instruction.fn)
 
     let args: { [key: string]: any } = {}
@@ -244,7 +284,7 @@ export class TransitionStrategy implements InstructionStrategy {
     const variables = instruction.fn?.match(/\$[a-zA-Z][a-zA-Z0-9_-]*/g) ?? []
     for (const match of variables) {
       const name = match.replace('$', '')
-      instruction.fn = instruction.fn!.replace(match, `event.state.workflow.variables.${name}`)
+      instruction.fn = instruction.fn!.replace(match, `event.state.workflow.variables['${name}']`)
     }
 
     const code = `return ${instruction.fn};`

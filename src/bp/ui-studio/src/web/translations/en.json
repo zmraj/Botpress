@@ -8,20 +8,22 @@
     "chooseFile": "Choose file",
     "configUpdated": "Bot configuration updated successfully",
     "confirmChangeLanguage": "Are you sure you want to change the language of your bot from {currentName} to {newName}? All of your content elements will be copied, make sure you translate them.",
+    "confirm": "Confirm",
     "confirmUnmount": "Are you sure want to unmount this bot? All of the functionalities of this bot will become unavailable.",
-    "contactEmail": "Contact E-mail",
+    "contactEmail": "Contact Email",
     "coverPicture": "Cover Picture",
     "coverUploadSuccess": "The cover picture has been uploaded successfully. You need to save the form in order for the changes to take effect.",
     "defaultLanguage": "Default language",
     "description": "Description",
     "formContainsErrors": "The form contains errors",
     "language": "Language",
-    "linkToPolicy": "Link to Privacy Policy",
-    "linkToTerms": "Link to Terms & Conditions",
+    "linkToPolicy": "Privacy Policy URL",
+    "linkToTerms": "Terms & Conditions URL",
     "phoneNumber": "Phone Number",
     "requireImageFile": "{targetProp} requires an image file",
     "supportedLanguages": "Supported languages",
-    "website": "Website"
+    "website": "Website URL",
+    "whatIsYourChatbotName": "What is your chatbot name?"
   },
   "language": {
     "arabic": "Arabic",
@@ -40,7 +42,7 @@
   "status": {
     "disabled": "Unmounted",
     "private": "Collaborators Only",
-    "public": "Published"
+    "public": "Public"
   },
   "statusBar": {
     "trainWarning": "You are testing a chatbot that needs to be trained.",
@@ -125,6 +127,7 @@
       }
     },
     "library": {
+      "setVarValueTo": "Set {varName} Value to",
       "savedBlocks": "Saved Blocks",
       "savedWorkflows": "Saved Workflows",
       "variableTypes": "Variable Types",
@@ -132,9 +135,12 @@
       "addPattern": "Add Pattern",
       "addComplex": "Add Complex",
       "addType": "Add Type",
+      "enterValue": "Enter a value",
       "editingSubWorkflowWarning": "Editing this workflow will impact all its linked instances.",
       "deleteVariableFromLibrary": "Remove Variable Type from Library",
       "duplicateVariableType": "Duplicate Variable Type",
+      "renameVariableType": "Rename Variable Type",
+      "nameVariableType": "Name Variable Type",
       "duplicateWorkflow": "Duplicate Workflow",
       "filter": "Filter blocks, workflows and variable types",
       "variableName": "What is the name of this variable",
@@ -142,6 +148,8 @@
       "addValueAlternative": "Add Value Alternative",
       "deleteEnumeration": "Delete Enumeration",
       "confirmDeleteEntity": "Do you really want to delete this variable type ?",
+      "copyTags": "Copy Tags",
+      "mustMatchNumberOfTags": "Number of tags must match in all languages",
       "complexityExamplePlaceholder": "Write as many example as possible that match this variable's complexity",
       "examplePlaceholder": "Write examples that match this variable type pattern",
       "regexPatternPlaceholder": "Write a regular expression pattern",
@@ -213,6 +221,8 @@
         "addAction": "Add new action",
         "addCondition": "Add Condition",
         "addMessage": "Add Message",
+        "addSuggestion": "Add a Suggestion",
+        "addSuggestionTooltip": "Press Enter + Shift while inline to add new suggestion quickly",
         "cantSeeActions": "Can't see your action?",
         "chatbotExecutes": "Chatbot Executes",
         "chatbotSays": "Chatbot Says",
@@ -381,6 +391,8 @@
         "deleteTopic": "Delete Topic",
         "deleteWorkflow": "Delete Workflow",
         "editQna": "Edit Q&A",
+        "moveQna": "Move Q&As to",
+        "confirmMoveQna": "Are you sure you want to move all Q&As to another topic?",
         "editTopic": "Edit topic",
         "editWorkflow": "Edit Workflow",
         "exportTopic": "Export Topic",
@@ -388,6 +400,7 @@
         "importExisting": "Import existing workflow",
         "nbQuestionsInTopic": "Number of questions in that topic",
         "nbTriggersInWorkflow": "Number of NLU triggers on that workflow",
+        "beforeRemovingSubflow": "Before removing this saved workflow block from library, please delete all the following instances:",
         "workflowReceiving": "Workflows referencing this workflow:"
       },
       "transition": "Transition",
@@ -419,9 +432,14 @@
       "config": "Config",
       "content": "Content",
       "flows": "Flows"
-    }
+    },
+    "zoomOut": "Zoom Out",
+    "zoomIn": "Zoom In"
   },
   "toolbar": {
+    "configuration": "Configuration",
+    "configureAnotherLanguage": "Configure another language to enable translation",
+    "contactSalesForMultilingual": "Contact sales to know more about multilingual chatbots",
     "emulator": "Emulator",
     "help": "Help",
     "logsPanel": "Logs Panel",

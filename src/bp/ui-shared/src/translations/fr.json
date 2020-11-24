@@ -17,6 +17,7 @@
   "chooseFile": "Choisir fichier...",
   "close": "Fermer",
   "collapseAll": "Tout réduire",
+  "converseApi": "Converse API",
   "commander": {
     "backToAdmin": "Retour à l'admin",
     "category": {
@@ -111,6 +112,7 @@
   "noRowsFound": "Aucun enregistrement trouvé",
   "of": "de",
   "ok": "OK",
+  "optional": "Optionnel",
   "options": "Options",
   "or": "ou",
   "overwrite": "Écraser",
@@ -124,6 +126,7 @@
   "previous": "Précédent",
   "prompt": "Prompt",
   "quickAddAlternative": "Appuyez sur la touche Entrée pendant que vous êtes dans le champ pour ajouter rapidement une nouvelle alternative",
+  "quickAddAlternativeTags": "Appuyez sur la touche Entrée et Majuscule pendant que vous êtes dans le champ pour ajouter rapidement une nouvelle alternative",
   "redo": "Refaire",
   "refresh": "Rafraîchir",
   "remove": "Retirer",
@@ -162,6 +165,7 @@
   "submit": "Soumettre",
   "subtitle": "Sous-titre",
   "success": "Succès",
+  "suggestions": "Suggestions",
   "superInput": {
     "convertToRegularInput": "Convertir en champ normal",
     "convertToSmartInput": "Convertir en champ intelligent",
@@ -181,15 +185,19 @@
   "upload": "Téléverser",
   "usage": "Utilisation",
   "date": "Date",
+  "notAvailable": "Non disponible",
   "number": "Nombre",
   "boolean": "Booléen",
   "string": "Texte",
   "format": "Format",
   "input": "Entrée",
   "output": "Sortie",
+  "inputs": "Entrées",
+  "outputs": "Sorties",
   "tolerance": "Tolérance",
   "enumeration": "Énumération",
   "uncategorized": "Non catégorisée",
+  "value": "Valeur",
   "values": "Valeurs",
   "exactMatch": "Correspondances exactes uniquement",
   "moderate": "Modéré",
@@ -199,5 +207,6 @@
   "examples": "Exemples",
   "uploading": "Téléversement",
   "incomplete": "Incomplètes",
-  "active": "Actives"
+  "active": "Actives",
+  "visibility": "Visibilité"
 }

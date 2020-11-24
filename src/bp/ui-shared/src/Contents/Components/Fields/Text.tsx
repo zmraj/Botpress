@@ -2,9 +2,9 @@ import { FormField } from 'botpress/sdk'
 import cx from 'classnames'
 import React, { FC, Fragment, useEffect, useState } from 'react'
 
+import sharedStyle from '../../../../../ui-shared-lite/style.scss'
 import { lang } from '../../../translations'
 import { getFieldDefaultValue } from '../../utils/fields'
-import style from '../style.scss'
 import { FieldProps } from '../typings'
 
 type TextProps = FieldProps & { field: FormField }
@@ -65,7 +65,7 @@ const Text: FC<TextProps> = ({
     <Fragment>
       <input
         ref={ref => childRef?.(ref)}
-        className={cx(style.input, { [style.hasError]: missingTranslation })}
+        className={cx(sharedStyle.input, { 'has-error': missingTranslation })}
         type={type}
         maxLength={maxLength}
         placeholder={placeholder}
@@ -77,9 +77,9 @@ const Text: FC<TextProps> = ({
           setLocalValue(value)
         }}
         onBlur={beforeOnBlur}
-        value={localValue || refValue}
+        value={localValue ?? refValue}
       />
-      {missingTranslation && <span className={style.fieldError}>{lang('pleaseTranslateField')}</span>}
+      {missingTranslation && <span className={sharedStyle.fieldError}>{lang('pleaseTranslateField')}</span>}
     </Fragment>
   )
 }

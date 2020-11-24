@@ -43,13 +43,20 @@ export class IntentService {
 
     for (const flow of flows) {
       const topicName = flow.name.split('/')[0]
+      const slots = flow.variables?.map(x => ({ name: x.params?.name, entity: x?.params?.subType ?? x.type })) ?? []
 
-      for (const node of flow.nodes.filter(x => x.type === 'trigger')) {
-        const tn = node as sdk.TriggerNode
-        const conditions = tn?.conditions.filter(x => x?.id === 'user_intent_is')
+      for (const triggerNode of flow.nodes.filter(
+        x => x.type === 'trigger' || x.triggers?.length
+      ) as sdk.TriggerNode[]) {
+        const conditions = triggerNode.conditions?.filter(x => x?.id === 'user_intent_is') ?? []
+        const explicitIntents = _.flatten(
+          triggerNode.triggers?.map(x =>
+            x.conditions.filter(x => x?.id === 'user_intent_is' && x.params?.utterances !== undefined)
+          ) ?? []
+        )
 
         for (let i = 0; i < conditions.length; i++) {
-          const intentName = sanitizeFileName(`${flow.name}/${tn?.name}/${i}`)
+          const intentName = sanitizeFileName(`${flow.name}/${triggerNode?.name}/${i}`)
           if (intentsByName[intentName]) {
             throw new Error(`Duplicated intent with name "${intentName}"`)
           }
@@ -57,8 +64,22 @@ export class IntentService {
             contexts: [topicName],
             filename: flow.name,
             name: intentName,
-            slots: flow.variables?.map(x => ({ name: x.params?.name, entity: x?.params?.subType ?? x.type })) ?? [],
+            slots,
             utterances: conditions[i]?.params?.utterances ?? {}
+          }
+        }
+
+        for (let i = 0; i < explicitIntents.length; i++) {
+          const intentName = sanitizeFileName(`${flow.name}/${triggerNode?.name}/${conditions.length + i}`)
+          if (intentsByName[intentName]) {
+            throw new Error(`Duplicated intent with name "${intentName}"`)
+          }
+          intentsByName[intentName] = {
+            contexts: [sanitizeFileName(`explicit:${flow.name}/${triggerNode.name}`)],
+            filename: flow.name,
+            name: intentName,
+            slots,
+            utterances: explicitIntents[i]?.params?.utterances ?? {}
           }
         }
       }

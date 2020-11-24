@@ -1,6 +1,16 @@
-import { Checkbox, Icon, IconName, Spinner } from '@blueprintjs/core'
-import { confirmDialog, EmptyState, HeaderButtonProps, lang, MainContent } from 'botpress/shared'
-import { AccessControl, Downloader, reorderFlows, toastFailure, toastSuccess } from 'botpress/utils'
+import { Icon, IconName, Spinner } from '@blueprintjs/core'
+import {
+  Checkbox,
+  confirmDialog,
+  EmptyState,
+  HeaderButtonProps,
+  Icons,
+  lang,
+  MainContent,
+  sharedStyle,
+  toast
+} from 'botpress/shared'
+import { AccessControl, Downloader, reorderFlows } from 'botpress/utils'
 import cx from 'classnames'
 import { debounce } from 'lodash'
 import React, { FC, useCallback, useEffect, useReducer, useRef, useState } from 'react'
@@ -22,6 +32,8 @@ const QnAList: FC<Props> = ({
   contentLang,
   updateLocalLang,
   isLite,
+  licensing,
+  emulatorOpen,
   events,
   refreshQnaCount
 }) => {
@@ -133,8 +145,10 @@ const QnAList: FC<Props> = ({
     noItemsTooltip = lang.tr('module.qna.form.addOneItemTooltip')
   }
 
-  if (languages?.length <= 1) {
-    languesTooltip = lang.tr('module.qna.form.onlyOneLanguage')
+  if (!licensing?.isPro) {
+    languesTooltip = lang.tr('toolbar.contactSalesForMultilingual')
+  } else if (languages?.length <= 1) {
+    languesTooltip = lang.tr('toolbar.configureAnotherLanguage')
   }
 
   const buttons: HeaderButtonProps[] = [
@@ -149,7 +163,7 @@ const QnAList: FC<Props> = ({
         }
       })),
       disabled: !items.length || languages?.length <= 1,
-      tooltip: noItemsTooltip || languesTooltip
+      tooltip: languesTooltip
     },
     {
       icon: 'filter',
@@ -157,7 +171,6 @@ const QnAList: FC<Props> = ({
       optionsWrapperClassName: style.filterWrapper,
       optionsItems: [
         {
-          className: style.checkboxWrapper,
           content: (
             <Checkbox
               checked={filterOptions.active}
@@ -167,20 +180,20 @@ const QnAList: FC<Props> = ({
           )
         },
         {
-          className: style.checkboxWrapper,
           content: (
             <Checkbox
               checked={filterOptions.incomplete}
+              className={style.checkboxSpacing}
               label={lang.tr('incomplete')}
               onChange={() => setFilterOptions({ ...filterOptions, incomplete: !filterOptions.incomplete })}
             />
           )
         },
         {
-          className: style.checkboxWrapper,
           content: (
             <Checkbox
               checked={filterOptions.disabled}
+              className={style.checkboxSpacing}
               label={lang.tr('disabled')}
               onChange={() => setFilterOptions({ ...filterOptions, disabled: !filterOptions.disabled })}
             />
@@ -194,14 +207,14 @@ const QnAList: FC<Props> = ({
       disabled: items.length < 2,
       optionsItems: [
         {
-          label: lang.tr('module.qna.mostRecent'),
+          label: lang.tr('module.qna.mostRecentlyEdited'),
           selected: sortOption === 'mostRecent',
           action: () => {
             setSortOption('mostRecent')
           }
         },
         {
-          label: lang.tr('module.qna.leastRecent'),
+          label: lang.tr('module.qna.leastRecentlyEdited'),
           selected: sortOption === 'leastRecent',
           action: () => {
             setSortOption('leastRecent')
@@ -214,13 +227,13 @@ const QnAList: FC<Props> = ({
       icon: allExpanded ? 'collapse-all' : 'expand-all',
       disabled: !items.length,
       onClick: () => dispatch({ type: allExpanded ? 'collapseAll' : 'expandAll' }),
-      tooltip: noItemsTooltip || lang.tr(allExpanded ? 'collapseAll' : 'expandAll')
+      tooltip: lang.tr(allExpanded ? 'collapseAll' : 'expandAll')
     },
     {
       icon: 'export',
       disabled: !items.length,
       onClick: startDownload,
-      tooltip: noItemsTooltip || lang.tr('module.qna.import.exportQnAs')
+      tooltip: lang.tr('module.qna.import.exportQnAs')
     }
   ]
 
@@ -266,7 +279,7 @@ const QnAList: FC<Props> = ({
   const importArchive = async file => {
     const extension = file.name.split('.').slice(-1)[0]
     if (extension !== 'gz') {
-      toastFailure(lang.tr('module.qna.import.badImportFormat'))
+      toast.failure(lang.tr('module.qna.import.badImportFormat'))
       return
     }
     let intervalHandle: number
@@ -280,16 +293,16 @@ const QnAList: FC<Props> = ({
         const { data } = await bp.axios.get(`/mod/qna/json-upload-status/${uploadStatusId}`)
         if (data === 'module.qna.import.uploadSuccessful') {
           clearInterval(intervalHandle)
-          toastSuccess(lang.tr(data))
+          toast.success(lang.tr(data))
           await fetchData()
         } else if (data.split('.')[0] !== 'module') {
-          toastFailure(data)
+          toast.failure(data)
           clearInterval(intervalHandle)
         }
       }, 500)
     } catch (err) {
       clearInterval(intervalHandle)
-      toastFailure(err.message)
+      toast.failure(err.message)
     }
   }
 
@@ -329,17 +342,21 @@ const QnAList: FC<Props> = ({
 
   return (
     <AccessControl resource="module.qna" operation="write">
-      <MainContent.Wrapper className={style.embeddedInFlow} childRef={ref => (wrapperRef.current = ref)}>
-        <MainContent.Header className={style.header} tabChange={setCurrentTab} tabs={tabs} buttons={buttons} />
-        <div className={style.searchWrapper}>
-          <input
-            className={style.input}
-            type="text"
-            value={questionSearch}
-            onChange={e => setQuestionSearch(e.currentTarget.value)}
-            placeholder={lang.tr('module.qna.search')}
-          />
-        </div>
+      <MainContent.Wrapper
+        className={cx(style.embeddedInFlow, { 'emulator-open': emulatorOpen })}
+        childRef={ref => (wrapperRef.current = ref)}
+      >
+        <MainContent.Toolbar className={style.header} tabChange={setCurrentTab} tabs={tabs} buttons={buttons} />
+        {!!((items.length && !loading) || questionSearch.length) && (
+          <div className={cx(sharedStyle.searchBar, style.searchBar)}>
+            <input
+              type="text"
+              value={questionSearch}
+              onChange={e => setQuestionSearch(e.currentTarget.value)}
+              placeholder={lang.tr('module.qna.search')}
+            />
+          </div>
+        )}
         <div className={cx(style.content, { [style.empty]: !items.length && !highlighted })}>
           {highlighted && (
             <div className={style.highlightedQna}>
@@ -413,10 +430,10 @@ const QnAList: FC<Props> = ({
             ))}
           {!items.length && !loading && (
             <EmptyState
-              icon={<EmptyStateIcon />}
+              icon={questionSearch.length ? <Icons.Search /> : <EmptyStateIcon />}
               text={
                 questionSearch.length
-                  ? lang.tr('module.qna.form.noResultsFromFilters')
+                  ? lang.tr('studio.flow.sidePanel.noSearchMatch')
                   : lang.tr('module.qna.form.emptyState')
               }
             />

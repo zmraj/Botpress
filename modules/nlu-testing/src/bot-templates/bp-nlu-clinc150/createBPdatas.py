@@ -7,16 +7,16 @@ import os
 import glob
 
 # IF SEED
-SEED = 42
+SEED = -1
 if SEED > 0:
     random.seed(SEED)
     np.random.seed(SEED)
 
 
 # negative number to keep all
-NB_INTENTS = 30
-NB_UTT_TRAIN_INTENT = 10
-NB_UTT_TEST_INTENT = 20
+NB_INTENTS = -1
+NB_UTT_TRAIN_INTENT = -1
+NB_UTT_TEST_INTENT = -1
 
 
 class TestEntry(TypedDict):

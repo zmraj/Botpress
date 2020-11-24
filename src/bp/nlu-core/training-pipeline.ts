@@ -10,9 +10,8 @@ import { getStopWordsForLang } from './language/stopWords'
 import { getSystemExamplesForLang } from './language/systemExamples'
 import { featurizeInScopeUtterances, featurizeOOSUtterances } from './out-of-scope-featurizer'
 import SlotTagger from './slots/slot-tagger'
-import { getSeededLodash, resetSeed } from './tools/seeded-lodash'
 import { replaceConsecutiveSpaces } from './tools/strings'
-import tfidf from './tools/tfidf'
+import tfidf, { SMALL_TFIDF } from './tools/tfidf'
 import { convertToRealSpaces, isSpace, SPACE } from './tools/token-utils'
 import {
   ColdListEntityModel,
@@ -24,6 +23,7 @@ import {
   ListEntity,
   ListEntityModel,
   PatternEntity,
+  SeededLodashProvider,
   TFIDF,
   Token2Vec,
   Tools,
@@ -244,6 +244,7 @@ const TrainIntentClassifier = async (
     .filter(u => u.tokens.filter(t => t.isWord).length >= 3)
     .value()
 
+  const lo = tools.seededLodashProvider.getSeededLodash()
   for (let i = 0; i < input.ctxToTrain.length; i++) {
     const ctx = input.ctxToTrain[i]
     const trainableIntents = input.intents.filter(
@@ -252,7 +253,6 @@ const TrainIntentClassifier = async (
 
     const nAvgUtts = Math.ceil(_.meanBy(trainableIntents, i => i.utterances.filter(u => !u.augmented).length))
 
-    const lo = getSeededLodash(input.nluSeed)
     const points = _.chain(trainableIntents)
       .thru(ints => [
         ...ints,
@@ -276,8 +276,6 @@ const TrainIntentClassifier = async (
       .filter(x => !x.coordinates.some(isNaN))
       .value()
 
-    resetSeed()
-
     if (points.length <= 0) {
       progress(1 / input.ctxToTrain.length)
       continue
@@ -299,7 +297,8 @@ const TrainIntentClassifier = async (
 const TrainContextClassifier = async (input: TrainStep, tools: Tools, progress: progressCB): Promise<string> => {
   debugTraining.forBot(input.botId, 'Training context classifier')
   const customEntities = getCustomEntitiesNames(input)
-  const points = _.flatMapDeep(input.contexts, ctx => {
+  const contexts = input.contexts.filter(ctx => !ctx.startsWith('explicit:'))
+  const points = _.flatMapDeep(contexts, ctx => {
     return input.intents
       .filter(intent => intent.contexts.includes(ctx) && intent.name !== NONE_INTENT)
       .map(intent =>
@@ -312,7 +311,8 @@ const TrainContextClassifier = async (input: TrainStep, tools: Tools, progress: 
       )
   }).filter(x => x.coordinates.filter(isNaN).length === 0)
 
-  if (points.length === 0 || input.contexts.length <= 1) {
+  const classCount = _.uniq(points.map(p => p.label)).length
+  if (points.length === 0 || classCount <= 1) {
     progress()
     debugTraining.forBot(input.botId, 'No context to train')
     return ''
@@ -428,8 +428,9 @@ export const AppendNoneIntent = async (input: TrainStep, tools: Tools): Promise<
     return input
   }
 
-  const lo = getSeededLodash(input.nluSeed)
+  const lo = tools.seededLodashProvider.getSeededLodash()
 
+  // TODO: we should filter out augmented + we should create none utterances by context
   const allUtterances = lo.flatten(input.intents.map(x => x.utterances))
   const vocabWithDupes = lo
     .chain(allUtterances)
@@ -448,7 +449,7 @@ export const AppendNoneIntent = async (input: TrainStep, tools: Tools): Promise<
   const vocabWords = lo
     .chain(input.tfIdf)
     .toPairs()
-    .filter(([word, tfidf]) => tfidf <= 0.3)
+    .filter(([word, tfidf]) => tfidf <= SMALL_TFIDF)
     .map('0')
     .value()
 
@@ -483,7 +484,6 @@ export const AppendNoneIntent = async (input: TrainStep, tools: Tools): Promise<
     slot_entities: []
   }
 
-  resetSeed()
   return { ...input, intents: [...input.intents, intent] }
 }
 

@@ -4,10 +4,9 @@ import _isEqual from 'lodash/isEqual'
 import _uniqueId from 'lodash/uniqueId'
 import React, { FC, useEffect, useRef, useState } from 'react'
 
+import sharedStyle from '../../../../ui-shared-lite/style.scss'
 import { lang } from '../../translations'
-import { controlKey } from '../../utils/keyboardShortcuts'
 import AddButton from '../../Contents/Components/Fields/AddButton'
-import ShortcutLabel from '../../ShortcutLabel'
 import Textarea from '../../Textarea'
 
 import style from './style.scss'
@@ -17,6 +16,7 @@ const TextFieldsArray: FC<TextFieldsArrayProps> = ({
   addBtnLabel,
   addBtnLabelTooltip,
   label,
+  minimum,
   onChange,
   items,
   refValue,
@@ -25,7 +25,8 @@ const TextFieldsArray: FC<TextFieldsArrayProps> = ({
   moreInfo
 }) => {
   const getInitialItems = () => {
-    let localItems = [...(items?.length ? items : [''])]
+    const baseItem = minimum ? [''] : []
+    let localItems = [...(items?.length ? items : baseItem)]
     const diff = (refValue || []).length - items?.length
 
     if (diff > 0) {
@@ -64,7 +65,7 @@ const TextFieldsArray: FC<TextFieldsArrayProps> = ({
       e.target.select()
     }
 
-    const shouldDelete = !localItems[index].length && localItems.length > 1
+    const shouldDelete = !localItems[index].length && localItems.length > minimum
 
     if (e.key === 'Backspace' && shouldDelete) {
       e.preventDefault()
@@ -93,17 +94,17 @@ const TextFieldsArray: FC<TextFieldsArrayProps> = ({
   }
 
   return (
-    <div className={style.items}>
+    <div className={sharedStyle.items}>
       <h2>{label}</h2>
       {moreInfo}
       {localItems?.map((item, index) => {
         const missingTranslation = refValue?.[index] && !item
 
         return (
-          <div key={index} className={style.textareaWrapper}>
+          <div key={index} className={sharedStyle.textareaWrapper}>
             <Textarea
               isFocused={focusedElement.current === index}
-              className={cx(style.customTextarea, { ['has-error']: missingTranslation })}
+              className={cx(sharedStyle.textarea, { ['has-error']: missingTranslation })}
               placeholder={getPlaceholder?.(index)}
               onChange={value => updateLocalItem(index, value)}
               onBlur={() => {

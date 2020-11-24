@@ -1,6 +1,6 @@
-import { Alignment, Button, Navbar, NavbarGroup, Tab, Tabs, Tooltip } from '@blueprintjs/core'
+import { Alignment, Button, Navbar, NavbarGroup, Tooltip } from '@blueprintjs/core'
 import axios from 'axios'
-import { lang } from 'botpress/shared'
+import { lang, Tabs } from 'botpress/shared'
 import { nextFlowName, nextTopicName } from 'common/flow'
 import _ from 'lodash'
 import React, { FC, useEffect, useState } from 'react'
@@ -11,7 +11,6 @@ import {
   duplicateFlow,
   fetchFlows,
   fetchTopics,
-  getQnaCountByTopic,
   refreshConditions,
   renameFlow,
   switchFlow,
@@ -25,9 +24,7 @@ import Inspector from '../../FlowBuilder/inspector'
 
 import style from './style.scss'
 import Library from './Library'
-import { exportCompleteTopic } from './TopicEditor/export'
 import CreateTopicModal from './TopicEditor/CreateTopicModal'
-import ImportModal from './TopicEditor/ImportModal'
 import TopicList from './TopicList'
 
 export type PanelPermissions = 'create' | 'rename' | 'delete'
@@ -72,7 +69,6 @@ const SidePanelContent: FC<Props> = props => {
   useEffect(() => {
     props.refreshConditions()
     props.fetchTopics()
-    props.getQnaCountByTopic()
   }, [])
 
   const goToFlow = (flow?: string) => history.push(`/oneflow/${flow?.replace(/\.flow\.json/, '') ?? ''}`)
@@ -95,23 +91,6 @@ const SidePanelContent: FC<Props> = props => {
     props.fetchTopics()
   }
 
-  const downloadTextFile = (text, fileName) => {
-    const link = document.createElement('a')
-    link.href = URL.createObjectURL(new Blob([text], { type: `application/json` }))
-    link.download = fileName
-    link.click()
-  }
-
-  const exportTopic = async topicName => {
-    const topic = await exportCompleteTopic(topicName, props.flows)
-    downloadTextFile(JSON.stringify(topic), `${topicName}.json`)
-  }
-
-  const onImportCompleted = () => {
-    props.fetchFlows()
-    props.fetchTopics()
-  }
-
   const canDelete = props.permissions.includes('delete')
   const canAdd = !props.defaultLang || props.defaultLang === props.currentLang
 
@@ -120,6 +99,17 @@ const SidePanelContent: FC<Props> = props => {
     storage.set(SIDEBAR_TAB_KEY, tabId)
   }
 
+  const tabs = [
+    {
+      id: 'topics',
+      title: lang.tr('topics')
+    },
+    {
+      id: 'library',
+      title: lang.tr('library')
+    }
+  ]
+
   return (
     <div className={style.sidePanel}>
       {props.showFlowNodeProps ? (
@@ -127,17 +117,9 @@ const SidePanelContent: FC<Props> = props => {
       ) : (
         <React.Fragment>
           <Navbar className={style.topicsNavbar}>
-            <NavbarGroup>
-              <Tabs onChange={onTabChanged} selectedTabId={currentTab}>
-                <Tab id="topics" title={lang.tr('topics')} />
-                <Tab id="library" title={lang.tr('library')} />
-              </Tabs>
-            </NavbarGroup>
+            <Tabs currentTab={currentTab} tabChange={onTabChanged} tabs={tabs} />
             {props.permissions.includes('create') && currentTab === 'topics' && (
               <NavbarGroup align={Alignment.RIGHT}>
-                <Tooltip content={lang.tr('studio.flow.sidePanel.importTopic')}>
-                  <Button icon="import" onClick={() => setImportModalOpen(true)} />
-                </Tooltip>
                 {canAdd && (
                   <Tooltip content={lang.tr('studio.flow.sidePanel.addTopic')}>
                     <Button icon="plus" onClick={() => createTopic()} />
@@ -150,10 +132,8 @@ const SidePanelContent: FC<Props> = props => {
           {currentTab === 'topics' && (
             <TopicList
               readOnly={props.readOnly}
-              qnaCountByTopic={props.qnaCountByTopic}
               goToFlow={goToFlow}
               createWorkflow={createWorkflow}
-              exportTopic={exportTopic}
               canDelete={canDelete}
               selectedTopic={props.selectedTopic}
               selectedWorkflow={props.selectedWorkflow}
@@ -182,14 +162,6 @@ const SidePanelContent: FC<Props> = props => {
         toggle={() => setCreateTopicOpen(!createTopicOpen)}
         onCreateFlow={props.onCreateFlow}
       />
-
-      <ImportModal
-        isOpen={importModalOpen}
-        toggle={() => setImportModalOpen(!importModalOpen)}
-        onImportCompleted={onImportCompleted}
-        flows={props.flows}
-        topics={props.topics}
-      />
     </div>
   )
 }
@@ -198,8 +170,7 @@ const mapStateToProps = (state: RootReducer) => ({
   flows: getAllFlows(state),
   flowsName: getFlowNamesList(state),
   showFlowNodeProps: state.flows.showFlowNodeProps,
-  topics: state.ndu.topics,
-  qnaCountByTopic: state.ndu.qnaCountByTopic
+  topics: state.ndu.topics
 })
 
 const mapDispatchToProps = {
@@ -211,8 +182,7 @@ const mapDispatchToProps = {
   updateFlow,
   refreshConditions,
   fetchTopics,
-  fetchFlows,
-  getQnaCountByTopic
+  fetchFlows
 }
 
 export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(SidePanelContent)

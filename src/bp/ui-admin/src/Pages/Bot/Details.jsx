@@ -13,13 +13,12 @@ import _ from 'lodash'
 import { fetchBots, fetchBotCategories } from '../../reducers/bots'
 import { fetchLicensing } from '../../reducers/license'
 import { fetchLanguages } from '../../reducers/server'
-import { toastSuccess, toastFailure } from '../../utils/toaster'
 
 import api from '../../api'
 import PageContainer from '~/App/PageContainer'
 import StickyActionBar from '~/App/StickyActionBar'
 import { Button, Intent, Callout } from '@blueprintjs/core'
-import { confirmDialog } from 'botpress/shared'
+import { confirmDialog, toast } from 'botpress/shared'
 
 const statusList = [
   { label: 'Published', value: 'public' },
@@ -199,7 +198,7 @@ class Bots extends Component {
 
     const { error } = Joi.validate(bot, BotEditSchema)
     if (error) {
-      toastFailure('The form contains errors')
+      toast.failure('The form contains errors')
       this.setState({ error: error, isSaving: false })
       return
     }
@@ -211,7 +210,7 @@ class Bots extends Component {
 
     await this.props.fetchBots()
 
-    toastSuccess('Bot configuration updated successfully')
+    toast.success('Bot configuration updated successfully')
     this.backToList()
   }
 
@@ -587,7 +586,8 @@ class Bots extends Component {
         helpText="This page shows the details you can configure for a desired bot."
       >
         <Callout title="This menu is moving" intent="warning">
-          This menu will be permanently moving to <a href={`studio/${this.state.botId}/config`}>the studio.</a>
+          This menu will be permanently moving to <a href={`studio/${this.state.botId}`}>the studio.</a> You can find
+          the icon in the tool bar
         </Callout>
         {this.renderDetails()}
         <StickyActionBar>

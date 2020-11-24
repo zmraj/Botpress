@@ -16,10 +16,10 @@ export async function setupMiddleware(bp: typeof sdk, prompts: { id; config: sdk
       return next(undefined, false, true)
     }
 
+    next(undefined, true)
+
     const payload = await handlePrompt(event, bp)
     await bp.events.replyContentToEvent(payload, event, { incomingEventId: event.incomingEventId })
-
-    return next(undefined, true)
   }
 }
 
@@ -28,7 +28,7 @@ export const handlePrompt = async (event: sdk.IO.OutgoingEvent, bp: typeof sdk):
 
   const defaultPayload: sdk.Content.Text = {
     type: 'text',
-    text: (payload.question as string).replace('__VARNAME', payload.output),
+    text: ((payload.question as string) ?? ' ').replace('__VARNAME', payload.output),
     metadata: payload.metadata
   }
 
@@ -42,11 +42,11 @@ export const handlePrompt = async (event: sdk.IO.OutgoingEvent, bp: typeof sdk):
       return {
         ...defaultPayload,
         metadata: {
-          __buttons: [
+          ...defaultPayload.metadata,
+          __suggestions: [
             { label: lang.tr('module.builtin.yes'), value: 'yes' },
             { label: lang.tr('module.builtin.no'), value: 'no' }
-          ],
-          ...defaultPayload.metadata
+          ]
         }
       }
 
@@ -65,11 +65,12 @@ export const handlePrompt = async (event: sdk.IO.OutgoingEvent, bp: typeof sdk):
         return defaultPayload
       }
 
-      const field = items.length >= 4 || __useDropdown ? '__dropdown' : '__buttons'
-
       return {
         ...defaultPayload,
-        metadata: { ...defaultPayload.metadata, [field]: items }
+        metadata: {
+          ...defaultPayload.metadata,
+          __suggestions: [...(defaultPayload.metadata?.__suggestions || []), ...items]
+        }
       }
   }
 }

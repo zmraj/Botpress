@@ -1,5 +1,5 @@
 import { Button, Icon, Position, Tooltip } from '@blueprintjs/core'
-import { BotEvent, Flow, FlowNode } from 'botpress/sdk'
+import { BotEvent, Content, Flow, FlowNode } from 'botpress/sdk'
 import { confirmDialog, Contents, FormFields, lang, MoreOptions, MoreOptionsItems } from 'botpress/shared'
 import { getFlowLabel } from 'botpress/utils'
 import cx from 'classnames'
@@ -154,6 +154,17 @@ const QnA: FC<Props> = props => {
     })
   }
 
+  const addContentAnswer = () => {
+    contentAnswers.push({} as Content.All)
+    setShowContentForm(true)
+    editingContent.current = contentAnswers.length - 1
+
+    updateQnA({
+      id,
+      data: { ...data, contentAnswers: [...contentAnswers] }
+    })
+  }
+
   const deleteContentAnswer = () => {
     setShowContentForm(false)
 
@@ -227,7 +238,12 @@ const QnA: FC<Props> = props => {
   return (
     <div className={style.questionWrapper}>
       <div className={style.headerWrapper}>
-        <Button minimal small onClick={() => setExpanded(!expanded)} className={style.questionHeader}>
+        <Button
+          minimal
+          small
+          onClick={() => setExpanded(!expanded)}
+          className={cx(style.questionHeader, { [style.disabled]: !data.enabled, [style.expanded]: expanded })}
+        >
           <div className={style.left}>
             <Icon icon={!expanded ? 'chevron-right' : 'chevron-down'} />{' '}
             <h1>{questions?.[0] || <span className={style.refTitle}>{refQuestions?.[0]}</span>}</h1>
@@ -261,7 +277,7 @@ const QnA: FC<Props> = props => {
                 <span className={cx(style.tag)}>{lang.tr('incomplete')}</span>
               </Tooltip>
             )}
-            {!expanded && (
+            {!showIncomplete && (
               <span className={style.tag}>{`${questions?.filter(q => q.trim()).length || 0} ${lang.tr(
                 'module.qna.form.q'
               )} · ${answers?.filter(a => a.trim()).length || 0}  ${lang.tr('module.qna.form.a')}`}</span>
@@ -271,7 +287,7 @@ const QnA: FC<Props> = props => {
         <MoreOptions show={showOption} onToggle={() => setShowOption(!showOption)} items={moreOptionsItems} />
       </div>
       {expanded && (
-        <div key={contentLang} className={style.collapsibleWrapper}>
+        <div key={contentLang} className={cx(style.collapsibleWrapper, { [style.disabled]: !data.enabled })}>
           <TextAreaList
             key="questions"
             items={questions || ['']}
@@ -337,10 +353,10 @@ const QnA: FC<Props> = props => {
             </div>
             {(!defaultLang || defaultLang === contentLang) && (
               <FormFields.AddButton
+                className={style.noSpacing}
                 text={lang.tr('module.qna.form.addContent')}
                 onClick={() => {
-                  setShowContentForm(true)
-                  editingContent.current = null
+                  addContentAnswer()
                 }}
               />
             )}

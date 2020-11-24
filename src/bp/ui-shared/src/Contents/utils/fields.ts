@@ -17,7 +17,7 @@ export const getFieldDefaultValue = (field: Partial<FormField>, lang?: string) =
     case 'checkbox':
       return false
     case 'group':
-      if (!field.fields || !field.group?.minimum) {
+      if (!field.fields || (!field.group?.minimum && !field.group?.defaultItem)) {
         return []
       }
 
@@ -27,7 +27,8 @@ export const getFieldDefaultValue = (field: Partial<FormField>, lang?: string) =
     case 'select':
       return null
     case 'text_array':
-      return field.translated ? { [lang!]: [''] } : ['']
+      const items = field.group?.minimum ?? 1 > 0 ? [''] : []
+      return field.translated ? { [lang!]: items } : items
     case 'overridable':
     case 'text':
     case 'textarea':
