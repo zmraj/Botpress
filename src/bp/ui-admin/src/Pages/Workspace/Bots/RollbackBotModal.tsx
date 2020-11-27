@@ -14,8 +14,8 @@ interface Props {
 }
 
 const RollbackBotModal: FC<Props> = props => {
-  const [revisions, setRevisions] = useState()
-  const [selected, setSelected] = useState()
+  const [revisions, setRevisions] = useState<any>()
+  const [selected, setSelected] = useState<any>()
   const [isConfirmed, setConfirmed] = useState(false)
   const [isProcessing, setProcessing] = useState(false)
 
@@ -29,7 +29,7 @@ const RollbackBotModal: FC<Props> = props => {
   const fetchRevisions = async () => {
     const { data } = await api.getSecured().get(`/admin/bots/${props.botId}/revisions`)
 
-    const revisions = data.payload.revisions.map(rev => {
+    const revisions = data.payload.revisions.reverse().map(rev => {
       const parts = rev.replace(/\.tgz$/i, '').split('++')
       parts[1] = new Date(parseInt(parts[1], 10)).toLocaleString()
       return {

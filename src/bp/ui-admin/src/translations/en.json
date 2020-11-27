@@ -1,5 +1,7 @@
 {
   "admin": {
+    "needsTraining": "This bot needs training.",
+    "howToTrain": "On the studio, click on the \"Train Now\" button (located on the bottom right corner).",
     "alerting": {
       "activeIncidents": "Active Incidents",
       "alertingAndIncidents": "Alerting & Incidents",
@@ -82,8 +84,8 @@
         "underLimits": "Under Limits",
         "unlicensed": "Unlicensed",
         "unofficialBuild": "Unofficial Botpress Build",
-        "unofficialBuildText": "We noticed that you are running a custom build of Botpress, which doesn't contain the Botpress Professional extensions. Make you use an {official}. You won't be able to activate {pro} otherwise.",
-        "useOfficial": "Make you use an {officialBinary}, you won't be able to activate pro otherwise.",
+        "unofficialBuildText": "We noticed that you are running a custom build of Botpress, which doesn't contain the Botpress Professional extensions. Make sure you use an {official}. You won't be able to activate {pro} otherwise.",
+        "useOfficial": "Make sure you use an {officialBinary}, you won't be able to activate pro otherwise.",
         "waitWhileReboot": "Please wait while the server reboots, this may take a couple of seconds."
       },
       "validateChange": "Validate & Change"
@@ -125,15 +127,21 @@
       }
     },
     "modules": {
+      "compressed": "Compressed Modules",
       "experimental": "Experimental Modules",
       "experimentalWarning": "The modules below are experimental, and may change drastically before their official release. Their use in production is not recommended. Migration will not be automatic for version upgrades",
       "helpText": "Enabling/disabling a module will update its status in the configuration files. If running a cluster in production, a restart of each node will be required for the change to take effect. Otherwise, the change will be immediate.",
+      "invalidModule": "The module archive appears to be invalid",
       "noDescription": "No description available",
       "rebootRequired": "Your Botpress configuration file was updated successfully. The server must be restarted for changes to take effect.",
       "restartNow": "Restart server now",
+      "selectArchive": "Select Archive",
       "stable": "Stable Modules",
       "unpackModule": "Unpack module",
-      "unpackRequired": "This module is compressed. Unpack it to display more information"
+      "unpackRequired": "This module is compressed. Unpack it to display more information",
+      "uploadInfo": "Once your module is uploaded, it will be active after the next server restart. To manage uploaded modules, use the advanced editor on the code editor.",
+      "uploadModule": "Upload Module",
+      "uploadSuccess": "Module uploaded successfully"
     },
     "monitoring": {
       "areYouSure": "Are you sure?",
@@ -386,6 +394,7 @@
   },
   "langCodes": {
     "en": "English",
-    "fr": "Français"
+    "fr": "Français",
+    "es": "Español"
   }
 }

@@ -5,7 +5,7 @@ import { Item, ItemList, SearchBar } from 'botpress/ui'
 import React, { FC, useState } from 'react'
 
 import { NluItem } from '..'
-import { NLUApi } from '../../api'
+import { NLUApi } from '../../../api'
 
 import { EntityNameModal } from './EntityNameModal'
 
@@ -15,6 +15,7 @@ interface Props {
   currentItem: NluItem
   setCurrentItem: (x: NluItem) => void
   reloadEntities: () => void
+  reloadIntents: () => void
 }
 
 export const EntitySidePanelSection: FC<Props> = props => {
@@ -52,6 +53,7 @@ export const EntitySidePanelSection: FC<Props> = props => {
 
       await props.api.deleteEntity(entity.name)
       await props.reloadEntities()
+      await props.reloadIntents()
     }
   }
 

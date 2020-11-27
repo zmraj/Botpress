@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { IO, Logger } from 'botpress/sdk'
+import { extractEventCommonArgs } from 'common/action'
 import { ObjectCache } from 'common/object-cache'
 import { ActionScope, ActionServer, LocalActionDefinition } from 'common/typings'
 import { UntrustedSandbox } from 'core/misc/code-sandbox'
@@ -7,8 +8,7 @@ import { printObject } from 'core/misc/print'
 import { TasksRepository } from 'core/repositories/tasks'
 import { NotFoundError } from 'core/routers/errors'
 import { ACTION_SERVER_AUDIENCE } from 'core/routers/sdk/utils'
-import { injectable } from 'inversify'
-import { inject, tagged } from 'inversify'
+import { inject, injectable, tagged } from 'inversify'
 import joi from 'joi'
 import jsonwebtoken from 'jsonwebtoken'
 import _ from 'lodash'
@@ -23,6 +23,7 @@ import { clearRequireCache, requireFromString } from '../../modules/require'
 import { TYPES } from '../../types'
 import { BotService } from '../bot-service'
 import { ActionExecutionError } from '../dialog/errors'
+import { addErrorToEvent, addStepToEvent, StepScopes, StepStatus } from '../middleware/event-collector'
 import { WorkspaceService } from '../workspace-service'
 
 import { extractMetadata } from './metadata'
@@ -32,7 +33,8 @@ import {
   getBaseLookupPaths,
   isTrustedAction,
   prepareRequire,
-  prepareRequireTester
+  prepareRequireTester,
+  runOutsideVm
 } from './utils'
 import { VmRunner } from './vm'
 
@@ -54,7 +56,7 @@ const ACTION_SERVER_RESPONSE_SCHEMA = joi.object({
 
 @injectable()
 export default class ActionService {
-  private _scopedActions: Map<string, ScopedActionService> = new Map()
+  private _scopedActions: Map<string, Promise<ScopedActionService>> = new Map()
   private _invalidateDebounce
 
   constructor(
@@ -76,27 +78,22 @@ export default class ActionService {
       return this._scopedActions.get(botId)!
     }
 
-    if (!(await this.botService.botExists(botId, true))) {
-      throw new NotFoundError(`This bot does not exist`)
-    }
+    const service = new Promise<ScopedActionService>(async cb => {
+      if (!(await this.botService.botExists(botId, true))) {
+        throw new NotFoundError('This bot does not exist')
+      }
 
-    const workspaceId = await this.workspaceService.getBotWorkspaceId(botId)
+      const workspaceId = await this.workspaceService.getBotWorkspaceId(botId)
+      cb(new ScopedActionService(this.ghost, this.logger, botId, this.cache, this.tasksRepository, workspaceId))
+    })
 
-    const service = new ScopedActionService(
-      this.ghost,
-      this.logger,
-      botId,
-      this.cache,
-      this.tasksRepository,
-      workspaceId
-    )
     this._scopedActions.set(botId, service)
     return service
   }
 
   private _listenForCacheInvalidation() {
     this.cache.events.on('invalidation', key => {
-      if (key.toLowerCase().indexOf(`/actions`) > -1) {
+      if (key.toLowerCase().indexOf('/actions') > -1 || key.toLowerCase().indexOf('/libraries') > -1) {
         this._invalidateDebounce(key)
       }
     })
@@ -105,7 +102,7 @@ export default class ActionService {
   // Debouncing invalidate since we get a lot of events when it happens
   private _invalidateRequire() {
     Object.keys(require.cache)
-      .filter(r => r.match(/(\\|\/)actions(\\|\/)/g))
+      .filter(r => r.match(/(\\|\/)actions(\\|\/)/g) || r.match(/(\\|\/)shared_libs(\\|\/)/g))
       .map(file => delete require.cache[file])
 
     clearRequireCache()
@@ -181,12 +178,25 @@ export class ScopedActionService {
       }
 
       debug.forBot(incomingEvent.botId, 'done running', { actionName, actionArgs })
+      addStepToEvent(incomingEvent, StepScopes.Action, actionName, StepStatus.Completed)
     } catch (err) {
       this.logger
         .forBot(this.botId)
         .attachError(err)
         .error(`An error occurred while executing the action "${actionName}`)
-      throw new ActionExecutionError(err.message, actionName, err.stack)
+
+      addErrorToEvent(
+        {
+          type: 'action-execution',
+          stacktrace: err.stacktrace || err.stack,
+          actionName,
+          actionArgs: _.omit(actionArgs, ['event'])
+        },
+        incomingEvent
+      )
+      const name = actionName ?? incomingEvent.state.context?.currentNode ?? ''
+      addStepToEvent(incomingEvent, StepScopes.Action, name, StepStatus.Error)
+      throw new ActionExecutionError(err.message, name, err.stack)
     }
   }
 
@@ -249,11 +259,11 @@ export class ScopedActionService {
     taskInfo.endedAt = new Date()
     taskInfo.statusCode = statusCode
 
-    if (statusCode != 200) {
+    if (statusCode !== 200) {
       this.tasksRepository.createTask({
         ...taskInfo,
         status: 'failed',
-        failureReason: `http:bad_status_code`
+        failureReason: 'http:bad_status_code'
       })
       return
     }
@@ -289,17 +299,13 @@ export class ScopedActionService {
   ) {
     const { actionName, actionArgs, incomingEvent, runType } = props
 
-    const { code, _require, dirPath } = await this.loadLocalAction(actionName)
+    const { code, _require, dirPath, action } = await this.loadLocalAction(actionName)
 
-    const args = {
-      event: incomingEvent,
-      user: incomingEvent.state.user,
-      temp: incomingEvent.state.temp,
-      session: incomingEvent.state.session,
+    const args = extractEventCommonArgs(incomingEvent, {
       args: actionArgs,
       printObject,
       process: UntrustedSandbox.getSandboxProcessArgs()
-    }
+    })
 
     switch (runType) {
       case 'trusted': {
@@ -307,6 +313,9 @@ export class ScopedActionService {
         return this._runWithoutVm(code, { bp: await createForAction(), ...args }, _require)
       }
       case 'legacy': {
+        if (runOutsideVm(action.scope)) {
+          return this._runWithoutVm(code, { bp: await createForAction(), ...args }, _require)
+        }
         // bp is created here because it cannot be created in the Local Action Server thread
         return this._runInVm(code, dirPath, { bp: await createForAction(), ...args }, _require)
       }
@@ -345,9 +354,9 @@ export class ScopedActionService {
     const action = await this._findAction(actionName)
     const code = await this._getActionScript(action.name, action.scope, action.legacy)
 
-    const botFolder = action.scope === 'global' ? 'global' : 'bots/' + this.botId
+    const botFolder = action.scope === 'global' ? 'global' : `bots/${this.botId}`
     const dirPath = path.resolve(path.join(process.PROJECT_LOCATION, `/data/${botFolder}/actions/${actionName}.js`))
-    const lookups = getBaseLookupPaths(dirPath)
+    const lookups = getBaseLookupPaths(dirPath, 'actions')
 
     return { code, dirPath, lookups, action }
   }
@@ -357,18 +366,18 @@ export class ScopedActionService {
       await this._checkActionRequires(actionName)
     }
 
-    const { code, dirPath, lookups } = await this._getActionDetails(actionName)
+    const { code, dirPath, lookups, action } = await this._getActionDetails(actionName)
 
     const _require = prepareRequire(dirPath, lookups)
 
-    return { code, _require, dirPath }
+    return { code, _require, dirPath, action }
   }
 
   private _listenForCacheInvalidation() {
     const clearDebounce = _.debounce(this._clearCache.bind(this), DEBOUNCE_DELAY, { leading: true, trailing: false })
 
     this.cache.events.on('invalidation', key => {
-      if (key.toLowerCase().indexOf(`/actions`) > -1) {
+      if (key.toLowerCase().indexOf('/actions') > -1) {
         clearDebounce()
       }
     })
@@ -396,9 +405,9 @@ export class ScopedActionService {
 
     let script: string
     if (scope === 'global') {
-      script = await this.ghost.global().readFileAsString('actions', name + '.js')
+      script = await this.ghost.global().readFileAsString('actions', `${name}.js`)
     } else {
-      const filename = legacy ? name + '.js' : name + '.http.js'
+      const filename = legacy ? `${name}.js` : `${name}.http.js`
       script = await this.ghost.forBot(this.botId).readFileAsString('actions', filename)
     }
 

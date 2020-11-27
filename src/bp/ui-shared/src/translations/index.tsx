@@ -1,8 +1,10 @@
+import { MultiLangText } from 'botpress/sdk'
 import { isEmpty, merge } from 'lodash'
 import { createIntl, createIntlCache, IntlShape } from 'react-intl'
 
 import en from './en.json'
 import fr from './fr.json'
+import es from './es.json'
 
 const defaultLocale = 'en'
 let translations = {}
@@ -22,7 +24,7 @@ document.addEventListener('keydown', function(event) {
 
 const langExtend = langs => {
   if (isEmpty(translations)) {
-    translations = { en, fr }
+    translations = { en, fr, es }
   }
 
   for (const [key, value] of Object.entries(langs)) {
@@ -72,7 +74,7 @@ const langAvaibale = (): string[] => {
 const squash = (space, root = {}, path = '') => {
   for (const [key, value] of Object.entries(space)) {
     if (typeof value === 'object' && value !== null) {
-      squash(value, root, path + key + '.')
+      squash(value, root, `${path}${key}.`)
     } else {
       root[path + key] = value
     }
@@ -91,7 +93,7 @@ const getUserLocale = () => {
 /**
  * Can either receive an ID, or an object with keys of supported languages
  */
-const lang = (id: string | { [lang: string]: string }, values?: { [variable: string]: any }): string => {
+const lang = (id: string | MultiLangText, values?: { [variable: string]: any }): string => {
   if (!id) {
     return ''
   }
@@ -107,4 +109,4 @@ const lang = (id: string | { [lang: string]: string }, values?: { [variable: str
   }
 }
 
-export { lang, langInit, langExtend, langLocale, langAvaibale }
+export { lang, langInit, langExtend, langLocale, langAvaibale, defaultLocale }

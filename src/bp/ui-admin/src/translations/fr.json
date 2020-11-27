@@ -1,5 +1,7 @@
 {
   "admin": {
+    "needsTraining": "Ce bot a besoin d'être entraîné.",
+    "howToTrain": "Dans le studio, cliquez sur le bouton \"Entraîner maintenant\" (situé dans le coin en bas, à droite).",
     "alerting": {
       "activeIncidents": "Incidents actifs",
       "alertingAndIncidents": "Alertes et incidents",
@@ -59,7 +61,7 @@
       },
       "status": {
         "allowedNodes": "Noeuds autorisés",
-        "areYouSure": "Êtes-vous sûr ?",
+        "areYouSure": "Êtes-vous sûr?",
         "clusterFingerprint": "Empreinte digitale du cluster",
         "copyToClipboard": "Copier dans le presse-papier",
         "enableMethod1": "Vous pouvez activer Botpress Pro en modifiant manuellement le fichier {file} et en définissant la valeur {field} à true.",
@@ -80,10 +82,10 @@
         "support": "Support",
         "thisIsSupport": "Ceci est le support offert par Botpress",
         "underLimits": "Les limites ne sont pas atteintes.",
-        "unlicensed": "Aucun licence valide",
-        "unofficialBuild": "Build non officiel de Botpress",
+        "unlicensed": "Aucune licence valide",
+        "unofficialBuild": "Compilation non officielle de Botpress",
         "unofficialBuildText": "Nous avons remarqué que vous exécutez une version personnalisée de Botpress, qui ne contient pas les extensions Botpress Professional. Vous devez utiliser le {officiel}. Sinon, vous ne pourrez pas activer {pro}.",
-        "useOfficial": "Vous devez utilisez le {officialBinary}, vous ne pourrez pas activer pro autrement.",
+        "useOfficial": "Vous devez utiliser le {officialBinary}, vous ne pourrez pas activer pro autrement.",
         "waitWhileReboot": "Veuillez patienter pendant le redémarrage du serveur, cela peut prendre quelques secondes."
       },
       "validateChange": "Valider et modifier"
@@ -125,15 +127,21 @@
       }
     },
     "modules": {
+      "compressed": "Modules Compressés",
       "experimental": "Modules Expérimentaux",
       "experimentalWarning": "Les modules ci-dessous sont expérimentaux et leur utilisation en production n'est pas recommandée, puisqu'ils sont sujet à être modifiés drastiquement d'ici à leur lancement officiel. La migration vers les nouvelles versions n'est pas automatique. Utilisez à vos risques.",
       "helpText": "Lorsque vous modifiez l'état d'un module, ce changement est enregistré dans le fichier 'botpress.config.json'. Si le mode cluster est actif et que Botpress ne s'exécute pas en mode production, le module sera activé ou désactivé à chaud.",
+      "invalidModule": "L'archive du module semble invalide.",
       "noDescription": "Aucune description disponible",
       "rebootRequired": "La configuration a été modifiée avec succès. Le serveur doit redémarrer pour que les changements soient effectifs.",
       "restartNow": "Redémarrer le serveur maintenant",
+      "selectArchive": "Selectionnez l'archive",
       "stable": "Modules Stables",
       "unpackModule": "Décompresser le module",
-      "unpackRequired": "Ce module est compressé. Veuillez le décompresser pour obtenir d'avantage d'informations."
+      "unpackRequired": "Ce module est compressé. Veuillez le décompresser pour obtenir d'avantage d'informations.",
+      "uploadInfo": "Une fois le module chargé, il sera actif lors du prochain redémarrage du serveur. Pour gérer les modules, utilizes l'éditeur avancé sur l'éditeur de code.",
+      "uploadModule": "Charger un module",
+      "uploadSuccess": "Module chargé avec succès"
     },
     "monitoring": {
       "areYouSure": "Êtes-vous sûr ?",

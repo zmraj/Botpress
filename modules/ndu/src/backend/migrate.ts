@@ -15,7 +15,7 @@ interface TemplateFile {
   buffer: string | Buffer
 }
 
-type FlowNodeView = {
+interface FlowNodeView {
   nodes: {
     id: string
     position: { x: number; y: number }
@@ -27,7 +27,7 @@ const addTriggersToListenNodes = (flow: sdk.Flow, flowPath: string) => {
     if (node.onReceive != undefined) {
       const listenNode = (node as unknown) as sdk.ListenNode
       if (!listenNode.triggers?.length) {
-        debug(`Add triggers property to node %o`, { flow: flowPath, node: node.name })
+        debug('Add triggers property to node %o', { flow: flowPath, node: node.name })
         listenNode.triggers = [{ conditions: [{ id: 'always' }] }]
       }
     }
@@ -87,7 +87,7 @@ const upsertNewFlows = async (ghost: sdk.ScopedGhostService, files: TemplateFile
 
     if (!(await ghost.fileExists(`flows/${topic}`, flowName))) {
       await ghost.upsertFile(`flows/${topic}`, flowName, flow.buffer)
-      debug(`Flow file missing, creating %o`, { topic, flow: flowName })
+      debug('Flow file missing, creating %o', { topic, flow: flowName })
     }
   }
 }
@@ -100,7 +100,7 @@ const createMissingElements = async (bp: typeof sdk, botId, files: TemplateFile[
 
     for (const element of content) {
       if (!(await bp.cms.getContentElement(botId, element.id))) {
-        debug(`Missing content element, creating... %o`, { element: element.id, type: contentType })
+        debug('Missing content element, creating... %o', { element: element.id, type: contentType })
         await bp.cms.createOrUpdateContentElement(botId, contentType, element.formData, element.id)
       }
     }
@@ -113,22 +113,6 @@ const getTemplateFiles = async (bp: typeof sdk): Promise<TemplateFile[]> => {
     content: JSON.parse(x.content.toString()),
     buffer: x.content
   }))
-}
-
-const moveExistingFlows = async (ghost: sdk.ScopedGhostService) => {
-  const renames = [
-    { from: 'error', to: 'error' },
-    { from: 'main', to: 'welcome' }
-  ]
-
-  for (const { from, to } of renames) {
-    if (await ghost.fileExists('flows', `${from}.flow.json`)) {
-      await ghost.renameFile('flows', `${from}.flow.json`, `Built-In/${to}.flow.json`)
-      await ghost.renameFile('flows', `${from}.ui.json`, `Built-In/${to}.ui.json`)
-
-      debug(`Renaming file from ${from}.flow.json to Built-In/${to}.flow.json`)
-    }
-  }
 }
 
 const getIntentContexts = async (ghost: sdk.ScopedGhostService) => {
@@ -162,15 +146,13 @@ const createTopicsFromContexts = async (bp: typeof sdk, ghost: sdk.ScopedGhostSe
     bp.logger
       .forBot(botId)
       .attachError(err)
-      .warn(`Couldn't create topics from context.`)
+      .warn("Couldn't create topics from context.")
   }
 }
 
 const migrateBot = async (bp: typeof sdk, botId: string) => {
   const ghost = bp.ghost.forBot(botId)
   const templateFiles = await getTemplateFiles(bp)
-
-  await moveExistingFlows(ghost)
 
   await upsertNewFlows(ghost, templateFiles)
   await createMissingElements(bp, botId, templateFiles)

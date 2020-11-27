@@ -6,7 +6,7 @@ import { IncidentRule } from '../services/alerting-service'
 
 export type BotpressCondition = '$isProduction' | '$isDevelopment'
 
-export type ModuleConfigEntry = {
+export interface ModuleConfigEntry {
   location: string
   enabled: boolean
 }
@@ -74,7 +74,7 @@ export interface LogsConfig {
  * We use the library "ms", so head over to this page to see supported formats: https://www.npmjs.com/package/ms
  */
 
-export type BotpressConfig = {
+export interface BotpressConfig {
   version: string
   appSecret: string
   httpServer: {
@@ -182,6 +182,45 @@ export type BotpressConfig = {
      * will be available in `event.credentials`.
      */
     externalAuth?: ExternalAuthConfig
+    /**
+     * Configure the branding of the admin panel and the studio. A valid license is required
+     */
+    branding: {
+      admin: {
+        /**
+         * Change the name displayed in the title bar on the admin panel
+         * @example "Botpress Admin Panel"
+         */
+        title?: string
+        /**
+         * Replace the default favicon
+         * @example "assets/ui-studio/public/img/favicon.png"
+         */
+        favicon?: string
+        /**
+         * Path to your custom stylesheet
+         * @example "assets/custom/my-stylesheet.css"
+         */
+        customCss?: string
+      }
+      studio: {
+        /**
+         * Change the name displayed in the title bar on the studio
+         * @example "Botpress Studio"
+         */
+        title?: string
+        /**
+         * Replace the default favicon
+         * @example "assets/ui-studio/public/img/favicon.png"
+         */
+        favicon?: string
+        /**
+         * Path to your custom stylesheet
+         * @example "assets/my-stylesheet.css"
+         */
+        customCss: string
+      }
+    }
   }
   /**
    * An array of e-mails of users which will have root access to Botpress (manage users, server settings)
@@ -279,6 +318,14 @@ export type BotpressConfig = {
    * @default false
    */
   experimental: boolean
+
+  telemetry: {
+    /**
+     * The number of entries stored in the telemetry database
+     * @default 1000
+     */
+    entriesLimit: number
+  }
 }
 
 export interface ExternalAuthConfig {
@@ -340,7 +387,7 @@ export interface DataRetentionConfig {
  * @example "profile.email": "30d"
  * @default {}
  */
-export type RetentionPolicy = {
+export interface RetentionPolicy {
   [key: string]: string
 }
 
@@ -508,7 +555,9 @@ export interface AuthStrategyLdap {
   certificates: string[]
 }
 
-export type FieldMapping = { [bpAttribute: string]: string }
+export interface FieldMapping {
+  [bpAttribute: string]: string
+}
 
 export interface MonitoringConfig {
   /**
@@ -607,7 +656,7 @@ export interface EventCollectorConfig {
   ignoredEventProperties: string[]
   /**
    * These properties are only stored with the event when the user is logged on the studio
-   * @default ["ndu.triggers","ndu.predictions","nlu.predictions"]
+   * @default ["ndu.triggers","ndu.predictions","nlu.predictions","state","processing","activeProcessing"]
    */
   debuggerProperties: string[]
 }

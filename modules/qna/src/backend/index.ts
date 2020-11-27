@@ -3,6 +3,7 @@ import _ from 'lodash'
 
 import en from '../translations/en.json'
 import fr from '../translations/fr.json'
+import es from '../translations/es.json'
 
 import api from './api'
 import { ScopedBots } from './qna'
@@ -108,10 +109,10 @@ const entryPoint: sdk.ModuleEntryPoint = {
   onTopicChanged,
   onFlowChanged,
   onFlowRenamed,
-  translations: { en, fr },
+  translations: { en, fr, es },
   definition: {
     name: 'qna',
-    menuIcon: 'question_answer',
+    menuIcon: 'chat',
     menuText: 'Q&A',
     fullName: 'QNA',
     homepage: 'https://botpress.com'

@@ -37,10 +37,8 @@ const TYPES = {
   InstructionProcessor: Symbol.for('InstructionProcessor'),
   InstructionFactory: Symbol.for('InstructionFactory'),
   FlowNavigator: Symbol.for('FlowNavigator'),
-  StrategyFactory: Symbol.for('StrategyFactory'),
   ActionStrategy: Symbol.for('ActionStrategy'),
   TransitionStrategy: Symbol.for('TransitionStrategy'),
-  WaitStrategy: Symbol.for('WaitStrategy'),
   StrategyProvider: Symbol.for('StrategyProvider'),
   MediaService: Symbol.for('MediaService'),
   JanitorRunner: Symbol.for('JanitorRunner'),
@@ -81,7 +79,15 @@ const TYPES = {
   TasksRepository: Symbol.for('TasksRepository'),
   WorkspaceUsersRepository: Symbol.for('WorkspaceUsersRepository'),
   WorkspaceInviteCodesRepository: Symbol.for('WorkspaceInviteCodesRepository'),
-  LocalActionServer: Symbol.for('LocalActionServer')
+  LocalActionServer: Symbol.for('LocalActionServer'),
+  NLUService: Symbol.for('NLUService'),
+  TelemetryRepository: Symbol.for('TelemetryRepository'),
+  ActionStats: Symbol.for('ActionStats'),
+  LegacyStats: Symbol.for('LegacyStats'),
+  RolesStats: Symbol.for('RolesStats'),
+  SDKStats: Symbol.for('SDKStats'),
+  HooksStats: Symbol.for('HooksStats'),
+  ConfigsStats: Symbol.for('ConfigsStats')
 }
 
 export { TYPES }

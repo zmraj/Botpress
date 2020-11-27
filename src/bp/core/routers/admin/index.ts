@@ -68,11 +68,11 @@ export class AdminRouter extends CustomRouter {
     this.serverRouter = new ServerRouter(
       logger,
       monitoringService,
-      workspaceService,
       alertingService,
       configProvider,
       ghostService,
-      jobService
+      jobService,
+      moduleLoader
     )
     this.languagesRouter = new LanguagesRouter(logger, moduleLoader, this.workspaceService, configProvider)
     this.loadUser = loadUser(this.authService)
@@ -117,12 +117,16 @@ export class AdminRouter extends CustomRouter {
     router.get(
       '/docker_images',
       this.asyncMiddleware(async (req, res) => {
-        const { data } = await axios.get(
-          'https://hub.docker.com/v2/repositories/botpress/server/tags/?page_size=125&page=1&name=v',
-          process.PROXY ? { httpsAgent: new httpsProxyAgent(process.PROXY) } : {}
-        )
+        try {
+          const { data } = await axios.get(
+            'https://hub.docker.com/v2/repositories/botpress/server/tags/?page_size=125&page=1&name=v',
+            process.PROXY ? { httpsAgent: new httpsProxyAgent(process.PROXY) } : {}
+          )
 
-        res.send(data)
+          res.send(data)
+        } catch (err) {
+          res.send({ results: [] })
+        }
       })
     )
 

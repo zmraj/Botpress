@@ -13,7 +13,9 @@ import { StateManager } from '../middleware/state-manager'
 
 import { DialogEngine } from './dialog-engine'
 
-type SendSuggestionResult = { executeFlows: boolean }
+interface SendSuggestionResult {
+  executeFlows: boolean
+}
 
 @injectable()
 export class DecisionEngine {
@@ -71,19 +73,6 @@ export class DecisionEngine {
         const flowName = flow.endsWith('.flow.json') ? flow : `${flow}.flow.json`
 
         await this.dialogEngine.jumpTo(sessionId, event, flowName, node)
-
-        if (action === 'startWorkflow') {
-          event.state.session.lastWorkflows = [
-            {
-              workflow: flowName,
-              eventId: event.id,
-              active: true
-            },
-            ...(event.state.session.lastWorkflows || [])
-          ]
-
-          BOTPRESS_CORE_EVENT('bp_core_workflow_started', { botId: event.botId, channel: event.channel, wfName: flow })
-        }
       }
     }
 
@@ -136,10 +125,11 @@ export class DecisionEngine {
 
     if (elected) {
       Object.assign(event, { decision: elected })
-      BOTPRESS_CORE_EVENT('bp_core_decision_elected', {
+      BOTPRESS_CORE_EVENT('bp_core_send_content', {
         botId: event.botId,
         channel: event.channel,
-        source: elected.source || 'none'
+        source: elected.source || 'none',
+        details: elected.sourceDetails!
       })
       sendSuggestionResult = await this._sendSuggestion(elected, sessionId, event)
     }
