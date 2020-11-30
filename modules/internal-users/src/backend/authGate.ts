@@ -37,7 +37,7 @@ const createNodes = (data: AuthGateData) => {
         { condition: `temp.gatePromptCount > 2 && ${data.promptLogin}`, node: '#' },
         { condition: `temp.inviteRequired && ${data.promptLogin}`, node: 'ask-invite' },
         { condition: `!temp.authorized && ${data.promptLogin}`, node: 'ask-login' },
-        { condition: `true`, node: '#' }
+        { condition: 'true', node: '#' }
       ]
     },
     {
@@ -62,7 +62,10 @@ const createNodes = (data: AuthGateData) => {
           name: 'internal-users/auth_validate'
         }
       ],
-      next: [{ condition: `temp.inviteRequired === true`, node: 'ask-invite' }, { condition: 'true', node: 'entry' }]
+      next: [
+        { condition: 'temp.inviteRequired === true', node: 'ask-invite' },
+        { condition: 'true', node: 'entry' }
+      ]
     },
     {
       name: 'ask-invite',

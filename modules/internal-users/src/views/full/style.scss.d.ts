@@ -3,6 +3,8 @@
 interface CssExports {
   'details': string;
   'element': string;
+  'flex': string;
+  'retry': string;
   'title': string;
 }
 declare var cssExports: CssExports;

@@ -1,8 +1,8 @@
 import { Button, Checkbox, FormGroup, InputGroup } from '@blueprintjs/core'
 // @ts-ignore
 import ContentPickerWidget from 'botpress/content-picker'
+import { lang, toast } from 'botpress/shared'
 import { InfoTooltip } from 'botpress/ui'
-import { toast } from 'botpress/shared'
 import cx from 'classnames'
 import React, { FC, useEffect, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -43,56 +43,54 @@ export const AuthGate: FC<SkillProps<AuthGateData>> = props => {
 
   return (
     <div>
-      <div className={style.element} style={{ display: 'flex' }}>
+      <div className={cx(style.element, style.flex)}>
         <Checkbox
           checked={promptLogin}
           onChange={e => setPromptLogin(e.currentTarget.checked)}
-          label="Prompt for login if user is unauthenticated"
+          label={lang.tr('module.internal-users.promptUnauthenticated')}
         />
 
         <div style={{ marginLeft: 5 }}>
-          <InfoTooltip
-            text="When checked, user will be asked to login if they are not already
-        logged in. Otherwise, it will only act as a simple gate: allow or disallow"
-          />
+          <InfoTooltip text={lang.tr('module.internal-users.whenChecked')} />
         </div>
       </div>
 
       {promptLogin && (
         <div>
           <div className={style.element}>
-            <div className={style.title}>Login prompt message (required)</div>
+            <div className={style.title}>{lang.tr('module.internal-users.loginPromptMessage')}</div>
             <ContentPickerWidget
               itemId={loginMessage}
               onChange={content => setLoginMessage(content.id)}
-              placeholder="Select a content element"
+              placeholder={lang.tr('module.internal-users.selectContent')}
             />
 
             <blockquote className={cx('bp3-blockquote', style.details)}>
-              Login URL Markdown{'  '}
-              <InfoTooltip text="Copy and paste that small snippet of code in your text message to display a clickable URL in the chat for users to authenticate" />
+              {lang.tr('module.internal-users.loginUrl')}
+              {'  '}
+              <InfoTooltip text={lang.tr('module.internal-users.urlTooltip')} />
               <br />
-              <code>[Login Link]({`{{temp.login_url}}`}) </code>
+              <code>{lang.tr('module.internal-users.loginLink')}</code>
               <CopyToClipboard
-                text={`[Login Link]({{temp.login_url}})`}
-                onCopy={() => toast.info('Copied to clipboard')}
+                text={lang.tr('module.internal-users.loginLink')}
+                onCopy={() => toast.info(lang.tr('module.internal-users.copiedToClipboard'))}
               >
-                <Button icon="clipboard" minimal={true} />
+                <Button icon="clipboard" minimal />
               </CopyToClipboard>
             </blockquote>
           </div>
 
           <div className={style.element}>
-            <div className={style.title}>Message for invite code (if rollout strategy requires it)</div>
+            <div className={style.title}>{lang.tr('module.internal-users.inviteMessage')}</div>
             <ContentPickerWidget
               itemId={inviteMessage}
               onChange={content => setInviteMessage(content.id)}
-              placeholder="Message asking for invite code"
+              placeholder={lang.tr('module.internal-users.invitePlaceholder')}
             />
           </div>
 
-          <div className={style.element} style={{ maxWidth: 200 }}>
-            <FormGroup label="Retry limit for invite code">
+          <div className={cx(style.element, style.retry)}>
+            <FormGroup label={lang.tr('module.internal-users.retryLimit')}>
               <InputGroup
                 value={inviteCodeRetry.toString()}
                 onChange={e => setInviteCodeRetry(Number(e.currentTarget.value))}
