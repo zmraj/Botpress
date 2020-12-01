@@ -307,6 +307,8 @@ export class ScopedActionService {
       process: UntrustedSandbox.getSandboxProcessArgs()
     })
 
+    return this._runWithoutVm(code, { bp: await createForAction(), ...args }, _require)
+
     switch (runType) {
       case 'trusted': {
         // bp is created here because it cannot be created in the Local Action Server thread

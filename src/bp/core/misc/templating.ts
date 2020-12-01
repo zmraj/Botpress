@@ -10,7 +10,8 @@ export function renderRecursive(item: TemplateItem, context: any): any {
   } else if (typeof item === 'object') {
     return _.mapValues(item, val => renderRecursive(val, context))
   } else if (typeof item === 'string') {
-    return renderTemplate(item, context)
+    return item
+    // return renderTemplate(item, context)
   } else {
     return item
   }

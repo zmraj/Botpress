@@ -44,61 +44,61 @@ export class DecisionEngine {
     this.noRepeatPolicy = (await this.configProvider.getBotpressConfig()).noRepeatPolicy
   }
 
-  private async processEventNDU(sessionId: string, event: IO.IncomingEvent) {
-    if (!event.ndu || !event.ndu.actions) {
-      return
-    }
+  // private async processEventNDU(sessionId: string, event: IO.IncomingEvent) {
+  //   if (!event.ndu || !event.ndu.actions) {
+  //     return
+  //   }
 
-    let eventProcessedCalled = false
-    const processEvent = async (event: IO.IncomingEvent) => {
-      if (!eventProcessedCalled) {
-        eventProcessedCalled = true
-        this.onAfterEventProcessed && (await this.onAfterEventProcessed(event))
-      }
-    }
+  //   let eventProcessedCalled = false
+  //   const processEvent = async (event: IO.IncomingEvent) => {
+  //     if (!eventProcessedCalled) {
+  //       eventProcessedCalled = true
+  //       this.onAfterEventProcessed && (await this.onAfterEventProcessed(event))
+  //     }
+  //   }
 
-    for (const { action, data } of event.ndu.actions) {
-      if (action === 'send' && data) {
-        const content = data as NDU.SendContent
-        await this._sendContent(content, event)
+  //   for (const { action, data } of event.ndu.actions) {
+  //     if (action === 'send' && data) {
+  //       const content = data as NDU.SendContent
+  //       await this._sendContent(content, event)
 
-        BOTPRESS_CORE_EVENT('bp_core_send_content', {
-          botId: event.botId,
-          channel: event.channel,
-          source: content.source,
-          details: content.sourceDetails!
-        })
-      } else if (action === 'redirect' || action === 'startWorkflow' || action === 'goToNode') {
-        const { flow, node } = data as NDU.FlowRedirect
-        const flowName = flow.endsWith('.flow.json') ? flow : `${flow}.flow.json`
+  //       BOTPRESS_CORE_EVENT('bp_core_send_content', {
+  //         botId: event.botId,
+  //         channel: event.channel,
+  //         source: content.source,
+  //         details: content.sourceDetails!
+  //       })
+  //     } else if (action === 'redirect' || action === 'startWorkflow' || action === 'goToNode') {
+  //       const { flow, node } = data as NDU.FlowRedirect
+  //       const flowName = flow.endsWith('.flow.json') ? flow : `${flow}.flow.json`
 
-        await this.dialogEngine.jumpTo(sessionId, event, flowName, node)
-      }
-    }
+  //       await this.dialogEngine.jumpTo(sessionId, event, flowName, node)
+  //     }
+  //   }
 
-    const hasContinue = event.ndu.actions.find(x => x.action === 'continue')
-    if (!event.hasFlag(WellKnownFlags.SKIP_DIALOG_ENGINE) && hasContinue) {
-      const processedEvent = await this.dialogEngine.processEvent(sessionId, event)
+  //   const hasContinue = event.ndu.actions.find(x => x.action === 'continue')
+  //   if (!event.hasFlag(WellKnownFlags.SKIP_DIALOG_ENGINE) && hasContinue) {
+  //     const processedEvent = event // await this.dialogEngine.processEvent(sessionId, event)
 
-      // In case there are no unknown errors, remove skills/ flow from the stacktrace
-      processedEvent.state.__stacktrace = processedEvent.state.__stacktrace.filter(x => !x.flow.startsWith('skills/'))
-      await processEvent(processedEvent)
-      await this.stateManager.persist(processedEvent, false)
-      return
-    }
+  //     // In case there are no unknown errors, remove skills/ flow from the stacktrace
+  //     processedEvent.state.__stacktrace = processedEvent.state.__stacktrace.filter(x => !x.flow.startsWith('skills/'))
+  //     await processEvent(processedEvent)
+  //     await this.stateManager.persist(processedEvent, false)
+  //     return
+  //   }
 
-    if (event.hasFlag(WellKnownFlags.FORCE_PERSIST_STATE)) {
-      await processEvent(event)
-      await this.stateManager.persist(event, false)
-    }
+  //   if (event.hasFlag(WellKnownFlags.FORCE_PERSIST_STATE)) {
+  //     await processEvent(event)
+  //     await this.stateManager.persist(event, false)
+  //   }
 
-    await processEvent(event)
-  }
+  //   await processEvent(event)
+  // }
 
   public async processEvent(sessionId: string, event: IO.IncomingEvent) {
-    if (event.ndu) {
-      return this.processEventNDU(sessionId, event)
-    }
+    // if (event.ndu) {
+    //   return this.processEventNDU(sessionId, event)
+    // }
 
     const isInMiddleOfFlow = _.get(event, 'state.context.currentFlow', false)
     if (!event.suggestions) {
@@ -116,23 +116,23 @@ export class DecisionEngine {
       })
     }
 
-    if (this.onBeforeSuggestionsElection) {
-      await this.onBeforeSuggestionsElection(sessionId, event, event.suggestions!)
-    }
+    // if (this.onBeforeSuggestionsElection) {
+    //   await this.onBeforeSuggestionsElection(sessionId, event, event.suggestions!)
+    // }
 
-    const elected = event.suggestions!.find(x => x.decision.status === 'elected')
+    // const elected = event.suggestions!.find(x => x.decision.status === 'elected')
     let sendSuggestionResult: SendSuggestionResult | undefined
 
-    if (elected) {
-      Object.assign(event, { decision: elected })
-      BOTPRESS_CORE_EVENT('bp_core_send_content', {
-        botId: event.botId,
-        channel: event.channel,
-        source: elected.source || 'none',
-        details: elected.sourceDetails!
-      })
-      sendSuggestionResult = await this._sendSuggestion(elected, sessionId, event)
-    }
+    // if (elected) {
+    //   Object.assign(event, { decision: elected })
+    //   BOTPRESS_CORE_EVENT('bp_core_send_content', {
+    //     botId: event.botId,
+    //     channel: event.channel,
+    //     source: elected.source || 'none',
+    //     details: elected.sourceDetails!
+    //   })
+    //   sendSuggestionResult = await this._sendSuggestion(elected, sessionId, event)
+    // }
 
     if (
       !event.hasFlag(WellKnownFlags.SKIP_DIALOG_ENGINE) &&
@@ -174,7 +174,7 @@ export class DecisionEngine {
   private async _processErrorFlow(sessionId: string, event) {
     try {
       await this.dialogEngine.jumpTo(sessionId, event, 'error', 'entry')
-      const processedEvent = await this.dialogEngine.processEvent(sessionId, event)
+      const processedEvent = event // await this.dialogEngine.processEvent(sessionId, event)
       await this.stateManager.persist(processedEvent, false)
     } catch (err) {
       this.logger

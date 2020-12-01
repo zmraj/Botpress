@@ -109,18 +109,20 @@ export class ConverseService {
       }
     })
 
-    const userKey = buildUserKey(botId, userId)
-    const timeoutPromise = this._createTimeoutPromise(botId, userKey)
-    const donePromise = this._createDonePromise(userKey)
+    // const userKey = buildUserKey(botId, userId)
+    // const timeoutPromise = this._createTimeoutPromise(botId, userKey)
+    // const donePromise = this._createDonePromise(userKey)
 
     await this.eventEngine.sendEvent(incomingEvent)
 
-    return Promise.race([timeoutPromise, donePromise]).finally(() => {
-      converseApiEvents.removeAllListeners(`done.${userKey}`)
-      converseApiEvents.removeAllListeners(`action.start.${userKey}`)
-      converseApiEvents.removeAllListeners(`action.end.${userKey}`)
-      delete this._responseMap[userKey]
-    })
+    // return Promise.race([timeoutPromise, donePromise]).finally(() => {
+    //   converseApiEvents.removeAllListeners(`done.${userKey}`)
+    //   converseApiEvents.removeAllListeners(`action.start.${userKey}`)
+    //   converseApiEvents.removeAllListeners(`action.end.${userKey}`)
+    //   delete this._responseMap[userKey]
+    // })
+
+    return { text: 'mocked converse' }
   }
 
   private async _createDonePromise(userKey: string) {

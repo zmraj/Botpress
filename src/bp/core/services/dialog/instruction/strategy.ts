@@ -68,7 +68,7 @@ export class ActionStrategy implements InstructionStrategy {
       }
     }
 
-    debug.forBot(botId, `[${event.target}] render element "${outputType}"`)
+    // debug.forBot(botId, `[${event.target}] render element "${outputType}"`)
 
     const message: IO.DialogTurnHistory = {
       eventId: event.id,
@@ -86,73 +86,74 @@ export class ActionStrategy implements InstructionStrategy {
     }
 
     args = {
-      ...args,
-      event,
-      user: _.get(event, 'state.user', {}),
-      session: _.get(event, 'state.session', {}),
-      temp: _.get(event, 'state.temp', {}),
-      bot: _.get(event, 'state.bot', {})
+      ...args
+      // event,
+      // user: _.get(event, 'state.user', {}),
+      // session: _.get(event, 'state.session', {}),
+      // temp: _.get(event, 'state.temp', {}),
+      // bot: _.get(event, 'state.bot', {})
     }
 
     const eventDestination = _.pick(event, ['channel', 'target', 'botId', 'threadId'])
-    const renderedElements = await this.cms.renderElement(outputType, args, eventDestination)
+    const renderedElements = await this.cms.renderElement(outputType, _.cloneDeep(args), eventDestination)
     await this.eventEngine.replyToEvent(eventDestination, renderedElements, event.id)
 
     return ProcessingResult.none()
   }
 
   private async invokeAction(botId, instruction, event: IO.IncomingEvent): Promise<ProcessingResult> {
-    const { actionName, argsStr, actionServerId } = parseActionInstruction(instruction.fn)
-
-    let args: { [key: string]: any } = {}
-    try {
-      if (argsStr && argsStr.length) {
-        args = JSON.parse(argsStr)
-      }
-    } catch (err) {
-      throw new Error(`Action "${actionName}" has invalid arguments (not a valid JSON string): ${argsStr}`)
-    }
-
-    const actionArgs = {
-      event,
-      user: _.get(event, 'state.user', {}),
-      session: _.get(event, 'state.session', {}),
-      temp: _.get(event, 'state.temp', {}),
-      bot: _.get(event, 'state.bot', {})
-    }
-
-    args = _.mapValues(args, value => renderTemplate(value, actionArgs))
-
-    let actionServer: ActionServer | undefined
-    if (actionServerId) {
-      actionServer = await this.actionServersService.getServer(actionServerId)
-      if (!actionServer) {
-        this.logger.warn(`Could not find Action Server with ID: ${actionServerId}`)
-        return ProcessingResult.none()
-      }
-    }
-
-    debug.forBot(botId, `[${event.target}] execute action "${actionName}"`)
-
-    const service = await this.actionService.forBot(botId)
-
-    try {
-      if (!actionServerId) {
-        const hasAction = await service.hasAction(actionName)
-        if (!hasAction) {
-          throw new Error(`Action "${actionName}" not found, `)
-        }
-      }
-
-      await service.runAction({ actionName, incomingEvent: event, actionArgs: args, actionServer })
-    } catch (err) {
-      const { onErrorFlowTo } = event.state.temp
-      const errorFlow = typeof onErrorFlowTo === 'string' && onErrorFlowTo.length ? onErrorFlowTo : 'error.flow.json'
-
-      return ProcessingResult.transition(errorFlow)
-    }
-
     return ProcessingResult.none()
+    // // // const { actionName, argsStr, actionServerId } = parseActionInstruction(instruction.fn)
+
+    // // // let args: { [key: string]: any } = {}
+    // // // try {
+    // // //   if (argsStr && argsStr.length) {
+    // // //     args = JSON.parse(argsStr)
+    // // //   }
+    // // // } catch (err) {
+    // // //   throw new Error(`Action "${actionName}" has invalid arguments (not a valid JSON string): ${argsStr}`)
+    // // // }
+
+    // // // const actionArgs = {
+    // // //   event,
+    // // //   user: _.get(event, 'state.user', {}),
+    // // //   session: _.get(event, 'state.session', {}),
+    // // //   temp: _.get(event, 'state.temp', {}),
+    // // //   bot: _.get(event, 'state.bot', {})
+    // // // }
+
+    // // // args = _.mapValues(args, value => renderTemplate(value, actionArgs))
+
+    // // // let actionServer: ActionServer | undefined
+    // // // if (actionServerId) {
+    // // //   actionServer = await this.actionServersService.getServer(actionServerId)
+    // // //   if (!actionServer) {
+    // // //     this.logger.warn(`Could not find Action Server with ID: ${actionServerId}`)
+    // // //     return ProcessingResult.none()
+    // // //   }
+    // // // }
+
+    // // // debug.forBot(botId, `[${event.target}] execute action "${actionName}"`)
+
+    // // // const service = await this.actionService.forBot(botId)
+
+    // // // try {
+    // // //   if (!actionServerId) {
+    // // //     const hasAction = await service.hasAction(actionName)
+    // // //     if (!hasAction) {
+    // // //       throw new Error(`Action "${actionName}" not found, `)
+    // // //     }
+    // // //   }
+
+    // // //   await service.runAction({ actionName, incomingEvent: event, actionArgs: args, actionServer })
+    // // // } catch (err) {
+    // // //   const { onErrorFlowTo } = event.state.temp
+    // // //   const errorFlow = typeof onErrorFlowTo === 'string' && onErrorFlowTo.length ? onErrorFlowTo : 'error.flow.json'
+
+    // // //   return ProcessingResult.transition(errorFlow)
+    // // }
+
+    // return ProcessingResult.none()
   }
 }
 
@@ -170,12 +171,12 @@ export class TransitionStrategy implements InstructionStrategy {
     })
 
     if (conditionSuccessful) {
-      debug.forBot(
-        botId,
-        `[${event.target}] eval transition "${instruction.fn === 'true' ? 'always' : instruction.fn}" to [${
-          instruction.node
-        }]`
-      )
+      // debug.forBot(
+      //   botId,
+      //   `[${event.target}] eval transition "${instruction.fn === 'true' ? 'always' : instruction.fn}" to [${
+      //     instruction.node
+      //   }]`
+      // )
       return ProcessingResult.transition(instruction.node)
     } else {
       return ProcessingResult.none()

@@ -11,7 +11,7 @@ import { addErrorToEvent } from '../middleware/event-collector'
 
 import { FlowError, TimeoutNodeNotFound } from './errors'
 import { FlowService } from './flow/service'
-import { Instruction } from './instruction'
+import { Instruction, ProcessingResult } from './instruction'
 import { InstructionProcessor } from './instruction/processor'
 import { InstructionQueue } from './instruction/queue'
 import { InstructionsQueueBuilder } from './queue-builder'
@@ -44,23 +44,23 @@ export class DialogEngine {
     const currentFlow = this._findFlow(botId, context.currentFlow!)
     const currentNode = this._findNode(botId, currentFlow, context.currentNode!)
 
-    if (event.ndu) {
-      const workflowName = currentFlow.name?.replace('.flow.json', '')
+    // if (event.ndu) {
+    //   const workflowName = currentFlow.name?.replace('.flow.json', '')
 
-      const { currentWorkflow } = event.state.session
-      const { workflow } = event.state
+    //   const { currentWorkflow } = event.state.session
+    //   const { workflow } = event.state
 
-      if (currentWorkflow !== workflowName) {
-        this.changeWorkflow(event, workflowName)
-        event.state.session.currentWorkflow = workflowName
-      }
+    //   if (currentWorkflow !== workflowName) {
+    //     this.changeWorkflow(event, workflowName)
+    //     event.state.session.currentWorkflow = workflowName
+    //   }
 
-      const workflowEnded = currentNode.type === 'success' || currentNode.type === 'failure'
-      if (workflowEnded && workflow) {
-        workflow.success = currentNode.type === 'success'
-        workflow.status = 'completed'
-      }
-    }
+    //   const workflowEnded = currentNode.type === 'success' || currentNode.type === 'failure'
+    //   if (workflowEnded && workflow) {
+    //     workflow.success = currentNode.type === 'success'
+    //     workflow.status = 'completed'
+    //   }
+    // }
 
     // Property type skill-call means that the node points to a subflow.
     // We skip this step if we're exiting from a subflow, otherwise it will result in an infinite loop.
@@ -85,11 +85,13 @@ export class DialogEngine {
     if (!instruction) {
       this._debug(event.botId, event.target, 'ending flow')
       this._endFlow(event)
+      event.state.context.queue = undefined
+      context.queue = undefined
       return event
     }
 
     try {
-      await converseApiEvents.emitAsync(`action.start.${buildUserKey(event.botId, event.target)}`, event)
+      // await converseApiEvents.emitAsync(`action.start.${buildUserKey(event.botId, event.target)}`, event)
       const result = await this.instructionProcessor.process(botId, instruction, event)
 
       if (result.followUpAction === 'none') {
@@ -130,58 +132,58 @@ export class DialogEngine {
     } catch (err) {
       this._reportProcessingError(botId, err, event, instruction)
     } finally {
-      await converseApiEvents.emitAsync(`action.end.${buildUserKey(event.botId, event.target)}`, event)
+      // await converseApiEvents.emitAsync(`action.end.${buildUserKey(event.botId, event.target)}`, event)
     }
 
     return event
   }
 
-  public changeWorkflow(event: IO.IncomingEvent, nextFlow: string) {
-    const { currentWorkflow, workflows } = event.state.session
-    const { workflow } = event.state
+  // public changeWorkflow(event: IO.IncomingEvent, nextFlow: string) {
+  //   const { currentWorkflow, workflows } = event.state.session
+  //   const { workflow } = event.state
 
-    const parentFlow = this._findFlow(event.botId, `${nextFlow}.flow.json`).parent
-    const isSubFlow = !!currentWorkflow && nextFlow.startsWith(currentWorkflow)
+  //   const parentFlow = this._findFlow(event.botId, `${nextFlow}.flow.json`).parent
+  //   const isSubFlow = !!currentWorkflow && nextFlow.startsWith(currentWorkflow)
 
-    // This workflow doesn't already exist, so we add it
-    if (!workflow) {
-      BOTPRESS_CORE_EVENT('bp_core_workflow_started', { botId: event.botId, channel: event.channel, wfName: nextFlow })
+  //   // This workflow doesn't already exist, so we add it
+  //   if (!workflow) {
+  //     BOTPRESS_CORE_EVENT('bp_core_workflow_started', { botId: event.botId, channel: event.channel, wfName: nextFlow })
 
-      event.state.session.workflows = {
-        ...event.state.session.workflows,
-        [nextFlow]: {
-          eventId: event.id,
-          status: 'active',
-          parent: parentFlow
-        }
-      }
-      return
-    }
+  //     event.state.session.workflows = {
+  //       ...event.state.session.workflows,
+  //       [nextFlow]: {
+  //         eventId: event.id,
+  //         status: 'active',
+  //         parent: parentFlow
+  //       }
+  //     }
+  //     return
+  //   }
 
-    // We dive one level deeper (one more child)
-    if (isSubFlow) {
-      BOTPRESS_CORE_EVENT('bp_core_workflow_started', { botId: event.botId, channel: event.channel, wfName: nextFlow })
+  //   // We dive one level deeper (one more child)
+  //   if (isSubFlow) {
+  //     BOTPRESS_CORE_EVENT('bp_core_workflow_started', { botId: event.botId, channel: event.channel, wfName: nextFlow })
 
-      // The parent flow is inactive for now
-      workflow.status = 'pending'
+  //     // The parent flow is inactive for now
+  //     workflow.status = 'pending'
 
-      event.state.session.workflows = {
-        ...event.state.session.workflows,
-        [nextFlow]: {
-          eventId: event.id,
-          status: 'active',
-          parent: currentWorkflow
-        }
-      }
-    } else {
-      workflow.status = 'completed'
+  //     event.state.session.workflows = {
+  //       ...event.state.session.workflows,
+  //       [nextFlow]: {
+  //         eventId: event.id,
+  //         status: 'active',
+  //         parent: currentWorkflow
+  //       }
+  //     }
+  //   } else {
+  //     workflow.status = 'completed'
 
-      // If the current workflow has a parent, and we return there, we update its status
-      if (workflow.parent && workflows[nextFlow]) {
-        workflows[nextFlow].status = 'active'
-      }
-    }
-  }
+  //     // If the current workflow has a parent, and we return there, we update its status
+  //     if (workflow.parent && workflows[nextFlow]) {
+  //       workflows[nextFlow].status = 'active'
+  //     }
+  //   }
+  // }
 
   public async jumpTo(sessionId: string, event: IO.IncomingEvent, targetFlowName: string, targetNodeName?: string) {
     try {
@@ -317,7 +319,7 @@ export class DialogEngine {
         previousFlow: event.state.context.currentFlow,
         previousNode: event.state.context.currentNode,
         jumpPoints: [
-          ...(context.jumpPoints || []),
+          ...(context.jumpPoints || []).map(x => ({ ...x })),
           {
             flow: context.currentFlow!,
             node: context.currentNode!
@@ -365,8 +367,8 @@ export class DialogEngine {
         ...context,
         currentNode: parentNode.name,
         currentFlow: parentFlow.name,
-        jumpPoints,
-        queue
+        jumpPoints: [...jumpPoints].map(x => ({ ...x })),
+        queue // TODO: this is LOUCHE
       }
 
       this._logExitFlow(
@@ -418,7 +420,7 @@ export class DialogEngine {
       previousFlow: parentFlow.name,
       previousNode: parentNode.name,
       jumpPoints: [
-        ...(event.state.context.jumpPoints || []),
+        ...(event.state.context.jumpPoints || []).map(x => ({ ...x })),
         {
           flow: parentFlow.name,
           node: parentNode.name
@@ -430,36 +432,36 @@ export class DialogEngine {
   }
 
   protected async _loadFlows(botId: string) {
+    if (this._flowsByBot.has(botId)) {
+      return
+    }
     const flows = await this.flowService.loadAll(botId)
     this._flowsByBot.set(botId, flows)
   }
 
   private _detectInfiniteLoop(stacktrace: IO.JumpPoint[], botId: string) {
-    // find the first node that gets repeated at least 3 times
-    const loop = _.chain(stacktrace)
-      .groupBy(x => `${x.flow}|${x.node}`)
-      .values()
-      .filter(x => x.length >= 3)
-      .first()
-      .value()
-
-    if (!loop) {
-      return
-    }
-
-    // we build the flow path for showing the loop to the end-user
-    const recurringPath: string[] = []
-    const { node, flow } = loop[0]
-    for (let i = 0, r = 0; i < stacktrace.length && r < 2; i++) {
-      if (stacktrace[i].flow === flow && stacktrace[i].node === node) {
-        r++
-      }
-      if (r > 0) {
-        recurringPath.push(`${stacktrace[i].flow} (${stacktrace[i].node})`)
-      }
-    }
-
-    throw new FlowError(`Infinite loop detected. (${recurringPath.join(' --> ')})`, botId, loop[0].flow, loop[0].node)
+    // // find the first node that gets repeated at least 3 times
+    // const loop = _.chain(stacktrace)
+    //   .groupBy(x => `${x.flow}|${x.node}`)
+    //   .values()
+    //   .filter(x => x.length >= 3)
+    //   .first()
+    //   .value()
+    // if (!loop) {
+    //   return
+    // }
+    // // we build the flow path for showing the loop to the end-user
+    // const recurringPath: string[] = []
+    // const { node, flow } = loop[0]
+    // for (let i = 0, r = 0; i < stacktrace.length && r < 2; i++) {
+    //   if (stacktrace[i].flow === flow && stacktrace[i].node === node) {
+    //     r++
+    //   }
+    //   if (r > 0) {
+    //     recurringPath.push(`${stacktrace[i].flow} (${stacktrace[i].node})`)
+    //   }
+    // }
+    // throw new FlowError(`Infinite loop detected. (${recurringPath.join(' --> ')})`, botId, loop[0].flow, loop[0].node)
   }
 
   private _findFlow(botId: string, flowName: string) {
@@ -484,18 +486,18 @@ export class DialogEngine {
   }
 
   private _reportProcessingError(botId: string, err, event: IO.IncomingEvent, instruction: Instruction) {
-    const nodeName = _.get(event, 'state.context.currentNode', 'N/A')
-    const flowName = _.get(event, 'state.context.currentFlow', 'N/A')
-    const instr = instruction.fn || instruction.type
-    const message = `Error processing '${instr}'\nErr: ${err.message}\nBotId: ${botId}\nFlow: ${flowName}\nNode: ${nodeName}`
+    // const nodeName = _.get(event, 'state.context.currentNode', 'N/A')
+    // const flowName = _.get(event, 'state.context.currentFlow', 'N/A')
+    // const instr = instruction.fn || instruction.type
+    // const message = `Error processing '${instr}'\nErr: ${err.message}\nBotId: ${botId}\nFlow: ${flowName}\nNode: ${nodeName}`
 
     if (!err.hideStack) {
-      this.logger
-        .forBot(botId)
-        .attachError(err)
-        .warn(message)
+      // this.logger
+      //   .forBot(botId)
+      //   .attachError(err)
+      //   .warn(message)
     } else {
-      this.logger.forBot(botId).warn(message)
+      // this.logger.forBot(botId).warn(message)
     }
 
     addErrorToEvent(
@@ -520,22 +522,22 @@ export class DialogEngine {
   }
 
   private _debug(botId: string, target: string, action: string, args?: any) {
-    if (args) {
-      debug.forBot(botId, `[${target}] ${action} %o`, args)
-    } else {
-      debug.forBot(botId, `[${target}] ${action}`)
-    }
+    // if (args) {
+    //   debug.forBot(botId, `[${target}] ${action} %o`, args)
+    // } else {
+    //   debug.forBot(botId, `[${target}] ${action}`)
+    // }
   }
 
   private _logExitFlow(botId, target, currentFlow, currentNode, previousFlow, previousNode) {
-    this._debug(botId, target, `transit (${currentFlow}) [${currentNode}] << (${previousFlow}) [${previousNode}]`)
+    // this._debug(botId, target, `transit (${currentFlow}) [${currentNode}] << (${previousFlow}) [${previousNode}]`)
   }
 
   private _logEnterFlow(botId, target, currentFlow, currentNode, previousFlow, previousNode) {
-    this._debug(botId, target, `transit (${previousFlow}) [${previousNode}] >> (${currentFlow}) [${currentNode}]`)
+    // this._debug(botId, target, `transit (${previousFlow}) [${previousNode}] >> (${currentFlow}) [${currentNode}]`)
   }
 
   private _logTransition(botId, target, currentFlow, currentNode, transitionTo) {
-    this._debug(botId, target, `transit (${currentFlow}) [${currentNode}] -> [${transitionTo}]`)
+    // this._debug(botId, target, `transit (${currentFlow}) [${currentNode}] -> [${transitionTo}]`)
   }
 }

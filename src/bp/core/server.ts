@@ -1,3 +1,4 @@
+import memwatch from '@airbnb/node-memwatch'
 import bodyParser from 'body-parser'
 import { AxiosBotConfig, AxiosOptions, http, Logger, RouterOptions } from 'botpress/sdk'
 import LicensingService from 'common/licensing-service'
@@ -314,6 +315,49 @@ export default class HTTPServer {
 
     this.app.get('/version', async (req, res) => {
       res.send(process.BOTPRESS_VERSION)
+    })
+
+    let hd = null
+    this.app.get('/heap/start', async (req, res) => {
+      try {
+        hd = new memwatch.HeapDiff()
+        res.send('done')
+      } catch (err) {
+        res.send({ error: true, message: err.message })
+        console.error(err)
+      }
+    })
+
+    this.app.get('/heap/end', async (req, res) => {
+      try {
+        if (!hd) {
+          res.send('start first')
+        }
+        const diff = (hd as any)!.end()
+        res.send(diff)
+      } catch (err) {
+        res.send({ error: true, message: err.message })
+        console.error(err)
+      }
+    })
+
+    this.app.get('/heap/stats', async (req, res) => {
+      try {
+        res.send(memwatch.stats())
+      } catch (err) {
+        res.send({ error: true, message: err.message })
+        console.error(err)
+      }
+    })
+
+    this.app.get('/heap/gc', async (req, res) => {
+      try {
+        memwatch.gc()
+        res.send('GC collected')
+      } catch (err) {
+        res.send({ error: true, message: err.message })
+        console.error(err)
+      }
     })
 
     this.app.get('/env.js', async (req, res) => {

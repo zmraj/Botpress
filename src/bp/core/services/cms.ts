@@ -233,7 +233,7 @@ export class CMSService implements IDisposeOnExit {
       .where({ botId, id })
       .first()
 
-    const deserialized = this.transformDbItemToApi(element)
+    const deserialized = _.cloneDeep(this.transformDbItemToApi(element))
     return language ? this._translateElement(deserialized, language) : deserialized
   }
 
@@ -440,10 +440,11 @@ export class CMSService implements IDisposeOnExit {
   }
 
   private _translateElement(element: ContentElement, language: string) {
-    return {
-      ...element,
-      formData: this.getOriginalProps(element.formData, this.getContentType(element.contentType), language)
-    }
+    return _.cloneDeep(element)
+    // return {
+    //   ...element,
+    //   formData: this.getOriginalProps(element.formData, this.getContentType(element.contentType), language)
+    // }
   }
 
   private transformDbItemToApi(item: any): ContentElement {
@@ -581,11 +582,11 @@ export class CMSService implements IDisposeOnExit {
 
     if (originalProps) {
       return originalProps.reduce((result, key) => {
-        result[key] = formData[key + '$' + lang] || (defaultLang && formData[key + '$' + defaultLang])
+        result[key] = _.cloneDeep(formData[key + '$' + lang] || (defaultLang && formData[key + '$' + defaultLang]))
         return result
       }, {})
     } else {
-      return formData
+      return { ...formData }
     }
   }
 
@@ -608,10 +609,10 @@ export class CMSService implements IDisposeOnExit {
     let contentTypeRenderer: ContentType
 
     const translateFormData = async (formData: object): Promise<object> => {
-      const defaultLang = (await this.configProvider.getBotConfig(eventDestination.botId)).defaultLanguage
-      const lang = _.get(args, 'event.state.user.language')
+      // const defaultLang = (await this.configProvider.getBotConfig(eventDestination.botId)).defaultLanguage
+      // const lang = _.get(args, 'event.state.user.language')
 
-      return this.getOriginalProps(formData, contentTypeRenderer, lang, defaultLang)
+      return this.getOriginalProps(formData, contentTypeRenderer, 'en', 'en')
     }
 
     if (contentId.startsWith('!')) {
@@ -623,25 +624,25 @@ export class CMSService implements IDisposeOnExit {
       contentTypeRenderer = this.getContentType(content.contentType)
       content.formData = await translateFormData(content.formData)
 
-      _.set(content, 'formData', renderRecursive(content.formData, args))
+      _.set(content, 'formData', renderRecursive(content.formData, _.cloneDeep(args)))
 
       const text = _.get(content.formData, 'text')
       const variations = _.get(content.formData, 'variations')
 
       const message = _.sample([text, ...(variations || [])])
       if (message) {
-        _.set(content, 'formData.text', renderTemplate(message, args))
+        _.set(content, 'formData.text', renderTemplate(message, _.cloneDeep(args)))
       }
 
       args = {
-        ...args,
-        ...content.formData
+        ..._.cloneDeep(args),
+        ..._.cloneDeep(content.formData)
       }
     } else if (contentId.startsWith('@')) {
       contentTypeRenderer = this.getContentType(contentId.substr(1))
       args = {
-        ...args,
-        ...(await translateFormData(args))
+        ..._.cloneDeep(args),
+        ..._.cloneDeep(await translateFormData(args))
       }
     } else {
       contentTypeRenderer = this.getContentType(contentId)
@@ -649,12 +650,12 @@ export class CMSService implements IDisposeOnExit {
 
     if (args.text) {
       args = {
-        ...args,
-        text: renderTemplate(args.text, args)
+        ..._.cloneDeep(args),
+        text: renderTemplate(args.text, _.cloneDeep(args))
       }
     }
 
-    let payloads = contentTypeRenderer.renderElement({ ...this._getAdditionalData(), ...args }, channel)
+    let payloads = contentTypeRenderer.renderElement({ ...this._getAdditionalData(), ..._.cloneDeep(args) }, channel)
     if (!_.isArray(payloads)) {
       payloads = [payloads]
     }

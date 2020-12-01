@@ -37,7 +37,7 @@ export class SafeCodeSandbox {
       compiler: 'javascript',
       sandbox: {},
       timeout: 1000,
-      console: 'redirect',
+      console: 'off',
       sourceExtensions: ['js'],
       nesting: false,
       require: {
@@ -49,21 +49,21 @@ export class SafeCodeSandbox {
       }
     })
 
-    this.vm.freeze(_, '_')
+    // this.vm.freeze(_, '_')
 
-    const listen = this.vm['on'].bind(this.vm)
-    listen('console.log', (...args) => {
-      logger && logger.debug(args[0], _.tail(args))
-    })
-    listen('console.info', (...args) => {
-      logger && logger.info(args[0], _.tail(args))
-    })
-    listen('console.warn', (...args) => {
-      logger && logger.warn(args[0], _.tail(args))
-    })
-    listen('console.error', (...args) => {
-      logger && logger.error(args[0], _.tail(args))
-    })
+    // const listen = this.vm['on'].bind(this.vm)
+    // listen('console.log', (...args) => {
+    //   logger && logger.debug(args[0], _.tail(args))
+    // })
+    // listen('console.info', (...args) => {
+    //   logger && logger.info(args[0], _.tail(args))
+    // })
+    // listen('console.warn', (...args) => {
+    //   logger && logger.warn(args[0], _.tail(args))
+    // })
+    // listen('console.error', (...args) => {
+    //   logger && logger.error(args[0], _.tail(args))
+    // })
   }
 
   ls(): string[] {
@@ -73,15 +73,8 @@ export class SafeCodeSandbox {
   async run(fileName: string): Promise<any> {
     const code = fs.readFileSync(this.filesMap[fileName], 'utf8')
     try {
-      return this.vm.run(
-        code,
-        path.join(
-          path.resolve(this.tmpPath, 'builtin'), // TODO: use the correct module path
-          `${Math.random()
-            .toString()
-            .substr(2, 6)}.js`
-        )
-      ) // Await cause if it returns a promise we await it
+      return require(this.filesMap[fileName])
+      // Await cause if it returns a promise we await it
     } catch (e) {
       throw new VError(e, `Error executing file "${fileName}" in SafeSandbox`)
     }
