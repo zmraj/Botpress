@@ -256,6 +256,7 @@ export default class AuthService {
 
     if (signature !== (await getMessageSignature(JSON.stringify({ botId, sessionId })))) {
       await sendEvent({ authenticatedUntil: undefined })
+      this.logger.error(`SPG creds: ${{ signature, botId, sessionId, secret: process.APP_SECRET }}`)
       throw new BadRequestError('Payload signature is invalid')
     }
 
