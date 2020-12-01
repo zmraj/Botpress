@@ -255,7 +255,7 @@ export default class AuthService {
     }
 
     this.logger.error(
-      `SPG before signature: ${{
+      `SPG before signature: ${JSON.stringify({
         signature,
         botId,
         sessionId,
@@ -266,12 +266,12 @@ export default class AuthService {
         channel,
         target,
         threadId
-      }}`
+      })}`
     )
     if (signature !== (await getMessageSignature(JSON.stringify({ botId, sessionId })))) {
       await sendEvent({ authenticatedUntil: undefined })
       this.logger.error(
-        `SPG payload error: ${{
+        `SPG payload error: ${JSON.stringify({
           signature,
           botId,
           sessionId,
@@ -282,7 +282,7 @@ export default class AuthService {
           channel,
           target,
           threadId
-        }}`
+        })}`
       )
       throw new BadRequestError('Payload signature is invalid')
     }
