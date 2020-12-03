@@ -94,6 +94,7 @@ export default class BasicAuthentication {
   afterLoginRedirect = async (redirectTo?: string) => {
     // Chat user authentication triggers an event & auto-closes, so must be cleared from storage after.
     const chatUserAuth = getChatUserAuth()
+    console.log(`afterLoginRedirect: Got chatUserAuth: ${JSON.stringify({ chatUserAuth })} `)
     if (chatUserAuth) {
       try {
         const { data: workspaceId } = await api.getSecured().post('/auth/me/chatAuth', chatUserAuth)

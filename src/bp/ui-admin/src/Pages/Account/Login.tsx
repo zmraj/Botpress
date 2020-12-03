@@ -38,6 +38,10 @@ const Login: FC<Props> = props => {
     const routeWorkspaceId = props.match.params.workspace
     const { workspaceId, botId, sessionId, signature, error } = props.location.query
 
+    console.log(
+      `Login initialize: ${JSON.stringify({ workspaceId, botId, sessionId, signature, error, routeWorkspaceId })}`
+    )
+
     if (routeWorkspaceId || workspaceId) {
       setActiveWorkspace(routeWorkspaceId || workspaceId)
     }
@@ -51,6 +55,7 @@ const Login: FC<Props> = props => {
     }
 
     if (props.auth.isAuthenticated()) {
+      console.log('Is authenticated')
       await props.auth.afterLoginRedirect()
     }
 
