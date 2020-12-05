@@ -1568,3 +1568,44 @@ index 01942c836..cdfb3db79 100644
  
          // Check if code returned a Promise-like object
          if (retValue && typeof retValue.then === 'function') {
+Starting botpress | Sat  5 Dec 2020 18:43:05 EST
+
+BEFORE MEMORY
+rss 182.8 MB
+heapTotal 111.93 MB
+heapUsed 82.22 MB
+external 36.9 MB
+Starting warmup | Sat  5 Dec 2020 18:43:15 EST
+Warmup done | Sat  5 Dec 2020 18:43:26 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 18:43:39 EST
+Sending requests | Sat  5 Dec 2020 18:43:41 EST
+Requests done | Sat  5 Dec 2020 18:44:13 EST
+Finishing snapshot | Sat  5 Dec 2020 18:45:13 EST
+
+LEAK SIZE: 1.24 mb
+Big diff: Object [4092 new] --> 182.55 kb
+Big diff: String [3253 new] --> 157.76 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 312.54 MB
+heapTotal 77.09 MB
+heapUsed 69.82 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: re-run
+--------------------
+
+
+GIT DIFF
+
+
