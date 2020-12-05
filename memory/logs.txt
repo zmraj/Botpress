@@ -892,3 +892,43 @@ index d78102d94..e833774d7 100644
      }
  
      this.botMonitor.onBotError = async (botId: string, events: sdk.LoggerEntry[]) => {
+Starting botpress | Sat  5 Dec 2020 18:05:29 EST
+
+BEFORE MEMORY
+rss 189.17 MB
+heapTotal 111.68 MB
+heapUsed 84.77 MB
+external 45.16 MB
+Starting warmup | Sat  5 Dec 2020 18:05:39 EST
+Warmup done | Sat  5 Dec 2020 18:05:50 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 18:06:04 EST
+Sending requests | Sat  5 Dec 2020 18:06:06 EST
+Requests done | Sat  5 Dec 2020 18:06:17 EST
+Finishing snapshot | Sat  5 Dec 2020 18:06:32 EST
+
+LEAK SIZE: -1.64 mb
+Big diff: Object [1225 new] --> 54.46 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 302.15 MB
+heapTotal 76.66 MB
+heapUsed 68.34 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: re-running last run
+--------------------
+
+
+GIT DIFF
+
+
