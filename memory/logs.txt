@@ -515,3 +515,61 @@ index 4e65f0c46..bc0e1f7b8 100644
  
  process.LOADED_MODULES = {}
  process.PROJECT_LOCATION = process.pkg
+Starting botpress | Sat  5 Dec 2020 17:54:03 EST
+
+BEFORE MEMORY
+rss 181.72 MB
+heapTotal 110.61 MB
+heapUsed 73.45 MB
+external 3.82 MB
+Starting warmup | Sat  5 Dec 2020 17:54:14 EST
+Warmup done | Sat  5 Dec 2020 17:54:25 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 17:54:38 EST
+Sending requests | Sat  5 Dec 2020 17:54:40 EST
+Requests done | Sat  5 Dec 2020 17:54:51 EST
+Finishing snapshot | Sat  5 Dec 2020 17:55:06 EST
+
+LEAK SIZE: 814.02 kb
+Big diff: Array [807 new] --> 220.41 kb
+Big diff: Code [77 new] --> 177.38 kb
+Big diff: Object [1196 new] --> 52.95 kb
+Big diff: String [1200 new] --> 53.96 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 302.77 MB
+heapTotal 75.41 MB
+heapUsed 68.14 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: last run isolation, diasable botpress core event
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/index.ts b/src/bp/index.ts
+index bc0e1f7b8..4e65f0c46 100644
+--- a/src/bp/index.ts
++++ b/src/bp/index.ts
+@@ -48,7 +48,9 @@ if (process.env.APP_DATA_PATH) {
+ process.IS_FAILSAFE = yn(process.env.BP_FAILSAFE)
+ process.BOTPRESS_EVENTS = new EventEmitter()
+ process.BOTPRESS_EVENTS.setMaxListeners(1000)
+-global.BOTPRESS_CORE_EVENT = (event, args) => process.BOTPRESS_EVENTS.emit(event, args)
++global.BOTPRESS_CORE_EVENT = (event, args) => {
++  /* noop */
++}
+ 
+ process.LOADED_MODULES = {}
+ process.PROJECT_LOCATION = process.pkg
