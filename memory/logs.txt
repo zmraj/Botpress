@@ -212,3 +212,56 @@ index df1cbfcee..bdcfa3b78 100644
    } else {
      return item
    }
+Starting botpress | Sat  5 Dec 2020 17:43:17 EST
+
+BEFORE MEMORY
+rss 181.18 MB
+heapTotal 109.11 MB
+heapUsed 73.55 MB
+external 29.86 MB
+Starting warmup | Sat  5 Dec 2020 17:43:28 EST
+Warmup done | Sat  5 Dec 2020 17:43:39 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 17:43:52 EST
+Sending requests | Sat  5 Dec 2020 17:43:54 EST
+Requests done | Sat  5 Dec 2020 17:44:05 EST
+Finishing snapshot | Sat  5 Dec 2020 17:44:20 EST
+
+LEAK SIZE: -1.35 mb
+Big diff: Object [1066 new] --> 46.81 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 284.36 MB
+heapTotal 74.73 MB
+heapUsed 67.54 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: re-running actions
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/services/action/action-service.ts b/src/bp/core/services/action/action-service.ts
+index 38b82a753..7f34ded8d 100644
+--- a/src/bp/core/services/action/action-service.ts
++++ b/src/bp/core/services/action/action-service.ts
+@@ -307,8 +307,6 @@ export class ScopedActionService {
+       process: UntrustedSandbox.getSandboxProcessArgs()
+     })
+ 
+-    return this._runWithoutVm(code, { bp: await createForAction(), ...args }, _require)
+-
+     switch (runType) {
+       case 'trusted': {
+         // bp is created here because it cannot be created in the Local Action Server thread
