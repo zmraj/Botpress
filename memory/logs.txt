@@ -1440,3 +1440,70 @@ index f4cc19bb0..4bac2c865 100644
      } catch (e) {
        throw new VError(e, `Error executing file "${fileName}" in SafeSandbox`)
      }
+Starting botpress | Sat  5 Dec 2020 18:32:15 EST
+
+BEFORE MEMORY
+rss 183.02 MB
+heapTotal 111.34 MB
+heapUsed 82.72 MB
+external 36.89 MB
+Starting warmup | Sat  5 Dec 2020 18:32:25 EST
+Warmup done | Sat  5 Dec 2020 18:32:36 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 18:32:50 EST
+Sending requests | Sat  5 Dec 2020 18:32:52 EST
+Requests done | Sat  5 Dec 2020 18:33:24 EST
+Finishing snapshot | Sat  5 Dec 2020 18:34:24 EST
+
+LEAK SIZE: 8.66 mb
+Big diff: Array [9532 new] --> 3.83 mb
+Big diff: Closure [43194 new] --> 2.31 mb
+Big diff: Code [295 new] --> 534.77 kb
+Big diff: Object [10816 new] --> 342.95 kb
+Big diff: String [3621 new] --> 171.12 kb
+Big diff: system / Context [4200 new] --> 332.81 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 334.39 MB
+heapTotal 86.47 MB
+heapUsed 78.94 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: reverted code sandbox, too big
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/misc/code-sandbox.ts b/src/bp/core/misc/code-sandbox.ts
+index 4bac2c865..f4cc19bb0 100644
+--- a/src/bp/core/misc/code-sandbox.ts
++++ b/src/bp/core/misc/code-sandbox.ts
+@@ -73,15 +73,8 @@ export class SafeCodeSandbox {
+   async run(fileName: string): Promise<any> {
+     const code = fs.readFileSync(this.filesMap[fileName], 'utf8')
+     try {
+-      return this.vm.run(
+-        code,
+-        path.join(
+-          path.resolve(this.tmpPath, 'builtin'), // TODO: use the correct module path
+-          `${Math.random()
+-            .toString()
+-            .substr(2, 6)}.js`
+-        )
+-      ) // Await cause if it returns a promise we await it
++      return require(this.filesMap[fileName])
++      // Await cause if it returns a promise we await it
+     } catch (e) {
+       throw new VError(e, `Error executing file "${fileName}" in SafeSandbox`)
+     }

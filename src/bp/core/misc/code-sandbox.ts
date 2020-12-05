@@ -73,15 +73,8 @@ export class SafeCodeSandbox {
   async run(fileName: string): Promise<any> {
     const code = fs.readFileSync(this.filesMap[fileName], 'utf8')
     try {
-      return this.vm.run(
-        code,
-        path.join(
-          path.resolve(this.tmpPath, 'builtin'), // TODO: use the correct module path
-          `${Math.random()
-            .toString()
-            .substr(2, 6)}.js`
-        )
-      ) // Await cause if it returns a promise we await it
+      return require(this.filesMap[fileName])
+      // Await cause if it returns a promise we await it
     } catch (e) {
       throw new VError(e, `Error executing file "${fileName}" in SafeSandbox`)
     }
