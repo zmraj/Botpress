@@ -307,3 +307,211 @@ Changes: CMS removed all clone deep etc
 GIT DIFF
 
 
+Starting botpress | Sat  5 Dec 2020 17:48:04 EST
+
+BEFORE MEMORY
+rss 180.59 MB
+heapTotal 110.11 MB
+heapUsed 73.43 MB
+external 3.82 MB
+Starting warmup | Sat  5 Dec 2020 17:48:14 EST
+Warmup done | Sat  5 Dec 2020 17:48:25 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 17:48:38 EST
+Sending requests | Sat  5 Dec 2020 17:48:40 EST
+Requests done | Sat  5 Dec 2020 17:48:51 EST
+Finishing snapshot | Sat  5 Dec 2020 17:49:06 EST
+
+LEAK SIZE: 172.98 kb
+Big diff: Array [127 new] --> 103.65 kb
+Big diff: Object [1142 new] --> 50.34 kb
+Big diff: String [1141 new] --> 50.92 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 294.22 MB
+heapTotal 74.98 MB
+heapUsed 67.51 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: dialog instructions restore
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/services/dialog/instruction/strategy.ts b/src/bp/core/services/dialog/instruction/strategy.ts
+index 40f7b9d54..89c43f707 100644
+--- a/src/bp/core/services/dialog/instruction/strategy.ts
++++ b/src/bp/core/services/dialog/instruction/strategy.ts
+@@ -86,12 +86,12 @@ export class ActionStrategy implements InstructionStrategy {
+     }
+ 
+     args = {
+-      ...args
+-      // event,
+-      // user: _.get(event, 'state.user', {}),
+-      // session: _.get(event, 'state.session', {}),
+-      // temp: _.get(event, 'state.temp', {}),
+-      // bot: _.get(event, 'state.bot', {})
++      ...args,
++      event,
++      user: _.get(event, 'state.user', {}),
++      session: _.get(event, 'state.session', {}),
++      temp: _.get(event, 'state.temp', {}),
++      bot: _.get(event, 'state.bot', {})
+     }
+ 
+     const eventDestination = _.pick(event, ['channel', 'target', 'botId', 'threadId'])
+@@ -102,58 +102,57 @@ export class ActionStrategy implements InstructionStrategy {
+   }
+ 
+   private async invokeAction(botId, instruction, event: IO.IncomingEvent): Promise<ProcessingResult> {
++    const { actionName, argsStr, actionServerId } = parseActionInstruction(instruction.fn)
++
++    let args: { [key: string]: any } = {}
++    try {
++      if (argsStr && argsStr.length) {
++        args = JSON.parse(argsStr)
++      }
++    } catch (err) {
++      throw new Error(`Action "${actionName}" has invalid arguments (not a valid JSON string): ${argsStr}`)
++    }
++
++    const actionArgs = {
++      event,
++      user: _.get(event, 'state.user', {}),
++      session: _.get(event, 'state.session', {}),
++      temp: _.get(event, 'state.temp', {}),
++      bot: _.get(event, 'state.bot', {})
++    }
++
++    args = _.mapValues(args, value => renderTemplate(value, actionArgs))
++
++    let actionServer: ActionServer | undefined
++    if (actionServerId) {
++      actionServer = await this.actionServersService.getServer(actionServerId)
++      if (!actionServer) {
++        this.logger.warn(`Could not find Action Server with ID: ${actionServerId}`)
++        return ProcessingResult.none()
++      }
++    }
++
++    debug.forBot(botId, `[${event.target}] execute action "${actionName}"`)
++
++    const service = await this.actionService.forBot(botId)
++
++    try {
++      if (!actionServerId) {
++        const hasAction = await service.hasAction(actionName)
++        if (!hasAction) {
++          throw new Error(`Action "${actionName}" not found, `)
++        }
++      }
++
++      await service.runAction({ actionName, incomingEvent: event, actionArgs: args, actionServer })
++    } catch (err) {
++      const { onErrorFlowTo } = event.state.temp
++      const errorFlow = typeof onErrorFlowTo === 'string' && onErrorFlowTo.length ? onErrorFlowTo : 'error.flow.json'
++
++      return ProcessingResult.transition(errorFlow)
++    }
++
+     return ProcessingResult.none()
+-    // // // const { actionName, argsStr, actionServerId } = parseActionInstruction(instruction.fn)
+-
+-    // // // let args: { [key: string]: any } = {}
+-    // // // try {
+-    // // //   if (argsStr && argsStr.length) {
+-    // // //     args = JSON.parse(argsStr)
+-    // // //   }
+-    // // // } catch (err) {
+-    // // //   throw new Error(`Action "${actionName}" has invalid arguments (not a valid JSON string): ${argsStr}`)
+-    // // // }
+-
+-    // // // const actionArgs = {
+-    // // //   event,
+-    // // //   user: _.get(event, 'state.user', {}),
+-    // // //   session: _.get(event, 'state.session', {}),
+-    // // //   temp: _.get(event, 'state.temp', {}),
+-    // // //   bot: _.get(event, 'state.bot', {})
+-    // // // }
+-
+-    // // // args = _.mapValues(args, value => renderTemplate(value, actionArgs))
+-
+-    // // // let actionServer: ActionServer | undefined
+-    // // // if (actionServerId) {
+-    // // //   actionServer = await this.actionServersService.getServer(actionServerId)
+-    // // //   if (!actionServer) {
+-    // // //     this.logger.warn(`Could not find Action Server with ID: ${actionServerId}`)
+-    // // //     return ProcessingResult.none()
+-    // // //   }
+-    // // // }
+-
+-    // // // debug.forBot(botId, `[${event.target}] execute action "${actionName}"`)
+-
+-    // // // const service = await this.actionService.forBot(botId)
+-
+-    // // // try {
+-    // // //   if (!actionServerId) {
+-    // // //     const hasAction = await service.hasAction(actionName)
+-    // // //     if (!hasAction) {
+-    // // //       throw new Error(`Action "${actionName}" not found, `)
+-    // // //     }
+-    // // //   }
+-
+-    // // //   await service.runAction({ actionName, incomingEvent: event, actionArgs: args, actionServer })
+-    // // // } catch (err) {
+-    // // //   const { onErrorFlowTo } = event.state.temp
+-    // // //   const errorFlow = typeof onErrorFlowTo === 'string' && onErrorFlowTo.length ? onErrorFlowTo : 'error.flow.json'
+-
+-    // // //   return ProcessingResult.transition(errorFlow)
+-    // // }
+-
+-    // return ProcessingResult.none()
+   }
+ }
+ 
+@@ -171,12 +170,12 @@ export class TransitionStrategy implements InstructionStrategy {
+     })
+ 
+     if (conditionSuccessful) {
+-      // debug.forBot(
+-      //   botId,
+-      //   `[${event.target}] eval transition "${instruction.fn === 'true' ? 'always' : instruction.fn}" to [${
+-      //     instruction.node
+-      //   }]`
+-      // )
++      debug.forBot(
++        botId,
++        `[${event.target}] eval transition "${instruction.fn === 'true' ? 'always' : instruction.fn}" to [${
++          instruction.node
++        }]`
++      )
+       return ProcessingResult.transition(instruction.node)
+     } else {
+       return ProcessingResult.none()
+diff --git a/src/bp/index.ts b/src/bp/index.ts
+index 4e65f0c46..bc0e1f7b8 100644
+--- a/src/bp/index.ts
++++ b/src/bp/index.ts
+@@ -48,9 +48,7 @@ if (process.env.APP_DATA_PATH) {
+ process.IS_FAILSAFE = yn(process.env.BP_FAILSAFE)
+ process.BOTPRESS_EVENTS = new EventEmitter()
+ process.BOTPRESS_EVENTS.setMaxListeners(1000)
+-global.BOTPRESS_CORE_EVENT = (event, args) => {
+-  /* noop */
+-}
++global.BOTPRESS_CORE_EVENT = (event, args) => process.BOTPRESS_EVENTS.emit(event, args)
+ 
+ process.LOADED_MODULES = {}
+ process.PROJECT_LOCATION = process.pkg
