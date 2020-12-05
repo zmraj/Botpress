@@ -802,3 +802,93 @@ index 18495a100..d78102d94 100644
      }
  
      await this.dataRetentionService.initialize()
+Starting botpress | Sat  5 Dec 2020 18:03:23 EST
+
+BEFORE MEMORY
+rss 180.18 MB
+heapTotal 108.86 MB
+heapUsed 73.59 MB
+external 29.86 MB
+Starting warmup | Sat  5 Dec 2020 18:03:34 EST
+Warmup done | Sat  5 Dec 2020 18:03:45 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 18:03:58 EST
+Sending requests | Sat  5 Dec 2020 18:04:00 EST
+Requests done | Sat  5 Dec 2020 18:04:12 EST
+Finishing snapshot | Sat  5 Dec 2020 18:04:27 EST
+
+LEAK SIZE: 719.3 kb
+Big diff: Array [911 new] --> 219.73 kb
+Big diff: Code [96 new] --> 165.55 kb
+Big diff: Object [1399 new] --> 62.48 kb
+Big diff: String [1223 new] --> 63.48 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 287.86 MB
+heapTotal 75.91 MB
+heapUsed 68.29 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: completed workflows
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/botpress.ts b/src/bp/core/botpress.ts
+index d78102d94..e833774d7 100644
+--- a/src/bp/core/botpress.ts
++++ b/src/bp/core/botpress.ts
+@@ -417,24 +417,24 @@ export class Botpress {
+       // this.eventCollector.storeEvent(event, activeWorkflow ? workflows[activeWorkflow] : undefined)
+       await this.hookService.executeHook(new Hooks.AfterEventProcessed(this.api, event))
+ 
+-      // completedWorkflows.forEach(async workflow => {
+-      //   const wf = workflows[workflow]
+-      //   const metric = wf.success ? 'bp_core_workflow_completed' : 'bp_core_workflow_failed'
+-      //   BOTPRESS_CORE_EVENT(metric, { botId: event.botId, channel: event.channel, wfName: workflow })
+-
+-      //   delete event.state.session.workflows[workflow]
+-
+-      //   if (!activeWorkflow && !wf.parent) {
+-      //     await this.eventEngine.sendEvent(
+-      //       Event({
+-      //         ..._.pick(event, ['botId', 'channel', 'target', 'threadId']),
+-      //         direction: 'incoming',
+-      //         type: 'workflow_ended',
+-      //         payload: { ...wf, workflow }
+-      //       })
+-      //     )
+-      //   }
+-      // })
++      completedWorkflows.forEach(async workflow => {
++        const wf = workflows[workflow]
++        const metric = wf.success ? 'bp_core_workflow_completed' : 'bp_core_workflow_failed'
++        BOTPRESS_CORE_EVENT(metric, { botId: event.botId, channel: event.channel, wfName: workflow })
++
++        delete event.state.session.workflows[workflow]
++
++        if (!activeWorkflow && !wf.parent) {
++          await this.eventEngine.sendEvent(
++            Event({
++              ..._.pick(event, ['botId', 'channel', 'target', 'threadId']),
++              direction: 'incoming',
++              type: 'workflow_ended',
++              payload: { ...wf, workflow }
++            })
++          )
++        }
++      })
+     }
+ 
+     this.botMonitor.onBotError = async (botId: string, events: sdk.LoggerEntry[]) => {
