@@ -573,3 +573,111 @@ index bc0e1f7b8..4e65f0c46 100644
  
  process.LOADED_MODULES = {}
  process.PROJECT_LOCATION = process.pkg
+Starting botpress | Sat  5 Dec 2020 17:56:41 EST
+
+BEFORE MEMORY
+rss 182.2 MB
+heapTotal 111.68 MB
+heapUsed 82.8 MB
+external 37.11 MB
+Starting warmup | Sat  5 Dec 2020 17:56:51 EST
+Warmup done | Sat  5 Dec 2020 17:57:03 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 17:57:16 EST
+Sending requests | Sat  5 Dec 2020 17:57:18 EST
+Requests done | Sat  5 Dec 2020 17:57:29 EST
+Finishing snapshot | Sat  5 Dec 2020 17:57:44 EST
+
+LEAK SIZE: 911.34 kb
+Big diff: Array [707 new] --> 232.86 kb
+Big diff: Code [94 new] --> 226.58 kb
+Big diff: Object [1214 new] --> 53.76 kb
+Big diff: String [1204 new] --> 54.95 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 300.98 MB
+heapTotal 75.66 MB
+heapUsed 68.18 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: will abort, cleam up comments
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/misc/code-sandbox.ts b/src/bp/core/misc/code-sandbox.ts
+index 3396d4f57..f4cc19bb0 100644
+--- a/src/bp/core/misc/code-sandbox.ts
++++ b/src/bp/core/misc/code-sandbox.ts
+@@ -37,7 +37,7 @@ export class SafeCodeSandbox {
+       compiler: 'javascript',
+       sandbox: {},
+       timeout: 1000,
+-      console: 'off',
++      console: 'redirect',
+       sourceExtensions: ['js'],
+       nesting: false,
+       require: {
+@@ -49,21 +49,21 @@ export class SafeCodeSandbox {
+       }
+     })
+ 
+-    // this.vm.freeze(_, '_')
+-
+-    // const listen = this.vm['on'].bind(this.vm)
+-    // listen('console.log', (...args) => {
+-    //   logger && logger.debug(args[0], _.tail(args))
+-    // })
+-    // listen('console.info', (...args) => {
+-    //   logger && logger.info(args[0], _.tail(args))
+-    // })
+-    // listen('console.warn', (...args) => {
+-    //   logger && logger.warn(args[0], _.tail(args))
+-    // })
+-    // listen('console.error', (...args) => {
+-    //   logger && logger.error(args[0], _.tail(args))
+-    // })
++    this.vm.freeze(_, '_')
++
++    const listen = this.vm['on'].bind(this.vm)
++    listen('console.log', (...args) => {
++      logger && logger.debug(args[0], _.tail(args))
++    })
++    listen('console.info', (...args) => {
++      logger && logger.info(args[0], _.tail(args))
++    })
++    listen('console.warn', (...args) => {
++      logger && logger.warn(args[0], _.tail(args))
++    })
++    listen('console.error', (...args) => {
++      logger && logger.error(args[0], _.tail(args))
++    })
+   }
+ 
+   ls(): string[] {
+diff --git a/src/bp/index.ts b/src/bp/index.ts
+index 4e65f0c46..bc0e1f7b8 100644
+--- a/src/bp/index.ts
++++ b/src/bp/index.ts
+@@ -48,9 +48,7 @@ if (process.env.APP_DATA_PATH) {
+ process.IS_FAILSAFE = yn(process.env.BP_FAILSAFE)
+ process.BOTPRESS_EVENTS = new EventEmitter()
+ process.BOTPRESS_EVENTS.setMaxListeners(1000)
+-global.BOTPRESS_CORE_EVENT = (event, args) => {
+-  /* noop */
+-}
++global.BOTPRESS_CORE_EVENT = (event, args) => process.BOTPRESS_EVENTS.emit(event, args)
+ 
+ process.LOADED_MODULES = {}
+ process.PROJECT_LOCATION = process.pkg

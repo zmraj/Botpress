@@ -37,7 +37,7 @@ export class SafeCodeSandbox {
       compiler: 'javascript',
       sandbox: {},
       timeout: 1000,
-      console: 'off',
+      console: 'redirect',
       sourceExtensions: ['js'],
       nesting: false,
       require: {
@@ -49,21 +49,21 @@ export class SafeCodeSandbox {
       }
     })
 
-    // this.vm.freeze(_, '_')
+    this.vm.freeze(_, '_')
 
-    // const listen = this.vm['on'].bind(this.vm)
-    // listen('console.log', (...args) => {
-    //   logger && logger.debug(args[0], _.tail(args))
-    // })
-    // listen('console.info', (...args) => {
-    //   logger && logger.info(args[0], _.tail(args))
-    // })
-    // listen('console.warn', (...args) => {
-    //   logger && logger.warn(args[0], _.tail(args))
-    // })
-    // listen('console.error', (...args) => {
-    //   logger && logger.error(args[0], _.tail(args))
-    // })
+    const listen = this.vm['on'].bind(this.vm)
+    listen('console.log', (...args) => {
+      logger && logger.debug(args[0], _.tail(args))
+    })
+    listen('console.info', (...args) => {
+      logger && logger.info(args[0], _.tail(args))
+    })
+    listen('console.warn', (...args) => {
+      logger && logger.warn(args[0], _.tail(args))
+    })
+    listen('console.error', (...args) => {
+      logger && logger.error(args[0], _.tail(args))
+    })
   }
 
   ls(): string[] {
