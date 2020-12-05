@@ -265,3 +265,45 @@ index 38b82a753..7f34ded8d 100644
      switch (runType) {
        case 'trusted': {
          // bp is created here because it cannot be created in the Local Action Server thread
+Starting botpress | Sat  5 Dec 2020 17:45:27 EST
+
+BEFORE MEMORY
+rss 179.71 MB
+heapTotal 108.61 MB
+heapUsed 73.57 MB
+external 29.88 MB
+Starting warmup | Sat  5 Dec 2020 17:45:37 EST
+Warmup done | Sat  5 Dec 2020 17:45:48 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 17:46:01 EST
+Sending requests | Sat  5 Dec 2020 17:46:03 EST
+Requests done | Sat  5 Dec 2020 17:46:14 EST
+Finishing snapshot | Sat  5 Dec 2020 17:46:29 EST
+
+LEAK SIZE: 219.29 kb
+Big diff: Array [143 new] --> 138 kb
+Big diff: Object [1142 new] --> 50.31 kb
+Big diff: String [1136 new] --> 50.77 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 301.26 MB
+heapTotal 74.98 MB
+heapUsed 67.55 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: CMS removed all clone deep etc
+--------------------
+
+
+GIT DIFF
+
+
