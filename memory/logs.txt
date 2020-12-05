@@ -932,3 +932,68 @@ Changes: re-running last run
 GIT DIFF
 
 
+Starting botpress | Sat  5 Dec 2020 18:07:51 EST
+
+BEFORE MEMORY
+rss 183.79 MB
+heapTotal 111.68 MB
+heapUsed 82.69 MB
+external 37.09 MB
+Starting warmup | Sat  5 Dec 2020 18:08:02 EST
+Warmup done | Sat  5 Dec 2020 18:08:13 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 18:08:26 EST
+Sending requests | Sat  5 Dec 2020 18:08:28 EST
+Requests done | Sat  5 Dec 2020 18:08:59 EST
+Finishing snapshot | Sat  5 Dec 2020 18:09:59 EST
+
+LEAK SIZE: 2.36 mb
+Big diff: Array [2072 new] --> 580.66 kb
+Big diff: Code [272 new] --> 507.94 kb
+Big diff: Object [4213 new] --> 188.16 kb
+Big diff: String [3636 new] --> 170.05 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 306.49 MB
+heapTotal 76.84 MB
+heapUsed 69.73 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: storing events
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/botpress.ts b/src/bp/core/botpress.ts
+index e833774d7..59b599efc 100644
+--- a/src/bp/core/botpress.ts
++++ b/src/bp/core/botpress.ts
+@@ -405,7 +405,7 @@ export class Botpress {
+ 
+     this.decisionEngine.onAfterEventProcessed = async (event: sdk.IO.IncomingEvent) => {
+       if (!event.ndu) {
+-        // this.eventCollector.storeEvent(event)
++        this.eventCollector.storeEvent(event)
+         return this.hookService.executeHook(new Hooks.AfterEventProcessed(this.api, event))
+       }
+ 
+@@ -414,7 +414,7 @@ export class Botpress {
+       const activeWorkflow = Object.keys(workflows).find(x => workflows[x].status === 'active')
+       const completedWorkflows = Object.keys(workflows).filter(x => workflows[x].status === 'completed')
+ 
+-      // this.eventCollector.storeEvent(event, activeWorkflow ? workflows[activeWorkflow] : undefined)
++      this.eventCollector.storeEvent(event, activeWorkflow ? workflows[activeWorkflow] : undefined)
+       await this.hookService.executeHook(new Hooks.AfterEventProcessed(this.api, event))
+ 
+       completedWorkflows.forEach(async workflow => {

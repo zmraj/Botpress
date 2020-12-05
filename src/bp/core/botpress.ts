@@ -405,7 +405,7 @@ export class Botpress {
 
     this.decisionEngine.onAfterEventProcessed = async (event: sdk.IO.IncomingEvent) => {
       if (!event.ndu) {
-        // this.eventCollector.storeEvent(event)
+        this.eventCollector.storeEvent(event)
         return this.hookService.executeHook(new Hooks.AfterEventProcessed(this.api, event))
       }
 
@@ -414,7 +414,7 @@ export class Botpress {
       const activeWorkflow = Object.keys(workflows).find(x => workflows[x].status === 'active')
       const completedWorkflows = Object.keys(workflows).filter(x => workflows[x].status === 'completed')
 
-      // this.eventCollector.storeEvent(event, activeWorkflow ? workflows[activeWorkflow] : undefined)
+      this.eventCollector.storeEvent(event, activeWorkflow ? workflows[activeWorkflow] : undefined)
       await this.hookService.executeHook(new Hooks.AfterEventProcessed(this.api, event))
 
       completedWorkflows.forEach(async workflow => {
