@@ -126,7 +126,7 @@ export class ConverseRouter extends CustomRouter {
 
     if (!parts.includes('nlu')) {
       delete output.nlu
-    }
+    } //
 
     if (!parts.includes('state')) {
       delete output.state

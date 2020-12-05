@@ -17,7 +17,7 @@ echo "GIT DIFF" >> logs.txt
 echo "" >> logs.txt
 echo "" >> logs.txt
 
-git diff >> logs.txt
+git diff -- ':!' >> logs.txt
 git add -A
 git commit -m "run - $changes"
 

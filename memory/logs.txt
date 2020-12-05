@@ -64,3 +64,57 @@ index 98c5fd490..1d72cdc0e 100755
  
  echo "Starting botpress..."
  echo "Starting botpress | $(date)" >> logs.txt
+Starting botpress | Sat  5 Dec 2020 17:24:42 EST
+
+BEFORE MEMORY
+rss 215.54 MB
+heapTotal 114.18 MB
+heapUsed 84.91 MB
+external 48.37 MB
+Starting warmup | Sat  5 Dec 2020 17:24:52 EST
+Warmup done | Sat  5 Dec 2020 17:25:03 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 17:25:16 EST
+Sending requests | Sat  5 Dec 2020 17:25:18 EST
+Requests done | Sat  5 Dec 2020 17:25:29 EST
+Finishing snapshot | Sat  5 Dec 2020 17:25:44 EST
+
+LEAK SIZE: -130.13 kb
+Big diff: Object [1090 new] --> 47.91 kb
+Big diff: String [997 new] --> 46.04 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 292.22 MB
+heapTotal 75.48 MB
+heapUsed 67.52 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: Run script
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/routers/bots/converse.ts b/src/bp/core/routers/bots/converse.ts
+index 0e777799d..f99cc28a9 100644
+--- a/src/bp/core/routers/bots/converse.ts
++++ b/src/bp/core/routers/bots/converse.ts
+@@ -126,7 +126,7 @@ export class ConverseRouter extends CustomRouter {
+ 
+     if (!parts.includes('nlu')) {
+       delete output.nlu
+-    }
++    } //
+ 
+     if (!parts.includes('state')) {
+       delete output.state
