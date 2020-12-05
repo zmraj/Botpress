@@ -13,6 +13,13 @@ echo "Changes: $changes" >> logs.txt
 echo "--------------------" >> logs.txt
 echo "" >> logs.txt
 echo "" >> logs.txt
+echo "GIT DIFF" >> logs.txt
+echo "" >> logs.txt
+echo "" >> logs.txt
+
+git diff >> logs.txt
+git add -A
+git commit -m "run - $changes"
 
 echo "Starting botpress..."
 echo "Starting botpress | $(date)" >> logs.txt

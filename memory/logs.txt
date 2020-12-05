@@ -1,0 +1,66 @@
+
+
+--------------------
+Changes: Initial
+--------------------
+
+
+Starting botpress | Sat  5 Dec 2020 17:19:39 EST
+
+BEFORE MEMORY
+rss 182.95 MB
+heapTotal 111.84 MB
+heapUsed 82.42 MB
+external 36.96 MB
+Starting warmup | Sat  5 Dec 2020 17:19:50 EST
+Warmup done | Sat  5 Dec 2020 17:20:01 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 17:20:14 EST
+Sending requests | Sat  5 Dec 2020 17:20:16 EST
+Requests done | Sat  5 Dec 2020 17:20:27 EST
+Finishing snapshot | Sat  5 Dec 2020 17:20:42 EST
+
+LEAK SIZE: -268.2 kb
+Big diff: Object [1093 new] --> 48.04 kb
+Big diff: String [827 new] --> 40.3 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 304.09 MB
+heapTotal 74.98 MB
+heapUsed 67.58 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: Changed run script
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/memory/run.sh b/memory/run.sh
+index 98c5fd490..1d72cdc0e 100755
+--- a/memory/run.sh
++++ b/memory/run.sh
+@@ -13,6 +13,13 @@ echo "Changes: $changes" >> logs.txt
+ echo "--------------------" >> logs.txt
+ echo "" >> logs.txt
+ echo "" >> logs.txt
++echo "GIT DIFF" >> logs.txt
++echo "" >> logs.txt
++echo "" >> logs.txt
++
++git diff >> logs.txt
++git add -A
++git commit -m "run - $changes"
+ 
+ echo "Starting botpress..."
+ echo "Starting botpress | $(date)" >> logs.txt
