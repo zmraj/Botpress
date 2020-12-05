@@ -118,3 +118,44 @@ index 0e777799d..f99cc28a9 100644
  
      if (!parts.includes('state')) {
        delete output.state
+Starting botpress | Sat  5 Dec 2020 17:35:07 EST
+
+BEFORE MEMORY
+rss 179.65 MB
+heapTotal 108.61 MB
+heapUsed 73.64 MB
+external 29.94 MB
+Starting warmup | Sat  5 Dec 2020 17:35:17 EST
+Warmup done | Sat  5 Dec 2020 17:35:29 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 17:35:42 EST
+Sending requests | Sat  5 Dec 2020 17:35:44 EST
+Requests done | Sat  5 Dec 2020 17:35:55 EST
+Finishing snapshot | Sat  5 Dec 2020 17:36:10 EST
+
+LEAK SIZE: 218.16 kb
+Big diff: Object [1142 new] --> 50.34 kb
+Big diff: String [1104 new] --> 49.73 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 286.3 MB
+heapTotal 74.73 MB
+heapUsed 67.54 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: Not calling converse
+--------------------
+
+
+GIT DIFF
+
+
