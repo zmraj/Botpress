@@ -997,3 +997,46 @@ index e833774d7..59b599efc 100644
        await this.hookService.executeHook(new Hooks.AfterEventProcessed(this.api, event))
  
        completedWorkflows.forEach(async workflow => {
+Starting botpress | Sat  5 Dec 2020 18:15:39 EST
+
+BEFORE MEMORY
+rss 183.54 MB
+heapTotal 111.43 MB
+heapUsed 82.57 MB
+external 37.05 MB
+Starting warmup | Sat  5 Dec 2020 18:15:49 EST
+Warmup done | Sat  5 Dec 2020 18:16:00 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 18:16:14 EST
+Sending requests | Sat  5 Dec 2020 18:16:16 EST
+Requests done | Sat  5 Dec 2020 18:16:47 EST
+Finishing snapshot | Sat  5 Dec 2020 18:17:47 EST
+
+LEAK SIZE: 2.07 mb
+Big diff: Array [2214 new] --> 480.72 kb
+Big diff: Code [252 new] --> 380.98 kb
+Big diff: Object [4199 new] --> 187.53 kb
+Big diff: String [3648 new] --> 170.36 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 305.75 MB
+heapTotal 76.59 MB
+heapUsed 69.56 MB
+external 3.8 MB
+
+
+
+--------------------
+Changes: eventCollector enabled in botpress config
+--------------------
+
+
+GIT DIFF
+
+
