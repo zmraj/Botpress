@@ -1040,3 +1040,44 @@ Changes: eventCollector enabled in botpress config
 GIT DIFF
 
 
+Starting botpress | Sat  5 Dec 2020 18:18:29 EST
+
+BEFORE MEMORY
+rss 184.16 MB
+heapTotal 111.68 MB
+heapUsed 83.38 MB
+external 37.68 MB
+Starting warmup | Sat  5 Dec 2020 18:18:39 EST
+Warmup done | Sat  5 Dec 2020 18:18:51 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 18:19:04 EST
+Sending requests | Sat  5 Dec 2020 18:19:06 EST
+Requests done | Sat  5 Dec 2020 18:19:37 EST
+Finishing snapshot | Sat  5 Dec 2020 18:20:37 EST
+
+LEAK SIZE: 1.32 mb
+Big diff: Object [4090 new] --> 182.45 kb
+Big diff: String [3276 new] --> 158.48 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 305.82 MB
+heapTotal 77.59 MB
+heapUsed 69.88 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: just re-running results
+--------------------
+
+
+GIT DIFF
+
+
