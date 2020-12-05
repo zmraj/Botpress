@@ -1507,3 +1507,64 @@ index 4bac2c865..f4cc19bb0 100644
      } catch (e) {
        throw new VError(e, `Error executing file "${fileName}" in SafeSandbox`)
      }
+Starting botpress | Sat  5 Dec 2020 18:38:44 EST
+
+BEFORE MEMORY
+rss 186.46 MB
+heapTotal 111.59 MB
+heapUsed 82.38 MB
+external 36.9 MB
+Starting warmup | Sat  5 Dec 2020 18:38:54 EST
+Warmup done | Sat  5 Dec 2020 18:39:06 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 18:39:19 EST
+Sending requests | Sat  5 Dec 2020 18:39:21 EST
+Requests done | Sat  5 Dec 2020 18:39:52 EST
+Finishing snapshot | Sat  5 Dec 2020 18:40:52 EST
+
+LEAK SIZE: 2.27 mb
+Big diff: Array [2250 new] --> 526.63 kb
+Big diff: Code [283 new] --> 467.98 kb
+Big diff: Object [4223 new] --> 188.66 kb
+Big diff: String [3635 new] --> 171.68 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 286.26 MB
+heapTotal 78.09 MB
+heapUsed 69.9 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: test remove vm
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/services/action/vm.ts b/src/bp/core/services/action/vm.ts
+index 01942c836..cdfb3db79 100644
+--- a/src/bp/core/services/action/vm.ts
++++ b/src/bp/core/services/action/vm.ts
+@@ -2,11 +2,11 @@ import { NodeVM, VMScript } from 'vm2'
+ 
+ export class VmRunner {
+   runInVm(vm: NodeVM, code: string, path?: string) {
+-    const script = new VMScript(code, { filename: path })
++    // const script = new VMScript(code, { filename: path })
+ 
+     return new Promise((resolve, reject) => {
+       try {
+-        const retValue = vm.run(script)
++        const retValue = eval(code) // vm.run(script)
+ 
+         // Check if code returned a Promise-like object
+         if (retValue && typeof retValue.then === 'function') {
