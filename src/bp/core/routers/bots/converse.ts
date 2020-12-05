@@ -38,36 +38,6 @@ export class ConverseRouter extends CustomRouter {
 
   setupRoutes() {
     this.router.post(
-      '/test/:userId',
-      this.httpServer.extractExternalToken,
-      this.asyncMiddleware(async (req, res) => {
-        try {
-          await joi.validate(req.body, conversePayloadSchema)
-        } catch (err) {
-          throw new StandardError('Invalid payload', err)
-        }
-
-        const { userId, botId } = req.params
-        const params = req.query.include
-
-        if (params && params.toLowerCase() !== 'responses') {
-          return res.status(401).send("Unauthenticated converse API can only return 'responses'")
-        }
-
-        // const rawOutput = await this.converseService.sendMessage(
-        //   botId,
-        //   userId,
-        //   _.omit(req.body, ['includedContexts']),
-        //   req.credentials,
-        //   req.body.includedContexts || ['global']
-        // )
-        // const formatedOutput = this.prepareResponse(rawOutput, params)
-
-        return res.json({})
-      })
-    )
-
-    this.router.post(
       '/:userId',
       this.httpServer.extractExternalToken,
       this.asyncMiddleware(async (req, res) => {

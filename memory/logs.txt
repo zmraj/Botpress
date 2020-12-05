@@ -1755,3 +1755,36 @@ index 5b9f7b685..0f219f12b 100644
      if (!_.isArray(payloads)) {
        payloads = [payloads]
      }
+Starting botpress | Sat  5 Dec 2020 18:49:37 EST
+
+BEFORE MEMORY
+rss 183.85 MB
+heapTotal 111.43 MB
+heapUsed 83.65 MB
+external 38.86 MB
+Starting warmup | Sat  5 Dec 2020 18:49:47 EST
+Warmup done | Sat  5 Dec 2020 18:49:58 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 18:50:11 EST
+Sending requests | Sat  5 Dec 2020 18:50:13 EST
+Requests done | Sat  5 Dec 2020 18:50:45 EST
+Finishing snapshot | Sat  5 Dec 2020 18:51:45 EST
+
+LEAK SIZE: 2.13 mb
+Big diff: Array [2093 new] --> 476.85 kb
+Big diff: Code [274 new] --> 423.94 kb
+Big diff: Object [4208 new] --> 187.93 kb
+Big diff: String [3624 new] --> 170.07 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 307.22 MB
+heapTotal 77.59 MB
+heapUsed 69.91 MB
+external 3.83 MB
+
