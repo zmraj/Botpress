@@ -159,3 +159,56 @@ Changes: Not calling converse
 GIT DIFF
 
 
+Starting botpress | Sat  5 Dec 2020 17:37:57 EST
+
+BEFORE MEMORY
+rss 179.71 MB
+heapTotal 108.36 MB
+heapUsed 73.52 MB
+external 29.86 MB
+Starting warmup | Sat  5 Dec 2020 17:38:08 EST
+Warmup done | Sat  5 Dec 2020 17:38:19 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 17:38:32 EST
+Sending requests | Sat  5 Dec 2020 17:38:34 EST
+Requests done | Sat  5 Dec 2020 17:38:45 EST
+Finishing snapshot | Sat  5 Dec 2020 17:39:00 EST
+
+LEAK SIZE: -95.38 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 253.47 MB
+heapTotal 71.86 MB
+heapUsed 66.36 MB
+external 3.81 MB
+
+
+
+--------------------
+Changes: renderTemplate
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/misc/templating.ts b/src/bp/core/misc/templating.ts
+index df1cbfcee..bdcfa3b78 100644
+--- a/src/bp/core/misc/templating.ts
++++ b/src/bp/core/misc/templating.ts
+@@ -10,8 +10,7 @@ export function renderRecursive(item: TemplateItem, context: any): any {
+   } else if (typeof item === 'object') {
+     return _.mapValues(item, val => renderRecursive(val, context))
+   } else if (typeof item === 'string') {
+-    return item
+-    // return renderTemplate(item, context)
++    return renderTemplate(item, context)
+   } else {
+     return item
+   }
