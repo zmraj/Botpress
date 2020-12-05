@@ -334,7 +334,19 @@ export default class HTTPServer {
           res.send('start first')
         }
         const diff = (hd as any)!.end()
-        res.send(diff)
+
+        const summary: string[] = []
+
+        summary.push(`LEAK SIZE: ${diff.change.size}`)
+
+        for (const o of diff.change.details) {
+          const alloc = o['+'] - o['-']
+          if (alloc > 0 && o.size_bytes > 1000) {
+            summary.push(`Big diff: ${o.what} [${alloc} new] --> ${o.size}`)
+          }
+        }
+
+        res.send(summary.join('\n'))
       } catch (err) {
         res.send({ error: true, message: err.message })
         console.error(err)
@@ -343,7 +355,12 @@ export default class HTTPServer {
 
     this.app.get('/heap/stats', async (req, res) => {
       try {
-        res.send(memwatch.stats())
+        const used = process.memoryUsage()
+        const arr: string[] = []
+        for (const key in used) {
+          arr.push(`${key} ${Math.round((used[key] / 1024 / 1024) * 100) / 100} MB`)
+        }
+        res.send(arr.join('\n'))
       } catch (err) {
         res.send({ error: true, message: err.message })
         console.error(err)
