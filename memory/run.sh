@@ -56,7 +56,7 @@ echo "Sending requests | $(date)" >> logs.txt
 k6 run --vus 150 --duration 60s load.js
 echo "Requests done | $(date)" >> logs.txt
 
-sleep 60
+sleep 120
 
 echo "Capture"
 echo "Finishing snapshot | $(date)" >> logs.txt
