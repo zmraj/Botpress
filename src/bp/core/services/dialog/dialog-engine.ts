@@ -11,7 +11,7 @@ import { addErrorToEvent } from '../middleware/event-collector'
 
 import { FlowError, TimeoutNodeNotFound } from './errors'
 import { FlowService } from './flow/service'
-import { Instruction, ProcessingResult } from './instruction'
+import { Instruction } from './instruction'
 import { InstructionProcessor } from './instruction/processor'
 import { InstructionQueue } from './instruction/queue'
 import { InstructionsQueueBuilder } from './queue-builder'
@@ -85,8 +85,6 @@ export class DialogEngine {
     if (!instruction) {
       this._debug(event.botId, event.target, 'ending flow')
       this._endFlow(event)
-      event.state.context.queue = undefined
-      context.queue = undefined
       return event
     }
 
@@ -319,7 +317,7 @@ export class DialogEngine {
         previousFlow: event.state.context.currentFlow,
         previousNode: event.state.context.currentNode,
         jumpPoints: [
-          ...(context.jumpPoints || []).map(x => ({ ...x })),
+          ...(context.jumpPoints || []),
           {
             flow: context.currentFlow!,
             node: context.currentNode!
@@ -367,8 +365,8 @@ export class DialogEngine {
         ...context,
         currentNode: parentNode.name,
         currentFlow: parentFlow.name,
-        jumpPoints: [...jumpPoints].map(x => ({ ...x })),
-        queue // TODO: this is LOUCHE
+        jumpPoints,
+        queue
       }
 
       this._logExitFlow(
@@ -420,7 +418,7 @@ export class DialogEngine {
       previousFlow: parentFlow.name,
       previousNode: parentNode.name,
       jumpPoints: [
-        ...(event.state.context.jumpPoints || []).map(x => ({ ...x })),
+        ...(event.state.context.jumpPoints || []),
         {
           flow: parentFlow.name,
           node: parentNode.name
@@ -444,9 +442,11 @@ export class DialogEngine {
       .filter(x => x.length >= 3)
       .first()
       .value()
+
     if (!loop) {
       return
     }
+
     // we build the flow path for showing the loop to the end-user
     const recurringPath: string[] = []
     const { node, flow } = loop[0]
@@ -458,6 +458,7 @@ export class DialogEngine {
         recurringPath.push(`${stacktrace[i].flow} (${stacktrace[i].node})`)
       }
     }
+
     throw new FlowError(`Infinite loop detected. (${recurringPath.join(' --> ')})`, botId, loop[0].flow, loop[0].node)
   }
 
