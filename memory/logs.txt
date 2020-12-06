@@ -1859,3 +1859,71 @@ index cdfb3db79..01942c836 100644
  
          // Check if code returned a Promise-like object
          if (retValue && typeof retValue.then === 'function') {
+Starting botpress | Sat  5 Dec 2020 18:57:59 EST
+
+BEFORE MEMORY
+rss 179.25 MB
+heapTotal 108.61 MB
+heapUsed 73.6 MB
+external 29.89 MB
+Starting warmup | Sat  5 Dec 2020 18:58:10 EST
+Warmup done | Sat  5 Dec 2020 18:58:21 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 18:58:34 EST
+Sending requests | Sat  5 Dec 2020 18:58:36 EST
+Requests done | Sat  5 Dec 2020 18:59:08 EST
+Finishing snapshot | Sat  5 Dec 2020 19:00:08 EST
+
+LEAK SIZE: 2.17 mb
+Big diff: Array [2013 new] --> 483.29 kb
+Big diff: Code [277 new] --> 435.48 kb
+Big diff: Object [4214 new] --> 188.28 kb
+Big diff: String [3615 new] --> 170.85 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 318.85 MB
+heapTotal 77.34 MB
+heapUsed 69.86 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: add error to event
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/services/middleware/event-collector.ts b/src/bp/core/services/middleware/event-collector.ts
+index 47b1cce75..b266aee7b 100644
+--- a/src/bp/core/services/middleware/event-collector.ts
++++ b/src/bp/core/services/middleware/event-collector.ts
+@@ -55,13 +55,13 @@ export const addLogToEvent = (logEntry: string, event: sdk.IO.Event) => {
+ }
+ 
+ export const addErrorToEvent = (eventError: sdk.IO.EventError, event: sdk.IO.Event | sdk.IO.IncomingEvent) => {
+-  // if (event?.debugger && event?.activeProcessing) {
+-  //   if (event.direction === 'incoming') {
+-  //     const { context } = (event as sdk.IO.IncomingEvent).state
+-  //     eventError = { ...eventError, flowName: context?.currentFlow, nodeName: context?.currentNode }
+-  //   }
+-  //   event.activeProcessing.errors = [...(event.activeProcessing.errors ?? []), eventError]
+-  // }
++  if (event?.debugger && event?.activeProcessing) {
++    if (event.direction === 'incoming') {
++      const { context } = (event as sdk.IO.IncomingEvent).state
++      eventError = { ...eventError, flowName: context?.currentFlow, nodeName: context?.currentNode }
++    }
++    event.activeProcessing.errors = [...(event.activeProcessing.errors ?? []), eventError]
++  }
+ }
+ 
+ const eventsFields = [
