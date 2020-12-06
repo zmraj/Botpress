@@ -2570,3 +2570,42 @@ index 1f586fd77..db8dc3c2b 100644
    }
  
    private async _createDonePromise(userKey: string) {
+Starting botpress | Sat  5 Dec 2020 19:23:01 EST
+
+BEFORE MEMORY
+rss 180.84 MB
+heapTotal 109.36 MB
+heapUsed 73.63 MB
+external 29.94 MB
+Starting warmup | Sat  5 Dec 2020 19:23:12 EST
+Warmup done | Sat  5 Dec 2020 19:23:25 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 19:23:38 EST
+Sending requests | Sat  5 Dec 2020 19:23:40 EST
+Requests done | Sat  5 Dec 2020 19:24:12 EST
+Finishing snapshot | Sat  5 Dec 2020 19:25:12 EST
+
+LEAK SIZE: 719.67 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 321.55 MB
+heapTotal 78.2 MB
+heapUsed 70.17 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: re-run converse
+--------------------
+
+
+GIT DIFF
+
+
