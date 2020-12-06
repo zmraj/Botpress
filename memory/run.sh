@@ -53,7 +53,7 @@ sleep 2
 
 echo "Bench"
 echo "Sending requests | $(date)" >> logs.txt
-k6 run --vus 100 --duration 30s load.js
+k6 run --vus 150 --duration 60s load.js
 echo "Requests done | $(date)" >> logs.txt
 
 sleep 60

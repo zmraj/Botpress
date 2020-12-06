@@ -2757,3 +2757,57 @@ Changes: change test for 100 VUs / 30s
 GIT DIFF
 
 
+Starting botpress | Sat  5 Dec 2020 19:36:36 EST
+
+BEFORE MEMORY
+rss 182.08 MB
+heapTotal 111.43 MB
+heapUsed 82.67 MB
+external 37.11 MB
+Starting warmup | Sat  5 Dec 2020 19:36:46 EST
+Warmup done | Sat  5 Dec 2020 19:36:58 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 19:37:11 EST
+Sending requests | Sat  5 Dec 2020 19:37:13 EST
+Requests done | Sat  5 Dec 2020 19:37:45 EST
+Finishing snapshot | Sat  5 Dec 2020 19:38:45 EST
+
+LEAK SIZE: 4.77 mb
+Big diff: Array [1158 new] --> 634.59 kb
+Big diff: BufferList [80 new] --> 3.75 kb
+Big diff: Closure [880 new] --> 45 kb
+Big diff: Code [202 new] --> 360.79 kb
+Big diff: Entry [80 new] --> 5 kb
+Big diff: HTTPParser [80 new] --> 2.5 kb
+Big diff: Native [80 new] --> 2.7 kb
+Big diff: Node [80 new] --> 4.38 kb
+Big diff: Object [494 new] --> 27.52 kb
+Big diff: ReadableState [80 new] --> 16.88 kb
+Big diff: Socket [80 new] --> 19.38 kb
+Big diff: String [446 new] --> 14.54 kb
+Big diff: Timeout [80 new] --> 8.75 kb
+Big diff: WritableState [81 new] --> 18.98 kb
+Big diff: system / Context [240 new] --> 13.13 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 319.66 MB
+heapTotal 80.49 MB
+heapUsed 72.83 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: 150 VUS for 60s
+--------------------
+
+
+GIT DIFF
+
+
