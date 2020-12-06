@@ -2747,3 +2747,13 @@ heapTotal 77.59 MB
 heapUsed 69.54 MB
 external 3.83 MB
 
+
+
+--------------------
+Changes: change test for 100 VUs / 30s
+--------------------
+
+
+GIT DIFF
+
+
