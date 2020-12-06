@@ -2715,3 +2715,35 @@ Changes: re-run
 GIT DIFF
 
 
+Starting botpress | Sat  5 Dec 2020 19:33:16 EST
+
+BEFORE MEMORY
+rss 179.61 MB
+heapTotal 109.11 MB
+heapUsed 73.68 MB
+external 29.94 MB
+Starting warmup | Sat  5 Dec 2020 19:33:27 EST
+Warmup done | Sat  5 Dec 2020 19:33:39 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 19:33:52 EST
+Sending requests | Sat  5 Dec 2020 19:33:54 EST
+Requests done | Sat  5 Dec 2020 19:34:26 EST
+Finishing snapshot | Sat  5 Dec 2020 19:35:26 EST
+
+LEAK SIZE: 1.97 mb
+Big diff: Array [745 new] --> 505 kb
+Big diff: Code [307 new] --> 576.9 kb
+Big diff: String [3 new] --> 15.58 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 306.55 MB
+heapTotal 77.59 MB
+heapUsed 69.54 MB
+external 3.83 MB
+
