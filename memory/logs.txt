@@ -2493,3 +2493,80 @@ index 13d60515b..bb9904d1b 100644
      throw new FlowError(`Infinite loop detected. (${recurringPath.join(' --> ')})`, botId, loop[0].flow, loop[0].node)
    }
  
+Starting botpress | Sat  5 Dec 2020 19:19:07 EST
+
+BEFORE MEMORY
+rss 181.24 MB
+heapTotal 110.11 MB
+heapUsed 73.41 MB
+external 3.82 MB
+Starting warmup | Sat  5 Dec 2020 19:19:17 EST
+Warmup done | Sat  5 Dec 2020 19:19:28 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 19:19:41 EST
+Sending requests | Sat  5 Dec 2020 19:19:43 EST
+Requests done | Sat  5 Dec 2020 19:20:14 EST
+Finishing snapshot | Sat  5 Dec 2020 19:21:14 EST
+
+LEAK SIZE: 2.77 mb
+Big diff: Array [1766 new] --> 533.94 kb
+Big diff: Code [350 new] --> 615.15 kb
+Big diff: Object [4196 new] --> 187.42 kb
+Big diff: String [3576 new] --> 164.26 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 328.09 MB
+heapTotal 78.2 MB
+heapUsed 70.66 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: converse api restore
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/services/converse.ts b/src/bp/core/services/converse.ts
+index 1f586fd77..db8dc3c2b 100644
+--- a/src/bp/core/services/converse.ts
++++ b/src/bp/core/services/converse.ts
+@@ -109,20 +109,18 @@ export class ConverseService {
+       }
+     })
+ 
+-    // const userKey = buildUserKey(botId, userId)
+-    // const timeoutPromise = this._createTimeoutPromise(botId, userKey)
+-    // const donePromise = this._createDonePromise(userKey)
++    const userKey = buildUserKey(botId, userId)
++    const timeoutPromise = this._createTimeoutPromise(botId, userKey)
++    const donePromise = this._createDonePromise(userKey)
+ 
+     await this.eventEngine.sendEvent(incomingEvent)
+ 
+-    // return Promise.race([timeoutPromise, donePromise]).finally(() => {
+-    //   converseApiEvents.removeAllListeners(`done.${userKey}`)
+-    //   converseApiEvents.removeAllListeners(`action.start.${userKey}`)
+-    //   converseApiEvents.removeAllListeners(`action.end.${userKey}`)
+-    //   delete this._responseMap[userKey]
+-    // })
+-
+-    return { text: 'mocked converse' }
++    return Promise.race([timeoutPromise, donePromise]).finally(() => {
++      converseApiEvents.removeAllListeners(`done.${userKey}`)
++      converseApiEvents.removeAllListeners(`action.start.${userKey}`)
++      converseApiEvents.removeAllListeners(`action.end.${userKey}`)
++      delete this._responseMap[userKey]
++    })
+   }
+ 
+   private async _createDonePromise(userKey: string) {
