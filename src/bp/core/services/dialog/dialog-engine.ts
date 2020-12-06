@@ -91,7 +91,7 @@ export class DialogEngine {
     }
 
     try {
-      // await converseApiEvents.emitAsync(`action.start.${buildUserKey(event.botId, event.target)}`, event)
+      await converseApiEvents.emitAsync(`action.start.${buildUserKey(event.botId, event.target)}`, event)
       const result = await this.instructionProcessor.process(botId, instruction, event)
 
       if (result.followUpAction === 'none') {
@@ -132,7 +132,7 @@ export class DialogEngine {
     } catch (err) {
       this._reportProcessingError(botId, err, event, instruction)
     } finally {
-      // await converseApiEvents.emitAsync(`action.end.${buildUserKey(event.botId, event.target)}`, event)
+      await converseApiEvents.emitAsync(`action.end.${buildUserKey(event.botId, event.target)}`, event)
     }
 
     return event
@@ -432,9 +432,6 @@ export class DialogEngine {
   }
 
   protected async _loadFlows(botId: string) {
-    if (this._flowsByBot.has(botId)) {
-      return
-    }
     const flows = await this.flowService.loadAll(botId)
     this._flowsByBot.set(botId, flows)
   }

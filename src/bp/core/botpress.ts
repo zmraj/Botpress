@@ -387,7 +387,7 @@ export class Botpress {
         this.eventCollector.storeEvent(event)
       }
 
-      // await converseApiEvents.emitAsync(`done.${buildUserKey(event.botId, event.target)}`, event)
+      await converseApiEvents.emitAsync(`done.${buildUserKey(event.botId, event.target)}`, event)
     }
 
     this.eventEngine.onBeforeOutgoingMiddleware = async (event: sdk.IO.IncomingEvent) => {

@@ -2293,3 +2293,91 @@ index 87578bb5c..a3e88f637 100644
        await this.stateManager.persist(processedEvent, false)
      } catch (err) {
        this.logger
+Starting botpress | Sat  5 Dec 2020 19:13:04 EST
+
+BEFORE MEMORY
+rss 180.2 MB
+heapTotal 110.11 MB
+heapUsed 73.03 MB
+external 3.82 MB
+Starting warmup | Sat  5 Dec 2020 19:13:15 EST
+Warmup done | Sat  5 Dec 2020 19:13:26 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 19:13:39 EST
+Sending requests | Sat  5 Dec 2020 19:13:41 EST
+Requests done | Sat  5 Dec 2020 19:14:13 EST
+Finishing snapshot | Sat  5 Dec 2020 19:15:13 EST
+
+LEAK SIZE: 2.82 mb
+Big diff: Array [1825 new] --> 544.39 kb
+Big diff: Code [349 new] --> 638.68 kb
+Big diff: Object [4207 new] --> 187.87 kb
+Big diff: String [3580 new] --> 165.01 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 293.18 MB
+heapTotal 78.45 MB
+heapUsed 70.82 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: load flows caching
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/botpress.ts b/src/bp/core/botpress.ts
+index 59b599efc..b246457aa 100644
+--- a/src/bp/core/botpress.ts
++++ b/src/bp/core/botpress.ts
+@@ -387,7 +387,7 @@ export class Botpress {
+         this.eventCollector.storeEvent(event)
+       }
+ 
+-      // await converseApiEvents.emitAsync(`done.${buildUserKey(event.botId, event.target)}`, event)
++      await converseApiEvents.emitAsync(`done.${buildUserKey(event.botId, event.target)}`, event)
+     }
+ 
+     this.eventEngine.onBeforeOutgoingMiddleware = async (event: sdk.IO.IncomingEvent) => {
+diff --git a/src/bp/core/services/dialog/dialog-engine.ts b/src/bp/core/services/dialog/dialog-engine.ts
+index bc5c2e6c5..13d60515b 100644
+--- a/src/bp/core/services/dialog/dialog-engine.ts
++++ b/src/bp/core/services/dialog/dialog-engine.ts
+@@ -91,7 +91,7 @@ export class DialogEngine {
+     }
+ 
+     try {
+-      // await converseApiEvents.emitAsync(`action.start.${buildUserKey(event.botId, event.target)}`, event)
++      await converseApiEvents.emitAsync(`action.start.${buildUserKey(event.botId, event.target)}`, event)
+       const result = await this.instructionProcessor.process(botId, instruction, event)
+ 
+       if (result.followUpAction === 'none') {
+@@ -132,7 +132,7 @@ export class DialogEngine {
+     } catch (err) {
+       this._reportProcessingError(botId, err, event, instruction)
+     } finally {
+-      // await converseApiEvents.emitAsync(`action.end.${buildUserKey(event.botId, event.target)}`, event)
++      await converseApiEvents.emitAsync(`action.end.${buildUserKey(event.botId, event.target)}`, event)
+     }
+ 
+     return event
+@@ -432,9 +432,6 @@ export class DialogEngine {
+   }
+ 
+   protected async _loadFlows(botId: string) {
+-    if (this._flowsByBot.has(botId)) {
+-      return
+-    }
+     const flows = await this.flowService.loadAll(botId)
+     this._flowsByBot.set(botId, flows)
+   }
