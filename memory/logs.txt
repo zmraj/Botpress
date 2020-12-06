@@ -2609,3 +2609,67 @@ Changes: re-run converse
 GIT DIFF
 
 
+Starting botpress | Sat  5 Dec 2020 19:27:05 EST
+
+BEFORE MEMORY
+rss 181.09 MB
+heapTotal 109.36 MB
+heapUsed 73.48 MB
+external 3.84 MB
+Starting warmup | Sat  5 Dec 2020 19:27:15 EST
+Warmup done | Sat  5 Dec 2020 19:27:27 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 19:27:40 EST
+Sending requests | Sat  5 Dec 2020 19:27:42 EST
+Requests done | Sat  5 Dec 2020 19:28:14 EST
+Finishing snapshot | Sat  5 Dec 2020 19:29:14 EST
+
+LEAK SIZE: 2.53 mb
+Big diff: Array [827 new] --> 483.4 kb
+Big diff: Code [322 new] --> 549.41 kb
+Big diff: String [17 new] --> 15.98 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 300.34 MB
+heapTotal 77.45 MB
+heapUsed 70.24 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: clone strategy
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/services/dialog/instruction/strategy.ts b/src/bp/core/services/dialog/instruction/strategy.ts
+index 89c43f707..c7faaab0c 100644
+--- a/src/bp/core/services/dialog/instruction/strategy.ts
++++ b/src/bp/core/services/dialog/instruction/strategy.ts
+@@ -68,7 +68,7 @@ export class ActionStrategy implements InstructionStrategy {
+       }
+     }
+ 
+-    // debug.forBot(botId, `[${event.target}] render element "${outputType}"`)
++    debug.forBot(botId, `[${event.target}] render element "${outputType}"`)
+ 
+     const message: IO.DialogTurnHistory = {
+       eventId: event.id,
+@@ -95,7 +95,7 @@ export class ActionStrategy implements InstructionStrategy {
+     }
+ 
+     const eventDestination = _.pick(event, ['channel', 'target', 'botId', 'threadId'])
+-    const renderedElements = await this.cms.renderElement(outputType, _.cloneDeep(args), eventDestination)
++    const renderedElements = await this.cms.renderElement(outputType, args, eventDestination)
+     await this.eventEngine.replyToEvent(eventDestination, renderedElements, event.id)
+ 
+     return ProcessingResult.none()

@@ -68,7 +68,7 @@ export class ActionStrategy implements InstructionStrategy {
       }
     }
 
-    // debug.forBot(botId, `[${event.target}] render element "${outputType}"`)
+    debug.forBot(botId, `[${event.target}] render element "${outputType}"`)
 
     const message: IO.DialogTurnHistory = {
       eventId: event.id,
@@ -95,7 +95,7 @@ export class ActionStrategy implements InstructionStrategy {
     }
 
     const eventDestination = _.pick(event, ['channel', 'target', 'botId', 'threadId'])
-    const renderedElements = await this.cms.renderElement(outputType, _.cloneDeep(args), eventDestination)
+    const renderedElements = await this.cms.renderElement(outputType, args, eventDestination)
     await this.eventEngine.replyToEvent(eventDestination, renderedElements, event.id)
 
     return ProcessingResult.none()
