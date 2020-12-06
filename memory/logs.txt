@@ -1927,3 +1927,160 @@ index 47b1cce75..b266aee7b 100644
  }
  
  const eventsFields = [
+Starting botpress | Sat  5 Dec 2020 19:06:42 EST
+
+BEFORE MEMORY
+rss 180.18 MB
+heapTotal 109.11 MB
+heapUsed 73.4 MB
+external 3.82 MB
+Starting warmup | Sat  5 Dec 2020 19:06:53 EST
+Warmup done | Sat  5 Dec 2020 19:07:04 EST
+
+GC collected
+Snapshot memory
+done
+Snapshot done | Sat  5 Dec 2020 19:07:19 EST
+Sending requests | Sat  5 Dec 2020 19:07:21 EST
+Requests done | Sat  5 Dec 2020 19:07:52 EST
+Finishing snapshot | Sat  5 Dec 2020 19:08:52 EST
+
+LEAK SIZE: 404.55 kb
+Big diff: Object [4071 new] --> 181.63 kb
+Big diff: String [2469 new] --> 123.37 kb
+
+
+GC collected
+
+FINAL MEMORY
+rss 297.81 MB
+heapTotal 77.59 MB
+heapUsed 69.94 MB
+external 3.83 MB
+
+
+
+--------------------
+Changes: nothing (state manager)
+--------------------
+
+
+GIT DIFF
+
+
+diff --git a/src/bp/core/services/middleware/state-manager.ts b/src/bp/core/services/middleware/state-manager.ts
+index dc118554f..2516c8995 100644
+--- a/src/bp/core/services/middleware/state-manager.ts
++++ b/src/bp/core/services/middleware/state-manager.ts
+@@ -67,30 +67,30 @@ export class StateManager {
+   public async restore(event: sdk.IO.IncomingEvent) {
+     const sessionId = SessionIdFactory.createIdFromEvent(event)
+ 
+-    // if (this.useRedis) {
+-    //   try {
+-    //     const userState = await this._redisClient.get(getRedisSessionKey(sessionId))
+-    //     if (userState) {
+-    //       event.state = JSON.parse(userState)
+-    //       event.state.__stacktrace = []
+-    //       return
+-    //     }
+-    //   } catch (err) {
+-    //     this.logger.attachError(err).error('Error reading user state from Redis')
+-    //   }
+-    // }
++    if (this.useRedis) {
++      try {
++        const userState = await this._redisClient.get(getRedisSessionKey(sessionId))
++        if (userState) {
++          event.state = JSON.parse(userState)
++          event.state.__stacktrace = []
++          return
++        }
++      } catch (err) {
++        this.logger.attachError(err).error('Error reading user state from Redis')
++      }
++    }
+ 
+     const state = event.state
+ 
+-    // const { result: user } = await this.userRepo.getOrCreate(event.channel, event.target, event.botId)
+-    state.user = {} // user.attributes
++    const { result: user } = await this.userRepo.getOrCreate(event.channel, event.target, event.botId)
++    state.user = user.attributes
+ 
+-    const session: any = null // await this.sessionRepo.get(sessionId)
++    const session = await this.sessionRepo.get(sessionId)
+ 
+     state.context = (session && session.context) || {}
+     state.session = (session && session.session_data) || { lastMessages: [], workflows: {} }
+     state.temp = (session && session.temp_data) || {}
+-    // state.bot = await this.kvs.forBot(event.botId).get(this.BOT_GLOBAL_KEY)
++    state.bot = await this.kvs.forBot(event.botId).get(this.BOT_GLOBAL_KEY)
+     state.__stacktrace = []
+ 
+     if (!state.workflow) {
+@@ -105,16 +105,16 @@ export class StateManager {
+   public async persist(event: sdk.IO.IncomingEvent, ignoreContext: boolean) {
+     const sessionId = SessionIdFactory.createIdFromEvent(event)
+ 
+-    // if (this.useRedis) {
+-    //   await this._redisClient.set(
+-    //     getRedisSessionKey(sessionId),
+-    //     JSON.stringify(_.omit(event.state, ['__stacktrace', 'workflow'])),
+-    //     'PX',
+-    //     REDIS_MEMORY_DURATION
+-    //   )
+-    //   this.batch.push({ event, ignoreContext })
+-    //   return
+-    // }
++    if (this.useRedis) {
++      await this._redisClient.set(
++        getRedisSessionKey(sessionId),
++        JSON.stringify(_.omit(event.state, ['__stacktrace', 'workflow'])),
++        'PX',
++        REDIS_MEMORY_DURATION
++      )
++      this.batch.push({ event, ignoreContext })
++      return
++    }
+ 
+     await this._saveState(event, ignoreContext)
+   }
+@@ -122,22 +122,21 @@ export class StateManager {
+   public async deleteDialogSession(sessionId: string) {
+     await this.sessionRepo.delete(sessionId)
+ 
+-    // if (this.useRedis) {
+-    //   await this._redisClient.del(getRedisSessionKey(sessionId))
+-    // }
++    if (this.useRedis) {
++      await this._redisClient.del(getRedisSessionKey(sessionId))
++    }
+   }
+ 
+   private async _saveState(event: sdk.IO.IncomingEvent, ignoreContext?: boolean, trx?: Knex.Transaction) {
+-    return
+     const { user, context, session, temp } = event.state
+     const sessionId = SessionIdFactory.createIdFromEvent(event)
+ 
+-    // await this.userRepo.setAttributes(event.channel, event.target, _.omitBy(user, _.isNil), trx)
++    await this.userRepo.setAttributes(event.channel, event.target, _.omitBy(user, _.isNil), trx)
+ 
+     // Take last 5 messages only
+-    // if (session && session.lastMessages) {
+-    //   session.lastMessages = _.takeRight(session.lastMessages, this.LAST_MESSAGES_HISTORY_COUNT)
+-    // }
++    if (session && session.lastMessages) {
++      session.lastMessages = _.takeRight(session.lastMessages, this.LAST_MESSAGES_HISTORY_COUNT)
++    }
+ 
+     const botConfig = await this.configProvider.getBotConfig(event.botId)
+     const botpressConfig = await this.getBotpressConfig()
+@@ -159,7 +158,6 @@ export class StateManager {
+   }
+ 
+   private _runTask = async () => {
+-    return
+     if (this.currentPromise || !this.batch || !this.batch.length) {
+       return
+     }
