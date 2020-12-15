@@ -124,7 +124,7 @@ export default async (bp: typeof sdk, db: Database) => {
   router.post(
     '/messages/:userId',
     bp.http.extractExternalToken,
-    asyncMiddleware(async (req: BPRequest, res: Response) => {
+    asyncMiddleware(async (req: BPRequest<any, any, any, { conversationId?: string }>, res: Response) => {
       const { botId, userId = undefined } = req.params
 
       if (!validateUserId(userId)) {
@@ -134,7 +134,7 @@ export default async (bp: typeof sdk, db: Database) => {
       const user = await bp.users.getOrCreateUser('web', userId, botId)
       const payload = req.body || {}
 
-      let { conversationId = undefined } = req.query || {}
+      let conversationId: string | number = req.query?.conversationId || ''
       conversationId = conversationId && parseInt(conversationId)
 
       if (!SUPPORTED_MESSAGES.includes(payload.type)) {
@@ -301,30 +301,35 @@ export default async (bp: typeof sdk, db: Database) => {
   router.post(
     '/events/:userId',
     bp.http.extractExternalToken,
-    asyncMiddleware(async (req: BPRequest, res: Response) => {
-      const payload = req.body || {}
-      const { botId = undefined, userId = undefined } = req.params || {}
-      let { conversationId = undefined } = req.query || {}
-      await bp.users.getOrCreateUser('web', userId, botId)
+    asyncMiddleware(
+      async (
+        req: BPRequest<{ botId: string; userId: string }, any, any, { conversationId?: string }>,
+        res: Response
+      ) => {
+        const payload = req.body || {}
+        const { botId = undefined, userId = undefined } = req.params || {}
+        let { conversationId: threadId } = req.query || {}
+        await bp.users.getOrCreateUser('web', userId, botId)
 
-      if (!conversationId) {
-        conversationId = await db.getOrCreateRecentConversation(botId, userId, { originatesFromUserMessage: true })
+        if (!threadId) {
+          threadId = await db.getOrCreateRecentConversation(botId, userId, { originatesFromUserMessage: true })
+        }
+
+        const event = bp.IO.Event({
+          botId,
+          channel: 'web',
+          direction: 'incoming',
+          target: userId,
+          threadId,
+          type: payload.type,
+          payload,
+          credentials: req.credentials
+        })
+
+        await bp.events.sendEvent(event)
+        res.sendStatus(200)
       }
-
-      const event = bp.IO.Event({
-        botId,
-        channel: 'web',
-        direction: 'incoming',
-        target: userId,
-        threadId: conversationId,
-        type: payload.type,
-        payload,
-        credentials: req.credentials
-      })
-
-      await bp.events.sendEvent(event)
-      res.sendStatus(200)
-    })
+    )
   )
 
   router.post(

@@ -57,7 +57,7 @@ export default async (bp: typeof sdk, db: Database) => {
   router.post(
     '/delete/:id',
     asyncMiddleware(async (req, res) => {
-      await db.deleteSchedule(req.params.id)
+      await db.deleteSchedule(parseInt(req.params.id))
       res.sendStatus(200)
     })
   )

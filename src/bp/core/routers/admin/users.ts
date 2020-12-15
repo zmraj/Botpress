@@ -1,4 +1,5 @@
 import { Logger, WorkspaceUser } from 'botpress/sdk'
+import { ConflictError } from 'common/http'
 import AuthService from 'core/services/auth/auth-service'
 import { InvalidOperationError } from 'core/services/auth/errors'
 import { WorkspaceService } from 'core/services/workspace-service'
@@ -7,7 +8,6 @@ import Joi from 'joi'
 import _ from 'lodash'
 
 import { CustomRouter } from '../customRouter'
-import { ConflictError } from '../errors'
 import {
   assertBotpressPro,
   assertSuperAdmin,
@@ -36,7 +36,7 @@ export class UsersRouter extends CustomRouter {
       '/',
       this.needPermissions('read', this.resource),
       this.asyncMiddleware(async (req, res) => {
-        const filterRoles = req.query.roles && req.query.roles.split(',')
+        const filterRoles = req.query.roles && (<string>req.query.roles).split(',')
         const attributes = ['last_logon', 'firstname', 'lastname', 'picture_url', 'created_at']
         const users = await this.workspaceService.getWorkspaceUsers(req.workspace!, { attributes })
 
@@ -53,7 +53,7 @@ export class UsersRouter extends CustomRouter {
       '/listAvailableUsers',
       this.needPermissions('read', this.resource),
       this.asyncMiddleware(async (req, res) => {
-        const filterRoles = req.query.roles && req.query.roles.split(',')
+        const filterRoles = req.query.roles && (<string>req.query.roles).split(',')
         const allUsers = await this.authService.getAllUsers()
         const workspaceUsers = await this.workspaceService.getWorkspaceUsers(req.workspace!)
         const available = _.filter(allUsers, x => !_.find(workspaceUsers, x)) as WorkspaceUser[]

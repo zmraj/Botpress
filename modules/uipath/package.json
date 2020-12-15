@@ -14,6 +14,7 @@
     "package": "node ../../build/module-builder/bin/entry package"
   },
   "dependencies": {
+    "@types/node": "^12.12.6",
     "jsonwebtoken": "^8.5.1"
   }
 }

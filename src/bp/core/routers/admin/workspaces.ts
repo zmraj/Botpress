@@ -1,5 +1,6 @@
-import { Logger } from 'botpress/sdk'
+import { Logger, RolloutStrategy } from 'botpress/sdk'
 import { defaultPipelines } from 'common/defaults'
+import { NotFoundError } from 'common/http'
 import { CreateWorkspace } from 'common/typings'
 import { PipelineSchema, WorkspaceCreationSchema } from 'common/validation'
 import { ConfigProvider } from 'core/config/config-loader'
@@ -9,9 +10,9 @@ import { ROLLOUT_STRATEGIES, WorkspaceService } from 'core/services/workspace-se
 import { Router } from 'express'
 import Joi from 'joi'
 import _ from 'lodash'
+import { ReplOptions } from 'repl'
 
 import { CustomRouter } from '../customRouter'
-import { NotFoundError } from '../errors'
 
 export class WorkspacesRouter extends CustomRouter {
   constructor(
@@ -151,7 +152,10 @@ export class WorkspacesRouter extends CustomRouter {
       this.asyncMiddleware(async (req, res) => {
         const { workspaceId, rolloutStrategy } = req.params
 
-        if (!ROLLOUT_STRATEGIES.includes(rolloutStrategy)) {
+        const isRollout = (rs: string | RolloutStrategy): rs is RolloutStrategy =>
+          (ROLLOUT_STRATEGIES as string[]).includes(rs)
+
+        if (!isRollout(rolloutStrategy)) {
           throw new InvalidOperationError(`Unknown strategy "${rolloutStrategy}"`)
         }
 

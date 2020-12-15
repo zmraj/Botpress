@@ -58,7 +58,7 @@ process.PROJECT_LOCATION = process.pkg
 process.stderr.write = stripDeprecationWrite
 
 process.on('unhandledRejection', err => {
-  global.printErrorDefault(err)
+  global.printErrorDefault(err as Error)
 })
 
 process.on('uncaughtException', err => {

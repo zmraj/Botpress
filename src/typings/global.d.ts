@@ -59,7 +59,7 @@ declare namespace NodeJS {
 }
 
 declare var process: NodeJS.Process
-declare var global: NodeJS.Global
+declare var glboal: NodeJS.Global
 declare type PRO_FEATURES = 'seats'
 
 /**
@@ -286,6 +286,10 @@ declare interface OSDistribution {
 
 declare interface Dic<T> {
   [Key: string]: T
+}
+
+declare type PartialDeep<T> = {
+  [P in keyof T]?: PartialDeep<T[P]>
 }
 
 declare interface BotpressCoreEvents {

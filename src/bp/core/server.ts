@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser'
 import { AxiosBotConfig, AxiosOptions, http, Logger, RouterOptions } from 'botpress/sdk'
+import { InvalidExternalToken, PaymentRequiredError } from 'common/http'
 import LicensingService from 'common/licensing-service'
 import { RequestWithUser } from 'common/typings'
 import session from 'cookie-session'
@@ -34,7 +35,6 @@ import { ConverseRouter } from './routers/bots/converse'
 import { HintsRouter } from './routers/bots/hints'
 import { NLURouter } from './routers/bots/nlu'
 import { isDisabled } from './routers/conditionalMiddleware'
-import { InvalidExternalToken, PaymentRequiredError } from './routers/errors'
 import { SdkApiRouter } from './routers/sdk/router'
 import { ShortLinksRouter } from './routers/shortlinks'
 import { TelemetryRouter } from './routers/telemetry'
@@ -392,7 +392,7 @@ export default class HTTPServer {
 
     const hostname = config.host === 'localhost' ? undefined : config.host
     await Promise.fromCallback(callback => {
-      this.httpServer.listen(process.PORT, hostname, config.backlog, callback)
+      this.httpServer.listen(process.PORT, hostname, config.backlog, callback.bind(this, null))
     })
 
     return this.app

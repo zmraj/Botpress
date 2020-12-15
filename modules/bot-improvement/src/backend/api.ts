@@ -8,18 +8,10 @@ import { flowsToGoals } from './helpers'
 import { FeedbackItem, FlowView, MessageGroup } from './typings'
 import { FeedbackItemSchema } from './validation'
 
-interface FeedbackItemsResponse extends Response {
-  send: (body: FeedbackItem[]) => FeedbackItemsResponse
-}
-
-interface SessionResponse extends Response {
-  send: (body: MessageGroup[]) => SessionResponse
-}
-
 export default async (bp: typeof sdk, db: Database) => {
   const router = bp.http.createRouterForBot('bot-improvement')
 
-  router.get('/feedback-items', async (req, res: FeedbackItemsResponse) => {
+  router.get('/feedback-items', async (req, res: Response<FeedbackItem[]>) => {
     const botId = req.params.botId
 
     const feedbackItems = await db.getFeedbackItems(botId)
@@ -48,7 +40,7 @@ export default async (bp: typeof sdk, db: Database) => {
     res.sendStatus(200)
   })
 
-  router.get('/sessions/:sessionId', async (req, res: SessionResponse) => {
+  router.get('/sessions/:sessionId', async (req, res: Response<MessageGroup[]>) => {
     const { sessionId } = req.params
 
     const messageGroups = await db.getMessageGroups(sessionId)

@@ -22,7 +22,7 @@ export class ShortLinksRouter extends CustomRouter {
         return res.status(404).send(`Shortlink "${name}" not registered`)
       }
 
-      const query = qs.stringify(req.query)
+      const query = qs.stringify(req.query as Dic<string>)
       if (query) {
         const hasQuery = /\?/g.test(link)
         link = link.concat(`${hasQuery ? '&' : '?'}${query}`)

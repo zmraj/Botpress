@@ -15,7 +15,7 @@ import { EventEngine } from './middleware/event-engine'
 
 export const converseApiEvents = new EventEmitter2()
 
-type ResponseMap = Partial<{
+export type ConverseResult = Partial<{
   responses: any[]
   nlu: IO.EventUnderstanding
   state: any
@@ -27,7 +27,7 @@ export const buildUserKey = (botId: string, target: string) => `${botId}_${targe
 
 @injectable()
 export class ConverseService {
-  private readonly _responseMap: { [target: string]: ResponseMap } = {}
+  private readonly _responseMap: Dic<ConverseResult> = {}
 
   constructor(
     @inject(TYPES.ConfigProvider) private configProvider: ConfigProvider,
@@ -76,7 +76,7 @@ export class ConverseService {
     payload: any,
     credentials: any,
     includedContexts: string[]
-  ): Promise<any> {
+  ): Promise<ConverseResult> {
     if (!payload.type) {
       payload.type = 'text'
     }
@@ -123,12 +123,12 @@ export class ConverseService {
     })
   }
 
-  private async _createDonePromise(userKey: string) {
+  private async _createDonePromise(userKey: string): Promise<ConverseResult> {
     return new Promise((resolve, reject) => {
       converseApiEvents.once(`done.${userKey}`, async event => {
         await Promise.delay(250)
         if (this._responseMap[userKey]) {
-          Object.assign(this._responseMap[userKey], <ResponseMap>{
+          Object.assign(this._responseMap[userKey], <ConverseResult>{
             state: event.state,
             suggestions: event.suggestions,
             decision: event.decision || {}
@@ -141,7 +141,7 @@ export class ConverseService {
     })
   }
 
-  private async _createTimeoutPromise(botId, userId) {
+  private async _createTimeoutPromise(botId, userId): Promise<ConverseResult> {
     let timeout = _.get(await this.configProvider.getBotConfig(botId), 'converse.timeout')
     if (!timeout) {
       timeout = _.get(await this.configProvider.getBotpressConfig(), 'converse.timeout', '5s')
@@ -185,7 +185,7 @@ export class ConverseService {
       this._responseMap[userKey] = { responses: [] }
     }
 
-    Object.assign(this._responseMap[userKey], <ResponseMap>{
+    Object.assign(this._responseMap[userKey], <ConverseResult>{
       nlu: event.nlu || {},
       suggestions: event.suggestions || [],
       credentials: event.credentials

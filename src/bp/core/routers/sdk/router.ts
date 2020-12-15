@@ -1,11 +1,10 @@
 import { CmsSearchContentElements, KvsGet, KvsSet, ReplyToEvent, SetAttributes } from 'botpress/apiSdk'
 import * as sdk from 'botpress/sdk'
 import { createForAction } from 'core/api'
-import { Router } from 'express'
+import { Request, Router } from 'express'
 import _ from 'lodash'
 
 import { CustomRouter } from '../customRouter'
-import { TypedRequest } from '../util'
 
 import { validateSdkApiPayload } from './utils'
 
@@ -33,7 +32,7 @@ export class SdkApiRouter extends CustomRouter {
     this.router.post(
       '/events/replyToEvent',
       validateSdkApiPayload('events.replyToEvent'),
-      this.asyncMiddleware(async (req: TypedRequest<ReplyToEvent>, res) => {
+      this.asyncMiddleware(async (req: Request<any, any, ReplyToEvent>, res) => {
         const { event, contentId, args } = req.body
         let payloads = req.body.payloads
 
@@ -56,7 +55,7 @@ export class SdkApiRouter extends CustomRouter {
     this.router.post(
       '/users/updateAttributes',
       validateSdkApiPayload('users.updateAttributes'),
-      this.asyncMiddleware(async (req: TypedRequest<SetAttributes>, res) => {
+      this.asyncMiddleware(async (req: Request<any, any, SetAttributes>, res) => {
         const { channel, userId, attributes } = req.body
 
         await this.api.users.updateAttributes(channel, userId, attributes)
@@ -70,7 +69,7 @@ export class SdkApiRouter extends CustomRouter {
     this.router.post(
       '/users/setAttributes',
       validateSdkApiPayload('users.setAttributes'),
-      this.asyncMiddleware(async (req: TypedRequest<SetAttributes>, res) => {
+      this.asyncMiddleware(async (req: Request<any, any, SetAttributes>, res) => {
         const { channel, userId, attributes } = req.body
 
         await this.api.users.setAttributes(channel, userId, attributes)
@@ -89,7 +88,7 @@ export class SdkApiRouter extends CustomRouter {
     this.router.post(
       '/kvs/set',
       validateSdkApiPayload('kvs.set'),
-      this.asyncMiddleware(async (req: TypedRequest<KvsSet>, res) => {
+      this.asyncMiddleware(async (req: Request<any, any, KvsSet>, res) => {
         const { botId, key, value, path, expiry } = req.body
 
         if (botId) {
@@ -112,7 +111,7 @@ export class SdkApiRouter extends CustomRouter {
     this.router.post(
       '/kvs/get',
       validateSdkApiPayload('kvs.get'),
-      this.asyncMiddleware(async (req: TypedRequest<KvsGet>, res) => {
+      this.asyncMiddleware(async (req: Request<any, any, KvsGet>, res) => {
         const { botId, key, path } = req.body
 
         if (botId) {
@@ -134,7 +133,7 @@ export class SdkApiRouter extends CustomRouter {
     this.router.post(
       '/cms/searchContentElements',
       validateSdkApiPayload('cms.searchContentElements'),
-      this.asyncMiddleware(async (req: TypedRequest<CmsSearchContentElements>, res) => {
+      this.asyncMiddleware(async (req: Request<any, any, CmsSearchContentElements>, res) => {
         const { botId, contentTypeId, searchParams, language } = req.body
 
         res.send(await this.api.cms.listContentElements(botId, contentTypeId, searchParams, language))
@@ -150,7 +149,7 @@ export class SdkApiRouter extends CustomRouter {
     this.router.post(
       '/security/getMessageSignature',
       validateSdkApiPayload('security.getMessageSignature'),
-      this.asyncMiddleware(async (req: TypedRequest<{ message: string }>, res) => {
+      this.asyncMiddleware(async (req: Request<any, any, { message: string }>, res) => {
         res.send(await this.api.security.getMessageSignature(req.body.message))
       })
     )

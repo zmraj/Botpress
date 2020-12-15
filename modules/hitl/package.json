@@ -26,6 +26,7 @@
     "@types/react-bootstrap": "^0.32.19"
   },
   "dependencies": {
+    "@types/node": "^12.12.6",
     "bluebird": "^3.5.3",
     "classnames": "^2.2.6",
     "lodash": "^4.17.19",

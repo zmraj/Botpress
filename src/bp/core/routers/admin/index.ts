@@ -148,14 +148,18 @@ export class AdminRouter extends CustomRouter {
       this.checkTokenHeader,
       this.needPermissions('read', 'admin.logs'),
       this.asyncMiddleware(async (req, res) => {
-        const { fromDate, toDate, onlyWorkspace } = req.query
+        const { fromDate = '', toDate = '', onlyWorkspace } = req.query as {
+          fromDate: string
+          toDate: string
+          onlyWorkspace: string | undefined
+        }
 
         if (!fromDate || !toDate) {
           return res.status(400).send('fromDate and toDate must be specified')
         }
 
-        const from = moment(parseInt(fromDate || ''))
-        const to = moment(parseInt(toDate || ''))
+        const from = moment(parseInt(fromDate))
+        const to = moment(parseInt(toDate))
 
         if (!from.isValid() || !to.isValid()) {
           return res.status(400).send('fromDate and toDate must be a valid unix timestamp')

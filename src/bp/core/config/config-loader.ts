@@ -8,7 +8,7 @@ import { FatalError } from 'errors'
 import fs from 'fs'
 import { inject, injectable } from 'inversify'
 import defaultJsonBuilder from 'json-schema-defaults'
-import _, { PartialDeep } from 'lodash'
+import _ from 'lodash'
 import path from 'path'
 
 import { BotpressConfig } from './botpress.config'

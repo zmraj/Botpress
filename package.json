@@ -122,7 +122,7 @@
     "@types/mkdirp": "^1.0.1",
     "@types/ms": "^0.7.30",
     "@types/mustache": "^0.8.31",
-    "@types/node": "^10.10.3",
+    "@types/node": "^12.12.6",
     "@types/numeric": "^1.2.1",
     "@types/passport": "^1.0.0",
     "@types/puppeteer": "^2.0.0",

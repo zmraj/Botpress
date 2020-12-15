@@ -1,8 +1,8 @@
-import { Logger } from 'botpress/sdk'
+import { IO, Logger } from 'botpress/sdk'
 import { StandardError } from 'common/http'
 import HTTPServer from 'core/server'
 import AuthService, { TOKEN_AUDIENCE } from 'core/services/auth/auth-service'
-import { ConverseService } from 'core/services/converse'
+import { ConverseResult, ConverseService } from 'core/services/converse'
 import { RequestHandler, Router } from 'express'
 import joi from 'joi'
 import _ from 'lodash'
@@ -46,13 +46,7 @@ export class ConverseRouter extends CustomRouter {
         } catch (err) {
           throw new StandardError('Invalid payload', err)
         }
-
         const { userId, botId } = req.params
-        const params = req.query.include
-
-        if (params && params.toLowerCase() !== 'responses') {
-          return res.status(401).send("Unauthenticated converse API can only return 'responses'")
-        }
 
         const rawOutput = await this.converseService.sendMessage(
           botId,
@@ -61,8 +55,8 @@ export class ConverseRouter extends CustomRouter {
           req.credentials,
           req.body.includedContexts || ['global']
         )
-        const formatedOutput = this.prepareResponse(rawOutput, params)
 
+        const formatedOutput = this.prepareResponse(rawOutput, 'responses')
         return res.json(formatedOutput)
       })
     )
@@ -84,36 +78,15 @@ export class ConverseRouter extends CustomRouter {
           req.credentials,
           req.body.includedContexts || ['global']
         )
-        const formatedOutput = this.prepareResponse(rawOutput, req.query.include)
+        const formatedOutput = this.prepareResponse(rawOutput, <string>req.query.include)
 
         return res.json(formatedOutput)
       })
     )
   }
 
-  private prepareResponse(output, params: string) {
-    const parts = (params && params.toLowerCase().split(',')) || []
-
-    if (!parts.includes('nlu')) {
-      delete output.nlu
-    }
-
-    if (!parts.includes('state')) {
-      delete output.state
-    }
-
-    if (!parts.includes('suggestions')) {
-      delete output.suggestions
-    }
-
-    if (!parts.includes('decision')) {
-      delete output.decision
-    }
-
-    if (!parts.includes('credentials')) {
-      delete output.credentials
-    }
-
-    return output
+  private prepareResponse(output: ConverseResult, params?: string) {
+    const parts = params?.toLowerCase().split(',') ?? []
+    return parts.length ? _.pick(output, parts) : output
   }
 }

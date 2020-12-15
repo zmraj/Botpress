@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser'
+import { BadRequestError } from 'common/http'
 import cors from 'cors'
 import express, { Application } from 'express'
 import rateLimit from 'express-rate-limit'
@@ -8,7 +9,6 @@ import _ from 'lodash'
 import ms from 'ms'
 import yn from 'yn'
 
-import { BadRequestError } from '../core/routers/errors'
 import Logger from '../simple-logger'
 
 import { getLanguageByCode } from './languages'
@@ -211,7 +211,7 @@ export default async function(
 
   await Promise.fromCallback(callback => {
     const hostname = options.host === 'localhost' ? undefined : options.host
-    httpServer.listen(options.port, hostname, undefined, callback)
+    httpServer.listen(options.port, hostname, undefined, callback.bind(null, null))
   })
 
   logger.info(`Language Server is ready at http://${options.host}:${options.port}/`)

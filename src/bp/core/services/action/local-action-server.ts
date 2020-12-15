@@ -1,9 +1,9 @@
 import bodyParser from 'body-parser'
 import { Logger } from 'botpress/sdk'
+import { BadRequestError, UnauthorizedError } from 'common/http'
 import { ActionDefinition } from 'common/typings'
-import { BadRequestError, UnauthorizedError } from 'core/routers/errors'
 import { ACTION_SERVER_AUDIENCE } from 'core/routers/sdk/utils'
-import { asyncMiddleware, AsyncMiddleware, TypedRequest, TypedResponse } from 'core/routers/util'
+import { asyncMiddleware, AsyncMiddleware } from 'core/routers/util'
 import { TYPES } from 'core/types'
 import express, { NextFunction, Request, Response } from 'express'
 import { inject, injectable, tagged } from 'inversify'
@@ -84,13 +84,15 @@ export class LocalActionServer {
       _validateRunRequest,
       this.asyncMiddleware(
         async (
-          req: TypedRequest<
+          req: Request<
+            any,
+            any,
             RunActionProps & {
               botId: string
               token: string
             }
           >,
-          res: TypedResponse<ActionServerResponse>
+          res: Response<ActionServerResponse>
         ) => {
           const { actionArgs, actionName, botId, token, incomingEvent } = req.body
 

@@ -14,6 +14,7 @@
     "package": "node ../../build/module-builder/bin/entry package"
   },
   "dependencies": {
+    "@types/node": "^12.12.6",
     "axios": "^0.19.0",
     "classnames": "^2.2.6",
     "joi": "^13.6.0",

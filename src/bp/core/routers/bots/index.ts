@@ -1,6 +1,7 @@
 import { Logger, RouterOptions } from 'botpress/sdk'
 import { Serialize } from 'cerialize'
 import { UnexpectedError } from 'common/http'
+import { NotFoundError } from 'common/http'
 import { gaId, machineUUID } from 'common/stats'
 import { FlowView } from 'common/typings'
 import { BotpressConfig } from 'core/config/botpress.config'
@@ -32,7 +33,6 @@ import { URL } from 'url'
 
 import { disableForModule } from '../conditionalMiddleware'
 import { CustomRouter } from '../customRouter'
-import { NotFoundError } from '../errors'
 import { checkMethodPermissions, checkTokenHeader, needPermissions } from '../util'
 
 const debugMedia = DEBUG('audit:action:media-upload')
@@ -512,7 +512,7 @@ export class BotsRouter extends CustomRouter {
       this.checkTokenHeader,
       this.needPermissions('read', 'bot.logs'),
       this.asyncMiddleware(async (req, res) => {
-        const limit = req.query.limit
+        const limit = req.query.limit ? parseInt(<string>req.query.limit) : undefined
         const botId = req.params.botId
         const logs = await this.logsService.getLogsForBot(botId, limit)
         res.send(logs)

@@ -375,7 +375,7 @@ export const AppendNoneIntent = async (input: TrainStep, tools: Tools): Promise<
   const vocabWithDupes = lo
     .chain(allUtterances)
     .map(x => x.tokens.map(x => x.value))
-    .flattenDeep<string>()
+    .flattenDeep()
     .value()
 
   const junkWords = await tools.generateSimilarJunkWords(Object.keys(input.vocabVectors), input.languageCode)

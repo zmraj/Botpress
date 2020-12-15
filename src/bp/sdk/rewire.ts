@@ -57,7 +57,7 @@ const nativeExtensions = [
   'sentencepiece.node'
 ]
 
-function addToNodePath(path) {
+function addToNodePath(path: string) {
   overwritePaths(getPaths().concat(path))
 }
 
@@ -78,6 +78,7 @@ function overwritePaths(paths: string[]) {
   reloadPaths()
 }
 
+// @ts-ignore
 global.require = {
   addToNodePath,
   getPaths,

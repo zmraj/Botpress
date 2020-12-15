@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@blueprintjs/datetime": "^3.17.0",
+    "@types/node": "^12.12.6",
     "bluebird": "^3.4.6",
     "bluebird-retry": "^0.8.0",
     "dateformat": "^1.0.12",

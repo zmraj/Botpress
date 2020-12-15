@@ -1,5 +1,6 @@
 import { BotConfig, Logger } from 'botpress/sdk'
 import { UnexpectedError } from 'common/http'
+import { ConflictError, ForbiddenError } from 'common/http'
 import { RequestWithUser } from 'common/typings'
 import { ConfigProvider } from 'core/config/config-loader'
 import { BotService } from 'core/services/bot-service'
@@ -10,7 +11,6 @@ import _ from 'lodash'
 import yn from 'yn'
 
 import { CustomRouter } from '../customRouter'
-import { ConflictError, ForbiddenError } from '../errors'
 import {
   assertBotpressPro,
   assertSuperAdmin,

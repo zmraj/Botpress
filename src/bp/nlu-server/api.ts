@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import express, { Application } from 'express'
+import { AnyTxtRecord } from 'dns'
+import express, { Application, Request } from 'express'
 import rateLimit from 'express-rate-limit'
 import { createServer } from 'http'
 import _ from 'lodash'
@@ -102,13 +103,13 @@ export default async function(options: APIOptions, engine: Engine) {
     }
   })
 
-  router.get('/train/:modelId', async (req, res) => {
+  router.get('/train/:modelId', async (req: Request<{ modelId: string }, any, any, { password: string }>, res) => {
     try {
       const { modelId } = req.params
-      const { password } = req.query
+      const { password = '' } = req.query
       let session = trainSessionService.getTrainingSession(modelId, password)
       if (!session) {
-        const model = await modelService.getModel(modelId, password ?? '')
+        const model = await modelService.getModel(modelId, password)
 
         if (!model) {
           return res
@@ -189,7 +190,7 @@ export default async function(options: APIOptions, engine: Engine) {
 
   await Promise.fromCallback(callback => {
     const hostname = options.host === 'localhost' ? undefined : options.host
-    httpServer.listen(options.port, hostname, undefined, callback)
+    httpServer.listen(options.port, hostname, undefined, callback.bind(null, null))
   })
 
   logger.info(`NLU Server is ready at http://${options.host}:${options.port}/`)

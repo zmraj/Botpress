@@ -1,5 +1,6 @@
 import { FlowGeneratorMetadata, Logger } from 'botpress/sdk'
 import { UnexpectedError } from 'common/http'
+import { NotFoundError } from 'common/http'
 import { ModuleInfo } from 'common/typings'
 import { ConfigProvider } from 'core/config/config-loader'
 import ModuleResolver from 'core/modules/resolver'
@@ -12,7 +13,6 @@ import { ModuleLoader } from '../module-loader'
 import { SkillService } from '../services/dialog/skill/service'
 
 import { CustomRouter } from './customRouter'
-import { NotFoundError } from './errors'
 import { assertSuperAdmin, checkTokenHeader } from './util'
 
 export class ModulesRouter extends CustomRouter {
@@ -136,13 +136,14 @@ export class ModulesRouter extends CustomRouter {
       '/:moduleName/skill/:skillId/generateFlow',
       this.checkTokenHeader,
       this.asyncMiddleware(async (req, res) => {
+        const { botId, isOneFlow } = req.query as { botId: string; isOneFlow: string }
         const flowGenerator = this.moduleLoader.getFlowGenerator(req.params.moduleName, req.params.skillId)
         if (!flowGenerator) {
           return res.status(404).send('Invalid module name or flow name')
         }
 
         try {
-          const metadata: FlowGeneratorMetadata = { botId: req.query.botId, isOneFlow: yn(req.query.isOneFlow) }
+          const metadata: FlowGeneratorMetadata = { botId, isOneFlow: yn(isOneFlow) }
           res.send(this.skillService.finalizeFlow(await flowGenerator(req.body, metadata)))
         } catch (err) {
           throw new UnexpectedError('Could not generate flow', err)

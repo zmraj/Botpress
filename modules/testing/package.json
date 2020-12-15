@@ -14,6 +14,7 @@
     "package": "node ../../build/module-builder/bin/entry package"
   },
   "dependencies": {
+    "@types/node": "^12.12.6",
     "classnames": "^2.2.6",
     "react-icons": "^3.8.0"
   },
