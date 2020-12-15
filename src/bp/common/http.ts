@@ -14,6 +14,16 @@ const escapeHtmlSimple = (str: string) => {
     .replace(/`/g, '&#96;')
 }
 
+const URL_FOLDER_SEPERATOR = '!!'
+
+export const encodeFolderPath = (path: string): string => {
+  return path.replace(/\//g, URL_FOLDER_SEPERATOR)
+}
+
+export const decodeFolderPath = (urlPath: string): string => {
+  return urlPath.replace(new RegExp(URL_FOLDER_SEPERATOR, 'g'), '/')
+}
+
 export type BPRequest<Params = ParamsDictionary, ResBody = any, ReqBody = any, ReqQuery = qs.ParsedQs> = Request<
   Params,
   ResBody,
