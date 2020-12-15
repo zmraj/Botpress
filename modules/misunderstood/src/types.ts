@@ -5,7 +5,7 @@ export enum FLAGGED_MESSAGE_STATUS {
   pending = 'pending'
 }
 
-export const FLAGGED_MESSAGE_STATUSES = Object.values(FLAGGED_MESSAGE_STATUS)
+export const FLAGGED_MESSAGE_STATUSES: string[] = Object.values(FLAGGED_MESSAGE_STATUS)
 
 export enum FLAG_REASON {
   auto_hook = 'auto_hook',

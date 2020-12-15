@@ -1,10 +1,10 @@
 import axios from 'axios'
 import * as sdk from 'botpress/sdk'
-import { asyncMiddleware as asyncMw, StandardError, UnexpectedError } from 'common/http'
+import { asyncMiddleware as asyncMw, BPRequest, StandardError, UnexpectedError } from 'common/http'
 import { Request, Response } from 'express'
 import moment from 'moment'
 
-import { FlaggedEvent, FLAGGED_MESSAGE_STATUSES } from '../types'
+import { FlaggedEvent, FLAGGED_MESSAGE_STATUS, FLAGGED_MESSAGE_STATUSES } from '../types'
 
 import Db from './db'
 
@@ -63,7 +63,7 @@ export default async (bp: typeof sdk, db: Db) => {
 
   router.get(
     `/events/:status(${FLAGGED_MESSAGE_STATUSES.join('|')})`,
-    asyncMiddleware(async (req: Request, res: Response) => {
+    asyncMiddleware(async (req: BPRequest<{ botId: string; status: FLAGGED_MESSAGE_STATUS }>, res: Response) => {
       const { botId, status } = req.params
       const { language, startDate, endDate } = extractQuery(req.query)
 
