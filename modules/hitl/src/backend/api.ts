@@ -1,3 +1,5 @@
+import { Request } from 'express'
+
 import { Config } from '../config'
 
 import { SDK } from '.'
@@ -7,9 +9,9 @@ import { SessionIdentity } from './typings'
 export default async (bp: SDK, db: Database) => {
   const router = bp.http.createRouterForBot('hitl')
 
-  router.get('/sessions', async (req, res) => {
+  router.get('/sessions', async (req: Request<any, any, any, { pausedOnly: string; searchText?: string }>, res) => {
     const pausedOnly = req.query.pausedOnly === 'true'
-    const sessionIds = req.query.searchText && (await db.searchSessions(req.query.searchText))
+    const sessionIds = req.query.searchText && (await db.searchSessions(<string>req.query.searchText))
 
     res.send(await db.getAllSessions(pausedOnly, req.params.botId, sessionIds))
   })
@@ -51,7 +53,7 @@ export default async (bp: SDK, db: Database) => {
 
   router.post('/channel/:channel/user/:userId/isPaused', async (req, res) => {
     const { botId, channel, userId } = req.params
-    const { threadId } = req.query
+    const threadId = req.query.threadId as string
     res.send(await db.isSessionPaused({ botId, channel, userId, threadId }))
   })
 
@@ -69,7 +71,7 @@ export default async (bp: SDK, db: Database) => {
 
   router.post('/channel/:channel/user/:userId/:action', async (req, res) => {
     const { botId, channel, userId, action, trigger } = req.params
-    const { threadId } = req.query
+    const threadId = req.query.threadId as string
     await changePauseState(action === 'pause', { botId, channel, userId, threadId }, trigger)
     res.sendStatus(200)
   })
