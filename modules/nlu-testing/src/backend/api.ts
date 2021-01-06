@@ -268,10 +268,9 @@ function conditionMatch(nlu: sdk.IO.EventUnderstanding, [key, matcher, expected]
     }
   } else if (key === 'context') {
     // tslint:disable-next-line
-    let [received, ctxPred] = _.chain(nlu.predictions)
+    let [received, ctxPred] = _(nlu.predictions)
       .toPairs()
       .maxBy('1.confidence')
-      .value()
 
     received = received !== 'oos' ? received : NONE
     const success = expected === received
@@ -296,10 +295,9 @@ function conditionMatchNDU(nlu: sdk.IO.EventUnderstanding, [key, matcher, expect
     return checkSlotMatch(nlu, key.split(':')[1], expected)
   }
   if (key === 'context') {
-    const [received, ctxPredObj] = _.chain(nlu.predictions)
+    const [received, ctxPredObj] = _(nlu.predictions)
       .toPairs()
       .maxBy('1.confidence')
-      .value()
 
     let conf = ctxPredObj.confidence
     let success = expected === received

@@ -31,7 +31,7 @@ export const textNodesFromUtterance = (rawUtterance: string, idx: number = 0): T
       const start = _.get(_.last(parsedSlots), 'cleanPosition.end', 0)
       return [...nodes, textNode(utterance, start)]
     })
-    .filter(n => n.text)
+    .filter(n => !!n.text)
     .value() as TextJSON[]
 }
 

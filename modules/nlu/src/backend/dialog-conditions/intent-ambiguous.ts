@@ -1,4 +1,4 @@
-import { Condition, IO } from 'botpress/sdk'
+import { Condition, IO, NLU } from 'botpress/sdk'
 import _ from 'lodash'
 
 interface Params {
@@ -6,7 +6,6 @@ interface Params {
   onlyIfActive: boolean
   topicName: string
 }
-
 export default {
   id: 'intent_is_ambiguous',
   label: 'Intent is ambiguous within topic',
@@ -23,12 +22,10 @@ export default {
       return 0
     }
 
-    const [highestTopic, topicPreds] =
-      _.chain(event?.nlu?.predictions ?? {})
-        .toPairs()
-        .orderBy(x => x[1].confidence, 'desc')
-        .first()
-        .value() || []
+    const [highestTopic, topicPreds]: [string, NLU.TopicPrediction] = _(event?.nlu?.predictions ?? {})
+      .toPairs()
+      .orderBy(x => x[1].confidence, 'desc')
+      .first()
 
     if (!topicName || !highestTopic || topicName !== highestTopic) {
       // consider intent confusion only when predicted topic is same as current topic

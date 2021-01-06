@@ -1,4 +1,4 @@
-import { Condition } from 'botpress/sdk'
+import { Condition, NLU } from 'botpress/sdk'
 import _ from 'lodash'
 
 export default {
@@ -24,11 +24,10 @@ export default {
 
     const oos = _.get(event, `nlu.predictions.${highestCtx}.oos`, 0)
 
-    const highest_none = _.chain(event)
+    const highest_none = _(event)
       .get(`nlu.predictions.${highestCtx}.intents`, [])
       .find(x => x.label === 'none')
       .get('confidence', 0)
-      .value()
 
     // validate if this still makes sens, we might want to do like we do in nlu testing api.ts line #295
     // pseudo would be: max_none  = highest_none.conf * (highest_none.ctx.oos)
