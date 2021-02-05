@@ -1,5 +1,8 @@
 import { MLToolkit } from 'botpress/sdk'
+import Joi, { validate } from 'joi'
 import _ from 'lodash'
+import { ListEntityModelSchema, PatternEntitySchema } from 'nlu-core/entities/schemas'
+import { ModelLoadingError } from 'nlu-core/errors'
 import { ListEntityModel, PatternEntity, Tools } from 'nlu-core/typings'
 import Utterance from 'nlu-core/utterance/utterance'
 
@@ -20,6 +23,15 @@ interface Predictors {
 }
 
 type Featurizer = (u: Utterance, entities: string[]) => number[]
+
+const modelSchema = Joi.object().keys({
+  svmModel: Joi.string().optional(),
+  intentNames: Joi.array().items(Joi.string()),
+  list_entities: Joi.array().items(ListEntityModelSchema),
+  pattern_entities: Joi.array().items(PatternEntitySchema)
+})
+
+const COMPONENT_NAME = 'SVM Intent Classifier'
 
 export class SvmIntentClassifier implements IntentClassifier {
   private model: Model | undefined
@@ -69,17 +81,22 @@ export class SvmIntentClassifier implements IntentClassifier {
     progress(1)
   }
 
-  serialize(): string {
+  async serialize(): Promise<string> {
     if (!this.model) {
-      throw new Error('SVM Intent classifier must be trained before calling serialize')
+      throw new Error(`${COMPONENT_NAME} must be trained before calling serialize`)
     }
     return JSON.stringify(this.model)
   }
 
-  load(serialized: string): void {
-    const model: Model = JSON.parse(serialized) // TODO: validate input
-    this.predictors = this._makePredictors(model)
-    this.model = model
+  async load(serialized: string): Promise<void> {
+    try {
+      const raw = JSON.parse(serialized)
+      const model: Model = await validate(raw, modelSchema)
+      this.predictors = this._makePredictors(model)
+      this.model = model
+    } catch (err) {
+      throw new ModelLoadingError(COMPONENT_NAME, err)
+    }
   }
 
   private _makePredictors(model: Model): Predictors {
@@ -95,7 +112,7 @@ export class SvmIntentClassifier implements IntentClassifier {
   async predict(utterance: Utterance): Promise<IntentPredictions> {
     if (!this.predictors) {
       if (!this.model) {
-        throw new Error('SVM Intent classifier must be trained before calling predict.')
+        throw new Error(`${COMPONENT_NAME} must be trained before calling predict.`)
       }
 
       this.predictors = this._makePredictors(this.model)

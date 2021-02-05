@@ -192,8 +192,7 @@ const TrainIntentClassifiers = async (
       }
     )
 
-    const model = intentClf.serialize()
-    svmPerCtx[ctx] = model
+    svmPerCtx[ctx] = await intentClf.serialize()
   }
 
   debugTraining('Done training intent classifier')
@@ -316,7 +315,7 @@ const TrainSlotTaggers = async (
       }
     )
 
-    slotModelByIntent[intent.name] = slotTagger.serialize()
+    slotModelByIntent[intent.name] = await slotTagger.serialize()
   }
 
   debugTraining('Done training slot tagger')

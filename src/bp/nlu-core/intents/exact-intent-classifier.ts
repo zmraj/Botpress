@@ -1,4 +1,6 @@
+import Joi, { validate } from 'joi'
 import _ from 'lodash'
+import { ModelLoadingError } from 'nlu-core/errors'
 import { Intent } from 'nlu-core/typings'
 import Utterance, { UtteranceToStringOptions } from 'nlu-core/utterance/utterance'
 
@@ -17,6 +19,13 @@ const EXACT_MATCH_STR_OPTIONS: UtteranceToStringOptions = {
   slots: 'keep-value', // slot extraction is done in || with intent prediction
   entities: 'keep-name'
 }
+
+const modelSchema = Joi.object().keys({
+  intents: Joi.array().items(Joi.string()),
+  exact_match_index: Joi.object().pattern(/^/, Joi.object().keys({ intent: Joi.string() }))
+})
+
+const COMPONENT_NAME = 'Exact Intent Classifier'
 
 export class ExactIntenClassifier implements IntentClassifier {
   private model: Model | undefined
@@ -49,21 +58,27 @@ export class ExactIntenClassifier implements IntentClassifier {
       .value()
   }
 
-  serialize() {
+  async serialize() {
     if (!this.model) {
-      throw new Error('Exact match intent classifier must be trained before calling serialize')
+      throw new Error(`${COMPONENT_NAME} must be trained before calling serialize`)
     }
     return JSON.stringify(this.model)
   }
 
-  load(serialized: string) {
-    const model: Model = JSON.parse(serialized) // TODO: validate input
-    this.model = model
+  async load(serialized: string) {
+    try {
+      const raw = JSON.parse(serialized)
+      const model: Model = await validate(raw, modelSchema)
+
+      this.model = model
+    } catch (err) {
+      throw new ModelLoadingError(COMPONENT_NAME, err)
+    }
   }
 
   async predict(utterance: Utterance): Promise<IntentPredictions> {
     if (!this.model) {
-      throw new Error('Exact match intent classifier must be trained before you call predict on it.')
+      throw new Error(`${COMPONENT_NAME} must be trained before you call predict on it.`)
     }
 
     const { exact_match_index, intents: intentNames } = this.model

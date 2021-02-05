@@ -1,5 +1,7 @@
 import { MLToolkit } from 'botpress/sdk'
+import Joi, { validate } from 'joi'
 import _ from 'lodash'
+import { ModelLoadingError } from 'nlu-core/errors'
 import { isPOSAvailable } from 'nlu-core/language/pos-tagger'
 import { getStopWordsForLang } from 'nlu-core/language/stopWords'
 import {
@@ -42,6 +44,15 @@ const NONE_UTTERANCES_BOUNDS = {
   MAX: 200
 }
 
+const modelSchema = Joi.object().keys({
+  trainingVocab: Joi.array().items(Joi.string()),
+  baseIntentClfModel: Joi.string(),
+  oosSvmModel: Joi.string().optional(),
+  exact_match_index: Joi.string()
+})
+
+const COMPONENT_NAME = 'OOS Intent Classifier'
+
 export class OOSIntentClassifier implements NoneableIntentClassifier {
   private model: Model | undefined
   private predictors: Predictors | undefined
@@ -49,7 +60,7 @@ export class OOSIntentClassifier implements NoneableIntentClassifier {
   constructor(private tools: Tools) {}
 
   public async train(trainInput: TrainInput, progress: (p: number) => void): Promise<void> {
-    const { languageCode, allUtterances, intents } = trainInput
+    const { languageCode, allUtterances } = trainInput
     const noneIntent = await this._makeNoneIntent(allUtterances, languageCode)
 
     let combinedProgress = 0
@@ -66,7 +77,7 @@ export class OOSIntentClassifier implements NoneableIntentClassifier {
     const exactIntenClassifier = new ExactIntenClassifier()
     const dummyProgress = () => {}
     await exactIntenClassifier.train(trainInput, dummyProgress)
-    const exact_match_index = exactIntenClassifier.serialize()
+    const exact_match_index = await exactIntenClassifier.serialize()
 
     this.model = {
       oosSvmModel: ooScopeModel,
@@ -208,17 +219,22 @@ export class OOSIntentClassifier implements NoneableIntentClassifier {
     return _.flatMap(utts, u => u.tokens.map(t => t.toString({ lowerCase: true })))
   }
 
-  public serialize(): string {
+  public async serialize(): Promise<string> {
     if (!this.model) {
-      throw new Error('Intent classifier must be trained before calling serialize')
+      throw new Error(`${COMPONENT_NAME} must be trained before calling serialize`)
     }
     return JSON.stringify(this.model)
   }
 
-  public load(serialized: string): void {
-    const model: Model = JSON.parse(serialized) // TODO: validate input
-    this.predictors = this._makePredictors(model)
-    this.model = model
+  public async load(serialized: string): Promise<void> {
+    try {
+      const raw = JSON.parse(serialized)
+      const model: Model = await validate(raw, modelSchema)
+      this.predictors = this._makePredictors(model)
+      this.model = model
+    } catch (err) {
+      throw new ModelLoadingError(COMPONENT_NAME, err)
+    }
   }
 
   private _makePredictors(model: Model): Predictors {
@@ -238,7 +254,7 @@ export class OOSIntentClassifier implements NoneableIntentClassifier {
   public async predict(utterance: Utterance): Promise<NoneableIntentPredictions> {
     if (!this.predictors) {
       if (!this.model) {
-        throw new Error('Intent classifier must be trained before you call predict on it.')
+        throw new Error(`${COMPONENT_NAME} must be trained before you call predict on it.`)
       }
 
       this.predictors = this._makePredictors(this.model)

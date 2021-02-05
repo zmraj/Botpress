@@ -23,8 +23,8 @@ export interface NoneableIntentPredictions extends IntentPredictions {
 
 export interface IntentClassifier {
   train(trainInput: IntentTrainInput, progress: (p: number) => void): Promise<void>
-  serialize(): string
-  load(model: string): void
+  serialize(): Promise<string>
+  load(model: string): Promise<void>
   predict(utterance: Utterance): Promise<IntentPredictions>
 }
 export interface NoneableIntentClassifier {

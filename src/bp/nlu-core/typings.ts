@@ -139,7 +139,7 @@ export type Intent<T> = Readonly<{
   utterances: T[]
 }>
 
-type SlotDefinition = Readonly<{
+export type SlotDefinition = Readonly<{
   name: string
   entities: string[]
 }>
