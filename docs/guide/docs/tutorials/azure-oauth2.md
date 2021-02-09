@@ -21,6 +21,14 @@ Create a new application and choose the appropriate configuration for your use c
 
 ## Step 3: Configure Botpress
 
+### Step 3.1: Finding your endpoints
+
+To find the endpoint URLs you need for the configuration step, click on the endpoints button while in the overview section of your app registration:
+
+![Endpoints](assets/oauth/az_3.1_endpoints.png)
+
+### Step 3.2: Configuration
+
 In your Botpress instance navigate to the code editor by going into any of your bots and add a new entry within `authStrategies` in the _botpress.config.json_ file, you may name the strategy whatever you want (keep the name URL safe) and fill in the entry in the following way:
 
 ```json
@@ -28,7 +36,7 @@ In your Botpress instance navigate to the code editor by going into any of your 
   "type": "oauth2",
   "allowSelfSignup": false,
   "options": {
-    "authorizationURL": "<Application (client) ID>",
+    "authorizationURL": "<OAuth 2.0 authorization endpoint (v2)>",
     "tokenURL": "<OAuth 2.0 token endpoint (v2)>",
     "clientSecret": "<See step 4>",
     "clientID": "<Application (client) ID>",
